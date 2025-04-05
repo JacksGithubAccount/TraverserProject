@@ -62,12 +62,18 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.44f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts 1\World Manager\WorldSaveGameManager.cs" />
+    <Compile Include="Assets\Scripts\Character\Player\PlayerCamera.cs" />
+    <Compile Include="Assets\Scripts\Character\CharacterNetworkManager.cs" />
+    <Compile Include="Assets\Scripts\Character\CharacterLocomotionManager.cs" />
+    <Compile Include="Assets\Scripts\Character\Player\PlayerInputManager.cs" />
+    <Compile Include="Assets\Scripts\Character\Player\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\Menu Scene\TitleScreenManager.cs" />
+    <Compile Include="Assets\Scripts\Character\Player\PlayerUI\PlayerUIManager.cs" />
+    <Compile Include="Assets\Scripts\Character\Player\PlayerLocomotionManager.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
-    <Compile Include="Assets\PlayerInputManager.cs" />
-    <Compile Include="Assets\Scripts 1\Menu Scene\TitleScreenManager.cs" />
-    <Compile Include="Assets\Scripts 1\Character\Player\PlayerUI\PlayerUIManager.cs" />
-    <Compile Include="Assets\Scripts 1\Character\Player\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\Character\CharacterManager.cs" />
+    <Compile Include="Assets\Scripts\World Manager\WorldSaveGameManager.cs" />
+    <Compile Include="Assets\PlayerControls.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
