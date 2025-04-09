@@ -13,14 +13,14 @@ namespace TraverserProject
             DontDestroyOnLoad(this);
 
             characterController = GetComponent<CharacterController>();
-            //characterNetworkManager = GetComponent<CharacterNetworkManager>();
+            characterNetworkManager = GetComponent<CharacterNetworkManager>();
         }
         protected virtual void Update()
         {
-            /*if (IsOwner)
+            if (IsOwner)
             {
                 characterNetworkManager.networkPosition.Value = transform.position;
-
+                characterNetworkManager.networkRotation.Value = transform.rotation;
             }
             else
             {
@@ -28,7 +28,11 @@ namespace TraverserProject
                     characterNetworkManager.networkPosition.Value,
                     ref characterNetworkManager.networkPositionVelocity,
                     characterNetworkManager.networkPositionSmoothTime);
-            }*/
+
+                transform.rotation = Quaternion.Slerp(transform.rotation, 
+                    characterNetworkManager.networkRotation.Value, 
+                    characterNetworkManager.networkRotationSmoothTime);
+            }
         }
     }
 }
