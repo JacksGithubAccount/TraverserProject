@@ -4,12 +4,14 @@ namespace TraverserProject
 {
     public class PlayerManager : CharacterManager
     {
-        PlayerLocomotionManager playerLocomotionManager;
+        [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
+        [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
         protected override void Awake()
         {
             base.Awake();
 
             playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
+            playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         }
 
         protected override void Update()
@@ -21,6 +23,22 @@ namespace TraverserProject
 
 
             playerLocomotionManager.HandleAllMovement();
+        }
+        public override OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+            if (IsOwner)
+            {
+                PlayerCamera.Singleton.player = this;
+                PlayerInputManager.Singleton.player = this;
+            }
+        }
+        protected override void LateUpdate()
+        {
+            if (!IsOwner)
+                return;
+            base.LateUpdate();
+            PlayerCamera.Singleton.HandleAllCameraActions();
         }
     }
 }

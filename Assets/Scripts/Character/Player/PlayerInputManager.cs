@@ -8,12 +8,17 @@ namespace TraverserProject
     {
         public static PlayerInputManager Singleton;
         PlayerControls playerControls;
+        public PlayerManager player;
 
         [SerializeField] Vector2 movementInput;
         public float verticalInput;
         public float horizontalInput;
         public float moveAmount;
 
+        [Header("Camera Movement Input")]
+        [SerializeField] Vector2 cameraInput;
+        public float cameraVerticalInput;
+        public float cameraHorizontalInput;
 
         private void Awake()
         {
@@ -53,8 +58,10 @@ namespace TraverserProject
             {
                 playerControls = new PlayerControls();
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
+                PlayerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
             }
             playerControls.Enable();
+
         }
 
         private void OnDestroy()
@@ -78,6 +85,8 @@ namespace TraverserProject
         private void Update()
         {
             HandleMovementInput();
+            HandleCameraMovementInput();
+
         }
         private void HandleMovementInput()
         {
@@ -95,6 +104,16 @@ namespace TraverserProject
             {
                 moveAmount = 1;
             }
+            if (player == null)
+                return;
+
+            player.playerAnimatorManager.UpdateAnimatorMovementParamters(0, moveAmount);
+        }
+        private void HandleCameraMovementInput()
+        {
+            cameraVerticalInput = cameraInput.y;
+            cameraHorizontalInput = cameraInput.x;
+
         }
     }
 }

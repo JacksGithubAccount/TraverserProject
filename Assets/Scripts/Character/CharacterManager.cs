@@ -5,14 +5,17 @@ namespace TraverserProject
 {
     public class CharacterManager : NetworkBehaviour
     {
-        public CharacterController characterController;
+        [HideInInspector] public CharacterController characterController;
+        [HideInInspector] public Animator animator;
 
-        CharacterNetworkManager characterNetworkManager;
+        [HideInInspector] CharacterNetworkManager characterNetworkManager;
+
         protected virtual void Awake()
         {
             DontDestroyOnLoad(this);
 
             characterController = GetComponent<CharacterController>();
+            animator = GetComponent<Animator>();
             characterNetworkManager = GetComponent<CharacterNetworkManager>();
         }
         protected virtual void Update()
@@ -33,6 +36,10 @@ namespace TraverserProject
                     characterNetworkManager.networkRotation.Value, 
                     characterNetworkManager.networkRotationSmoothTime);
             }
+        }
+        protected virtual void LateUpdate()
+        {
+
         }
     }
 }
