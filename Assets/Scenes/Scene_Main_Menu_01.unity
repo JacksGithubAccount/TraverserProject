@@ -1077,11 +1077,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1936112716}
   m_CullTransparentMesh: 1
---- !u!20 &2061128680 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 2115535574535001951, guid: 7e240ffba03dac74fac5e974c4a46a58, type: 3}
-  m_PrefabInstance: {fileID: 6823282441214905961}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2061873925
 GameObject:
   m_ObjectHideFlags: 0
@@ -1491,7 +1486,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31a34e2c1e20b8d49b262df9394c7497, type: 3}
---- !u!1001 &6823282441214905961
+--- !u!1001 &7581374399157015997
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1500,12 +1495,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -657012425039240914, guid: 7e240ffba03dac74fac5e974c4a46a58, type: 3}
-      propertyPath: cameraObject
-      value: 
-      objectReference: {fileID: 2061128680}
+      propertyPath: collideWithLayers.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5909739042979962705, guid: 7e240ffba03dac74fac5e974c4a46a58, type: 3}
       propertyPath: m_Name
-      value: PlayerCamera
+      value: PlayerCamera (Left & Right)
       objectReference: {fileID: 0}
     - target: {fileID: 7146308888717255960, guid: 7e240ffba03dac74fac5e974c4a46a58, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1564,4 +1559,4 @@ SceneRoots:
   - {fileID: 5817130102268414011}
   - {fileID: 1858073754092016729}
   - {fileID: 5366097242827597371}
-  - {fileID: 6823282441214905961}
+  - {fileID: 7581374399157015997}

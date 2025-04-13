@@ -58,7 +58,7 @@ namespace TraverserProject
             {
                 playerControls = new PlayerControls();
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
-                PlayerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
+                playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
             }
             playerControls.Enable();
 
@@ -107,7 +107,7 @@ namespace TraverserProject
             if (player == null)
                 return;
 
-            player.playerAnimatorManager.UpdateAnimatorMovementParamters(0, moveAmount);
+            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
         }
         private void HandleCameraMovementInput()
         {

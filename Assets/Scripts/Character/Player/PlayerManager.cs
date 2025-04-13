@@ -24,7 +24,7 @@ namespace TraverserProject
 
             playerLocomotionManager.HandleAllMovement();
         }
-        public override OnNetworkSpawn()
+        public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
             if (IsOwner)
