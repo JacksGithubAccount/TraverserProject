@@ -7,8 +7,6 @@ namespace TraverserProject
         public static PlayerCamera Singleton;
         public Camera cameraObject;
         public PlayerManager player;
-
-
         [SerializeField] Transform cameraPivotTransform;
 
         [Header("Camera Settings")]
@@ -69,9 +67,11 @@ namespace TraverserProject
 
             Vector3 cameraRotation = Vector3.zero;
             Quaternion targetRotation;
+
             cameraRotation.y = leftAndRightLookAngle;
             targetRotation = Quaternion.Euler(cameraRotation);
             transform.rotation = targetRotation;
+
 
             cameraRotation = Vector3.zero;
             cameraRotation.x = upAndDownLookAngle;

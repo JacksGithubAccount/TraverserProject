@@ -35,8 +35,7 @@ namespace TraverserProject
         }
         protected override void LateUpdate()
         {
-            if (!IsOwner)
-                return;
+
             base.LateUpdate();
             PlayerCamera.Singleton.HandleAllCameraActions();
         }
