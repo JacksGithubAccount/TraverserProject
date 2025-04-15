@@ -83,7 +83,7 @@ namespace TraverserProject
         {
             targetCameraZPosition = cameraZPosition;
             RaycastHit hit;
-            Vector3 direction = cameraObject.transform.position = cameraPivotTransform.position;
+            Vector3 direction = cameraObject.transform.position - cameraPivotTransform.position;
             direction.Normalize();
 
             if (Physics.SphereCast(cameraPivotTransform.position, cameraCollisionRadius, direction, out hit, Mathf.Abs(targetCameraZPosition), collideWithLayers))

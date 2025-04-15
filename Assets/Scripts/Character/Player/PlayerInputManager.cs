@@ -84,8 +84,8 @@ namespace TraverserProject
         }
         private void Update()
         {
-            HandleMovementInput();
             HandleCameraMovementInput();
+            HandleMovementInput();            
 
         }
         private void HandleMovementInput()
