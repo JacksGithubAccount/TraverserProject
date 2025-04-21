@@ -8,7 +8,7 @@ namespace TraverserProject
         [HideInInspector] public CharacterController characterController;
         [HideInInspector] public Animator animator;
 
-        [HideInInspector] CharacterNetworkManager characterNetworkManager;
+        [HideInInspector] public CharacterNetworkManager characterNetworkManager;
 
         protected virtual void Awake()
         {

@@ -7,8 +7,8 @@ namespace TraverserProject
     {
         CharacterManager character;
 
-        float vertical;
-        float horizontal;
+        [SerializeField] float vertical;
+        [SerializeField] float horizontal;
 
         protected virtual void Awake()
         {

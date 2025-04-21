@@ -20,21 +20,40 @@ namespace TraverserProject
             base.Awake();
             player = GetComponent<PlayerManager>();
         }
+        protected override void Update()
+        {
+            base.Update();
+            if (player.IsOwner)
+            {
+                player.characterNetworkManager.verticalMovement.Value = verticalMovement;
+                player.characterNetworkManager.horizontalMovement.Value = horizontalMovement;
+                player.characterNetworkManager.moveAmount.Value = moveAmount;
+            }
+            else
+            {
+                verticalMovement = player.characterNetworkManager.verticalMovement.Value;
+                horizontalMovement = player.characterNetworkManager.horizontalMovement.Value;
+                moveAmount = player.characterNetworkManager.moveAmount.Value;
+
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
+            }
+        }
+
         public void HandleAllMovement()
         {
             HandleGroundedMovement();
             HandleRotation();
         }
-        private void GetVerticalAndHorizontalInputs()
+        private void GetMovementValues()
         {
             verticalMovement = PlayerInputManager.Singleton.verticalInput;
             horizontalMovement = PlayerInputManager.Singleton.horizontalInput;
-
+            moveAmount = PlayerInputManager.Singleton.moveAmount;
             //clamp the movements
         }
         private void HandleGroundedMovement()
         {
-            GetVerticalAndHorizontalInputs();
+            GetMovementValues();
             //movement is based in camer direction and move inputs
             moveDirection = PlayerCamera.Singleton.transform.forward * verticalMovement;
             moveDirection = moveDirection + PlayerCamera.Singleton.transform.right * horizontalMovement;

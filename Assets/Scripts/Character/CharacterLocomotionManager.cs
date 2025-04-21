@@ -9,5 +9,6 @@ namespace TraverserProject
         {
             //DontDestroyOnLoad(this);
         }
+        protected virtual void Update() { }
     }
 }
