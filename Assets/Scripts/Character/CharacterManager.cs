@@ -10,6 +10,9 @@ namespace TraverserProject
 
         [HideInInspector] public CharacterNetworkManager characterNetworkManager;
 
+        [Header("Flags")]
+        public bool isPerformingAction = false;
+
         protected virtual void Awake()
         {
             DontDestroyOnLoad(this);

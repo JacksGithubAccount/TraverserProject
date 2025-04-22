@@ -10,15 +10,19 @@ namespace TraverserProject
         PlayerControls playerControls;
         public PlayerManager player;
 
+        [Header("Camera Movement Input")]
+        [SerializeField] Vector2 cameraInput;
+        public float cameraVerticalInput;
+        public float cameraHorizontalInput;
+
+        [Header("Player Movement Input")]
         [SerializeField] Vector2 movementInput;
         public float verticalInput;
         public float horizontalInput;
         public float moveAmount;
 
-        [Header("Camera Movement Input")]
-        [SerializeField] Vector2 cameraInput;
-        public float cameraVerticalInput;
-        public float cameraHorizontalInput;
+        [Header("Player Action Input")]
+        [SerializeField] bool dodgeInput = false;
 
         private void Awake()
         {
@@ -59,6 +63,7 @@ namespace TraverserProject
                 playerControls = new PlayerControls();
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
+                playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
             }
             playerControls.Enable();
 
@@ -82,11 +87,15 @@ namespace TraverserProject
                 }
             }
         }
-        private void Update()
+        private void Update()        
+        {
+            HandleAllInputs();
+        }
+        private void HandleAllInputs()
         {
             HandleCameraMovementInput();
-            HandleMovementInput();            
-
+            HandleMovementInput();
+            HandleDodgeInput();
         }
         private void HandleMovementInput()
         {
@@ -113,6 +122,16 @@ namespace TraverserProject
         {
             cameraVerticalInput = cameraInput.y;
             cameraHorizontalInput = cameraInput.x;
+
+        }
+        private void HandleDodgeInput()
+        {
+            if (dodgeInput)
+            {
+                dodgeInput = false;
+
+                player.playerLocomotionManager.AttemptToPerformDodge();
+            }
 
         }
     }

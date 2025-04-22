@@ -5,16 +5,19 @@ namespace TraverserProject
     public class PlayerLocomotionManager : CharacterLocomotionManager
     {
         PlayerManager player;
-        public float verticalMovement;
-        public float horizontalMovement;
-        public float moveAmount;
+        [HideInInspector] public float verticalMovement;
+        [HideInInspector] public float horizontalMovement;
+        [HideInInspector] public float moveAmount;
 
+        [Header("Movement Settings")]
         private Vector3 moveDirection;
         private Vector3 targetRotationDirection;
         [SerializeField] float walkingSpeed = 2;
         [SerializeField] float runningSpeed = 5;
         [SerializeField] float rotationSpeed = 15;
 
+        [Header("Dodge")]
+        private Vector3 RollDirection;
         protected override void Awake()
         {
             base.Awake();
@@ -85,6 +88,29 @@ namespace TraverserProject
             Quaternion newRotation = Quaternion.LookRotation(targetRotationDirection);
             Quaternion targetRotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);
             transform.rotation = targetRotation;
+        }
+        public void AttemptToPerformDodge()
+        {
+            //if (player.isPerformingAction)
+               // return;
+
+            if (PlayerInputManager.Singleton.moveAmount > 0) //roll
+            {
+                RollDirection = PlayerCamera.Singleton.cameraObject.transform.forward * PlayerInputManager.Singleton.verticalInput;
+                RollDirection += PlayerCamera.Singleton.cameraObject.transform.right * PlayerInputManager.Singleton.horizontalInput;
+
+                RollDirection.y = 0;
+                RollDirection.Normalize();
+
+                Quaternion playerRotation = Quaternion.LookRotation(RollDirection);
+                player.transform.rotation = playerRotation;
+
+                player.playerAnimatorManager.PlayTargetActionAnimation("Roll_Forward_01", true);
+            }
+            else //backstep
+            {
+
+            }
         }
     }
 }
