@@ -56,6 +56,9 @@ namespace TraverserProject
         }
         private void HandleGroundedMovement()
         {
+            if (!player.canMove)
+                return;
+
             GetMovementValues();
             //movement is based in camer direction and move inputs
             moveDirection = PlayerCamera.Singleton.transform.forward * verticalMovement;
@@ -76,6 +79,9 @@ namespace TraverserProject
         }
         private void HandleRotation()
         {
+            if (!player.canRotate)
+                return;
+
             targetRotationDirection = Vector3.zero;
             targetRotationDirection = PlayerCamera.Singleton.cameraObject.transform.forward * verticalMovement;
             targetRotationDirection = targetRotationDirection + PlayerCamera.Singleton.cameraObject.transform.right * horizontalMovement;
@@ -91,8 +97,8 @@ namespace TraverserProject
         }
         public void AttemptToPerformDodge()
         {
-            //if (player.isPerformingAction)
-               // return;
+            if (player.isPerformingAction)
+                return;
 
             if (PlayerInputManager.Singleton.moveAmount > 0) //roll
             {
@@ -109,7 +115,7 @@ namespace TraverserProject
             }
             else //backstep
             {
-
+                player.playerAnimatorManager.PlayTargetActionAnimation("Back_Step_01", true);
             }
         }
     }

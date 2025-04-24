@@ -12,6 +12,9 @@ namespace TraverserProject
 
         [Header("Flags")]
         public bool isPerformingAction = false;
+        public bool canRotate = true;
+        public bool canMove = true;
+        public bool applyRootMotion = false;
 
         protected virtual void Awake()
         {
