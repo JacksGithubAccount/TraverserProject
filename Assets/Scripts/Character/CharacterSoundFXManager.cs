@@ -14,7 +14,7 @@ namespace TraverserProject
 
         public void PlayRollSoundFX()
         {
-            audioSource.Play(WorldSoundFXManager.Singleton.rollSFX);
+            audioSource.PlayOneShot(WorldSoundFXManager.Singleton.rollSFX);
         }
     }
 }

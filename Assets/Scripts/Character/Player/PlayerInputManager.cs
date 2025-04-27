@@ -23,6 +23,7 @@ namespace TraverserProject
 
         [Header("Player Action Input")]
         [SerializeField] bool dodgeInput = false;
+        [SerializeField] bool sprintInput = false;
 
         private void Awake()
         {
@@ -64,6 +65,9 @@ namespace TraverserProject
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
+                //hold input sprints, release stops sprint
+                playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
+                playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
             }
             playerControls.Enable();
 
@@ -87,7 +91,7 @@ namespace TraverserProject
                 }
             }
         }
-        private void Update()        
+        private void Update()
         {
             HandleAllInputs();
         }
@@ -96,6 +100,7 @@ namespace TraverserProject
             HandleCameraMovementInput();
             HandleMovementInput();
             HandleDodgeInput();
+            HandleSprinting();
         }
         private void HandleMovementInput()
         {
@@ -116,7 +121,7 @@ namespace TraverserProject
             if (player == null)
                 return;
 
-            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
+            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
         }
         private void HandleCameraMovementInput()
         {
@@ -133,6 +138,17 @@ namespace TraverserProject
                 player.playerLocomotionManager.AttemptToPerformDodge();
             }
 
+        }
+        private void HandleSprinting()
+        {
+            if (sprintInput)
+            {
+                player.playerLocomotionManager.HandleSprinting();
+            }
+            else
+            {
+                player.playerNetworkManager.isSprinting.Value = false;
+            }
         }
     }
 }

@@ -39,7 +39,7 @@ namespace TraverserProject
         [ClientRpc]
         public void PlayActionAnimationForAllClientsClientRpc(ulong clientID, string animationID, bool applyRootMotion)
         {
-            if (clientID != NetworkManager.Singleton.LocalClientID)
+            if (clientID != NetworkManager.Singleton.LocalClientId)
             {
                 PerformActionAnimationFromServer(animationID, applyRootMotion);
             }
