@@ -24,7 +24,7 @@ namespace TraverserProject
             float verticalAmount = verticalMovement;
             if (isSprinting)
             {
-                vertical = 2;
+                verticalAmount = 2;
             }
 
             character.animator.SetFloat(horizontal, horizontalAmount, 0.1f, Time.deltaTime);
