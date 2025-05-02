@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Netcode;
+using TravserserProject;
 
 namespace TraverserProject
 {
@@ -8,6 +9,8 @@ namespace TraverserProject
         public static PlayerUIManager Singleton { get; set; }
         [Header("NETWORK JOIN")]
         [SerializeField] bool startGameAsClient;
+
+        [HideInInspector] public PlayerUIHudManager playerUIHudManager;
 
         private void Awake()
         {
@@ -20,6 +23,7 @@ namespace TraverserProject
             {
                 Destroy(gameObject);
             }
+            playerUIHudManager = GetComponentInChildren<PlayerUIHudManager>();
         }
         private void Start()
         {

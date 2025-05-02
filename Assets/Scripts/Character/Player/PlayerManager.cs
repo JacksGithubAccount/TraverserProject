@@ -1,3 +1,4 @@
+using TravserserProject;
 using UnityEngine;
 
 namespace TraverserProject
@@ -7,6 +8,7 @@ namespace TraverserProject
         [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
         [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
         [HideInInspector] public PlayerNetworkManager playerNetworkManager;
+        [HideInInspector] public PlayerStatsManager playerStatsManager;
 
         protected override void Awake()
         {
@@ -15,6 +17,7 @@ namespace TraverserProject
             playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
             playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
             playerNetworkManager = GetComponent<PlayerNetworkManager>();
+            playerStatsManager = GetComponent<PlayerStatsManager>();
         }
 
         protected override void Update()
@@ -26,6 +29,8 @@ namespace TraverserProject
 
 
             playerLocomotionManager.HandleAllMovement();
+
+            playerStatsManager.RegenerateStamina();
         }
         public override void OnNetworkSpawn()
         {
@@ -34,6 +39,15 @@ namespace TraverserProject
             {
                 PlayerCamera.Singleton.player = this;
                 PlayerInputManager.Singleton.player = this;
+
+                playerNetworkManager.currentStamina.OnValueChanged += PlayerUIManager.Singleton.playerUIHudManager.SetNewStaminaValue;
+                playerNetworkManager.currentStamina.OnValueChanged += playerStatsManager.ResetStaminaRegenTimer;
+
+                //moved with implement save/load
+                playerNetworkManager.maxStamina.Value = playerStatsManager.CalculateStaminaBasedOnEnduranceLevel(playerNetworkManager.endurance.Value);
+                playerNetworkManager.currentStamina.Value = playerStatsManager.CalculateStaminaBasedOnEnduranceLevel(playerNetworkManager.endurance.Value);
+                PlayerUIManager.Singleton.playerUIHudManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
+
             }
         }
         protected override void LateUpdate()

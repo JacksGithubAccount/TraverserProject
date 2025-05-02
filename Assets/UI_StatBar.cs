@@ -1,16 +1,29 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class UI_StatBar : MonoBehaviour
+namespace TravserserProject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public class UI_StatBar : MonoBehaviour
     {
-        
+        private Slider slider;
+
+        protected virtual void Awake()
+        {
+            slider = GetComponent<Slider>();
+
+        }
+
+        public virtual void SetStat(int newValue)
+        {
+            slider.value = newValue;
+        }
+
+        public virtual void SetMaxStat(int maxValue)
+        {
+            slider.maxValue = maxValue;
+            slider.value = maxValue;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

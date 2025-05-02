@@ -16,6 +16,9 @@ namespace TraverserProject
         public bool canMove = true;
         public bool applyRootMotion = false;
 
+
+
+
         protected virtual void Awake()
         {
             DontDestroyOnLoad(this);
@@ -38,8 +41,8 @@ namespace TraverserProject
                     ref characterNetworkManager.networkPositionVelocity,
                     characterNetworkManager.networkPositionSmoothTime);
 
-                transform.rotation = Quaternion.Slerp(transform.rotation, 
-                    characterNetworkManager.networkRotation.Value, 
+                transform.rotation = Quaternion.Slerp(transform.rotation,
+                    characterNetworkManager.networkRotation.Value,
                     characterNetworkManager.networkRotationSmoothTime);
             }
         }
@@ -47,5 +50,7 @@ namespace TraverserProject
         {
 
         }
+
+
     }
 }
