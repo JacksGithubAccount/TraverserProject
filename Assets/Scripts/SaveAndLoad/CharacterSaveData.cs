@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class CharacterSaveData : MonoBehaviour
+namespace TraverserProject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class CharacterSaveData
     {
-        
-    }
+            
+        [Header("Character Name")]
+        public string characterName;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [Header("Time Played")]
+        public float secondsPlayed;
+
+        [Header("World Coordinates")]
+        public float xPosition;
+        public float yPosition;
+        public float zPosition;
     }
 }

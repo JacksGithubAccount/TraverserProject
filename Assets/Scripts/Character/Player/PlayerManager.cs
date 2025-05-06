@@ -32,6 +32,12 @@ namespace TraverserProject
 
             playerStatsManager.RegenerateStamina();
         }
+        protected override void LateUpdate()
+        {
+
+            base.LateUpdate();
+            PlayerCamera.Singleton.HandleAllCameraActions();
+        }
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
@@ -50,11 +56,19 @@ namespace TraverserProject
 
             }
         }
-        protected override void LateUpdate()
-        {
 
-            base.LateUpdate();
-            PlayerCamera.Singleton.HandleAllCameraActions();
+        public void SaveGameDataToCurrentCharacterData(ref CharacterSaveData currentCharacterData)
+        {
+            currentCharacterData.characterName = playerNetworkManager.characterName.ToString();
+            currentCharacterData.xPosition = transform.position.x;
+            currentCharacterData.yPosition = transform.position.y;
+            currentCharacterData.zPosition = transform.position.z;
+        }
+        public void LoadGameDataFromCurrentCharacterData(ref CharacterSaveData currentCharacterData)
+        {
+            playerNetworkManager.characterName.Value = currentCharacterData.characterName;
+            Vector3 myPosition = new Vector3(currentCharacterData.xPosition, currentCharacterData.yPosition, currentCharacterData.zPosition);
+            transform.position = myPosition;
         }
     }
 }
