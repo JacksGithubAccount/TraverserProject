@@ -9,7 +9,7 @@ namespace TraverserProject
     {
         public static WorldSaveGameManager Singleton { get; set; }
 
-        [SerializeField] PlayerManager player;
+        public PlayerManager player;
 
         [Header("SAVE/LOAD")]
         [SerializeField] bool saveGame;
@@ -110,10 +110,33 @@ namespace TraverserProject
             return fileName;
         }
 
-        public void CreateNewGame()
+        public void AttemptToCreateNewGame()
         {
-            saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(currentCharacterSlotBeingUsed);
-            currentCharacterData = new CharacterSaveData();
+            saveFileDataWriter = new SaveFileDataWriter();
+            saveFileDataWriter.saveDataDirectoryPath = Application.persistentDataPath;
+
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_01);
+
+            if (!saveFileDataWriter.CheckToSeeIfFileExist())
+            {
+                Debug.Log("2");
+                currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_01;
+                currentCharacterData = new CharacterSaveData();
+                StartCoroutine(LoadWorldScene());
+                return;
+            }
+            saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_02);
+
+            if (!saveFileDataWriter.CheckToSeeIfFileExist())
+            {
+                currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_02;
+                currentCharacterData = new CharacterSaveData();
+                StartCoroutine(LoadWorldScene());
+                return;
+            }
+
+            TitleScreenManager.Singleton.DisplayNoFreeCharacterSlotsPopUp();
+
 
         }
         public void LoadGame()
@@ -142,8 +165,8 @@ namespace TraverserProject
 
         private void LoadAllCharacterProfiles()
         {
-            saveFileDataWriter= new SaveFileDataWriter();
-            saveFileDataWriter.saveDataDirectoryPath= Application.persistentDataPath;
+            saveFileDataWriter = new SaveFileDataWriter();
+            saveFileDataWriter.saveDataDirectoryPath = Application.persistentDataPath;
 
             saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_01);
             characterSlot01 = saveFileDataWriter.LoadSaveFile();
@@ -169,6 +192,8 @@ namespace TraverserProject
         public IEnumerator LoadWorldScene()
         {
             AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
+
+            player.LoadGameDataFromCurrentCharacterData(ref currentCharacterData);
 
             yield return null;
         }

@@ -45,6 +45,7 @@ namespace TraverserProject
             {
                 PlayerCamera.Singleton.player = this;
                 PlayerInputManager.Singleton.player = this;
+                WorldSaveGameManager.Singleton.player = this;
 
                 playerNetworkManager.currentStamina.OnValueChanged += PlayerUIManager.Singleton.playerUIHudManager.SetNewStaminaValue;
                 playerNetworkManager.currentStamina.OnValueChanged += playerStatsManager.ResetStaminaRegenTimer;

@@ -155,5 +155,12 @@ namespace TraverserProject
                 }
             }
         }
+
+        public void LoadGameFromCharacterSlot()
+        {
+            WorldSaveGameManager.Singleton.currentCharacterSlotBeingUsed = characterSlot;
+            WorldSaveGameManager.Singleton.LoadGame();
+
+        }
     }
 }
