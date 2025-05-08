@@ -15,10 +15,19 @@ namespace TraverserProject
         [SerializeField] Button mainMenuNewGameButton;
         [SerializeField] Button loadMenuReturnButton;
         [SerializeField] Button MainMenuLoadGameButton;
+        [SerializeField] Button deleteCharacterPopUpConfirmButton;
 
         [Header("Pop Ups")]
         [SerializeField] GameObject noCharacterSlotsPopUp;
         [SerializeField] Button noCharacterSlotsOkayButton;
+        [SerializeField] GameObject deleteCharacterSlotPopUp;
+
+        [Header("Save Slots")]
+        public CharacterSlot currentSelectedSlot = CharacterSlot.NO_SLOT;
+
+
+        [Header("Title Screen Inputs")]
+        [SerializeField] bool deleteCharacterSlot = false;
 
         private void Awake()
         {
@@ -67,5 +76,38 @@ namespace TraverserProject
             noCharacterSlotsPopUp.SetActive(false);
             mainMenuNewGameButton.Select();
         }
+        public void SelectCharacterSlot(CharacterSlot characterSlot)
+        {
+            currentSelectedSlot = characterSlot;
+        }
+        public void SelectNoSlot()
+        {
+            currentSelectedSlot = CharacterSlot.NO_SLOT; ;
+        }
+
+        public void AttemptToDeleteCharacterSlot()
+        {
+            if (currentSelectedSlot != CharacterSlot.NO_SLOT)
+            {
+                deleteCharacterSlotPopUp.SetActive(true);
+                deleteCharacterPopUpConfirmButton.Select();
+            }
+        }
+
+        public void DeleteCharacterSlot()
+        {
+            deleteCharacterSlotPopUp.SetActive(false);
+            WorldSaveGameManager.Singleton.DeleteGame(currentSelectedSlot);
+            //refreshes screeen to make load slots reload
+            titleScreenLoadMenu.SetActive(false);
+            titleScreenLoadMenu.SetActive(true);
+
+                loadMenuReturnButton.Select();
+            }
+            public void CloseDeleteCharacterPopUp()
+            {
+                deleteCharacterSlotPopUp.SetActive(false);
+                loadMenuReturnButton.Select();
+            }
+        }
     }
-}

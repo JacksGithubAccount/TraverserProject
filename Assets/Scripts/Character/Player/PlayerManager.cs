@@ -1,5 +1,7 @@
 using TravserserProject;
 using UnityEngine;
+using Unity.SceneManagement;
+using UnityEngine.SceneManagement;
 
 namespace TraverserProject
 {
@@ -60,6 +62,7 @@ namespace TraverserProject
 
         public void SaveGameDataToCurrentCharacterData(ref CharacterSaveData currentCharacterData)
         {
+            currentCharacterData.sceneIndex = SceneManager.GetActiveScene().buildIndex;
             currentCharacterData.characterName = playerNetworkManager.characterName.ToString();
             currentCharacterData.xPosition = transform.position.x;
             currentCharacterData.yPosition = transform.position.y;

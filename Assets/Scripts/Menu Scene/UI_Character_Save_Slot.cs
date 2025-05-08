@@ -24,7 +24,7 @@ namespace TraverserProject
             saveFileDataWriter = new SaveFileDataWriter();
             saveFileDataWriter.saveDataDirectoryPath = Application.persistentDataPath; ;
 
-            if(characterSlot == CharacterSlot.CharacterSlot_01)
+            if (characterSlot == CharacterSlot.CharacterSlot_01)
             {
                 saveFileDataWriter.saveFileName = WorldSaveGameManager.Singleton.DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(characterSlot);
                 if (saveFileDataWriter.CheckToSeeIfFileExist())
@@ -161,6 +161,10 @@ namespace TraverserProject
             WorldSaveGameManager.Singleton.currentCharacterSlotBeingUsed = characterSlot;
             WorldSaveGameManager.Singleton.LoadGame();
 
+        }
+        public void SelectCurrentSlot()
+        {
+            TitleScreenManager.Singleton.SelectCharacterSlot(characterSlot);
         }
     }
 }
