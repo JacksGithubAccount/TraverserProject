@@ -1,6 +1,5 @@
 using TravserserProject;
 using UnityEngine;
-using Unity.SceneManagement;
 using UnityEngine.SceneManagement;
 
 namespace TraverserProject
