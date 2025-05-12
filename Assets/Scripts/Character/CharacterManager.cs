@@ -12,6 +12,8 @@ namespace TraverserProject
 
         [Header("Flags")]
         public bool isPerformingAction = false;
+        public bool isJumping = false;
+        public bool isGrounded = true;
         public bool canRotate = true;
         public bool canMove = true;
         public bool applyRootMotion = false;
@@ -29,6 +31,8 @@ namespace TraverserProject
         }
         protected virtual void Update()
         {
+            animator.SetBool("isGrounded", isGrounded);
+
             if (IsOwner)
             {
                 characterNetworkManager.networkPosition.Value = transform.position;
