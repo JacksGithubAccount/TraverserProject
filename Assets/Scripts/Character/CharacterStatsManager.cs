@@ -19,6 +19,22 @@ namespace TravserserProject
         {
             character = GetComponent<CharacterManager>();
         }
+
+        protected virtual void Start()
+        {
+
+        }
+
+        public int CalculateHealthBasedOnVitalityLevel(int vitality)
+        {
+            float health = 0;
+
+            //any equation for health
+            health = vitality * 30;
+
+            return Mathf.RoundToInt(health);
+        }
+
         public int CalculateStaminaBasedOnEnduranceLevel(int endurance)
         {
             float stamina = 0;
