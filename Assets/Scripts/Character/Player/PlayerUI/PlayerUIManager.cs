@@ -11,7 +11,7 @@ namespace TraverserProject
         [SerializeField] bool startGameAsClient;
 
         [HideInInspector] public PlayerUIHudManager playerUIHudManager;
-
+        [HideInInspector] public PlayerUIPopUpManager playerUIPopUpManager;
         private void Awake()
         {
             //there can only be one of this object in the game at any one time. if another exist, destroy it
@@ -24,6 +24,7 @@ namespace TraverserProject
                 Destroy(gameObject);
             }
             playerUIHudManager = GetComponentInChildren<PlayerUIHudManager>();
+            playerUIPopUpManager = GetComponentInChildren<PlayerUIPopUpManager>();
         }
         private void Start()
         {

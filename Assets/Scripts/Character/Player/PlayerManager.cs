@@ -1,3 +1,4 @@
+using System.Collections;
 using TravserserProject;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,6 +7,9 @@ namespace TraverserProject
 {
     public class PlayerManager : CharacterManager
     {
+        [Header("DEBUG MENU")]
+        [SerializeField] bool respawnCharacter = false;
+
         [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
         [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
         [HideInInspector] public PlayerNetworkManager playerNetworkManager;
@@ -55,7 +59,32 @@ namespace TraverserProject
                 playerNetworkManager.currentStamina.OnValueChanged += PlayerUIManager.Singleton.playerUIHudManager.SetNewStaminaValue;
                 playerNetworkManager.currentStamina.OnValueChanged += playerStatsManager.ResetStaminaRegenTimer;
             }
+
+            playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHealth;
         }
+
+        public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
+        {
+            if (IsOwner)
+            {
+                PlayerUIManager.Singleton.playerUIPopUpManager.SendYouDiedPopUp();
+            }
+
+            return base.ProcessDeathEvent(manuallySelectDeathAnimation);
+        }
+        public override void ReviveCharacter()
+        {
+            base.ReviveCharacter();
+
+            if (IsOwner)
+            {
+                playerNetworkManager.currentHealth.Value = playerNetworkManager.maxHealth.Value;
+                playerNetworkManager.currentStamina.Value = playerNetworkManager.maxStamina.Value;
+
+                playerAnimatorManager.PlayTargetActionAnimation("Empty", false);
+            }
+        }
+
 
         public void SaveGameDataToCurrentCharacterData(ref CharacterSaveData currentCharacterData)
         {
@@ -88,6 +117,14 @@ namespace TraverserProject
             playerNetworkManager.maxStamina.Value = playerStatsManager.CalculateStaminaBasedOnEnduranceLevel(playerNetworkManager.endurance.Value);
             playerNetworkManager.currentStamina.Value = currentCharacterData.currentStamina;
             PlayerUIManager.Singleton.playerUIHudManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
+        }
+        private void DebugMenu()
+        {
+            if (respawnCharacter)
+            {
+                respawnCharacter = false;
+                ReviveCharacter();
+            }
         }
     }
 }
