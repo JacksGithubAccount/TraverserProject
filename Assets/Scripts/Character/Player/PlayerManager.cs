@@ -14,6 +14,7 @@ namespace TraverserProject
         [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
         [HideInInspector] public PlayerNetworkManager playerNetworkManager;
         [HideInInspector] public PlayerStatsManager playerStatsManager;
+        [HideInInspector] public PlayerInventoryManager playerInventoryManager;
 
         protected override void Awake()
         {
@@ -23,6 +24,7 @@ namespace TraverserProject
             playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
             playerNetworkManager = GetComponent<PlayerNetworkManager>();
             playerStatsManager = GetComponent<PlayerStatsManager>();
+            playerInventoryManager = GetComponent <PlayerInventoryManager>();
         }
 
         protected override void Update()
@@ -36,6 +38,8 @@ namespace TraverserProject
             playerLocomotionManager.HandleAllMovement();
 
             playerStatsManager.RegenerateStamina();
+
+            DebugMenu();
         }
         protected override void LateUpdate()
         {
@@ -85,11 +89,10 @@ namespace TraverserProject
             }
         }
 
-
         public void SaveGameDataToCurrentCharacterData(ref CharacterSaveData currentCharacterData)
         {
             currentCharacterData.sceneIndex = SceneManager.GetActiveScene().buildIndex;
-            currentCharacterData.characterName = playerNetworkManager.characterName.ToString();
+            currentCharacterData.characterName = playerNetworkManager.characterName.Value.ToString();
             currentCharacterData.xPosition = transform.position.x;
             currentCharacterData.yPosition = transform.position.y;
             currentCharacterData.zPosition = transform.position.z;
@@ -118,6 +121,7 @@ namespace TraverserProject
             playerNetworkManager.currentStamina.Value = currentCharacterData.currentStamina;
             PlayerUIManager.Singleton.playerUIHudManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
         }
+
         private void DebugMenu()
         {
             if (respawnCharacter)

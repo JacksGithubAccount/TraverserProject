@@ -76,34 +76,34 @@ namespace TraverserProject
             switch (characterSlot)
             {
                 case CharacterSlot.CharacterSlot_01:
-                    fileName = "CharacterSlot_" + (int)currentCharacterSlotBeingUsed + 1;
+                    fileName = "CharacterSlot_01";
                     break;
                 case CharacterSlot.CharacterSlot_02:
-                    fileName = "CharacterSlot_" + (int)currentCharacterSlotBeingUsed + 1;
+                    fileName = "CharacterSlot_02";
                     break;
                 case CharacterSlot.CharacterSlot_03:
-                    fileName = "CharacterSlot_" + (int)currentCharacterSlotBeingUsed + 1;
+                    fileName = "CharacterSlot_03";
                     break;
                 case CharacterSlot.CharacterSlot_04:
-                    fileName = "CharacterSlot_" + (int)currentCharacterSlotBeingUsed + 1;
+                    fileName = "CharacterSlot_04";
                     break;
                 case CharacterSlot.CharacterSlot_05:
-                    fileName = "CharacterSlot_" + (int)currentCharacterSlotBeingUsed + 1;
+                    fileName = "CharacterSlot_05";
                     break;
                 case CharacterSlot.CharacterSlot_06:
-                    fileName = "CharacterSlot_" + (int)currentCharacterSlotBeingUsed + 1;
+                    fileName = "CharacterSlot_0" + (int)currentCharacterSlotBeingUsed + 1;
                     break;
                 case CharacterSlot.CharacterSlot_07:
-                    fileName = "CharacterSlot_" + (int)currentCharacterSlotBeingUsed + 1;
+                    fileName = "CharacterSlot_0" + (int)currentCharacterSlotBeingUsed + 1;
                     break;
                 case CharacterSlot.CharacterSlot_08:
-                    fileName = "CharacterSlot_" + (int)currentCharacterSlotBeingUsed + 1;
+                    fileName = "CharacterSlot_0" + (int)currentCharacterSlotBeingUsed + 1;
                     break;
                 case CharacterSlot.CharacterSlot_09:
-                    fileName = "CharacterSlot_" + (int)currentCharacterSlotBeingUsed + 1;
+                    fileName = "CharacterSlot_0" + (int)currentCharacterSlotBeingUsed + 1;
                     break;
                 case CharacterSlot.CharacterSlot_10:
-                    fileName = "CharacterSlot_" + (int)currentCharacterSlotBeingUsed + 1;
+                    fileName = "CharacterSlot_0" + (int)currentCharacterSlotBeingUsed + 1;
                     break;
 
             }
@@ -213,6 +213,7 @@ namespace TraverserProject
             {
                 player.playerNetworkManager.vitality.Value = 10;
                 player.playerNetworkManager.endurance.Value = 10;
+                
 
                 SaveGame();
                 StartCoroutine(LoadWorldScene());
@@ -259,23 +260,23 @@ namespace TraverserProject
                 saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_01);
                 characterSlot01 = saveFileDataWriter.LoadSaveFile();
                 saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_02);
-                characterSlot01 = saveFileDataWriter.LoadSaveFile();
+                characterSlot02 = saveFileDataWriter.LoadSaveFile();
                 saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_03);
-                characterSlot01 = saveFileDataWriter.LoadSaveFile();
+                characterSlot03 = saveFileDataWriter.LoadSaveFile();
                 saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_04);
-                characterSlot01 = saveFileDataWriter.LoadSaveFile();
+                characterSlot04 = saveFileDataWriter.LoadSaveFile();
                 saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_05);
-                characterSlot01 = saveFileDataWriter.LoadSaveFile();
+                characterSlot05 = saveFileDataWriter.LoadSaveFile();
                 saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_06);
-                characterSlot01 = saveFileDataWriter.LoadSaveFile();
+                characterSlot06 = saveFileDataWriter.LoadSaveFile();
                 saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_07);
-                characterSlot01 = saveFileDataWriter.LoadSaveFile();
+                characterSlot07 = saveFileDataWriter.LoadSaveFile();
                 saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_08);
-                characterSlot01 = saveFileDataWriter.LoadSaveFile();
+                characterSlot08 = saveFileDataWriter.LoadSaveFile();
                 saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_09);
-                characterSlot01 = saveFileDataWriter.LoadSaveFile();
+                characterSlot09 = saveFileDataWriter.LoadSaveFile();
                 saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_10);
-                characterSlot01 = saveFileDataWriter.LoadSaveFile();
+                characterSlot10 = saveFileDataWriter.LoadSaveFile();
             }
             public IEnumerator LoadWorldScene()
             {

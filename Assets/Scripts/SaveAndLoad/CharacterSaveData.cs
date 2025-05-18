@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace TraverserProject
 {
+    [System.Serializable ]
     public class CharacterSaveData
     {
         [Header("Scene Index")]

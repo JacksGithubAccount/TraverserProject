@@ -64,14 +64,20 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Character\Player\PlayerCamera.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterNetworkManager.cs" />
+    <Compile Include="Assets\WeaponModelInstantiationSlot.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerStatsManager.cs" />
+    <Compile Include="Assets\Scripts\Character\CharacterEquipmentManager.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterLocomotionManager.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerInputManager.cs" />
     <Compile Include="Assets\Scripts\SaveAndLoad\CharacterSaveData.cs" />
     <Compile Include="Assets\Scripts\SaveAndLoad\SaveFileDataWriter.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerAnimatorManager.cs" />
+    <Compile Include="Assets\Scripts\Character\CharacterInventoryManager.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerEffectsManager.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterStatsManager.cs" />
+    <Compile Include="Assets\Scripts\Character\Player\PlayerUI\PlayerUIPopUpManager.cs" />
+    <Compile Include="Assets\Scripts\Items\WeaponItem.cs" />
+    <Compile Include="Assets\Scripts\Items\MeleeWeaponItem.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerNetworkManager.cs" />
     <Compile Include="Assets\Scripts\Menu Scene\TitleScreenManager.cs" />
@@ -82,13 +88,14 @@
     <Compile Include="Assets\Scripts\Character\CharacterSoundFXManager.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerLocomotionManager.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerUI\UI_StatBar.cs" />
-    <Compile Include="Assets\PlayerUIPopUpManager.cs" />
+    <Compile Include="Assets\Scripts\Items\BaseItem.cs" />
     <Compile Include="Assets\Scripts\Menu Scene\UI_Character_Save_Slot.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerUI\PlayerUIHudManager.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Effects\TakeDamageEffect.cs" />
     <Compile Include="Assets\Scripts\World Manager\WorldSoundFXManager.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerSoundFXManager.cs" />
+    <Compile Include="Assets\PlayerEquipmentManager.cs" />
     <Compile Include="Assets\Scripts\Character\ResetIsJumping.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterManager.cs" />
     <Compile Include="Assets\Scripts\Enums.cs" />
@@ -96,6 +103,7 @@
     <Compile Include="Assets\Scripts\World Manager\WorldSaveGameManager.cs" />
     <Compile Include="Assets\PlayerControls.cs" />
     <Compile Include="Assets\Scripts\Effects\InstantCharacterEffect.cs" />
+    <Compile Include="Assets\PlayerInventoryManager.cs" />
     <Compile Include="Assets\Scripts\Colliders\DamageCollider.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterAnimatorManager.cs" />
     <Compile Include="Assets\Scripts\Character\ResetActionFlag.cs" />
@@ -119,6 +127,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Art\LowPolyWeapons\LowPolyWeapons_ReadMe 1.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
@@ -1276,6 +1285,10 @@
     <ProjectReference Include="Unity.VisualScripting.State.csproj">
       <Project>{8CB2203A-5CA4-5FE3-ABD8-C018F91868BE}</Project>
       <Name>Unity.VisualScripting.State</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.2D.Sprite.Editor.csproj">
+      <Project>{C12CF02F-7852-D6C1-C84E-84E93999B3D0}</Project>
+      <Name>Unity.2D.Sprite.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.AI.Navigation.Editor.ConversionSystem.csproj">
       <Project>{A24726B9-B206-C377-E0DB-95ECB4BBEF36}</Project>
