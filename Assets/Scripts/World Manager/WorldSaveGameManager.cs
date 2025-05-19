@@ -125,7 +125,7 @@ namespace TraverserProject
                 NewGame();
                 return;
             }
-            saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_02);
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_02);
 
             if (!saveFileDataWriter.CheckToSeeIfFileExist())
             {
@@ -134,7 +134,7 @@ namespace TraverserProject
                 NewGame();
                 return;
             }
-            saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_03);
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_03);
 
             if (!saveFileDataWriter.CheckToSeeIfFileExist())
             {
@@ -143,7 +143,7 @@ namespace TraverserProject
                 NewGame();
                 return;
             }
-            saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_04);
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_04);
 
             if (!saveFileDataWriter.CheckToSeeIfFileExist())
             {
@@ -152,7 +152,7 @@ namespace TraverserProject
                 NewGame();
                 return;
             }
-            saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_05);
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_05);
 
             if (!saveFileDataWriter.CheckToSeeIfFileExist())
             {
@@ -161,7 +161,7 @@ namespace TraverserProject
                 NewGame();
                 return;
             }
-            saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_06);
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_06);
 
             if (!saveFileDataWriter.CheckToSeeIfFileExist())
             {
@@ -170,7 +170,7 @@ namespace TraverserProject
                 NewGame();
                 return;
             }
-            saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_07);
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_07);
 
             if (!saveFileDataWriter.CheckToSeeIfFileExist())
             {
@@ -179,7 +179,7 @@ namespace TraverserProject
                 NewGame();
                 return;
             }
-            saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_08);
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_08);
 
             if (!saveFileDataWriter.CheckToSeeIfFileExist())
             {
@@ -188,7 +188,7 @@ namespace TraverserProject
                 NewGame();
                 return;
             }
-            saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_09);
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_09);
 
             if (!saveFileDataWriter.CheckToSeeIfFileExist())
             {
@@ -197,7 +197,7 @@ namespace TraverserProject
                 NewGame();
                 return;
             }
-            saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_10);
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_10);
 
             if (!saveFileDataWriter.CheckToSeeIfFileExist())
             {
@@ -211,8 +211,8 @@ namespace TraverserProject
 
             private void NewGame()
             {
-                player.playerNetworkManager.vitality.Value = 10;
-                player.playerNetworkManager.endurance.Value = 10;
+                //player.playerNetworkManager.vitality.Value = 10;
+                //player.playerNetworkManager.endurance.Value = 10;
                 
 
                 SaveGame();

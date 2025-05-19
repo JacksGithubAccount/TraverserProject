@@ -6,6 +6,9 @@ namespace TraverserProject
 
     public class DamageCollider : MonoBehaviour
     {
+        [Header("Collider")]
+        protected Collider damageCollider;
+
         [Header("Damage")]
         public float physicalDamage = 0;
         public float magicDamage = 0;
@@ -49,5 +52,14 @@ namespace TraverserProject
             damageTarget.characterEffectsManager.ProcessInstantEffect(damageEffect);
         }
 
+        public virtual void EnableDamageCollider()
+        {
+            damageCollider.enabled = true;
+        }
+        public virtual void DisableDamageCollider()
+        {
+            damageCollider.enabled = false;
+            charactersDamaged.Clear();
+        }
     }
 }
