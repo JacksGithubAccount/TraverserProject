@@ -9,7 +9,7 @@ namespace TraverserProject
     {
         [Header("DEBUG MENU")]
         [SerializeField] bool respawnCharacter = false;
-		[SerializeField] bool switchRightWeapon = false;
+        [SerializeField] bool switchRightWeapon = false;
 
         [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
         [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
@@ -72,6 +72,11 @@ namespace TraverserProject
             //equipment
             playerNetworkManager.currentRightHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentRightHandWeaponIDChange;
             playerNetworkManager.currentLeftHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentLeftHandWeaponIDChange;
+
+            if (IsOwner && !IsServer)
+            {
+                LoadGameDataFromCurrentCharacterData(ref WorldSaveGameManager.Singleton.currentCharacterData);
+            }
 
         }
 

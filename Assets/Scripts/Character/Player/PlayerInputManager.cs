@@ -42,7 +42,13 @@ namespace TraverserProject
         {
             DontDestroyOnLoad(gameObject);
             SceneManager.activeSceneChanged += OnSceneChange;
+
             Singleton.enabled = false;
+
+            if (playerControls != null)
+            {
+                playerControls.Disable();
+            }
         }
 
         private void OnSceneChange(Scene oldScene, Scene newScene)
@@ -51,10 +57,18 @@ namespace TraverserProject
             if (newScene.buildIndex == WorldSaveGameManager.Singleton.GetWorldSceneIndex())
             {
                 Singleton.enabled = true;
+                if (playerControls != null)
+                {
+                    playerControls.Enable();
+                }
             }
             else
             {
                 Singleton.enabled = false;
+                if (playerControls != null)
+                {
+                    playerControls.Disable();
+                }
             }
         }
 

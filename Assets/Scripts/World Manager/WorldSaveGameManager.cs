@@ -211,8 +211,8 @@ namespace TraverserProject
 
             private void NewGame()
             {
-                //player.playerNetworkManager.vitality.Value = 10;
-                //player.playerNetworkManager.endurance.Value = 10;
+                player.playerNetworkManager.vitality.Value = 10;
+                player.playerNetworkManager.endurance.Value = 10;
                 
 
                 SaveGame();
