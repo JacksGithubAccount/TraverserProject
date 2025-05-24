@@ -391,6 +391,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       insertIndex: -1
       addedObject: {fileID: -8589718263785180198}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4598779547375827842}
     - targetCorrespondingSourceObject: {fileID: 2261973912390581236, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4260622113842702054}
@@ -547,7 +550,6 @@ MonoBehaviour:
   characterEffectsManager: {fileID: 0}
   characterAnimatorManager: {fileID: 0}
   isPerformingAction: 0
-  isJumping: 0
   isGrounded: 1
   canRotate: 1
   canMove: 1
@@ -560,6 +562,7 @@ MonoBehaviour:
   playerStatsManager: {fileID: 0}
   playerInventoryManager: {fileID: 0}
   playerEquipmentManager: {fileID: 0}
+  playerCombatManager: {fileID: 0}
 --- !u!114 &-3595477288112356080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,6 +623,8 @@ MonoBehaviour:
   moveAmount:
     m_InternalValue: 0
   isSprinting:
+    m_InternalValue: 0
+  isJumping:
     m_InternalValue: 0
   currentStamina:
     m_InternalValue: 0
@@ -702,9 +707,15 @@ MonoBehaviour:
         byte0059: 0
         byte0060: 0
         byte0061: 0
+  currentWeaponBeingUsed:
+    m_InternalValue: 0
   currentRightHandWeaponID:
     m_InternalValue: 0
   currentLeftHandWeaponID:
+    m_InternalValue: 0
+  isUsingRightHand:
+    m_InternalValue: 0
+  isUsingLeftHand:
     m_InternalValue: 0
 --- !u!114 &-4992428033466497924
 MonoBehaviour:
@@ -894,10 +905,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87e1482e7f139c74bb42016530a83dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRightHandWeapon: {fileID: 11400000, guid: 8ce237a8c1ddcf34aa6ecb1039b591af, type: 2}
+  currentRightHandWeapon: {fileID: 11400000, guid: 64a3dcab51c176e409334284777e2c9a, type: 2}
   currentLeftHandWeapon: {fileID: 11400000, guid: 8ce237a8c1ddcf34aa6ecb1039b591af, type: 2}
   weaponsInRightHandSlots:
-  - {fileID: 11400000, guid: 8ce237a8c1ddcf34aa6ecb1039b591af, type: 2}
+  - {fileID: 11400000, guid: 64a3dcab51c176e409334284777e2c9a, type: 2}
   - {fileID: 11400000, guid: 8ce237a8c1ddcf34aa6ecb1039b591af, type: 2}
   - {fileID: 11400000, guid: 8ce237a8c1ddcf34aa6ecb1039b591af, type: 2}
   rightHandWeaponIndex: 0
@@ -951,6 +962,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4598779547375827842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981417154689355843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 285700da5f9e90b458de5b470d2eee61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeaponBeingUsed: {fileID: 0}
 --- !u!1 &1436562615973365599 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1346693338035923533, guid: e90d2635acace004890485c7a82d2ab3, type: 3}

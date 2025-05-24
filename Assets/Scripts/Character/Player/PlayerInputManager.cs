@@ -25,6 +25,7 @@ namespace TraverserProject
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool sprintInput = false;
         [SerializeField] bool jumpInput = false;
+        [SerializeField] bool RB_Input = false;
 
         private void Awake()
         {
@@ -81,6 +82,7 @@ namespace TraverserProject
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
+                playerControls.PlayerActions.RB.performed += i => RB_Input = true;
 
 
                 //hold input sprints, release stops sprint
@@ -120,6 +122,7 @@ namespace TraverserProject
             HandleDodgeInput();
             HandleSprintInput();
             HandleJumpInput();
+            HandleRBInput();
         }
         private void HandleMovementInput()
         {
@@ -176,6 +179,18 @@ namespace TraverserProject
                 jumpInput = false;
 
                 player.playerLocomotionManager.AttemptToPerformJump();
+            }
+        }
+
+        private void HandleRBInput()
+        {
+            if (RB_Input)
+            {
+                RB_Input = false;
+
+                player.playerNetworkManager.SetCharacterActionHand(true);
+
+                player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RB_Action, player.playerInventoryManager.currentRightHandWeapon);
             }
         }
     }
