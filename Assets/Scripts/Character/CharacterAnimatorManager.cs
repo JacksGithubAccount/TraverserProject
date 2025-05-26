@@ -43,6 +43,18 @@ namespace TraverserProject
             character.characterNetworkManager.NotifyTheServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }
 
+        public virtual void PlayTargetAttackActionAnimation(string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false)
+        {
+            character.applyRootMotion = applyRootMotion;
+            character.animator.applyRootMotion = applyRootMotion;
+            character.animator.CrossFade(targetAnimation, 0.2f);
+            character.isPerformingAction = isPerformingAction;
+            character.canRotate = canRotate;
+            character.canMove = canMove;
+
+            character.characterNetworkManager.NotifyTheServerOfAttackActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
+        }
+
     }
 
 }

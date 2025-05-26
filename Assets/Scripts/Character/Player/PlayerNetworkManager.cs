@@ -68,5 +68,36 @@ namespace TraverserProject
             WeaponItem newWeapon = Instantiate(WorldItemDatabase.Singleton.GetWeaponByID(newID));
             player.playerCombatManager.currentWeaponBeingUsed = newWeapon;
         }
+
+        [ServerRpc]
+        public void NotifyTheServerOfWeaponActionServerRpc(ulong clientID, int actionID, int weaponID)
+        {
+            if (IsServer)
+            {
+                NotifyTheServerOfWeaponActionClientRpc(clientID, actionID, weaponID);
+            }
+        }
+        [ClientRpc]
+        private void NotifyTheServerOfWeaponActionClientRpc(ulong clientID, int actionID, int weaponID)
+        {
+            if (clientID != NetworkManager.Singleton.LocalClientId)
+            {
+                PerformWeaponBasedAction(actionID, weaponID);
+            }
+        }
+
+        private void PerformWeaponBasedAction(int actionID, int weaponID)
+        {
+            WeaponItemAction weaponAction = WorldActionManager.Singleton.GetWeaponItemActionByID(actionID);
+
+            if (weaponAction != null)
+            {
+                weaponAction.AttemptToPerformAction(player, WorldItemDatabase.Singleton.GetWeaponByID(weaponID));
+            }
+            else
+            {
+                Debug.LogError("Action is null");
+            }
+        }
     }
 }

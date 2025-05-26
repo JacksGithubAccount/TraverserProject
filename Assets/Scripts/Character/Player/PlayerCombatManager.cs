@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Netcode;
 
 namespace TraverserProject
 {
@@ -17,7 +18,13 @@ namespace TraverserProject
 
         public void PerformWeaponBasedAction(WeaponItemAction weaponAction, WeaponItem weaponPerformingAction)
         {
-            weaponAction.AttemptToPerformAction(player, weaponPerformingAction);
+            if (player.IsOwner)
+            {
+                weaponAction.AttemptToPerformAction(player, weaponPerformingAction);
+
+                player.playerNetworkManager.NotifyTheServerOfWeaponActionServerRpc(NetworkManager.Singleton.LocalClientId, weaponAction.actionID, weaponPerformingAction.itemID);
+            }
+
 
 
         }
