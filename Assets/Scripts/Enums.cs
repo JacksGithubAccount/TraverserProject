@@ -28,3 +28,9 @@ public enum WeaponModelSlot
     LeftHip,
     Back
 }
+
+public enum AttackType
+{
+    LightAttack01
+
+}
