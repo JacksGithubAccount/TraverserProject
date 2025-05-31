@@ -6,6 +6,9 @@ namespace TraverserProject
     {
         public static WorldSoundFXManager Singleton;
 
+        [Header("Damage Sounds")]
+        public AudioClip[] physicalDamageSFX;
+
         [Header("Action Sounds")]
         public AudioClip rollSFX;
 
@@ -23,6 +26,13 @@ namespace TraverserProject
         private void Start()
         {
             DontDestroyOnLoad(gameObject);
+        }
+
+        public AudioClip ChooseRandomSFXFromArray(AudioClip[] array)
+        {
+            int index = Random.Range(0, array.Length);
+
+            return array[index];
         }
     }
 }

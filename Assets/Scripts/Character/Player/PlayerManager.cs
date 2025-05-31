@@ -2,6 +2,7 @@ using System.Collections;
 using TravserserProject;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
 
 namespace TraverserProject
 {
@@ -55,6 +56,8 @@ namespace TraverserProject
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
+            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
+
             if (IsOwner)
             {
                 PlayerCamera.Singleton.player = this;
@@ -81,6 +84,21 @@ namespace TraverserProject
                 LoadGameDataFromCurrentCharacterData(ref WorldSaveGameManager.Singleton.currentCharacterData);
             }
 
+        }
+
+        private void OnClientConnectedCallback(ulong clientID)
+        {
+            WorldGameSessionManager.Singleton.AddPlayerToActivePlayersList(this);
+            if (!IsServer && IsOwner)
+            {
+                foreach (var player in WorldGameSessionManager.Singleton.players)
+                {
+                    if (player != this)
+                    {
+                        player.LoadOtherPlayerCharacterWhenJoiningServer();
+                    }
+                }
+            }
         }
 
         public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
@@ -136,6 +154,14 @@ namespace TraverserProject
             playerNetworkManager.maxStamina.Value = playerStatsManager.CalculateStaminaBasedOnEnduranceLevel(playerNetworkManager.endurance.Value);
             playerNetworkManager.currentStamina.Value = currentCharacterData.currentStamina;
             PlayerUIManager.Singleton.playerUIHudManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
+        }
+
+        private void LoadOtherPlayerCharacterWhenJoiningServer()
+        {
+            playerNetworkManager.OnCurrentRightHandWeaponIDChange(0, playerNetworkManager.currentRightHandWeaponID.Value);
+            playerNetworkManager.OnCurrentLeftHandWeaponIDChange(0, playerNetworkManager.currentLeftHandWeaponID.Value);
+
+
         }
 
         private void DebugMenu()

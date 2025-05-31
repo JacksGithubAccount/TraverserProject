@@ -8,6 +8,9 @@ namespace TraverserProject
     {
         public static WorldCharacterEffectsManager Singleton;
 
+        [Header("VFX")]
+        public GameObject bloodSplatterVFX;
+
         [Header("Damage")]
         public TakeDamageEffect takeDamageEffect;
 

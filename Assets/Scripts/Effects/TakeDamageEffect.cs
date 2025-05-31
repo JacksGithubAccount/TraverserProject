@@ -48,6 +48,11 @@ namespace TraverserProject
                 return;
 
             CalculateDamage(character);
+
+            PlayDamageSFX(character);
+            PlayDamageVFX(character);
+
+
         }
 
         private void CalculateDamage(CharacterManager character)
@@ -70,5 +75,16 @@ namespace TraverserProject
 
         }
 
+        private void PlayDamageVFX(CharacterManager character)
+        {
+            character.characterEffectsManager.PlayBloodSplatterVFX(contactPoint);
+        }
+
+        private void PlayDamageSFX(CharacterManager character)
+        {
+            AudioClip physicalDamageSFX = WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(WorldSoundFXManager.Singleton.physicalDamageSFX);
+
+            character.characterSoundFXManager.PlaySoundFX(physicalDamageSFX);
+        }
     }
 }
