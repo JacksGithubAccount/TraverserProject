@@ -24,7 +24,7 @@ namespace TraverserProject
 
         protected override void OnTriggerEnter(Collider other)
         {
-            CharacterManager damageTarget = other.GetComponentInParent<CharacterManager>();            
+            CharacterManager damageTarget = other.GetComponentInParent<CharacterManager>();
 
             if (damageTarget != null)
             {
@@ -50,6 +50,7 @@ namespace TraverserProject
             damageEffect.lightningDamage = lightningDamage;
             damageEffect.holyDamage = holyDamage;
             damageEffect.contactPoint = contactPoint;
+            damageEffect.angleHitFrom = Vector3.SignedAngle(characterCausingDamage.transform.forward, damageTarget.transform.forward, Vector3.up);
 
             switch (characterCausingDamage.characterCombatManager.currentAttackType)
             {

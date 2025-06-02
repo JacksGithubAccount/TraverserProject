@@ -9,7 +9,7 @@ namespace TraverserProject
         public override void AttemptToPerformAction(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
 
-            base.AttemptToPerformAction(playerPerformingAction, weaponPerformingAction);
+            
 
             if (!playerPerformingAction.IsOwner)
                 return;
@@ -20,6 +20,7 @@ namespace TraverserProject
             if (!playerPerformingAction.isGrounded)
                 return;
 
+            base.AttemptToPerformAction(playerPerformingAction, weaponPerformingAction);
             PerformLightAttack(playerPerformingAction, weaponPerformingAction);
 
 

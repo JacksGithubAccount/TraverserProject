@@ -48,6 +48,7 @@ namespace TraverserProject
                 return;
 
             CalculateDamage(character);
+            PlayDirectionalBasedDamageAnimation(character);
 
             PlayDamageSFX(character);
             PlayDamageVFX(character);
@@ -86,5 +87,49 @@ namespace TraverserProject
 
             character.characterSoundFXManager.PlaySoundFX(physicalDamageSFX);
         }
+
+        private void PlayDirectionalBasedDamageAnimation(CharacterManager character)
+        {
+            if (!character.IsOwner)
+                return;
+
+            poiseIsBroken = true;
+
+
+            //front
+            if (angleHitFrom >= 145 && angleHitFrom <= 180)
+            {
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.forward_Medium_Damage);
+            }
+            //
+            else if (angleHitFrom <= -145 && angleHitFrom >= -180)
+            {
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.forward_Medium_Damage);
+            }
+            //back
+            else if (angleHitFrom >= -45 && angleHitFrom <= 45)
+            {
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.backward_Medium_Damage);
+            }
+            //left
+            else if (angleHitFrom >= -144 && angleHitFrom <= -45)
+            {
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.left_Medium_Damage);
+            }
+            //right
+            else if (angleHitFrom >= 45 && angleHitFrom <= 144)
+            {
+                damageAnimation = character.characterAnimatorManager.GetRandomAnimationFromList(character.characterAnimatorManager.right_Medium_Damage);
+            }
+
+            if (poiseIsBroken)
+            {
+                character.characterAnimatorManager.lastDamageAnimationPlayed = damageAnimation;
+                character.characterAnimatorManager.PlayTargetActionAnimation(damageAnimation, true);
+            }
+
+
+        }
+
     }
 }
