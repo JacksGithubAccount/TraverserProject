@@ -27,6 +27,12 @@ namespace TraverserProject
         private float cameraZPosition;
         private float targetCameraZPosition;
 
+        [Header("Lock On")]
+        [SerializeField] float lockOnRadius = 20;
+        [SerializeField] float minimumViewableAngle = -50;
+        [SerializeField] float maximumViewableAngle = 50;
+        [SerializeField] float maximumLockOnDistance = 20;
+
         private void Awake()
         {
             if (Singleton == null)
@@ -97,6 +103,51 @@ namespace TraverserProject
                 cameraObjectPosition.z = Mathf.Lerp(cameraObject.transform.localPosition.z, targetCameraZPosition, 0.2f);
                 cameraObject.transform.localPosition = cameraObjectPosition;
 
+            }
+        }
+
+        public void HandleLocatingLockOnTargets()
+        {
+            float shortestDistance = Mathf.Infinity;
+            float shortestDistanceOfRightTarget = Mathf.Infinity;
+            float shortestDistanceOfleftTarget = -Mathf.Infinity;
+
+            Collider[] colliders = Physics.OverlapSphere(player.transform.position, lockOnRadius, WorldUtilityManager.Singleton.GetCharacterLayers());
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                CharacterManager lockOnTarget = colliders[i].GetComponent<CharacterManager>();
+
+                if (lockOnTarget != null)
+                {
+                    Vector3 lockOnTargetsDirection = lockOnTarget.transform.position = player.transform.position;
+
+                    float distanceFromTarget = Vector3.Distance(player.transform.position, lockOnTarget.transform.position);
+                    float viewableAngle = Vector3.Angle(lockOnTargetsDirection, cameraObject.transform.forward);
+
+                    if (lockOnTarget.isDead.Value)
+                        continue;
+
+                    if (lockOnTarget.transform.root == player.transform.root)
+                        continue;
+
+                    if (distanceFromTarget > maximumLockOnDistance)
+                        continue;
+
+                    if (viewableAngle > minimumViewableAngle && viewableAngle < maximumViewableAngle)
+                    {
+                        RaycastHit hit;
+
+                        if (Physics.Linecast(player.playerCombatManager.lockOnTransform.position, lockOnTarget.characterCombatManager.lockOnTransform.position, out hit, WorldUtilityManager.Singleton.GetEnviroLayers()))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            Debug.Log("We Made It!");
+                        }
+                    }
+                }
             }
         }
     }

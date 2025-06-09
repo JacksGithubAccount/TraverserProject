@@ -19,6 +19,7 @@ namespace TraverserProject
         public NetworkVariable<float> moveAmount = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [Header("Flags")]
+        public NetworkVariable<bool> isLockedOn = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isSprinting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isJumping = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
@@ -110,8 +111,8 @@ namespace TraverserProject
 
         //damage
         [ServerRpc(RequireOwnership = false)]
-        public void NofityTheServerOfCharacterDamageServerRpc(ulong damagedCharacterID, ulong characterCausingDamageID, 
-            float physicalDamage, float magicDamage, float fireDamage, float lightningDamage, float holyDamage, float poiseDamage, 
+        public void NofityTheServerOfCharacterDamageServerRpc(ulong damagedCharacterID, ulong characterCausingDamageID,
+            float physicalDamage, float magicDamage, float fireDamage, float lightningDamage, float holyDamage, float poiseDamage,
             float angleHitFrom, float contactPointX, float contactPointY, float contactPointZ)
         {
             if (IsServer)

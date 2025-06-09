@@ -15,6 +15,9 @@ namespace TraverserProject
         public float cameraVerticalInput;
         public float cameraHorizontalInput;
 
+        [Header("Lock On Input")]
+        [SerializeField] bool lock_On_Input;
+
         [Header("Player Movement Input")]
         [SerializeField] Vector2 movementInput;
         public float verticalInput;
@@ -26,6 +29,9 @@ namespace TraverserProject
         [SerializeField] bool sprintInput = false;
         [SerializeField] bool jumpInput = false;
         [SerializeField] bool RB_Input = false;
+
+
+
 
         private void Awake()
         {
@@ -84,6 +90,7 @@ namespace TraverserProject
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
                 playerControls.PlayerActions.RB.performed += i => RB_Input = true;
 
+                playerControls.PlayerActions.LockOn.performed += i => lock_On_Input = true;
 
                 //hold input sprints, release stops sprint
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
@@ -117,6 +124,7 @@ namespace TraverserProject
         }
         private void HandleAllInputs()
         {
+            HandleLockOnInput();
             HandleCameraMovementInput();
             HandleMovementInput();
             HandleDodgeInput();
@@ -124,6 +132,38 @@ namespace TraverserProject
             HandleJumpInput();
             HandleRBInput();
         }
+
+        private void HandleLockOnInput()
+        {
+            if(player.playerNetworkManager.isLockedOn.Value)
+			{
+                if (player.playerCombatManager.currentTarget == null)
+                    return;
+
+                if (player.playerCombatManager.currentTarget.isDead.Value)
+                {
+                    player.playerNetworkManager.isLockedOn.Value = false;
+                }
+
+
+
+
+            }
+            if (lock_On_Input && player.playerNetworkManager.isLockedOn.Value)
+            {
+                lock_On_Input = false;
+
+                return;
+            }
+
+            if (lock_On_Input && !player.playerNetworkManager.isLockedOn.Value)
+            {
+                lock_On_Input = false;
+
+                PlayerCamera.Singleton.HandleLocatingLockOnTargets();
+            }
+        }
+
         private void HandleMovementInput()
         {
             verticalInput = movementInput.y;
