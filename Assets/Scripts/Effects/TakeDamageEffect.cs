@@ -93,6 +93,9 @@ namespace TraverserProject
             if (!character.IsOwner)
                 return;
 
+            if (character.isDead.Value)
+                return;
+
             poiseIsBroken = true;
 
 

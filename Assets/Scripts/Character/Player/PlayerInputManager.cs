@@ -152,6 +152,8 @@ namespace TraverserProject
             if (lock_On_Input && player.playerNetworkManager.isLockedOn.Value)
             {
                 lock_On_Input = false;
+                PlayerCamera.Singleton.ClearLockOnTargets();
+                player.playerNetworkManager.isLockedOn.Value = false;
 
                 return;
             }
@@ -161,6 +163,13 @@ namespace TraverserProject
                 lock_On_Input = false;
 
                 PlayerCamera.Singleton.HandleLocatingLockOnTargets();
+
+
+                if (PlayerCamera.Singleton.nearestLockOnTarget != null)
+                {
+                    player.playerCombatManager.SetTarget(PlayerCamera.Singleton.nearestLockOnTarget);
+                    player.playerNetworkManager.isLockedOn.Value = true;
+                }
             }
         }
 

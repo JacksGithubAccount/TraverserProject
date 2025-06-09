@@ -74,6 +74,10 @@ namespace TraverserProject
 
             playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHealth;
 
+            //lock on
+            playerNetworkManager.isLockedOn.OnValueChanged += playerNetworkManager.OnIsLockedOnChanged;
+            playerNetworkManager.currentTargetNetworkObjectID.OnValueChanged += playerNetworkManager.OnLockOnTargetIDChange;
+
             //equipment
             playerNetworkManager.currentRightHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentRightHandWeaponIDChange;
             playerNetworkManager.currentLeftHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentLeftHandWeaponIDChange;
@@ -116,6 +120,7 @@ namespace TraverserProject
 
             if (IsOwner)
             {
+                isDead.Value = false;
                 playerNetworkManager.currentHealth.Value = playerNetworkManager.maxHealth.Value;
                 playerNetworkManager.currentStamina.Value = playerNetworkManager.maxStamina.Value;
 
@@ -158,9 +163,17 @@ namespace TraverserProject
 
         private void LoadOtherPlayerCharacterWhenJoiningServer()
         {
+            //sync weapons
             playerNetworkManager.OnCurrentRightHandWeaponIDChange(0, playerNetworkManager.currentRightHandWeaponID.Value);
             playerNetworkManager.OnCurrentLeftHandWeaponIDChange(0, playerNetworkManager.currentLeftHandWeaponID.Value);
 
+
+
+            //lock on
+            if (playerNetworkManager.isLockedOn.Value)
+            {
+                playerNetworkManager.OnLockOnTargetIDChange(0, playerNetworkManager.currentTargetNetworkObjectID.Value);
+            }
 
         }
 
