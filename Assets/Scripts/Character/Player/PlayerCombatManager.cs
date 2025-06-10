@@ -8,7 +8,7 @@ namespace TraverserProject
     {
         PlayerManager player;
         public WeaponItem currentWeaponBeingUsed;
-        
+
 
         protected override void Awake()
         {
@@ -43,7 +43,7 @@ namespace TraverserProject
             {
                 case AttackType.LightAttack01:
                     staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.lightAttackStaminaCostMultiplier;
-                    
+
                     break;
                 default:
                     break;
@@ -51,5 +51,17 @@ namespace TraverserProject
             Debug.Log("Stamina drain: " + Mathf.RoundToInt(staminaDeducted));
             player.playerNetworkManager.currentStamina.Value -= Mathf.RoundToInt(staminaDeducted);
         }
+
+        public override void SetTarget(CharacterManager newTarget)
+        {
+            base.SetTarget(newTarget);
+
+            if (player.IsOwner)
+            {
+                PlayerCamera.Singleton.SetLockCameraHeight();
+            }
+        }
+
+
     }
 }

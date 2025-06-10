@@ -16,6 +16,9 @@ namespace TraverserProject
         protected bool fallingVelocityHasBeenSet = false;
         protected float inAirTimer = 0;
 
+        [Header("Flags")]
+        public bool isRolling = false;
+
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         protected virtual void Awake()
         {
@@ -58,9 +61,9 @@ namespace TraverserProject
         }
 
         //draws sphere around character
-        //protected void OnDrawGizmosSelected()
-        //{
-            //Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
-        //}
+        protected void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
+        }
     }
 }

@@ -17,6 +17,10 @@ namespace TraverserProject
 
         [Header("Lock On Input")]
         [SerializeField] bool lock_On_Input;
+        [SerializeField] bool lockOn_Left_Input;
+        [SerializeField] bool lockOn_Right_Input;
+        [SerializeField] Vector2 lockOn_Seek_Input;
+        private Coroutine lockOnCoroutine;
 
         [Header("Player Movement Input")]
         [SerializeField] Vector2 movementInput;
@@ -91,6 +95,9 @@ namespace TraverserProject
                 playerControls.PlayerActions.RB.performed += i => RB_Input = true;
 
                 playerControls.PlayerActions.LockOn.performed += i => lock_On_Input = true;
+                //playerControls.PlayerActions.SeekLeftLockOnTarget.performed += i => lockOn_Left_Input = true;
+                //playerControls.PlayerActions.SeekRightLockOnTarget.performed += i => lockOn_Right_Input = true;
+                playerControls.PlayerActions.SeekLockOnTarget.performed += i => lockOn_Seek_Input = i.ReadValue<Vector2>();
 
                 //hold input sprints, release stops sprint
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
@@ -125,6 +132,7 @@ namespace TraverserProject
         private void HandleAllInputs()
         {
             HandleLockOnInput();
+            HandleLockOnSwitchInput();
             HandleCameraMovementInput();
             HandleMovementInput();
             HandleDodgeInput();
@@ -145,7 +153,10 @@ namespace TraverserProject
                     player.playerNetworkManager.isLockedOn.Value = false;
                 }
 
+                if (lockOnCoroutine != null)
+                    StopCoroutine(lockOnCoroutine);
 
+                lockOnCoroutine = StartCoroutine(PlayerCamera.Singleton.WaitThenFindNewTarget());
 
 
             }
@@ -173,6 +184,44 @@ namespace TraverserProject
             }
         }
 
+        private void HandleLockOnSwitchInput()
+        {
+            if (lockOn_Seek_Input.x > cameraInput.x)
+                lockOn_Right_Input = true;
+            else if(lockOn_Seek_Input.x < cameraInput.x)
+                lockOn_Left_Input = true;
+
+            if (lockOn_Left_Input)
+            {
+                lockOn_Left_Input = false;
+
+                if (player.playerNetworkManager.isLockedOn.Value)
+                {
+                    PlayerCamera.Singleton.HandleLocatingLockOnTargets();
+
+                    if (PlayerCamera.Singleton.leftLockOnTarget != null)
+                    {
+                        player.playerCombatManager.SetTarget(PlayerCamera.Singleton.leftLockOnTarget);
+                    }
+                }
+            }
+
+            if (lockOn_Right_Input)
+            {
+                lockOn_Right_Input = false;
+
+                if (player.playerNetworkManager.isLockedOn.Value)
+                {
+                    PlayerCamera.Singleton.HandleLocatingLockOnTargets();
+
+                    if (PlayerCamera.Singleton.rightLockOnTarget != null)
+                    {
+                        player.playerCombatManager.SetTarget(PlayerCamera.Singleton.rightLockOnTarget);
+                    }
+                }
+            }
+        }
+
         private void HandleMovementInput()
         {
             verticalInput = movementInput.y;
@@ -192,7 +241,15 @@ namespace TraverserProject
             if (player == null)
                 return;
 
-            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
+            if (!player.playerNetworkManager.isLockedOn.Value || player.playerNetworkManager.isSprinting.Value)
+            {
+
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
+            }
+            else
+            {
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontalInput, verticalInput, player.playerNetworkManager.isSprinting.Value);
+            }
         }
         private void HandleCameraMovementInput()
         {
