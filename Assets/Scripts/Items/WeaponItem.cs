@@ -28,7 +28,8 @@ namespace TraverserProject
 
         [Header("Attack Modifiers")]
         public float light_Attack_01_Modifier = 1.1f;
-
+        public float heavy_Attack_01_Modifier = 1.4f;
+        public float charge_Attack_01_Modifier = 2.0f;
 
         [Header("Stamina Cost Modifiers")]
         public int baseStaminaCost = 20;
@@ -36,6 +37,9 @@ namespace TraverserProject
 
         [Header("Actions")]
         public WeaponItemAction oh_RB_Action; //one hand right bumper
+        public WeaponItemAction oh_RT_Action; //one hand right trigger
+
+
 
     }
 }

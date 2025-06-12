@@ -25,6 +25,7 @@ namespace TraverserProject
         public NetworkVariable<bool> isLockedOn = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isSprinting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isJumping = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> isChargingAttack = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [Header("Resources")]
         public NetworkVariable<float> currentStamina = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -74,6 +75,12 @@ namespace TraverserProject
                 character.characterCombatManager.currentTarget = null;
             }
         }
+
+        public void OnIsChargingAttackChanged(bool oldStatus, bool newStatus)
+        {
+            character.animator.SetBool("isChargingAttack", isChargingAttack.Value);
+        }
+
 
         //action animation
         [ServerRpc]

@@ -33,7 +33,7 @@ namespace TraverserProject
         [SerializeField] float lockOnRadius = 20;
         [SerializeField] float minimumViewableAngle = -50;
         [SerializeField] float maximumViewableAngle = 50;
-        [SerializeField] float lockOnTargetFollowSpeed = 0.2f;
+        [SerializeField] float lockOnTargetFollowSpeed = 1;
         [SerializeField] float setCameraHeightSpeed = 1;
         [SerializeField] float unlockedCameraHeight = 1.65f;
         [SerializeField] float lockedCameraHeight = 2.0f;

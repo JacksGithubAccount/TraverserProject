@@ -19,7 +19,6 @@ namespace TraverserProject
         [SerializeField] bool lock_On_Input;
         [SerializeField] bool lockOn_Left_Input;
         [SerializeField] bool lockOn_Right_Input;
-        [SerializeField] Vector2 lockOn_Seek_Input;
         private Coroutine lockOnCoroutine;
 
         [Header("Player Movement Input")]
@@ -32,9 +31,13 @@ namespace TraverserProject
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool sprintInput = false;
         [SerializeField] bool jumpInput = false;
+
+        [Header("Bumper Input")]
         [SerializeField] bool RB_Input = false;
 
-
+        [Header("Trigger Input")]
+        [SerializeField] bool RT_Input = false;
+        [SerializeField] bool Hold_RT_Input = false;
 
 
         private void Awake()
@@ -92,12 +95,20 @@ namespace TraverserProject
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
+
+
+                //bumpers
                 playerControls.PlayerActions.RB.performed += i => RB_Input = true;
 
+
+                //Triggers
+                playerControls.PlayerActions.RT.performed += i => RT_Input = true;
+                playerControls.PlayerActions.HoldRT.performed += i => Hold_RT_Input = true;
+                playerControls.PlayerActions.HoldRT.canceled += i => Hold_RT_Input = false;
+
                 playerControls.PlayerActions.LockOn.performed += i => lock_On_Input = true;
-                //playerControls.PlayerActions.SeekLeftLockOnTarget.performed += i => lockOn_Left_Input = true;
-                //playerControls.PlayerActions.SeekRightLockOnTarget.performed += i => lockOn_Right_Input = true;
-                playerControls.PlayerActions.SeekLockOnTarget.performed += i => lockOn_Seek_Input = i.ReadValue<Vector2>();
+                playerControls.PlayerActions.SeekLeftLockOnTarget.performed += i => lockOn_Left_Input = true;
+                playerControls.PlayerActions.SeekRightLockOnTarget.performed += i => lockOn_Right_Input = true;
 
                 //hold input sprints, release stops sprint
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
@@ -139,6 +150,8 @@ namespace TraverserProject
             HandleSprintInput();
             HandleJumpInput();
             HandleRBInput();
+            HandleRTInput();
+            HandleHoldRTInput();
         }
 
         private void HandleLockOnInput()
@@ -176,7 +189,7 @@ namespace TraverserProject
                 PlayerCamera.Singleton.HandleLocatingLockOnTargets();
 
 
-                if (PlayerCamera.Singleton.nearestLockOnTarget != null)
+                if(PlayerCamera.Singleton.nearestLockOnTarget != null)
                 {
                     player.playerCombatManager.SetTarget(PlayerCamera.Singleton.nearestLockOnTarget);
                     player.playerNetworkManager.isLockedOn.Value = true;
@@ -186,11 +199,6 @@ namespace TraverserProject
 
         private void HandleLockOnSwitchInput()
         {
-            if (lockOn_Seek_Input.x > cameraInput.x)
-                lockOn_Right_Input = true;
-            else if(lockOn_Seek_Input.x < cameraInput.x)
-                lockOn_Left_Input = true;
-
             if (lockOn_Left_Input)
             {
                 lockOn_Left_Input = false;
@@ -297,6 +305,29 @@ namespace TraverserProject
                 player.playerNetworkManager.SetCharacterActionHand(true);
 
                 player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RB_Action, player.playerInventoryManager.currentRightHandWeapon);
+            }
+        }
+
+        private void HandleRTInput()
+        {
+            if (RT_Input)
+            {
+                RT_Input = false;
+
+                player.playerNetworkManager.SetCharacterActionHand(true);
+
+                player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RT_Action, player.playerInventoryManager.currentRightHandWeapon);
+            }
+        }
+
+        private void HandleHoldRTInput()
+        {
+            if (player.isPerformingAction)
+            {
+                if (player.playerNetworkManager.isUsingRightHand.Value)
+                {
+                    player.playerNetworkManager.isChargingAttack.Value = Hold_RT_Input;
+                }
             }
         }
     }
