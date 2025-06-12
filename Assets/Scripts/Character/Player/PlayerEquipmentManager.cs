@@ -59,7 +59,7 @@ namespace TraverserProject
         {
             if (!player.IsOwner)
                 return;
-            player.playerAnimatorManager.PlayTargetActionAnimation("Swap_Right_Weapon_01", false, true, true, true);
+            player.playerAnimatorManager.PlayTargetActionAnimation("Swap_Right_Weapon_01", false, false, true, true);
 
             WeaponItem selectedWeapon = null;
 
@@ -135,7 +135,67 @@ namespace TraverserProject
 
         public void SwitchLeftWeapon()
         {
+            if (!player.IsOwner)
+                return;
+            player.playerAnimatorManager.PlayTargetActionAnimation("Swap_Left_Weapon_01", false, false, true, true);
 
+            WeaponItem selectedWeapon = null;
+
+            player.playerInventoryManager.leftHandWeaponIndex += 1;
+
+            if (player.playerInventoryManager.leftHandWeaponIndex < 0 || player.playerInventoryManager.leftHandWeaponIndex > 2)
+            {
+                player.playerInventoryManager.leftHandWeaponIndex = 0;
+
+                float weaponCount = 0;
+                WeaponItem firstWeapon = null;
+                int firstWeaponPosition = 0;
+
+                //Checks if we are holding more than one weapon
+                for (int i = 0; i < player.playerInventoryManager.weaponsInLeftHandSlots.Length; i++)
+                {
+                    if (player.playerInventoryManager.weaponsInLeftHandSlots[i].itemID != WorldItemDatabase.Singleton.unarmedWeapon.itemID)
+                    {
+                        weaponCount += 1;
+
+                        if (firstWeapon == null)
+                        {
+                            firstWeapon = player.playerInventoryManager.weaponsInLeftHandSlots[i];
+                            firstWeaponPosition = i;
+                        }
+                    }
+                }
+
+                if (weaponCount <= 1)
+                {
+                    player.playerInventoryManager.leftHandWeaponIndex = -1;
+                    selectedWeapon = WorldItemDatabase.Singleton.unarmedWeapon;
+                    player.playerNetworkManager.currentLeftHandWeaponID.Value = selectedWeapon.itemID;
+                }
+                else
+                {
+                    player.playerInventoryManager.leftHandWeaponIndex = firstWeaponPosition;
+                    player.playerNetworkManager.currentLeftHandWeaponID.Value = firstWeapon.itemID;
+                }
+                return;
+            }
+
+
+
+            foreach (WeaponItem weapon in player.playerInventoryManager.weaponsInLeftHandSlots)
+            {
+                if (player.playerInventoryManager.weaponsInLeftHandSlots[player.playerInventoryManager.leftHandWeaponIndex].itemID != WorldItemDatabase.Singleton.unarmedWeapon.itemID)
+                {
+                    selectedWeapon = player.playerInventoryManager.weaponsInLeftHandSlots[player.playerInventoryManager.leftHandWeaponIndex];
+                    player.playerNetworkManager.currentLeftHandWeaponID.Value = player.playerInventoryManager.weaponsInLeftHandSlots[player.playerInventoryManager.leftHandWeaponIndex].itemID;
+                    return;
+                }
+            }
+
+            if (selectedWeapon == null && player.playerInventoryManager.leftHandWeaponIndex <= 2)
+            {
+                SwitchLeftWeapon();
+            }
         }
 
         public void LoadLeftWeapon()
@@ -144,7 +204,7 @@ namespace TraverserProject
             {
                 leftHandSlot.UnloadWeapon();
 
-                leftHandWeaponModel =Instantiate(player.playerInventoryManager.currentLeftHandWeapon.weaponModel);
+                leftHandWeaponModel = Instantiate(player.playerInventoryManager.currentLeftHandWeapon.weaponModel);
                 leftHandSlot.LoadWeapon(leftHandWeaponModel);
                 leftWeaponManager = leftHandWeaponModel.GetComponent<WeaponManager>();
                 leftWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
@@ -160,7 +220,7 @@ namespace TraverserProject
             {
                 rightWeaponManager.meleeDamageCollider.EnableDamageCollider();
             }
-            else if(player.playerNetworkManager.isUsingLeftHand.Value)
+            else if (player.playerNetworkManager.isUsingLeftHand.Value)
             {
                 leftWeaponManager.meleeDamageCollider.EnableDamageCollider();
             }

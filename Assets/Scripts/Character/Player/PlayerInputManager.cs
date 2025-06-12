@@ -31,6 +31,8 @@ namespace TraverserProject
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool sprintInput = false;
         [SerializeField] bool jumpInput = false;
+        [SerializeField] bool switch_Right_Weapon_Input = false;
+        [SerializeField] bool switch_Left_Weapon_Input = false;
 
         [Header("Bumper Input")]
         [SerializeField] bool RB_Input = false;
@@ -38,6 +40,8 @@ namespace TraverserProject
         [Header("Trigger Input")]
         [SerializeField] bool RT_Input = false;
         [SerializeField] bool Hold_RT_Input = false;
+
+
 
 
         private void Awake()
@@ -93,9 +97,13 @@ namespace TraverserProject
                 playerControls = new PlayerControls();
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
+
+
+                //actions
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
-
+                playerControls.PlayerActions.SwitchRightWeapon.performed += i => switch_Right_Weapon_Input = true;
+                playerControls.PlayerActions.SwitchLeftWeapon.performed += i => switch_Left_Weapon_Input = true;
 
                 //bumpers
                 playerControls.PlayerActions.RB.performed += i => RB_Input = true;
@@ -152,6 +160,8 @@ namespace TraverserProject
             HandleRBInput();
             HandleRTInput();
             HandleHoldRTInput();
+            HandleSwitchRightWeaponInput();
+            HandleSwitchLeftWeaponInput();
         }
 
         private void HandleLockOnInput()
@@ -189,7 +199,7 @@ namespace TraverserProject
                 PlayerCamera.Singleton.HandleLocatingLockOnTargets();
 
 
-                if(PlayerCamera.Singleton.nearestLockOnTarget != null)
+                if (PlayerCamera.Singleton.nearestLockOnTarget != null)
                 {
                     player.playerCombatManager.SetTarget(PlayerCamera.Singleton.nearestLockOnTarget);
                     player.playerNetworkManager.isLockedOn.Value = true;
@@ -328,6 +338,24 @@ namespace TraverserProject
                 {
                     player.playerNetworkManager.isChargingAttack.Value = Hold_RT_Input;
                 }
+            }
+        }
+
+        private void HandleSwitchRightWeaponInput()
+        {
+            if (switch_Right_Weapon_Input)
+            {
+                switch_Right_Weapon_Input = false;
+                player.playerEquipmentManager.SwitchRightWeapon();
+            }
+        }
+
+        private void HandleSwitchLeftWeaponInput()
+        {
+            if (switch_Left_Weapon_Input)
+            {
+                switch_Left_Weapon_Input = false;
+                player.playerEquipmentManager.SwitchLeftWeapon();
             }
         }
     }
