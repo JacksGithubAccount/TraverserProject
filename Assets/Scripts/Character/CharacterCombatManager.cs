@@ -8,6 +8,9 @@ namespace TraverserProject
     {
         CharacterManager character;
 
+        [Header("Last Attack Animation Performed")]
+        public string lastAttackAnimationPerformed;
+
         [Header("Attack Targer")]
         public CharacterManager currentTarget;
 

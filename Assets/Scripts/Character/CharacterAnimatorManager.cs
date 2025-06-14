@@ -151,6 +151,7 @@ namespace TraverserProject
         public virtual void PlayTargetAttackActionAnimation(AttackType attackType, string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false)
         {
             character.characterCombatManager.currentAttackType = attackType;
+            character.characterCombatManager.lastAttackAnimationPerformed = targetAnimation;
             character.applyRootMotion = applyRootMotion;
             character.animator.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(targetAnimation, 0.2f);
@@ -161,6 +162,15 @@ namespace TraverserProject
             character.characterNetworkManager.NotifyTheServerOfAttackActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }
 
+        public virtual void EnableCanDoCombo()
+        {
+
+        }
+
+        public virtual void DisableCanDoCombo()
+        {
+
+        }
     }
 
 }

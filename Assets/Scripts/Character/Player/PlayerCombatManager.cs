@@ -9,6 +9,9 @@ namespace TraverserProject
         PlayerManager player;
         public WeaponItem currentWeaponBeingUsed;
 
+        [Header("Flags")]
+        public bool canComboWithMainHandWeapon = false;
+        public bool canComboWithOffHandWeapon = false;
 
         protected override void Awake()
         {

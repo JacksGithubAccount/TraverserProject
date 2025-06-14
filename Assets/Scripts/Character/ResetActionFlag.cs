@@ -17,6 +17,7 @@ namespace TraverserProject
             character.canMove = true;
             character.canRotate = true;
             character.characterLocomotionManager.isRolling = false;
+            character.characterAnimatorManager.DisableCanDoCombo();
 
             if (character.IsOwner)
             {
