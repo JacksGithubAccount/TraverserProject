@@ -153,7 +153,7 @@ namespace TraverserProject
             HandleLockOnInput();
             HandleLockOnSwitchInput();
             HandleCameraMovementInput();
-            HandleMovementInput();
+            HandlePlayerMovementInput();
             HandleDodgeInput();
             HandleSprintInput();
             HandleJumpInput();
@@ -240,7 +240,7 @@ namespace TraverserProject
             }
         }
 
-        private void HandleMovementInput()
+        private void HandlePlayerMovementInput()
         {
             verticalInput = movementInput.y;
             horizontalInput = movementInput.x;
@@ -258,6 +258,14 @@ namespace TraverserProject
             }
             if (player == null)
                 return;
+
+            if (moveAmount > 0)
+            {
+                player.playerNetworkManager.isMoving.Value = true;
+            }else
+            {
+                player.playerNetworkManager.isMoving.Value = false;
+            }
 
             if (!player.playerNetworkManager.isLockedOn.Value || player.playerNetworkManager.isSprinting.Value)
             {

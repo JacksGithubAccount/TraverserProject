@@ -404,12 +404,6 @@ PrefabInstance:
       addedObject: {fileID: 7031988082704253172}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5444156507735131409}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8611199763761185706}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 538213927450739908}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       insertIndex: -1
@@ -428,10 +422,16 @@ PrefabInstance:
       addedObject: {fileID: 9205544371384152217}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5630557766271080056}
+      addedObject: {fileID: -3101570621495118235}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -3101570621495118235}
+      addedObject: {fileID: 4399915805965458901}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -9121799708190759962}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4734148030826243730}
     - targetCorrespondingSourceObject: {fileID: 2261973912390581236, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8398905484300377553}
@@ -725,7 +725,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: ae15404fa09381e42b9f77ea61bb470d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -908,75 +908,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5444156507735131409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3807294811122837391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d178a7e6ec1155b4c90dcefe105ae2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gravityForce: -5.55
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 1
-  groundCheckSphereRadius: 1
-  yVelocity: {x: 0, y: 0, z: 0}
-  groundedYVelocity: -20
-  fallStartYVelocity: -5
-  isRolling: 0
---- !u!114 &8611199763761185706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3807294811122837391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09c81bff8251fb64b96c4f934466aa8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  networkPosition:
-    m_InternalValue: {x: 0, y: 0, z: 0}
-  networkRotation:
-    m_InternalValue: {x: 0, y: 0, z: 0, w: 1}
-  networkPositionVelocity: {x: 0, y: 0, z: 0}
-  networkPositionSmoothTime: 0.1
-  networkRotationSmoothTime: 0.1
-  horizontalMovement:
-    m_InternalValue: 0
-  verticalMovement:
-    m_InternalValue: 0
-  moveAmount:
-    m_InternalValue: 0
-  currentTargetNetworkObjectID:
-    m_InternalValue: 0
-  isLockedOn:
-    m_InternalValue: 0
-  isSprinting:
-    m_InternalValue: 0
-  isJumping:
-    m_InternalValue: 0
-  isChargingAttack:
-    m_InternalValue: 0
-  currentStamina:
-    m_InternalValue: 0
-  maxStamina:
-    m_InternalValue: 0
-  currentHealth:
-    m_InternalValue: 0
-  maxHealth:
-    m_InternalValue: 0
-  vitality:
-    m_InternalValue: 1
-  endurance:
-    m_InternalValue: 1
 --- !u!114 &538213927450739908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1063,23 +994,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9889b7df03915bc479841c3c17bfaebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5630557766271080056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3807294811122837391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d57d875cf21cc6b45b4bb089deb11b1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  lastAttackAnimationPerformed: 
-  currentTarget: {fileID: 0}
-  currentAttackType: 0
-  lockOnTransform: {fileID: 6423249203147581417}
 --- !u!114 &-3101570621495118235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1103,11 +1017,110 @@ MonoBehaviour:
   characterCombatManager: {fileID: 0}
   characterSoundFXManager: {fileID: 0}
   characterLocomotionManager: {fileID: 0}
+  characterGroup: 1
   isPerformingAction: 0
   isGrounded: 1
   canRotate: 1
   canMove: 1
   applyRootMotion: 0
+  aiCharacterNetworkManager: {fileID: 0}
+  aiCharacterCombatManager: {fileID: 0}
+  aiCharacterLocomotionManager: {fileID: 0}
+  currentState: {fileID: 11400000, guid: b0db1e40aa2911148b99441ce4fc171d, type: 2}
+  navMeshAgent: {fileID: 0}
+  idle: {fileID: 0}
+  pursueTarget: {fileID: 0}
+--- !u!114 &4399915805965458901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3807294811122837391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0aafabce0b55534895496982608b407, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  lastAttackAnimationPerformed: 
+  currentTarget: {fileID: 0}
+  currentAttackType: 0
+  lockOnTransform: {fileID: 6423249203147581417}
+  detectionRadius: 15
+  minimumDetectionAngle: -35
+  maximumDetectionAngle: 35
+--- !u!114 &-9121799708190759962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3807294811122837391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9bec4462a16ed246babbbee6d85a1f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  networkPosition:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  networkRotation:
+    m_InternalValue: {x: 0, y: 0, z: 0, w: 1}
+  networkPositionVelocity: {x: 0, y: 0, z: 0}
+  networkPositionSmoothTime: 0.1
+  networkRotationSmoothTime: 0.1
+  isMoving:
+    m_InternalValue: 0
+  horizontalMovement:
+    m_InternalValue: 0
+  verticalMovement:
+    m_InternalValue: 0
+  moveAmount:
+    m_InternalValue: 0
+  currentTargetNetworkObjectID:
+    m_InternalValue: 0
+  isLockedOn:
+    m_InternalValue: 0
+  isSprinting:
+    m_InternalValue: 0
+  isJumping:
+    m_InternalValue: 0
+  isChargingAttack:
+    m_InternalValue: 0
+  currentStamina:
+    m_InternalValue: 0
+  maxStamina:
+    m_InternalValue: 0
+  currentHealth:
+    m_InternalValue: 0
+  maxHealth:
+    m_InternalValue: 0
+  vitality:
+    m_InternalValue: 1
+  endurance:
+    m_InternalValue: 1
+--- !u!114 &-4734148030826243730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3807294811122837391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01564b2916876d45b1bdf4d1a82a28a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityForce: -5.55
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  groundCheckSphereRadius: 1
+  yVelocity: {x: 0, y: 0, z: 0}
+  groundedYVelocity: -20
+  fallStartYVelocity: -5
+  isRolling: 0
 --- !u!1 &4052779361683456650 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -9211815070973405100, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
