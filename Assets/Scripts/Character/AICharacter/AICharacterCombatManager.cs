@@ -6,11 +6,14 @@ namespace TraverserProject
 
     public class AICharacterCombatManager : CharacterCombatManager
     {
+        [Header("Target Information")]
+        public float viewableAngle;
+        public Vector3 targetsDirection;
 
         [Header("Detection")]
         [SerializeField] float detectionRadius = 15;
-        [SerializeField] float minimumDetectionAngle = -35;
-        [SerializeField] float maximumDetectionAngle = 35;
+        public float minimumFOV = -35;
+        public float maximumFOV = 35;
 
 
         public void FindATargetViaLineOfSight(AICharacterManager aiCharacter)
@@ -36,9 +39,9 @@ namespace TraverserProject
                 if (WorldUtilityManager.Singleton.CanIDamageThisTarget(aiCharacter.characterGroup, targetCharacter.characterGroup))
                 {
                     Vector3 targetsDirection = targetCharacter.transform.position - aiCharacter.transform.position;
-                    float viewableAngle = Vector3.Angle(targetsDirection, aiCharacter.transform.forward);
+                    float angleOfPotentialTarget = Vector3.Angle(targetsDirection, aiCharacter.transform.forward);
 
-                    if (viewableAngle > minimumDetectionAngle && viewableAngle < maximumDetectionAngle)
+                    if (angleOfPotentialTarget > minimumFOV && angleOfPotentialTarget < maximumFOV)
                     {
                         if (Physics.Linecast(aiCharacter.characterCombatManager.lockOnTransform.position, targetCharacter.characterCombatManager.lockOnTransform.position, WorldUtilityManager.Singleton.GetEnviroLayers()))
                         {
@@ -47,10 +50,53 @@ namespace TraverserProject
                         }
                         else
                         {
+                            targetsDirection = targetCharacter.transform.position - transform.position;
+                            viewableAngle = WorldUtilityManager.Singleton.GetAngleOfTarget(transform, targetsDirection);
+
                             aiCharacter.characterCombatManager.SetTarget(targetCharacter);
+                            PivotTowardsTarget(aiCharacter);
                         }
                     }
                 }
+            }
+        }
+
+        public void PivotTowardsTarget(AICharacterManager aiCharacter)
+        {
+            if (aiCharacter.isPerformingAction)
+                return;
+
+            if (viewableAngle >= 20 && viewableAngle <= 60)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_45", true);
+            }
+            else if (viewableAngle <= -20 && viewableAngle >= -60)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_45", true);
+            }
+            else if (viewableAngle >= 61 && viewableAngle <= 110)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_90", true);
+            }
+            else if (viewableAngle <= -61 && viewableAngle >= -110)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_90", true);
+            }
+            else if (viewableAngle >= 110 && viewableAngle <= 145)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_135", true);
+            }
+            else if (viewableAngle <= -110 && viewableAngle >= -145)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_135", true);
+            }
+            else if (viewableAngle >= 146 && viewableAngle <= 180)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_180", true);
+            }
+            else if (viewableAngle <= 1 - 46 && viewableAngle >= -180)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_180", true);
             }
         }
     }

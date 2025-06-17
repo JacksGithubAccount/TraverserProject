@@ -1,3 +1,4 @@
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,7 +12,7 @@ namespace TraverserProject
         [HideInInspector] public AICharacterLocomotionManager aiCharacterLocomotionManager;
 
         [Header("Current State")]
-	    [SerializeField] AIState currentState;
+        [SerializeField] AIState currentState;
 
         [Header("Navmesh Agent")]
         public NavMeshAgent navMeshAgent;
@@ -40,7 +41,8 @@ namespace TraverserProject
         {
             base.FixedUpdate();
 
-            ProcessStateMachine();
+            if (IsOwner)
+                ProcessStateMachine();
         }
 
         private void ProcessStateMachine()
@@ -54,6 +56,12 @@ namespace TraverserProject
 
             navMeshAgent.transform.localPosition = Vector3.zero;
             navMeshAgent.transform.localRotation = Quaternion.identity;
+
+            if (aiCharacterCombatManager.currentTarget != null)
+            {
+                aiCharacterCombatManager.targetsDirection = aiCharacterCombatManager.currentTarget.transform.position - transform.position;
+                aiCharacterCombatManager.viewableAngle = WorldUtilityManager.Singleton.GetAngleOfTarget(transform, aiCharacterCombatManager.targetsDirection);
+            }
 
             if (navMeshAgent.enabled)
             {
