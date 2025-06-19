@@ -24,6 +24,8 @@ namespace TraverserProject
 
             aiCharacter.aiCharacterLocomotionManager.RotateTowardsAgent(aiCharacter);
 
+            if(aiCharacter.aiCharacterCombatManager.distanceFromTarget <= aiCharacter.navMeshAgent.stoppingDistance)
+                return SwitchState(aiCharacter, aiCharacter.combatStance);
 
             NavMeshPath path = new NavMeshPath();
             aiCharacter.navMeshAgent.CalculatePath(aiCharacter.aiCharacterCombatManager.currentTarget.transform.position, path);

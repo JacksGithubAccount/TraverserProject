@@ -20,7 +20,7 @@ namespace TraverserProject
         [SerializeField] bool hasRolledForComboChance = false;
 
         [Header("Engagement Distance")]
-        [SerializeField] protected float maximumEngagementDistance = 5;
+        [SerializeField] public float maximumEngagementDistance = 5;
 
         public override AIState Tick(AICharacterManager aiCharacter)
         {
@@ -38,7 +38,9 @@ namespace TraverserProject
             }
 
             //rotate to face target
-            if (aiCharacter.aiCharacterCombatManager.currentTarget = null)
+            aiCharacter.aiCharacterCombatManager.RotateTowardsAgent(aiCharacter);
+
+            if (aiCharacter.aiCharacterCombatManager.currentTarget == null)
                 return SwitchState(aiCharacter, aiCharacter.idle);
 
             if (!hasAttack)
@@ -47,7 +49,9 @@ namespace TraverserProject
             }
             else
             {
+                aiCharacter.attack.currentAttack = choosenAttack;
 
+                return SwitchState(aiCharacter, aiCharacter.attack);
             }
 
             if (aiCharacter.aiCharacterCombatManager.distanceFromTarget > maximumEngagementDistance)
@@ -65,7 +69,7 @@ namespace TraverserProject
         {
             potentialAttacks = new List<AICharacterAttackAction>();
 
-            foreach (var potentialAttack in potentialAttacks)
+            foreach (var potentialAttack in aiCharacterAttacks)
             {
                 if (potentialAttack.minimumAttackDistance > aiCharacter.aiCharacterCombatManager.distanceFromTarget)
                     continue;
@@ -104,6 +108,7 @@ namespace TraverserProject
                     choosenAttack = attack;
                     previousAttack = choosenAttack;
                     hasAttack = true;
+                    return;
                 }
             }
         }

@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1740
     height: 941
   m_ShowMode: 4
-  m_Title: Console
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 432}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 150}
   m_MaxSize: {x: 24288, y: 24288}
   vertical: 0
-  controlID: 221
+  controlID: 212
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 150}
   m_MaxSize: {x: 16192, y: 24288}
   vertical: 1
-  controlID: 81
+  controlID: 18
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 0
-  controlID: 82
+  controlID: 19
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -218,8 +218,8 @@ MonoBehaviour:
     y: 0
     width: 522
     height: 332
-  m_MinSize: {x: 201, y: 226}
-  m_MaxSize: {x: 4001, y: 4026}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 167
+  controlID: 160
   draggingID: 0
 --- !u!114 &13
 MonoBehaviour:
@@ -966,9 +966,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 3ebb0000
+      m_SelectedIDs: 5ec50000
       m_LastClickedID: 0
-      m_ExpandedIDs: 20fbffff
+      m_ExpandedIDs: 1efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1050,10 +1050,10 @@ MonoBehaviour:
     m_TextWithWhitespace: "Animator\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 576
-    y: 79
-    width: 751
-    height: 664
+    x: 562
+    y: 179
+    width: 680
+    height: 538
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1125,14 +1125,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.26285714
+    - e00: 0.284
       e01: 0
       e02: 0
-      e03: 109.62857
+      e03: 117.23999
       e10: 0
-      e11: 0.26285714
+      e11: 0.284
       e12: 0
-      e13: 219.08571
+      e13: 267.96
       e20: 0
       e21: 0
       e22: 1
@@ -1173,14 +1173,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.5021472
+    - e00: 0.34041095
       e01: 0
       e02: 0
-      e03: 149.22383
+      e03: 127.33562
       e10: 0
-      e11: 0.5021472
+      e11: 0.34041095
       e12: 0
-      e13: 463.01175
+      e13: 268.2226
       e20: 0
       e21: 0
       e22: 1
@@ -1224,9 +1224,7 @@ MonoBehaviour:
   m_PreviewAnimator: {fileID: 0}
   m_AnimatorController: {fileID: 9100000, guid: ac6a39d35cc00c64a94f59354af22f5c, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 1240478378372897851, guid: ac6a39d35cc00c64a94f59354af22f5c, type: 2}
-    m_ScrollPosition: {x: 0, y: 0}
-  - m_Target: {fileID: 3939714256608147310, guid: ac6a39d35cc00c64a94f59354af22f5c, type: 2}
+  - m_Target: {fileID: 1760726051998024030, guid: ac6a39d35cc00c64a94f59354af22f5c, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -1238,7 +1236,7 @@ MonoBehaviour:
     m_IsLocked: 0
   m_CurrentEditor: 0
   m_LayerEditor:
-    m_SelectedLayerIndex: 0
+    m_SelectedLayerIndex: 2
 --- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1389,7 +1387,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Character/AICharacter/Action
+    - Assets/Scripts/Character/AICharacter/State
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1399,16 +1397,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scripts/Character/AICharacter/Action
+  - Assets/Scripts/Character/AICharacter/State
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\jckzh\source\repos\TraverserProject
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 413}
-    m_SelectedIDs: 14bb0000
-    m_LastClickedID: 47892
-    m_ExpandedIDs: 0000000000b9000002b9000004b9000006b9000008b900000ab900000cb900000eb9000010b9000012b9000014b9000016b9000018b900001ab900001cb900001eb90000a4b90000c4b90000e0b9000000ca9a3b
+    scrollPos: {x: 0, y: 353}
+    m_SelectedIDs: ecb90000
+    m_LastClickedID: 47596
+    m_ExpandedIDs: 000000000cb900000eb9000010b9000012b9000014b9000016b9000018b900001ab900001cb900001eb9000020b9000022b9000024b9000026b9000028b900002ab90000d0b9000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1437,7 +1435,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 10dfffff
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000000b9000002b9000004b9000006b9000008b900000ab900000cb900000eb9000010b9000012b9000014b9000016b9000018b900001ab900001cb900001eb90000
+    m_ExpandedIDs: 000000000cb900000eb9000010b9000012b9000014b9000016b9000018b900001ab900001cb900001eb9000020b9000022b9000024b9000026b9000028b900002ab90000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1469,15 +1467,15 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: 76d70000ece00000e8b2000040b100004cb100002eb20000d2ec000006ba000046b5000052d70000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: AICharacterAttackAction
-      m_OriginalName: AICharacterAttackAction
+      m_Name: AttackState
+      m_OriginalName: AttackState
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 47934
+      m_UserData: 50680
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -1542,7 +1540,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Imports/Not So Scary Zombie Pack
+    - Assets/Data/AI Attack Actions/Undead
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1552,16 +1550,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Imports/Not So Scary Zombie Pack
+  - Assets/Data/AI Attack Actions/Undead
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\jckzh\source\repos\TraverserProject
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 187}
-    m_SelectedIDs: 1eb90000
-    m_LastClickedID: 47390
-    m_ExpandedIDs: 0000000000b9000002b9000004b9000006b9000008b900000ab900000cb900000eb9000010b9000012b9000014b9000016b9000018b900001ab900001cb900001eb90000bab9000000ca9a3b
+    scrollPos: {x: 0, y: 7}
+    m_SelectedIDs: 58c50000
+    m_LastClickedID: 50520
+    m_ExpandedIDs: 000000000cb900000eb9000010b9000012b9000014b9000016b9000018b900001ab900001cb900001eb9000020b9000022b9000024b9000026b9000028b900002ab90000c6b9000054c5000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1590,7 +1588,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000000b9000002b9000004b9000006b9000008b900000ab900000cb900000eb9000010b9000012b9000014b9000016b9000018b900001ab900001cb900001eb90000
+    m_ExpandedIDs: 000000000cb900000eb9000010b9000012b9000014b9000016b9000018b900001ab900001cb900001eb9000020b9000022b9000024b9000026b9000028b900002ab90000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1618,7 +1616,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 7eb10000a6b3000036b9000046b5000074ba000070ba0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
