@@ -61,6 +61,7 @@ namespace TraverserProject
             {
                 aiCharacterCombatManager.targetsDirection = aiCharacterCombatManager.currentTarget.transform.position - transform.position;
                 aiCharacterCombatManager.viewableAngle = WorldUtilityManager.Singleton.GetAngleOfTarget(transform, aiCharacterCombatManager.targetsDirection);
+                aiCharacterCombatManager.distanceFromTarget = Vector3.Distance(transform.position, aiCharacterCombatManager.currentTarget.transform.position);
             }
 
             if (navMeshAgent.enabled)

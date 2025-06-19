@@ -67,9 +67,11 @@
     <Compile Include="Assets\Scripts\Items\WeaponManager.cs" />
     <Compile Include="Assets\Scripts\Character\AICharacter\AICharacterManager.cs" />
     <Compile Include="Assets\Scripts\Character\AICharacter\AICharacterAnimatorManager.cs" />
+    <Compile Include="Assets\Scripts\Character\AICharacter\State\CombatStanceState.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerStatsManager.cs" />
     <Compile Include="Assets\Scripts\World Manager\WorldGameSessionManager.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterEquipmentManager.cs" />
+    <Compile Include="Assets\Scripts\Character\AICharacter\State\IdleState.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterLocomotionManager.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerInputManager.cs" />
     <Compile Include="Assets\Scripts\SaveAndLoad\CharacterSaveData.cs" />
@@ -78,9 +80,9 @@
     <Compile Include="Assets\Scripts\Character\AICharacter\AICharacterCombatManager.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerAnimatorManager.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterInventoryManager.cs" />
+    <Compile Include="Assets\Scripts\Character\AICharacter\Action\AICharacterAttackAction.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerEffectsManager.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterStatsManager.cs" />
-    <Compile Include="Assets\Scripts\Character\AICharacter\IdleState.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerUI\PlayerUIPopUpManager.cs" />
     <Compile Include="Assets\Scripts\Items\WeaponItem.cs" />
     <Compile Include="Assets\Scripts\Items\Weapon Actions\WeaponItemAction.cs" />
@@ -91,7 +93,6 @@
     <Compile Include="Assets\Scripts\Animator\ResetIsJumping.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerEquipmentManager.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerNetworkManager.cs" />
-    <Compile Include="Assets\Scripts\Character\AICharacter\AIState.cs" />
     <Compile Include="Assets\Scripts\Animator\ResetActionFlag.cs" />
     <Compile Include="Assets\Scripts\Menu Scene\TitleScreenManager.cs" />
     <Compile Include="Assets\Scripts\World Manager\WorldCharacterEffectsManager.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Assets\Scripts\World Manager\WorldUtilityManager.cs" />
     <Compile Include="Assets\Scripts\World Manager\WorldActionManager.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerSoundFXManager.cs" />
+    <Compile Include="Assets\Scripts\Character\AICharacter\State\PursueTargetState.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterManager.cs" />
     <Compile Include="Assets\Scripts\Items\Weapon Actions\LightAttackWeaponItemAction.cs" />
     <Compile Include="Assets\Scripts\Enums.cs" />
@@ -124,11 +126,12 @@
     <Compile Include="Assets\Scripts\World Manager\WorldSaveGameManager.cs" />
     <Compile Include="Assets\Scripts\Utility\Utility_DestroyAfterTime.cs" />
     <Compile Include="Assets\PlayerControls.cs" />
+    <Compile Include="Assets\Scripts\Character\AICharacter\Action\CombatStanceState.cs" />
     <Compile Include="Assets\Scripts\Effects\InstantCharacterEffect.cs" />
     <Compile Include="Assets\Scripts\Character\AICharacter\AICharacterLocomotionManager.cs" />
     <Compile Include="Assets\Scripts\Colliders\DamageCollider.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterAnimatorManager.cs" />
-    <Compile Include="Assets\Scripts\Character\AICharacter\PursueTargetState.cs" />
+    <Compile Include="Assets\Scripts\Character\AICharacter\State\AIState.cs" />
     <Compile Include="Assets\Scripts\Effects\TakeStaminaDamageCharacterEffect.cs" />
   </ItemGroup>
   <ItemGroup>
