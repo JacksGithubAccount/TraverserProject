@@ -20,7 +20,7 @@ namespace TraverserProject
             if (playerPerformingAction.playerNetworkManager.currentStamina.Value <= 0)
                 return;
 
-            if (!playerPerformingAction.isGrounded)
+            if (!playerPerformingAction.characterLocomotionManager.isGrounded)
                 return;
 
             base.AttemptToPerformAction(playerPerformingAction, weaponPerformingAction);

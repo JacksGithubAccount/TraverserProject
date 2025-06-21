@@ -77,7 +77,7 @@ namespace TraverserProject
         }
         private void HandleGroundedMovement()
         {
-            if (!player.canMove)
+            if (!player.characterLocomotionManager.canMove)
                 return;
 
             GetMovementValues();
@@ -117,7 +117,7 @@ namespace TraverserProject
 
         private void HandleFreeFallMovement()
         {
-            if (!player.isGrounded)
+            if (!player.characterLocomotionManager.isGrounded)
             {
                 Vector3 freeFallDirection;
 
@@ -133,7 +133,7 @@ namespace TraverserProject
 
             if (player.isDead.Value)
                 return;
-            if (!player.canRotate)
+            if (!player.characterLocomotionManager.canRotate)
                 return;
 
             if (player.playerNetworkManager.isLockedOn.Value)
@@ -253,7 +253,7 @@ namespace TraverserProject
             if (player.playerNetworkManager.isJumping.Value)
                 return;
 
-            if (!player.isGrounded)
+            if (!player.characterLocomotionManager.isGrounded)
                 return;
 
             player.playerAnimatorManager.PlayTargetActionAnimation("Main_Jump_01", false);

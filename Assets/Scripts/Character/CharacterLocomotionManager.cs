@@ -18,6 +18,9 @@ namespace TraverserProject
 
         [Header("Flags")]
         public bool isRolling = false;
+        public bool isGrounded = true;
+        public bool canRotate = true;
+        public bool canMove = true;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         protected virtual void Awake()
@@ -29,7 +32,7 @@ namespace TraverserProject
         {
             HandleGroundCheck();
 
-            if (character.isGrounded)
+            if (character.characterLocomotionManager.isGrounded)
             {
                 if (yVelocity.y < 0)
                 {
@@ -57,13 +60,23 @@ namespace TraverserProject
 
         protected void HandleGroundCheck()
         {
-            character.isGrounded = Physics.CheckSphere(character.transform.position, groundCheckSphereRadius, groundLayer);
+            isGrounded = Physics.CheckSphere(character.transform.position, groundCheckSphereRadius, groundLayer);
         }
 
         //draws sphere around character
         protected void OnDrawGizmosSelected()
         {
             //Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
+        }
+
+        public void EnableCanRotate()
+        {
+            canRotate = true;
+        }
+
+        public void DisableCanRotate()
+        {
+            canRotate = false;
         }
     }
 }

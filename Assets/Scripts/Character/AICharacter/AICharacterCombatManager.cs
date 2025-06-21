@@ -23,6 +23,13 @@ namespace TraverserProject
         public float attackRotationSpeed = 25;
 
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            lockOnTransform = GetComponentInChildren<LockOnTransform>().transform;
+        }
+
         public void FindATargetViaLineOfSight(AICharacterManager aiCharacter)
         {
             if (currentTarget != null)
@@ -109,7 +116,7 @@ namespace TraverserProject
 
         public void RotateTowardsAgent(AICharacterManager aiCharacter)
         {
-            if(aiCharacter.aiCharacterNetworkManager.isMoving.Value)
+            if (aiCharacter.aiCharacterNetworkManager.isMoving.Value)
             {
                 aiCharacter.transform.rotation = aiCharacter.navMeshAgent.transform.rotation;
             }
@@ -120,7 +127,7 @@ namespace TraverserProject
             if (currentTarget == null)
                 return;
 
-            if (!aiCharacter.canRotate)
+            if (!aiCharacter.characterLocomotionManager.canRotate)
                 return;
 
             if (!aiCharacter.isPerformingAction)
@@ -130,7 +137,7 @@ namespace TraverserProject
             targetDirection.y = 0;
             targetDirection.Normalize();
 
-            if(targetDirection == Vector3.zero)
+            if (targetDirection == Vector3.zero)
                 targetDirection = aiCharacter.transform.forward;
 
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
@@ -141,9 +148,9 @@ namespace TraverserProject
 
         public void HandleActionRecovery(AICharacterManager aiCharacter)
         {
-            if(actionRecoveryTimer > 0)
+            if (actionRecoveryTimer > 0)
             {
-                if(!aiCharacter.isPerformingAction)
+                if (!aiCharacter.isPerformingAction)
                 {
                     actionRecoveryTimer -= Time.deltaTime;
                 }

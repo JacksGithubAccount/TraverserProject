@@ -19,7 +19,7 @@ namespace TraverserProject
         {
             if (aiCharacter.IsOwner)
             {
-                if (!aiCharacter.isGrounded)
+                if (!aiCharacter.characterLocomotionManager.isGrounded)
                     return;
 
                 Vector3 velocity = aiCharacter.animator.deltaPosition;
@@ -30,7 +30,7 @@ namespace TraverserProject
             }
             else
             {
-                if (!aiCharacter.isGrounded)
+                if (!aiCharacter.characterLocomotionManager.isGrounded)
                     return;
 
                 Vector3 velocity = aiCharacter.animator.deltaPosition;

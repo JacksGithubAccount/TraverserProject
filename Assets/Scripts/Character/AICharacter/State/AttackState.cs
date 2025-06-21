@@ -21,10 +21,12 @@ namespace TraverserProject
             if (aiCharacter.aiCharacterCombatManager.currentTarget == null)
                 return SwitchState(aiCharacter, aiCharacter.idle);
 
-            if(aiCharacter.aiCharacterCombatManager.currentTarget.isDead.Value)
+            if (aiCharacter.aiCharacterCombatManager.currentTarget.isDead.Value)
                 return SwitchState(aiCharacter, aiCharacter.idle);
 
-            aiCharacter.characterAnimatorManager.UpdateAnimatorMovementParameters(0,0, false);
+            aiCharacter.aiCharacterCombatManager.RotateTowardsTargetWhilstAttacking(aiCharacter);
+
+            aiCharacter.characterAnimatorManager.UpdateAnimatorMovementParameters(0, 0, false);
 
             if (willPerformCombo && !hasPerformedCombo)
             {
@@ -35,12 +37,12 @@ namespace TraverserProject
                 }
             }
 
-            if(!hasPerformedAttack)
+            if (aiCharacter.isPerformingAction)
+                return this;
+
+            if (!hasPerformedAttack)
             {
                 if (aiCharacter.aiCharacterCombatManager.actionRecoveryTimer > 0)
-                    return this;
-
-                if (aiCharacter.isPerformingAction)
                     return this;
 
                 PerformAttack(aiCharacter);

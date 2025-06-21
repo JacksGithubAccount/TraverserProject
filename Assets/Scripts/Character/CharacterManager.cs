@@ -18,17 +18,13 @@ namespace TraverserProject
         [HideInInspector] public CharacterAnimatorManager characterAnimatorManager;
         [HideInInspector] public CharacterCombatManager characterCombatManager;
         [HideInInspector] public CharacterSoundFXManager characterSoundFXManager;
-        [HideInInspector] public CharacterLocomotionManager characterLocomotionManager;
+        [HideInInspector] public CharacterLocomotionManager     ;
 
         [Header("Character Group")]
         public CharacterGroup characterGroup;
 
         [Header("Flags")]
         public bool isPerformingAction = false;
-        public bool isGrounded = true;
-        public bool canRotate = true;
-        public bool canMove = true;
-        public bool applyRootMotion = false;
 
 
 
@@ -53,7 +49,7 @@ namespace TraverserProject
 
         protected virtual void Update()
         {
-            animator.SetBool("isGrounded", isGrounded);
+            animator.SetBool("isGrounded", characterLocomotionManager.isGrounded);
 
             if (IsOwner)
             {
