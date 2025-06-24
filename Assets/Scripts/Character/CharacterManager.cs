@@ -18,7 +18,7 @@ namespace TraverserProject
         [HideInInspector] public CharacterAnimatorManager characterAnimatorManager;
         [HideInInspector] public CharacterCombatManager characterCombatManager;
         [HideInInspector] public CharacterSoundFXManager characterSoundFXManager;
-        [HideInInspector] public CharacterLocomotionManager     ;
+        [HideInInspector] public CharacterLocomotionManager characterLocomotionManager; 
 
         [Header("Character Group")]
         public CharacterGroup characterGroup;

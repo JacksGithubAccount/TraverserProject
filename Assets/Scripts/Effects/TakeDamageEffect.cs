@@ -86,6 +86,7 @@ namespace TraverserProject
             AudioClip physicalDamageSFX = WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(WorldSoundFXManager.Singleton.physicalDamageSFX);
 
             character.characterSoundFXManager.PlaySoundFX(physicalDamageSFX);
+            character.characterSoundFXManager.PlayDamageGrunt();
         }
 
         private void PlayDirectionalBasedDamageAnimation(CharacterManager character)

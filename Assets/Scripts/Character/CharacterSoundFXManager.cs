@@ -6,6 +6,12 @@ namespace TraverserProject
     {
         private AudioSource audioSource;
 
+        [Header("Damage Grunts")]
+        [SerializeField] protected AudioClip[] damageGrunts;
+
+        [Header("Attack Grunts")]
+        [SerializeField] protected AudioClip[] attackGrunts;
+
         protected virtual void Awake()
         {
 
@@ -26,6 +32,16 @@ namespace TraverserProject
         public void PlayRollSoundFX()
         {
             audioSource.PlayOneShot(WorldSoundFXManager.Singleton.rollSFX);
+        }
+
+        public virtual void PlayDamageGrunt()
+        {
+            PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(damageGrunts));
+        }
+
+        public virtual void PlayAttackGrunt()
+        {
+            PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(attackGrunts));
         }
     }
 }

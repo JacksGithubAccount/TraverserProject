@@ -6,6 +6,9 @@ namespace TraverserProject
 
     public class AICharacterCombatManager : CharacterCombatManager
     {
+
+        protected AICharacterManager aiCharacter;
+
         [Header("Action Recovery")]
         public float actionRecoveryTimer = 0f;
 
@@ -27,6 +30,7 @@ namespace TraverserProject
         {
             base.Awake();
 
+            aiCharacter = GetComponent<AICharacterManager>();
             lockOnTransform = GetComponentInChildren<LockOnTransform>().transform;
         }
 
@@ -127,7 +131,7 @@ namespace TraverserProject
             if (currentTarget == null)
                 return;
 
-            if (!aiCharacter.characterLocomotionManager.canRotate)
+            if (!aiCharacter.aiCharacterLocomotionManager.canRotate)
                 return;
 
             if (!aiCharacter.isPerformingAction)

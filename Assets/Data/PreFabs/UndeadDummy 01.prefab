@@ -1047,6 +1047,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b5e5f2ba94eac468861ffedcef0a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageGrunts:
+  - {fileID: 8300000, guid: 86905e456c6a2c9479ac9153eb0ebc00, type: 3}
+  attackGrunts:
+  - {fileID: 8300000, guid: b493999f70a2a824db61ba3a2026a68d, type: 3}
 --- !u!114 &8175454045765328493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1123,10 +1127,6 @@ MonoBehaviour:
   characterLocomotionManager: {fileID: 0}
   characterGroup: 1
   isPerformingAction: 0
-  isGrounded: 1
-  canRotate: 1
-  canMove: 1
-  applyRootMotion: 1
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterCombatManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
@@ -1207,6 +1207,9 @@ MonoBehaviour:
   groundedYVelocity: -20
   fallStartYVelocity: -5
   isRolling: 0
+  isGrounded: 1
+  canRotate: 1
+  canMove: 1
 --- !u!114 &7208941246191151473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1221,6 +1224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertical: 0
   horizontal: 0
+  applyRootMotion: 0
   lastDamageAnimationPlayed: 
   hit_Forward_Medium_01: hit_Forward_Medium_01
   hit_Backward_Medium_01: hit_Backward_Medium_01

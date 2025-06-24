@@ -585,11 +585,9 @@ MonoBehaviour:
   characterAnimatorManager: {fileID: 0}
   characterCombatManager: {fileID: 0}
   characterSoundFXManager: {fileID: 0}
+  characterLocomotionManager: {fileID: 0}
+  characterGroup: 0
   isPerformingAction: 0
-  isGrounded: 1
-  canRotate: 1
-  canMove: 1
-  applyRootMotion: 0
   respawnCharacter: 0
   switchRightWeapon: 0
   playerAnimatorManager: {fileID: 0}
@@ -619,6 +617,10 @@ MonoBehaviour:
   yVelocity: {x: 0, y: 0, z: 0}
   groundedYVelocity: -20
   fallStartYVelocity: -5
+  isRolling: 0
+  isGrounded: 1
+  canRotate: 1
+  canMove: 1
   verticalMovement: 0
   horizontalMovement: 0
   moveAmount: 0
@@ -652,17 +654,23 @@ MonoBehaviour:
   networkPositionVelocity: {x: 0, y: 0, z: 0}
   networkPositionSmoothTime: 0.1
   networkRotationSmoothTime: 0.1
+  isMoving:
+    m_InternalValue: 0
   horizontalMovement:
     m_InternalValue: 0
   verticalMovement:
     m_InternalValue: 0
   moveAmount:
     m_InternalValue: 0
+  currentTargetNetworkObjectID:
+    m_InternalValue: 0
   isLockedOn:
     m_InternalValue: 0
   isSprinting:
     m_InternalValue: 0
   isJumping:
+    m_InternalValue: 0
+  isChargingAttack:
     m_InternalValue: 0
   currentStamina:
     m_InternalValue: 0
@@ -769,6 +777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertical: 0
   horizontal: 0
+  applyRootMotion: 0
   lastDamageAnimationPlayed: 
   hit_Forward_Medium_01: hit_Forward_Medium_01
   hit_Backward_Medium_01: hit_Backward_Medium_01
@@ -790,6 +799,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e88ff170d3612a4eb07d8702968356b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageGrunts:
+  - {fileID: 8300000, guid: 5583e9c9a0afdf0408f9d0946666f85a, type: 3}
+  - {fileID: 8300000, guid: 572fe06c861000149bc4b51cc1fdb09d, type: 3}
+  - {fileID: 8300000, guid: 88b91714a2e2cbb428f61e18ca4d39d8, type: 3}
+  - {fileID: 8300000, guid: 80cc6816623c9a04580970e36613d8c4, type: 3}
+  - {fileID: 8300000, guid: cad57fcf83264a4489ae5c41b55e7a8b, type: 3}
+  - {fileID: 8300000, guid: 132005c60d8148440b6f375a773d8f8e, type: 3}
+  - {fileID: 8300000, guid: 50b441f111083504d90ad648f16723e0, type: 3}
+  - {fileID: 8300000, guid: 36104c8b981b4a349a1948b61c9e8a20, type: 3}
+  - {fileID: 8300000, guid: 14a883f5f8241cc4ca1f35fe54fef1d2, type: 3}
+  - {fileID: 8300000, guid: 62c41c4c89235bd42bf85b0e4c855d1a, type: 3}
+  - {fileID: 8300000, guid: c39ba448713aff147bdc2b9b4126b1d8, type: 3}
+  - {fileID: 8300000, guid: f549a9145c031244a89a2d36d5f18757, type: 3}
+  - {fileID: 8300000, guid: 9ef3f6cb1b48c67419812b50793d9da6, type: 3}
+  attackGrunts:
+  - {fileID: 8300000, guid: 0aadd833bb2d5c6459071cec3b57b6fc, type: 3}
+  - {fileID: 8300000, guid: bab2beee4e54b6b4884ba37eee560014, type: 3}
+  - {fileID: 8300000, guid: 479575cc89c3733419221428dae636ad, type: 3}
+  - {fileID: 8300000, guid: 7a043f0917c61774d94c1a6331f30f9c, type: 3}
+  - {fileID: 8300000, guid: 2ed46ddcc4f7dd549b61957f22cc624d, type: 3}
+  - {fileID: 8300000, guid: dfd9240fb951bf6498605be9a417b5de, type: 3}
+  - {fileID: 8300000, guid: a390f9932470d264da3696567a4a581c, type: 3}
+  - {fileID: 8300000, guid: ec37c89a97a3a194d98cecd9bb3a61d5, type: 3}
+  - {fileID: 8300000, guid: 5db80d54d2dafd348b6cae53c6d9924a, type: 3}
+  - {fileID: 8300000, guid: 37f1bb4806a676249891c3249bf962a2, type: 3}
 --- !u!143 &816276440649717873
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1022,10 +1056,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285700da5f9e90b458de5b470d2eee61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  lastAttackAnimationPerformed: 
   currentTarget: {fileID: 0}
   currentAttackType: 0
   lockOnTransform: {fileID: 4830149107854607307}
   currentWeaponBeingUsed: {fileID: 0}
+  canComboWithMainHandWeapon: 0
+  canComboWithOffHandWeapon: 0
 --- !u!1 &1436562615973365599 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1346693338035923533, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
