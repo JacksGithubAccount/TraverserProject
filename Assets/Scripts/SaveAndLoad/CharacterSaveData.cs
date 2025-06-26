@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace TraverserProject
 {
-    [System.Serializable ]
+    [System.Serializable]
     public class CharacterSaveData
     {
         [Header("Scene Index")]
@@ -28,7 +28,14 @@ namespace TraverserProject
         public int vitality;
         public int endurance;
 
+        [Header("Bosses")]
+        public SerializableDictionary<int, bool> bossesAwakened;
+        public SerializableDictionary<int, bool> bossesDefeated;
 
-
+        public CharacterSaveData()
+        {
+            bossesAwakened = new SerializableDictionary<int, bool>();
+            bossesDefeated = new SerializableDictionary<int, bool>();
+        }
     }
 }
