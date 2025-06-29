@@ -24,7 +24,7 @@ namespace TraverserProject
 
         protected virtual void Awake()
         {
-            
+
         }
         protected virtual void OnTriggerEnter(Collider other)
         {
@@ -33,6 +33,9 @@ namespace TraverserProject
             if (damageTarget != null)
             {
                 contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+
+
+
                 DamageTarget(damageTarget);
 
             }

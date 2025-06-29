@@ -20,7 +20,7 @@ namespace TraverserProject
         [SerializeField] bool hasRolledForComboChance = false;
 
         [Header("Engagement Distance")]
-        [SerializeField] public float maximumEngagementDistance = 5;
+        [SerializeField] protected float maximumEngagementDistance = 5;
 
         public override AIState Tick(AICharacterManager aiCharacter)
         {
@@ -30,16 +30,17 @@ namespace TraverserProject
             if (!aiCharacter.navMeshAgent.enabled)
                 aiCharacter.navMeshAgent.enabled = true;
 
-            //turns and face towards target when target is outside FOV
-            if (!aiCharacter.aiCharacterNetworkManager.isMoving.Value)
+            if (aiCharacter.aiCharacterCombatManager.enablePivot)
             {
-                if (aiCharacter.aiCharacterCombatManager.viewableAngle < -30 || aiCharacter.aiCharacterCombatManager.viewableAngle > 30)
-                    aiCharacter.aiCharacterCombatManager.PivotTowardsTarget(aiCharacter);
+                //turns and face towards target when target is outside FOV
+                if (!aiCharacter.aiCharacterNetworkManager.isMoving.Value)
+                {
+                    if (aiCharacter.aiCharacterCombatManager.viewableAngle < -30 || aiCharacter.aiCharacterCombatManager.viewableAngle > 30)
+                        aiCharacter.aiCharacterCombatManager.PivotTowardsTarget(aiCharacter);
+                }
             }
 
             //rotate to face target
-            aiCharacter.aiCharacterCombatManager.RotateTowardsAgent(aiCharacter);
-
             if (aiCharacter.aiCharacterCombatManager.currentTarget == null)
                 return SwitchState(aiCharacter, aiCharacter.idle);
 
@@ -69,7 +70,7 @@ namespace TraverserProject
         {
             potentialAttacks = new List<AICharacterAttackAction>();
 
-            foreach (var potentialAttack in aiCharacterAttacks)
+            foreach (var potentialAttack in potentialAttacks)
             {
                 if (potentialAttack.minimumAttackDistance > aiCharacter.aiCharacterCombatManager.distanceFromTarget)
                     continue;
@@ -86,7 +87,7 @@ namespace TraverserProject
                 potentialAttacks.Add(potentialAttack);
             }
 
-            if (potentialAttacks.Count <= 0)
+            if (potentialAttacks.Count <= 0)   
                 return;
 
             var totalWeight = 0;
