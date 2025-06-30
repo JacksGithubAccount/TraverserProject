@@ -20,7 +20,7 @@ namespace TraverserProject
         [SerializeField] bool hasRolledForComboChance = false;
 
         [Header("Engagement Distance")]
-        [SerializeField] protected float maximumEngagementDistance = 5;
+        [SerializeField] public float maximumEngagementDistance = 5;
 
         public override AIState Tick(AICharacterManager aiCharacter)
         {
@@ -30,9 +30,9 @@ namespace TraverserProject
             if (!aiCharacter.navMeshAgent.enabled)
                 aiCharacter.navMeshAgent.enabled = true;
 
+            //turns and face towards target when target is outside FOV
             if (aiCharacter.aiCharacterCombatManager.enablePivot)
             {
-                //turns and face towards target when target is outside FOV
                 if (!aiCharacter.aiCharacterNetworkManager.isMoving.Value)
                 {
                     if (aiCharacter.aiCharacterCombatManager.viewableAngle < -30 || aiCharacter.aiCharacterCombatManager.viewableAngle > 30)
@@ -41,6 +41,8 @@ namespace TraverserProject
             }
 
             //rotate to face target
+            aiCharacter.aiCharacterCombatManager.RotateTowardsAgent(aiCharacter);
+
             if (aiCharacter.aiCharacterCombatManager.currentTarget == null)
                 return SwitchState(aiCharacter, aiCharacter.idle);
 
@@ -70,7 +72,7 @@ namespace TraverserProject
         {
             potentialAttacks = new List<AICharacterAttackAction>();
 
-            foreach (var potentialAttack in potentialAttacks)
+            foreach (var potentialAttack in aiCharacterAttacks)
             {
                 if (potentialAttack.minimumAttackDistance > aiCharacter.aiCharacterCombatManager.distanceFromTarget)
                     continue;
@@ -87,7 +89,7 @@ namespace TraverserProject
                 potentialAttacks.Add(potentialAttack);
             }
 
-            if (potentialAttacks.Count <= 0)   
+            if (potentialAttacks.Count <= 0)
                 return;
 
             var totalWeight = 0;

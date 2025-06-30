@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace TraverserProject
@@ -6,37 +5,52 @@ namespace TraverserProject
 
     public class AIDurkCombatManager : AICharacterCombatManager
     {
+        AIDurkCharacterManager durkManager;
+
         [Header("Damage Colliders")]
         [SerializeField] DurkClubDamageCollider clubDamageCollider;
-        [SerializeField] Transform durksStompingFoot;
-        [SerializeField] float stompAttackAOERadius = 1.5f;
+        [SerializeField] DurkStompCollider stompCollider;
+        public float stompAttackAOERadius = 1.5f;
 
         [Header("Damage")]
         [SerializeField] int baseDamage = 25;
         [SerializeField] float attack01DamageModifier = 1.0f;
         [SerializeField] float attack02DamageModifier = 1.2f;
         [SerializeField] float attack03DamageModifier = 1.4f;
-        [SerializeField] float stompDamage = 25;
+        public float stompDamage = 25;
 
+        [Header("VFX")]
+        public GameObject durkImpactVFX;
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            durkManager = GetComponent<AIDurkCharacterManager>();
+        }
         public void SetAttack01Damage()
         {
+            aiCharacter.characterSoundFXManager.PlayAttackGruntFX();
             clubDamageCollider.physicalDamage = baseDamage * attack01DamageModifier;
         }
 
         public void SetAttack02Damage()
         {
+            aiCharacter.characterSoundFXManager.PlayAttackGruntFX();
             clubDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
         }
 
         public void SetAttack03Damage()
         {
+            aiCharacter.characterSoundFXManager.PlayAttackGruntFX();
             clubDamageCollider.physicalDamage = baseDamage * attack03DamageModifier;
         }
 
         public void OpenClubDamageCollider()
         {
-            aiCharacter.characterSoundFXManager.PlayAttackGrunt();
+
             clubDamageCollider.EnableDamageCollider();
+            durkManager.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(durkManager.durkSoundFXManager.clubWhooshes));
         }
 
         public void CloseClubDamageCollider()
@@ -46,35 +60,7 @@ namespace TraverserProject
 
         public void ActivateDurkStomp()
         {
-            Collider[] colliders = Physics.OverlapSphere(durksStompingFoot.position, stompAttackAOERadius, WorldUtilityManager.Singleton.GetCharacterLayers());
-            List<CharacterManager> charactersDamaged = new List<CharacterManager>();
-
-            foreach (var collider in colliders)
-            {
-                CharacterManager character = collider.GetComponentInParent<CharacterManager>();
-
-                if (character != null)
-                {
-                    if (charactersDamaged.Contains(character))
-                        continue;
-
-                    charactersDamaged.Add(character);
-
-
-                    if (character.IsOwner)
-                    {
-
-
-                        TakeDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.Singleton.takeDamageEffect);
-                        damageEffect.physicalDamage = stompDamage;
-                        damageEffect.poiseDamage = stompDamage;
-
-                        character.characterEffectsManager.ProcessInstantEffect(damageEffect);
-                    }
-                }
-
-
-            }
+            stompCollider.StompAttack();
         }
 
         public override void PivotTowardsTarget(AICharacterManager aiCharacter)

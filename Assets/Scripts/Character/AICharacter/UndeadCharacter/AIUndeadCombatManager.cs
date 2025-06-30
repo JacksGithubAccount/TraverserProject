@@ -28,13 +28,13 @@ namespace TraverserProject
 
         public void OpenRightHandDamageCollider()
         {
-            aiCharacter.characterSoundFXManager.PlayAttackGrunt();
+            aiCharacter.characterSoundFXManager.PlayAttackGruntFX();
             rightHandDamageCollider.EnableDamageCollider();
         }
 
         public void OpenLeftHandDamageCollider()
         {
-            aiCharacter.characterSoundFXManager.PlayAttackGrunt();
+            aiCharacter.characterSoundFXManager.PlayAttackGruntFX();
             leftHandDamageCollider.EnableDamageCollider();
         }
 

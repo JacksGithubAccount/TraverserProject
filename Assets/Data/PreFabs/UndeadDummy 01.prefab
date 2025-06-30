@@ -162,15 +162,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.549092
+      value: 9.632046
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.43556368
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.066626
+      value: -6.7532845
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -481,12 +481,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5901436056940162819}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5139940775573925462}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9205544371384152217}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       insertIndex: -1
       addedObject: {fileID: -3101570621495118235}
@@ -873,7 +867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 402827078
+  GlobalObjectIdHash: 827997870
   InScenePlacedSourceGlobalObjectIdHash: 402827078
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1051,6 +1045,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 86905e456c6a2c9479ac9153eb0ebc00, type: 3}
   attackGrunts:
   - {fileID: 8300000, guid: b493999f70a2a824db61ba3a2026a68d, type: 3}
+  footSteps: []
 --- !u!114 &8175454045765328493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1078,30 +1073,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodSplatterVFX: {fileID: 1972549086604712929, guid: c90de004b46c5404387de1354ec6a546, type: 3}
---- !u!114 &5139940775573925462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3807294811122837391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff803879925ec074fa7975b537875e18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &9205544371384152217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3807294811122837391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9889b7df03915bc479841c3c17bfaebe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-3101570621495118235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1149,6 +1120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  isActive:
+    m_InternalValue: 1
   networkPosition:
     m_InternalValue: {x: 0, y: 0, z: 0}
   networkRotation:
@@ -1165,6 +1138,8 @@ MonoBehaviour:
   moveAmount:
     m_InternalValue: 0
   currentTargetNetworkObjectID:
+    m_InternalValue: 0
+  isInvulnerable:
     m_InternalValue: 0
   isLockedOn:
     m_InternalValue: 0
@@ -1252,6 +1227,7 @@ MonoBehaviour:
   currentAttackType: 0
   lockOnTransform: {fileID: 0}
   actionRecoveryTimer: 0
+  enablePivot: 1
   distanceFromTarget: 0
   viewableAngle: 0
   targetsDirection: {x: 0, y: 0, z: 0}

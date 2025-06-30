@@ -12,6 +12,10 @@ namespace TraverserProject
         [Header("Attack Grunts")]
         [SerializeField] protected AudioClip[] attackGrunts;
 
+        [Header("FootSteps")]
+        [SerializeField] protected AudioClip[] footSteps;
+
+
         protected virtual void Awake()
         {
 
@@ -34,14 +38,23 @@ namespace TraverserProject
             audioSource.PlayOneShot(WorldSoundFXManager.Singleton.rollSFX);
         }
 
-        public virtual void PlayDamageGrunt()
+        public virtual void PlayDamageGruntFX()
         {
-            PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(damageGrunts));
+            if (damageGrunts.Length > 0)
+                PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(damageGrunts));
         }
 
-        public virtual void PlayAttackGrunt()
+        public virtual void PlayAttackGruntFX()
         {
-            PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(attackGrunts));
+            if (attackGrunts.Length > 0)
+                PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(attackGrunts));
+
+        }
+
+        public virtual void PlayFootStepSoundFX()
+        {
+            if (footSteps.Length > 0)
+                PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(footSteps));
         }
     }
 }
