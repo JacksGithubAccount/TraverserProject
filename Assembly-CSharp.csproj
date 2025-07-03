@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Character\Player\PlayerStatsManager.cs" />
     <Compile Include="Assets\Scripts\World Manager\WorldGameSessionManager.cs" />
     <Compile Include="Assets\AIBossCharacterManager.cs" />
+    <Compile Include="Assets\UI_Boss_HP_Bar.cs" />
     <Compile Include="Assets\WorldObjectManager.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterEquipmentManager.cs" />
     <Compile Include="Assets\Scripts\Character\AICharacter\State\IdleState.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Assets\Scripts\Character\Player\PlayerEquipmentManager.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerNetworkManager.cs" />
     <Compile Include="Assets\Scripts\Animator\ResetActionFlag.cs" />
+    <Compile Include="Assets\Scripts\Character\AICharacter\State\BossSleepState.cs" />
     <Compile Include="Assets\Scripts\Menu Scene\TitleScreenManager.cs" />
     <Compile Include="Assets\Scripts\Colliders\UndeadHandDamageCollider.cs" />
     <Compile Include="Assets\Scripts\World Manager\WorldCharacterEffectsManager.cs" />
@@ -129,6 +131,7 @@
     <Compile Include="Assets\Scripts\Colliders\DurkStompCollider.cs" />
     <Compile Include="Assets\Scripts\Character\AICharacter\State\PursueTargetState.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterManager.cs" />
+    <Compile Include="Assets\EventTriggerBossFight.cs" />
     <Compile Include="Assets\Scripts\Items\Weapon Actions\LightAttackWeaponItemAction.cs" />
     <Compile Include="Assets\AIDurkCharacterManager.cs" />
     <Compile Include="Assets\Scripts\Enums.cs" />
@@ -1347,6 +1350,10 @@
       <Project>{8CB2203A-5CA4-5FE3-ABD8-C018F91868BE}</Project>
       <Name>Unity.VisualScripting.State</Name>
     </ProjectReference>
+    <ProjectReference Include="CFXRDemo.csproj">
+      <Project>{FF9AFE63-6497-ECB6-3EE2-FA059DD0BE4D}</Project>
+      <Name>CFXRDemo</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.2D.Sprite.Editor.csproj">
       <Project>{C12CF02F-7852-D6C1-C84E-84E93999B3D0}</Project>
       <Name>Unity.2D.Sprite.Editor</Name>
@@ -1354,10 +1361,6 @@
     <ProjectReference Include="Unity.AI.Navigation.Editor.ConversionSystem.csproj">
       <Project>{A24726B9-B206-C377-E0DB-95ECB4BBEF36}</Project>
       <Name>Unity.AI.Navigation.Editor.ConversionSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="CFXRDemo.csproj">
-      <Project>{FF9AFE63-6497-ECB6-3EE2-FA059DD0BE4D}</Project>
-      <Name>CFXRDemo</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
       <Project>{9BE8FA17-511C-1FBE-7382-95789662D0E5}</Project>

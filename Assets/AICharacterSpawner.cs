@@ -30,6 +30,7 @@ namespace TraverserProject
                 instantiatedGameObject.transform.position = transform.position;
                 instantiatedGameObject.transform.rotation = transform.rotation;
                 instantiatedGameObject.GetComponent<NetworkObject>().Spawn();
+                WorldAIManager.Singleton.AddCharacterToSpawnedCharactersList(instantiatedGameObject.GetComponent<AICharacterManager>());
             }
         }
     }

@@ -1555,7 +1555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054e8355552a51b4b925c09d08a9eda5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageCollider: {fileID: 0}
+  damageCollider: {fileID: 1576139118183601173}
   physicalDamage: 0
   magicDamage: 0
   fireDamage: 0
@@ -7036,7 +7036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3720505044
+  GlobalObjectIdHash: 3958654246
   InScenePlacedSourceGlobalObjectIdHash: 3958654246
   DeferredDespawnTick: 0
   Ownership: 1
@@ -7193,7 +7193,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -7316,13 +7316,13 @@ MonoBehaviour:
   isChargingAttack:
     m_InternalValue: 0
   currentStamina:
-    m_InternalValue: 0
+    m_InternalValue: 200
   maxStamina:
-    m_InternalValue: 0
+    m_InternalValue: 200
   currentHealth:
-    m_InternalValue: 0
+    m_InternalValue: 1000
   maxHealth:
-    m_InternalValue: 0
+    m_InternalValue: 1000
   vitality:
     m_InternalValue: 1
   endurance:
@@ -7354,7 +7354,7 @@ MonoBehaviour:
   maximumFOV: 35
   attackRotationSpeed: 25
   clubDamageCollider: {fileID: 3916656321501878968}
-  stompCollider: {fileID: 0}
+  stompCollider: {fileID: 8139985458824157583}
   stompAttackAOERadius: 1.5
   baseDamage: 25
   attack01DamageModifier: 1
@@ -7416,6 +7416,7 @@ MonoBehaviour:
   characterLocomotionManager: {fileID: 0}
   characterGroup: 1
   isPerformingAction: 0
+  characterName: SkelkieBoyy
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterCombatManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
@@ -7426,12 +7427,16 @@ MonoBehaviour:
   combatStance: {fileID: 11400000, guid: 326ecc394e1d27b4387c8464299dc703, type: 2}
   attack: {fileID: 11400000, guid: ef49e155246f6ab4b89274c9e846dc1f, type: 2}
   bossID: 0
-  fogWallID: 0
-  hasBeenDefeated: 0
-  hasBeenAwakened: 0
+  bossFightIsActive:
+    m_InternalValue: 0
+  hasBeenDefeated:
+    m_InternalValue: 0
+  hasBeenAwakened:
+    m_InternalValue: 0
   fogWalls: []
-  defeatedBossDebug: 0
-  wakeBossUp: 0
+  sleepAnimation: Sleep_01
+  awakenAnimation: Awaken_01
+  sleepState: {fileID: 11400000, guid: 7138526f75ca86e4bb2d11a050f98293, type: 2}
   durkSoundFXManager: {fileID: 0}
   durkCombatManager: {fileID: 0}
 --- !u!1 &8804580751211298275

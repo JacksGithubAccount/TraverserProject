@@ -7,12 +7,15 @@ namespace TraverserProject
 
     public class AICharacterManager : CharacterManager
     {
+        [Header("Character Name")]
+        public string characterName = "";
+
         [HideInInspector] public AICharacterNetworkManager aiCharacterNetworkManager;
         [HideInInspector] public AICharacterCombatManager aiCharacterCombatManager;
         [HideInInspector] public AICharacterLocomotionManager aiCharacterLocomotionManager;
 
         [Header("Current State")]
-        [SerializeField] AIState currentState;
+        [SerializeField] protected AIState currentState;
 
         [Header("Navmesh Agent")]
         public NavMeshAgent navMeshAgent;
@@ -32,11 +35,21 @@ namespace TraverserProject
             aiCharacterLocomotionManager = GetComponent<AICharacterLocomotionManager>();
             navMeshAgent = GetComponentInChildren<NavMeshAgent>();
 
-            //use copy of scriptable objects so the original is not modified
-            idle = Instantiate(idle);
-            pursueTarget = Instantiate(pursueTarget);
 
-            currentState = idle;
+        }
+
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+
+            //use copy of scriptable objects so the original is not modified
+            if (IsOwner)
+            {
+                idle = Instantiate(idle);
+                pursueTarget = Instantiate(pursueTarget);
+
+                currentState = idle;
+            }
         }
 
         protected override void Update()
