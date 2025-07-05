@@ -5,8 +5,18 @@ namespace TraverserProject
     [CreateAssetMenu(menuName = "Character Actions/Weapon Actions/Light Attack Action")]
     public class LightAttackWeaponItemAction : WeaponItemAction
     {
+        [Header("Light Attacks")]
         [SerializeField] string light_Attack_01 = "Main_Light_Attack_01";
         [SerializeField] string light_Attack_02 = "Main_Light_Attack_02";
+
+        [Header("Running Attacks")]
+        [SerializeField] string running_Light_Attack_01 = "Main_Run_Light_Attack_01";
+
+        [Header("Rolling Attacks")]
+        [SerializeField] string rolling_Light_Attack_01 = "Main_Roll_Light_Attack_01";
+
+        [Header("Backstep Attacks")]
+        [SerializeField] string backstep_Light_Attack_01 = "Main_Backstep_Light_Attack_01";
 
         public override void AttemptToPerformAction(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
@@ -21,6 +31,24 @@ namespace TraverserProject
 
             if (!playerPerformingAction.characterLocomotionManager.isGrounded)
                 return;
+
+            if (playerPerformingAction.characterNetworkManager.isSprinting.Value)
+            {
+                PerformRunningAttack(playerPerformingAction, weaponPerformingAction);
+                return;
+            }
+
+            if (playerPerformingAction.characterCombatManager.canPerformRollingAttack)
+            {
+                PerformRollingAttack(playerPerformingAction, weaponPerformingAction);
+                return;
+            }
+
+            if (playerPerformingAction.characterCombatManager.canPerformBackstepAttack)
+            {
+                PerformBackstepAttack(playerPerformingAction, weaponPerformingAction);
+                return;
+            }
 
             base.AttemptToPerformAction(playerPerformingAction, weaponPerformingAction);
             PerformLightAttack(playerPerformingAction, weaponPerformingAction);
@@ -46,7 +74,24 @@ namespace TraverserProject
             {
                 playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.LightAttack01, light_Attack_01, true);
             }
+
         }
 
+        public void PerformRunningAttack(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
+        {
+            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.RunningLightAttack01, running_Light_Attack_01, true);
+        }
+
+        public void PerformRollingAttack(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
+        {
+            playerPerformingAction.playerCombatManager.canPerformRollingAttack = false;
+            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.RollingLightAttack01, rolling_Light_Attack_01, true);
+        }
+
+        public void PerformBackstepAttack(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
+        {
+            playerPerformingAction.playerCombatManager.canPerformBackstepAttack = false;
+            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.BackstepLightAttack01, backstep_Light_Attack_01, true);
+        }
     }
 }

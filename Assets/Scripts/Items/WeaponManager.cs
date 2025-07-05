@@ -28,6 +28,12 @@ namespace TraverserProject
             meleeDamageCollider.heavy_Attack_02_Modifier = weapon.heavy_Attack_02_Modifier;
             meleeDamageCollider.charge_Attack_01_Modifier = weapon.charge_Attack_01_Modifier;
             meleeDamageCollider.charge_Attack_02_Modifier = weapon.charge_Attack_02_Modifier;
+            meleeDamageCollider.rolling_Light_Attack_01_Modifier = weapon.rolling_Light_Attack_01_Modifier;
+            meleeDamageCollider.rolling_Heavy_Attack_01_Modifier = weapon.rolling_Heavy_Attack_01_Modifier;
+            meleeDamageCollider.running_Light_Attack_01_Modifier = weapon.running_Light_Attack_01_Modifier;
+            meleeDamageCollider.running_Heavy_Attack_01_Modifier = weapon.running_Heavy_Attack_01_Modifier;
+            meleeDamageCollider.backstep_Light_Attack_01_Modifier = weapon.backstep_Light_Attack_01_Modifier;
+            meleeDamageCollider.backstep_Heavy_Attack_01_Modifier = weapon.backstep_Heavy_Attack_01_Modifier;
         }
 
     }

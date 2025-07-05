@@ -33,10 +33,24 @@ namespace TraverserProject
         public float heavy_Attack_02_Modifier = 1.5f;
         public float charge_Attack_01_Modifier = 2.0f;
         public float charge_Attack_02_Modifier = 2.1f;
+        public float running_Light_Attack_01_Modifier = 1.1f;
+        public float running_Heavy_Attack_01_Modifier = 1.5f;
+        public float rolling_Light_Attack_01_Modifier = 0.9f;
+        public float rolling_Heavy_Attack_01_Modifier = 1.3f;
+        public float backstep_Light_Attack_01_Modifier = 1.0f;
+        public float backstep_Heavy_Attack_01_Modifier = 1.4f;
 
         [Header("Stamina Cost Modifiers")]
         public int baseStaminaCost = 20;
         public float lightAttackStaminaCostMultiplier = 0.9f;
+        public float heavyAttackStaminaCostMultiplier = 1.3f;
+        public float chargedAttackStaminaCostMultiplier = 1.5f;
+        public float runningLightAttackStaminaCostMultiplier = 1.0f;
+        public float runningHeavyAttackStaminaCostMultiplier = 0.4f;
+        public float rollingLightAttackStaminaCostMultiplier = 0.9f;
+        public float rollingHeavyAttackStaminaCostMultiplier = 1.4f;
+        public float backstepLightAttackStaminaCostMultiplier = 0.9f;
+        public float backstepHeavyAttackStaminaCostMultiplier = 1.3f;
 
         [Header("Actions")]
         public WeaponItemAction oh_RB_Action; //one hand right bumper

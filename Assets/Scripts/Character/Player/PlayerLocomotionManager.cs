@@ -76,11 +76,16 @@ namespace TraverserProject
             //clamp the movements
         }
         private void HandleGroundedMovement()
-        {
+        {         
+
+            if (player.characterLocomotionManager.canMove || player.playerLocomotionManager.canRotate)
+            {
+                GetMovementValues();
+            }
+
             if (!player.characterLocomotionManager.canMove)
                 return;
 
-            GetMovementValues();
             //movement is based in camer direction and move inputs
             moveDirection = PlayerCamera.Singleton.transform.forward * verticalMovement;
             moveDirection = moveDirection + PlayerCamera.Singleton.transform.right * horizontalMovement;
