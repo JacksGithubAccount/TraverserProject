@@ -47,9 +47,18 @@ namespace TraverserProject
             {
                 idle = Instantiate(idle);
                 pursueTarget = Instantiate(pursueTarget);
+                combatStance = Instantiate(combatStance);
+                attack = Instantiate(attack);
 
                 currentState = idle;
             }
+            aiCharacterNetworkManager.currentHealth.OnValueChanged += aiCharacterNetworkManager.CheckHealth;
+        }
+
+        public override void OnNetworkDespawn()
+        {
+            base.OnNetworkDespawn();
+            aiCharacterNetworkManager.currentHealth.OnValueChanged -= aiCharacterNetworkManager.CheckHealth;
         }
 
         protected override void Update()

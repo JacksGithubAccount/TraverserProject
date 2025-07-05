@@ -50,7 +50,7 @@ namespace TraverserProject
             character = GetComponent<CharacterManager>();
         }
 
-        public void CheckHealth(int oldValue, int newValue)
+        public virtual void CheckHealth(int oldValue, int newValue)
         {
             if (currentHealth.Value <= 0)
             {

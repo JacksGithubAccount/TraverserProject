@@ -6973,10 +6973,10 @@ GameObject:
   - component: {fileID: 938925429103824830}
   - component: {fileID: 3768501074324438072}
   - component: {fileID: 7400550082357739781}
-  - component: {fileID: 8560030166271067974}
   - component: {fileID: 688280012291426523}
   - component: {fileID: 4192554865707513474}
   - component: {fileID: 4832348600423051507}
+  - component: {fileID: -7678631799240646659}
   m_Layer: 6
   m_Name: SkeletonDummy01
   m_TagString: Untagged
@@ -7273,60 +7273,6 @@ MonoBehaviour:
   isGrounded: 1
   canRotate: 1
   canMove: 1
---- !u!114 &8560030166271067974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8784433656743023300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9bec4462a16ed246babbbee6d85a1f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  isActive:
-    m_InternalValue: 1
-  networkPosition:
-    m_InternalValue: {x: 0, y: 0, z: 0}
-  networkRotation:
-    m_InternalValue: {x: 0, y: 0, z: 0, w: 1}
-  networkPositionVelocity: {x: 0, y: 0, z: 0}
-  networkPositionSmoothTime: 0.1
-  networkRotationSmoothTime: 0.1
-  isMoving:
-    m_InternalValue: 0
-  horizontalMovement:
-    m_InternalValue: 0
-  verticalMovement:
-    m_InternalValue: 0
-  moveAmount:
-    m_InternalValue: 0
-  currentTargetNetworkObjectID:
-    m_InternalValue: 0
-  isInvulnerable:
-    m_InternalValue: 0
-  isLockedOn:
-    m_InternalValue: 0
-  isSprinting:
-    m_InternalValue: 0
-  isJumping:
-    m_InternalValue: 0
-  isChargingAttack:
-    m_InternalValue: 0
-  currentStamina:
-    m_InternalValue: 200
-  maxStamina:
-    m_InternalValue: 200
-  currentHealth:
-    m_InternalValue: 1000
-  maxHealth:
-    m_InternalValue: 1000
-  vitality:
-    m_InternalValue: 1
-  endurance:
-    m_InternalValue: 1
 --- !u!114 &688280012291426523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7427,6 +7373,8 @@ MonoBehaviour:
   combatStance: {fileID: 11400000, guid: 326ecc394e1d27b4387c8464299dc703, type: 2}
   attack: {fileID: 11400000, guid: ef49e155246f6ab4b89274c9e846dc1f, type: 2}
   bossID: 0
+  bossIntroClip: {fileID: 8300000, guid: 51d84a0aee6c0c141b759f307ab5d41c, type: 3}
+  bossBattleLoopClip: {fileID: 8300000, guid: 3fdfee6bb05f6a14c966fc34c2f58e0e, type: 3}
   bossFightIsActive:
     m_InternalValue: 0
   hasBeenDefeated:
@@ -7437,8 +7385,65 @@ MonoBehaviour:
   sleepAnimation: Sleep_01
   awakenAnimation: Awaken_01
   sleepState: {fileID: 11400000, guid: 7138526f75ca86e4bb2d11a050f98293, type: 2}
+  minimumHealthPercentageToShift: 50
+  phaseShiftAnimation: Phase_Change_01
+  phase02CombatStanceState: {fileID: 11400000, guid: fa83c887eb5452d43a9c6aa36dfe3ca8, type: 2}
   durkSoundFXManager: {fileID: 0}
   durkCombatManager: {fileID: 0}
+--- !u!114 &-7678631799240646659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8784433656743023300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21011e01a0e894b44a5e9f125fbdc62d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  isActive:
+    m_InternalValue: 1
+  networkPosition:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  networkRotation:
+    m_InternalValue: {x: 0, y: 0, z: 0, w: 1}
+  networkPositionVelocity: {x: 0, y: 0, z: 0}
+  networkPositionSmoothTime: 0.1
+  networkRotationSmoothTime: 0.1
+  isMoving:
+    m_InternalValue: 0
+  horizontalMovement:
+    m_InternalValue: 0
+  verticalMovement:
+    m_InternalValue: 0
+  moveAmount:
+    m_InternalValue: 0
+  currentTargetNetworkObjectID:
+    m_InternalValue: 0
+  isInvulnerable:
+    m_InternalValue: 0
+  isLockedOn:
+    m_InternalValue: 0
+  isSprinting:
+    m_InternalValue: 0
+  isJumping:
+    m_InternalValue: 0
+  isChargingAttack:
+    m_InternalValue: 0
+  currentStamina:
+    m_InternalValue: 0
+  maxStamina:
+    m_InternalValue: 0
+  currentHealth:
+    m_InternalValue: 0
+  maxHealth:
+    m_InternalValue: 0
+  vitality:
+    m_InternalValue: 1
+  endurance:
+    m_InternalValue: 1
 --- !u!1 &8804580751211298275
 GameObject:
   m_ObjectHideFlags: 0

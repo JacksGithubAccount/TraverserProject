@@ -10,6 +10,10 @@ namespace TraverserProject
     {
         public int bossID = 0;
 
+        [Header("Music")]
+        [SerializeField] AudioClip bossIntroClip;
+        [SerializeField] AudioClip bossBattleLoopClip;
+
         [Header("Status")]
         public NetworkVariable<bool> bossFightIsActive = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> hasBeenDefeated = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -21,6 +25,12 @@ namespace TraverserProject
 
         [Header("States")]
         [SerializeField] BossSleepState sleepState;
+
+        [Header("Phase Shift")]
+        public float minimumHealthPercentageToShift = 50;
+        [SerializeField]
+        string phaseShiftAnimation = "Phase_Change_01";
+        [SerializeField] CombatStanceState phase02CombatStanceState;
 
         protected override void Awake()
         {
@@ -106,12 +116,17 @@ namespace TraverserProject
         }
         public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
         {
+            PlayerUIManager.Singleton.playerUIPopUpManager.SendBossDefeatedPopUp("GREAT FOE FELLED");
             if (IsOwner)
             {
                 characterNetworkManager.currentHealth.Value = 0;
                 isDead.Value = true;
-
                 bossFightIsActive.Value = false;
+
+                foreach (var fogWall in fogWalls)
+                {
+                    fogWall.isActive.Value = false;
+                }
 
                 if (!manuallySelectDeathAnimation)
                 {
@@ -177,11 +192,25 @@ namespace TraverserProject
         {
             if (bossFightIsActive.Value)
             {
+                WorldSoundFXManager.Singleton.PlayBossTrack(bossIntroClip, bossBattleLoopClip);
+
                 GameObject bossHealthBar = Instantiate(PlayerUIManager.Singleton.playerUIHudManager.bossHealthBarObject, PlayerUIManager.Singleton.playerUIHudManager.bossHealthBarParent);
 
                 UI_Boss_HP_Bar bossHPBar = bossHealthBar.GetComponentInChildren<UI_Boss_HP_Bar>();
                 bossHPBar.EnableBossHPBar(this);
             }
+            else
+            {
+                WorldSoundFXManager.Singleton.StopBossMusic();
+
+            }
+        }
+
+        public void PhaseShift()
+        {
+            characterAnimatorManager.PlayTargetActionAnimation(phaseShiftAnimation, true);
+            combatStance = Instantiate(phase02CombatStanceState);
+            currentState = combatStance;
         }
     }
 }

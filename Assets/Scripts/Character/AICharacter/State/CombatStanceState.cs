@@ -9,9 +9,9 @@ namespace TraverserProject
     {
         [Header("Attacks")]
         public List<AICharacterAttackAction> aiCharacterAttacks;
-        protected List<AICharacterAttackAction> potentialAttacks;
-        private AICharacterAttackAction choosenAttack;
-        private AICharacterAttackAction previousAttack;
+        public List<AICharacterAttackAction> potentialAttacks;
+        public AICharacterAttackAction choosenAttack;
+        public AICharacterAttackAction previousAttack;
         protected bool hasAttack = false;
 
         [Header("Combo")]
