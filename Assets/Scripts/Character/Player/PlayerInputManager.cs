@@ -41,7 +41,12 @@ namespace TraverserProject
         [SerializeField] bool RT_Input = false;
         [SerializeField] bool Hold_RT_Input = false;
 
-
+        [Header("Que Inputs")]
+        private bool input_Que_Is_Active = false;
+        [SerializeField] float default_Que_Input_Time = 0.35f;
+        [SerializeField] float que_Input_Timer = 0;
+        [SerializeField] bool que_RB_Input = false;
+        [SerializeField] bool que_RT_Input = false;
 
 
         private void Awake()
@@ -121,6 +126,10 @@ namespace TraverserProject
                 //hold input sprints, release stops sprint
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
                 playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
+
+                //Queued Inputs
+                playerControls.PlayerActions.QueRB.performed += i => QueInputs(ref que_RB_Input);
+                playerControls.PlayerActions.QueRT.performed += i => QueInputs(ref que_RT_Input);
             }
             playerControls.Enable();
 
@@ -162,6 +171,7 @@ namespace TraverserProject
             HandleHoldRTInput();
             HandleSwitchRightWeaponInput();
             HandleSwitchLeftWeaponInput();
+            HandleQueuedInputs();
         }
 
         private void HandleLockOnInput()
@@ -364,6 +374,54 @@ namespace TraverserProject
             {
                 switch_Left_Weapon_Input = false;
                 player.playerEquipmentManager.SwitchLeftWeapon();
+            }
+        }
+
+        private void ResetQueInputs()
+        {
+            que_RB_Input = false;
+            que_RT_Input = false;
+        }
+
+        private void QueInputs(ref bool queInput)
+        {
+
+            ResetQueInputs();
+            if (player.isPerformingAction || player.playerNetworkManager.isJumping.Value)
+            {
+                queInput = true;
+                que_Input_Timer = default_Que_Input_Time;
+                input_Que_Is_Active = true;
+            }
+        }
+
+        private void ProcessQuedInput()
+        {
+            if (player.isDead.Value)
+                return;
+
+            if(que_RB_Input)
+                RB_Input = true;
+
+            if (que_RT_Input)
+                RT_Input = true;
+        }    
+
+        private void HandleQueuedInputs()
+        {
+            if(input_Que_Is_Active)
+            {
+                if(que_Input_Timer > 0)
+                {
+                    que_Input_Timer -= Time.deltaTime;
+                    ProcessQuedInput();
+                }
+                else
+                {
+                    ResetQueInputs();
+                    input_Que_Is_Active = false;
+                    que_Input_Timer = 0;
+                }
             }
         }
     }

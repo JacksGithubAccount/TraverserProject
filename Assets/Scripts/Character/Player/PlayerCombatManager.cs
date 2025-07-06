@@ -83,10 +83,6 @@ namespace TraverserProject
                 default:
                     break;
             }
-            switch (currentAttackType)
-            {
-                
-            }
 
             Debug.Log("Stamina drain: " + Mathf.RoundToInt(staminaDeducted));
             player.playerNetworkManager.currentStamina.Value -= Mathf.RoundToInt(staminaDeducted);

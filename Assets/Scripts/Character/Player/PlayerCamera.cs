@@ -12,7 +12,7 @@ namespace TraverserProject
         [SerializeField] Transform cameraPivotTransform;
 
         [Header("Camera Settings")]
-        private float cameraSmoothSpeed = 1; // biggest the numer, longer it takes for camera to move to its position during movement
+        [SerializeField] private float cameraSmoothSpeed = 10; // biggest the numer, longer it takes for camera to move to its position during movement
         [SerializeField] float leftAndRightRotationSpeed = 220;
         [SerializeField] float upAndDownRotationSpeed = 220;
         [SerializeField] float minimumPivot = -30; //lowest point to look down
