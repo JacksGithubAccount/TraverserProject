@@ -11,7 +11,7 @@ namespace TravserserProject
         [Header("Stamina Regeneration")]
         private float staminaRegenerationTimer = 0;
         private float staminaTickTimer = 0;
-        [SerializeField] float staminaRegenerationAmount = 2;
+        [SerializeField] float staminaRegenerationAmount = 5;
         [SerializeField] float staminaRegenerationDelay = 2;
 
 

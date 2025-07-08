@@ -53,6 +53,22 @@ namespace TraverserProject
             base.LateUpdate();
             PlayerCamera.Singleton.HandleAllCameraActions();
         }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+
+
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+
+
+
+        }
+
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
@@ -71,6 +87,10 @@ namespace TraverserProject
                 playerNetworkManager.currentStamina.OnValueChanged += PlayerUIManager.Singleton.playerUIHudManager.SetNewStaminaValue;
                 playerNetworkManager.currentStamina.OnValueChanged += playerStatsManager.ResetStaminaRegenTimer;
             }
+
+            if (!IsOwner)
+                characterNetworkManager.currentHealth.OnValueChanged += characterUIManager.OnHPChanged;
+
 
             playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHealth;
 
@@ -107,6 +127,9 @@ namespace TraverserProject
                 playerNetworkManager.currentStamina.OnValueChanged -= PlayerUIManager.Singleton.playerUIHudManager.SetNewStaminaValue;
                 playerNetworkManager.currentStamina.OnValueChanged -= playerStatsManager.ResetStaminaRegenTimer;
             }
+
+            if (!IsOwner)
+                characterNetworkManager.currentHealth.OnValueChanged -= characterUIManager.OnHPChanged;
 
             playerNetworkManager.currentHealth.OnValueChanged -= playerNetworkManager.CheckHealth;
 

@@ -2,13 +2,13 @@ using TraverserProject;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TravserserProject
+namespace TraverserProject
 {
 
     public class UI_StatBar : MonoBehaviour
     {
-        private Slider slider;
-        private RectTransform rectTransform;
+        [SerializeField] protected Slider slider;
+        protected RectTransform rectTransform;
 
         [Header("Bar Options")]
         [SerializeField] protected bool scaleBarLengthWithStats = true;
@@ -18,6 +18,11 @@ namespace TravserserProject
         {
             slider = GetComponent<Slider>();
             rectTransform = GetComponent<RectTransform>();
+        }
+
+        protected virtual void Start()
+        {
+
         }
 
         public virtual void SetStat(int newValue)
