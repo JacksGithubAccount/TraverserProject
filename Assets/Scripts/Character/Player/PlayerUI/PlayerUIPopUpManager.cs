@@ -7,6 +7,10 @@ namespace TraverserProject
 
     public class PlayerUIPopUpManager : MonoBehaviour
     {
+        [Header("Message Pop Up")]
+        [SerializeField] GameObject messagePopUpGameObject;
+        [SerializeField] TextMeshProUGUI messagePopUpText;
+
         [Header("YOU DIED Pop Up")]
         [SerializeField] GameObject youDiedPopUpGameObject;
         [SerializeField] TextMeshProUGUI youDiedPopUpBackgroundText;
@@ -18,6 +22,20 @@ namespace TraverserProject
         [SerializeField] TextMeshProUGUI bossDefeatedPopUpBackgroundText;
         [SerializeField] TextMeshProUGUI bossDefeatedPopUpText;
         [SerializeField] CanvasGroup bossDefeatedPopUpCanvasGroup;
+
+        public void CloseAllPopUpWindows()
+        {
+            messagePopUpGameObject.SetActive(false);
+
+            PlayerUIManager.Singleton.popUpWindowIsOpen = false;
+        }
+
+        public void SendPlayerMessagePopUp(string messageText)
+        {
+            PlayerUIManager.Singleton.popUpWindowIsOpen = true;
+            messagePopUpText.text = messageText;
+            messagePopUpGameObject.SetActive(true);
+        }
 
         public void SendYouDiedPopUp()
         {

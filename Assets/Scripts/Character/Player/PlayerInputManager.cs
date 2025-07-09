@@ -33,6 +33,7 @@ namespace TraverserProject
         [SerializeField] bool jumpInput = false;
         [SerializeField] bool switch_Right_Weapon_Input = false;
         [SerializeField] bool switch_Left_Weapon_Input = false;
+        [SerializeField] bool interaction_Input = false;
 
         [Header("Bumper Input")]
         [SerializeField] bool RB_Input = false;
@@ -109,6 +110,7 @@ namespace TraverserProject
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
                 playerControls.PlayerActions.SwitchRightWeapon.performed += i => switch_Right_Weapon_Input = true;
                 playerControls.PlayerActions.SwitchLeftWeapon.performed += i => switch_Left_Weapon_Input = true;
+                playerControls.PlayerActions.Interact.performed += i => interaction_Input = true;
 
                 //bumpers
                 playerControls.PlayerActions.RB.performed += i => RB_Input = true;
@@ -172,12 +174,13 @@ namespace TraverserProject
             HandleSwitchRightWeaponInput();
             HandleSwitchLeftWeaponInput();
             HandleQueuedInputs();
+            HandleInteractionInput();
         }
 
         private void HandleLockOnInput()
         {
-            if(player.playerNetworkManager.isLockedOn.Value)
-			{
+            if (player.playerNetworkManager.isLockedOn.Value)
+            {
                 if (player.playerCombatManager.currentTarget == null)
                     return;
 
@@ -272,7 +275,8 @@ namespace TraverserProject
             if (moveAmount > 0)
             {
                 player.playerNetworkManager.isMoving.Value = true;
-            }else
+            }
+            else
             {
                 player.playerNetworkManager.isMoving.Value = false;
             }
@@ -377,6 +381,16 @@ namespace TraverserProject
             }
         }
 
+        private void HandleInteractionInput()
+        {
+            if (interaction_Input)
+            {
+                interaction_Input = false;
+
+                player.playerInteractionManager.Interact();
+            }
+        }
+
         private void ResetQueInputs()
         {
             que_RB_Input = false;
@@ -400,18 +414,18 @@ namespace TraverserProject
             if (player.isDead.Value)
                 return;
 
-            if(que_RB_Input)
+            if (que_RB_Input)
                 RB_Input = true;
 
             if (que_RT_Input)
                 RT_Input = true;
-        }    
+        }
 
         private void HandleQueuedInputs()
         {
-            if(input_Que_Is_Active)
+            if (input_Que_Is_Active)
             {
-                if(que_Input_Timer > 0)
+                if (que_Input_Timer > 0)
                 {
                     que_Input_Timer -= Time.deltaTime;
                     ProcessQuedInput();

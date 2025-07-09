@@ -12,6 +12,12 @@ namespace TraverserProject
 
         [HideInInspector] public PlayerUIHudManager playerUIHudManager;
         [HideInInspector] public PlayerUIPopUpManager playerUIPopUpManager;
+
+        [Header("UI Flags")]
+        public bool menuWindowIsOpen = false;
+        public bool popUpWindowIsOpen = false;
+
+
         private void Awake()
         {
             //there can only be one of this object in the game at any one time. if another exist, destroy it
@@ -40,5 +46,7 @@ namespace TraverserProject
                 NetworkManager.Singleton.StartClient();
             }
         }
+
+
     }
 }
