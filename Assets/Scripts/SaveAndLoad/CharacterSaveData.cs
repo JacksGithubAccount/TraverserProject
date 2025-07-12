@@ -28,12 +28,16 @@ namespace TraverserProject
         public int vitality;
         public int endurance;
 
+        [Header("Sites Of Grace")]
+        public SerializableDictionary<int, bool> sitesOfGrace;
+
         [Header("Bosses")]
         public SerializableDictionary<int, bool> bossesAwakened;
         public SerializableDictionary<int, bool> bossesDefeated;
 
         public CharacterSaveData()
         {
+            sitesOfGrace = new SerializableDictionary<int, bool>();
             bossesAwakened = new SerializableDictionary<int, bool>();
             bossesDefeated = new SerializableDictionary<int, bool>();
         }

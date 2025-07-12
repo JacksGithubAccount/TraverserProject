@@ -23,6 +23,12 @@ namespace TraverserProject
         [SerializeField] TextMeshProUGUI bossDefeatedPopUpText;
         [SerializeField] CanvasGroup bossDefeatedPopUpCanvasGroup;
 
+        [Header("Grace Restored Pop Uo")]
+        [SerializeField] GameObject graceRestoredPopUpGameObject;
+        [SerializeField] TextMeshProUGUI graceRestoredUpBackgroundText;
+        [SerializeField] TextMeshProUGUI graceRestoredPopUpText;
+        [SerializeField] CanvasGroup graceRestoredPopUpCanvasGroup;
+
         public void CloseAllPopUpWindows()
         {
             messagePopUpGameObject.SetActive(false);
@@ -57,6 +63,19 @@ namespace TraverserProject
             StartCoroutine(StretchPopUpTextOverTime(bossDefeatedPopUpBackgroundText, 8, 19));
             StartCoroutine(FadeInPopUpOverTime(bossDefeatedPopUpCanvasGroup, 5));
             StartCoroutine(WaitThenFadeOutPopUpOverTime(bossDefeatedPopUpCanvasGroup, 2, 5));
+
+
+        }
+
+        public void SendGraceRestoredPopUp(string bossDefeatedMessage)
+        {
+            graceRestoredPopUpText.text = bossDefeatedMessage;
+            graceRestoredUpBackgroundText.text = bossDefeatedMessage;
+            graceRestoredPopUpGameObject.SetActive(true);
+            graceRestoredUpBackgroundText.characterSpacing = 0;
+            StartCoroutine(StretchPopUpTextOverTime(graceRestoredUpBackgroundText, 8, 19));
+            StartCoroutine(FadeInPopUpOverTime(graceRestoredPopUpCanvasGroup, 5));
+            StartCoroutine(WaitThenFadeOutPopUpOverTime(graceRestoredPopUpCanvasGroup, 2, 5));
 
 
         }
@@ -117,12 +136,12 @@ namespace TraverserProject
                 while (timer < duration)
                 {
                     timer = timer + Time.deltaTime;
-                    canvas.alpha = Mathf.Lerp(canvas.alpha, 1, duration * Time.deltaTime);
+                    canvas.alpha = Mathf.Lerp(canvas.alpha, 0, duration * Time.deltaTime);
                     yield return null;
                 }
             }
 
-            canvas.alpha = 1;
+            canvas.alpha = 0;
 
             yield return null;
         }
