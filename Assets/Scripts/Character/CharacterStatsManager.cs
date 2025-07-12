@@ -14,6 +14,12 @@ namespace TravserserProject
         [SerializeField] float staminaRegenerationAmount = 5;
         [SerializeField] float staminaRegenerationDelay = 2;
 
+        [Header("BlockingAbsorptions")]
+        public float blockingPhysicalAbsorption;
+        public float blockingFireAbsorption;
+        public float blockingMagicAbsorption;
+        public float blockingLightningAbsorption;
+        public float blockingHolyAbsorption;
 
         protected virtual void Awake()
         {

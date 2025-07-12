@@ -2,6 +2,7 @@ using UnityEngine;
 using Unity.Netcode;
 using System.Collections;
 using System.Collections.Generic;
+using TravserserProject;
 
 namespace TraverserProject
 {
@@ -20,6 +21,7 @@ namespace TraverserProject
         [HideInInspector] public CharacterSoundFXManager characterSoundFXManager;
         [HideInInspector] public CharacterLocomotionManager characterLocomotionManager;
         [HideInInspector] public CharacterUIManager characterUIManager;
+        [HideInInspector] public CharacterStatsManager characterStatsManager;
 
         [Header("Character Group")]
         public CharacterGroup characterGroup;
@@ -43,6 +45,7 @@ namespace TraverserProject
             characterSoundFXManager = GetComponent<CharacterSoundFXManager>();
             characterLocomotionManager = GetComponent<CharacterLocomotionManager>();
             characterUIManager = GetComponent<CharacterUIManager>();
+            characterStatsManager = GetComponent<CharacterStatsManager>();
         }
         protected virtual void Start()
         {

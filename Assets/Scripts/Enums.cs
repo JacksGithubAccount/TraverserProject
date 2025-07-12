@@ -52,3 +52,12 @@ public enum AttackType
     BackstepLightAttack01,
     BackstepHeavyAttack01
 }
+
+public enum DamageIntensity
+{
+    Ping,
+    Light,
+    Medium,
+    Heavy,
+    Colossal
+}
