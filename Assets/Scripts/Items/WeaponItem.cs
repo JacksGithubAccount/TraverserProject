@@ -5,6 +5,9 @@ namespace TraverserProject
 
     public class WeaponItem : BaseItem
     {
+        [Header("Animations")]
+        public AnimatorOverrideController weaponAnimator;
+
         [Header("Weapon Model")]
         public GameObject weaponModel;
 

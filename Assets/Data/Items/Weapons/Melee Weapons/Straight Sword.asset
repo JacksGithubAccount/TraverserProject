@@ -16,6 +16,7 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 8fc9fbe16e16390468aa6d028cca21ec, type: 3}
   itemDescription: A straight sword
   itemID: 1
+  weaponAnimator: {fileID: 22100000, guid: be65e939cf281a842bcbc0c517560755, type: 2}
   weaponModel: {fileID: 804672481472311766, guid: 657579d186f7f8e45bd9ada60a0a95cf, type: 3}
   strengthREQ: 10
   dexterityREQ: 10
@@ -33,8 +34,22 @@ MonoBehaviour:
   heavy_Attack_02_Modifier: 1.5
   charge_Attack_01_Modifier: 2
   charge_Attack_02_Modifier: 2.1
+  running_Light_Attack_01_Modifier: 1.1
+  running_Heavy_Attack_01_Modifier: 1.5
+  rolling_Light_Attack_01_Modifier: 0.9
+  rolling_Heavy_Attack_01_Modifier: 1.3
+  backstep_Light_Attack_01_Modifier: 1
+  backstep_Heavy_Attack_01_Modifier: 1.4
   baseStaminaCost: 20
   lightAttackStaminaCostMultiplier: 0.9
+  heavyAttackStaminaCostMultiplier: 1.3
+  chargedAttackStaminaCostMultiplier: 1.5
+  runningLightAttackStaminaCostMultiplier: 1
+  runningHeavyAttackStaminaCostMultiplier: 0.4
+  rollingLightAttackStaminaCostMultiplier: 0.9
+  rollingHeavyAttackStaminaCostMultiplier: 1.4
+  backstepLightAttackStaminaCostMultiplier: 0.9
+  backstepHeavyAttackStaminaCostMultiplier: 1.3
   oh_RB_Action: {fileID: 11400000, guid: be57d178e77a15549ae43da20eb6d228, type: 2}
   oh_RT_Action: {fileID: 11400000, guid: 20531202c3730b9468689c7c112b159c, type: 2}
   whooshes:

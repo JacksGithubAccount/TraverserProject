@@ -25,7 +25,7 @@ namespace TraverserProject
 
         public void AttemptToPerformAction(AICharacterManager aiCharacter)
         {
-            aiCharacter.characterAnimatorManager.PlayTargetAttackActionAnimation(attackType, attackAnimation, true);
+            aiCharacter.characterAnimatorManager.PlayTargetActionAnimation(attackAnimation, true);
         }
 
     }

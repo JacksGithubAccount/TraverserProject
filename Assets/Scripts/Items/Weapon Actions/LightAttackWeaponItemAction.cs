@@ -21,8 +21,6 @@ namespace TraverserProject
         public override void AttemptToPerformAction(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
 
-
-
             if (!playerPerformingAction.IsOwner)
                 return;
 
@@ -31,6 +29,9 @@ namespace TraverserProject
 
             if (!playerPerformingAction.characterLocomotionManager.isGrounded)
                 return;
+
+
+
 
             if (playerPerformingAction.characterNetworkManager.isSprinting.Value)
             {
@@ -63,35 +64,35 @@ namespace TraverserProject
                 playerPerformingAction.playerCombatManager.canComboWithMainHandWeapon = false;
                 if (playerPerformingAction.characterCombatManager.lastAttackAnimationPerformed == light_Attack_01)
                 {
-                    playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.LightAttack02, light_Attack_02, true);
+                    playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.LightAttack02, light_Attack_02, true);
                 }
                 else
                 {
-                    playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.LightAttack01, light_Attack_01, true);
+                    playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.LightAttack01, light_Attack_01, true);
                 }
             }
             else if (!playerPerformingAction.isPerformingAction)
             {
-                playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.LightAttack01, light_Attack_01, true);
+                playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.LightAttack01, light_Attack_01, true);
             }
 
         }
 
         public void PerformRunningAttack(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
-            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.RunningLightAttack01, running_Light_Attack_01, true);
+            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.RunningLightAttack01, running_Light_Attack_01, true);
         }
 
         public void PerformRollingAttack(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
             playerPerformingAction.playerCombatManager.canPerformRollingAttack = false;
-            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.RollingLightAttack01, rolling_Light_Attack_01, true);
+            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.RollingLightAttack01, rolling_Light_Attack_01, true);
         }
 
         public void PerformBackstepAttack(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
             playerPerformingAction.playerCombatManager.canPerformBackstepAttack = false;
-            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.BackstepLightAttack01, backstep_Light_Attack_01, true);
+            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.BackstepLightAttack01, backstep_Light_Attack_01, true);
         }
     }
 }
