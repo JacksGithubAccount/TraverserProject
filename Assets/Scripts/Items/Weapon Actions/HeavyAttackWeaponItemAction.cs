@@ -23,7 +23,8 @@ namespace TraverserProject
             if (!playerPerformingAction.characterLocomotionManager.isGrounded)
                 return;
 
-
+            if (playerPerformingAction.IsOwner)
+                playerPerformingAction.playerNetworkManager.isAttacking.Value = true;
 
             base.AttemptToPerformAction(playerPerformingAction, weaponPerformingAction);
             PerformHeavyAttack(playerPerformingAction, weaponPerformingAction);

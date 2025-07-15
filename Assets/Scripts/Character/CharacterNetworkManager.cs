@@ -29,6 +29,7 @@ namespace TraverserProject
 
         [Header("Flags")]
         public NetworkVariable<bool> isBlocking = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> isAttacking = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isInvulnerable = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isLockedOn = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isSprinting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -98,6 +99,13 @@ namespace TraverserProject
         {
             gameObject.SetActive(isActive.Value);
         }
+
+        public virtual void OnIsBlockingChanged(bool oldStatus, bool newStatus)
+        {
+            character.animator.SetBool("isBlocking", isBlocking.Value);
+        }
+
+
 
         //action animation
         [ServerRpc]

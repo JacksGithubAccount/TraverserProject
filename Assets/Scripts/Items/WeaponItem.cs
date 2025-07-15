@@ -8,6 +8,9 @@ namespace TraverserProject
         [Header("Animations")]
         public AnimatorOverrideController weaponAnimator;
 
+        [Header("Model Instantiation")]
+        public WeaponModelType weaponModelType;
+
         [Header("Weapon Model")]
         public GameObject weaponModel;
 
@@ -55,9 +58,18 @@ namespace TraverserProject
         public float backstepLightAttackStaminaCostMultiplier = 0.9f;
         public float backstepHeavyAttackStaminaCostMultiplier = 1.3f;
 
+        [Header("Weapon Blocking Absorption")]
+        public float physicalBaseDamageAbsorption = 50;
+        public float magicBaseDamageAbsorption = 50;
+        public float fireBaseDamageAbsorption = 50;
+        public float lightningBaseDamageAbsorption = 50;
+        public float holyBaseDamageAbsorption = 50;
+        public float stability = 50;
+
         [Header("Actions")]
         public WeaponItemAction oh_RB_Action; //one hand right bumper
         public WeaponItemAction oh_RT_Action; //one hand right trigger
+        public WeaponItemAction oh_LB_Action; //one hand left bumper
 
         [Header("Whooshes")]
         public AudioClip[] whooshes;

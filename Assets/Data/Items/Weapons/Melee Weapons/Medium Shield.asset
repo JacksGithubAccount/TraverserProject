@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75af94b0c4b9ce547b5e6ab6531cd902, type: 3}
+  m_Name: Medium Shield
+  m_EditorClassIdentifier: 
+  itemName: Straight Shield
+  itemIcon: {fileID: 21300000, guid: 8fc9fbe16e16390468aa6d028cca21ec, type: 3}
+  itemDescription: A straight shield
+  itemID: 4
+  weaponAnimator: {fileID: 22100000, guid: 7f27c68c764b54744ac33791d6f1b113, type: 2}
+  weaponModelType: 1
+  weaponModel: {fileID: 804672481472311766, guid: 3da51aa171325654c98549d4e85674d9, type: 3}
+  strengthREQ: 10
+  dexterityREQ: 10
+  intelligenceREQ: 0
+  faithREQ: 0
+  physicalDamage: 50
+  magicDamage: 0
+  fireDamage: 0
+  lightningDamage: 0
+  holyDamage: 0
+  poiseDamage: 10
+  light_Attack_01_Modifier: 1.1
+  light_Attack_02_Modifier: 1.1
+  heavy_Attack_01_Modifier: 1.4
+  heavy_Attack_02_Modifier: 1.5
+  charge_Attack_01_Modifier: 2
+  charge_Attack_02_Modifier: 2.1
+  running_Light_Attack_01_Modifier: 1.1
+  running_Heavy_Attack_01_Modifier: 1.5
+  rolling_Light_Attack_01_Modifier: 0.9
+  rolling_Heavy_Attack_01_Modifier: 1.3
+  backstep_Light_Attack_01_Modifier: 1
+  backstep_Heavy_Attack_01_Modifier: 1.4
+  baseStaminaCost: 20
+  lightAttackStaminaCostMultiplier: 0.9
+  heavyAttackStaminaCostMultiplier: 1.3
+  chargedAttackStaminaCostMultiplier: 1.5
+  runningLightAttackStaminaCostMultiplier: 1
+  runningHeavyAttackStaminaCostMultiplier: 0.4
+  rollingLightAttackStaminaCostMultiplier: 0.9
+  rollingHeavyAttackStaminaCostMultiplier: 1.4
+  backstepLightAttackStaminaCostMultiplier: 0.9
+  backstepHeavyAttackStaminaCostMultiplier: 1.3
+  physicalBaseDamageAbsorption: 50
+  magicBaseDamageAbsorption: 50
+  fireBaseDamageAbsorption: 50
+  lightningBaseDamageAbsorption: 50
+  holyBaseDamageAbsorption: 50
+  stability: 50
+  oh_RB_Action: {fileID: 11400000, guid: be57d178e77a15549ae43da20eb6d228, type: 2}
+  oh_RT_Action: {fileID: 11400000, guid: 20531202c3730b9468689c7c112b159c, type: 2}
+  oh_LB_Action: {fileID: 11400000, guid: 79096931ddd6fbb48b35417a10d199ce, type: 2}
+  whooshes:
+  - {fileID: 8300000, guid: f444c045e25f5964b97a4fca35e2cf9c, type: 3}
+  - {fileID: 8300000, guid: 9289b3a7fefc725459b47812d94fd4e5, type: 3}
+  - {fileID: 8300000, guid: 2f33f1fab9562d74ba4c744705958f1d, type: 3}

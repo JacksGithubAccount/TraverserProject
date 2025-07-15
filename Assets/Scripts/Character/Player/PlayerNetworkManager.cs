@@ -85,6 +85,20 @@ namespace TraverserProject
                 player.playerAnimatorManager.UpdateAnimatorController(player.playerCombatManager.currentWeaponBeingUsed.weaponAnimator);
         }
 
+        public override void OnIsBlockingChanged(bool oldStatus, bool newStatus)
+        {
+            base.OnIsBlockingChanged(oldStatus, newStatus);
+
+            if (IsOwner)
+            {
+                player.playerStatsManager.blockingPhysicalAbsorption = player.playerCombatManager.currentWeaponBeingUsed.physicalBaseDamageAbsorption;
+                player.playerStatsManager.blockingFireAbsorption = player.playerCombatManager.currentWeaponBeingUsed.fireBaseDamageAbsorption;
+                player.playerStatsManager.blockingMagicAbsorption = player.playerCombatManager.currentWeaponBeingUsed.magicBaseDamageAbsorption;
+                player.playerStatsManager.blockingHolyAbsorption = player.playerCombatManager.currentWeaponBeingUsed.holyBaseDamageAbsorption;
+                player.playerStatsManager.blockingLightningAbsorption = player.playerCombatManager.currentWeaponBeingUsed.lightningBaseDamageAbsorption;
+            }
+        }
+
         [ServerRpc]
         public void NotifyTheServerOfWeaponActionServerRpc(ulong clientID, int actionID, int weaponID)
         {

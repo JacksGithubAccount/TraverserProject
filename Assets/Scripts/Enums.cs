@@ -30,10 +30,17 @@ public enum CharacterGroup
 public enum WeaponModelSlot
 {
     RightHand,
-    LeftHand,
+    LeftHandWeaponSlot,
+    LeftHandShieldSlot,
     RightHip,
     LeftHip,
     Back
+}
+
+public enum WeaponModelType
+{
+    Weapon,
+    Shield
 }
 
 //used to calc damage

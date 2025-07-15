@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Netcode;
+using static UnityEngine.GridBrushBase;
 
 namespace TraverserProject
 {
@@ -23,6 +24,7 @@ namespace TraverserProject
         [Header("Attack Flags")]
         public bool canPerformRollingAttack = false;
         public bool canPerformBackstepAttack = false;
+        public bool canBlock = true;
 
         protected virtual void Awake()
         {
