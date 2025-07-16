@@ -24,6 +24,10 @@ namespace TraverserProject
         public float poiseDamage = 0;
         public bool poiseIsBroken = false;
 
+        [Header("Stamina")]
+        public float staminaDamage = 0;
+        public float finalStaminaDamage = 0;
+
         [Header("Animations")]
         public bool playDamageAnimation = true;
         public bool manuallySelectDamageAnimation = false;
@@ -49,12 +53,13 @@ namespace TraverserProject
                 return;
 
             CalculateDamage(character);
+            CalculateStaminaDamage(character);
             PlayDirectionalBasedBlockingAnimation(character);
 
             PlayDamageSFX(character);
             PlayDamageVFX(character);
 
-
+            CheckForGuardBreak(character);
         }
 
         private void CalculateDamage(CharacterManager character)
@@ -87,6 +92,32 @@ namespace TraverserProject
 
         }
 
+        private void CalculateStaminaDamage(CharacterManager character)
+        {
+            if (!character.IsOwner)
+                return;
+
+            finalStaminaDamage = staminaDamage;
+            float staminaDamageAbsorption = finalStaminaDamage * (character.characterStatsManager.blockingStability / 100);
+            float staminaDamageAfterAbsorption = finalStaminaDamage - staminaDamageAbsorption;
+
+            character.characterNetworkManager.currentStamina.Value -= staminaDamageAfterAbsorption;
+        }
+
+        private void CheckForGuardBreak(CharacterManager character)
+        {
+            if (!character.IsOwner)
+                return;
+
+            if (character.characterNetworkManager.currentStamina.Value <= 0)
+            {
+                character.characterAnimatorManager.PlayTargetActionAnimation("Guard_Break_01", true);
+                character.characterNetworkManager.isBlocking.Value = false;
+
+
+            }
+        }
+
         private void PlayDamageVFX(CharacterManager character)
         {
 
@@ -94,7 +125,7 @@ namespace TraverserProject
 
         private void PlayDamageSFX(CharacterManager character)
         {
-
+            character.characterSoundFXManager.PlayBlockSoundFX();
         }
 
         private void PlayDirectionalBasedBlockingAnimation(CharacterManager character)

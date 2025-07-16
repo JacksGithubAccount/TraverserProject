@@ -56,5 +56,10 @@ namespace TraverserProject
             if (footSteps.Length > 0)
                 PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(footSteps));
         }
+
+        public virtual void PlayBlockSoundFX()
+        {
+
+        }
     }
 }
