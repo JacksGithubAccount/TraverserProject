@@ -22,6 +22,13 @@ namespace TravserserProject
         public float blockingHolyAbsorption;
         public float blockingStability;
 
+        [Header("Poise")]
+        public float totalPoiseDamage;
+        public float offensivePoiseBonus;
+        public float basePoiseDefense;
+        public float defaultPoiseResetTime = 8;
+        public float poiseResetTimer = 0;
+
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();
@@ -30,6 +37,11 @@ namespace TravserserProject
         protected virtual void Start()
         {
 
+        }
+
+        protected virtual void Update()
+        {
+            HandlePoiseResetTimer();
         }
 
         public int CalculateHealthBasedOnVitalityLevel(int vitality)
@@ -88,6 +100,19 @@ namespace TravserserProject
                 staminaRegenerationTimer = 0;
             }
 
+        }
+
+
+        protected virtual void HandlePoiseResetTimer()
+        {
+            if (poiseResetTimer > 0)
+            {
+                poiseResetTimer -= Time.deltaTime;
+            }
+            else
+            {
+                totalPoiseDamage = 0;
+            }
         }
     }
 
