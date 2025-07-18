@@ -32,9 +32,9 @@ public enum WeaponModelSlot
     RightHand,
     LeftHandWeaponSlot,
     LeftHandShieldSlot,
-    RightHip,
-    LeftHip,
-    Back
+    RightHipSlot,
+    LeftHipSlot,
+    BackSlot
 }
 
 public enum WeaponModelType

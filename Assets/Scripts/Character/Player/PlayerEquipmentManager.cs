@@ -7,15 +7,19 @@ namespace TraverserProject
     {
         PlayerManager player;
 
+        [Header("Weapon Model Instantiation Slots")]
         public WeaponModelInstantiationSlot rightHandSlot;
         public WeaponModelInstantiationSlot leftHandWeaponSlot;
         public WeaponModelInstantiationSlot leftHandShieldSlot;
+        public WeaponModelInstantiationSlot backSlot;
 
+        [Header("Weapon Models")]
         [SerializeField] WeaponManager rightWeaponManager;
         [SerializeField] WeaponManager leftWeaponManager;
 
-        public GameObject rightHandWeaponModel;
-        public GameObject leftHandWeaponModel;
+        [Header("Weapon Managers")]
+        [SerializeField] GameObject rightHandWeaponModel;
+        [SerializeField] GameObject leftHandWeaponModel;
 
         protected override void Awake()
         {
@@ -50,6 +54,10 @@ namespace TraverserProject
                 else if (weaponSlot.weaponSlot == WeaponModelSlot.LeftHandShieldSlot)
                 {
                     leftHandShieldSlot = weaponSlot;
+                }
+                else if (weaponSlot.weaponSlot == WeaponModelSlot.BackSlot)
+                {
+                    backSlot = weaponSlot;
                 }
             }
         }
@@ -235,6 +243,20 @@ namespace TraverserProject
             }
         }
 
+        public void UnTwoHandWeapon()
+        {
+
+        }
+
+        public void TwoHandRightWeapon()
+        {
+
+        }
+
+        public void TwoHandLeftWeapon()
+        {
+
+        }
 
 
         //Damage Colliders

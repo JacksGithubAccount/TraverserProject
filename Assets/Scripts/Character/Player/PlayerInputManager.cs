@@ -43,6 +43,11 @@ namespace TraverserProject
         [SerializeField] bool RT_Input = false;
         [SerializeField] bool Hold_RT_Input = false;
 
+        [Header("Two Hand Input")]
+        [SerializeField] bool two_Hand_Input = false;
+        [SerializeField] bool two_Hand_Right_Weapon_Input = false;
+        [SerializeField] bool two_Hand_Left_Weapon_Input = false;
+
         [Header("Que Inputs")]
         private bool input_Que_Is_Active = false;
         [SerializeField] float default_Que_Input_Time = 0.35f;
@@ -123,6 +128,16 @@ namespace TraverserProject
                 playerControls.PlayerActions.HoldRT.performed += i => Hold_RT_Input = true;
                 playerControls.PlayerActions.HoldRT.canceled += i => Hold_RT_Input = false;
 
+                //two hand
+                playerControls.PlayerActions.TwoHandWeapon.performed += i => two_Hand_Input = true;
+                playerControls.PlayerActions.TwoHandWeapon.canceled += i => two_Hand_Input = false;
+                playerControls.PlayerActions.TwoHandRightWeapon.performed += i => two_Hand_Right_Weapon_Input = true;
+                playerControls.PlayerActions.TwoHandRightWeapon.canceled += i => two_Hand_Right_Weapon_Input = false;
+                playerControls.PlayerActions.TwoHandLeftWeapon.performed += i => two_Hand_Left_Weapon_Input = true;
+                playerControls.PlayerActions.TwoHandLeftWeapon.canceled += i => two_Hand_Left_Weapon_Input = false;
+
+
+                //lock on
                 playerControls.PlayerActions.LockOn.performed += i => lock_On_Input = true;
                 playerControls.PlayerActions.SeekLeftLockOnTarget.performed += i => lockOn_Left_Input = true;
                 playerControls.PlayerActions.SeekRightLockOnTarget.performed += i => lockOn_Right_Input = true;
@@ -163,6 +178,7 @@ namespace TraverserProject
         }
         private void HandleAllInputs()
         {
+            HandleTwoHandInput();
             HandleLockOnInput();
             HandleLockOnSwitchInput();
             HandleCameraMovementInput();
@@ -178,280 +194,326 @@ namespace TraverserProject
             HandleSwitchLeftWeaponInput();
             HandleQueuedInputs();
             HandleInteractionInput();
+
         }
 
-        private void HandleLockOnInput()
+        private void HandleTwoHandInput()
         {
-            if (player.playerNetworkManager.isLockedOn.Value)
-            {
-                if (player.playerCombatManager.currentTarget == null)
-                    return;
-
-                if (player.playerCombatManager.currentTarget.isDead.Value)
-                {
-                    player.playerNetworkManager.isLockedOn.Value = false;
-                }
-
-                if (lockOnCoroutine != null)
-                    StopCoroutine(lockOnCoroutine);
-
-                lockOnCoroutine = StartCoroutine(PlayerCamera.Singleton.WaitThenFindNewTarget());
-
-
-            }
-            if (lock_On_Input && player.playerNetworkManager.isLockedOn.Value)
-            {
-                lock_On_Input = false;
-                PlayerCamera.Singleton.ClearLockOnTargets();
-                player.playerNetworkManager.isLockedOn.Value = false;
-
-                return;
-            }
-
-            if (lock_On_Input && !player.playerNetworkManager.isLockedOn.Value)
-            {
-                lock_On_Input = false;
-
-                PlayerCamera.Singleton.HandleLocatingLockOnTargets();
-
-
-                if (PlayerCamera.Singleton.nearestLockOnTarget != null)
-                {
-                    player.playerCombatManager.SetTarget(PlayerCamera.Singleton.nearestLockOnTarget);
-                    player.playerNetworkManager.isLockedOn.Value = true;
-                }
-            }
-        }
-
-        private void HandleLockOnSwitchInput()
-        {
-            if (lockOn_Left_Input)
-            {
-                lockOn_Left_Input = false;
-
-                if (player.playerNetworkManager.isLockedOn.Value)
-                {
-                    PlayerCamera.Singleton.HandleLocatingLockOnTargets();
-
-                    if (PlayerCamera.Singleton.leftLockOnTarget != null)
-                    {
-                        player.playerCombatManager.SetTarget(PlayerCamera.Singleton.leftLockOnTarget);
-                    }
-                }
-            }
-
-            if (lockOn_Right_Input)
-            {
-                lockOn_Right_Input = false;
-
-                if (player.playerNetworkManager.isLockedOn.Value)
-                {
-                    PlayerCamera.Singleton.HandleLocatingLockOnTargets();
-
-                    if (PlayerCamera.Singleton.rightLockOnTarget != null)
-                    {
-                        player.playerCombatManager.SetTarget(PlayerCamera.Singleton.rightLockOnTarget);
-                    }
-                }
-            }
-        }
-
-        private void HandlePlayerMovementInput()
-        {
-            verticalInput = movementInput.y;
-            horizontalInput = movementInput.x;
-
-            moveAmount = Mathf.Clamp01(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
-
-            //clamps movement values
-            if (moveAmount <= 0.5 && moveAmount > 0)
-            {
-                moveAmount = 0.5f;
-            }
-            else if (moveAmount > 0.5 && moveAmount <= 1)
-            {
-                moveAmount = 1;
-            }
-            if (player == null)
+            if (!two_Hand_Input)
                 return;
 
-            if (moveAmount > 0)
-            {
-                player.playerNetworkManager.isMoving.Value = true;
-            }
-            else
-            {
-                player.playerNetworkManager.isMoving.Value = false;
-            }
-
-            if (!player.playerNetworkManager.isLockedOn.Value || player.playerNetworkManager.isSprinting.Value)
-            {
-
-                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
-            }
-            else
-            {
-                player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontalInput, verticalInput, player.playerNetworkManager.isSprinting.Value);
-            }
-        }
-        private void HandleCameraMovementInput()
-        {
-            cameraVerticalInput = cameraInput.y;
-            cameraHorizontalInput = cameraInput.x;
-
-        }
-        private void HandleDodgeInput()
-        {
-            if (dodgeInput)
-            {
-                dodgeInput = false;
-
-                player.playerLocomotionManager.AttemptToPerformDodge();
-            }
-
-        }
-        private void HandleSprintInput()
-        {
-            if (sprintInput)
-            {
-                player.playerLocomotionManager.HandleSprinting();
-            }
-            else
-            {
-                player.playerNetworkManager.isSprinting.Value = false;
-            }
-        }
-        private void HandleJumpInput()
-        {
-            if (jumpInput)
-            {
-                jumpInput = false;
-
-                player.playerLocomotionManager.AttemptToPerformJump();
-            }
-        }
-
-        private void HandleRBInput()
-        {
-            if (RB_Input)
+            if (two_Hand_Right_Weapon_Input)
             {
                 RB_Input = false;
+                two_Hand_Right_Weapon_Input = false;
+                player.playerNetworkManager.isBlocking.Value = false;
 
-                player.playerNetworkManager.SetCharacterActionHand(true);
-
-                player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RB_Action, player.playerInventoryManager.currentRightHandWeapon);
-            }
-        }
-
-        private void HandleLBInput()
-        {
-            if (LB_Input)
-            {
-                LB_Input = false;
-
-                player.playerNetworkManager.SetCharacterActionHand(false);
-
-                player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentLeftHandWeapon.oh_LB_Action, player.playerInventoryManager.currentLeftHandWeapon);
-            }
-        }
-
-        private void HandleRTInput()
-        {
-            if (RT_Input)
-            {
-                RT_Input = false;
-
-                player.playerNetworkManager.SetCharacterActionHand(true);
-
-                player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RT_Action, player.playerInventoryManager.currentRightHandWeapon);
-            }
-        }
-
-        private void HandleHoldRTInput()
-        {
-            if (player.isPerformingAction)
-            {
-                if (player.playerNetworkManager.isUsingRightHand.Value)
+                if (player.playerNetworkManager.isTwoHandingWeapon.Value)
                 {
-                    player.playerNetworkManager.isChargingAttack.Value = Hold_RT_Input;
-                }
-            }
-        }
-
-        private void HandleSwitchRightWeaponInput()
-        {
-            if (switch_Right_Weapon_Input)
-            {
-                switch_Right_Weapon_Input = false;
-                player.playerEquipmentManager.SwitchRightWeapon();
-            }
-        }
-
-        private void HandleSwitchLeftWeaponInput()
-        {
-            if (switch_Left_Weapon_Input)
-            {
-                switch_Left_Weapon_Input = false;
-                player.playerEquipmentManager.SwitchLeftWeapon();
-            }
-        }
-
-        private void HandleInteractionInput()
-        {
-            if (interaction_Input)
-            {
-                interaction_Input = false;
-
-                player.playerInteractionManager.Interact();
-            }
-        }
-
-        private void ResetQueInputs()
-        {
-            que_RB_Input = false;
-            que_RT_Input = false;
-        }
-
-        private void QueInputs(ref bool queInput)
-        {
-
-            ResetQueInputs();
-            if (player.isPerformingAction || player.playerNetworkManager.isJumping.Value)
-            {
-                queInput = true;
-                que_Input_Timer = default_Que_Input_Time;
-                input_Que_Is_Active = true;
-            }
-        }
-
-        private void ProcessQuedInput()
-        {
-            if (player.isDead.Value)
-                return;
-
-            if (que_RB_Input)
-                RB_Input = true;
-
-            if (que_RT_Input)
-                RT_Input = true;
-        }
-
-        private void HandleQueuedInputs()
-        {
-            if (input_Que_Is_Active)
-            {
-                if (que_Input_Timer > 0)
-                {
-                    que_Input_Timer -= Time.deltaTime;
-                    ProcessQuedInput();
+                    player.playerNetworkManager.isTwoHandingWeapon.Value = false;
+                    return;
                 }
                 else
                 {
-                    ResetQueInputs();
-                    input_Que_Is_Active = false;
-                    que_Input_Timer = 0;
+                    player.playerNetworkManager.isTwoHandingRightWeapon.Value = true;
+                    return;
+                }
+            }
+            else if (two_Hand_Left_Weapon_Input)
+            {
+                LB_Input = false;
+                two_Hand_Left_Weapon_Input = false;
+                player.playerNetworkManager.isBlocking.Value = false;
+
+                if (player.playerNetworkManager.isTwoHandingWeapon.Value)
+                {
+                    player.playerNetworkManager.isTwoHandingWeapon.Value = false;
+                    return;
+                }
+                else
+                {
+                    player.playerNetworkManager.isTwoHandingLeftWeapon.Value = true;
+                    return;
+                }
+            }
+        }
+    
+
+    private void HandleLockOnInput()
+    {
+        if (player.playerNetworkManager.isLockedOn.Value)
+        {
+            if (player.playerCombatManager.currentTarget == null)
+                return;
+
+            if (player.playerCombatManager.currentTarget.isDead.Value)
+            {
+                player.playerNetworkManager.isLockedOn.Value = false;
+            }
+
+            if (lockOnCoroutine != null)
+                StopCoroutine(lockOnCoroutine);
+
+            lockOnCoroutine = StartCoroutine(PlayerCamera.Singleton.WaitThenFindNewTarget());
+
+
+        }
+        if (lock_On_Input && player.playerNetworkManager.isLockedOn.Value)
+        {
+            lock_On_Input = false;
+            PlayerCamera.Singleton.ClearLockOnTargets();
+            player.playerNetworkManager.isLockedOn.Value = false;
+
+            return;
+        }
+
+        if (lock_On_Input && !player.playerNetworkManager.isLockedOn.Value)
+        {
+            lock_On_Input = false;
+
+            PlayerCamera.Singleton.HandleLocatingLockOnTargets();
+
+
+            if (PlayerCamera.Singleton.nearestLockOnTarget != null)
+            {
+                player.playerCombatManager.SetTarget(PlayerCamera.Singleton.nearestLockOnTarget);
+                player.playerNetworkManager.isLockedOn.Value = true;
+            }
+        }
+    }
+
+    private void HandleLockOnSwitchInput()
+    {
+        if (lockOn_Left_Input)
+        {
+            lockOn_Left_Input = false;
+
+            if (player.playerNetworkManager.isLockedOn.Value)
+            {
+                PlayerCamera.Singleton.HandleLocatingLockOnTargets();
+
+                if (PlayerCamera.Singleton.leftLockOnTarget != null)
+                {
+                    player.playerCombatManager.SetTarget(PlayerCamera.Singleton.leftLockOnTarget);
+                }
+            }
+        }
+
+        if (lockOn_Right_Input)
+        {
+            lockOn_Right_Input = false;
+
+            if (player.playerNetworkManager.isLockedOn.Value)
+            {
+                PlayerCamera.Singleton.HandleLocatingLockOnTargets();
+
+                if (PlayerCamera.Singleton.rightLockOnTarget != null)
+                {
+                    player.playerCombatManager.SetTarget(PlayerCamera.Singleton.rightLockOnTarget);
                 }
             }
         }
     }
+
+    private void HandlePlayerMovementInput()
+    {
+        verticalInput = movementInput.y;
+        horizontalInput = movementInput.x;
+
+        moveAmount = Mathf.Clamp01(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
+
+        //clamps movement values
+        if (moveAmount <= 0.5 && moveAmount > 0)
+        {
+            moveAmount = 0.5f;
+        }
+        else if (moveAmount > 0.5 && moveAmount <= 1)
+        {
+            moveAmount = 1;
+        }
+        if (player == null)
+            return;
+
+        if (moveAmount > 0)
+        {
+            player.playerNetworkManager.isMoving.Value = true;
+        }
+        else
+        {
+            player.playerNetworkManager.isMoving.Value = false;
+        }
+
+        if (!player.playerNetworkManager.isLockedOn.Value || player.playerNetworkManager.isSprinting.Value)
+        {
+
+            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
+        }
+        else
+        {
+            player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontalInput, verticalInput, player.playerNetworkManager.isSprinting.Value);
+        }
+    }
+    private void HandleCameraMovementInput()
+    {
+        cameraVerticalInput = cameraInput.y;
+        cameraHorizontalInput = cameraInput.x;
+
+    }
+    private void HandleDodgeInput()
+    {
+        if (dodgeInput)
+        {
+            dodgeInput = false;
+
+            player.playerLocomotionManager.AttemptToPerformDodge();
+        }
+
+    }
+    private void HandleSprintInput()
+    {
+        if (sprintInput)
+        {
+            player.playerLocomotionManager.HandleSprinting();
+        }
+        else
+        {
+            player.playerNetworkManager.isSprinting.Value = false;
+        }
+    }
+    private void HandleJumpInput()
+    {
+        if (jumpInput)
+        {
+            jumpInput = false;
+
+            player.playerLocomotionManager.AttemptToPerformJump();
+        }
+    }
+
+    private void HandleRBInput()
+    {
+        if (two_Hand_Input)
+            return;
+
+        if (RB_Input)
+        {
+            RB_Input = false;
+
+            player.playerNetworkManager.SetCharacterActionHand(true);
+
+            player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RB_Action, player.playerInventoryManager.currentRightHandWeapon);
+        }
+    }
+
+    private void HandleLBInput()
+    {
+        if (LB_Input)
+        {
+            LB_Input = false;
+
+            player.playerNetworkManager.SetCharacterActionHand(false);
+
+            player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentLeftHandWeapon.oh_LB_Action, player.playerInventoryManager.currentLeftHandWeapon);
+        }
+    }
+
+    private void HandleRTInput()
+    {
+        if (RT_Input)
+        {
+            RT_Input = false;
+
+            player.playerNetworkManager.SetCharacterActionHand(true);
+
+            player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RT_Action, player.playerInventoryManager.currentRightHandWeapon);
+        }
+    }
+
+    private void HandleHoldRTInput()
+    {
+        if (player.isPerformingAction)
+        {
+            if (player.playerNetworkManager.isUsingRightHand.Value)
+            {
+                player.playerNetworkManager.isChargingAttack.Value = Hold_RT_Input;
+            }
+        }
+    }
+
+    private void HandleSwitchRightWeaponInput()
+    {
+        if (switch_Right_Weapon_Input)
+        {
+            switch_Right_Weapon_Input = false;
+            player.playerEquipmentManager.SwitchRightWeapon();
+        }
+    }
+
+    private void HandleSwitchLeftWeaponInput()
+    {
+        if (switch_Left_Weapon_Input)
+        {
+            switch_Left_Weapon_Input = false;
+            player.playerEquipmentManager.SwitchLeftWeapon();
+        }
+    }
+
+    private void HandleInteractionInput()
+    {
+        if (interaction_Input)
+        {
+            interaction_Input = false;
+
+            player.playerInteractionManager.Interact();
+        }
+    }
+
+    private void ResetQueInputs()
+    {
+        que_RB_Input = false;
+        que_RT_Input = false;
+    }
+
+    private void QueInputs(ref bool queInput)
+    {
+
+        ResetQueInputs();
+        if (player.isPerformingAction || player.playerNetworkManager.isJumping.Value)
+        {
+            queInput = true;
+            que_Input_Timer = default_Que_Input_Time;
+            input_Que_Is_Active = true;
+        }
+    }
+
+    private void ProcessQuedInput()
+    {
+        if (player.isDead.Value)
+            return;
+
+        if (que_RB_Input)
+            RB_Input = true;
+
+        if (que_RT_Input)
+            RT_Input = true;
+    }
+
+    private void HandleQueuedInputs()
+    {
+        if (input_Que_Is_Active)
+        {
+            if (que_Input_Timer > 0)
+            {
+                que_Input_Timer -= Time.deltaTime;
+                ProcessQuedInput();
+            }
+            else
+            {
+                ResetQueInputs();
+                input_Que_Is_Active = false;
+                que_Input_Timer = 0;
+            }
+        }
+    }
+}
 }
