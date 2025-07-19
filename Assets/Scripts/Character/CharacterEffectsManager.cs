@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace TraverserProject
 {
@@ -9,6 +11,9 @@ namespace TraverserProject
 
         [Header("VFX")]
         [SerializeField] GameObject bloodSplatterVFX;
+
+        [Header("Static Effects")]
+        public List<StaticCharacterEffect> staticEffects = new List<StaticCharacterEffect>();
 
         protected virtual void Awake()
         {
@@ -31,5 +36,41 @@ namespace TraverserProject
             }
         }
 
+        public void AddStaticEffect(StaticCharacterEffect effect)
+        {
+            staticEffects.Add(effect);
+            effect.ProcessStaticEffect(character);
+
+            for (int i = staticEffects.Count - 1; i > -1; i--)
+            {
+                if(staticEffects[i] == null)
+                    staticEffects.RemoveAt(i);
+            }
+        }
+
+        public void RemoveStaticEffect(int effectID)
+        {
+            StaticCharacterEffect effect;
+
+            for(int i = 0; i < staticEffects.Count; i++)
+            {
+                if(staticEffects[i] != null)
+                {
+                    if (staticEffects[i].staticEffectID == effectID)
+                    {
+                        effect = staticEffects[i];
+                        effect.RemoveStaticEffect(character);
+                        staticEffects.Remove(effect);
+                    }
+                }
+            }
+
+            for (int i = staticEffects.Count - 1; i > -1; i--)
+            {
+                if (staticEffects[i] == null)
+                    staticEffects.RemoveAt(i);
+            }
+
+        }
     }
 }

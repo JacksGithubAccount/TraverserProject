@@ -118,6 +118,11 @@ namespace TraverserProject
                 }
 
                 player.playerEquipmentManager.UnTwoHandWeapon();
+                player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.Singleton.twoHandingEffect.staticEffectID);
+            }else
+            {
+                StaticCharacterEffect twoHandEffect = Instantiate(WorldCharacterEffectsManager.Singleton.twoHandingEffect);
+                player.playerEffectsManager.AddStaticEffect(twoHandEffect);
             }
 
             player.animator.SetBool("isTwoHandingWeapon", isTwoHandingWeapon.Value);
