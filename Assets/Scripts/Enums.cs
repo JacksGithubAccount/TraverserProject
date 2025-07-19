@@ -43,6 +43,16 @@ public enum WeaponModelType
     Shield
 }
 
+public enum WeaponClass
+{
+    StraightSword,
+    Spear,
+    MediumShield,
+    Fist,
+    Axe
+}
+
+
 //used to calc damage
 public enum AttackType
 {
