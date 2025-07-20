@@ -14,13 +14,26 @@ namespace TravserserProject
         [SerializeField] float staminaRegenerationAmount = 5;
         [SerializeField] float staminaRegenerationDelay = 2;
 
-        [Header("BlockingAbsorptions")]
+        [Header("Blocking Absorptions")]
         public float blockingPhysicalAbsorption;
         public float blockingFireAbsorption;
         public float blockingMagicAbsorption;
         public float blockingLightningAbsorption;
         public float blockingHolyAbsorption;
         public float blockingStability;
+
+        [Header("Armor Absorptions")]
+        public float armorPhysicalDamageAbsorption;
+        public float armorMagicDamageAbsorption;
+        public float armorFireDamageAbsorption;
+        public float armorLightningDamageAbsorption;
+        public float armorHolyDamageAbsorption;
+
+        [Header("Armor Resistances")]
+        public float armorImmunity;   //rot and poison
+        public float armorRobustness; //bleed and frost
+        public float armorFocus;      //sleep and madness
+        public float armorVitality;   //deathblight
 
         [Header("Poise")]
         public float totalPoiseDamage;

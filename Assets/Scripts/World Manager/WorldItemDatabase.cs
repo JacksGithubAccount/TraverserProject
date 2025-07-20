@@ -14,9 +14,28 @@ namespace TraverserProject
         [Header("Weapons")]
         [SerializeField] List<WeaponItem> weapons = new List<WeaponItem>();
 
+        [Header("Head equipment")]
+        [SerializeField] List<HeadEquipmentItem> headEquipment = new List<HeadEquipmentItem>();
+
+        [Header("Body equipment")]
+        [SerializeField] List<BodyEquipmentItem> bodyEquipment = new List<BodyEquipmentItem>();
+
+        [Header("Hand equipment")]
+        [SerializeField] List<HandEquipmentItem> handEquipment = new List<HandEquipmentItem>();
+
+        [Header("Leg equipment")]
+        [SerializeField] List<LegEquipmentItem> legEquipment = new List<LegEquipmentItem>();
+
 
         [Header("Items")]
         private List<BaseItem> items = new List<BaseItem>();
+
+        [Header("Item ID Prefix Keys")]
+        [SerializeField] int weaponItemKey = 1000;
+        [SerializeField] int headItemKey = 2000;
+        [SerializeField] int bodyItemKey = 3000;
+        [SerializeField] int handItemKey = 4000;
+        [SerializeField] int legItemKey = 5000;
 
         private void Awake()
         {
@@ -33,15 +52,69 @@ namespace TraverserProject
             {
                 items.Add(weapon);
             }
+
+            foreach (var item in headEquipment)
+            {
+                items.Add(item);
+            }
+
+            foreach (var item in bodyEquipment)
+            {
+                items.Add(item);
+            }
+
+            foreach (var item in handEquipment)
+            {
+                items.Add(item);
+            }
+
+            foreach (var item in legEquipment)
+            {
+                items.Add(item);
+            }
+
             for (int i = 0; i < items.Count; i++)
             {
-                items[i].itemID = i;
+                int prefixKey = 0;
+
+                if(items[i].GetType() == typeof(WeaponItem))
+                    prefixKey = weaponItemKey;
+                else if (items[i].GetType() == typeof(HeadEquipmentItem))
+                    prefixKey = headItemKey;
+                else if(items[i].GetType() == typeof(BodyEquipmentItem))
+                    prefixKey = bodyItemKey;
+                else if(items[i].GetType() == typeof(HandEquipmentItem))
+                    prefixKey = handItemKey;
+                else if(items[i].GetType() == typeof(LegEquipmentItem))
+                    prefixKey = legItemKey;
+
+                items[i].itemID = prefixKey + i;
             }
         }
 
         public WeaponItem GetWeaponByID(int ID)
         {
             return weapons.FirstOrDefault(weapon => weapon.itemID == ID);
+        }
+
+        public HeadEquipmentItem GetHeadEquipmentByID(int ID)
+        {
+            return headEquipment.FirstOrDefault(equipment => equipment.itemID == ID);
+        }
+
+        public BodyEquipmentItem GetBodyEquipmentByID(int ID)
+        {
+            return bodyEquipment.FirstOrDefault(equipment => equipment.itemID == ID);
+        }
+
+        public HandEquipmentItem GetHandEquipmentByID(int ID)
+        {
+            return handEquipment.FirstOrDefault(equipment => equipment.itemID == ID);
+        }
+
+        public LegEquipmentItem GetLegEquipmentByID(int ID)
+        {
+            return legEquipment.FirstOrDefault(equipment => equipment.itemID == ID);
         }
 
     }

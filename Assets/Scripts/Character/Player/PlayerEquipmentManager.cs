@@ -21,6 +21,9 @@ namespace TraverserProject
         [SerializeField] GameObject rightHandWeaponModel;
         [SerializeField] GameObject leftHandWeaponModel;
 
+        [Header("Debug")]
+        [SerializeField] bool equipNewItems = false;
+        
         protected override void Awake()
         {
             base.Awake();
@@ -35,6 +38,53 @@ namespace TraverserProject
             base.Start();
 
             LoadWeaponsOnBothHands();
+        }
+
+        private void Update()
+        {
+            if (equipNewItems)
+            {
+                equipNewItems = false;
+                DebugEquipNewItems();
+            }
+        }
+
+        private void DebugEquipNewItems()
+        {
+            Debug.Log("Equip New Items");
+            if (player.playerInventoryManager.headEquipment != null)
+                LoadHeadEquipment(player.playerInventoryManager.headEquipment);
+
+            if (player.playerInventoryManager.bodyEquipment != null)
+                LoadBodyEquipment(player.playerInventoryManager.bodyEquipment);
+
+            if (player.playerInventoryManager.handEquipment != null)
+                LoadHandEquipment(player.playerInventoryManager.handEquipment);
+
+            if (player.playerInventoryManager.legEquipment != null)
+                LoadLegEquipment(player.playerInventoryManager.legEquipment);
+
+
+        }
+
+        public void LoadHeadEquipment(HeadEquipmentItem equipment)
+        {
+            player.playerStatsManager.CalculateTotalArmorAbsorption();
+        }
+
+        public void LoadBodyEquipment(BodyEquipmentItem equipment)
+        {
+            player.playerStatsManager.CalculateTotalArmorAbsorption();
+        }
+
+        public void LoadHandEquipment(HandEquipmentItem equipment)
+        {
+            player.playerStatsManager.CalculateTotalArmorAbsorption();
+        }
+
+        public void LoadLegEquipment(LegEquipmentItem equipment)
+        {
+            player.playerStatsManager.CalculateTotalArmorAbsorption();
         }
 
         private void InitializeWeaponSlots()

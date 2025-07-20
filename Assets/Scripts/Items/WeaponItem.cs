@@ -3,7 +3,7 @@ using UnityEngine;
 namespace TraverserProject
 {
 
-    public class WeaponItem : BaseItem
+    public class WeaponItem : EquipmentItem
     {
         [Header("Animations")]
         public AnimatorOverrideController weaponAnimator;
