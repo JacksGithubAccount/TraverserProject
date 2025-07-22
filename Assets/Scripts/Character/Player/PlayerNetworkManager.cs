@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Netcode;
 using Unity.Collections;
+using System.Globalization;
 
 namespace TraverserProject
 {
@@ -21,6 +22,14 @@ namespace TraverserProject
         public NetworkVariable<bool> isTwoHandingWeapon = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isTwoHandingRightWeapon = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isTwoHandingLeftWeapon = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+        [Header("Armor")]
+        public NetworkVariable<bool> isMale = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> headEquipmentID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> bodyEquipmentID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> handEquipmentID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> legEquipmentID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
 
 
         protected override void Awake()
@@ -119,7 +128,8 @@ namespace TraverserProject
 
                 player.playerEquipmentManager.UnTwoHandWeapon();
                 player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.Singleton.twoHandingEffect.staticEffectID);
-            }else
+            }
+            else
             {
                 StaticCharacterEffect twoHandEffect = Instantiate(WorldCharacterEffectsManager.Singleton.twoHandingEffect);
                 player.playerEffectsManager.AddStaticEffect(twoHandEffect);
@@ -154,6 +164,74 @@ namespace TraverserProject
             }
             player.playerInventoryManager.currentTwoHandWeapon = player.playerInventoryManager.currentLeftHandWeapon;
             player.playerEquipmentManager.TwoHandLeftWeapon();
+        }
+
+        public void OnHeadEquipmentChanged(int oldValue, int newValue)
+        {
+            if (IsOwner)
+                return;
+
+            HeadEquipmentItem equipment = WorldItemDatabase.Singleton.GetHeadEquipmentByID(headEquipmentID.Value);
+
+            if (equipment != null)
+            {
+                player.playerEquipmentManager.LoadHeadEquipment(Instantiate(equipment));
+            }
+            else
+            {
+                player.playerEquipmentManager.LoadHeadEquipment(null);
+            }
+        }
+
+        public void OnBodyEquipmentChanged(int oldValue, int newValue)
+        {
+            if (IsOwner)
+                return;
+
+            BodyEquipmentItem equipment = WorldItemDatabase.Singleton.GetBodyEquipmentByID(bodyEquipmentID.Value);
+
+            if (equipment != null)
+            {
+                player.playerEquipmentManager.LoadBodyEquipment(Instantiate(equipment));
+            }
+            else
+            {
+                player.playerEquipmentManager.LoadBodyEquipment(null);
+            }
+        }
+
+        public void OnHandEquipmentChanged(int oldValue, int newValue)
+        {
+            if (IsOwner)
+                return;
+
+            HandEquipmentItem equipment = WorldItemDatabase.Singleton.GetHandEquipmentByID(handEquipmentID.Value);
+
+            if (equipment != null)
+            {
+                player.playerEquipmentManager.LoadHandEquipment(Instantiate(equipment));
+            }
+            else
+            {
+                player.playerEquipmentManager.LoadHandEquipment(null);
+            }
+        }
+
+        public void OnLegEquipmentChanged(int oldValue, int newValue)
+        {
+            if (IsOwner)
+                return;
+
+            LegEquipmentItem equipment = WorldItemDatabase.Singleton.GetLegEquipmentByID(legEquipmentID.Value);
+
+            if (equipment != null)
+            {
+                player.playerEquipmentManager.LoadLegEquipment(Instantiate(equipment));
+            }
+            else
+            {
+                player.playerEquipmentManager.LoadLegEquipment(null);
+            }
         }
 
         [ServerRpc]

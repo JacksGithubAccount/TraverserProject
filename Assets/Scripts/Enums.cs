@@ -52,6 +52,33 @@ public enum WeaponClass
     Axe
 }
 
+public enum EquipmentModelType
+{
+    FullHelmet,
+    OpenHelmet,
+    Hood,
+    HelmetAccessories,
+    FaceCover,
+    Torso,
+    Back,
+    RightShoulder,
+    RightUpperArm,
+    RightElbow,
+    RightLowerArm,
+    RightHand,
+    LeftShoulder,
+    LeftUpperArm,
+    LeftElbow,
+    LeftLowerArm,
+    LeftHand,
+    Hips,
+    HipsAttachment,
+    RightLeg,
+    RightKnee,
+    LeftLeg,
+    LeftKnee
+}
+
 
 //used to calc damage
 public enum AttackType
