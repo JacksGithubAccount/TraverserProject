@@ -36,29 +36,85 @@ namespace TraverserProject
                         }
                     }
                     break;
-                case EquipmentModelType.OpenHelmet:
-
+                case EquipmentModelType.Hat:
+                    foreach (var model in player.playerEquipmentManager.hats)
+                    {
+                        if (model.gameObject.name == maleEquipmentName)
+                        {
+                            model.gameObject.SetActive(true);
+                            //model.gameObject.GetComponent<Renderer>().material = Instantiate(equipmentMaterial);
+                        }
+                    }
                     break;
                 case EquipmentModelType.Hood:
-
+                    foreach (var model in player.playerEquipmentManager.hoods)
+                    {
+                        if (model.gameObject.name == maleEquipmentName)
+                        {
+                            model.gameObject.SetActive(true);
+                            //model.gameObject.GetComponent<Renderer>().material = Instantiate(equipmentMaterial);
+                        }
+                    }
                     break;
                 case EquipmentModelType.HelmetAccessories:
-
+                    foreach (var model in player.playerEquipmentManager.helmetAccessories)
+                    {
+                        if (model.gameObject.name == maleEquipmentName)
+                        {
+                            model.gameObject.SetActive(true);
+                            //model.gameObject.GetComponent<Renderer>().material = Instantiate(equipmentMaterial);
+                        }
+                    }
                     break;
                 case EquipmentModelType.FaceCover:
-
+                    foreach (var model in player.playerEquipmentManager.faceCovers)
+                    {
+                        if (model.gameObject.name == maleEquipmentName)
+                        {
+                            model.gameObject.SetActive(true);
+                            //model.gameObject.GetComponent<Renderer>().material = Instantiate(equipmentMaterial);
+                        }
+                    }
                     break;
                 case EquipmentModelType.Torso:
-
+                    foreach (var model in player.playerEquipmentManager.maleBodies)
+                    {
+                        if (model.gameObject.name == maleEquipmentName)
+                        {
+                            model.gameObject.SetActive(true);
+                            //model.gameObject.GetComponent<Renderer>().material = Instantiate(equipmentMaterial);
+                        }
+                    }
                     break;
                 case EquipmentModelType.Back:
-
+                    foreach (var model in player.playerEquipmentManager.backAccessories)
+                    {
+                        if (model.gameObject.name == maleEquipmentName)
+                        {
+                            model.gameObject.SetActive(true);
+                            //model.gameObject.GetComponent<Renderer>().material = Instantiate(equipmentMaterial);
+                        }
+                    }
                     break;
                 case EquipmentModelType.RightShoulder:
-
+                    foreach (var model in player.playerEquipmentManager.rightShoulder)
+                    {
+                        if (model.gameObject.name == maleEquipmentName)
+                        {
+                            model.gameObject.SetActive(true);
+                            //model.gameObject.GetComponent<Renderer>().material = Instantiate(equipmentMaterial);
+                        }
+                    }
                     break;
                 case EquipmentModelType.RightUpperArm:
-
+                    foreach (var model in player.playerEquipmentManager.maleRightUpperArms)
+                    {
+                        if (model.gameObject.name == maleEquipmentName)
+                        {
+                            model.gameObject.SetActive(true);
+                            //model.gameObject.GetComponent<Renderer>().material = Instantiate(equipmentMaterial);
+                        }
+                    }
                     break;
                 case EquipmentModelType.RightElbow:
 
