@@ -27,13 +27,13 @@ namespace TraverserProject
 
         [Header("General Equipment Models")]
         public GameObject hatsObject;
-        [HideInInspector] public GameObject[] hats;
+         public GameObject[] hats;
         public GameObject hoodsObject;
-        [HideInInspector] public GameObject[] hoods;
+         public GameObject[] hoods;
         public GameObject faceCoversObject;
-        [HideInInspector] public GameObject[] faceCovers;
+         public GameObject[] faceCovers;
         public GameObject helmetAccessoriesObject;
-        [HideInInspector] public GameObject[] helmetAccessories;
+         public GameObject[] helmetAccessories;
         public GameObject backAccessoriesObject;
         [HideInInspector] public GameObject[] backAccessories;
         public GameObject hipAccessoriesObject;
@@ -113,13 +113,18 @@ namespace TraverserProject
             {
                 hatsList.Add(child.gameObject);
             }
+            if (hatsList.Count == 0)
+                hatsList.Add(hatsObject);
             hats = hatsList.ToArray();
+            
 
             List<GameObject> hoodsList = new List<GameObject>();
             foreach (Transform child in hoodsObject.transform)
             {
                 hoodsList.Add(child.gameObject);
             }
+            if (hoodsList.Count == 0)
+                hoodsList.Add(hoodsObject);
             hoods = hoodsList.ToArray();
 
             List<GameObject> faceCoversList = new List<GameObject>();
@@ -127,6 +132,8 @@ namespace TraverserProject
             {
                 faceCoversList.Add(child.gameObject);
             }
+            if (faceCoversList.Count == 0)
+                faceCoversList.Add(faceCoversObject);
             faceCovers = faceCoversList.ToArray();
 
             List<GameObject> helmetAccessoriesList = new List<GameObject>();
@@ -134,6 +141,8 @@ namespace TraverserProject
             {
                 helmetAccessoriesList.Add(child.gameObject);
             }
+            if (helmetAccessoriesList.Count == 0)
+                helmetAccessoriesList.Add(helmetAccessoriesObject);
             helmetAccessories = helmetAccessoriesList.ToArray();
 
             List<GameObject> backAccessoriesList = new List<GameObject>();
