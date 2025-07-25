@@ -27,13 +27,13 @@ namespace TraverserProject
 
         [Header("General Equipment Models")]
         public GameObject hatsObject;
-         public GameObject[] hats;
+        [HideInInspector] public GameObject[] hats;
         public GameObject hoodsObject;
-         public GameObject[] hoods;
+        [HideInInspector] public GameObject[] hoods;
         public GameObject faceCoversObject;
-         public GameObject[] faceCovers;
+        [HideInInspector] public GameObject[] faceCovers;
         public GameObject helmetAccessoriesObject;
-         public GameObject[] helmetAccessories;
+        [HideInInspector] public GameObject[] helmetAccessories;
         public GameObject backAccessoriesObject;
         [HideInInspector] public GameObject[] backAccessories;
         public GameObject hipAccessoriesObject;
@@ -113,18 +113,13 @@ namespace TraverserProject
             {
                 hatsList.Add(child.gameObject);
             }
-            if (hatsList.Count == 0)
-                hatsList.Add(hatsObject);
             hats = hatsList.ToArray();
-            
 
             List<GameObject> hoodsList = new List<GameObject>();
             foreach (Transform child in hoodsObject.transform)
             {
                 hoodsList.Add(child.gameObject);
             }
-            if (hoodsList.Count == 0)
-                hoodsList.Add(hoodsObject);
             hoods = hoodsList.ToArray();
 
             List<GameObject> faceCoversList = new List<GameObject>();
@@ -132,8 +127,6 @@ namespace TraverserProject
             {
                 faceCoversList.Add(child.gameObject);
             }
-            if (faceCoversList.Count == 0)
-                faceCoversList.Add(faceCoversObject);
             faceCovers = faceCoversList.ToArray();
 
             List<GameObject> helmetAccessoriesList = new List<GameObject>();
@@ -141,8 +134,6 @@ namespace TraverserProject
             {
                 helmetAccessoriesList.Add(child.gameObject);
             }
-            if (helmetAccessoriesList.Count == 0)
-                helmetAccessoriesList.Add(helmetAccessoriesObject);
             helmetAccessories = helmetAccessoriesList.ToArray();
 
             List<GameObject> backAccessoriesList = new List<GameObject>();
@@ -370,24 +361,20 @@ namespace TraverserProject
             if (equipNewItems)
             {
                 equipNewItems = false;
-                DebugEquipNewItems();
+                EquipArmor();
             }
         }
 
-        private void DebugEquipNewItems()
+        public void EquipArmor()
         {
-            Debug.Log("Equip New Items");
-
             LoadHeadEquipment(player.playerInventoryManager.headEquipment);
-
             LoadBodyEquipment(player.playerInventoryManager.bodyEquipment);
+            LoadHandEquipment(player.playerInventoryManager.handEquipment);
+            LoadLegEquipment(player.playerInventoryManager.legEquipment);
+        }
 
-            if (player.playerInventoryManager.handEquipment != null)
-                LoadHandEquipment(player.playerInventoryManager.handEquipment);
-
-            if (player.playerInventoryManager.legEquipment != null)
-                LoadLegEquipment(player.playerInventoryManager.legEquipment);
-
+        private void InitializeArmorModels()
+        {
 
         }
 
@@ -427,7 +414,7 @@ namespace TraverserProject
 
             foreach (var model in equipment.equipmentModels)
             {
-                model.LoadModel(player, true);
+                model.LoadModel(player, player.playerNetworkManager.isMale.Value);
             }
 
             player.playerStatsManager.CalculateTotalArmorAbsorption();
@@ -488,9 +475,11 @@ namespace TraverserProject
 
             player.playerInventoryManager.bodyEquipment = equipment;
 
+            player.playerBodyManager.DisableBody();
+
             foreach (var model in equipment.equipmentModels)
             {
-                model.LoadModel(player, true);
+                model.LoadModel(player, player.playerNetworkManager.isMale.Value);
             }
 
             player.playerStatsManager.CalculateTotalArmorAbsorption();
@@ -561,15 +550,140 @@ namespace TraverserProject
 
         public void LoadHandEquipment(HandEquipmentItem equipment)
         {
+            UnloadHandEquipmentModels();
+
+            if (equipment == null)
+            {
+                if (player.IsOwner)
+                    player.playerNetworkManager.handEquipmentID.Value = -1; //-1 will never be ID so it will always be null
+
+                player.playerInventoryManager.handEquipment = null;
+                return;
+            }
+
+            player.playerInventoryManager.handEquipment = equipment;
+
+            player.playerBodyManager.DisableArms();
+
+            foreach (var model in equipment.equipmentModels)
+            {
+                model.LoadModel(player, player.playerNetworkManager.isMale.Value);
+            }
+
             player.playerStatsManager.CalculateTotalArmorAbsorption();
+
+            if (player.IsOwner)
+                player.playerNetworkManager.handEquipmentID.Value = equipment.itemID;
+        }
+
+        private void UnloadHandEquipmentModels()
+        {
+            foreach (var model in maleRightLowerArms)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in maleLeftLowerArms)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in maleRightHands)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in maleLeftHands)
+            {
+                model.SetActive(false);
+            }
+
+            foreach (var model in femaleRightLowerArms)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in femaleLeftLowerArms)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in femaleRightHands)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in femaleLeftHands)
+            {
+                model.SetActive(false);
+            }
+
+            player.playerBodyManager.EnableArms();
         }
 
         public void LoadLegEquipment(LegEquipmentItem equipment)
         {
+            UnloadLegEquipmentModels();
+
+            if (equipment == null)
+            {
+                if (player.IsOwner)
+                    player.playerNetworkManager.legEquipmentID.Value = -1; //-1 will never be ID so it will always be null
+
+                player.playerInventoryManager.legEquipment = null;
+                return;
+            }
+
+            player.playerInventoryManager.legEquipment = equipment;
+
+            player.playerBodyManager.DisableLowerBody();
+
+            foreach (var model in equipment.equipmentModels)
+            {
+                model.LoadModel(player, player.playerNetworkManager.isMale.Value);
+            }
+
             player.playerStatsManager.CalculateTotalArmorAbsorption();
+
+            if (player.IsOwner)
+                player.playerNetworkManager.legEquipmentID.Value = equipment.itemID;
         }
 
+        private void UnloadLegEquipmentModels()
+        {
+            foreach (var model in maleHips)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in femaleHips)
+            {
+                model.SetActive(false);
+            }
 
+            foreach (var model in leftKnee)
+            {
+                model.SetActive(false);
+            }
+
+            foreach (var model in rightKnee)
+            {
+                model.SetActive(false);
+            }
+
+            foreach (var model in maleLeftLegs)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in maleRightLegs)
+            {
+                model.SetActive(false);
+            }
+
+            foreach (var model in femaleLeftLegs)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in femaleRightLegs)
+            {
+                model.SetActive(false);
+            }
+
+            player.playerBodyManager.EnableLowerBody();
+        }
 
         private void InitializeWeaponSlots()
         {

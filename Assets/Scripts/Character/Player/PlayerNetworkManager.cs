@@ -25,10 +25,10 @@ namespace TraverserProject
 
         [Header("Armor")]
         public NetworkVariable<bool> isMale = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        public NetworkVariable<int> headEquipmentID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        public NetworkVariable<int> bodyEquipmentID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        public NetworkVariable<int> handEquipmentID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        public NetworkVariable<int> legEquipmentID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> headEquipmentID = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> bodyEquipmentID = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> handEquipmentID = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> legEquipmentID = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
 
@@ -232,6 +232,11 @@ namespace TraverserProject
             {
                 player.playerEquipmentManager.LoadLegEquipment(null);
             }
+        }
+
+        public void OnIsMaleChanged(bool oldStatus, bool newStatus)
+        {
+            player.playerBodyManager.ToggleBodyType(isMale.Value);
         }
 
         [ServerRpc]
