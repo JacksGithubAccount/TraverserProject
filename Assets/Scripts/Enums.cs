@@ -4,7 +4,7 @@ public class Enums : MonoBehaviour
 {
 
 }
-
+//character saving
 public enum CharacterSlot
 {
     CharacterSlot_01,
@@ -19,14 +19,14 @@ public enum CharacterSlot
     CharacterSlot_10,
     NO_SLOT
 }
-
+//process damage and character targeting
 public enum CharacterGroup
 {
     Team01,
     Team02,
     Team03
 }
-
+//is tag for each weapon model instantiation slot
 public enum WeaponModelSlot
 {
     RightHand,
@@ -36,13 +36,13 @@ public enum WeaponModelSlot
     LeftHipSlot,
     BackSlot
 }
-
+//where to instantiate model based on model type
 public enum WeaponModelType
 {
     Weapon,
     Shield
 }
-
+//information specific to weapon class
 public enum WeaponClass
 {
     StraightSword,
@@ -51,7 +51,7 @@ public enum WeaponClass
     Fist,
     Axe
 }
-
+//is used to tag equipment models with specific body parts that the equipment will cover
 public enum EquipmentModelType
 {
     FullHelmet,
@@ -78,7 +78,7 @@ public enum EquipmentModelType
     LeftLeg,
     LeftKnee
 }
-
+// tags helmetsfor specific head portions to cover
 public enum HeadEquipmentType
 {
     FullHelmet,
@@ -103,7 +103,7 @@ public enum AttackType
     BackstepLightAttack01,
     BackstepHeavyAttack01
 }
-
+//calculate damage animation intensity
 public enum DamageIntensity
 {
     Ping,
@@ -111,4 +111,10 @@ public enum DamageIntensity
     Medium,
     Heavy,
     Colossal
+}
+//determines item pick up type
+public enum ItemPickUpType
+{
+    WorldSpawn,
+    CharacterDrop
 }

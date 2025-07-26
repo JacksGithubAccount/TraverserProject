@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace TraverserProject
 {
@@ -10,6 +11,12 @@ namespace TraverserProject
         [Header("Message Pop Up")]
         [SerializeField] GameObject messagePopUpGameObject;
         [SerializeField] TextMeshProUGUI messagePopUpText;
+
+        [Header("Item Pop Up")]
+        [SerializeField] GameObject itemPopUpGameObject;
+        [SerializeField] Image itemIcon;
+        [SerializeField] TextMeshProUGUI itemName;
+        [SerializeField] TextMeshProUGUI itemAmount;
 
         [Header("YOU DIED Pop Up")]
         [SerializeField] GameObject youDiedPopUpGameObject;
@@ -32,6 +39,7 @@ namespace TraverserProject
         public void CloseAllPopUpWindows()
         {
             messagePopUpGameObject.SetActive(false);
+            itemPopUpGameObject.SetActive(false);
 
             PlayerUIManager.Singleton.popUpWindowIsOpen = false;
         }
@@ -41,6 +49,23 @@ namespace TraverserProject
             PlayerUIManager.Singleton.popUpWindowIsOpen = true;
             messagePopUpText.text = messageText;
             messagePopUpGameObject.SetActive(true);
+        }
+
+        public void SendItemPopUp(Item item, int amount)
+        {
+            itemAmount.enabled = false;
+            itemIcon.sprite = item.itemIcon;
+            itemName.text = item.itemName;
+
+            if (amount > 0)
+            {
+                itemAmount.enabled = true;
+                itemAmount.text = "x" + amount.ToString();
+            }
+
+            itemPopUpGameObject.SetActive(true);
+            PlayerUIManager.Singleton.popUpWindowIsOpen = true;
+
         }
 
         public void SendYouDiedPopUp()

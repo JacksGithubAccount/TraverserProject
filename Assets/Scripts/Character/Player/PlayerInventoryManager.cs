@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace TraverserProject
 {
@@ -21,5 +22,18 @@ namespace TraverserProject
         public BodyEquipmentItem bodyEquipment;
         public HandEquipmentItem handEquipment;
         public LegEquipmentItem legEquipment;
+
+        [Header("Inventory")]
+        public List<Item> itemsInIventory;
+
+        public void AddItemToInventory(Item item)
+        {
+            itemsInIventory.Add(item);
+        }
+
+        public void RemoveItemFromIventory()
+        {
+
+        }
     }
 }

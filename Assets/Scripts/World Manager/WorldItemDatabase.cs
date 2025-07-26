@@ -28,7 +28,7 @@ namespace TraverserProject
 
 
         [Header("Items")]
-        private List<BaseItem> items = new List<BaseItem>();
+        private List<Item> items = new List<Item>();
 
         [Header("Item ID Prefix Keys")]
         [SerializeField] int weaponItemKey = 1000;

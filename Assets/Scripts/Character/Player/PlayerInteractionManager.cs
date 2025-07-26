@@ -71,6 +71,8 @@ namespace TraverserProject
 
         public void Interact()
         {
+            PlayerUIManager.Singleton.playerUIPopUpManager.CloseAllPopUpWindows();
+
             if (currentInteractableActions.Count == 0)
                 return;
 
