@@ -7,6 +7,8 @@ namespace TravserserProject
 
     public class PlayerUIHudManager : MonoBehaviour
     {
+        [SerializeField] CanvasGroup[] canvasGroup;
+
         [Header("Stat Bars")]
         [SerializeField] UI_StatBar healthBar;
         [SerializeField] UI_StatBar staminaBar;
@@ -18,6 +20,24 @@ namespace TravserserProject
         [Header("Boss Health Bar")]
         public Transform bossHealthBarParent;
         public GameObject bossHealthBarObject;
+
+        public void ToggleHUD(bool status)
+        {
+            if (status)
+            {
+                foreach (var canvas in canvasGroup)
+                {
+                    canvas.alpha = 1;
+                }
+            }
+            else
+            {
+                foreach (var canvas in canvasGroup)
+                {
+                    canvas.alpha = 0;
+                }
+            }
+        }
 
         public void RefreshHUD()
         {
@@ -98,6 +118,7 @@ namespace TravserserProject
             leftWeaponQuickSlotIcon.sprite = weapon.itemIcon;
             leftWeaponQuickSlotIcon.enabled = true;
         }
+
     }
 
 }

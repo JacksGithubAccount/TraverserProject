@@ -173,6 +173,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Open Character Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""f5ec0341-5b60-41d5-8473-4c2c3eea8a08"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""bdf7133c-cc03-46e2-9d22-bf7c8a24cf56"",
@@ -393,6 +402,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""daa69628-4edb-4eae-8610-2bca9b7e30f6"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Open Character Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""53b3ccef-f1ae-4640-9fc0-db98d4fc49ea"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -590,6 +610,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // PlayerActions
         m_PlayerActions = asset.FindActionMap("PlayerActions", throwIfNotFound: true);
         m_PlayerActions_Dodge = m_PlayerActions.FindAction("Dodge", throwIfNotFound: true);
+        m_PlayerActions_OpenCharacterMenu = m_PlayerActions.FindAction("Open Character Menu", throwIfNotFound: true);
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
         m_PlayerActions_Interact = m_PlayerActions.FindAction("Interact", throwIfNotFound: true);
         m_PlayerActions_RB = m_PlayerActions.FindAction("RB", throwIfNotFound: true);
@@ -794,6 +815,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerActions;
     private List<IPlayerActionsActions> m_PlayerActionsActionsCallbackInterfaces = new List<IPlayerActionsActions>();
     private readonly InputAction m_PlayerActions_Dodge;
+    private readonly InputAction m_PlayerActions_OpenCharacterMenu;
     private readonly InputAction m_PlayerActions_Jump;
     private readonly InputAction m_PlayerActions_Interact;
     private readonly InputAction m_PlayerActions_RB;
@@ -827,6 +849,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerActions/Dodge".
         /// </summary>
         public InputAction @Dodge => m_Wrapper.m_PlayerActions_Dodge;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerActions/OpenCharacterMenu".
+        /// </summary>
+        public InputAction @OpenCharacterMenu => m_Wrapper.m_PlayerActions_OpenCharacterMenu;
         /// <summary>
         /// Provides access to the underlying input action "PlayerActions/Jump".
         /// </summary>
@@ -928,6 +954,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Dodge.started += instance.OnDodge;
             @Dodge.performed += instance.OnDodge;
             @Dodge.canceled += instance.OnDodge;
+            @OpenCharacterMenu.started += instance.OnOpenCharacterMenu;
+            @OpenCharacterMenu.performed += instance.OnOpenCharacterMenu;
+            @OpenCharacterMenu.canceled += instance.OnOpenCharacterMenu;
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
@@ -996,6 +1025,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Dodge.started -= instance.OnDodge;
             @Dodge.performed -= instance.OnDodge;
             @Dodge.canceled -= instance.OnDodge;
+            @OpenCharacterMenu.started -= instance.OnOpenCharacterMenu;
+            @OpenCharacterMenu.performed -= instance.OnOpenCharacterMenu;
+            @OpenCharacterMenu.canceled -= instance.OnOpenCharacterMenu;
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
@@ -1304,6 +1336,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDodge(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Open Character Menu" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOpenCharacterMenu(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Jump" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

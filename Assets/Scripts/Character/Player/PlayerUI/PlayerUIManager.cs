@@ -12,6 +12,8 @@ namespace TraverserProject
 
         [HideInInspector] public PlayerUIHudManager playerUIHudManager;
         [HideInInspector] public PlayerUIPopUpManager playerUIPopUpManager;
+        [HideInInspector] public PlayerUICharacterMenuManager playerUICharacterMenuManager;
+        [HideInInspector] public PlayerUIEquipmentManager playerUIEquipmentManager;
 
         [Header("UI Flags")]
         public bool menuWindowIsOpen = false;
@@ -31,6 +33,8 @@ namespace TraverserProject
             }
             playerUIHudManager = GetComponentInChildren<PlayerUIHudManager>();
             playerUIPopUpManager = GetComponentInChildren<PlayerUIPopUpManager>();
+            playerUICharacterMenuManager = GetComponentInChildren<PlayerUICharacterMenuManager>();
+            playerUIEquipmentManager = GetComponentInChildren<PlayerUIEquipmentManager>();
         }
         private void Start()
         {
@@ -47,6 +51,10 @@ namespace TraverserProject
             }
         }
 
-
+        public void CloseAllMenuWindows()
+        {
+            playerUICharacterMenuManager.CloseCharacterMenu();
+            playerUIEquipmentManager.CloseEquipmentManagerMenu();
+        }
     }
 }
