@@ -412,6 +412,9 @@ namespace TraverserProject
             {
                 RB_Input = false;
 
+                if (PlayerUIManager.Singleton.menuWindowIsOpen)
+                    return;
+
                 player.playerNetworkManager.SetCharacterActionHand(true);
 
                 player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RB_Action, player.playerInventoryManager.currentRightHandWeapon);
@@ -458,6 +461,10 @@ namespace TraverserProject
             if (switch_Right_Weapon_Input)
             {
                 switch_Right_Weapon_Input = false;
+
+                if (PlayerUIManager.Singleton.menuWindowIsOpen)
+                    return;
+
                 player.playerEquipmentManager.SwitchRightWeapon();
             }
         }
@@ -467,6 +474,10 @@ namespace TraverserProject
             if (switch_Left_Weapon_Input)
             {
                 switch_Left_Weapon_Input = false;
+
+                if (PlayerUIManager.Singleton.menuWindowIsOpen)
+                    return;
+
                 player.playerEquipmentManager.SwitchLeftWeapon();
             }
         }

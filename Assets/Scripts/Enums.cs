@@ -78,6 +78,17 @@ public enum EquipmentModelType
     LeftLeg,
     LeftKnee
 }
+//determines with equipment slot is currently selected
+public enum EquipmentType
+{
+    RightWeapon01,
+    RightWeapon02,
+    RightWeapon03,
+    LeftWeapon01,
+    LeftWeapon02,
+    LeftWeapon03,
+
+}
 // tags helmetsfor specific head portions to cover
 public enum HeadEquipmentType
 {
