@@ -87,6 +87,10 @@ public enum EquipmentType
     LeftWeapon01,
     LeftWeapon02,
     LeftWeapon03,
+    Head,
+    Body,
+    Hands,
+    Legs
 
 }
 // tags helmetsfor specific head portions to cover
