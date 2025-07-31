@@ -35,6 +35,7 @@ namespace TraverserProject
         public NetworkVariable<bool> isSprinting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isJumping = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isChargingAttack = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> isRipostable = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [Header("Resources")]
         public NetworkVariable<float> currentStamina = new NetworkVariable<float>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -137,7 +138,30 @@ namespace TraverserProject
             character.animator.CrossFade(animationID, 0.2f);
         }
 
+        //instant action animation
+        [ServerRpc]
+        public void NotifyTheServerOfInstantActionAnimationServerRpc(ulong clientID, string animationID, bool applyRootMotion)
+        {
+            if (IsServer)
+            {
+                PlayInstantActionAnimationForAllClientsClientRpc(clientID, animationID, applyRootMotion);
+            }
+        }
 
+        [ClientRpc]
+        public void PlayInstantActionAnimationForAllClientsClientRpc(ulong clientID, string animationID, bool applyRootMotion)
+        {
+            if (clientID != NetworkManager.Singleton.LocalClientId)
+            {
+                PerformInstantActionAnimationFromServer(animationID, applyRootMotion);
+            }
+        }
+
+        private void PerformInstantActionAnimationFromServer(string animationID, bool applyRootMotion)
+        {
+            character.characterAnimatorManager.applyRootMotion = applyRootMotion;
+            character.animator.Play(animationID);
+        }
 
         //attack action animation
         [ServerRpc]

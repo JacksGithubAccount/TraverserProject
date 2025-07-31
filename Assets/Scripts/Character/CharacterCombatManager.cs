@@ -12,7 +12,10 @@ namespace TraverserProject
         [Header("Last Attack Animation Performed")]
         public string lastAttackAnimationPerformed;
 
-        [Header("Attack Targer")]
+        [Header("Previous Poise Damage Taken")]
+        public float previousPoiseDamageTaken;
+
+        [Header("Attack Target")]
         public CharacterManager currentTarget;
 
         [Header("Attack Type")]
@@ -58,6 +61,13 @@ namespace TraverserProject
             if (character.IsOwner)
                 character.characterNetworkManager.isInvulnerable.Value = false;
         }
+
+        public void EnableIsRipostable()
+        {
+            if (character.IsOwner)
+                character.characterNetworkManager.isRipostable.Value = true;
+        }
+
 
         public void EnableCanDoRollingAttack()
         {

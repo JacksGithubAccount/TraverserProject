@@ -56,6 +56,10 @@ namespace TraverserProject
             PlayDamageSFX(character);
             PlayDamageVFX(character);
 
+            //run this after all other functions that would attempt to play an animation upon being damaged & after poise/stance is calculated
+            CalculateStanceDamage(character);
+
+
 
         }
 
@@ -78,12 +82,27 @@ namespace TraverserProject
 
             character.characterStatsManager.totalPoiseDamage -= poiseDamage;
 
+            //stores poise daamage taken for other interactions
+            character.characterCombatManager.previousPoiseDamageTaken = poiseDamage;
+
             float remainingPoise = character.characterStatsManager.basePoiseDefense + character.characterStatsManager.offensivePoiseBonus + character.characterStatsManager.totalPoiseDamage;
 
             if (remainingPoise <= 0)
                 poiseIsBroken = true;
 
             character.characterStatsManager.poiseResetTimer = character.characterStatsManager.defaultPoiseResetTime;
+        }
+
+        private void CalculateStanceDamage(CharacterManager character)
+        {
+            AICharacterManager aiCharacter = character as AICharacterManager;
+
+            int stanceDamage = Mathf.RoundToInt(poiseDamage);
+
+            if (aiCharacter != null)
+            {
+                aiCharacter.aiCharacterCombatManager.DamageStance(stanceDamage);
+            }
         }
 
         private void PlayDamageVFX(CharacterManager character)

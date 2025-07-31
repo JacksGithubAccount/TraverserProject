@@ -28,6 +28,17 @@ namespace TraverserProject
         [Header("Attack Rotation Speed")]
         public float attackRotationSpeed = 25;
 
+        [Header("Stance Settings")]
+        public float maxStance = 150;
+        public float currentStance;
+        [SerializeField] float stanceRegeneratedPerSecond = 15;
+        [SerializeField] bool ignoreStanceBreak = false;
+
+        [Header("Stance Timer")]
+        [SerializeField] float stanceRegenerationTimer = 0;
+        private float stanceTickTimer = 0;
+        [SerializeField] float defaultTimeUntilStanceRegenerationBegins = 15;
+
 
         protected override void Awake()
         {
@@ -35,6 +46,68 @@ namespace TraverserProject
 
             aiCharacter = GetComponent<AICharacterManager>();
             lockOnTransform = GetComponentInChildren<LockOnTransform>().transform;
+        }
+
+        private void FixedUpdate()
+        {
+            HandleStanceBreak();
+        }
+
+        private void HandleStanceBreak()
+        {
+            if (!aiCharacter.IsOwner)
+                return;
+
+            if (aiCharacter.isDead.Value)
+                return;
+
+            if (stanceRegenerationTimer > 0)
+            {
+                stanceRegenerationTimer -= Time.deltaTime;
+            }
+            else
+            {
+                stanceRegenerationTimer = 0;
+
+                if (currentStance < maxStance)
+                {
+                    stanceTickTimer += Time.deltaTime;
+                    if (stanceTickTimer >= 1)
+                    {
+                        stanceTickTimer = 0;
+                        currentStance += stanceRegeneratedPerSecond;
+                    }
+                }
+                else
+                {
+                    currentStance = maxStance;
+                }
+            }
+
+            if (currentStance <= 0)
+            {
+                DamageIntensity previousDamageIntensity = WorldUtilityManager.Singleton.GetDamageIntensityBasedOnPoiseDamage(previousPoiseDamageTaken);
+
+                if (previousDamageIntensity == DamageIntensity.Colossal)
+                {
+                    currentStance = 1;
+                    return;
+                }
+
+                currentStance = maxStance;
+
+                if (ignoreStanceBreak)
+                    return;
+
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimationInstantly("Stance_Break_01", true);
+            }
+        }
+
+        public void DamageStance(int stanceDamage)
+        {
+            stanceRegenerationTimer = defaultTimeUntilStanceRegenerationBegins;
+
+            currentStance -= stanceDamage;
         }
 
         public void FindATargetViaLineOfSight(AICharacterManager aiCharacter)

@@ -170,6 +170,19 @@ namespace TraverserProject
             character.characterNetworkManager.NotifyTheServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }
 
+        public virtual void PlayTargetActionAnimationInstantly(string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false)
+        {
+            Debug.Log("Playing Animation: " + targetAnimation);
+            this.applyRootMotion = applyRootMotion;
+            character.animator.applyRootMotion = applyRootMotion;
+            character.animator.Play(targetAnimation);
+            character.isPerformingAction = isPerformingAction;
+            character.characterLocomotionManager.canRotate = canRotate;
+            character.characterLocomotionManager.canMove = canMove;
+
+            character.characterNetworkManager.NotifyTheServerOfInstantActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
+        }
+
         public virtual void PlayTargetAttackActionAnimation(WeaponItem weapon, AttackType attackType, string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false)
         {
             character.characterCombatManager.currentAttackType = attackType;

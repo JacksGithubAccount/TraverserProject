@@ -57,6 +57,11 @@ namespace TraverserProject
                 PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(footSteps));
         }
 
+        public virtual void PlayStanceBreakSoundFX()
+        {
+            audioSource.PlayOneShot(WorldSoundFXManager.Singleton.stanceBreakSFX);
+        }
+
         public virtual void PlayBlockSoundFX()
         {
 
