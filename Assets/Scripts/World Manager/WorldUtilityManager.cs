@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace TraverserProject
 {
@@ -97,6 +98,27 @@ namespace TraverserProject
         public Vector3 GetRipostingPositionBasedOnWeaponClass(WeaponClass weaponClass)
         {
             Vector3 position = new Vector3(0.11f, 0, 0.7f);
+            switch (weaponClass)
+            {
+                case WeaponClass.StraightSword: //change position here if needed
+
+                    break;
+                case WeaponClass.Spear:
+
+                    break;
+                case WeaponClass.MediumShield:
+
+                    break;
+                case WeaponClass.Fist:
+
+                    break;
+            }
+            return position;
+        }
+
+        public Vector3 GetBackstabbingPositionBasedOnWeaponClass(WeaponClass weaponClass)
+        {
+            Vector3 position = new Vector3(0.12f, 0, 0.74f);
             switch (weaponClass)
             {
                 case WeaponClass.StraightSword: //change position here if needed

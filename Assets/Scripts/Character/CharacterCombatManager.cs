@@ -30,9 +30,11 @@ namespace TraverserProject
         public bool canPerformRollingAttack = false;
         public bool canPerformBackstepAttack = false;
         public bool canBlock = true;
+        public bool canBeBackstabbed = true;
 
         [Header("Critical Attack")]
         private Transform riposteReceiverTransform;
+        private Transform backstabReceiverTransform;
         [SerializeField] float criticalAttackDistanceCheck = 0.7f;
         public int pendingCriticalDamage;
 
@@ -92,6 +94,21 @@ namespace TraverserProject
                             return;
                         }
                     }
+
+                    if (targetCharacter.characterCombatManager.canBeBackstabbed)
+                    {
+                        if (targetViewableAngle <= 180 && targetViewableAngle >= 145)
+                        {
+                            AttemptBackstab(hit);
+                            return;
+                        }
+
+                        if (targetViewableAngle >= -180 && targetViewableAngle <= -145)
+                        {
+                            AttemptBackstab(hit);
+                            return;
+                        }
+                    }
                 }
             }
         }
@@ -105,6 +122,20 @@ namespace TraverserProject
                 return;
 
             if (!targetCharacter.characterNetworkManager.isRipostable.Value)
+                return;
+
+            if (targetCharacter.characterNetworkManager.isBeingCriticallyDamaged.Value)
+                return;
+
+
+        }
+
+        public virtual void AttemptBackstab(RaycastHit hit)
+        {
+            Debug.Log("Backstabbing Target");
+            CharacterManager targetCharacter = hit.transform.gameObject.GetComponent<CharacterManager>();
+
+            if (targetCharacter == null)
                 return;
 
             if (targetCharacter.characterNetworkManager.isBeingCriticallyDamaged.Value)
@@ -142,6 +173,31 @@ namespace TraverserProject
                 riposteReceiverTransform.localPosition = ripostePosition;
                 enemyCharacter.transform.position = riposteReceiverTransform.position;
                 transform.rotation = Quaternion.LookRotation(-enemyCharacter.transform.forward);
+                yield return null;
+
+            }
+        }
+
+        public IEnumerator ForceMoveEnemyCharacterToBackstabPosition(CharacterManager enemyCharacter, Vector3 backstabPosition)
+        {
+            float timer = 0;
+
+            while (timer < 0.2f)
+            {
+                timer += Time.deltaTime;
+
+
+                if (backstabReceiverTransform == null)
+                {
+                    GameObject backstabTransformObject = new GameObject("Backstab Transform");
+                    backstabTransformObject.transform.parent = transform;
+                    backstabTransformObject.transform.position = Vector3.zero;
+                    backstabReceiverTransform = backstabTransformObject.transform;
+                }
+
+                backstabReceiverTransform.localPosition = backstabPosition;
+                enemyCharacter.transform.position = backstabReceiverTransform.position;
+                transform.rotation = Quaternion.LookRotation(enemyCharacter.transform.forward);
                 yield return null;
 
             }

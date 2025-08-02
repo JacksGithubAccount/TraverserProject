@@ -93,7 +93,6 @@ namespace TraverserProject
 
             characterNetworkManager.isMoving.OnValueChanged += characterNetworkManager.OnIsMovingChanged;
             characterNetworkManager.isActive.OnValueChanged += characterNetworkManager.OnIsActiveChanged;
-            isDead.OnValueChanged += characterNetworkManager.OnIsDeadChanged;
         }
 
         public override void OnNetworkDespawn()
@@ -102,7 +101,6 @@ namespace TraverserProject
 
             characterNetworkManager.isMoving.OnValueChanged -= characterNetworkManager.OnIsMovingChanged;
             characterNetworkManager.isActive.OnValueChanged -= characterNetworkManager.OnIsActiveChanged;
-            isDead.OnValueChanged -= characterNetworkManager.OnIsDeadChanged;
         }
 
         protected virtual void OnEnable()
@@ -122,7 +120,7 @@ namespace TraverserProject
                 characterNetworkManager.currentHealth.Value = 0;
                 isDead.Value = true;
 
-                if (!manuallySelectDeathAnimation)
+                if (!manuallySelectDeathAnimation && !characterNetworkManager.isBeingCriticallyDamaged.Value)
                 {
                     characterAnimatorManager.PlayTargetActionAnimation("Dead_01", true);
                 }

@@ -48,7 +48,6 @@ namespace TraverserProject
         public float rolling_Heavy_Attack_01_Modifier = 1.3f;
         public float backstep_Light_Attack_01_Modifier = 1.0f;
         public float backstep_Heavy_Attack_01_Modifier = 1.4f;
-        public float riposte_Attack_01_Modifier = 3.3f;
 
         [Header("Stamina Cost Modifiers")]
         public int baseStaminaCost = 20;
