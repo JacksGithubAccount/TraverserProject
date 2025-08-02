@@ -11,6 +11,7 @@ namespace TraverserProject
 
         [Header("VFX")]
         [SerializeField] GameObject bloodSplatterVFX;
+        [SerializeField] GameObject criticalBloodSplatterVFX;
 
         [Header("Static Effects")]
         public List<StaticCharacterEffect> staticEffects = new List<StaticCharacterEffect>();
@@ -36,6 +37,20 @@ namespace TraverserProject
             }
         }
 
+        public void PlayCriticalBloodSplatterVFX(Vector3 contactPoint)
+        {
+            if (criticalBloodSplatterVFX != null)
+            {
+                GameObject bloodSplatter = Instantiate(criticalBloodSplatterVFX, contactPoint, Quaternion.identity);
+            }
+            else
+            {
+                GameObject bloodSplatter = Instantiate(WorldCharacterEffectsManager.Singleton.criticalBloodSplatterVFX, contactPoint, Quaternion.identity);
+            }
+        }
+
+
+
         public void AddStaticEffect(StaticCharacterEffect effect)
         {
             staticEffects.Add(effect);
@@ -43,7 +58,7 @@ namespace TraverserProject
 
             for (int i = staticEffects.Count - 1; i > -1; i--)
             {
-                if(staticEffects[i] == null)
+                if (staticEffects[i] == null)
                     staticEffects.RemoveAt(i);
             }
         }
@@ -52,9 +67,9 @@ namespace TraverserProject
         {
             StaticCharacterEffect effect;
 
-            for(int i = 0; i < staticEffects.Count; i++)
+            for (int i = 0; i < staticEffects.Count; i++)
             {
-                if(staticEffects[i] != null)
+                if (staticEffects[i] != null)
                 {
                     if (staticEffects[i].staticEffectID == effectID)
                     {

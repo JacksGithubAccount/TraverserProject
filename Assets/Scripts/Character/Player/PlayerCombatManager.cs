@@ -33,6 +33,52 @@ namespace TraverserProject
 
         }
 
+        public override void AttemptRiposte(RaycastHit hit)
+        {
+            Debug.Log("Riposting Target");
+            CharacterManager targetCharacter = hit.transform.gameObject.GetComponent<CharacterManager>();
+
+            if (targetCharacter == null)
+                return;
+
+            if (!targetCharacter.characterNetworkManager.isRipostable.Value)
+                return;
+
+            if (targetCharacter.characterNetworkManager.isBeingCriticallyDamaged.Value)
+                return;
+
+            MeleeWeaponItem riposteWeapon;
+            MeleeWeaponDamageCollider riposteCollider;
+
+            riposteWeapon = player.playerInventoryManager.currentRightHandWeapon as MeleeWeaponItem;
+            riposteCollider = player.playerEquipmentManager.rightWeaponManager.meleeDamageCollider;
+
+            //animation will change based on weapon's animator controller so the animation can be chosen there, name is always the same
+            character.characterAnimatorManager.PlayTargetActionAnimationInstantly("Riposte_01", true);
+
+            if (character.IsOwner)
+                character.characterNetworkManager.isInvulnerable.Value = true;
+
+            TakeCriticalDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.Singleton.takeCriticalDamageEffect);
+
+            damageEffect.physicalDamage = riposteCollider.physicalDamage;
+            damageEffect.magicDamage = riposteCollider.magicDamage;
+            damageEffect.fireDamage = riposteCollider.fireDamage;
+            damageEffect.lightningDamage = riposteCollider.lightningDamage;
+            damageEffect.holyDamage = riposteCollider.holyDamage;
+            damageEffect.poiseDamage = riposteCollider.poiseDamage;
+
+            damageEffect.physicalDamage *= riposteWeapon.riposte_Attack_01_Modifier;
+            damageEffect.magicDamage *= riposteWeapon.riposte_Attack_01_Modifier;
+            damageEffect.fireDamage *= riposteWeapon.riposte_Attack_01_Modifier;
+            damageEffect.lightningDamage *= riposteWeapon.riposte_Attack_01_Modifier;
+            damageEffect.holyDamage *= riposteWeapon.riposte_Attack_01_Modifier;
+            damageEffect.poiseDamage *= riposteWeapon.riposte_Attack_01_Modifier;
+
+            targetCharacter.characterNetworkManager.NofityTheServerOfRiposteServerRpc(targetCharacter.NetworkObjectId, character.NetworkObjectId, "Riposted_01", riposteWeapon.itemID,
+                damageEffect.physicalDamage, damageEffect.magicDamage, damageEffect.fireDamage, damageEffect.lightningDamage, damageEffect.holyDamage, damageEffect.poiseDamage);
+        }
+
         public virtual void DrainStaminaBasedOnAttack()
         {
             if (!player.IsOwner)

@@ -15,8 +15,8 @@ namespace TraverserProject
         [HideInInspector] public WeaponModelInstantiationSlot backSlot;
 
         [Header("Weapon Models")]
-        WeaponManager rightWeaponManager;
-        WeaponManager leftWeaponManager;
+        public WeaponManager rightWeaponManager;
+        public WeaponManager leftWeaponManager;
 
         [Header("Weapon Managers")]
         [HideInInspector] GameObject rightHandWeaponModel;

@@ -27,6 +27,7 @@ namespace TraverserProject
                 character.characterNetworkManager.isInvulnerable.Value = false;
                 character.characterNetworkManager.isAttacking.Value = false;
                 character.characterNetworkManager.isRipostable.Value = false;
+                character.characterNetworkManager.isBeingCriticallyDamaged.Value = false;
             }
 
         }

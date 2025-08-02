@@ -62,6 +62,11 @@ namespace TraverserProject
             audioSource.PlayOneShot(WorldSoundFXManager.Singleton.stanceBreakSFX);
         }
 
+        public virtual void PlayCriticalStrikeSoundFX()
+        {
+            audioSource.PlayOneShot(WorldSoundFXManager.Singleton.criticalStrikeSFX);
+        }
+
         public virtual void PlayBlockSoundFX()
         {
 

@@ -67,7 +67,8 @@ namespace TraverserProject
                 return;
             }
 
-            base.AttemptToPerformAction(playerPerformingAction, weaponPerformingAction);
+            playerPerformingAction.characterCombatManager.AttemptCriticalAttack();
+
             PerformLightAttack(playerPerformingAction, weaponPerformingAction);
 
 
@@ -75,7 +76,7 @@ namespace TraverserProject
 
         public void PerformLightAttack(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
-            if(playerPerformingAction.playerNetworkManager.isTwoHandingWeapon.Value)
+            if (playerPerformingAction.playerNetworkManager.isTwoHandingWeapon.Value)
             {
                 PerformTwoHandLightAttack(playerPerformingAction, weaponPerformingAction);
             }

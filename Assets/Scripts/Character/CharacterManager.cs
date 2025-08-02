@@ -93,6 +93,7 @@ namespace TraverserProject
 
             characterNetworkManager.isMoving.OnValueChanged += characterNetworkManager.OnIsMovingChanged;
             characterNetworkManager.isActive.OnValueChanged += characterNetworkManager.OnIsActiveChanged;
+            isDead.OnValueChanged += characterNetworkManager.OnIsDeadChanged;
         }
 
         public override void OnNetworkDespawn()
@@ -101,6 +102,7 @@ namespace TraverserProject
 
             characterNetworkManager.isMoving.OnValueChanged -= characterNetworkManager.OnIsMovingChanged;
             characterNetworkManager.isActive.OnValueChanged -= characterNetworkManager.OnIsActiveChanged;
+            isDead.OnValueChanged -= characterNetworkManager.OnIsDeadChanged;
         }
 
         protected virtual void OnEnable()

@@ -21,7 +21,7 @@ namespace TraverserProject
 
 
         [Header("Final Damage")]
-        private int finalDamageDealt = 0;
+        protected int finalDamageDealt = 0;
 
         [Header("Poise")]
         public float poiseDamage = 0;
@@ -63,7 +63,7 @@ namespace TraverserProject
 
         }
 
-        private void CalculateDamage(CharacterManager character)
+        protected virtual void CalculateDamage(CharacterManager character)
         {
             if (!character.IsOwner)
                 return;
@@ -93,7 +93,7 @@ namespace TraverserProject
             character.characterStatsManager.poiseResetTimer = character.characterStatsManager.defaultPoiseResetTime;
         }
 
-        private void CalculateStanceDamage(CharacterManager character)
+        protected void CalculateStanceDamage(CharacterManager character)
         {
             AICharacterManager aiCharacter = character as AICharacterManager;
 
@@ -105,12 +105,12 @@ namespace TraverserProject
             }
         }
 
-        private void PlayDamageVFX(CharacterManager character)
+        protected void PlayDamageVFX(CharacterManager character)
         {
             character.characterEffectsManager.PlayBloodSplatterVFX(contactPoint);
         }
 
-        private void PlayDamageSFX(CharacterManager character)
+        protected void PlayDamageSFX(CharacterManager character)
         {
             AudioClip physicalDamageSFX = WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(WorldSoundFXManager.Singleton.physicalDamageSFX);
 
@@ -118,7 +118,7 @@ namespace TraverserProject
             character.characterSoundFXManager.PlayDamageGruntFX();
         }
 
-        private void PlayDirectionalBasedDamageAnimation(CharacterManager character)
+        protected void PlayDirectionalBasedDamageAnimation(CharacterManager character)
         {
             if (!character.IsOwner)
                 return;

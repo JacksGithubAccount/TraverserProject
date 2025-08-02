@@ -1,6 +1,8 @@
 using UnityEngine;
 using Unity.Netcode;
 using static UnityEngine.GridBrushBase;
+using UnityEngine.TextCore.Text;
+using System.Collections;
 
 namespace TraverserProject
 {
@@ -29,6 +31,11 @@ namespace TraverserProject
         public bool canPerformBackstepAttack = false;
         public bool canBlock = true;
 
+        [Header("Critical Attack")]
+        private Transform riposteReceiverTransform;
+        [SerializeField] float criticalAttackDistanceCheck = 0.7f;
+        public int pendingCriticalDamage;
+
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();
@@ -47,6 +54,96 @@ namespace TraverserProject
                 {
                     currentTarget = null;
                 }
+            }
+        }
+
+        public virtual void AttemptCriticalAttack()
+        {
+            if (character.isPerformingAction)
+                return;
+
+            if (character.characterNetworkManager.currentStamina.Value <= 0)
+                return;
+
+            RaycastHit[] hits = Physics.RaycastAll(character.characterCombatManager.lockOnTransform.position, character.transform.TransformDirection(Vector3.forward), criticalAttackDistanceCheck, WorldUtilityManager.Singleton.GetCharacterLayers());
+
+            for (int i = 0; i < hits.Length; i++)
+            {
+                RaycastHit hit = hits[i];
+
+                CharacterManager targetCharacter = hit.transform.GetComponent<CharacterManager>();
+
+                if (targetCharacter != null)
+                {
+                    if (targetCharacter == character)
+                        continue;
+
+                    if (!WorldUtilityManager.Singleton.CanIDamageThisTarget(character.characterGroup, targetCharacter.characterGroup))
+                        continue;
+
+                    Vector3 directionFromCharacterToTarget = character.transform.position - targetCharacter.transform.position;
+                    float targetViewableAngle = Vector3.SignedAngle(directionFromCharacterToTarget, targetCharacter.transform.forward, Vector3.up);
+
+                    if (targetCharacter.characterNetworkManager.isRipostable.Value)
+                    {
+                        if (targetViewableAngle >= -60 && targetViewableAngle <= 60)
+                        {
+                            AttemptRiposte(hit);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+        public virtual void AttemptRiposte(RaycastHit hit)
+        {
+            Debug.Log("Riposting Target");
+            CharacterManager targetCharacter = hit.transform.gameObject.GetComponent<CharacterManager>();
+
+            if (targetCharacter == null)
+                return;
+
+            if (!targetCharacter.characterNetworkManager.isRipostable.Value)
+                return;
+
+            if (targetCharacter.characterNetworkManager.isBeingCriticallyDamaged.Value)
+                return;
+
+
+        }
+
+        public virtual void ApplyCriticalDamage()
+        {
+            character.characterEffectsManager.PlayCriticalBloodSplatterVFX(character.characterCombatManager.lockOnTransform.position);
+            character.characterSoundFXManager.PlayCriticalStrikeSoundFX();
+
+            if (character.IsOwner)
+                character.characterNetworkManager.currentHealth.Value -= pendingCriticalDamage;
+        }
+
+        public IEnumerator ForceMoveEnemyCharacterToRipostePosition(CharacterManager enemyCharacter, Vector3 ripostePosition)
+        {
+            float timer = 0;
+
+            while (timer < 0.5f)
+            {
+                timer += Time.deltaTime;
+
+
+                if (riposteReceiverTransform == null)
+                {
+                    GameObject riposteTransformObject = new GameObject("Riposte Transform");
+                    riposteTransformObject.transform.parent = transform;
+                    riposteTransformObject.transform.position = Vector3.zero;
+                    riposteReceiverTransform = riposteTransformObject.transform;
+                }
+
+                riposteReceiverTransform.localPosition = ripostePosition;
+                enemyCharacter.transform.position = riposteReceiverTransform.position;
+                transform.rotation = Quaternion.LookRotation(-enemyCharacter.transform.forward);
+                yield return null;
+
             }
         }
 
