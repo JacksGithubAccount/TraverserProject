@@ -49,7 +49,8 @@ public enum WeaponClass
     Spear,
     MediumShield,
     Fist,
-    Axe
+    Axe,
+    LightShield
 }
 //is used to tag equipment models with specific body parts that the equipment will cover
 public enum EquipmentModelType

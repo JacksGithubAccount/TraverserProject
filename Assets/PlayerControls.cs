@@ -272,6 +272,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""LT"",
+                    ""type"": ""Button"",
+                    ""id"": ""f1b96691-fb81-4ddb-9b27-d055e71ad5bb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Que RT"",
                     ""type"": ""Button"",
                     ""id"": ""bbec9838-05b1-4e3c-8325-6cc03f930519"",
@@ -510,6 +519,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""80c2fa74-2bc6-4745-9dc2-fc8a126d10f4"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LT"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""0a07b3c6-5186-4e2c-93d2-a70a462ddb84"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
@@ -641,6 +661,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerActions_TwoHandLeftWeapon = m_PlayerActions.FindAction("Two Hand Left Weapon", throwIfNotFound: true);
         m_PlayerActions_QueRB = m_PlayerActions.FindAction("Que RB", throwIfNotFound: true);
         m_PlayerActions_RT = m_PlayerActions.FindAction("RT", throwIfNotFound: true);
+        m_PlayerActions_LT = m_PlayerActions.FindAction("LT", throwIfNotFound: true);
         m_PlayerActions_QueRT = m_PlayerActions.FindAction("Que RT", throwIfNotFound: true);
         m_PlayerActions_HoldRT = m_PlayerActions.FindAction("Hold RT", throwIfNotFound: true);
         m_PlayerActions_Sprint = m_PlayerActions.FindAction("Sprint", throwIfNotFound: true);
@@ -847,6 +868,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_TwoHandLeftWeapon;
     private readonly InputAction m_PlayerActions_QueRB;
     private readonly InputAction m_PlayerActions_RT;
+    private readonly InputAction m_PlayerActions_LT;
     private readonly InputAction m_PlayerActions_QueRT;
     private readonly InputAction m_PlayerActions_HoldRT;
     private readonly InputAction m_PlayerActions_Sprint;
@@ -915,6 +937,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerActions/RT".
         /// </summary>
         public InputAction @RT => m_Wrapper.m_PlayerActions_RT;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerActions/LT".
+        /// </summary>
+        public InputAction @LT => m_Wrapper.m_PlayerActions_LT;
         /// <summary>
         /// Provides access to the underlying input action "PlayerActions/QueRT".
         /// </summary>
@@ -1013,6 +1039,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RT.started += instance.OnRT;
             @RT.performed += instance.OnRT;
             @RT.canceled += instance.OnRT;
+            @LT.started += instance.OnLT;
+            @LT.performed += instance.OnLT;
+            @LT.canceled += instance.OnLT;
             @QueRT.started += instance.OnQueRT;
             @QueRT.performed += instance.OnQueRT;
             @QueRT.canceled += instance.OnQueRT;
@@ -1087,6 +1116,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @RT.started -= instance.OnRT;
             @RT.performed -= instance.OnRT;
             @RT.canceled -= instance.OnRT;
+            @LT.started -= instance.OnLT;
+            @LT.performed -= instance.OnLT;
+            @LT.canceled -= instance.OnLT;
             @QueRT.started -= instance.OnQueRT;
             @QueRT.performed -= instance.OnQueRT;
             @QueRT.canceled -= instance.OnQueRT;
@@ -1445,6 +1477,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRT(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "LT" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLT(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Que RT" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

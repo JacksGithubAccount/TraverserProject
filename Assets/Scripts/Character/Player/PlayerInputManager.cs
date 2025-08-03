@@ -42,6 +42,7 @@ namespace TraverserProject
         [Header("Trigger Input")]
         [SerializeField] bool RT_Input = false;
         [SerializeField] bool Hold_RT_Input = false;
+        [SerializeField] bool LT_Input = false;
 
         [Header("Two Hand Input")]
         [SerializeField] bool two_Hand_Input = false;
@@ -131,6 +132,7 @@ namespace TraverserProject
                 playerControls.PlayerActions.RT.performed += i => RT_Input = true;
                 playerControls.PlayerActions.HoldRT.performed += i => Hold_RT_Input = true;
                 playerControls.PlayerActions.HoldRT.canceled += i => Hold_RT_Input = false;
+                playerControls.PlayerActions.LT.performed += i => LT_Input = true;
 
                 //two hand
                 playerControls.PlayerActions.TwoHandWeapon.performed += i => two_Hand_Input = true;
@@ -198,6 +200,7 @@ namespace TraverserProject
             HandleLBInput();
             HandleRTInput();
             HandleHoldRTInput();
+            HandleLTInput();
             HandleSwitchRightWeaponInput();
             HandleSwitchLeftWeaponInput();
             HandleQueuedInputs();
@@ -453,6 +456,19 @@ namespace TraverserProject
                 {
                     player.playerNetworkManager.isChargingAttack.Value = Hold_RT_Input;
                 }
+            }
+        }
+
+        private void HandleLTInput()
+        {
+            if (LT_Input)
+            {
+                LT_Input = false;
+
+                WeaponItem weaponPerformingAshOfWar = player.playerCombatManager.SelectWeaponToPerformAshOfWar();
+
+                weaponPerformingAshOfWar.ashOfWarAction.AttemptToPerformAction(player);
+
             }
         }
 

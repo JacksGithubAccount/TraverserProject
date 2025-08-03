@@ -26,6 +26,9 @@ namespace TraverserProject
         [Header("Leg equipment")]
         [SerializeField] List<LegEquipmentItem> legEquipment = new List<LegEquipmentItem>();
 
+        [Header("Ashes of War")]
+        [SerializeField] List<AshOfWar> ashesOfWar = new List<AshOfWar>();
+
 
         [Header("Items")]
         private List<Item> items = new List<Item>();
@@ -73,19 +76,24 @@ namespace TraverserProject
                 items.Add(item);
             }
 
+            foreach (var item in ashesOfWar)
+            {
+                items.Add(item);
+            }
+
             for (int i = 0; i < items.Count; i++)
             {
                 int prefixKey = 0;
 
-                if(items[i].GetType() == typeof(WeaponItem))
+                if (items[i].GetType() == typeof(WeaponItem))
                     prefixKey = weaponItemKey;
                 else if (items[i].GetType() == typeof(HeadEquipmentItem))
                     prefixKey = headItemKey;
-                else if(items[i].GetType() == typeof(BodyEquipmentItem))
+                else if (items[i].GetType() == typeof(BodyEquipmentItem))
                     prefixKey = bodyItemKey;
-                else if(items[i].GetType() == typeof(HandEquipmentItem))
+                else if (items[i].GetType() == typeof(HandEquipmentItem))
                     prefixKey = handItemKey;
-                else if(items[i].GetType() == typeof(LegEquipmentItem))
+                else if (items[i].GetType() == typeof(LegEquipmentItem))
                     prefixKey = legItemKey;
 
                 items[i].itemID = prefixKey + i;
@@ -115,6 +123,11 @@ namespace TraverserProject
         public LegEquipmentItem GetLegEquipmentByID(int ID)
         {
             return legEquipment.FirstOrDefault(equipment => equipment.itemID == ID);
+        }
+
+        public AshOfWar GetAshOfWarByID(int ID)
+        {
+            return ashesOfWar.FirstOrDefault(item => item.itemID == ID);
         }
 
     }

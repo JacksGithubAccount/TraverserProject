@@ -227,5 +227,13 @@ namespace TraverserProject
 
         }
 
+        public WeaponItem SelectWeaponToPerformAshOfWar()
+        {
+            WeaponItem selectedWeapon = player.playerInventoryManager.currentLeftHandWeapon;
+            player.playerNetworkManager.SetCharacterActionHand(false);
+            player.playerNetworkManager.currentWeaponBeingUsed.Value = selectedWeapon.itemID;
+            return selectedWeapon;
+        }
+
     }
 }

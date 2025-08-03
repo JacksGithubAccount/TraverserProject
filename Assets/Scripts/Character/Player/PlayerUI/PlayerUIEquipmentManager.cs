@@ -13,15 +13,25 @@ namespace TraverserProject
 
         [Header("Weapon Slots")]
         [SerializeField] Image rightHandSlot01;
+        private Button rightHandSlot01Button;
         [SerializeField] Image rightHandSlot02;
+        private Button rightHandSlot02Button;
         [SerializeField] Image rightHandSlot03;
+        private Button rightHandSlot03Button;
         [SerializeField] Image leftHandSlot01;
+        private Button leftHandSlot01Button;
         [SerializeField] Image leftHandSlot02;
+        private Button leftHandSlot02Button;
         [SerializeField] Image leftHandSlot03;
+        private Button leftHandSlot03Button;
         [SerializeField] Image headEquipmentSlot;
+        private Button headEquipmentSlotButton;
         [SerializeField] Image bodyEquipmentSlot;
+        private Button bodyEquipmentSlotButton;
         [SerializeField] Image handEquipmentSlot;
+        private Button handEquipmentSlotButton;
         [SerializeField] Image legEquipmentSlot;
+        private Button legEquipmentSlotButton;
 
         [Header("Equipment Inventory")]
         public EquipmentType currentSelectedEquipmentSlot;
@@ -30,9 +40,26 @@ namespace TraverserProject
         [SerializeField] Transform equipmentIventoryContentWindow;
         [SerializeField] Item currentlySelectedItem;
 
+        private void Awake()
+        {
+            rightHandSlot01Button = rightHandSlot01.GetComponentInParent<Button>(true);
+            rightHandSlot02Button = rightHandSlot02.GetComponentInParent<Button>(true);
+            rightHandSlot03Button = rightHandSlot03.GetComponentInParent<Button>(true);
+
+            leftHandSlot01Button = leftHandSlot01.GetComponentInParent<Button>(true);
+            leftHandSlot02Button = leftHandSlot02.GetComponentInParent<Button>(true);
+            leftHandSlot03Button = leftHandSlot03.GetComponentInParent<Button>(true);
+
+            headEquipmentSlotButton = headEquipmentSlot.GetComponentInParent<Button>(true);
+            bodyEquipmentSlotButton = bodyEquipmentSlot.GetComponentInParent<Button>(true);
+            handEquipmentSlotButton = handEquipmentSlot.GetComponentInParent<Button>(true);
+            legEquipmentSlotButton = legEquipmentSlot.GetComponentInParent<Button>(true);
+        }
+
         public void OpenEquipmentManagerMenu()
         {
             PlayerUIManager.Singleton.menuWindowIsOpen = true;
+            ToggleEquipmentButtons(true);
             menu.SetActive(true);
             equipmentInventoryWindow.SetActive(false);
             RefreshMenu();
@@ -44,43 +71,60 @@ namespace TraverserProject
             RefreshEquipmentSlotIcons();
         }
 
+        public void ToggleEquipmentButtons(bool isEnabled)
+        {
+            rightHandSlot01Button.enabled = isEnabled;
+            rightHandSlot02Button.enabled = isEnabled;
+            rightHandSlot03Button.enabled = isEnabled;
+
+            leftHandSlot01Button.enabled = isEnabled;
+            leftHandSlot02Button.enabled = isEnabled;
+            leftHandSlot03Button.enabled = isEnabled;
+
+            headEquipmentSlotButton.enabled = isEnabled;
+            bodyEquipmentSlotButton.enabled = isEnabled;
+            handEquipmentSlotButton.enabled = isEnabled;
+            legEquipmentSlotButton.enabled = isEnabled;
+        }
+
         public void SelectLastSelectedEquipmentSlot()
         {
             Button lastSelectedButton = null;
+            ToggleEquipmentButtons(true);
             switch (currentSelectedEquipmentSlot)
-            {             
-            case EquipmentType.RightWeapon01:
-                lastSelectedButton = rightHandSlot01.GetComponentInParent<Button>();
-                break;
-            case EquipmentType.RightWeapon02:
-                lastSelectedButton = rightHandSlot02.GetComponentInParent<Button>();
-                break;
-            case EquipmentType.RightWeapon03:
-                lastSelectedButton = rightHandSlot03.GetComponentInParent<Button>();
-                break;
-            case EquipmentType.LeftWeapon01:
-                lastSelectedButton = leftHandSlot01.GetComponentInParent<Button>();
-                break;
-            case EquipmentType.LeftWeapon02:
-                lastSelectedButton = leftHandSlot02.GetComponentInParent<Button>();
-                break;
-            case EquipmentType.LeftWeapon03:
-                lastSelectedButton = leftHandSlot03.GetComponentInParent<Button>();
-                break;
-            case EquipmentType.Head:
-                lastSelectedButton = headEquipmentSlot.GetComponentInParent<Button>();
-                break;
-            case EquipmentType.Body:
-                lastSelectedButton = bodyEquipmentSlot.GetComponentInParent<Button>();
-                break;
-            case EquipmentType.Hands:
-                lastSelectedButton = handEquipmentSlot.GetComponentInParent<Button>();
-                break;
-            case EquipmentType.Legs:
-                lastSelectedButton = legEquipmentSlot.GetComponentInParent<Button>();
-                break;
-            default:
-                break;
+            {
+                case EquipmentType.RightWeapon01:
+                    lastSelectedButton = rightHandSlot01Button;
+                    break;
+                case EquipmentType.RightWeapon02:
+                    lastSelectedButton = rightHandSlot02Button;
+                    break;
+                case EquipmentType.RightWeapon03:
+                    lastSelectedButton = rightHandSlot03Button;
+                    break;
+                case EquipmentType.LeftWeapon01:
+                    lastSelectedButton = leftHandSlot01Button;
+                    break;
+                case EquipmentType.LeftWeapon02:
+                    lastSelectedButton = leftHandSlot02Button;
+                    break;
+                case EquipmentType.LeftWeapon03:
+                    lastSelectedButton = leftHandSlot03Button;
+                    break;
+                case EquipmentType.Head:
+                    lastSelectedButton = headEquipmentSlotButton;
+                    break;
+                case EquipmentType.Body:
+                    lastSelectedButton = bodyEquipmentSlotButton;
+                    break;
+                case EquipmentType.Hands:
+                    lastSelectedButton = handEquipmentSlotButton;
+                    break;
+                case EquipmentType.Legs:
+                    lastSelectedButton = legEquipmentSlotButton;
+                    break;
+                default:
+                    break;
             }
 
             if (lastSelectedButton != null)
@@ -88,6 +132,8 @@ namespace TraverserProject
                 lastSelectedButton.Select();
                 lastSelectedButton.OnSelect(null);
             }
+
+            equipmentInventoryWindow.SetActive(false);
         }
 
         public void CloseEquipmentManagerMenu()
@@ -221,6 +267,7 @@ namespace TraverserProject
 
         public void LoadEquipmentInventory()
         {
+            ToggleEquipmentButtons(false);
             equipmentInventoryWindow.SetActive(true);
 
             switch (currentSelectedEquipmentSlot)
@@ -276,6 +323,8 @@ namespace TraverserProject
 
             if (weaponsInInventory.Count <= 0)
             {
+                equipmentInventoryWindow.SetActive(false);
+                ToggleEquipmentButtons(true);
                 RefreshMenu();
                 return;
             }
@@ -314,6 +363,8 @@ namespace TraverserProject
 
             if (headEquipmentInInventory.Count <= 0)
             {
+                equipmentInventoryWindow.SetActive(false);
+                ToggleEquipmentButtons(true);
                 RefreshMenu();
                 return;
             }
@@ -352,6 +403,8 @@ namespace TraverserProject
 
             if (bodyEquipmentInInventory.Count <= 0)
             {
+                equipmentInventoryWindow.SetActive(false);
+                ToggleEquipmentButtons(true);
                 RefreshMenu();
                 return;
             }
@@ -390,6 +443,8 @@ namespace TraverserProject
 
             if (handEquipmentInInventory.Count <= 0)
             {
+                equipmentInventoryWindow.SetActive(false);
+                ToggleEquipmentButtons(true);
                 RefreshMenu();
                 return;
             }
@@ -428,6 +483,8 @@ namespace TraverserProject
 
             if (legEquipmentInInventory.Count <= 0)
             {
+                equipmentInventoryWindow.SetActive(false);
+                ToggleEquipmentButtons(true);
                 RefreshMenu();
                 return;
             }

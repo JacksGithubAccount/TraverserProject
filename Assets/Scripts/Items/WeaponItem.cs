@@ -73,6 +73,7 @@ namespace TraverserProject
         public WeaponItemAction oh_RB_Action; //one hand right bumper
         public WeaponItemAction oh_RT_Action; //one hand right trigger
         public WeaponItemAction oh_LB_Action; //one hand left bumper
+        public AshOfWar ashOfWarAction; //one hand left trigger
 
         [Header("SFX")]
         public AudioClip[] whooshes;
