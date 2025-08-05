@@ -33,6 +33,14 @@ namespace TraverserProject
 
         }
 
+        public override void CloseAllDamageColliders()
+        {
+            base.CloseAllDamageColliders();
+
+            player.playerEquipmentManager.rightWeaponManager.meleeDamageCollider.DisableDamageCollider();
+            player.playerEquipmentManager.leftWeaponManager.meleeDamageCollider.DisableDamageCollider();
+        }
+
         public override void AttemptRiposte(RaycastHit hit)
         {
             Debug.Log("Riposting Target");

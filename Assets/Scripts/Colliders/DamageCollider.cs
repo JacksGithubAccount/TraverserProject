@@ -43,7 +43,10 @@ namespace TraverserProject
 
                 CheckForBlock(damageTarget);
 
-                DamageTarget(damageTarget);
+                CheckForParry(damageTarget);
+
+                if (!damageTarget.characterNetworkManager.isInvulnerable.Value)
+                    DamageTarget(damageTarget);
 
             }
         }
@@ -71,6 +74,11 @@ namespace TraverserProject
 
                 damageTarget.characterEffectsManager.ProcessInstantEffect(damageEffect);
             }
+        }
+
+        protected virtual void CheckForParry(CharacterManager damageTarget)
+        {
+
         }
 
         protected virtual void GetBlockingDotValues(CharacterManager damageTarget)
@@ -107,5 +115,7 @@ namespace TraverserProject
             damageCollider.enabled = false;
             charactersDamaged.Clear();
         }
+
+
     }
 }

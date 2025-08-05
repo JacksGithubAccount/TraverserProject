@@ -29,6 +29,8 @@ namespace TraverserProject
 
         [Header("Flags")]
         public NetworkVariable<bool> isBlocking = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> isParrying = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> isParryable = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isAttacking = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isInvulnerable = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isLockedOn = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -340,6 +342,34 @@ namespace TraverserProject
 
             StartCoroutine(characterCausingDamage.characterCombatManager.ForceMoveEnemyCharacterToBackstabPosition
                 (damagedCharacter, WorldUtilityManager.Singleton.GetBackstabbingPositionBasedOnWeaponClass(weapon.weaponClass)));
+        }
+
+        //parry
+        [ServerRpc(RequireOwnership = false)]
+        public void NotifyTheServerOfParryServerRpc(ulong parriedClientID)
+        {
+            if (IsServer)
+            {
+                NotifyTheServerOfParryClientRpc(parriedClientID);
+            }
+        }
+        [ClientRpc]
+        protected void NotifyTheServerOfParryClientRpc(ulong parriedClientID)
+        {
+            ProcessParryFromServer(parriedClientID);
+        }
+
+        protected void ProcessParryFromServer(ulong parriedClient)
+        {
+            CharacterManager parriedCharacter = NetworkManager.Singleton.SpawnManager.SpawnedObjects[parriedClient].gameObject.GetComponent<CharacterManager>();
+
+            if (parriedCharacter == null)
+                return;
+
+            if (parriedCharacter.IsOwner)
+            {
+                parriedCharacter.characterAnimatorManager.PlayTargetActionAnimationInstantly("Parried_01", true);
+            }
         }
     }
 }

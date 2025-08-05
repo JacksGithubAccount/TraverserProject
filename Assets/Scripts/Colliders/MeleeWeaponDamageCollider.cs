@@ -39,12 +39,40 @@ namespace TraverserProject
 
             if (damageTarget != null)
             {
+                contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+
                 if (damageTarget == characterCausingDamage)
                     return;
 
-                contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-                DamageTarget(damageTarget);
+                if (!WorldUtilityManager.Singleton.CanIDamageThisTarget(characterCausingDamage.characterGroup, damageTarget.characterGroup))
+                    return;
 
+                CheckForParry(damageTarget);
+
+                CheckForBlock(damageTarget);
+
+                if (!damageTarget.characterNetworkManager.isInvulnerable.Value)
+                    DamageTarget(damageTarget);
+
+            }
+        }
+
+        protected override void CheckForParry(CharacterManager damageTarget)
+        {
+            if (charactersDamaged.Contains(damageTarget))
+                return;
+
+            if (!characterCausingDamage.characterNetworkManager.isParryable.Value)
+                return;
+
+            if (!damageTarget.IsOwner)
+                return;
+
+            if (damageTarget.characterNetworkManager.isParrying.Value)
+            {
+                charactersDamaged.Add(damageTarget);
+                damageTarget.characterNetworkManager.NotifyTheServerOfParryServerRpc(characterCausingDamage.NetworkObjectId);
+                damageTarget.characterAnimatorManager.PlayTargetActionAnimationInstantly("Parry_Land_01", true);
             }
         }
 
