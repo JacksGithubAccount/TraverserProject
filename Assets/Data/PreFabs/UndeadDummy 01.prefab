@@ -502,6 +502,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8632862048956698659}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2746066676055463006}
     - targetCorrespondingSourceObject: {fileID: 2261973912390581236, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8398905484300377553}
@@ -1133,6 +1136,7 @@ MonoBehaviour:
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterCombatManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
+  aiCharacterInventoryManager: {fileID: 0}
   currentState: {fileID: 11400000, guid: b0db1e40aa2911148b99441ce4fc171d, type: 2}
   navMeshAgent: {fileID: 0}
   idle: {fileID: 11400000, guid: b0db1e40aa2911148b99441ce4fc171d, type: 2}
@@ -1287,6 +1291,10 @@ MonoBehaviour:
     m_InternalValue: 0
   isBlocking:
     m_InternalValue: 0
+  isParrying:
+    m_InternalValue: 0
+  isParryable:
+    m_InternalValue: 0
   isAttacking:
     m_InternalValue: 0
   isInvulnerable:
@@ -1319,6 +1327,21 @@ MonoBehaviour:
     m_InternalValue: 1
   strengthModifier:
     m_InternalValue: 1
+--- !u!114 &2746066676055463006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3807294811122837391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af101b79c803fa74d9765bb9c95c302a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropItemChance: 10
+  droppableItems:
+  - {fileID: 11400000, guid: 64a3dcab51c176e409334284777e2c9a, type: 2}
 --- !u!1 &4052779361683456650 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -9211815070973405100, guid: e90d2635acace004890485c7a82d2ab3, type: 3}

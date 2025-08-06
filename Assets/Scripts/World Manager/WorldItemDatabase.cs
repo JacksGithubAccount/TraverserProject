@@ -11,6 +11,8 @@ namespace TraverserProject
 
         public WeaponItem unarmedWeapon;
 
+        public GameObject creatureDropPickUpItemPrefab;
+
         [Header("Weapons")]
         [SerializeField] List<WeaponItem> weapons = new List<WeaponItem>();
 
@@ -98,6 +100,11 @@ namespace TraverserProject
 
                 items[i].itemID = prefixKey + i;
             }
+        }
+
+        public Item GetItemByID(int ID)
+        {
+            return items.FirstOrDefault(item => item.itemID == ID);
         }
 
         public WeaponItem GetWeaponByID(int ID)

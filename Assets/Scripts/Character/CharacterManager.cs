@@ -88,6 +88,7 @@ namespace TraverserProject
         {
             base.OnNetworkSpawn();
 
+            isDead.OnValueChanged += characterNetworkManager.OnIsDeadChanged;
             animator.SetBool("isMoving", characterNetworkManager.isMoving.Value);
             characterNetworkManager.OnIsActiveChanged(false, characterNetworkManager.isActive.Value);
 
@@ -99,6 +100,7 @@ namespace TraverserProject
         {
             base.OnNetworkDespawn();
 
+            isDead.OnValueChanged -= characterNetworkManager.OnIsDeadChanged;
             characterNetworkManager.isMoving.OnValueChanged -= characterNetworkManager.OnIsMovingChanged;
             characterNetworkManager.isActive.OnValueChanged -= characterNetworkManager.OnIsActiveChanged;
         }

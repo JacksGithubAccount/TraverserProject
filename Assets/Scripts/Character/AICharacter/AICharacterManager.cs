@@ -13,6 +13,7 @@ namespace TraverserProject
         [HideInInspector] public AICharacterNetworkManager aiCharacterNetworkManager;
         [HideInInspector] public AICharacterCombatManager aiCharacterCombatManager;
         [HideInInspector] public AICharacterLocomotionManager aiCharacterLocomotionManager;
+        [HideInInspector] public AICharacterInventoryManager aiCharacterInventoryManager;
 
         [Header("Current State")]
         [SerializeField] protected AIState currentState;
@@ -33,6 +34,8 @@ namespace TraverserProject
             aiCharacterNetworkManager = GetComponent<AICharacterNetworkManager>();
             aiCharacterCombatManager = GetComponent<AICharacterCombatManager>();
             aiCharacterLocomotionManager = GetComponent<AICharacterLocomotionManager>();
+            aiCharacterInventoryManager = GetComponent<AICharacterInventoryManager>();
+
             navMeshAgent = GetComponentInChildren<NavMeshAgent>();
 
 
