@@ -31,6 +31,8 @@ namespace TraverserProject
         [Header("Ashes of War")]
         [SerializeField] List<AshOfWar> ashesOfWar = new List<AshOfWar>();
 
+        [Header("Spells")]
+        [SerializeField] List<SpellItem> spells = new List<SpellItem>();
 
         [Header("Items")]
         private List<Item> items = new List<Item>();
@@ -41,6 +43,8 @@ namespace TraverserProject
         [SerializeField] int bodyItemKey = 3000;
         [SerializeField] int handItemKey = 4000;
         [SerializeField] int legItemKey = 5000;
+        [SerializeField] int ashOfWarItemKey = 6000;
+        [SerializeField] int spellItemKey = 7000;
 
         private void Awake()
         {
@@ -83,6 +87,11 @@ namespace TraverserProject
                 items.Add(item);
             }
 
+            foreach (var item in spells)
+            {
+                items.Add(item);
+            }
+
             for (int i = 0; i < items.Count; i++)
             {
                 int prefixKey = 0;
@@ -97,6 +106,10 @@ namespace TraverserProject
                     prefixKey = handItemKey;
                 else if (items[i].GetType() == typeof(LegEquipmentItem))
                     prefixKey = legItemKey;
+                else if (items[i].GetType() == typeof(AshOfWar))
+                    prefixKey = ashOfWarItemKey;
+                else if (items[i].GetType() == typeof(SpellItem))
+                    prefixKey = spellItemKey;
 
                 items[i].itemID = prefixKey + i;
             }
@@ -135,6 +148,11 @@ namespace TraverserProject
         public AshOfWar GetAshOfWarByID(int ID)
         {
             return ashesOfWar.FirstOrDefault(item => item.itemID == ID);
+        }
+
+        public SpellItem GetSpellByID(int ID)
+        {
+            return spells.FirstOrDefault(item => item.itemID == ID);
         }
 
     }

@@ -14,6 +14,7 @@ namespace TraverserProject
         public NetworkVariable<int> currentWeaponBeingUsed = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<int> currentRightHandWeaponID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<int> currentLeftHandWeaponID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> currentSpellID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isUsingRightHand = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isUsingLeftHand = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
@@ -99,6 +100,17 @@ namespace TraverserProject
 
             if (player.playerCombatManager.currentWeaponBeingUsed != null)
                 player.playerAnimatorManager.UpdateAnimatorController(player.playerCombatManager.currentWeaponBeingUsed.weaponAnimator);
+        }
+
+        public void OnCurrentSpellIDChange(int oldID, int newID)
+        {
+            SpellItem newSpell = Instantiate(WorldItemDatabase.Singleton.GetSpellByID(newID));
+            player.playerInventoryManager.currentSpell = newSpell;
+
+            if (player.IsOwner)
+            {
+                //PlayerUIManager.Singleton.playerUIHudManager.SetSpellQuickSlotIcon(newID);
+            }
         }
 
         public override void OnIsBlockingChanged(bool oldStatus, bool newStatus)

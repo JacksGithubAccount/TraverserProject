@@ -52,6 +52,14 @@ public enum WeaponClass
     Axe,
     LightShield
 }
+
+//determines which catalyst is used to cast spell
+public enum SpellClass
+{
+    Incantation,
+    Sorcery
+}
+
 //is used to tag equipment models with specific body parts that the equipment will cover
 public enum EquipmentModelType
 {
