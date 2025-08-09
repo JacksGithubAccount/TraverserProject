@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Netcode;
 
 namespace TraverserProject
 {
@@ -14,7 +15,8 @@ namespace TraverserProject
                 playerPerformingAction.playerNetworkManager.currentWeaponBeingUsed.Value = weaponPerformingAction.itemID;
             }
 
-            Debug.Log("The action has fired");
+            playerPerformingAction.playerNetworkManager.NotifyTheServerOfWeaponActionServerRpc(NetworkManager.Singleton.LocalClientId, actionID, weaponPerformingAction.itemID);
+
         }
 
     }

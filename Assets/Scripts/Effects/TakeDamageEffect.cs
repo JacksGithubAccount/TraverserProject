@@ -189,6 +189,7 @@ namespace TraverserProject
             if (poiseIsBroken)
             {
                 character.characterAnimatorManager.PlayTargetActionAnimation(damageAnimation, true);
+                character.characterCombatManager.DestroyAllCurrentActionFX();
             }
             else
             {

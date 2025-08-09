@@ -9,6 +9,9 @@ namespace TraverserProject
     {
         CharacterManager character;
 
+        [Header("Current FX")]
+        public GameObject activeSpellWarmUpFX;
+
         [Header("VFX")]
         [SerializeField] GameObject bloodSplatterVFX;
         [SerializeField] GameObject criticalBloodSplatterVFX;

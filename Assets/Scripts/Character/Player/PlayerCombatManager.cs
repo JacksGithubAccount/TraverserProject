@@ -26,8 +26,7 @@ namespace TraverserProject
             {
                 weaponAction.AttemptToPerformAction(player, weaponPerformingAction);
 
-                player.playerNetworkManager.NotifyTheServerOfWeaponActionServerRpc(NetworkManager.Singleton.LocalClientId, weaponAction.actionID, weaponPerformingAction.itemID);
-            }
+           }
 
 
 
@@ -249,6 +248,14 @@ namespace TraverserProject
                 return;
 
             player.playerInventoryManager.currentSpell.InstantiateReleaseFX(player);
+        }
+
+        public void SuccessfullyCastSpell()
+        {
+            if (player.playerInventoryManager.currentSpell == null)
+                return;
+
+            player.playerInventoryManager.currentSpell.SuccessfullyCastSpell(player);
         }
 
         public WeaponItem SelectWeaponToPerformAshOfWar()

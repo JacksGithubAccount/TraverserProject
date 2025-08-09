@@ -105,7 +105,9 @@ namespace TraverserProject
         public void OnCurrentSpellIDChange(int oldID, int newID)
         {
             SpellItem newSpell = Instantiate(WorldItemDatabase.Singleton.GetSpellByID(newID));
-            player.playerInventoryManager.currentSpell = newSpell;
+
+            if (newSpell != null)
+                player.playerInventoryManager.currentSpell = newSpell;
 
             if (player.IsOwner)
             {

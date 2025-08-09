@@ -51,8 +51,20 @@ MonoBehaviour:
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
+  poiseDamage: 0
   characterCausingDamage: {fileID: 0}
   light_Attack_01_Modifier: 0
+  light_Attack_02_Modifier: 0
+  heavy_Attack_01_Modifier: 0
+  heavy_Attack_02_Modifier: 0
+  charge_Attack_01_Modifier: 0
+  charge_Attack_02_Modifier: 0
+  running_Light_Attack_01_Modifier: 0
+  running_Heavy_Attack_01_Modifier: 0
+  rolling_Light_Attack_01_Modifier: 0
+  rolling_Heavy_Attack_01_Modifier: 0
+  backstep_Light_Attack_01_Modifier: 0
+  backstep_Heavy_Attack_01_Modifier: 0
 --- !u!135 &624268283510482665
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -83,6 +95,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5519861368666095948}
+  - component: {fileID: 2945864083729874583}
   m_Layer: 0
   m_Name: WeaponModel
   m_TagString: Untagged
@@ -106,6 +119,18 @@ Transform:
   - {fileID: 235532955732972092}
   m_Father: {fileID: 2208235284986152112}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2945864083729874583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3885255180708114160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 350fc997bd70d6d46837c99ae0d5eff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5843861863679961298
 GameObject:
   m_ObjectHideFlags: 0

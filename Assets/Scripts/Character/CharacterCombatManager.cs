@@ -268,5 +268,10 @@ namespace TraverserProject
         {
 
         }
+        //used to destroy drawn arrows or spell warm up fx when character is poise broken
+        public void DestroyAllCurrentActionFX()
+        {
+            character.characterNetworkManager.DestroyAllCurrentActionFXServerRpc();
+        }
     }
 }

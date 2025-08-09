@@ -123,6 +123,24 @@ namespace TraverserProject
 
 
 
+        //used to cancel FX when poise broken
+        [ServerRpc]
+        public void DestroyAllCurrentActionFXServerRpc()
+        {
+            if (IsServer)
+            {
+                DestroyAllCurrentActionFXClientRpc();
+
+            }
+        }
+
+        [ClientRpc]
+        public void DestroyAllCurrentActionFXClientRpc()
+        {
+            if (character.characterEffectsManager.activeSpellWarmUpFX != null)
+                Destroy(character.characterEffectsManager.activeSpellWarmUpFX);
+        }
+
         //action animation
         [ServerRpc]
         public void NotifyTheServerOfActionAnimationServerRpc(ulong clientID, string animationID, bool applyRootMotion)
@@ -286,7 +304,9 @@ namespace TraverserProject
             damageEffect.characterCausingDamage = characterCausingDamage;
 
             damagedCharacter.characterEffectsManager.ProcessInstantEffect(damageEffect);
-            damagedCharacter.characterAnimatorManager.PlayTargetActionAnimationInstantly(criticalDamageAnimation, true);
+
+            if (damagedCharacter.IsOwner)
+                damagedCharacter.characterAnimatorManager.PlayTargetActionAnimationInstantly(criticalDamageAnimation, true);
 
 
             StartCoroutine(damagedCharacter.characterCombatManager.ForceMoveEnemyCharacterToRipostePosition
