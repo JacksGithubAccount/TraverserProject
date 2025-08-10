@@ -77,6 +77,16 @@ namespace TravserserProject
             return Mathf.RoundToInt(stamina);
         }
 
+        public int CalculateFocusPointsBasedOnMindLevel(int mind)
+        {
+            float focusPoints = 0;
+
+            //any equation for stamina
+            focusPoints = mind * 10;
+
+            return Mathf.RoundToInt(focusPoints);
+        }
+
         public virtual void RegenerateStamina()
         {
             if (!character.IsOwner)

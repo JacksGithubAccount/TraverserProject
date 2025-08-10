@@ -88,9 +88,11 @@ namespace TraverserProject
 
                 playerNetworkManager.vitality.OnValueChanged += playerNetworkManager.SetNewMaxHealthValue;
                 playerNetworkManager.endurance.OnValueChanged += playerNetworkManager.SetNewMaxStaminaValue;
+                playerNetworkManager.mind.OnValueChanged += playerNetworkManager.SetNewMaxFocusPointValue;
 
                 playerNetworkManager.currentHealth.OnValueChanged += PlayerUIManager.Singleton.playerUIHudManager.SetNewHealthValue;
                 playerNetworkManager.currentStamina.OnValueChanged += PlayerUIManager.Singleton.playerUIHudManager.SetNewStaminaValue;
+                playerNetworkManager.currentFocusPoints.OnValueChanged += PlayerUIManager.Singleton.playerUIHudManager.SetNewFocusPointValue;
                 playerNetworkManager.currentStamina.OnValueChanged += playerStatsManager.ResetStaminaRegenTimer;
             }
 
@@ -145,9 +147,11 @@ namespace TraverserProject
             {
                 playerNetworkManager.vitality.OnValueChanged -= playerNetworkManager.SetNewMaxHealthValue;
                 playerNetworkManager.endurance.OnValueChanged -= playerNetworkManager.SetNewMaxStaminaValue;
+                playerNetworkManager.mind.OnValueChanged -= playerNetworkManager.SetNewMaxFocusPointValue;
 
                 playerNetworkManager.currentHealth.OnValueChanged -= PlayerUIManager.Singleton.playerUIHudManager.SetNewHealthValue;
                 playerNetworkManager.currentStamina.OnValueChanged -= PlayerUIManager.Singleton.playerUIHudManager.SetNewStaminaValue;
+                playerNetworkManager.currentFocusPoints.OnValueChanged -= PlayerUIManager.Singleton.playerUIHudManager.SetNewFocusPointValue;
                 playerNetworkManager.currentStamina.OnValueChanged -= playerStatsManager.ResetStaminaRegenTimer;
             }
 
@@ -237,9 +241,11 @@ namespace TraverserProject
 
             currentCharacterData.currentHealth = playerNetworkManager.currentHealth.Value;
             currentCharacterData.currentStamina = playerNetworkManager.currentStamina.Value;
+            currentCharacterData.currentFocusPoints = playerNetworkManager.currentFocusPoints.Value;
 
             currentCharacterData.vitality = playerNetworkManager.vitality.Value;
             currentCharacterData.endurance = playerNetworkManager.endurance.Value;
+            currentCharacterData.mind = playerNetworkManager.mind.Value;
 
             //equipment
             //currentCharacterData.headEquipment = playerInventoryManager.headEquipment.itemID;
@@ -260,6 +266,9 @@ namespace TraverserProject
             currentCharacterData.leftWeapon01 = playerInventoryManager.weaponsInLeftHandSlots[0].itemID;
             currentCharacterData.leftWeapon02 = playerInventoryManager.weaponsInLeftHandSlots[1].itemID;
             currentCharacterData.leftWeapon03 = playerInventoryManager.weaponsInLeftHandSlots[2].itemID;
+
+            if(playerInventoryManager.currentSpell != null)
+                currentCharacterData.currentSpell = playerInventoryManager.currentSpell.itemID;
         }
         public void LoadGameDataFromCurrentCharacterData(ref CharacterSaveData currentCharacterData)
         {
@@ -271,15 +280,17 @@ namespace TraverserProject
 
             playerNetworkManager.vitality.Value = currentCharacterData.vitality;
             playerNetworkManager.endurance.Value = currentCharacterData.endurance;
+            playerNetworkManager.mind.Value = currentCharacterData.mind;
 
             //moved with implement save/load
             playerNetworkManager.maxHealth.Value = playerStatsManager.CalculateHealthBasedOnVitalityLevel(playerNetworkManager.vitality.Value);
-            //playerNetworkManager.currentHealth.Value = currentCharacterData.currentHealth;
-            PlayerUIManager.Singleton.playerUIHudManager.SetMaxHealthValue(playerNetworkManager.maxHealth.Value);
+            playerNetworkManager.currentHealth.Value = currentCharacterData.currentHealth;
 
             playerNetworkManager.maxStamina.Value = playerStatsManager.CalculateStaminaBasedOnEnduranceLevel(playerNetworkManager.endurance.Value);
             playerNetworkManager.currentStamina.Value = currentCharacterData.currentStamina;
-            PlayerUIManager.Singleton.playerUIHudManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
+
+            playerNetworkManager.maxFocusPoints.Value = playerStatsManager.CalculateFocusPointsBasedOnMindLevel(playerNetworkManager.mind.Value);
+            playerNetworkManager.currentFocusPoints.Value = currentCharacterData.currentFocusPoints;
 
             //equipment
             if (WorldItemDatabase.Singleton.GetHeadEquipmentByID(currentCharacterData.headEquipment))
@@ -379,6 +390,16 @@ namespace TraverserProject
             else
             {
                 playerInventoryManager.weaponsInLeftHandSlots[2] = null;
+            }
+
+            if (WorldItemDatabase.Singleton.GetSpellByID(currentCharacterData.currentSpell))
+            {
+                SpellItem currentSpell = Instantiate(WorldItemDatabase.Singleton.GetSpellByID(currentCharacterData.currentSpell));
+                playerNetworkManager.currentSpellID.Value = currentSpell.itemID;
+            }
+            else
+            {
+                playerNetworkManager.currentSpellID.Value = -1;
             }
 
             playerEquipmentManager.EquipArmor();

@@ -19,6 +19,7 @@ namespace TravserserProject
             base.Start();
             CalculateHealthBasedOnVitalityLevel(player.playerNetworkManager.vitality.Value);
             CalculateStaminaBasedOnEnduranceLevel(player.playerNetworkManager.endurance.Value);
+            CalculateFocusPointsBasedOnMindLevel(player.playerNetworkManager.mind.Value);
         }
 
         public void CalculateTotalArmorAbsorption()

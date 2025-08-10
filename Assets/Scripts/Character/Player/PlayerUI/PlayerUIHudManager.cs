@@ -12,10 +12,12 @@ namespace TravserserProject
         [Header("Stat Bars")]
         [SerializeField] UI_StatBar healthBar;
         [SerializeField] UI_StatBar staminaBar;
+        [SerializeField] UI_StatBar focusPointBar;
 
         [Header("Quick Slots")]
         [SerializeField] Image rightWeaponQuickSlotIcon;
         [SerializeField] Image leftWeaponQuickSlotIcon;
+        [SerializeField] Image spellItemQuickSlotIcon;
 
         [Header("Boss Health Bar")]
         public Transform bossHealthBarParent;
@@ -45,6 +47,8 @@ namespace TravserserProject
             healthBar.gameObject.SetActive(true);
             staminaBar.gameObject.SetActive(false);
             staminaBar.gameObject.SetActive(true);
+            focusPointBar.gameObject.SetActive(false);
+            focusPointBar.gameObject.SetActive(true);
         }
         public void SetNewHealthValue(int oldValue, int newValue)
         {
@@ -66,12 +70,22 @@ namespace TravserserProject
             staminaBar.SetMaxStat(maxStamina);
         }
 
+        public void SetNewFocusPointValue(int oldValue, int newValue)
+        {
+            focusPointBar.SetStat(Mathf.RoundToInt(newValue));
+        }
+
+        public void SetMaxFocusPointsValue(int maxFocusPoint)
+        {
+            focusPointBar.SetMaxStat(maxFocusPoint);
+        }
+
         public void SetRightWeaponQuickSlotIcon(int weaponID)
         {
 
             WeaponItem weapon = WorldItemDatabase.Singleton.GetWeaponByID(weaponID);
 
-            if (WorldItemDatabase.Singleton.GetWeaponByID(weaponID) == null)
+            if (weapon == null)
             {
                 Debug.Log("Right weapon is null");
                 rightWeaponQuickSlotIcon.enabled = false;
@@ -98,7 +112,7 @@ namespace TravserserProject
 
             WeaponItem weapon = WorldItemDatabase.Singleton.GetWeaponByID(weaponID);
 
-            if (WorldItemDatabase.Singleton.GetWeaponByID(weaponID) == null)
+            if (weapon == null)
             {
                 Debug.Log("Left weapon is null");
                 leftWeaponQuickSlotIcon.enabled = false;
@@ -117,6 +131,33 @@ namespace TravserserProject
 
             leftWeaponQuickSlotIcon.sprite = weapon.itemIcon;
             leftWeaponQuickSlotIcon.enabled = true;
+        }
+
+        public void SetSpellQuickSlotIcon(int spellID)
+        {
+
+            SpellItem spell = WorldItemDatabase.Singleton.GetSpellByID(spellID);
+
+            if (spell == null)
+            {
+                Debug.Log("spell is null");
+                spellItemQuickSlotIcon.enabled = false;
+                spellItemQuickSlotIcon.sprite = null;
+                return;
+            }
+
+            if (spell.itemIcon == null)
+            {
+                Debug.Log("spell has No Icon");
+                spellItemQuickSlotIcon.enabled = false;
+                spellItemQuickSlotIcon.sprite = null;
+                return;
+            }
+
+
+
+            spellItemQuickSlotIcon.sprite = spell.itemIcon;
+            spellItemQuickSlotIcon.enabled = true;
         }
 
     }

@@ -26,10 +26,12 @@ namespace TraverserProject
         [Header("Resources")]
         public int currentHealth;
         public float currentStamina;
+        public int currentFocusPoints;
 
         [Header("Stats")]
         public int vitality;
         public int endurance;
+        public int mind;
 
         [Header("Sites Of Grace")]
         public SerializableDictionary<int, bool> sitesOfGrace;
@@ -57,7 +59,7 @@ namespace TraverserProject
         public int leftWeapon02;
         public int leftWeapon03;
 
-
+        public int currentSpell;
 
 
         public CharacterSaveData()

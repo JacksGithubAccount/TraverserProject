@@ -72,6 +72,13 @@ namespace TraverserProject
             currentStamina.Value = maxStamina.Value;
         }
 
+        public void SetNewMaxFocusPointValue(int oldMind, int newMind)
+        {
+            maxFocusPoints.Value = player.playerStatsManager.CalculateFocusPointsBasedOnMindLevel(newMind);
+            PlayerUIManager.Singleton.playerUIHudManager.SetMaxFocusPointsValue(maxFocusPoints.Value);
+            currentFocusPoints.Value = maxFocusPoints.Value;
+        }
+
         public void OnCurrentRightHandWeaponIDChange(int oldID, int newID)
         {
             WeaponItem newWeapon = Instantiate(WorldItemDatabase.Singleton.GetWeaponByID(newID));
@@ -94,7 +101,6 @@ namespace TraverserProject
                 PlayerUIManager.Singleton.playerUIHudManager.SetLeftWeaponQuickSlotIcon(newID);
             }
         }
-
         public void OnCurrentWeaponBeingUsedIDChange(int oldID, int newID)
         {
             WeaponItem newWeapon = Instantiate(WorldItemDatabase.Singleton.GetWeaponByID(newID));
@@ -109,15 +115,21 @@ namespace TraverserProject
 
         public void OnCurrentSpellIDChange(int oldID, int newID)
         {
-            SpellItem newSpell = Instantiate(WorldItemDatabase.Singleton.GetSpellByID(newID));
+            SpellItem newSpell = null;
+
+            if (WorldItemDatabase.Singleton.GetSpellByID(newID))
+                newSpell = Instantiate(WorldItemDatabase.Singleton.GetSpellByID(newID));
 
             if (newSpell != null)
+            {
                 player.playerInventoryManager.currentSpell = newSpell;
 
-            if (player.IsOwner)
-            {
-                //PlayerUIManager.Singleton.playerUIHudManager.SetSpellQuickSlotIcon(newID);
+                if (player.IsOwner)
+                    PlayerUIManager.Singleton.playerUIHudManager.SetSpellQuickSlotIcon(newID);
             }
+
+            
+            
         }
 
         public void OnIsChargingRightSpellChanged(bool oldStatus, bool newStatus)
