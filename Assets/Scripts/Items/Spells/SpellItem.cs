@@ -14,7 +14,9 @@ namespace TraverserProject
 
         [Header("Spell FX")]
         [SerializeField] protected GameObject spellCastWarmUpFX;
+        [SerializeField] protected GameObject spellCastChargeFX;
         [SerializeField] protected GameObject spellCastReleaseFX;
+        [SerializeField] protected GameObject spellCastReleaseFullChargeFX;
 
         [Header("Animations")]
         [SerializeField] protected string mainHandSpellAnimation;
@@ -30,6 +32,16 @@ namespace TraverserProject
         }
 
         public virtual void SuccessfullyCastSpell(PlayerManager player)
+        {
+
+        }
+
+        public virtual void SuccessfullyChargeSpell(PlayerManager player)
+        {
+
+        }
+
+        public virtual void SuccessfullyCastSpellFullCharge(PlayerManager player)
         {
 
         }

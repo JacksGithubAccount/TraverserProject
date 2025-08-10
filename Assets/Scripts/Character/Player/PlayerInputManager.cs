@@ -37,11 +37,13 @@ namespace TraverserProject
 
         [Header("Bumper Input")]
         [SerializeField] bool RB_Input = false;
+        [SerializeField] bool hold_RB_Input = false;
         [SerializeField] bool LB_Input = false;
+        [SerializeField] bool hold_LB_Input = false;
 
         [Header("Trigger Input")]
         [SerializeField] bool RT_Input = false;
-        [SerializeField] bool Hold_RT_Input = false;
+        [SerializeField] bool hold_RT_Input = false;
         [SerializeField] bool LT_Input = false;
 
         [Header("Two Hand Input")]
@@ -125,13 +127,17 @@ namespace TraverserProject
 
                 //bumpers
                 playerControls.PlayerActions.RB.performed += i => RB_Input = true;
+                playerControls.PlayerActions.HoldRB.performed += i => hold_RB_Input = true;
+                playerControls.PlayerActions.HoldRB.canceled += i => hold_RB_Input = false;
                 playerControls.PlayerActions.LB.performed += i => LB_Input = true;
+                playerControls.PlayerActions.HoldLB.performed += i => hold_LB_Input = true;
+                playerControls.PlayerActions.HoldLB.canceled += i => hold_LB_Input = false;
                 playerControls.PlayerActions.LB.canceled += i => player.playerNetworkManager.isBlocking.Value = false;
 
                 //Triggers
                 playerControls.PlayerActions.RT.performed += i => RT_Input = true;
-                playerControls.PlayerActions.HoldRT.performed += i => Hold_RT_Input = true;
-                playerControls.PlayerActions.HoldRT.canceled += i => Hold_RT_Input = false;
+                playerControls.PlayerActions.HoldRT.performed += i => hold_RT_Input = true;
+                playerControls.PlayerActions.HoldRT.canceled += i => hold_RT_Input = false;
                 playerControls.PlayerActions.LT.performed += i => LT_Input = true;
 
                 //two hand
@@ -197,7 +203,9 @@ namespace TraverserProject
             HandleSprintInput();
             HandleJumpInput();
             HandleRBInput();
+            HandleHoldRBInput();
             HandleLBInput();
+            HandleHoldLBInput();
             HandleRTInput();
             HandleHoldRTInput();
             HandleLTInput();
@@ -424,6 +432,18 @@ namespace TraverserProject
             }
         }
 
+        private void HandleHoldRBInput()
+        {
+            if (hold_RB_Input)
+            {
+                player.playerNetworkManager.isChargingRightSpell.Value = true;
+            }
+            else
+            {
+                player.playerNetworkManager.isChargingRightSpell.Value = false;
+            }
+        }
+
         private void HandleLBInput()
         {
             if (LB_Input)
@@ -433,6 +453,18 @@ namespace TraverserProject
                 player.playerNetworkManager.SetCharacterActionHand(false);
 
                 player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentLeftHandWeapon.oh_LB_Action, player.playerInventoryManager.currentLeftHandWeapon);
+            }
+        }
+
+        private void HandleHoldLBInput()
+        {
+            if (hold_LB_Input)
+            {
+                player.playerNetworkManager.isChargingLeftSpell.Value = true;
+            }
+            else
+            {
+                player.playerNetworkManager.isChargingLeftSpell.Value = false;
             }
         }
 
@@ -454,7 +486,7 @@ namespace TraverserProject
             {
                 if (player.playerNetworkManager.isUsingRightHand.Value)
                 {
-                    player.playerNetworkManager.isChargingAttack.Value = Hold_RT_Input;
+                    player.playerNetworkManager.isChargingAttack.Value = hold_RT_Input;
                 }
             }
         }

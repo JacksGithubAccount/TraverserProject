@@ -26,7 +26,8 @@ namespace TraverserProject
             {
                 weaponAction.AttemptToPerformAction(player, weaponPerformingAction);
 
-           }
+                player.playerNetworkManager.NotifyTheServerOfWeaponActionServerRpc(NetworkManager.Singleton.LocalClientId, weaponAction.actionID, weaponPerformingAction.itemID);
+            }
 
 
 
@@ -256,6 +257,22 @@ namespace TraverserProject
                 return;
 
             player.playerInventoryManager.currentSpell.SuccessfullyCastSpell(player);
+        }
+
+        public void SuccessfullyChargeSpell()
+        {
+            if (player.playerInventoryManager.currentSpell == null)
+                return;
+
+            player.playerInventoryManager.currentSpell.SuccessfullyChargeSpell(player);
+        }
+
+        public void SuccessfullyCastSpellFullCharge()
+        {
+            if (player.playerInventoryManager.currentSpell == null)
+                return;
+
+            player.playerInventoryManager.currentSpell.SuccessfullyCastSpellFullCharge(player);
         }
 
         public WeaponItem SelectWeaponToPerformAshOfWar()

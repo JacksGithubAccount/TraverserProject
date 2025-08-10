@@ -63,8 +63,7 @@ namespace TraverserProject
             if (player.IsOwner)
                 player.playerCombatManager.DestroyAllCurrentActionFX();
 
-            Collider[] characterCollider = player.GetComponentsInChildren<Collider>();
-            Collider characterCollisionCollider = player.GetComponent<Collider>();
+
 
             SpellInstantiationLocation spellInstantiationLocation;
             GameObject instantiatedReleasedSpellFX = Instantiate(spellCastReleaseFX);
@@ -82,11 +81,17 @@ namespace TraverserProject
             instantiatedReleasedSpellFX.transform.localRotation = Quaternion.identity;
             instantiatedReleasedSpellFX.transform.parent = null;
 
-            Rigidbody spellRigidBody = instantiatedReleasedSpellFX.GetComponent<Rigidbody>();
-            Vector3 upwardVelocityVector = instantiatedReleasedSpellFX.transform.up * upwardVelocity;
-            Vector3 forwardVelocityVector = instantiatedReleasedSpellFX.transform.forward * forwardVelocity;
-            Vector3 totalVelocity = upwardVelocityVector + forwardVelocityVector;
-            spellRigidBody.linearVelocity = totalVelocity;
+            FireBallManager fireBallManager = instantiatedReleasedSpellFX.GetComponent<FireBallManager>();
+            fireBallManager.InitializeFireBall(player);
+
+            //shows ignoring collision of caster, but that is already done elsewhere
+            /*Collider[] characterCollider = player.GetComponentInChildren<Collider>();
+			Collider characterCollisionCollider = player.GetComponent<Collider>();
+			Physics.IgnoreCollision(characterCollisionCollider, fireBallManager.damageCollider.damageCollider)
+			foreach(var collider in characterColliders)
+			{
+				Physics.IgnoreCollision(collider, fireBallManager.damageCollider.damageCollider, true);
+			}*/
 
             if (player.playerNetworkManager.isLockedOn.Value)
             {
@@ -97,6 +102,94 @@ namespace TraverserProject
                 Vector3 forwardDirection = player.transform.forward;
                 instantiatedReleasedSpellFX.transform.forward = forwardDirection;
             }
+
+            Rigidbody spellRigidBody = instantiatedReleasedSpellFX.GetComponent<Rigidbody>();
+            Vector3 upwardVelocityVector = instantiatedReleasedSpellFX.transform.up * upwardVelocity;
+            Vector3 forwardVelocityVector = instantiatedReleasedSpellFX.transform.forward * forwardVelocity;
+            Vector3 totalVelocity = upwardVelocityVector + forwardVelocityVector;
+            spellRigidBody.linearVelocity = totalVelocity;
+        }
+
+        public override void SuccessfullyChargeSpell(PlayerManager player)
+        {
+            base.SuccessfullyChargeSpell(player);
+
+            if (player.IsOwner)
+                player.playerCombatManager.DestroyAllCurrentActionFX();
+
+            SpellInstantiationLocation spellInstantiationLocation;
+            GameObject instantiatedChargeSpellFX = Instantiate(spellCastChargeFX);
+            if (player.playerNetworkManager.isUsingRightHand.Value)
+            {
+                spellInstantiationLocation = player.playerEquipmentManager.rightWeaponManager.GetComponentInChildren<SpellInstantiationLocation>();
+
+            }
+            else
+            {
+                spellInstantiationLocation = player.playerEquipmentManager.leftWeaponManager.GetComponentInChildren<SpellInstantiationLocation>();
+            }
+
+            player.playerEffectsManager.activeSpellWarmUpFX = instantiatedChargeSpellFX;
+
+            instantiatedChargeSpellFX.transform.parent = spellInstantiationLocation.transform;
+            instantiatedChargeSpellFX.transform.localPosition = Vector3.zero;
+            instantiatedChargeSpellFX.transform.localRotation = Quaternion.identity;
+
+        }
+
+        public override void SuccessfullyCastSpellFullCharge(PlayerManager player)
+        {
+            base.SuccessfullyCastSpellFullCharge(player);
+
+            if (player.IsOwner)
+                player.playerCombatManager.DestroyAllCurrentActionFX();
+
+
+
+            SpellInstantiationLocation spellInstantiationLocation;
+            GameObject instantiatedReleasedSpellFX = Instantiate(spellCastReleaseFullChargeFX);
+            if (player.playerNetworkManager.isUsingRightHand.Value)
+            {
+                spellInstantiationLocation = player.playerEquipmentManager.rightWeaponManager.GetComponentInChildren<SpellInstantiationLocation>();
+
+            }
+            else
+            {
+                spellInstantiationLocation = player.playerEquipmentManager.leftWeaponManager.GetComponentInChildren<SpellInstantiationLocation>();
+            }
+            instantiatedReleasedSpellFX.transform.parent = spellInstantiationLocation.transform;
+            instantiatedReleasedSpellFX.transform.localPosition = Vector3.zero;
+            instantiatedReleasedSpellFX.transform.localRotation = Quaternion.identity;
+            instantiatedReleasedSpellFX.transform.parent = null;
+
+            FireBallManager fireBallManager = instantiatedReleasedSpellFX.GetComponent<FireBallManager>();
+            fireBallManager.isFullyCharged = true;
+            fireBallManager.InitializeFireBall(player);
+
+            //shows ignoring collision of caster, but that is already done elsewhere
+            /*Collider[] characterCollider = player.GetComponentInChildren<Collider>();
+			Collider characterCollisionCollider = player.GetComponent<Collider>();
+			Physics.IgnoreCollision(characterCollisionCollider, fireBallManager.damageCollider.damageCollider)
+			foreach(var collider in characterColliders)
+			{
+				Physics.IgnoreCollision(collider, fireBallManager.damageCollider.damageCollider, true);
+			}*/
+
+            if (player.playerNetworkManager.isLockedOn.Value)
+            {
+                instantiatedReleasedSpellFX.transform.LookAt(player.playerCombatManager.currentTarget.transform.position);
+            }
+            else
+            {
+                Vector3 forwardDirection = player.transform.forward;
+                instantiatedReleasedSpellFX.transform.forward = forwardDirection;
+            }
+
+            Rigidbody spellRigidBody = instantiatedReleasedSpellFX.GetComponent<Rigidbody>();
+            Vector3 upwardVelocityVector = instantiatedReleasedSpellFX.transform.up * upwardVelocity;
+            Vector3 forwardVelocityVector = instantiatedReleasedSpellFX.transform.forward * forwardVelocity;
+            Vector3 totalVelocity = upwardVelocityVector + forwardVelocityVector;
+            spellRigidBody.linearVelocity = totalVelocity;
         }
 
         public override bool CanICastThisSpell(PlayerManager player)
