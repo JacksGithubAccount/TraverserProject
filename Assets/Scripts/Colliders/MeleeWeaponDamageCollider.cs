@@ -21,6 +21,8 @@ namespace TraverserProject
         public float rolling_Heavy_Attack_01_Modifier;
         public float backstep_Light_Attack_01_Modifier;
         public float backstep_Heavy_Attack_01_Modifier;
+        public float jumping_Light_Attack_01_Modifier;
+        public float jumping_Heavy_Attack_01_Modifier;
 
         protected override void Awake()
         {
@@ -112,6 +114,12 @@ namespace TraverserProject
                     break;
                 case AttackType.HeavyAttack02:
                     ApplyAttackDamageModifiers(heavy_Attack_02_Modifier, damageEffect);
+                    break;
+                case AttackType.LightJumpingAttack01:
+                    ApplyAttackDamageModifiers(jumping_Light_Attack_01_Modifier, damageEffect);
+                    break;
+                case AttackType.HeavyJumpingAttack01:
+                    ApplyAttackDamageModifiers(jumping_Heavy_Attack_01_Modifier, damageEffect);
                     break;
                 case AttackType.ChargedAttack01:
                     ApplyAttackDamageModifiers(charge_Attack_01_Modifier, damageEffect);

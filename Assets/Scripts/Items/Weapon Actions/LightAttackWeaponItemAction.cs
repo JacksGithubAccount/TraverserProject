@@ -9,6 +9,7 @@ namespace TraverserProject
         [Header("Light Attacks")]
         [SerializeField] string light_Attack_01 = "Main_Light_Attack_01";
         [SerializeField] string light_Attack_02 = "Main_Light_Attack_02";
+        [SerializeField] string light_Jumping_Attack_01 = "Main_Jumping_Light_Attack_01";
 
         [Header("Running Attacks")]
         [SerializeField] string running_Light_Attack_01 = "Main_Run_Light_Attack_01";
@@ -23,6 +24,7 @@ namespace TraverserProject
         [Header("Light Attacks")]
         [SerializeField] string twoh_light_Attack_01 = "2H_Light_Attack_01";
         [SerializeField] string twoh_light_Attack_02 = "2H_Light_Attack_02";
+        [SerializeField] string twoh_light_Jumping_Attack_01 = "2H_Jumping_Light_Attack_01";
 
         [Header("Running Attacks")]
         [SerializeField] string twoh_running_Light_Attack_01 = "2H_Run_Light_Attack_01";
@@ -43,11 +45,12 @@ namespace TraverserProject
                 return;
 
             if (!playerPerformingAction.characterLocomotionManager.isGrounded)
+            {
+                PerformJumpingLightAttack(playerPerformingAction, weaponPerformingAction);
+            }
+
+            if (playerPerformingAction.playerNetworkManager.isJumping.Value)
                 return;
-
-            if (playerPerformingAction.IsOwner)
-                playerPerformingAction.playerNetworkManager.isAttacking.Value = true;
-
 
             if (playerPerformingAction.characterNetworkManager.isSprinting.Value)
             {
@@ -83,6 +86,19 @@ namespace TraverserProject
             else
             {
                 PerformMainHandLightAttack(playerPerformingAction, weaponPerformingAction);
+            }
+
+        }
+
+        public void PerformJumpingLightAttack(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
+        {
+            if (playerPerformingAction.playerNetworkManager.isTwoHandingWeapon.Value)
+            {
+                PerformTwoHandJumpingLightAttack(playerPerformingAction, weaponPerformingAction);
+            }
+            else
+            {
+                PerformMainHandJumpingLightAttack(playerPerformingAction, weaponPerformingAction);
             }
 
         }
@@ -125,6 +141,26 @@ namespace TraverserProject
             {
                 playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.LightAttack01, twoh_light_Attack_01, true);
             }
+        }
+
+        public void PerformMainHandJumpingLightAttack(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
+        {
+            if (playerPerformingAction.isPerformingAction)
+                return;
+
+            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.LightJumpingAttack01, light_Jumping_Attack_01, true);
+
+
+        }
+
+        public void PerformTwoHandJumpingLightAttack(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
+        {
+            if (playerPerformingAction.isPerformingAction)
+                return;
+
+            playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.LightJumpingAttack01, twoh_light_Jumping_Attack_01, true);
+
+
         }
 
         public void PerformRunningAttack(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)

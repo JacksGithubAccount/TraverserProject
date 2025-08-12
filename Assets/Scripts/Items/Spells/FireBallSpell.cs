@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 namespace TraverserProject
 {
@@ -64,7 +65,6 @@ namespace TraverserProject
                 player.playerCombatManager.DestroyAllCurrentActionFX();
 
 
-
             SpellInstantiationLocation spellInstantiationLocation;
             GameObject instantiatedReleasedSpellFX = Instantiate(spellCastReleaseFX);
             if (player.playerNetworkManager.isUsingRightHand.Value)
@@ -81,8 +81,13 @@ namespace TraverserProject
             instantiatedReleasedSpellFX.transform.localRotation = Quaternion.identity;
             instantiatedReleasedSpellFX.transform.parent = null;
 
+            //var ve = instantiatedReleasedSpellFX.GetComponent<VisualEffect>();
+            //ve.playRate = 7.5f;
+
             FireBallManager fireBallManager = instantiatedReleasedSpellFX.GetComponent<FireBallManager>();
             fireBallManager.InitializeFireBall(player);
+
+            
 
             //shows ignoring collision of caster, but that is already done elsewhere
             /*Collider[] characterCollider = player.GetComponentInChildren<Collider>();
@@ -99,7 +104,7 @@ namespace TraverserProject
             }
             else
             {
-                Vector3 forwardDirection = player.transform.forward;
+                Vector3 forwardDirection = PlayerCamera.Singleton.transform.forward;
                 instantiatedReleasedSpellFX.transform.forward = forwardDirection;
             }
 

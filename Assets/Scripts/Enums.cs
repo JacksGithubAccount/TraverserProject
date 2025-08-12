@@ -125,7 +125,9 @@ public enum AttackType
     RollingLightAttack01,
     RollingHeavyAttack01,
     BackstepLightAttack01,
-    BackstepHeavyAttack01
+    BackstepHeavyAttack01,
+    LightJumpingAttack01,
+    HeavyJumpingAttack01
 }
 //calculate damage animation intensity
 public enum DamageIntensity

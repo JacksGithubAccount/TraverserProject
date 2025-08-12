@@ -172,6 +172,12 @@ namespace TraverserProject
                 case AttackType.HeavyAttack02:
                     staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.heavyAttackStaminaCostMultiplier;
                     break;
+                case AttackType.LightJumpingAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.jumpingLightAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.HeavyJumpingAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.jumpingHeavyAttackStaminaCostMultiplier;
+                    break;
                 case AttackType.ChargedAttack01:
                     staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.chargedAttackStaminaCostMultiplier;
                     break;

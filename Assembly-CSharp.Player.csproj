@@ -164,6 +164,7 @@
     <Compile Include="Assets\Scripts\Character\CharacterManager.cs" />
     <Compile Include="Assets\UI_Character_HP_Bar.cs" />
     <Compile Include="Assets\Scripts\Items\Weapon Actions\LightAttackWeaponItemAction.cs" />
+    <Compile Include="Assets\Data\Imports\Solodream\VFX_FireballPack\Scripts\FireballHorizontalMovement.cs" />
     <Compile Include="Assets\Scripts\Colliders\FireBallDamageCollider.cs" />
     <Compile Include="Assets\Scripts\Interactables\PickUpItemInteractable.cs" />
     <Compile Include="Assets\Scripts\Character\AICharacter\BossCharacters\Durk\AIDurkCombatManager.cs" />
@@ -1073,13 +1074,17 @@
       <Project>{DAD454CD-30CB-0795-D8F9-FA6AE5873AA6}</Project>
       <Name>Unity.RenderPipelines.Universal.Config.Runtime.Player</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.Player.csproj">
-      <Project>{E60C170D-E99B-3724-073A-9045C7104ABC}</Project>
-      <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.Player</Name>
+    <ProjectReference Include="Unity.VisualEffectGraph.Runtime.Player.csproj">
+      <Project>{8A2B06FF-91A8-1D3B-3CE3-7ABAE1ABF224}</Project>
+      <Name>Unity.VisualEffectGraph.Runtime.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Multiplayer.Center.Common.Player.csproj">
       <Project>{F17F1198-2522-1742-CDB0-F4020FF69542}</Project>
       <Name>Unity.Multiplayer.Center.Common.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.Player.csproj">
+      <Project>{E60C170D-E99B-3724-073A-9045C7104ABC}</Project>
+      <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Player.csproj">
       <Project>{00E27FA5-B934-59F9-3259-32258AB6347F}</Project>

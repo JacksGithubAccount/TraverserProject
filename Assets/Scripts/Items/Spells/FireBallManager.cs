@@ -30,13 +30,8 @@ namespace TraverserProject
             base.Update();
 
             if (spellTarget != null)
-                transform.LookAt(spellTarget.transform);
+                transform.LookAt(spellTarget.characterCombatManager.lockOnTransform.position);
 
-            if (fireBallRigidBody != null)
-            {
-                Vector3 currentVelocity = fireBallRigidBody.linearVelocity;
-                fireBallRigidBody.linearVelocity = transform.forward + currentVelocity;
-            }
         }
 
         private void OnCollisionEnter(Collision collision)

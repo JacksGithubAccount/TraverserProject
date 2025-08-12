@@ -48,6 +48,8 @@ namespace TraverserProject
         public float rolling_Heavy_Attack_01_Modifier = 1.3f;
         public float backstep_Light_Attack_01_Modifier = 1.0f;
         public float backstep_Heavy_Attack_01_Modifier = 1.4f;
+        public float jumping_Light_Attack_01_Modifier = 1.0f;
+        public float jumping_Heavy_Attack_01_Modifier = 1.5f;
 
         [Header("Stamina Cost Modifiers")]
         public int baseStaminaCost = 20;
@@ -60,6 +62,8 @@ namespace TraverserProject
         public float rollingHeavyAttackStaminaCostMultiplier = 1.4f;
         public float backstepLightAttackStaminaCostMultiplier = 0.9f;
         public float backstepHeavyAttackStaminaCostMultiplier = 1.3f;
+        public float jumpingLightAttackStaminaCostMultiplier = 1.0f;
+        public float jumpingHeavyAttackStaminaCostMultiplier = 2.0f;
 
         [Header("Weapon Blocking Absorption")]
         public float physicalBaseDamageAbsorption = 50;
