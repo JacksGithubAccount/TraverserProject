@@ -50,7 +50,8 @@ public enum WeaponClass
     MediumShield,
     Fist,
     Axe,
-    LightShield
+    LightShield,
+    Bow
 }
 
 //determines which catalyst is used to cast spell
@@ -58,6 +59,13 @@ public enum SpellClass
 {
     Incantation,
     Sorcery
+}
+
+//determines which range weapon can fire this ammo
+public enum ProjectileClass
+{
+    Arrow,
+	Bolt
 }
 
 //is used to tag equipment models with specific body parts that the equipment will cover

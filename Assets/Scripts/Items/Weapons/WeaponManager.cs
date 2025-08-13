@@ -15,6 +15,9 @@ namespace TraverserProject
 
         public void SetWeaponDamage(CharacterManager characterWieldingWeapon, WeaponItem weapon)
         {
+            if (meleeDamageCollider == null)
+                return;
+
             meleeDamageCollider.characterCausingDamage = characterWieldingWeapon;
             meleeDamageCollider.physicalDamage = weapon.physicalDamage;
             meleeDamageCollider.magicDamage = weapon.magicDamage;
