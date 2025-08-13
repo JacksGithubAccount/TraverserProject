@@ -65,7 +65,14 @@ public enum SpellClass
 public enum ProjectileClass
 {
     Arrow,
-	Bolt
+    Bolt
+}
+
+
+public enum ProjectileSlot
+{
+    Main,
+    Secondary
 }
 
 //is used to tag equipment models with specific body parts that the equipment will cover

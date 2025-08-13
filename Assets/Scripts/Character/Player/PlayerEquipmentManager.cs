@@ -19,8 +19,8 @@ namespace TraverserProject
         public WeaponManager leftWeaponManager;
 
         [Header("Weapon Managers")]
-        [HideInInspector] GameObject rightHandWeaponModel;
-        [HideInInspector] GameObject leftHandWeaponModel;
+        [HideInInspector] public GameObject rightHandWeaponModel;
+        [HideInInspector] public GameObject leftHandWeaponModel;
 
         [Header("Debug")]
         [SerializeField] bool equipNewItems = false;

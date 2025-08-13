@@ -36,6 +36,10 @@ namespace TraverserProject
         public NetworkVariable<int> handEquipmentID = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<int> legEquipmentID = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+        [Header("Projectiles")]
+        public NetworkVariable<int> mainProjectileID = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> secondaryProjectileID = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> hasArrowNotched = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
         protected override void Awake()
@@ -127,9 +131,30 @@ namespace TraverserProject
                 if (player.IsOwner)
                     PlayerUIManager.Singleton.playerUIHudManager.SetSpellQuickSlotIcon(newID);
             }
+        }
 
-            
-            
+        public void OnMainProjectileIDChange(int oldID, int newID)
+        {
+            RangedProjectileItem newProjectile = null;
+
+            if (WorldItemDatabase.Singleton.GetProjectileByID(newID))
+                newProjectile = Instantiate(WorldItemDatabase.Singleton.GetProjectileByID(newID));
+
+            if (newProjectile != null)
+                player.playerInventoryManager.mainProjectile = newProjectile;
+
+        }
+
+        public void OnSecondaryProjectileIDChange(int oldID, int newID)
+        {
+            RangedProjectileItem newProjectile = null;
+
+            if (WorldItemDatabase.Singleton.GetProjectileByID(newID))
+                newProjectile = Instantiate(WorldItemDatabase.Singleton.GetProjectileByID(newID));
+
+            if (newProjectile != null)
+                player.playerInventoryManager.secondaryProjectile = newProjectile;
+
         }
 
         public void OnIsChargingRightSpellChanged(bool oldStatus, bool newStatus)
@@ -310,5 +335,37 @@ namespace TraverserProject
                 Debug.LogError("Action is null");
             }
         }
+
+        //draw projectile
+        [ServerRpc]
+        public void NotifyTheServerOfDrawnProjectileServerRpc(int projectileID)
+        {
+            if (IsServer)
+            {
+                NotifyTheServerOfDrawnProjectileClientRpc(projectileID);
+            }
+        }
+
+        [ClientRpc]
+        private void NotifyTheServerOfDrawnProjectileClientRpc(int projectileID)
+        {
+            Animator bowAnimator;
+
+            if (isTwoHandingLeftWeapon.Value)
+            {
+                bowAnimator = player.playerEquipmentManager.leftHandWeaponModel.GetComponentInChildren<Animator>();
+            }
+            else
+            {
+                bowAnimator = player.playerEquipmentManager.rightHandWeaponModel.GetComponentInChildren<Animator>();
+            }
+
+            bowAnimator.SetBool("isDrawn", true);
+            bowAnimator.Play("Bow_Draw_01");
+
+            GameObject arrow = Instantiate(WorldItemDatabase.Singleton.GetProjectileByID(projectileID).drawProjectileModel, player.playerEquipmentManager.leftHandWeaponSlot.transform);
+            player.playerEffectsManager.activeDrawnProjectileFX = arrow;
+        }
+
     }
 }

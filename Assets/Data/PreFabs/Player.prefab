@@ -12532,6 +12532,12 @@ MonoBehaviour:
     m_InternalValue: -1
   legEquipmentID:
     m_InternalValue: -1
+  mainProjectileID:
+    m_InternalValue: -1
+  secondaryProjectileID:
+    m_InternalValue: -1
+  hasArrowNotched:
+    m_InternalValue: 0
 --- !u!114 &595495762783959068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12771,6 +12777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeSpellWarmUpFX: {fileID: 0}
+  activeDrawnProjectileFX: {fileID: 0}
   bloodSplatterVFX: {fileID: 0}
   criticalBloodSplatterVFX: {fileID: 0}
   staticEffects: []
@@ -12804,6 +12811,8 @@ MonoBehaviour:
   bodyEquipment: {fileID: 11400000, guid: d7f23dd81588e284892606c920126316, type: 2}
   handEquipment: {fileID: 11400000, guid: 404cac2c9b0f0f240a6ac1a7bd8e74cb, type: 2}
   legEquipment: {fileID: 11400000, guid: 0ac3f505a2054504a8c167b1834bb5b1, type: 2}
+  mainProjectile: {fileID: 11400000, guid: c769f95361625fa4d98e2a4e4d9ac4b1, type: 2}
+  secondaryProjectile: {fileID: 0}
   itemsInInventory:
   - {fileID: 11400000, guid: 2136559b2bbf9ce42b3d1be103acd38b, type: 2}
   - {fileID: 11400000, guid: 5e71dc28b7f4e344a866875bc002bce4, type: 2}
@@ -12833,6 +12842,8 @@ MonoBehaviour:
   backSlot: {fileID: 0}
   rightWeaponManager: {fileID: 0}
   leftWeaponManager: {fileID: 0}
+  rightHandWeaponModel: {fileID: 0}
+  leftHandWeaponModel: {fileID: 0}
   equipNewItems: 0
   hatsObject: {fileID: 4950477512941471090}
   hats: []

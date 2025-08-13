@@ -24,6 +24,10 @@ namespace TraverserProject
         public HandEquipmentItem handEquipment;
         public LegEquipmentItem legEquipment;
 
+        [Header("Projectiles")]
+        public RangedProjectileItem mainProjectile;
+        public RangedProjectileItem secondaryProjectile;
+
         [Header("Inventory")]
         public List<Item> itemsInInventory;
 

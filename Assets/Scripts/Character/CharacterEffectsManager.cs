@@ -11,6 +11,7 @@ namespace TraverserProject
 
         [Header("Current FX")]
         public GameObject activeSpellWarmUpFX;
+        public GameObject activeDrawnProjectileFX;
 
         [Header("VFX")]
         [SerializeField] GameObject bloodSplatterVFX;
