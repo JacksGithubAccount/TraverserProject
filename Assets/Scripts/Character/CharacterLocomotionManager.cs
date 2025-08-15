@@ -20,6 +20,7 @@ namespace TraverserProject
         public bool isRolling = false;
         public bool isGrounded = true;
         public bool canRotate = true;
+        public bool canRun = true;
         public bool canMove = true;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created

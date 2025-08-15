@@ -355,13 +355,25 @@ namespace TraverserProject
             if (player == null)
                 return;
 
-            if (moveAmount > 0)
+            if (moveAmount != 0)
             {
                 player.playerNetworkManager.isMoving.Value = true;
             }
             else
             {
                 player.playerNetworkManager.isMoving.Value = false;
+            }
+
+            if (!player.playerLocomotionManager.canRun)
+            {
+                if (moveAmount > 0.5f)
+                moveAmount = 0.5f;
+
+                if (verticalInput > 0.5f)
+                verticalInput = 0.5f;
+
+                if (horizontalInput > 0.5f)
+                horizontalInput = 0.5f;
             }
 
             if (!player.playerNetworkManager.isLockedOn.Value || player.playerNetworkManager.isSprinting.Value)
@@ -437,10 +449,12 @@ namespace TraverserProject
             if (hold_RB_Input)
             {
                 player.playerNetworkManager.isChargingRightSpell.Value = true;
+                player.playerNetworkManager.isHoldingArrow.Value = true;
             }
             else
             {
                 player.playerNetworkManager.isChargingRightSpell.Value = false;
+                player.playerNetworkManager.isHoldingArrow.Value = false;
             }
         }
 

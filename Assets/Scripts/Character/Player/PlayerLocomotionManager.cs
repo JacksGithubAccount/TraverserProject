@@ -76,7 +76,7 @@ namespace TraverserProject
             //clamp the movements
         }
         private void HandleGroundedMovement()
-        {         
+        {
 
             if (player.characterLocomotionManager.canMove || player.playerLocomotionManager.canRotate)
             {
@@ -245,6 +245,7 @@ namespace TraverserProject
                 player.playerAnimatorManager.PlayTargetActionAnimation("Back_Step_01", true, true);
             }
             player.playerNetworkManager.currentStamina.Value -= dodgeStaminaCost;
+            player.playerNetworkManager.DestroyAllCurrentActionFXServerRpc();
         }
 
         public void AttemptToPerformJump()

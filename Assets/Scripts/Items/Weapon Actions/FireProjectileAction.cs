@@ -52,6 +52,7 @@ namespace TraverserProject
 
             if (!playerPerformingAction.playerNetworkManager.hasArrowNotched.Value)
             {
+                playerPerformingAction.playerNetworkManager.hasArrowNotched.Value = true;
                 bool canIDrawAProjectile = CanIFireThisProjectile(weaponPerformingAction, projectileItem);
 
                 if (!canIDrawAProjectile)
@@ -62,6 +63,8 @@ namespace TraverserProject
                     playerPerformingAction.playerAnimatorManager.PlayTargetActionAnimation("Out_Of_Ammo_01", true);
                     return;
                 }
+
+                playerPerformingAction.playerCombatManager.currentProjectileBeingUsed = projectileSlot;
                 playerPerformingAction.playerAnimatorManager.PlayTargetActionAnimation("Bow_Draw_01", true);
                 playerPerformingAction.playerNetworkManager.NotifyTheServerOfDrawnProjectileServerRpc(projectileItem.itemID);
             }

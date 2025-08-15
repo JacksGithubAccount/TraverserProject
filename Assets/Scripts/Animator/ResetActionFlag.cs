@@ -16,6 +16,7 @@ namespace TraverserProject
             character.characterAnimatorManager.applyRootMotion = false;
             character.characterLocomotionManager.canMove = true;
             character.characterLocomotionManager.canRotate = true;
+            character.characterLocomotionManager.canRun = true;
             character.characterLocomotionManager.isRolling = false;
             character.characterCombatManager.DisableCanDoCombo();
             character.characterCombatManager.DisableCanDoRollingAttack();

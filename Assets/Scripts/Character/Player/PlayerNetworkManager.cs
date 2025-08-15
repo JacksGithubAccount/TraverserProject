@@ -40,6 +40,7 @@ namespace TraverserProject
         public NetworkVariable<int> mainProjectileID = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<int> secondaryProjectileID = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> hasArrowNotched = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> isHoldingArrow = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
         protected override void Awake()
@@ -156,6 +157,12 @@ namespace TraverserProject
                 player.playerInventoryManager.secondaryProjectile = newProjectile;
 
         }
+
+        public void OnIsHoldingArrowChanged(bool oldStatus, bool newStatus)
+        {
+            player.animator.SetBool("isHoldingArrow", isHoldingArrow.Value);
+        }
+
 
         public void OnIsChargingRightSpellChanged(bool oldStatus, bool newStatus)
         {
@@ -336,6 +343,35 @@ namespace TraverserProject
             }
         }
 
+        [ClientRpc]
+        public override void DestroyAllCurrentActionFXClientRpc()
+        {
+            base.DestroyAllCurrentActionFXClientRpc();
+
+            if (hasArrowNotched.Value)
+            {
+
+                Animator bowAnimator;
+
+                if (player.playerNetworkManager.isTwoHandingLeftWeapon.Value)
+                {
+                    bowAnimator = player.playerEquipmentManager.leftHandWeaponModel.GetComponentInChildren<Animator>();
+                }
+                else
+                {
+                    bowAnimator = player.playerEquipmentManager.rightHandWeaponModel.GetComponentInChildren<Animator>();
+                }
+
+                bowAnimator.SetBool("isDrawn", false);
+                bowAnimator.Play("Bow_Draw_01");
+
+                if (player.IsOwner)
+                    hasArrowNotched.Value = false;
+            }
+
+
+        }
+
         //draw projectile
         [ServerRpc]
         public void NotifyTheServerOfDrawnProjectileServerRpc(int projectileID)
@@ -365,6 +401,9 @@ namespace TraverserProject
 
             GameObject arrow = Instantiate(WorldItemDatabase.Singleton.GetProjectileByID(projectileID).drawProjectileModel, player.playerEquipmentManager.leftHandWeaponSlot.transform);
             player.playerEffectsManager.activeDrawnProjectileFX = arrow;
+
+
+            player.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(WorldSoundFXManager.Singleton.notchArrowSFX));
         }
 
     }
