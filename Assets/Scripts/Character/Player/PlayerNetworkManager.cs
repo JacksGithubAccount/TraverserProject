@@ -1,7 +1,8 @@
-using UnityEngine;
-using Unity.Netcode;
-using Unity.Collections;
+using System.Collections.Generic;
 using System.Globalization;
+using Unity.Collections;
+using Unity.Netcode;
+using UnityEngine;
 
 namespace TraverserProject
 {
@@ -172,6 +173,7 @@ namespace TraverserProject
                 PlayerCamera.Singleton.cameraObject.transform.localEulerAngles = new Vector3(0, 0, 0);
                 PlayerCamera.Singleton.cameraObject.fieldOfView = 60;
                 PlayerCamera.Singleton.cameraObject.nearClipPlane = 0.3f;
+                PlayerCamera.Singleton.cameraPivotTransform.localPosition = new Vector3(0, PlayerCamera.Singleton.cameraPivotYPositionOffset, 0);
                 PlayerUIManager.Singleton.playerUIHudManager.crossHair.SetActive(false);
             }
             else
@@ -180,6 +182,7 @@ namespace TraverserProject
                 PlayerCamera.Singleton.cameraPivotTransform.localEulerAngles = new Vector3(0, 0, 0);
                 PlayerCamera.Singleton.cameraObject.fieldOfView = 40;
                 PlayerCamera.Singleton.cameraObject.nearClipPlane = 1.3f;
+                PlayerCamera.Singleton.cameraPivotTransform.localPosition = Vector3.zero;
                 PlayerUIManager.Singleton.playerUIHudManager.crossHair.SetActive(true);
             }
         }
@@ -424,6 +427,82 @@ namespace TraverserProject
 
 
             player.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(WorldSoundFXManager.Singleton.notchArrowSFX));
+        }
+
+        //release projectile
+        [ServerRpc]
+        public void NotifyTheServerOfReleasedProjectileServerRpc(ulong playerClientID, int projectileID, float xPosition, float yPosition, float zPosition, float yCharacterRotation)
+        {
+            if (IsServer)
+            {
+                NotifyTheServerOfReleasedProjectileClientRpc(playerClientID, projectileID, xPosition, yPosition, zPosition, yCharacterRotation);
+            }
+        }
+
+        [ClientRpc]
+        public void NotifyTheServerOfReleasedProjectileClientRpc(ulong playerClientID, int projectileID, float xPosition, float yPosition, float zPosition, float yCharacterRotation)
+        {
+            if (playerClientID != NetworkManager.Singleton.LocalClientId)
+                PerformReleasedProjectileFromRpc(projectileID, xPosition, yPosition, zPosition, yCharacterRotation);
+
+        }
+
+        private void PerformReleasedProjectileFromRpc(int projectileID, float xPosition, float yPosition, float zPosition, float yCharacterRotation)
+        {
+            RangedProjectileItem projectileItem = null;
+            if (WorldItemDatabase.Singleton.GetProjectileByID(projectileID) != null)
+                projectileItem = WorldItemDatabase.Singleton.GetProjectileByID(projectileID);
+
+            if (projectileItem == null)
+                return;
+
+            Transform projectileInstantiationLocation;
+            GameObject projectileGameObject;
+            Rigidbody projectileRigidbody;
+            RangedProjectileDamageCollider projectileDamageCollider;
+
+            projectileInstantiationLocation = player.playerCombatManager.lockOnTransform;
+            projectileGameObject = Instantiate(projectileItem.releaseProjectileModel, projectileInstantiationLocation);
+            projectileDamageCollider = projectileGameObject.GetComponent<RangedProjectileDamageCollider>();
+            projectileRigidbody = projectileGameObject.GetComponent<Rigidbody>();
+
+            projectileDamageCollider.physicalDamage = 100;
+            projectileDamageCollider.characterShootingProjectile = player;
+
+            //aiming
+            if (player.playerNetworkManager.isAiming.Value)
+            {
+                projectileGameObject.transform.LookAt(new Vector3(xPosition, yPosition, zPosition));
+            }
+            else
+            {
+                //locked onto target
+                if (player.playerCombatManager.currentTarget != null)
+                {
+                    Quaternion arrowRotation = Quaternion.LookRotation(player.playerCombatManager.currentTarget.characterCombatManager.lockOnTransform.position - projectileGameObject.transform.position);
+                    projectileGameObject.transform.rotation = arrowRotation;
+                }
+                //unlocked and not aiming
+                else
+                {
+                    player.transform.rotation = Quaternion.Euler(player.transform.rotation.x, yCharacterRotation, player.transform.rotation.z);
+                    Quaternion arrowRotation = Quaternion.LookRotation(player.transform.forward);
+                    projectileGameObject.transform.rotation = arrowRotation;
+                }
+            }
+
+
+            Collider[] characterColliders = player.GetComponentsInChildren<Collider>();
+            List<Collider> collidersArrowWillIgnore = new List<Collider>();
+
+            foreach (var item in characterColliders)
+                collidersArrowWillIgnore.Add(item);
+
+            foreach (Collider hitBox in collidersArrowWillIgnore)
+                Physics.IgnoreCollision(projectileDamageCollider.damageCollider, hitBox, true);
+
+            projectileRigidbody.AddForce(projectileGameObject.transform.forward * projectileItem.forwardVelocity);
+            projectileGameObject.transform.parent = null;
         }
 
     }

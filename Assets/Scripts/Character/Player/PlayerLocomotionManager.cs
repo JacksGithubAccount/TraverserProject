@@ -87,10 +87,20 @@ namespace TraverserProject
                 return;
 
             //movement is based in camer direction and move inputs
-            moveDirection = PlayerCamera.Singleton.transform.forward * verticalMovement;
-            moveDirection = moveDirection + PlayerCamera.Singleton.transform.right * horizontalMovement;
-            moveDirection.Normalize();
-            moveDirection.y = 0;
+            if (player.playerNetworkManager.isAiming.Value)
+            {
+                moveDirection = transform.forward * verticalMovement;
+                moveDirection = moveDirection + transform.right * horizontalMovement;
+                moveDirection.Normalize();
+                moveDirection.y = 0;
+            }
+            else
+            {
+                moveDirection = PlayerCamera.Singleton.transform.forward * verticalMovement;
+                moveDirection = moveDirection + PlayerCamera.Singleton.transform.right * horizontalMovement;
+                moveDirection.Normalize();
+                moveDirection.y = 0;
+            }
 
             if (player.playerNetworkManager.isSprinting.Value)
             {

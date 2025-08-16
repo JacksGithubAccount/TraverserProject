@@ -11,6 +11,9 @@ namespace TraverserProject
         public WeaponItem currentWeaponBeingUsed;
         public ProjectileSlot currentProjectileBeingUsed;
 
+        [Header("Projectile")]
+        private Vector3 projectileAimDirection;
+
         [Header("Flags")]
         public bool canComboWithMainHandWeapon = false;
         public bool canComboWithOffHandWeapon = false;
@@ -306,10 +309,14 @@ namespace TraverserProject
             projectileDamageCollider.physicalDamage = 100;
             projectileDamageCollider.characterShootingProjectile = player;
 
+            float yRotationDuringFire = player.transform.localEulerAngles.y;
+
             //aiming
             if (player.playerNetworkManager.isAiming.Value)
             {
-
+                Ray newRay = new Ray(lockOnTransform.position, PlayerCamera.Singleton.aimDirection);
+                projectileAimDirection = newRay.GetPoint(5000);
+                projectileGameObject.transform.LookAt(projectileAimDirection);
             }
             else
             {
@@ -339,6 +346,8 @@ namespace TraverserProject
 
             projectileRigidbody.AddForce(projectileGameObject.transform.forward * projectileItem.forwardVelocity);
             projectileGameObject.transform.parent = null;
+
+            player.playerNetworkManager.NotifyTheServerOfReleasedProjectileServerRpc(player.OwnerClientId, projectileItem.itemID, projectileAimDirection.x, projectileAimDirection.y, projectileAimDirection.z, yRotationDuringFire);
         }
 
         public void InstantiateSpellWarmUpFX()

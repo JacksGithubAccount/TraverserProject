@@ -10,9 +10,10 @@ namespace TraverserProject
         public Camera cameraObject;
         public PlayerManager player;
         public Transform cameraPivotTransform;
+        public float cameraPivotYPositionOffset = 1.5f;
 
         [Header("Camera Settings")]
-        [SerializeField] private float cameraSmoothSpeed = 10; // biggest the numer, longer it takes for camera to move to its position during movement
+        [SerializeField] private float cameraSmoothSpeed = 0.1f; // biggest the numer, longer it takes for camera to move to its position during movement
         [SerializeField] float leftAndRightRotationSpeed = 220;
         [SerializeField] float upAndDownRotationSpeed = 220;
         [SerializeField] float minimumPivot = -30; //lowest point to look down
@@ -45,6 +46,7 @@ namespace TraverserProject
 
         [Header("Ranged Aim")]
         private Transform followTransformWhenAiming;
+        public Vector3 aimDirection;
 
 
         private void Awake()
@@ -76,18 +78,13 @@ namespace TraverserProject
         {
             if (player.playerNetworkManager.isAiming.Value)
             {
-                if (followTransformWhenAiming == null)
-                {
-                    followTransformWhenAiming = player.GetComponentInChildren<PlayerAimCameraFollowTransform>().transform;
-                    return;
-                }
-                Vector3 TargetCameraPosition = Vector3.SmoothDamp(transform.position, followTransformWhenAiming.position, ref cameraVelocity, cameraSmoothSpeed * Time.deltaTime);
-                transform.position = TargetCameraPosition;
+                Vector3 targetCameraPosition = Vector3.SmoothDamp(transform.position, player.playerCombatManager.lockOnTransform.position, ref cameraVelocity, cameraSmoothSpeed + Time.deltaTime);
+                transform.position = targetCameraPosition;
             }
             else
             {
-                Vector3 TargetCameraPosition = Vector3.SmoothDamp(transform.position, player.transform.position, ref cameraVelocity, cameraSmoothSpeed * Time.deltaTime);
-                transform.position = TargetCameraPosition;
+                Vector3 targetCameraPosition = Vector3.SmoothDamp(transform.position, player.transform.position, ref cameraVelocity, cameraSmoothSpeed + Time.deltaTime);
+                transform.position = targetCameraPosition;
             }
         }
 
@@ -110,6 +107,8 @@ namespace TraverserProject
 
             if (player.isPerformingAction)
                 return;
+
+            aimDirection = cameraObject.transform.forward.normalized;
 
             Vector3 cameraRotationY = Vector3.zero;
             Vector3 cameraRotationX = Vector3.zero;
@@ -182,6 +181,13 @@ namespace TraverserProject
                 if (Mathf.Abs(targetCameraZPosition) < cameraCollisionRadius)
                 {
                     targetCameraZPosition = -cameraCollisionRadius;
+                }
+
+                if (player.playerNetworkManager.isAiming.Value)
+                {
+                    cameraObjectPosition.z = 0;
+                    cameraObject.transform.localPosition = cameraObjectPosition;
+                    return;
                 }
                 cameraObjectPosition.z = Mathf.Lerp(cameraObject.transform.localPosition.z, targetCameraZPosition, 0.2f);
                 cameraObject.transform.localPosition = cameraObjectPosition;

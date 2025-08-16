@@ -9,14 +9,16 @@ namespace TraverserProject
         public CharacterManager characterShootingProjectile;
 
         [Header("Collision")]
-        private bool hasCollided = false;
+        private bool hasPenetratedSurface = false;
         public Rigidbody rigidBody;
+        private CapsuleCollider capsuleCollider;
 
         protected override void Awake()
         {
             base.Awake();
 
             rigidBody = GetComponent<Rigidbody>();
+            capsuleCollider = GetComponent<CapsuleCollider>();
         }
 
         private void FixedUpdate()
@@ -29,26 +31,83 @@ namespace TraverserProject
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (!hasCollided)
+            CreatePenetrationIntoObject(collision);
+            CharacterManager potentialTarget = collision.transform.gameObject.GetComponent<CharacterManager>();
+
+
+            if (characterShootingProjectile == null)
+                return;
+
+            Collider contactCollider = collision.gameObject.GetComponent<Collider>();
+
+            if (contactCollider != null)
+                contactPoint = contactCollider.ClosestPointOnBounds(transform.position);
+
+            if (potentialTarget == null)
+                return;
+
+            if (WorldUtilityManager.Singleton.CanIDamageThisTarget(characterShootingProjectile.characterGroup, potentialTarget.characterGroup))
             {
-                //hasCollided = true;
+                CheckForBlock(potentialTarget);
+                DamageTarget(potentialTarget);
+            }
 
-                CharacterManager potentialTarget = collision.transform.gameObject.GetComponent<CharacterManager>();
 
 
-                if (characterShootingProjectile == null)
-                    return;
+        }
 
-                if (potentialTarget == null)
-                    return;
+        protected override void CheckForBlock(CharacterManager damageTarget)
+        {
+            if (charactersDamaged.Contains(damageTarget))
+                return;
 
-                if (WorldUtilityManager.Singleton.CanIDamageThisTarget(characterShootingProjectile.characterGroup, potentialTarget.characterGroup))
-                {
-                    DamageTarget(potentialTarget);
-                }
+            float angle = Vector3.Angle(damageTarget.transform.forward, transform.forward);
 
-                Destroy(gameObject);
+            if (damageTarget.characterNetworkManager.isBlocking.Value && angle > 145)
+            {
+                charactersDamaged.Add(damageTarget);
+                TakeBlockedDamageEffect blockedDamageEffect = Instantiate(WorldCharacterEffectsManager.Singleton.takeBlockedDamageEffect);
 
+                if (characterShootingProjectile != null)
+                    blockedDamageEffect.characterCausingDamage = characterShootingProjectile;
+
+                blockedDamageEffect.physicalDamage = physicalDamage;
+                blockedDamageEffect.magicDamage = magicDamage;
+                blockedDamageEffect.fireDamage = fireDamage;
+                blockedDamageEffect.lightningDamage = lightningDamage;
+                blockedDamageEffect.holyDamage = holyDamage;
+                blockedDamageEffect.poiseDamage = poiseDamage;
+                blockedDamageEffect.staminaDamage = poiseDamage;
+                blockedDamageEffect.contactPoint = contactPoint;
+
+                damageTarget.characterEffectsManager.ProcessInstantEffect(blockedDamageEffect);
+            }
+
+
+        }
+
+        private void CreatePenetrationIntoObject(Collision hit)
+        {
+            if (!hasPenetratedSurface)
+            {
+                hasPenetratedSurface = true;
+
+                //contact point
+                gameObject.transform.position = hit.GetContact(0).point;
+                var emptyObject = new GameObject();
+                emptyObject.transform.parent = hit.collider.transform;
+                gameObject.transform.SetParent(emptyObject.transform, true);
+
+                //how far the arrow penetrates
+                transform.position += transform.forward * (Random.Range(0.1f, 0.3f));
+
+                //disables colliders and rigidbody
+                rigidBody.isKinematic = true;
+                capsuleCollider.enabled = false;
+
+                //destroys collider and arrow after a time
+                Destroy(GetComponent<RangedProjectileDamageCollider>());
+                Destroy(gameObject, 20);
             }
         }
 
