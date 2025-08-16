@@ -133,6 +133,7 @@ namespace TraverserProject
                 playerControls.PlayerActions.HoldLB.performed += i => hold_LB_Input = true;
                 playerControls.PlayerActions.HoldLB.canceled += i => hold_LB_Input = false;
                 playerControls.PlayerActions.LB.canceled += i => player.playerNetworkManager.isBlocking.Value = false;
+                playerControls.PlayerActions.LB.canceled += i => player.playerNetworkManager.isAiming.Value = false;
 
                 //Triggers
                 playerControls.PlayerActions.RT.performed += i => RT_Input = true;
@@ -367,13 +368,13 @@ namespace TraverserProject
             if (!player.playerLocomotionManager.canRun)
             {
                 if (moveAmount > 0.5f)
-                moveAmount = 0.5f;
+                    moveAmount = 0.5f;
 
                 if (verticalInput > 0.5f)
-                verticalInput = 0.5f;
+                    verticalInput = 0.5f;
 
                 if (horizontalInput > 0.5f)
-                horizontalInput = 0.5f;
+                    horizontalInput = 0.5f;
             }
 
             if (!player.playerNetworkManager.isLockedOn.Value || player.playerNetworkManager.isSprinting.Value)
@@ -466,7 +467,16 @@ namespace TraverserProject
 
                 player.playerNetworkManager.SetCharacterActionHand(false);
 
-                player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentLeftHandWeapon.oh_LB_Action, player.playerInventoryManager.currentLeftHandWeapon);
+                if (player.playerNetworkManager.isTwoHandingRightWeapon.Value)
+                {
+                    player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_LB_Action, player.playerInventoryManager.currentRightHandWeapon);
+
+                }
+                else
+                {
+                    player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentLeftHandWeapon.oh_LB_Action, player.playerInventoryManager.currentLeftHandWeapon);
+
+                }
             }
         }
 

@@ -41,6 +41,8 @@ namespace TraverserProject
         public NetworkVariable<int> secondaryProjectileID = new NetworkVariable<int>(-1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> hasArrowNotched = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isHoldingArrow = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> isAiming = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
 
 
         protected override void Awake()
@@ -163,6 +165,24 @@ namespace TraverserProject
             player.animator.SetBool("isHoldingArrow", isHoldingArrow.Value);
         }
 
+        public void OnIsAimingChanged(bool oldStatus, bool newStatus)
+        {
+            if (!isAiming.Value)
+            {
+                PlayerCamera.Singleton.cameraObject.transform.localEulerAngles = new Vector3(0, 0, 0);
+                PlayerCamera.Singleton.cameraObject.fieldOfView = 60;
+                PlayerCamera.Singleton.cameraObject.nearClipPlane = 0.3f;
+                PlayerUIManager.Singleton.playerUIHudManager.crossHair.SetActive(false);
+            }
+            else
+            {
+                PlayerCamera.Singleton.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+                PlayerCamera.Singleton.cameraPivotTransform.localEulerAngles = new Vector3(0, 0, 0);
+                PlayerCamera.Singleton.cameraObject.fieldOfView = 40;
+                PlayerCamera.Singleton.cameraObject.nearClipPlane = 1.3f;
+                PlayerUIManager.Singleton.playerUIHudManager.crossHair.SetActive(true);
+            }
+        }
 
         public void OnIsChargingRightSpellChanged(bool oldStatus, bool newStatus)
         {

@@ -9,7 +9,7 @@ namespace TraverserProject
         public static PlayerCamera Singleton;
         public Camera cameraObject;
         public PlayerManager player;
-        [SerializeField] Transform cameraPivotTransform;
+        public Transform cameraPivotTransform;
 
         [Header("Camera Settings")]
         [SerializeField] private float cameraSmoothSpeed = 10; // biggest the numer, longer it takes for camera to move to its position during movement
@@ -43,6 +43,9 @@ namespace TraverserProject
         public CharacterManager leftLockOnTarget;
         public CharacterManager rightLockOnTarget;
 
+        [Header("Ranged Aim")]
+        private Transform followTransformWhenAiming;
+
 
         private void Awake()
         {
@@ -71,12 +74,57 @@ namespace TraverserProject
         }
         private void HandleFollowTarget()
         {
-            Vector3 TargetCameraPosition = Vector3.SmoothDamp(transform.position, player.transform.position, ref cameraVelocity, cameraSmoothSpeed * Time.deltaTime);
-            transform.position = TargetCameraPosition;
-
-
+            if (player.playerNetworkManager.isAiming.Value)
+            {
+                if (followTransformWhenAiming == null)
+                {
+                    followTransformWhenAiming = player.GetComponentInChildren<PlayerAimCameraFollowTransform>().transform;
+                    return;
+                }
+                Vector3 TargetCameraPosition = Vector3.SmoothDamp(transform.position, followTransformWhenAiming.position, ref cameraVelocity, cameraSmoothSpeed * Time.deltaTime);
+                transform.position = TargetCameraPosition;
+            }
+            else
+            {
+                Vector3 TargetCameraPosition = Vector3.SmoothDamp(transform.position, player.transform.position, ref cameraVelocity, cameraSmoothSpeed * Time.deltaTime);
+                transform.position = TargetCameraPosition;
+            }
         }
+
         private void HandleRotations()
+        {
+            if (player.playerNetworkManager.isAiming.Value)
+            {
+                HandleAimRotations();
+            }
+            else
+            {
+                HandleStandardRotations();
+            }
+        }
+
+        private void HandleAimRotations()
+        {
+            if (!player.playerLocomotionManager.isGrounded)
+                player.playerNetworkManager.isAiming.Value = false;
+
+            if (player.isPerformingAction)
+                return;
+
+            Vector3 cameraRotationY = Vector3.zero;
+            Vector3 cameraRotationX = Vector3.zero;
+
+            leftAndRightLookAngle += (PlayerInputManager.Singleton.cameraHorizontalInput * leftAndRightRotationSpeed) * Time.deltaTime;
+            upAndDownLookAngle -= (PlayerInputManager.Singleton.cameraVerticalInput * upAndDownRotationSpeed) * Time.deltaTime;
+            upAndDownLookAngle = Mathf.Clamp(upAndDownLookAngle, minimumPivot, maximumPivot);
+
+            cameraRotationY.y = leftAndRightLookAngle;
+            cameraRotationX.x = upAndDownLookAngle;
+
+            cameraObject.transform.localEulerAngles = new Vector3(upAndDownLookAngle, leftAndRightLookAngle, 0);
+        }
+
+        private void HandleStandardRotations()
         {
             if (player.playerNetworkManager.isLockedOn.Value)
             {
@@ -98,11 +146,9 @@ namespace TraverserProject
                 //saves rotation to look angles so unlock doesnt snap too far away
                 leftAndRightLookAngle = transform.eulerAngles.y;
                 upAndDownLookAngle = transform.eulerAngles.x;
-
             }
             else
             {
-
                 leftAndRightLookAngle += (PlayerInputManager.Singleton.cameraHorizontalInput * leftAndRightRotationSpeed) * Time.deltaTime;
                 upAndDownLookAngle -= (PlayerInputManager.Singleton.cameraVerticalInput * upAndDownRotationSpeed) * Time.deltaTime;
                 upAndDownLookAngle = Mathf.Clamp(upAndDownLookAngle, minimumPivot, maximumPivot);
@@ -315,5 +361,5 @@ namespace TraverserProject
             yield return null;
         }
 
-    } 
+    }
 }

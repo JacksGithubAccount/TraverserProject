@@ -15,6 +15,7 @@ namespace TraverserProject
         public bool canComboWithMainHandWeapon = false;
         public bool canComboWithOffHandWeapon = false;
 
+
         protected override void Awake()
         {
             base.Awake();
@@ -305,12 +306,27 @@ namespace TraverserProject
             projectileDamageCollider.physicalDamage = 100;
             projectileDamageCollider.characterShootingProjectile = player;
 
-            //locked onto target
-            if (player.playerCombatManager.currentTarget != null)
+            //aiming
+            if (player.playerNetworkManager.isAiming.Value)
             {
-                Quaternion arrowRotation = Quaternion.LookRotation(player.playerCombatManager.currentTarget.characterCombatManager.lockOnTransform.position - projectileGameObject.transform.position);
-                projectileGameObject.transform.rotation = arrowRotation;
+
             }
+            else
+            {
+                //locked onto target
+                if (player.playerCombatManager.currentTarget != null)
+                {
+                    Quaternion arrowRotation = Quaternion.LookRotation(player.playerCombatManager.currentTarget.characterCombatManager.lockOnTransform.position - projectileGameObject.transform.position);
+                    projectileGameObject.transform.rotation = arrowRotation;
+                }
+                //unlocked and not aiming
+                else
+                {
+                    Quaternion arrowRotation = Quaternion.LookRotation(player.transform.forward);
+                    projectileGameObject.transform.rotation = arrowRotation;
+                }
+            }
+
 
             Collider[] characterColliders = player.GetComponentsInChildren<Collider>();
             List<Collider> collidersArrowWillIgnore = new List<Collider>();

@@ -135,11 +135,37 @@ namespace TraverserProject
         }
         private void HandleRotation()
         {
-
             if (player.isDead.Value)
                 return;
+
             if (!player.characterLocomotionManager.canRotate)
                 return;
+
+            if (player.playerNetworkManager.isAiming.Value)
+            {
+                HandleAimRotation();
+            }
+            else
+            {
+                HandleStandardRotation();
+            }
+
+
+        }
+
+        private void HandleAimRotation()
+        {
+            Vector3 targetDirection;
+            targetDirection = PlayerCamera.Singleton.cameraObject.transform.forward;
+            targetDirection.y = 0;
+            targetDirection.Normalize();
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+            Quaternion finalRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = finalRotation;
+        }
+
+        private void HandleStandardRotation()
+        {
 
             if (player.playerNetworkManager.isLockedOn.Value)
             {
@@ -189,8 +215,8 @@ namespace TraverserProject
                 Quaternion targetRotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);
                 transform.rotation = targetRotation;
             }
-
         }
+
         public void HandleSprinting()
         {
             if (player.isPerformingAction)

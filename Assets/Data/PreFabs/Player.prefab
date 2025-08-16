@@ -11056,6 +11056,50 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00000011920929, y: 0.039437175, z: 0.035762087}
     m_Extent: {x: 1.0270792, y: 0.96941197, z: 0.17498174}
   m_DirtyAABB: 0
+--- !u!1 &3215360207871379889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 704639495678455982}
+  - component: {fileID: 6607130244901507997}
+  m_Layer: 0
+  m_Name: Player Aim Camera Follow Transform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &704639495678455982
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3215360207871379889}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5737888998633187497}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6607130244901507997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3215360207871379889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 664083fe15ff3d547ac41e6256f96847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3224135720177570598
 GameObject:
   m_ObjectHideFlags: 0
@@ -12228,6 +12272,7 @@ Transform:
   - {fileID: 6138840406782751668}
   - {fileID: 805698594198192677}
   - {fileID: 6319698240394206320}
+  - {fileID: 704639495678455982}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7089468043551462106
@@ -12339,6 +12384,7 @@ MonoBehaviour:
   isRolling: 0
   isGrounded: 1
   canRotate: 1
+  canRun: 1
   canMove: 1
   verticalMovement: 0
   horizontalMovement: 0
@@ -12537,6 +12583,10 @@ MonoBehaviour:
   secondaryProjectileID:
     m_InternalValue: -1
   hasArrowNotched:
+    m_InternalValue: 0
+  isHoldingArrow:
+    m_InternalValue: 0
+  isAiming:
     m_InternalValue: 0
 --- !u!114 &595495762783959068
 MonoBehaviour:
@@ -12965,6 +13015,7 @@ MonoBehaviour:
   criticalAttackDistanceCheck: 0.7
   pendingCriticalDamage: 0
   currentWeaponBeingUsed: {fileID: 0}
+  currentProjectileBeingUsed: 0
   canComboWithMainHandWeapon: 0
   canComboWithOffHandWeapon: 0
 --- !u!114 &8168205539592873728
@@ -18717,7 +18768,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6319698240394206320}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Game Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18732,7 +18783,7 @@ Transform:
   m_GameObject: {fileID: 5435784008294866984}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.637, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
