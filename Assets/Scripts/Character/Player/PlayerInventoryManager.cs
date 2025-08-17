@@ -17,6 +17,7 @@ namespace TraverserProject
         public WeaponItem[] weaponsInLeftHandSlots = new WeaponItem[3];
         public int leftHandWeaponIndex = 0;
         public SpellItem currentSpell;
+        public QuickSlotItem currentQuickSlotItem;
 
         [Header("Armor")]
         public HeadEquipmentItem headEquipment;

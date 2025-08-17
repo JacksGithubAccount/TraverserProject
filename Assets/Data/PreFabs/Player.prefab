@@ -12499,6 +12499,10 @@ MonoBehaviour:
         byte0059: 0
         byte0060: 0
         byte0061: 0
+  isUsingRightHand:
+    m_InternalValue: 0
+  isUsingLeftHand:
+    m_InternalValue: 0
   currentWeaponBeingUsed:
     m_InternalValue: 0
   currentRightHandWeaponID:
@@ -12507,9 +12511,7 @@ MonoBehaviour:
     m_InternalValue: 0
   currentSpellID:
     m_InternalValue: 0
-  isUsingRightHand:
-    m_InternalValue: 0
-  isUsingLeftHand:
+  currentQuickSlotItemID:
     m_InternalValue: 0
   currentWeaponBeingTwoHanded:
     m_InternalValue: 0
@@ -12781,6 +12783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbad3ca10f9522f439ad2167c544fc37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeQuickSlotItemFX: {fileID: 0}
   activeSpellWarmUpFX: {fileID: 0}
   activeDrawnProjectileFX: {fileID: 0}
   bloodSplatterVFX: {fileID: 0}
@@ -12812,6 +12815,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d3160f87dcad91841b332fb8242c9eb2, type: 2}
   leftHandWeaponIndex: 0
   currentSpell: {fileID: 11400000, guid: 90bca23752031904badfc4e94de7bea6, type: 2}
+  currentQuickSlotItem: {fileID: 11400000, guid: aedcc59cf0831af4eb8da47234130fb5, type: 2}
   headEquipment: {fileID: 11400000, guid: d4a06b49d42657449b74320981258cb1, type: 2}
   bodyEquipment: {fileID: 11400000, guid: d7f23dd81588e284892606c920126316, type: 2}
   handEquipment: {fileID: 11400000, guid: 404cac2c9b0f0f240a6ac1a7bd8e74cb, type: 2}

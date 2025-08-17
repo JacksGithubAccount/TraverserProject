@@ -10,6 +10,7 @@ namespace TraverserProject
         CharacterManager character;
 
         [Header("Current FX")]
+        public GameObject activeQuickSlotItemFX;
         public GameObject activeSpellWarmUpFX;
         public GameObject activeDrawnProjectileFX;
 

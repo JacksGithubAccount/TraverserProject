@@ -11,13 +11,16 @@ namespace TraverserProject
         PlayerManager player;
         public NetworkVariable<FixedString64Bytes> characterName = new NetworkVariable<FixedString64Bytes>("Character", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+        [Header("Actions")]
+        public NetworkVariable<bool> isUsingRightHand = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> isUsingLeftHand = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
         [Header("Equipment")]
         public NetworkVariable<int> currentWeaponBeingUsed = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<int> currentRightHandWeaponID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<int> currentLeftHandWeaponID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<int> currentSpellID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        public NetworkVariable<bool> isUsingRightHand = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        public NetworkVariable<bool> isUsingLeftHand = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> currentQuickSlotItemID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [Header("Two Handing")]
         public NetworkVariable<int> currentWeaponBeingTwoHanded = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -134,6 +137,22 @@ namespace TraverserProject
 
                 if (player.IsOwner)
                     PlayerUIManager.Singleton.playerUIHudManager.SetSpellQuickSlotIcon(newID);
+            }
+        }
+
+        public void OnCurrentQuickSlotItemIDChange(int oldID, int newID)
+        {
+            QuickSlotItem newQuickSlotItem = null;
+
+            if (WorldItemDatabase.Singleton.GetQuickSlotItemByID(newID))
+                newQuickSlotItem = Instantiate(WorldItemDatabase.Singleton.GetQuickSlotItemByID(newID));
+
+            if (newQuickSlotItem != null)
+            {
+                player.playerInventoryManager.currentQuickSlotItem = newQuickSlotItem;
+
+                if (player.IsOwner)
+                    PlayerUIManager.Singleton.playerUIHudManager.SetQuickSlotItemQuickSlotIcon(newID);
             }
         }
 

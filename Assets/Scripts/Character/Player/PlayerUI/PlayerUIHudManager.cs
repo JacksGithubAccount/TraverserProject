@@ -18,6 +18,7 @@ namespace TravserserProject
         [SerializeField] Image rightWeaponQuickSlotIcon;
         [SerializeField] Image leftWeaponQuickSlotIcon;
         [SerializeField] Image spellItemQuickSlotIcon;
+        [SerializeField] Image quickSlotItemQuickSlotIcon;
 
         [Header("Boss Health Bar")]
         public Transform bossHealthBarParent;
@@ -131,7 +132,6 @@ namespace TravserserProject
                 return;
             }
 
-
             leftWeaponQuickSlotIcon.sprite = weapon.itemIcon;
             leftWeaponQuickSlotIcon.enabled = true;
         }
@@ -157,10 +157,33 @@ namespace TravserserProject
                 return;
             }
 
-
-
             spellItemQuickSlotIcon.sprite = spell.itemIcon;
             spellItemQuickSlotIcon.enabled = true;
+        }
+
+        public void SetQuickSlotItemQuickSlotIcon(int quickSlotItemID)
+        {
+
+            QuickSlotItem quickSlotItem = WorldItemDatabase.Singleton.GetQuickSlotItemByID(quickSlotItemID);
+
+            if (quickSlotItem == null)
+            {
+                Debug.Log("quickSlotItem is null");
+                quickSlotItemQuickSlotIcon.enabled = false;
+                quickSlotItemQuickSlotIcon.sprite = null;
+                return;
+            }
+
+            if (quickSlotItem.itemIcon == null)
+            {
+                Debug.Log("quickSlotItem has No Icon");
+                quickSlotItemQuickSlotIcon.enabled = false;
+                quickSlotItemQuickSlotIcon.sprite = null;
+                return;
+            }
+
+            quickSlotItemQuickSlotIcon.sprite = quickSlotItem.itemIcon;
+            quickSlotItemQuickSlotIcon.enabled = true;
         }
 
     }

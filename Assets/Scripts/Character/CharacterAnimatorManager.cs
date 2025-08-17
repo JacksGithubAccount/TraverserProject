@@ -157,7 +157,7 @@ namespace TraverserProject
             character.animator.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);
 
         }
-        public virtual void PlayTargetActionAnimation(string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false)
+        public virtual void PlayTargetActionAnimation(string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false, bool canRun = true)
         {
             Debug.Log("Playing Animation: " + targetAnimation);
             this.applyRootMotion = applyRootMotion;
@@ -166,11 +166,12 @@ namespace TraverserProject
             character.isPerformingAction = isPerformingAction;
             character.characterLocomotionManager.canRotate = canRotate;
             character.characterLocomotionManager.canMove = canMove;
+            character.characterLocomotionManager.canRun = canRun;
 
             character.characterNetworkManager.NotifyTheServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }
 
-        public virtual void PlayTargetActionAnimationInstantly(string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false)
+        public virtual void PlayTargetActionAnimationInstantly(string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false, bool canRun = true)
         {
             Debug.Log("Playing Animation: " + targetAnimation);
             this.applyRootMotion = applyRootMotion;
@@ -179,6 +180,7 @@ namespace TraverserProject
             character.isPerformingAction = isPerformingAction;
             character.characterLocomotionManager.canRotate = canRotate;
             character.characterLocomotionManager.canMove = canMove;
+            character.characterLocomotionManager.canRun = canRun;
 
             character.characterNetworkManager.NotifyTheServerOfInstantActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }

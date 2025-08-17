@@ -34,6 +34,7 @@ namespace TraverserProject
         [SerializeField] bool switch_Right_Weapon_Input = false;
         [SerializeField] bool switch_Left_Weapon_Input = false;
         [SerializeField] bool interaction_Input = false;
+        [SerializeField] bool use_Item_Input = false;
 
         [Header("Bumper Input")]
         [SerializeField] bool RB_Input = false;
@@ -124,6 +125,7 @@ namespace TraverserProject
                 playerControls.PlayerActions.SwitchRightWeapon.performed += i => switch_Right_Weapon_Input = true;
                 playerControls.PlayerActions.SwitchLeftWeapon.performed += i => switch_Left_Weapon_Input = true;
                 playerControls.PlayerActions.Interact.performed += i => interaction_Input = true;
+                playerControls.PlayerActions.X.performed += i => use_Item_Input = true;
 
                 //bumpers
                 playerControls.PlayerActions.RB.performed += i => RB_Input = true;
@@ -195,6 +197,7 @@ namespace TraverserProject
         }
         private void HandleAllInputs()
         {
+            HandleUseItemInput();
             HandleTwoHandInput();
             HandleLockOnInput();
             HandleLockOnSwitchInput();
@@ -217,6 +220,22 @@ namespace TraverserProject
             HandleOpenCharacterMenuInput();
             HandleCloseUIInput();
 
+        }
+
+        private void HandleUseItemInput()
+        {
+            if (use_Item_Input)
+            {
+                use_Item_Input = false;
+
+                if (PlayerUIManager.Singleton.menuWindowIsOpen)
+                    return;
+
+                if (player.playerInventoryManager.currentQuickSlotItem != null)
+                {
+                    player.playerInventoryManager.currentQuickSlotItem.AttemptToUseItem(player);
+                }
+            }
         }
 
         private void HandleTwoHandInput()

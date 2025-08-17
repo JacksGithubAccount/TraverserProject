@@ -37,6 +37,9 @@ namespace TraverserProject
         [Header("Projectiles")]
         [SerializeField] List<RangedProjectileItem> projectiles = new List<RangedProjectileItem>();
 
+        [Header("Quick Slot")]
+        [SerializeField] List<QuickSlotItem> quickSlotItems = new List<QuickSlotItem>();
+
         [Header("Items")]
         private List<Item> items = new List<Item>();
 
@@ -49,6 +52,7 @@ namespace TraverserProject
         [SerializeField] int ashOfWarItemKey = 6000;
         [SerializeField] int spellItemKey = 7000;
         [SerializeField] int projectileItemKey = 8000;
+        [SerializeField] int quickSlotItemKey = 9000;
 
         private void Awake()
         {
@@ -101,6 +105,11 @@ namespace TraverserProject
                 items.Add(item);
             }
 
+            foreach (var item in quickSlotItems)
+            {
+                items.Add(item);
+            }
+
             for (int i = 0; i < items.Count; i++)
             {
                 int prefixKey = 0;
@@ -121,6 +130,8 @@ namespace TraverserProject
                     prefixKey = spellItemKey;
                 else if (items[i].GetType() == typeof(RangedProjectileItem))
                     prefixKey = projectileItemKey;
+                else if (items[i].GetType() == typeof(QuickSlotItem))
+                    prefixKey = quickSlotItemKey;
 
                 items[i].itemID = prefixKey + i;
             }
@@ -159,7 +170,7 @@ namespace TraverserProject
         public AshOfWar GetAshOfWarByID(int ID)
         {
             return ashesOfWar.FirstOrDefault(item => item.itemID == ID);
-        }   
+        }
 
         public SpellItem GetSpellByID(int ID)
         {
@@ -169,6 +180,11 @@ namespace TraverserProject
         public RangedProjectileItem GetProjectileByID(int ID)
         {
             return projectiles.FirstOrDefault(item => item.itemID == ID);
+        }
+
+        public QuickSlotItem GetQuickSlotItemByID(int ID)
+        {
+            return quickSlotItems.FirstOrDefault(item => item.itemID == ID);
         }
     }
 }

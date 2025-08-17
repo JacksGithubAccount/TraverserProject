@@ -147,6 +147,10 @@ namespace TraverserProject
 
             if (character.characterEffectsManager.activeDrawnProjectileFX != null)
                 Destroy(character.characterEffectsManager.activeDrawnProjectileFX);
+
+            if (character.characterEffectsManager.activeQuickSlotItemFX != null)
+                Destroy(character.characterEffectsManager.activeQuickSlotItemFX);
+
         }
 
         //action animation
