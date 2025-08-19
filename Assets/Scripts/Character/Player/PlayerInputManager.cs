@@ -1,6 +1,7 @@
 using TraverserProject;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
 
 namespace TraverserProject
 {
@@ -234,6 +235,8 @@ namespace TraverserProject
                 if (player.playerInventoryManager.currentQuickSlotItem != null)
                 {
                     player.playerInventoryManager.currentQuickSlotItem.AttemptToUseItem(player);
+
+                    player.playerNetworkManager.NotifyTheServerOfQuickSlotItemActionServerRpc(NetworkManager.Singleton.LocalClientId, player.playerInventoryManager.currentQuickSlotItem.itemID);
                 }
             }
         }

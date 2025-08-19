@@ -17,6 +17,8 @@ namespace TraverserProject
         [Header("Flags")]
         public bool canComboWithMainHandWeapon = false;
         public bool canComboWithOffHandWeapon = false;
+        public bool isUsingItem = false;
+
 
 
         protected override void Awake()
@@ -388,6 +390,12 @@ namespace TraverserProject
                 return;
 
             player.playerInventoryManager.currentSpell.SuccessfullyCastSpellFullCharge(player);
+        }
+
+        public void SuccessfullyUseQuickSlotItem()
+        {
+            if (player.playerInventoryManager.currentQuickSlotItem != null)
+                player.playerInventoryManager.currentQuickSlotItem.SuccessfullyUseItem(player);
         }
 
         public WeaponItem SelectWeaponToPerformAshOfWar()

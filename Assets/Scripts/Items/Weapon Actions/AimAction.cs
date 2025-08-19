@@ -21,6 +21,9 @@ namespace TraverserProject
             if (playerPerformingAction.playerNetworkManager.isLockedOn.Value)
                 return;
 
+            if (playerPerformingAction.playerCombatManager.isUsingItem)
+                return;
+
             if (playerPerformingAction.IsOwner)
             {
                 if (!playerPerformingAction.playerNetworkManager.isTwoHandingWeapon.Value)

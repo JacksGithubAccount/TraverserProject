@@ -157,7 +157,7 @@ namespace TraverserProject
             character.animator.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);
 
         }
-        public virtual void PlayTargetActionAnimation(string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false, bool canRun = true)
+        public virtual void PlayTargetActionAnimation(string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false, bool canRun = true, bool canRoll = false)
         {
             Debug.Log("Playing Animation: " + targetAnimation);
             this.applyRootMotion = applyRootMotion;
@@ -167,11 +167,12 @@ namespace TraverserProject
             character.characterLocomotionManager.canRotate = canRotate;
             character.characterLocomotionManager.canMove = canMove;
             character.characterLocomotionManager.canRun = canRun;
+            character.characterLocomotionManager.canRoll = canRoll;
 
             character.characterNetworkManager.NotifyTheServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }
 
-        public virtual void PlayTargetActionAnimationInstantly(string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false, bool canRun = true)
+        public virtual void PlayTargetActionAnimationInstantly(string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false, bool canRun = true, bool canRoll = false)
         {
             Debug.Log("Playing Animation: " + targetAnimation);
             this.applyRootMotion = applyRootMotion;
@@ -181,11 +182,12 @@ namespace TraverserProject
             character.characterLocomotionManager.canRotate = canRotate;
             character.characterLocomotionManager.canMove = canMove;
             character.characterLocomotionManager.canRun = canRun;
+            character.characterLocomotionManager.canRoll = canRoll;
 
             character.characterNetworkManager.NotifyTheServerOfInstantActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }
 
-        public virtual void PlayTargetAttackActionAnimation(WeaponItem weapon, AttackType attackType, string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false)
+        public virtual void PlayTargetAttackActionAnimation(WeaponItem weapon, AttackType attackType, string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false, bool canRoll = false)
         {
             character.characterCombatManager.currentAttackType = attackType;
             character.characterCombatManager.lastAttackAnimationPerformed = targetAnimation;
@@ -199,6 +201,7 @@ namespace TraverserProject
             character.characterLocomotionManager.canRotate = canRotate;
             character.characterLocomotionManager.canMove = canMove;
             character.characterNetworkManager.isAttacking.Value = true;
+            character.characterLocomotionManager.canRoll = canRoll;
 
             character.characterNetworkManager.NotifyTheServerOfAttackActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }

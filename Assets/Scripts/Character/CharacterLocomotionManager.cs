@@ -22,6 +22,7 @@ namespace TraverserProject
         public bool canRotate = true;
         public bool canRun = true;
         public bool canMove = true;
+        public bool canRoll = true;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         protected virtual void Awake()

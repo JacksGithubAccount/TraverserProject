@@ -11,6 +11,12 @@ namespace TraverserProject
         PlayerManager player;
         public NetworkVariable<FixedString64Bytes> characterName = new NetworkVariable<FixedString64Bytes>("Character", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+        [Header("Flasks")]
+        public NetworkVariable<int> remainingHealthFlasks = new NetworkVariable<int>(3, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<int> remainingFocusPointsFlasks = new NetworkVariable<int>(2, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> isChugging = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+
         [Header("Actions")]
         public NetworkVariable<bool> isUsingRightHand = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isUsingLeftHand = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -281,6 +287,11 @@ namespace TraverserProject
             player.playerEquipmentManager.TwoHandLeftWeapon();
         }
 
+        public void OnIsChuggingChanged(bool oldStatus, bool newStatus)
+        {
+            player.animator.SetBool("isChugging", isChugging.Value);
+        }
+
         public void OnHeadEquipmentChanged(int oldValue, int newValue)
         {
             if (IsOwner)
@@ -524,5 +535,37 @@ namespace TraverserProject
             projectileGameObject.transform.parent = null;
         }
 
+        [ServerRpc]
+        public void HideWeaponsServerRpc()
+        {
+            if (IsServer)
+                HideWeaponsClientRpc();
+        }
+
+        [ClientRpc]
+        private void HideWeaponsClientRpc()
+        {
+            if (player.playerEquipmentManager.rightHandWeaponModel != null)
+                player.playerEquipmentManager.rightHandWeaponModel.SetActive(false);
+
+            if (player.playerEquipmentManager.leftHandWeaponModel != null)
+                player.playerEquipmentManager.leftHandWeaponModel.SetActive(false);
+        }
+
+        [ServerRpc]
+        public void NotifyTheServerOfQuickSlotItemActionServerRpc(ulong clientID, int quickSlotID)
+        {
+            NotifyTheServerOfQuickSlotItemActionClientRpc(clientID, quickSlotID);
+        }
+
+        [ClientRpc]
+        private void NotifyTheServerOfQuickSlotItemActionClientRpc(ulong clientID, int quickSlotID)
+        {
+            if (clientID != NetworkManager.Singleton.LocalClientId)
+            {
+                QuickSlotItem item = WorldItemDatabase.Singleton.GetQuickSlotItemByID(quickSlotID);
+                item.AttemptToUseItem(player);
+            }
+        }
     }
 }

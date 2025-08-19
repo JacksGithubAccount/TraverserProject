@@ -989,5 +989,14 @@ namespace TraverserProject
                 leftWeaponManager.meleeDamageCollider.DisableDamageCollider();
             }
         }
+
+        public void UnHideWeapons()
+        {
+            if (player.playerEquipmentManager.rightHandWeaponModel != null)
+                player.playerEquipmentManager.rightHandWeaponModel.SetActive(true);
+
+            if (player.playerEquipmentManager.leftHandWeaponModel != null)
+                player.playerEquipmentManager.leftHandWeaponModel.SetActive(true);
+        }
     }
 }

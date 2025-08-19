@@ -27,6 +27,9 @@ namespace TraverserProject
             if (playerPerformingAction.playerNetworkManager.currentStamina.Value <= 0)
                 return;
 
+            if (playerPerformingAction.playerCombatManager.isUsingItem)
+                return;
+
             if (!playerPerformingAction.characterLocomotionManager.isGrounded)
             {
                 PerformJumpingHeavyAttack(playerPerformingAction, weaponPerformingAction);
