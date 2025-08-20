@@ -105,6 +105,15 @@ namespace TraverserProject
             if (player.IsOwner)
             {
                 PlayerUIManager.Singleton.playerUIHudManager.SetRightWeaponQuickSlotIcon(newID);
+
+                if (newWeapon.weaponClass == WeaponClass.Bow)
+                {
+                    PlayerUIManager.Singleton.playerUIHudManager.ToggleProjectileQuickSlotsVisibility(true);
+                }
+                else
+                {
+                    PlayerUIManager.Singleton.playerUIHudManager.ToggleProjectileQuickSlotsVisibility(false);
+                }
             }
         }
         public void OnCurrentLeftHandWeaponIDChange(int oldID, int newID)
@@ -116,6 +125,15 @@ namespace TraverserProject
             if (player.IsOwner)
             {
                 PlayerUIManager.Singleton.playerUIHudManager.SetLeftWeaponQuickSlotIcon(newID);
+
+                if (newWeapon.weaponClass == WeaponClass.Bow)
+                {
+                    PlayerUIManager.Singleton.playerUIHudManager.ToggleProjectileQuickSlotsVisibility(true);
+                }
+                else
+                {
+                    PlayerUIManager.Singleton.playerUIHudManager.ToggleProjectileQuickSlotsVisibility(false);
+                }
             }
         }
         public void OnCurrentWeaponBeingUsedIDChange(int oldID, int newID)
@@ -172,6 +190,10 @@ namespace TraverserProject
             if (newProjectile != null)
                 player.playerInventoryManager.mainProjectile = newProjectile;
 
+            if (player.IsOwner)
+                PlayerUIManager.Singleton.playerUIHudManager.SetMainProjectileQuickSlotIcon(player.playerInventoryManager.mainProjectile);
+
+
         }
 
         public void OnSecondaryProjectileIDChange(int oldID, int newID)
@@ -183,6 +205,10 @@ namespace TraverserProject
 
             if (newProjectile != null)
                 player.playerInventoryManager.secondaryProjectile = newProjectile;
+
+            if (player.IsOwner)
+                PlayerUIManager.Singleton.playerUIHudManager.SetSecondaryProjectileQuickSlotIcon(player.playerInventoryManager.secondaryProjectile);
+
 
         }
 

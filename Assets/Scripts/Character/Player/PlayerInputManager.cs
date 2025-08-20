@@ -564,6 +564,12 @@ namespace TraverserProject
                 if (PlayerUIManager.Singleton.menuWindowIsOpen)
                     return;
 
+                if (player.isPerformingAction)
+                    return;
+
+                if (player.playerCombatManager.isUsingItem)
+                    return;
+
                 player.playerEquipmentManager.SwitchRightWeapon();
             }
         }
@@ -575,6 +581,12 @@ namespace TraverserProject
                 switch_Left_Weapon_Input = false;
 
                 if (PlayerUIManager.Singleton.menuWindowIsOpen)
+                    return;
+
+                if (player.isPerformingAction)
+                    return;
+
+                if (player.playerCombatManager.isUsingItem)
                     return;
 
                 player.playerEquipmentManager.SwitchLeftWeapon();

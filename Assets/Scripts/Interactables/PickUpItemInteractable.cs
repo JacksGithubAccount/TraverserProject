@@ -95,6 +95,9 @@ namespace TraverserProject
             if (player.isPerformingAction)
                 return;
 
+            if (player.playerCombatManager.isUsingItem)
+                return;
+
 
             base.Interact(player);
 

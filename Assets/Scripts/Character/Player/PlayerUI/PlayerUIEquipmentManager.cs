@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Unity.Netcode;
 using System.Collections.Generic;
+using TMPro;
 
 namespace TraverserProject
 {
@@ -32,6 +33,12 @@ namespace TraverserProject
         private Button handEquipmentSlotButton;
         [SerializeField] Image legEquipmentSlot;
         private Button legEquipmentSlotButton;
+        [SerializeField] Image mainProjectileEquipmentSlot;
+        [SerializeField] TextMeshProUGUI mainProjectileCount;
+        private Button mainProjectileEquipmentSlotButton;
+        [SerializeField] Image secondaryProjectileEquipmentSlot;
+        [SerializeField] TextMeshProUGUI secondaryProjectileCount;
+        private Button secondaryProjectileEquipmentSlotButton;
 
         [Header("Equipment Inventory")]
         public EquipmentType currentSelectedEquipmentSlot;
@@ -54,6 +61,9 @@ namespace TraverserProject
             bodyEquipmentSlotButton = bodyEquipmentSlot.GetComponentInParent<Button>(true);
             handEquipmentSlotButton = handEquipmentSlot.GetComponentInParent<Button>(true);
             legEquipmentSlotButton = legEquipmentSlot.GetComponentInParent<Button>(true);
+
+            mainProjectileEquipmentSlotButton = mainProjectileEquipmentSlot.GetComponentInParent<Button>(true);
+            secondaryProjectileEquipmentSlotButton = secondaryProjectileEquipmentSlot.GetComponentInParent<Button>(true);
         }
 
         public void OpenEquipmentManagerMenu()
@@ -85,6 +95,9 @@ namespace TraverserProject
             bodyEquipmentSlotButton.enabled = isEnabled;
             handEquipmentSlotButton.enabled = isEnabled;
             legEquipmentSlotButton.enabled = isEnabled;
+
+            mainProjectileEquipmentSlotButton.enabled = isEnabled;
+            secondaryProjectileEquipmentSlotButton.enabled = isEnabled;
         }
 
         public void SelectLastSelectedEquipmentSlot()
@@ -122,6 +135,12 @@ namespace TraverserProject
                     break;
                 case EquipmentType.Legs:
                     lastSelectedButton = legEquipmentSlotButton;
+                    break;
+                case EquipmentType.MainProjectile:
+                    lastSelectedButton = mainProjectileEquipmentSlotButton;
+                    break;
+                case EquipmentType.SecondaryProjectile:
+                    lastSelectedButton = secondaryProjectileEquipmentSlotButton;
                     break;
                 default:
                     break;
@@ -255,6 +274,34 @@ namespace TraverserProject
             {
                 legEquipmentSlot.enabled = false;
             }
+
+            RangedProjectileItem mainProjectileEquipment = player.playerInventoryManager.mainProjectile;
+            if (mainProjectileEquipment != null)
+            {
+                mainProjectileEquipmentSlot.enabled = true;
+                mainProjectileEquipmentSlot.sprite = mainProjectileEquipment.itemIcon;
+                mainProjectileCount.enabled = true;
+                mainProjectileCount.text = mainProjectileEquipment.currentAmmoAmount.ToString();
+            }
+            else
+            {
+                mainProjectileEquipmentSlot.enabled = false;
+                mainProjectileCount.enabled = false;
+            }
+
+            RangedProjectileItem secondaryProjectileEquipment = player.playerInventoryManager.secondaryProjectile;
+            if (secondaryProjectileEquipment != null)
+            {
+                secondaryProjectileEquipmentSlot.enabled = true;
+                secondaryProjectileEquipmentSlot.sprite = secondaryProjectileEquipment.itemIcon;
+                secondaryProjectileCount.enabled = true;
+                secondaryProjectileCount.text = secondaryProjectileEquipment.currentAmmoAmount.ToString();
+            }
+            else
+            {
+                secondaryProjectileEquipmentSlot.enabled = false;
+                secondaryProjectileCount.enabled = false;
+            }
         }
 
         private void ClearEquipmentInventory()
@@ -301,6 +348,12 @@ namespace TraverserProject
                     break;
                 case EquipmentType.Legs:
                     LoadLegEquipmentInventory();
+                    break;
+                case EquipmentType.MainProjectile:
+                    LoadProjectileInventory();
+                    break;
+                case EquipmentType.SecondaryProjectile:
+                    LoadProjectileInventory();
                     break;
                 default:
                     break;
@@ -508,6 +561,46 @@ namespace TraverserProject
             }
         }
 
+        public void LoadProjectileInventory()
+        {
+            PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+            List<RangedProjectileItem> projectilesInInventory = new List<RangedProjectileItem>();
+
+            for (int i = 0; i < player.playerInventoryManager.itemsInInventory.Count; i++)
+            {
+                RangedProjectileItem projectile = player.playerInventoryManager.itemsInInventory[i] as RangedProjectileItem;
+
+                if (projectile != null)
+                    projectilesInInventory.Add(projectile);
+            }
+
+            if (projectilesInInventory.Count <= 0)
+            {
+                equipmentInventoryWindow.SetActive(false);
+                ToggleEquipmentButtons(true);
+                RefreshMenu();
+                return;
+            }
+
+            bool hasSelectedFirstInventorySlot = false;
+
+            for (int i = 0; i < projectilesInInventory.Count; i++)
+            {
+                GameObject inventorySlotGameObject = Instantiate(equipmentInventorySlotPrefab, equipmentIventoryContentWindow);
+                UI_EquipmentInventorySlot equipmentInventorySlot = inventorySlotGameObject.GetComponent<UI_EquipmentInventorySlot>();
+                equipmentInventorySlot.AddItem(projectilesInInventory[i]);
+
+                if (!hasSelectedFirstInventorySlot)
+                {
+                    hasSelectedFirstInventorySlot = true;
+                    Button inventorySlotButton = inventorySlotGameObject.GetComponent<Button>();
+                    inventorySlotButton.Select();
+                    inventorySlotButton.OnSelect(null);
+
+                }
+            }
+        }
+
         public void SelectEquipmentSlot(int equipmentSlot)
         {
             currentSelectedEquipmentSlot = (EquipmentType)equipmentSlot;
@@ -623,6 +716,22 @@ namespace TraverserProject
 
                     player.playerInventoryManager.legEquipment = null;
                     player.playerEquipmentManager.LoadLegEquipment(player.playerInventoryManager.legEquipment);
+                    break;
+                case EquipmentType.MainProjectile:
+                    unequippedItem = player.playerInventoryManager.mainProjectile;
+                    if (unequippedItem != null)
+                        player.playerInventoryManager.AddItemToInventory(unequippedItem);
+
+                    player.playerInventoryManager.mainProjectile = null;
+                    player.playerEquipmentManager.LoadMainProjectileEquipment(player.playerInventoryManager.mainProjectile);
+                    break;
+                case EquipmentType.SecondaryProjectile:
+                    unequippedItem = player.playerInventoryManager.secondaryProjectile;
+                    if (unequippedItem != null)
+                        player.playerInventoryManager.AddItemToInventory(unequippedItem);
+
+                    player.playerInventoryManager.secondaryProjectile = null;
+                    player.playerEquipmentManager.LoadSecondaryProjectileEquipment(player.playerInventoryManager.secondaryProjectile);
                     break;
                 default:
                     break;

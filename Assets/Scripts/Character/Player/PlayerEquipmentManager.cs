@@ -685,6 +685,46 @@ namespace TraverserProject
             player.playerBodyManager.EnableLowerBody();
         }
 
+        public void LoadMainProjectileEquipment(RangedProjectileItem equipment)
+        {
+
+
+            if (equipment == null)
+            {
+                if (player.IsOwner)
+                    player.playerNetworkManager.mainProjectileID.Value = -1; //-1 will never be ID so it will always be null
+
+                player.playerInventoryManager.mainProjectile = null;
+                return;
+            }
+
+            player.playerInventoryManager.mainProjectile = equipment;
+
+
+            if (player.IsOwner)
+                player.playerNetworkManager.mainProjectileID.Value = equipment.itemID;
+        }
+
+        public void LoadSecondaryProjectileEquipment(RangedProjectileItem equipment)
+        {
+
+
+            if (equipment == null)
+            {
+                if (player.IsOwner)
+                    player.playerNetworkManager.secondaryProjectileID.Value = -1; //-1 will never be ID so it will always be null
+
+                player.playerInventoryManager.secondaryProjectile = null;
+                return;
+            }
+
+            player.playerInventoryManager.secondaryProjectile = equipment;
+
+
+            if (player.IsOwner)
+                player.playerNetworkManager.secondaryProjectileID.Value = equipment.itemID;
+        }
+
         private void InitializeWeaponSlots()
         {
             WeaponModelInstantiationSlot[] weaponSlots = GetComponentsInChildren<WeaponModelInstantiationSlot>();

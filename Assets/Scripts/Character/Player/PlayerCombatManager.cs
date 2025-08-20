@@ -303,6 +303,18 @@ namespace TraverserProject
 
             projectileItem.currentAmmoAmount -= 1;
 
+            switch (currentProjectileBeingUsed)
+            {
+                case ProjectileSlot.Main:
+                    PlayerUIManager.Singleton.playerUIHudManager.SetMainProjectileQuickSlotIcon(projectileItem);
+                    break;
+                case ProjectileSlot.Secondary:
+                    PlayerUIManager.Singleton.playerUIHudManager.SetMainProjectileQuickSlotIcon(projectileItem);
+                    break;
+                default:
+                    break;
+            }
+
             projectileInstantiationLocation = player.playerCombatManager.lockOnTransform;
             projectileGameObject = Instantiate(projectileItem.releaseProjectileModel, projectileInstantiationLocation);
             projectileDamageCollider = projectileGameObject.GetComponent<RangedProjectileDamageCollider>();

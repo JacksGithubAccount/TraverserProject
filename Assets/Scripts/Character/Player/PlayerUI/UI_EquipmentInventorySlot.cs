@@ -179,6 +179,32 @@ namespace TraverserProject
 
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
                     break;
+                case EquipmentType.MainProjectile:
+                    equippedItem = player.playerInventoryManager.mainProjectile;
+                    if (equippedItem != null)
+                    {
+                        player.playerInventoryManager.AddItemToInventory(equippedItem);
+                    }
+                    player.playerInventoryManager.mainProjectile = currentItem as RangedProjectileItem;
+                    player.playerInventoryManager.RemoveItemFromInventory(currentItem);
+
+                    player.playerEquipmentManager.LoadMainProjectileEquipment(player.playerInventoryManager.mainProjectile);
+
+                    PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
+                    break;
+                case EquipmentType.SecondaryProjectile:
+                    equippedItem = player.playerInventoryManager.secondaryProjectile;
+                    if (equippedItem != null)
+                    {
+                        player.playerInventoryManager.AddItemToInventory(equippedItem);
+                    }
+                    player.playerInventoryManager.secondaryProjectile = currentItem as RangedProjectileItem;
+                    player.playerInventoryManager.RemoveItemFromInventory(currentItem);
+
+                    player.playerEquipmentManager.LoadSecondaryProjectileEquipment(player.playerInventoryManager.secondaryProjectile);
+
+                    PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
+                    break;
                 default:
                     break;
             }

@@ -114,7 +114,9 @@ public enum EquipmentType
     Head,
     Body,
     Hands,
-    Legs
+    Legs,
+    MainProjectile,
+    SecondaryProjectile
 
 }
 // tags helmetsfor specific head portions to cover

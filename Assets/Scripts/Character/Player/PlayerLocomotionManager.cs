@@ -289,6 +289,10 @@ namespace TraverserProject
             if (player.isPerformingAction)
                 return;
 
+            if (player.playerCombatManager.isUsingItem)
+                return;
+
+
             if (player.playerNetworkManager.currentStamina.Value <= 0)
                 return;
 

@@ -115,6 +115,12 @@ namespace TraverserProject
         {
             base.Interact(player);
 
+            if (player.isPerformingAction)
+                return;
+
+            if (player.playerCombatManager.isUsingItem)
+                return;
+
             if (!isActivated.Value)
             {
                 RetoreSiteOfGrace(player);
