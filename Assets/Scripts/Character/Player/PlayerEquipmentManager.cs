@@ -22,9 +22,6 @@ namespace TraverserProject
         [HideInInspector] public GameObject rightHandWeaponModel;
         [HideInInspector] public GameObject leftHandWeaponModel;
 
-        [Header("Debug")]
-        [SerializeField] bool equipNewItems = false;
-
         [Header("General Equipment Models")]
         public GameObject hatsObject;
         [HideInInspector] public GameObject[] hats;
@@ -356,21 +353,78 @@ namespace TraverserProject
             LoadWeaponsOnBothHands();
         }
 
-        private void Update()
-        {
-            if (equipNewItems)
-            {
-                equipNewItems = false;
-                EquipArmor();
-            }
-        }
-
         public void EquipArmor()
         {
             LoadHeadEquipment(player.playerInventoryManager.headEquipment);
             LoadBodyEquipment(player.playerInventoryManager.bodyEquipment);
             LoadHandEquipment(player.playerInventoryManager.handEquipment);
             LoadLegEquipment(player.playerInventoryManager.legEquipment);
+        }
+
+        public void SwitchQuickSlotItem()
+        {
+            if (!player.IsOwner)
+                return;
+
+
+            QuickSlotItem selectedItem = null;
+
+            player.playerInventoryManager.quickSlotItemIndex += 1;
+
+            if (player.playerInventoryManager.quickSlotItemIndex < 0 || player.playerInventoryManager.quickSlotItemIndex > 2)
+            {
+                player.playerInventoryManager.quickSlotItemIndex = 0;
+
+                float itemCount = 0;
+                QuickSlotItem firstItem = null;
+                int firstItemPosition = 0;
+
+                //Checks if we are holding more than one weapon
+                for (int i = 0; i < player.playerInventoryManager.quickSlotItemsInQuickSlots.Length; i++)
+                {
+                    if (player.playerInventoryManager.quickSlotItemsInQuickSlots[i] != null)
+                    {
+                        itemCount += 1;
+
+                        if (firstItem == null)
+                        {
+                            firstItem = player.playerInventoryManager.quickSlotItemsInQuickSlots[i];
+                            firstItemPosition = i;
+                        }
+                    }
+                }
+
+                if (itemCount <= 1)
+                {
+                    player.playerInventoryManager.quickSlotItemIndex = -1;
+                    selectedItem = null;
+                    player.playerNetworkManager.currentQuickSlotItemID.Value = -1;
+                }
+                else
+                {
+                    player.playerInventoryManager.quickSlotItemIndex = firstItemPosition;
+                    player.playerNetworkManager.currentQuickSlotItemID.Value = firstItem.itemID;
+                }
+                return;
+            }
+
+
+            if (player.playerInventoryManager.quickSlotItemsInQuickSlots[player.playerInventoryManager.quickSlotItemIndex] != null)
+            {
+                selectedItem = player.playerInventoryManager.quickSlotItemsInQuickSlots[player.playerInventoryManager.quickSlotItemIndex];
+                player.playerNetworkManager.currentQuickSlotItemID.Value = player.playerInventoryManager.quickSlotItemsInQuickSlots[player.playerInventoryManager.quickSlotItemIndex].itemID;
+                return;
+            }
+            else
+            {
+                player.playerNetworkManager.currentQuickSlotItemID.Value = -1;
+            }
+
+            if (selectedItem == null && player.playerInventoryManager.quickSlotItemIndex <= 2)
+            {
+                SwitchQuickSlotItem();
+            }
+
         }
 
         private void InitializeArmorModels()
@@ -724,6 +778,7 @@ namespace TraverserProject
             if (player.IsOwner)
                 player.playerNetworkManager.secondaryProjectileID.Value = equipment.itemID;
         }
+
 
         private void InitializeWeaponSlots()
         {

@@ -116,7 +116,10 @@ public enum EquipmentType
     Hands,
     Legs,
     MainProjectile,
-    SecondaryProjectile
+    SecondaryProjectile,
+    QuickSlot01,
+    QuickSlot02,
+    QuickSlot03
 
 }
 // tags helmetsfor specific head portions to cover
