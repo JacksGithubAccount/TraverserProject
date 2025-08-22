@@ -8,7 +8,7 @@ namespace TraverserProject
     public class SiteOfGraceInteractable : Interactable
     {
         [Header("Site Of Grace Info")]
-        [SerializeField] int siteOfGraceID;
+        public int siteOfGraceID;
         public NetworkVariable<bool> isActivated = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
         [Header("VFX")]
@@ -17,6 +17,9 @@ namespace TraverserProject
         [Header("Interaction Text")]
         [SerializeField] string unactivatedInteractionText = "Restore Site Of Grace";
         [SerializeField] string activatedInteractionText = "Rest";
+
+        [Header("Teleport Transform")]
+        [SerializeField] Transform teleportTransform;
 
 
         protected override void Start()
@@ -53,6 +56,8 @@ namespace TraverserProject
                 OnIsActivatedChanged(false, isActivated.Value);
 
             isActivated.OnValueChanged += OnIsActivatedChanged;
+
+            WorldObjectManager.Singleton.AddSiteOfGraceToList(this);
         }
 
         public override void OnNetworkDespawn()
@@ -81,7 +86,7 @@ namespace TraverserProject
 
         private void RestAtSiteOfGrace(PlayerManager player)
         {
-            Debug.Log("Resting");
+            PlayerUIManager.Singleton.playerUISiteOfGraceManager.OpenSiteOfGraceManagerMenu();
             //temp
             interactableCollider.enabled = true;
             player.playerNetworkManager.currentHealth.Value = player.playerNetworkManager.maxHealth.Value;
@@ -129,6 +134,13 @@ namespace TraverserProject
             {
                 RestAtSiteOfGrace(player);
             }
+        }
+
+        public void TeleportToSiteOfGrace()
+        {
+            PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+
+            player.transform.position = teleportTransform.position;
         }
 
     }

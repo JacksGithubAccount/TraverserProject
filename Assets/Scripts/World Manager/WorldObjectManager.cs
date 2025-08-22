@@ -15,6 +15,9 @@ namespace TraverserProject
         [Header("Fog Walls")]
         public List<FogWallInteractable> fogWalls;
 
+        [Header("Site Of Grace")]
+        public List<SiteOfGraceInteractable> sitesOfGrace;
+
         private void Awake()
         {
             if (Singleton == null)
@@ -26,7 +29,7 @@ namespace TraverserProject
                 Destroy(gameObject);
             }
         }
-        
+
         public void SpawnObject(NetworkObjectSpawner networkObjectSpawner)
         {
             if (NetworkManager.Singleton.IsServer)
@@ -52,6 +55,23 @@ namespace TraverserProject
 
             {
                 fogWalls.Remove(fogWall);
+            }
+        }
+
+        public void AddSiteOfGraceToList(SiteOfGraceInteractable siteOfGrace)
+        {
+            if (!sitesOfGrace.Contains(siteOfGrace))
+            {
+                sitesOfGrace.Add(siteOfGrace);
+            }
+
+        }
+
+        public void RemoveSiteOfGraceFromList(SiteOfGraceInteractable siteOfGrace)
+        {
+            if (sitesOfGrace.Contains(siteOfGrace))
+            {
+                sitesOfGrace.Remove(siteOfGrace);
             }
         }
 
