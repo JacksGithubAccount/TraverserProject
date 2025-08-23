@@ -281,6 +281,7 @@ namespace TraverserProject
         }
         public void LoadWorldScene(int buildIndex)
         {
+            PlayerUIManager.Singleton.playerUILoadingScreenManager.ActivateLoadingScreen();
             string worldScene = SceneUtility.GetScenePathByBuildIndex(buildIndex);
             NetworkManager.Singleton.SceneManager.LoadScene(worldScene, LoadSceneMode.Single);
             player.LoadGameDataFromCurrentCharacterData(ref currentCharacterData);

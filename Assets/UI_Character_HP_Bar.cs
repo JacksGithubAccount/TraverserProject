@@ -14,7 +14,7 @@ namespace TraverserProject
         [SerializeField] bool displayCharacterNameOnDamage = false;
         [SerializeField] float defaultTimeBeforeBarHides = 3;
         [SerializeField] float hideTimer = 0;
-        [SerializeField] int currentDamageTaken = 0;
+        public int currentDamageTaken = 0;
         [SerializeField] TextMeshProUGUI characterName;
         [SerializeField] TextMeshProUGUI characterDamage;
         [HideInInspector] public int oldHealthValue = 0;
@@ -23,7 +23,7 @@ namespace TraverserProject
         {
             base.Awake();
 
-            if(slider == null )
+            if (slider == null)
                 slider = GetComponentInChildren<Slider>();
 
             character = GetComponentInParent<CharacterManager>();
@@ -91,12 +91,12 @@ namespace TraverserProject
             {
                 gameObject.SetActive(false);
             }
-	}
-
-            private void OnDisable()
-            {
-                currentDamageTaken = 0;
-            }
-
         }
+
+        private void OnDisable()
+        {
+            currentDamageTaken = 0;
+        }
+
     }
+}

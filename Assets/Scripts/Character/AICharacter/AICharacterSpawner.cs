@@ -9,6 +9,7 @@ namespace TraverserProject
         [Header("Character")]
         [SerializeField] GameObject characterGameObject;
         [SerializeField] GameObject instantiatedGameObject;
+        private AICharacterManager aiCharacter;
 
 
         private void Awake()
@@ -30,8 +31,33 @@ namespace TraverserProject
                 instantiatedGameObject.transform.position = transform.position;
                 instantiatedGameObject.transform.rotation = transform.rotation;
                 instantiatedGameObject.GetComponent<NetworkObject>().Spawn();
-                WorldAIManager.Singleton.AddCharacterToSpawnedCharactersList(instantiatedGameObject.GetComponent<AICharacterManager>());
+                aiCharacter = instantiatedGameObject.GetComponent<AICharacterManager>();
+
+                if (aiCharacter != null)
+                    WorldAIManager.Singleton.AddCharacterToSpawnedCharactersList(aiCharacter);
             }
+        }
+
+        public void ResetCharacter()
+        {
+            if (instantiatedGameObject == null)
+                return;
+
+            if (aiCharacter == null)
+                return;
+
+            instantiatedGameObject.transform.position = transform.position;
+            instantiatedGameObject.transform.rotation = transform.rotation;
+            aiCharacter.aiCharacterNetworkManager.currentHealth.Value = aiCharacter.aiCharacterNetworkManager.maxHealth.Value;
+            if (aiCharacter.isDead.Value)
+            {
+                aiCharacter.isDead.Value = false;
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Empty", false, false, true, true, true, true);
+            }
+
+            aiCharacter.characterUIManager.ResetCharacterHPBar();
+
+
         }
     }
 }

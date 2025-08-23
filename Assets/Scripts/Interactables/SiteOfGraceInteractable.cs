@@ -67,7 +67,7 @@ namespace TraverserProject
             isActivated.OnValueChanged -= OnIsActivatedChanged;
         }
 
-        private void RetoreSiteOfGrace(PlayerManager player)
+        private void RestoreSiteOfGrace(PlayerManager player)
         {
             isActivated.Value = true;
 
@@ -128,7 +128,7 @@ namespace TraverserProject
 
             if (!isActivated.Value)
             {
-                RetoreSiteOfGrace(player);
+                RestoreSiteOfGrace(player);
             }
             else
             {
@@ -140,7 +140,11 @@ namespace TraverserProject
         {
             PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
 
+            PlayerUIManager.Singleton.playerUILoadingScreenManager.ActivateLoadingScreen();
+
             player.transform.position = teleportTransform.position;
+
+            PlayerUIManager.Singleton.playerUILoadingScreenManager.DeactivateLoadingScreen(1);
         }
 
     }

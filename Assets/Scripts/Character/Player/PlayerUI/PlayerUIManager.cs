@@ -16,6 +16,7 @@ namespace TraverserProject
         [HideInInspector] public PlayerUIEquipmentManager playerUIEquipmentManager;
         [HideInInspector] public PlayerUISiteOfGraceManager playerUISiteOfGraceManager;
         [HideInInspector] public PlayerUITeleportLocationManager playerUITeleportLocationManager;
+        [HideInInspector] public PlayerUILoadingScreenManager playerUILoadingScreenManager;
 
         [Header("UI Flags")]
         public bool menuWindowIsOpen = false;
@@ -39,6 +40,7 @@ namespace TraverserProject
             playerUIEquipmentManager = GetComponentInChildren<PlayerUIEquipmentManager>();
             playerUISiteOfGraceManager = GetComponentInChildren<PlayerUISiteOfGraceManager>();
             playerUITeleportLocationManager = GetComponentInChildren<PlayerUITeleportLocationManager>();
+            playerUILoadingScreenManager = GetComponentInChildren<PlayerUILoadingScreenManager>();
         }
         private void Start()
         {

@@ -11,11 +11,15 @@ namespace TraverserProject
     {
         public static WorldAIManager Singleton;
 
-
+        [Header("Loading")]
+        public bool isPerformingLoadingOperation = false;
 
         [Header("Characters")]
         [SerializeField] List<AICharacterSpawner> aiCharacterSpawners;
         [SerializeField] List<AICharacterManager> spawnedInCharacters;
+        private Coroutine spawnAllCharactersCoroutine;
+        private Coroutine despawnAllCharactersCoroutine;
+        private Coroutine resetAllCharactersCoroutine;
 
         [Header("Bosses")]
         [SerializeField] List<AIBossCharacterManager> spawnedInBosses;
@@ -69,22 +73,85 @@ namespace TraverserProject
 
         public void ResetAllCharacters()
         {
-            DespawnAllCharacters();
+            isPerformingLoadingOperation = true;
 
-            foreach (var spawner in aiCharacterSpawners)
+            if (spawnAllCharactersCoroutine != null)
+                StopCoroutine(spawnAllCharactersCoroutine);
+
+            spawnAllCharactersCoroutine = StartCoroutine(SpawnAllCharactersCoroutine());
+        }
+
+        private IEnumerator SpawnAllCharactersCoroutine()
+        {
+            for (int i = 0; i < aiCharacterSpawners.Count; i++)
             {
-                spawner.AttemptToSpawnCharacter();
+                yield return new WaitForFixedUpdate();
+
+                aiCharacterSpawners[i].AttemptToSpawnCharacter();
+
+                yield return null;
             }
+
+            isPerformingLoadingOperation = false;
+
+            yield return null;
+        }
+
+        public void ResetAllCharacter()
+        {
+            isPerformingLoadingOperation = true;
+
+            if (resetAllCharactersCoroutine != null)
+                StopCoroutine(resetAllCharactersCoroutine);
+
+            resetAllCharactersCoroutine = StartCoroutine(ResetAllCharactersCoroutine());
+        }
+
+        private IEnumerator ResetAllCharactersCoroutine()
+        {
+            for (int i = 0; i < aiCharacterSpawners.Count; i++)
+            {
+                yield return new WaitForFixedUpdate();
+
+                aiCharacterSpawners[i].ResetCharacter();
+
+                yield return null;
+            }
+
+            isPerformingLoadingOperation = false;
+
+            yield return null;
         }
 
         private void DespawnAllCharacters()
         {
-            foreach (var character in spawnedInCharacters)
+            isPerformingLoadingOperation = true;
+
+            if (despawnAllCharactersCoroutine != null)
+                StopCoroutine(despawnAllCharactersCoroutine);
+
+            despawnAllCharactersCoroutine = StartCoroutine(DespawnAllCharactersCoroutine());
+
+
+
+
+        }
+
+        private IEnumerator DespawnAllCharactersCoroutine()
+        {
+            for (int i = 0; i < spawnedInCharacters.Count; i++)
             {
-                character.GetComponent<NetworkObject>().Despawn();
+                yield return new WaitForFixedUpdate();
+
+                spawnedInCharacters[i].GetComponent<NetworkObject>().Despawn();
+
+                yield return null;
             }
 
             spawnedInCharacters.Clear();
+            isPerformingLoadingOperation = false;
+
+            yield return null;
         }
 
         private void DisableAllCharacters()
