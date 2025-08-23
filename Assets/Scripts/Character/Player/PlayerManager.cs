@@ -272,14 +272,17 @@ namespace TraverserProject
             currentCharacterData.legEquipment = playerNetworkManager.legEquipmentID.Value;
 
             currentCharacterData.rightWeaponIndex = playerInventoryManager.rightHandWeaponIndex;
-            currentCharacterData.rightWeapon01 = playerInventoryManager.weaponsInRightHandSlots[0].itemID;
-            currentCharacterData.rightWeapon02 = playerInventoryManager.weaponsInRightHandSlots[1].itemID;
-            currentCharacterData.rightWeapon03 = playerInventoryManager.weaponsInRightHandSlots[2].itemID;
+            currentCharacterData.rightWeapon01 = WorldSaveGameManager.Singleton.GetSerializableWeaponFromWeaponItem(playerInventoryManager.weaponsInRightHandSlots[0]);
+            currentCharacterData.rightWeapon02 = WorldSaveGameManager.Singleton.GetSerializableWeaponFromWeaponItem(playerInventoryManager.weaponsInRightHandSlots[1]);
+            currentCharacterData.rightWeapon03 = WorldSaveGameManager.Singleton.GetSerializableWeaponFromWeaponItem(playerInventoryManager.weaponsInRightHandSlots[2]);
 
             currentCharacterData.leftWeaponIndex = playerInventoryManager.leftHandWeaponIndex;
-            currentCharacterData.leftWeapon01 = playerInventoryManager.weaponsInLeftHandSlots[0].itemID;
-            currentCharacterData.leftWeapon02 = playerInventoryManager.weaponsInLeftHandSlots[1].itemID;
-            currentCharacterData.leftWeapon03 = playerInventoryManager.weaponsInLeftHandSlots[2].itemID;
+            currentCharacterData.leftWeapon01 = WorldSaveGameManager.Singleton.GetSerializableWeaponFromWeaponItem(playerInventoryManager.weaponsInLeftHandSlots[0]);
+            currentCharacterData.leftWeapon02 = WorldSaveGameManager.Singleton.GetSerializableWeaponFromWeaponItem(playerInventoryManager.weaponsInLeftHandSlots[1]);
+            currentCharacterData.leftWeapon03 = WorldSaveGameManager.Singleton.GetSerializableWeaponFromWeaponItem(playerInventoryManager.weaponsInLeftHandSlots[2]);
+
+            currentCharacterData.mainProjectile = WorldSaveGameManager.Singleton.GetSerializableRangedProjectileFromRangedProjectileItem(playerInventoryManager.mainProjectile);
+            currentCharacterData.secondaryProjectile = WorldSaveGameManager.Singleton.GetSerializableRangedProjectileFromRangedProjectileItem(playerInventoryManager.secondaryProjectile);
 
             if (playerInventoryManager.currentSpell != null)
                 currentCharacterData.currentSpell = playerInventoryManager.currentSpell.itemID;
@@ -347,64 +350,36 @@ namespace TraverserProject
                 playerInventoryManager.legEquipment = null;
             }
 
-            if (WorldItemDatabase.Singleton.GetWeaponByID(currentCharacterData.rightWeapon01))
+            playerInventoryManager.weaponsInRightHandSlots[0] = currentCharacterData.rightWeapon01.GetWeapon();
+            playerInventoryManager.weaponsInRightHandSlots[1] = currentCharacterData.rightWeapon02.GetWeapon();
+            playerInventoryManager.weaponsInRightHandSlots[2] = currentCharacterData.rightWeapon03.GetWeapon();
+
+            playerInventoryManager.weaponsInLeftHandSlots[0] = currentCharacterData.leftWeapon01.GetWeapon();
+            playerInventoryManager.weaponsInLeftHandSlots[1] = currentCharacterData.leftWeapon02.GetWeapon();
+            playerInventoryManager.weaponsInLeftHandSlots[2] = currentCharacterData.leftWeapon03.GetWeapon();
+
+            playerInventoryManager.rightHandWeaponIndex = currentCharacterData.rightWeaponIndex;
+            if (currentCharacterData.rightWeaponIndex >= 0)
             {
-                WeaponItem rightWeapon01 = Instantiate(WorldItemDatabase.Singleton.GetWeaponByID(currentCharacterData.rightWeapon01));
-                playerInventoryManager.weaponsInRightHandSlots[0] = rightWeapon01;
+                playerInventoryManager.currentRightHandWeapon = playerInventoryManager.weaponsInRightHandSlots[currentCharacterData.rightWeaponIndex];
+                playerNetworkManager.currentRightHandWeaponID.Value = playerInventoryManager.weaponsInRightHandSlots[currentCharacterData.rightWeaponIndex].itemID;
             }
             else
             {
-                playerInventoryManager.weaponsInRightHandSlots[0] = null;
+                playerNetworkManager.currentRightHandWeaponID.Value = WorldItemDatabase.Singleton.unarmedWeapon.itemID;
             }
 
-            if (WorldItemDatabase.Singleton.GetWeaponByID(currentCharacterData.rightWeapon02))
+            playerInventoryManager.leftHandWeaponIndex = currentCharacterData.leftWeaponIndex;
+            if (currentCharacterData.leftWeaponIndex >= 0)
             {
-                WeaponItem rightWeapon02 = Instantiate(WorldItemDatabase.Singleton.GetWeaponByID(currentCharacterData.rightWeapon02));
-                playerInventoryManager.weaponsInRightHandSlots[1] = rightWeapon02;
+                playerInventoryManager.currentLeftHandWeapon = playerInventoryManager.weaponsInLeftHandSlots[currentCharacterData.leftWeaponIndex];
+                playerNetworkManager.currentLeftHandWeaponID.Value = playerInventoryManager.weaponsInLeftHandSlots[currentCharacterData.leftWeaponIndex].itemID;
             }
             else
             {
-                playerInventoryManager.weaponsInRightHandSlots[1] = null;
+                playerNetworkManager.currentLeftHandWeaponID.Value = WorldItemDatabase.Singleton.unarmedWeapon.itemID;
             }
 
-            if (WorldItemDatabase.Singleton.GetWeaponByID(currentCharacterData.rightWeapon03))
-            {
-                WeaponItem rightWeapon03 = Instantiate(WorldItemDatabase.Singleton.GetWeaponByID(currentCharacterData.rightWeapon03));
-                playerInventoryManager.weaponsInRightHandSlots[2] = rightWeapon03;
-            }
-            else
-            {
-                playerInventoryManager.weaponsInRightHandSlots[2] = null;
-            }
-
-            if (WorldItemDatabase.Singleton.GetWeaponByID(currentCharacterData.leftWeapon01))
-            {
-                WeaponItem leftWeapon01 = Instantiate(WorldItemDatabase.Singleton.GetWeaponByID(currentCharacterData.leftWeapon01));
-                playerInventoryManager.weaponsInLeftHandSlots[0] = leftWeapon01;
-            }
-            else
-            {
-                playerInventoryManager.weaponsInLeftHandSlots[0] = null;
-            }
-            if (WorldItemDatabase.Singleton.GetWeaponByID(currentCharacterData.leftWeapon02))
-            {
-                WeaponItem leftWeapon02 = Instantiate(WorldItemDatabase.Singleton.GetWeaponByID(currentCharacterData.leftWeapon02));
-                playerInventoryManager.weaponsInLeftHandSlots[1] = leftWeapon02;
-            }
-            else
-            {
-                playerInventoryManager.weaponsInLeftHandSlots[1] = null;
-            }
-
-            if (WorldItemDatabase.Singleton.GetWeaponByID(currentCharacterData.leftWeapon03))
-            {
-                WeaponItem leftWeapon03 = Instantiate(WorldItemDatabase.Singleton.GetWeaponByID(currentCharacterData.leftWeapon03));
-                playerInventoryManager.weaponsInLeftHandSlots[2] = leftWeapon03;
-            }
-            else
-            {
-                playerInventoryManager.weaponsInLeftHandSlots[2] = null;
-            }
 
             if (WorldItemDatabase.Singleton.GetSpellByID(currentCharacterData.currentSpell))
             {
@@ -418,25 +393,9 @@ namespace TraverserProject
 
             playerEquipmentManager.EquipArmor();
 
-            playerInventoryManager.rightHandWeaponIndex = currentCharacterData.rightWeaponIndex;
-            if (currentCharacterData.rightWeaponIndex >= 0)
-            {
-                playerNetworkManager.currentRightHandWeaponID.Value = playerInventoryManager.weaponsInRightHandSlots[currentCharacterData.rightWeaponIndex].itemID;
-            }
-            else
-            {
-                playerNetworkManager.currentRightHandWeaponID.Value = WorldItemDatabase.Singleton.unarmedWeapon.itemID;
-            }
+            playerEquipmentManager.LoadMainProjectileEquipment(currentCharacterData.mainProjectile.GetProjectile());
+            playerEquipmentManager.LoadSecondaryProjectileEquipment(currentCharacterData.secondaryProjectile.GetProjectile());
 
-            playerInventoryManager.leftHandWeaponIndex = currentCharacterData.leftWeaponIndex;
-            if (currentCharacterData.leftWeaponIndex >= 0)
-            {
-                playerNetworkManager.currentLeftHandWeaponID.Value = playerInventoryManager.weaponsInLeftHandSlots[currentCharacterData.leftWeaponIndex].itemID;
-            }
-            else
-            {
-                playerNetworkManager.currentLeftHandWeaponID.Value = WorldItemDatabase.Singleton.unarmedWeapon.itemID;
-            }
         }
 
         private void LoadOtherPlayerCharacterWhenJoiningServer()

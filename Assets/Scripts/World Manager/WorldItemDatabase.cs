@@ -137,6 +137,8 @@ namespace TraverserProject
             }
         }
 
+        //item database
+
         public Item GetItemByID(int ID)
         {
             return items.FirstOrDefault(item => item.itemID == ID);
@@ -186,5 +188,39 @@ namespace TraverserProject
         {
             return quickSlotItems.FirstOrDefault(item => item.itemID == ID);
         }
+
+
+        //item serialization
+
+        public WeaponItem GetWeaponFromSerializedData(SerializableWeapon serializableWeapon)
+        {
+            WeaponItem weapon = null;
+            if (GetWeaponByID(serializableWeapon.itemID))
+                weapon = Instantiate(GetWeaponByID(serializableWeapon.itemID));
+
+            if (weapon == null)
+                return Instantiate(unarmedWeapon);
+
+            if (GetAshOfWarByID(serializableWeapon.ashofWarID))
+            {
+                AshOfWar ashOfWar = Instantiate(GetAshOfWarByID(serializableWeapon.ashofWarID));
+                weapon.ashOfWarAction = ashOfWar;
+            }
+
+            return weapon;
+        }
+
+        public RangedProjectileItem GetRangedProjectileFromSerializedData(SerializableRangedProjectile serializableProjectile)
+        {
+            RangedProjectileItem projectile = null;
+            if (GetProjectileByID(serializableProjectile.itemID))
+            {
+                projectile = Instantiate(GetProjectileByID(serializableProjectile.itemID));
+                projectile.currentAmmoAmount = serializableProjectile.itemAmount;
+            }
+
+            return projectile;
+        }
+
     }
 }

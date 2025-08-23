@@ -143,6 +143,7 @@ namespace TraverserProject
             PlayerUIManager.Singleton.playerUILoadingScreenManager.ActivateLoadingScreen();
 
             player.transform.position = teleportTransform.position;
+            Physics.SyncTransforms();
 
             PlayerUIManager.Singleton.playerUILoadingScreenManager.DeactivateLoadingScreen(1);
         }

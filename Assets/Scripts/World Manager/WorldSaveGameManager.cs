@@ -291,5 +291,37 @@ namespace TraverserProject
         {
             return worldSceneIndex;
         }
+
+        public SerializableWeapon GetSerializableWeaponFromWeaponItem(WeaponItem weapon)
+        {
+            SerializableWeapon serializedWeapon = new SerializableWeapon();
+            serializedWeapon.itemID = weapon.itemID;
+
+            if (weapon.ashOfWarAction != null)
+            {
+                serializedWeapon.ashofWarID = weapon.ashOfWarAction.itemID;
+            }
+            else
+            {
+                serializedWeapon.ashofWarID = -1;
+            }
+
+            return serializedWeapon;
+        }
+
+        public SerializableRangedProjectile GetSerializableRangedProjectileFromRangedProjectileItem(RangedProjectileItem projectile)
+        {
+            SerializableRangedProjectile serializedProjectile = new SerializableRangedProjectile();
+            if (projectile != null)
+            {
+                serializedProjectile.itemID = projectile.itemID;
+                serializedProjectile.itemAmount = projectile.currentAmmoAmount;
+            }
+            else
+            {
+                serializedProjectile.itemID = -1;
+            }
+            return serializedProjectile;
+        }
     }
 }
