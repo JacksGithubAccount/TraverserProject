@@ -12199,10 +12199,10 @@ GameObject:
   - component: {fileID: 6034644509893924099}
   - component: {fileID: 2442665282701344435}
   - component: {fileID: 3019695855622963282}
-  - component: {fileID: 2733138463253679835}
   - component: {fileID: 8168205539592873728}
   - component: {fileID: 1298057709493842833}
   - component: {fileID: 5796847305617921371}
+  - component: {fileID: -348975591456630097}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -12341,6 +12341,7 @@ MonoBehaviour:
   canRotate: 1
   canRun: 1
   canMove: 1
+  canRoll: 1
   verticalMovement: 0
   horizontalMovement: 0
   moveAmount: 0
@@ -12499,6 +12500,12 @@ MonoBehaviour:
         byte0059: 0
         byte0060: 0
         byte0061: 0
+  remainingHealthFlasks:
+    m_InternalValue: 3
+  remainingFocusPointsFlasks:
+    m_InternalValue: 2
+  isChugging:
+    m_InternalValue: 0
   isUsingRightHand:
     m_InternalValue: 0
   isUsingLeftHand:
@@ -12815,6 +12822,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d3160f87dcad91841b332fb8242c9eb2, type: 2}
   leftHandWeaponIndex: 0
   currentSpell: {fileID: 11400000, guid: 90bca23752031904badfc4e94de7bea6, type: 2}
+  quickSlotItemsInQuickSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  quickSlotItemIndex: 0
   currentQuickSlotItem: {fileID: 11400000, guid: aedcc59cf0831af4eb8da47234130fb5, type: 2}
   headEquipment: {fileID: 11400000, guid: d4a06b49d42657449b74320981258cb1, type: 2}
   bodyEquipment: {fileID: 11400000, guid: d7f23dd81588e284892606c920126316, type: 2}
@@ -12853,7 +12865,6 @@ MonoBehaviour:
   leftWeaponManager: {fileID: 0}
   rightHandWeaponModel: {fileID: 0}
   leftHandWeaponModel: {fileID: 0}
-  equipNewItems: 0
   hatsObject: {fileID: 4950477512941471090}
   hats: []
   hoodsObject: {fileID: 8165882637337718957}
@@ -12949,34 +12960,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2733138463253679835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3761150245944100862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 285700da5f9e90b458de5b470d2eee61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  lastAttackAnimationPerformed: 
-  previousPoiseDamageTaken: 0
-  currentTarget: {fileID: 0}
-  currentAttackType: 0
-  lockOnTransform: {fileID: 1524366428834116565}
-  canPerformRollingAttack: 0
-  canPerformBackstepAttack: 0
-  canBlock: 1
-  canBeBackstabbed: 1
-  criticalAttackDistanceCheck: 0.7
-  pendingCriticalDamage: 0
-  currentWeaponBeingUsed: {fileID: 0}
-  currentProjectileBeingUsed: 0
-  canComboWithMainHandWeapon: 0
-  canComboWithOffHandWeapon: 0
 --- !u!114 &8168205539592873728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13029,6 +13012,35 @@ MonoBehaviour:
   femaleArms: []
   femaleLegs: []
   femaleEyebrows: {fileID: 8433444400076566292}
+--- !u!114 &-348975591456630097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3761150245944100862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 285700da5f9e90b458de5b470d2eee61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  lastAttackAnimationPerformed: 
+  previousPoiseDamageTaken: 0
+  currentTarget: {fileID: 0}
+  currentAttackType: 0
+  lockOnTransform: {fileID: 1524366428834116565}
+  canPerformRollingAttack: 0
+  canPerformBackstepAttack: 0
+  canBlock: 1
+  canBeBackstabbed: 1
+  criticalAttackDistanceCheck: 0.7
+  pendingCriticalDamage: 0
+  currentWeaponBeingUsed: {fileID: 0}
+  currentProjectileBeingUsed: 0
+  canComboWithMainHandWeapon: 0
+  canComboWithOffHandWeapon: 0
+  isUsingItem: 0
 --- !u!1 &3777490511738098112
 GameObject:
   m_ObjectHideFlags: 0

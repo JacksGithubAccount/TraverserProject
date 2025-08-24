@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace TraverserProject
@@ -59,8 +60,25 @@ namespace TraverserProject
         public SerializableWeapon leftWeapon02;
         public SerializableWeapon leftWeapon03;
 
+        public int quickSlotIndex;
+        public SerializableQuickSlotItem quickSlotItem01;
+        public SerializableQuickSlotItem quickSlotItem02;
+        public SerializableQuickSlotItem quickSlotItem03;
+
         public SerializableRangedProjectile mainProjectile;
         public SerializableRangedProjectile secondaryProjectile;
+
+        public int currentHealthFlaskRemaining = 3;
+        public int currentFocusPointsFlaskRemaining = 2;
+
+        [Header("Inventory")]
+        public List<SerializableWeapon> weaponsInInventory;
+        public List<SerializableRangedProjectile> projectilesInInventory;
+        public List<SerializableQuickSlotItem> quickSlotItemsInInventory;
+        public List<int> headEquipmentInInventory;
+        public List<int> bodyEquipmentInInventory;
+        public List<int> handEquipmentInInventory;
+        public List<int> legEquipmentInInventory;
 
         public int currentSpell;
 
@@ -71,6 +89,15 @@ namespace TraverserProject
             bossesAwakened = new SerializableDictionary<int, bool>();
             bossesDefeated = new SerializableDictionary<int, bool>();
             worldItemsLooted = new SerializableDictionary<int, bool>();
+
+            weaponsInInventory = new List<SerializableWeapon>();
+            projectilesInInventory = new List<SerializableRangedProjectile>();
+            quickSlotItemsInInventory = new List<SerializableQuickSlotItem>();
+            headEquipmentInInventory = new List<int>();
+            bodyEquipmentInInventory = new List<int>();
+            handEquipmentInInventory = new List<int>();
+            legEquipmentInInventory = new List<int>();
+
         }
     }
 }

@@ -185,8 +185,8 @@ namespace TraverserProject
             {
                 player.playerInventoryManager.currentQuickSlotItem = null;
             }
-            if (player.IsOwner)
-                PlayerUIManager.Singleton.playerUIHudManager.SetQuickSlotItemQuickSlotIcon(newID);
+
+
         }
 
         public void OnMainProjectileIDChange(int oldID, int newID)

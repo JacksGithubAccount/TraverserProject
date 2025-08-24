@@ -104,6 +104,9 @@ namespace TraverserProject
                     player.playerNetworkManager.currentFocusPoints.Value += flaskRestoration;
                     player.playerNetworkManager.remainingFocusPointsFlasks.Value -= 1;
                 }
+
+                PlayerUIManager.Singleton.playerUIHudManager.SetQuickSlotItemQuickSlotIcon(player.playerInventoryManager.currentQuickSlotItem);
+
             }
 
             if (healthFlask && player.playerNetworkManager.remainingHealthFlasks.Value <= 0)

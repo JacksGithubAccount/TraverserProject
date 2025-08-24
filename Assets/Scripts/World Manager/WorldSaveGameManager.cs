@@ -323,5 +323,34 @@ namespace TraverserProject
             }
             return serializedProjectile;
         }
+
+        public SerializableFlask GetSerializableFlaskFromFlaskItem(FlaskItem flask)
+        {
+            SerializableFlask serializedFlask = new SerializableFlask();
+            if (flask != null)
+            {
+                serializedFlask.itemID = flask.itemID;
+            }
+            else
+            {
+                serializedFlask.itemID = -1;
+            }
+            return serializedFlask;
+        }
+
+        public SerializableQuickSlotItem GetSerializableQuickSlotItemFromQuickSlotItem(QuickSlotItem quickSlotItem)
+        {
+            SerializableQuickSlotItem serializedQuickSlotItem = new SerializableQuickSlotItem();
+            if (quickSlotItem != null)
+            {
+                serializedQuickSlotItem.itemID = quickSlotItem.itemID;
+                serializedQuickSlotItem.itemAmount = quickSlotItem.itemAmount;
+            }
+            else
+            {
+                serializedQuickSlotItem.itemID = -1;
+            }
+            return serializedQuickSlotItem;
+        }
     }
 }

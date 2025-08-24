@@ -169,10 +169,8 @@ namespace TravserserProject
             spellItemQuickSlotIcon.enabled = true;
         }
 
-        public void SetQuickSlotItemQuickSlotIcon(int quickSlotItemID)
+        public void SetQuickSlotItemQuickSlotIcon(QuickSlotItem quickSlotItem)
         {
-
-            QuickSlotItem quickSlotItem = WorldItemDatabase.Singleton.GetQuickSlotItemByID(quickSlotItemID);
 
             if (quickSlotItem == null)
             {

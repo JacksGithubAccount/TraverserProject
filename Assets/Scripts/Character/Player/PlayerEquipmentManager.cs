@@ -779,6 +779,25 @@ namespace TraverserProject
                 player.playerNetworkManager.secondaryProjectileID.Value = equipment.itemID;
         }
 
+        //quick slots
+        public void LoadQuickSlotItemEquipment(QuickSlotItem equipment)
+        {
+            if (equipment == null)
+            {
+                if (player.IsOwner)
+                    player.playerNetworkManager.currentQuickSlotItemID.Value = -1; //-1 will never be ID so it will always be null
+
+                player.playerInventoryManager.currentQuickSlotItem = null;
+                return;
+            }
+
+            player.playerInventoryManager.currentQuickSlotItem = equipment;
+
+
+            if (player.IsOwner)
+                player.playerNetworkManager.currentQuickSlotItemID.Value = equipment.itemID;
+        }
+
 
         private void InitializeWeaponSlots()
         {
