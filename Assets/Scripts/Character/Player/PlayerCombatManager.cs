@@ -249,7 +249,7 @@ namespace TraverserProject
 
         }
 
-        public void ReleaseArrow()
+        public override void ReleaseArrow()
         {
             if (player.IsOwner)
                 player.playerNetworkManager.hasArrowNotched.Value = false;

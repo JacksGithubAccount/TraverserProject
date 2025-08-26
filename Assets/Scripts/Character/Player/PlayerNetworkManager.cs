@@ -3,6 +3,7 @@ using System.Globalization;
 using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 namespace TraverserProject
 {
@@ -434,7 +435,14 @@ namespace TraverserProject
         [ClientRpc]
         public override void DestroyAllCurrentActionFXClientRpc()
         {
-            base.DestroyAllCurrentActionFXClientRpc();
+            if (player.characterEffectsManager.activeSpellWarmUpFX != null)
+                Destroy(player.characterEffectsManager.activeSpellWarmUpFX);
+
+            if (player.characterEffectsManager.activeDrawnProjectileFX != null)
+                Destroy(player.characterEffectsManager.activeDrawnProjectileFX);
+
+            if (player.characterEffectsManager.activeQuickSlotItemFX != null)
+                Destroy(player.characterEffectsManager.activeQuickSlotItemFX);
 
             if (hasArrowNotched.Value)
             {

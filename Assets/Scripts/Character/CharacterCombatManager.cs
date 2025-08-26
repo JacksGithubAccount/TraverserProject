@@ -264,6 +264,10 @@ namespace TraverserProject
 
         }
 
+        public virtual void ReleaseArrow()
+        {
+
+        }
         public virtual void CloseAllDamageColliders()
         {
 

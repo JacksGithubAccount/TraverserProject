@@ -10,6 +10,7 @@ namespace TraverserProject
         [Header("Menus")]
         [SerializeField] GameObject titleScreenMainMenu;
         [SerializeField] GameObject titleScreenLoadMenu;
+        [SerializeField] GameObject titleScreenCharacterCreationMenu;
 
         [Header("Buttons")]
         [SerializeField] Button mainMenuNewGameButton;
@@ -46,6 +47,18 @@ namespace TraverserProject
             NetworkManager.Singleton.StartHost();
         }
 
+        public void AttemptToCreateNewCharacter()
+        {
+            if (WorldSaveGameManager.Singleton.HasFreeCharacterSlot())
+            {
+                OpenCharacterCreationMenu();
+            }
+            else
+            {
+                DisplayNoFreeCharacterSlotsPopUp();
+            }
+        }
+
         public void StartNewGame()
         {
             WorldSaveGameManager.Singleton.AttemptToCreateNewGame();
@@ -66,6 +79,17 @@ namespace TraverserProject
 
             MainMenuLoadGameButton.Select();
         }
+
+        public void OpenCharacterCreationMenu()
+        {
+            titleScreenCharacterCreationMenu.SetActive(true);
+        }
+
+        public void CloseCharacterCreationMenu()
+        {
+            titleScreenCharacterCreationMenu.SetActive(false);
+        }
+
         public void DisplayNoFreeCharacterSlotsPopUp()
         {
             noCharacterSlotsPopUp.SetActive(true);
@@ -102,12 +126,12 @@ namespace TraverserProject
             titleScreenLoadMenu.SetActive(false);
             titleScreenLoadMenu.SetActive(true);
 
-                loadMenuReturnButton.Select();
-            }
-            public void CloseDeleteCharacterPopUp()
-            {
-                deleteCharacterSlotPopUp.SetActive(false);
-                loadMenuReturnButton.Select();
-            }
+            loadMenuReturnButton.Select();
+        }
+        public void CloseDeleteCharacterPopUp()
+        {
+            deleteCharacterSlotPopUp.SetActive(false);
+            loadMenuReturnButton.Select();
         }
     }
+}
