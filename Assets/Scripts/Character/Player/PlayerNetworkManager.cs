@@ -22,6 +22,13 @@ namespace TraverserProject
         public NetworkVariable<bool> isUsingRightHand = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isUsingLeftHand = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+        [Header("Body")]
+        public NetworkVariable<int> hairStyleID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<float> hairColorRed = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<float> hairColorGreen = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<float> hairColorBlue = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+
         [Header("Equipment")]
         public NetworkVariable<int> currentWeaponBeingUsed = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<int> currentRightHandWeaponID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -95,6 +102,24 @@ namespace TraverserProject
             maxFocusPoints.Value = player.playerStatsManager.CalculateFocusPointsBasedOnMindLevel(newMind);
             PlayerUIManager.Singleton.playerUIHudManager.SetMaxFocusPointsValue(maxFocusPoints.Value);
             currentFocusPoints.Value = maxFocusPoints.Value;
+        }
+
+        public void OnHairStyleIDChange(int oldID, int newID)
+        {
+            player.playerBodyManager.ToggleHairType(hairStyleID.Value);
+        }
+
+        public void OnHairColorRedChange(float oldID, float newID)
+        {
+            player.playerBodyManager.SetHairColor();
+        }
+        public void OnHairColorGreenChange(float oldID, float newID)
+        {
+            player.playerBodyManager.SetHairColor();
+        }
+        public void OnHairColorBlueChange(float oldID, float newID)
+        {
+            player.playerBodyManager.SetHairColor();
         }
 
         public void OnCurrentRightHandWeaponIDChange(int oldID, int newID)

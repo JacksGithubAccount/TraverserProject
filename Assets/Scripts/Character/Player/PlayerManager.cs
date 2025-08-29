@@ -112,6 +112,12 @@ namespace TraverserProject
             playerNetworkManager.isLockedOn.OnValueChanged += playerNetworkManager.OnIsLockedOnChanged;
             playerNetworkManager.currentTargetNetworkObjectID.OnValueChanged += playerNetworkManager.OnLockOnTargetIDChange;
 
+            //body
+            playerNetworkManager.hairStyleID.OnValueChanged += playerNetworkManager.OnHairStyleIDChange;
+            playerNetworkManager.hairColorRed.OnValueChanged += playerNetworkManager.OnHairColorRedChange;
+            playerNetworkManager.hairColorGreen.OnValueChanged += playerNetworkManager.OnHairColorGreenChange;
+            playerNetworkManager.hairColorBlue.OnValueChanged += playerNetworkManager.OnHairColorBlueChange;
+
             //equipment
             playerNetworkManager.currentRightHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentRightHandWeaponIDChange;
             playerNetworkManager.currentLeftHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentLeftHandWeaponIDChange;
@@ -176,6 +182,12 @@ namespace TraverserProject
             //lock on
             playerNetworkManager.isLockedOn.OnValueChanged -= playerNetworkManager.OnIsLockedOnChanged;
             playerNetworkManager.currentTargetNetworkObjectID.OnValueChanged -= playerNetworkManager.OnLockOnTargetIDChange;
+
+            //body
+            playerNetworkManager.hairStyleID.OnValueChanged -= playerNetworkManager.OnHairStyleIDChange;
+            playerNetworkManager.hairColorRed.OnValueChanged -= playerNetworkManager.OnHairColorRedChange;
+            playerNetworkManager.hairColorGreen.OnValueChanged -= playerNetworkManager.OnHairColorGreenChange;
+            playerNetworkManager.hairColorBlue.OnValueChanged -= playerNetworkManager.OnHairColorBlueChange;
 
             //equipment
             playerNetworkManager.currentRightHandWeaponID.OnValueChanged -= playerNetworkManager.OnCurrentRightHandWeaponIDChange;
@@ -261,6 +273,13 @@ namespace TraverserProject
             currentCharacterData.vitality = playerNetworkManager.vitality.Value;
             currentCharacterData.endurance = playerNetworkManager.endurance.Value;
             currentCharacterData.mind = playerNetworkManager.mind.Value;
+
+            //body
+            currentCharacterData.hairStyleID = playerNetworkManager.hairStyleID.Value;
+            currentCharacterData.hairColorRed = playerNetworkManager.hairColorRed.Value;
+            currentCharacterData.hairColorGreen = playerNetworkManager.hairColorGreen.Value;
+            currentCharacterData.hairColorBlue = playerNetworkManager.hairColorBlue.Value;
+
             currentCharacterData.currentHealthFlaskRemaining = playerNetworkManager.remainingHealthFlasks.Value;
             currentCharacterData.currentFocusPointsFlaskRemaining = playerNetworkManager.remainingFocusPointsFlasks.Value;
 
@@ -364,6 +383,13 @@ namespace TraverserProject
 
             playerNetworkManager.remainingHealthFlasks.Value = currentCharacterData.currentHealthFlaskRemaining;
             playerNetworkManager.remainingFocusPointsFlasks.Value = currentCharacterData.currentFocusPointsFlaskRemaining;
+
+            //body
+            playerNetworkManager.hairStyleID.Value = currentCharacterData.hairStyleID;
+            playerNetworkManager.hairColorRed.Value = currentCharacterData.hairColorRed;
+            playerNetworkManager.hairColorGreen.Value = currentCharacterData.hairColorGreen;
+            playerNetworkManager.hairColorBlue.Value = currentCharacterData.hairColorBlue;
+
 
             //equipment
             if (WorldItemDatabase.Singleton.GetHeadEquipmentByID(currentCharacterData.headEquipment))
@@ -509,6 +535,10 @@ namespace TraverserProject
         {
             //sync body type
             playerNetworkManager.OnIsMaleChanged(false, playerNetworkManager.isMale.Value);
+            playerNetworkManager.OnHairStyleIDChange(0, playerNetworkManager.hairStyleID.Value);
+            playerNetworkManager.OnHairColorRedChange(0, playerNetworkManager.hairColorRed.Value);
+            playerNetworkManager.OnHairColorGreenChange(0, playerNetworkManager.hairColorGreen.Value);
+            playerNetworkManager.OnHairColorBlueChange(0, playerNetworkManager.hairColorBlue.Value);
 
             //sync weapons
             playerNetworkManager.OnCurrentRightHandWeaponIDChange(0, playerNetworkManager.currentRightHandWeaponID.Value);
