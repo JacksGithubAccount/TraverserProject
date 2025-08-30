@@ -7,6 +7,8 @@ namespace TraverserProject
     public class PlayerUIManager : MonoBehaviour
     {
         public static PlayerUIManager Singleton { get; set; }
+        [HideInInspector] public PlayerManager localPlayer;
+
         [Header("NETWORK JOIN")]
         [SerializeField] bool startGameAsClient;
 

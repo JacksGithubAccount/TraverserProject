@@ -85,6 +85,7 @@ namespace TraverserProject
             {
                 PlayerCamera.Singleton.player = this;
                 PlayerInputManager.Singleton.player = this;
+                PlayerUIManager.Singleton.localPlayer = this;
                 WorldSaveGameManager.Singleton.player = this;
 
                 playerNetworkManager.vitality.OnValueChanged += playerNetworkManager.SetNewMaxHealthValue;

@@ -1,6 +1,7 @@
-using Unity.Netcode;
 using UnityEngine;
+using Unity.Netcode;
 using UnityEngine.UI;
+using TMPro;
 
 namespace TraverserProject
 {
@@ -31,12 +32,16 @@ namespace TraverserProject
         [SerializeField] Button characterClassButton;
 		[SerializeField] Button characterHairButton;
 		[SerializeField] Button characterHairColorButton;
+		[SerializeField] Button characterSexButton;
+		[SerializeField] TextMeshProUGUI characterSexText;
         [SerializeField] Button startGameButton;
 		
 		[Header("Character Creation Secondary Panel Menus")]
 		[SerializeField] GameObject characterClassMenu;
 		[SerializeField] GameObject characterHairMenu;
 		[SerializeField] GameObject characterHairColorMenu;
+		[SerializeField] GameObject characterNameMenu;
+		[SerializeField] TMP_InputField characterNameInputField;
 		
 		[Header("Character Creation Class Panel Buttons")]
 		[SerializeField] Button[] characterClassButtons;
@@ -107,15 +112,49 @@ namespace TraverserProject
 
             MainMenuLoadGameButton.Select();
         }
+		
+		public void ToggleBodyType()
+		{
+			PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+			
+			player.playerNetworkManager.isMale.Value = !player.playerNetworkManager.isMale.Value;
+			
+			if(player.playerNetworkManager.isMale.Value)
+			{
+				characterSexText.text = "MALE";
+			}
+			else
+			{
+				characterSexText.text = "FEMALE";
+			}
+		}
+		
+		public void OpenTitleScreenMainMenu()
+        {
+            titleScreenMainMenu.SetActive(true);
+        
+		}
 
+        public void CloseTitleScreenMainMenu()
+        {
+            titleScreenMainMenu.SetActive(false);
+        }
+		
         public void OpenCharacterCreationMenu()
         {
+			CloseTitleScreenMainMenu();
+			
             titleScreenCharacterCreationMenu.SetActive(true);
-        }
+        
+			PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+			player.playerBodyManager.ToggleBodyType(true);
+		}
 
         public void CloseCharacterCreationMenu()
         {
             titleScreenCharacterCreationMenu.SetActive(false);
+			
+			OpenTitleScreenMainMenu();
         }
 		
 		public void OpenChooseCharacterClassSubMenu()
@@ -139,7 +178,7 @@ namespace TraverserProject
 		
 		public void OpenChooseHairStyleSubMenu()
 		{
-			PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+			PlayerManager player = PlayerUIManager.Singleton.localPlayer;
 			
 			ToggleCharacterCreationScreenMainMenuButtons(false);
 			characterHairMenu.SetActive(true);
@@ -158,7 +197,7 @@ namespace TraverserProject
 		
 		public void CloseChooseHairStyleSubMenu()
 		{
-			PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+			PlayerManager player = PlayerUIManager.Singleton.localPlayer;
 			
 			ToggleCharacterCreationScreenMainMenuButtons(true);
 			characterHairMenu.SetActive(false);
@@ -173,7 +212,7 @@ namespace TraverserProject
 		
 		public void OpenChooseHairColorSubMenu()
 		{
-			PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+			PlayerManager player = PlayerUIManager.Singleton.localPlayer;
 			
 			ToggleCharacterCreationScreenMainMenuButtons(false);
 			characterHairColorMenu.SetActive(true);
@@ -192,7 +231,7 @@ namespace TraverserProject
 		
 		public void CloseChooseHairColorSubMenu()
 		{
-			PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+			PlayerManager player = PlayerUIManager.Singleton.localPlayer;
 			
 			ToggleCharacterCreationScreenMainMenuButtons(true);
 			characterHairColorMenu.SetActive(false);
@@ -205,12 +244,42 @@ namespace TraverserProject
 			player.playerEquipmentManager.EquipArmor();
 		}
 		
+		public void OpenChooseNameSubMenu()
+		{
+			//PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+			
+			ToggleCharacterCreationScreenMainMenuButtons(false);
+			
+			characterNameButton.gameObject.SetActive(false);
+			characterNameMenu.SetActive(true);
+			
+			characterNameInputField.Select();
+
+		}
+		
+		public void CloseChooseNameSubMenu()
+		{
+			PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+            PlayerManager playertest = PlayerUIManager.Singleton.localPlayer;
+
+
+            ToggleCharacterCreationScreenMainMenuButtons(true);
+			
+			characterNameMenu.SetActive(false);
+			characterNameButton.gameObject.SetActive(true);
+			
+			characterNameButton.Select();
+			
+			player.playerNetworkManager.characterName.Value = characterNameInputField.text;
+		}
+		
 		private void ToggleCharacterCreationScreenMainMenuButtons(bool status)
 		{
 			characterNameButton.enabled = status;
 			characterClassButton.enabled = status;
 			characterHairButton.enabled = status;
 			characterHairColorButton.enabled = status;
+			characterSexButton.enabled = status;
 			startGameButton.enabled = status;
 		}
 
@@ -260,7 +329,7 @@ namespace TraverserProject
 		
 		public void SelectClass(int classID)
 		{
-			PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+			PlayerManager player = PlayerUIManager.Singleton.localPlayer;
 		
 			if(startingClasses.Length <= 0)
 				return;
@@ -271,7 +340,7 @@ namespace TraverserProject
 		
 		public void PreviewClass(int classID)
 		{
-			PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+			PlayerManager player = PlayerUIManager.Singleton.localPlayer;
 		
 			if(startingClasses.Length <= 0)
 				return;
@@ -361,7 +430,7 @@ namespace TraverserProject
 		
 		public void SelectHair(int hairID)
 		{
-			PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+			PlayerManager player = PlayerUIManager.Singleton.localPlayer;
 		
 			player.playerNetworkManager.hairStyleID.Value = hairID;
 
@@ -370,14 +439,14 @@ namespace TraverserProject
 		
 		public void PreviewHair(int hairID)
 		{
-			PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+			PlayerManager player = PlayerUIManager.Singleton.localPlayer;
 		
 			player.playerNetworkManager.hairStyleID.Value = hairID;
 		}
 		
 		public void SelectHairColor()
 		{
-			PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+			PlayerManager player = PlayerUIManager.Singleton.localPlayer;
 		
 			player.playerNetworkManager.hairColorRed.Value = redSlider.value;
 			player.playerNetworkManager.hairColorGreen.Value = greenSlider.value;
@@ -388,7 +457,7 @@ namespace TraverserProject
 		
 		public void PreviewHairColor()
 		{
-			PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+			PlayerManager player = PlayerUIManager.Singleton.localPlayer;
 				
 			player.playerNetworkManager.hairColorRed.Value = redSlider.value;
 			player.playerNetworkManager.hairColorGreen.Value = greenSlider.value;
