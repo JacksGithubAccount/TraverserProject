@@ -8,6 +8,10 @@ namespace TravserserProject
     {
 
         CharacterManager character;
+
+        [Header("Runes")]
+        public int runesDroppedOnDeath = 50;
+
         [Header("Stamina Regeneration")]
         private float staminaRegenerationTimer = 0;
         private float staminaTickTimer = 0;

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.TextCore.Text;
+using Unity.Netcode;
 
 namespace TraverserProject
 {
@@ -51,6 +52,22 @@ namespace TraverserProject
         private void FixedUpdate()
         {
             HandleStanceBreak();
+        }
+
+        public void AwardRunesOnDeath(PlayerManager player)
+        {
+            //checks if player is friendly to host (not an invader)
+            if (player.characterGroup == CharacterGroup.Team02)
+                return;
+
+            //if want to give different rune amount to client vs host, is here
+            //if(NetworkManager.Singleton.IsHost)
+            //{
+
+            //}
+
+            //add runes, also if multipliers to runes is applicable, put here
+            player.playerStatsManager.AddRunes(aiCharacter.characterStatsManager.runesDroppedOnDeath);
         }
 
         private void HandleStanceBreak()

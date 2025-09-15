@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Unity.Netcode;
 using TMPro;
+using System.Collections;
 
 namespace TravserserProject
 {
@@ -15,6 +16,13 @@ namespace TravserserProject
         [SerializeField] UI_StatBar healthBar;
         [SerializeField] UI_StatBar staminaBar;
         [SerializeField] UI_StatBar focusPointBar;
+
+        [Header("Runes")]
+        [SerializeField] float runeUpdateCountDelayTimer = 2.5f;
+        private int pendingRunesToAdd = 0;
+        private Coroutine waitThenAddRunesCoroutine;
+        [SerializeField] TextMeshProUGUI runesToAddText;
+        [SerializeField] TextMeshProUGUI runesCountText;
 
         [Header("Quick Slots")]
         [SerializeField] Image rightWeaponQuickSlotIcon;
@@ -62,6 +70,44 @@ namespace TravserserProject
             focusPointBar.gameObject.SetActive(false);
             focusPointBar.gameObject.SetActive(true);
         }
+
+        public void SetRunesCount(int runesToAdd)
+        {
+            pendingRunesToAdd += runesToAdd;
+
+            if (waitThenAddRunesCoroutine != null)
+                StopCoroutine(waitThenAddRunesCoroutine);
+
+            waitThenAddRunesCoroutine = StartCoroutine(WaitThenUpdateRuneCount());
+
+
+        }
+
+        private IEnumerator WaitThenUpdateRuneCount()
+        {
+            float timer = runeUpdateCountDelayTimer;
+            int runesToAdd = pendingRunesToAdd;
+            runesToAddText.text = "+ " + runesToAdd.ToString();
+            runesToAddText.enabled = true;
+
+            while (timer > 0)
+            {
+                timer -= Time.deltaTime;
+
+                if (runesToAdd != pendingRunesToAdd)
+                {
+                    runesToAdd = pendingRunesToAdd;
+                    runesToAddText.text = "+ " + runesToAdd.ToString();
+                }
+
+                yield return null;
+            }
+            runesToAddText.enabled = false;
+            pendingRunesToAdd = 0;
+            runesCountText.text = PlayerUIManager.Singleton.localPlayer.playerStatsManager.runes.ToString();
+            yield return null;
+        }
+
         public void SetNewHealthValue(int oldValue, int newValue)
         {
             healthBar.SetStat(Mathf.RoundToInt(newValue));

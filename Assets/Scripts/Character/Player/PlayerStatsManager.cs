@@ -7,6 +7,12 @@ namespace TravserserProject
     public class PlayerStatsManager : CharacterStatsManager
     {
         PlayerManager player;
+
+        [Header("Runes")]
+        public int runes = 0;
+        public int runeMemory = 0;
+
+
         protected override void Awake()
         {
             base.Awake();
@@ -105,6 +111,14 @@ namespace TravserserProject
                 basePoiseDefense += player.playerInventoryManager.legEquipment.poise;
 
             }
+        }
+
+        public void AddRunes(int runesToAdd)
+        {
+            runes += runesToAdd;
+            runeMemory += runesToAdd;
+
+            PlayerUIManager.Singleton.playerUIHudManager.SetRunesCount(runes);
         }
     }
 
