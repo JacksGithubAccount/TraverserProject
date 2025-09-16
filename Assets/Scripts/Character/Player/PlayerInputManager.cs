@@ -429,6 +429,9 @@ namespace TraverserProject
             {
                 dodgeInput = false;
 
+                if (PlayerUIManager.Singleton.menuWindowIsOpen)
+                    return;
+
                 player.playerLocomotionManager.AttemptToPerformDodge();
             }
 
@@ -681,7 +684,7 @@ namespace TraverserProject
 
                 PlayerUIManager.Singleton.playerUIPopUpManager.CloseAllPopUpWindows();
                 PlayerUIManager.Singleton.CloseAllMenuWindows();
-                PlayerUIManager.Singleton.playerUICharacterMenuManager.OpenCharacterMenu();
+                PlayerUIManager.Singleton.playerUICharacterMenuManager.OpenMenu();
             }
 
         }

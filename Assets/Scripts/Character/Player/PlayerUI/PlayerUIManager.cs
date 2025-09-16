@@ -19,6 +19,7 @@ namespace TraverserProject
         [HideInInspector] public PlayerUISiteOfGraceManager playerUISiteOfGraceManager;
         [HideInInspector] public PlayerUITeleportLocationManager playerUITeleportLocationManager;
         [HideInInspector] public PlayerUILoadingScreenManager playerUILoadingScreenManager;
+        [HideInInspector] public PlayerUILevelUpManager playerUILevelUpManager;
 
         [Header("UI Flags")]
         public bool menuWindowIsOpen = false;
@@ -43,6 +44,7 @@ namespace TraverserProject
             playerUISiteOfGraceManager = GetComponentInChildren<PlayerUISiteOfGraceManager>();
             playerUITeleportLocationManager = GetComponentInChildren<PlayerUITeleportLocationManager>();
             playerUILoadingScreenManager = GetComponentInChildren<PlayerUILoadingScreenManager>();
+            playerUILevelUpManager = GetComponentInChildren<PlayerUILevelUpManager>();
         }
         private void Start()
         {
@@ -61,10 +63,11 @@ namespace TraverserProject
 
         public void CloseAllMenuWindows()
         {
-            playerUICharacterMenuManager.CloseCharacterMenu();
-            playerUIEquipmentManager.CloseEquipmentManagerMenu();
-            playerUISiteOfGraceManager.CloseSiteOfGraceManagerMenu();
-            playerUITeleportLocationManager.CloseTeleportLocationManagerMenu();
+            playerUICharacterMenuManager.CloseMenu();
+            playerUIEquipmentManager.CloseMenu();
+            playerUISiteOfGraceManager.CloseMenu();
+            playerUITeleportLocationManager.CloseMenu();
+            playerUILevelUpManager.CloseMenu();
         }
     }
 }

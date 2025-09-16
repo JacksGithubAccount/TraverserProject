@@ -7,10 +7,8 @@ using TMPro;
 namespace TraverserProject
 {
 
-    public class PlayerUIEquipmentManager : MonoBehaviour
+    public class PlayerUIEquipmentManager : PlayerUIMenu
     {
-        [Header("Menu")]
-        [SerializeField] GameObject menu;
 
         [Header("Weapon Slots")]
         [SerializeField] Image rightHandSlot01;
@@ -86,13 +84,15 @@ namespace TraverserProject
 
         }
 
-        public void OpenEquipmentManagerMenu()
+
+        public override void OpenMenu()
         {
-            PlayerUIManager.Singleton.menuWindowIsOpen = true;
+            base.OpenMenu();
+
             ToggleEquipmentButtons(true);
-            menu.SetActive(true);
             equipmentInventoryWindow.SetActive(false);
             RefreshMenu();
+            RefreshEquipmentSlotIcons();
         }
 
         public void RefreshMenu()
@@ -186,12 +186,6 @@ namespace TraverserProject
             }
 
             equipmentInventoryWindow.SetActive(false);
-        }
-
-        public void CloseEquipmentManagerMenu()
-        {
-            PlayerUIManager.Singleton.menuWindowIsOpen = false;
-            menu.SetActive(false);
         }
 
         private void RefreshEquipmentSlotIcons()

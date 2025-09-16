@@ -3,29 +3,17 @@ using UnityEngine;
 namespace TraverserProject
 {
 
-    public class PlayerUISiteOfGraceManager : MonoBehaviour
+    public class PlayerUISiteOfGraceManager : PlayerUIMenu
     {
-        [Header("Menu")]
-        [SerializeField] GameObject menu;
-
-        public void OpenSiteOfGraceManagerMenu()
-        {
-            PlayerUIManager.Singleton.menuWindowIsOpen = true;
-
-            menu.SetActive(true);
-
-        }
-
-        public void CloseSiteOfGraceManagerMenu()
-        {
-            PlayerUIManager.Singleton.menuWindowIsOpen = false;
-            menu.SetActive(false);
-        }
-
         public void OpenTeleportLocationMenu()
         {
-            CloseSiteOfGraceManagerMenu();
-            PlayerUIManager.Singleton.playerUITeleportLocationManager.OpenTeleportLocationManagerMenu();
+            CloseMenu();
+            PlayerUIManager.Singleton.playerUITeleportLocationManager.OpenMenu();
+        }
+        public void OpenLevelUpMenu()
+        {
+            CloseMenu();
+            PlayerUIManager.Singleton.playerUILevelUpManager.OpenMenu();
         }
     }
 }

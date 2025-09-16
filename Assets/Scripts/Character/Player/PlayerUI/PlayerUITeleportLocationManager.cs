@@ -4,26 +4,17 @@ using UnityEngine.UI;
 namespace TraverserProject
 {
 
-    public class PlayerUITeleportLocationManager : MonoBehaviour
+    public class PlayerUITeleportLocationManager : PlayerUIMenu
     {
-        [Header("Menu")]
-        [SerializeField] GameObject menu;
-
+        [Header("Teleport Locations")]
         [SerializeField] GameObject[] teleportLocations;
 
-        public void OpenTeleportLocationManagerMenu()
+        public override void OpenMenu()
         {
-            PlayerUIManager.Singleton.menuWindowIsOpen = true;
-            menu.SetActive(true);
+            base.OpenMenu();
 
             CheckForUnlockedTeleports();
 
-        }
-
-        public void CloseTeleportLocationManagerMenu()
-        {
-            PlayerUIManager.Singleton.menuWindowIsOpen = false;
-            menu.SetActive(false);
         }
 
         private void CheckForUnlockedTeleports()
@@ -62,7 +53,7 @@ namespace TraverserProject
         public void TeleportToSiteOfGrace(int siteID)
         {
             for (int i = 0; i < WorldObjectManager.Singleton.sitesOfGrace.Count; i++)
-            {               
+            {
                 if (WorldObjectManager.Singleton.sitesOfGrace[i].siteOfGraceID == siteID)
                 {
                     WorldObjectManager.Singleton.sitesOfGrace[i].TeleportToSiteOfGrace();

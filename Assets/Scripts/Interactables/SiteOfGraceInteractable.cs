@@ -86,7 +86,7 @@ namespace TraverserProject
 
         private void RestAtSiteOfGrace(PlayerManager player)
         {
-            PlayerUIManager.Singleton.playerUISiteOfGraceManager.OpenSiteOfGraceManagerMenu();
+            PlayerUIManager.Singleton.playerUISiteOfGraceManager.OpenMenu();
             //temp
             interactableCollider.enabled = true;
             player.playerNetworkManager.currentHealth.Value = player.playerNetworkManager.maxHealth.Value;
