@@ -354,7 +354,7 @@ namespace TraverserProject
 		{
 			hiddenHelmet = null;
 		
-			player.playerNetworkManager.vitality.Value = vitality;
+			player.playerNetworkManager.vigor.Value = vitality;
 			player.playerNetworkManager.endurance.Value = endurance;
 			player.playerNetworkManager.mind.Value = mind;
 			player.playerNetworkManager.strength.Value = strength;

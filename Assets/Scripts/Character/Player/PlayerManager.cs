@@ -88,7 +88,7 @@ namespace TraverserProject
                 PlayerUIManager.Singleton.localPlayer = this;
                 WorldSaveGameManager.Singleton.player = this;
 
-                playerNetworkManager.vitality.OnValueChanged += playerNetworkManager.SetNewMaxHealthValue;
+                playerNetworkManager.vigor.OnValueChanged += playerNetworkManager.SetNewMaxHealthValue;
                 playerNetworkManager.endurance.OnValueChanged += playerNetworkManager.SetNewMaxStaminaValue;
                 playerNetworkManager.mind.OnValueChanged += playerNetworkManager.SetNewMaxFocusPointValue;
 
@@ -160,7 +160,7 @@ namespace TraverserProject
 
             if (IsOwner)
             {
-                playerNetworkManager.vitality.OnValueChanged -= playerNetworkManager.SetNewMaxHealthValue;
+                playerNetworkManager.vigor.OnValueChanged -= playerNetworkManager.SetNewMaxHealthValue;
                 playerNetworkManager.endurance.OnValueChanged -= playerNetworkManager.SetNewMaxStaminaValue;
                 playerNetworkManager.mind.OnValueChanged -= playerNetworkManager.SetNewMaxFocusPointValue;
 
@@ -271,7 +271,7 @@ namespace TraverserProject
             currentCharacterData.currentStamina = playerNetworkManager.currentStamina.Value;
             currentCharacterData.currentFocusPoints = playerNetworkManager.currentFocusPoints.Value;
 
-            currentCharacterData.vitality = playerNetworkManager.vitality.Value;
+            currentCharacterData.vitality = playerNetworkManager.vigor.Value;
             currentCharacterData.endurance = playerNetworkManager.endurance.Value;
             currentCharacterData.mind = playerNetworkManager.mind.Value;
 
@@ -368,12 +368,12 @@ namespace TraverserProject
             Vector3 myPosition = new Vector3(currentCharacterData.xPosition, currentCharacterData.yPosition, currentCharacterData.zPosition);
             transform.position = myPosition;
 
-            playerNetworkManager.vitality.Value = currentCharacterData.vitality;
+            playerNetworkManager.vigor.Value = currentCharacterData.vitality;
             playerNetworkManager.endurance.Value = currentCharacterData.endurance;
             playerNetworkManager.mind.Value = currentCharacterData.mind;
 
             //moved with implement save/load
-            playerNetworkManager.maxHealth.Value = playerStatsManager.CalculateHealthBasedOnVitalityLevel(playerNetworkManager.vitality.Value);
+            playerNetworkManager.maxHealth.Value = playerStatsManager.CalculateHealthBasedOnVitalityLevel(playerNetworkManager.vigor.Value);
             playerNetworkManager.currentHealth.Value = currentCharacterData.currentHealth;
 
             playerNetworkManager.maxStamina.Value = playerStatsManager.CalculateStaminaBasedOnEnduranceLevel(playerNetworkManager.endurance.Value);

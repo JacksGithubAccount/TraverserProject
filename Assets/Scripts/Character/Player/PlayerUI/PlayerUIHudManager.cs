@@ -104,7 +104,7 @@ namespace TravserserProject
             }
             runesToAddText.enabled = false;
             pendingRunesToAdd = 0;
-            runesCountText.text = PlayerUIManager.Singleton.localPlayer.playerStatsManager.runes.ToString();
+            runesCountText.text = PlayerUIManager.Singleton.localPlayer.playerStatsManager.bubbles.ToString();
             yield return null;
         }
 

@@ -8,9 +8,9 @@ namespace TravserserProject
     {
         PlayerManager player;
 
-        [Header("Runes")]
-        public int runes = 0;
-        public int runeMemory = 0;
+        [Header("Bubbles")]
+        public int bubbles = 0;
+        public int bubbleMemory = 0;
 
 
         protected override void Awake()
@@ -23,7 +23,7 @@ namespace TravserserProject
         protected override void Start()
         {
             base.Start();
-            CalculateHealthBasedOnVitalityLevel(player.playerNetworkManager.vitality.Value);
+            CalculateHealthBasedOnVitalityLevel(player.playerNetworkManager.vigor.Value);
             CalculateStaminaBasedOnEnduranceLevel(player.playerNetworkManager.endurance.Value);
             CalculateFocusPointsBasedOnMindLevel(player.playerNetworkManager.mind.Value);
         }
@@ -115,10 +115,10 @@ namespace TravserserProject
 
         public void AddRunes(int runesToAdd)
         {
-            runes += runesToAdd;
-            runeMemory += runesToAdd;
+            bubbles += runesToAdd;
+            bubbleMemory += runesToAdd;
 
-            PlayerUIManager.Singleton.playerUIHudManager.SetRunesCount(runes);
+            PlayerUIManager.Singleton.playerUIHudManager.SetRunesCount(bubbles);
         }
     }
 

@@ -1,5 +1,6 @@
 using TraverserProject;
 using UnityEngine;
+using System;
 
 namespace TravserserProject
 {
@@ -89,6 +90,26 @@ namespace TravserserProject
             focusPoints = mind * 10;
 
             return Mathf.RoundToInt(focusPoints);
+        }
+
+        public int CalculateCharacterLevelBasedOnAttributes()
+        {
+            int totalAttributes = character.characterNetworkManager.vigor.Value +
+                character.characterNetworkManager.mind.Value +
+                character.characterNetworkManager.endurance.Value +
+                character.characterNetworkManager.strength.Value +
+                character.characterNetworkManager.dexterity.Value +
+                character.characterNetworkManager.intelligence.Value +
+                character.characterNetworkManager.faith.Value +
+                character.characterNetworkManager.luck.Value;
+
+            //int characterLevel = totalAttributes - 80 + 1;
+            int characterLevel = totalAttributes - (Enum.GetNames(typeof(CharacterAttribute)).Length * 10) + 1;
+
+            if (characterLevel < 1)
+                characterLevel = 1;
+
+            return characterLevel;
         }
 
         public virtual void RegenerateStamina()

@@ -281,7 +281,7 @@ namespace TraverserProject
 
         private void NewGame()
         {
-            player.playerNetworkManager.vitality.Value = 10;
+            player.playerNetworkManager.vigor.Value = 10;
             player.playerNetworkManager.endurance.Value = 20;
             player.playerNetworkManager.mind.Value = 30;
 
