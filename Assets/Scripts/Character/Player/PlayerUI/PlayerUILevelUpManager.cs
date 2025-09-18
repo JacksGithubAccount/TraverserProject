@@ -7,6 +7,11 @@ namespace TraverserProject
 
     public class PlayerUILevelUpManager : PlayerUIMenu
     {
+        [Header("Levels")]
+        [SerializeField] int[] playerLevels = new int[100];
+        [SerializeField] int baseLevelCost = 83;
+        [SerializeField] int totalLevelUpCost = 0;
+
         [Header("Character Stats")]
         [SerializeField] TextMeshProUGUI characterLevelText;
         [SerializeField] TextMeshProUGUI bubblesHeldText;
@@ -34,14 +39,22 @@ namespace TraverserProject
 
         [Header("Sliders")]
         public CharacterAttribute currentSelectedAttribute;
-        [SerializeField] Slider vigorSlider;
-        [SerializeField] Slider mindSlider;
-        [SerializeField] Slider enduranceSlider;
-        [SerializeField] Slider strengthSlider;
-        [SerializeField] Slider dexteritySlider;
-        [SerializeField] Slider intelligenceSlider;
-        [SerializeField] Slider faithSlider;
-        [SerializeField] Slider luckSlider;
+        public Slider vigorSlider;
+        public Slider mindSlider;
+        public Slider enduranceSlider;
+        public Slider strengthSlider;
+        public Slider dexteritySlider;
+        public Slider intelligenceSlider;
+        public Slider faithSlider;
+        public Slider luckSlider;
+
+        [Header("Buttons")]
+        [SerializeField] Button confirmLevelsButton;
+
+        private void Awake()
+        {
+            SetAllLevelsCosts();
+        }
 
         public override void OpenMenu()
         {
@@ -97,6 +110,9 @@ namespace TraverserProject
 
         public void UpdateSliderBasedOnCurrentlySelectedAttribute()
         {
+            PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+
+
             switch (currentSelectedAttribute)
             {
                 case CharacterAttribute.Vigor:
@@ -126,11 +142,26 @@ namespace TraverserProject
                 default:
                     break;
             }
+            //passes current and projected level to set up level up costs
+            CalculateLevelCost(PlayerUIManager.Singleton.localPlayer.characterStatsManager.CalculateCharacterLevelBasedOnAttributes(), PlayerUIManager.Singleton.localPlayer.characterStatsManager.CalculateCharacterLevelBasedOnAttributes(true));
+
+            projectedCharacterLevelText.text = player.characterStatsManager.CalculateCharacterLevelBasedOnAttributes(true).ToString();
+            bubblesCostText.text = totalLevelUpCost.ToString();
+
+            if (totalLevelUpCost > player.playerStatsManager.bubbles)
+            {
+                confirmLevelsButton.interactable = false;
+            }
+            else
+            {
+                confirmLevelsButton.interactable = true;
+            }
         }
 
         public void ConfirmLevels()
         {
             PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+            player.playerStatsManager.bubbles -= totalLevelUpCost;
 
             player.playerNetworkManager.vigor.Value = Mathf.RoundToInt(vigorSlider.value);
             player.playerNetworkManager.mind.Value = Mathf.RoundToInt(mindSlider.value);
@@ -142,6 +173,43 @@ namespace TraverserProject
             player.playerNetworkManager.luck.Value = Mathf.RoundToInt(luckSlider.value);
 
             SetCurrentStats();
+        }
+
+        private void SetAllLevelsCosts()
+        {
+            for (int i = 0; i < playerLevels.Length; i++)
+            {
+                if (i == 0)
+                    continue;
+
+                playerLevels[i] = baseLevelCost + (50 * i);
+            }
+        }
+
+        private void CalculateLevelCost(int currentLevel, int projectedLevel)
+        {
+            int totalCost = 0;
+
+            for (int i = 0; i < projectedLevel; i++)
+            {
+                if (i < currentLevel)
+                    continue;
+
+                totalCost += playerLevels[i];
+            }
+            totalLevelUpCost = totalCost;
+
+
+            projectedBubblesHeldText.text = (PlayerUIManager.Singleton.localPlayer.playerStatsManager.bubbles - totalCost).ToString();
+
+            if (totalCost > PlayerUIManager.Singleton.localPlayer.playerStatsManager.bubbles)
+            {
+                projectedBubblesHeldText.color = Color.red;
+            }
+            else
+            {
+                projectedBubblesHeldText.color = Color.white;
+            }
         }
     }
 }

@@ -92,9 +92,30 @@ namespace TravserserProject
             return Mathf.RoundToInt(focusPoints);
         }
 
-        public int CalculateCharacterLevelBasedOnAttributes()
+        public int CalculateCharacterLevelBasedOnAttributes(bool calculateProjectedLevel = false)
         {
-            int totalAttributes = character.characterNetworkManager.vigor.Value +
+            if (calculateProjectedLevel)
+            {
+                int totalProjectedAttributes = Mathf.RoundToInt(PlayerUIManager.Singleton.playerUILevelUpManager.vigorSlider.value) +
+                    Mathf.RoundToInt(PlayerUIManager.Singleton.playerUILevelUpManager.mindSlider.value) +
+                    Mathf.RoundToInt(PlayerUIManager.Singleton.playerUILevelUpManager.enduranceSlider.value) +
+                    Mathf.RoundToInt(PlayerUIManager.Singleton.playerUILevelUpManager.strengthSlider.value) +
+                    Mathf.RoundToInt(PlayerUIManager.Singleton.playerUILevelUpManager.dexteritySlider.value) +
+                    Mathf.RoundToInt(PlayerUIManager.Singleton.playerUILevelUpManager.intelligenceSlider.value) +
+                    Mathf.RoundToInt(PlayerUIManager.Singleton.playerUILevelUpManager.faithSlider.value) +
+                    Mathf.RoundToInt(PlayerUIManager.Singleton.playerUILevelUpManager.luckSlider.value);
+
+                //int projectedCharacterLevel = totalProjectedAttributes - 80 + 1;
+                int projectedCharacterLevel = totalProjectedAttributes - (Enum.GetNames(typeof(CharacterAttribute)).Length * 10) + 1;
+
+                if (projectedCharacterLevel < 1)
+                    projectedCharacterLevel = 1;
+
+                return projectedCharacterLevel;
+            }
+            else
+            {
+                int totalAttributes = character.characterNetworkManager.vigor.Value +
                 character.characterNetworkManager.mind.Value +
                 character.characterNetworkManager.endurance.Value +
                 character.characterNetworkManager.strength.Value +
@@ -103,13 +124,14 @@ namespace TravserserProject
                 character.characterNetworkManager.faith.Value +
                 character.characterNetworkManager.luck.Value;
 
-            //int characterLevel = totalAttributes - 80 + 1;
-            int characterLevel = totalAttributes - (Enum.GetNames(typeof(CharacterAttribute)).Length * 10) + 1;
+                //int characterLevel = totalAttributes - 80 + 1;
+                int characterLevel = totalAttributes - (Enum.GetNames(typeof(CharacterAttribute)).Length * 10) + 1;
 
-            if (characterLevel < 1)
-                characterLevel = 1;
+                if (characterLevel < 1)
+                    characterLevel = 1;
 
-            return characterLevel;
+                return characterLevel;
+            }
         }
 
         public virtual void RegenerateStamina()
