@@ -267,13 +267,21 @@ namespace TraverserProject
             currentCharacterData.yPosition = transform.position.y;
             currentCharacterData.zPosition = transform.position.z;
 
+            //stats
             currentCharacterData.currentHealth = playerNetworkManager.currentHealth.Value;
             currentCharacterData.currentStamina = playerNetworkManager.currentStamina.Value;
             currentCharacterData.currentFocusPoints = playerNetworkManager.currentFocusPoints.Value;
 
-            currentCharacterData.vitality = playerNetworkManager.vigor.Value;
+            currentCharacterData.vigor = playerNetworkManager.vigor.Value;
             currentCharacterData.endurance = playerNetworkManager.endurance.Value;
             currentCharacterData.mind = playerNetworkManager.mind.Value;
+            currentCharacterData.strength = playerNetworkManager.strength.Value;
+            currentCharacterData.dexterity = playerNetworkManager.dexterity.Value;
+            currentCharacterData.intelligence = playerNetworkManager.intelligence.Value;
+            currentCharacterData.faith = playerNetworkManager.faith.Value;
+            currentCharacterData.luck = playerNetworkManager.luck.Value;
+
+            currentCharacterData.bubbles = playerStatsManager.bubbles;
 
             //body
             currentCharacterData.hairStyleID = playerNetworkManager.hairStyleID.Value;
@@ -368,19 +376,25 @@ namespace TraverserProject
             Vector3 myPosition = new Vector3(currentCharacterData.xPosition, currentCharacterData.yPosition, currentCharacterData.zPosition);
             transform.position = myPosition;
 
-            playerNetworkManager.vigor.Value = currentCharacterData.vitality;
+            //Stats
+            playerNetworkManager.vigor.Value = currentCharacterData.vigor;
             playerNetworkManager.endurance.Value = currentCharacterData.endurance;
             playerNetworkManager.mind.Value = currentCharacterData.mind;
+            playerNetworkManager.strength.Value = currentCharacterData.strength;
+            playerNetworkManager.dexterity.Value = currentCharacterData.dexterity;
+            playerNetworkManager.intelligence.Value = currentCharacterData.intelligence;
+            playerNetworkManager.faith.Value = currentCharacterData.faith;
+            playerNetworkManager.luck.Value = currentCharacterData.luck;
 
             //moved with implement save/load
             playerNetworkManager.maxHealth.Value = playerStatsManager.CalculateHealthBasedOnVitalityLevel(playerNetworkManager.vigor.Value);
             playerNetworkManager.currentHealth.Value = currentCharacterData.currentHealth;
-
             playerNetworkManager.maxStamina.Value = playerStatsManager.CalculateStaminaBasedOnEnduranceLevel(playerNetworkManager.endurance.Value);
             playerNetworkManager.currentStamina.Value = currentCharacterData.currentStamina;
-
             playerNetworkManager.maxFocusPoints.Value = playerStatsManager.CalculateFocusPointsBasedOnMindLevel(playerNetworkManager.mind.Value);
             playerNetworkManager.currentFocusPoints.Value = currentCharacterData.currentFocusPoints;
+
+            playerStatsManager.AddBubbles(currentCharacterData.bubbles);
 
             playerNetworkManager.remainingHealthFlasks.Value = currentCharacterData.currentHealthFlaskRemaining;
             playerNetworkManager.remainingFocusPointsFlasks.Value = currentCharacterData.currentFocusPointsFlaskRemaining;

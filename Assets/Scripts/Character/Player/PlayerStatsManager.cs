@@ -113,12 +113,12 @@ namespace TravserserProject
             }
         }
 
-        public void AddRunes(int runesToAdd)
+        public void AddBubbles(int bubblesToAdd)
         {
-            bubbles += runesToAdd;
-            bubbleMemory += runesToAdd;
+            bubbles += bubblesToAdd;
+            bubbleMemory += bubblesToAdd;
 
-            PlayerUIManager.Singleton.playerUIHudManager.SetRunesCount(bubbles);
+            PlayerUIManager.Singleton.playerUIHudManager.SetBubblesCount(bubbles);
         }
     }
 

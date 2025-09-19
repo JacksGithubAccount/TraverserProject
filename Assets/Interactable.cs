@@ -36,6 +36,8 @@ namespace TraverserProject
             interactableCollider.enabled = false;
             player.playerInteractionManager.RemoveInteractionFromList(this);
             PlayerUIManager.Singleton.playerUIPopUpManager.CloseAllPopUpWindows();
+
+            WorldSaveGameManager.Singleton.SaveGame();
         }
 
         public virtual void OnTriggerEnter(Collider other)

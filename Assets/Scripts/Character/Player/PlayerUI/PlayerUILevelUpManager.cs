@@ -51,6 +51,11 @@ namespace TraverserProject
         [Header("Buttons")]
         [SerializeField] Button confirmLevelsButton;
 
+        [Header("Text Colors")]
+        [SerializeField] Color standardColor = Color.white;
+        [SerializeField] Color negativeColor = Color.red;
+        [SerializeField] Color positiveColor = Color.blue;
+
         private void Awake()
         {
             SetAllLevelsCosts();
@@ -156,6 +161,7 @@ namespace TraverserProject
             {
                 confirmLevelsButton.interactable = true;
             }
+            ChangeTextColorsDependingOnCosts();
         }
 
         public void ConfirmLevels()
@@ -173,6 +179,8 @@ namespace TraverserProject
             player.playerNetworkManager.luck.Value = Mathf.RoundToInt(luckSlider.value);
 
             SetCurrentStats();
+            ChangeTextColorsDependingOnCosts();
+            WorldSaveGameManager.Singleton.SaveGame();
         }
 
         private void SetAllLevelsCosts()
@@ -180,6 +188,9 @@ namespace TraverserProject
             for (int i = 0; i < playerLevels.Length; i++)
             {
                 if (i == 0)
+                    continue;
+
+                if (i > playerLevels.Length)
                     continue;
 
                 playerLevels[i] = baseLevelCost + (50 * i);
@@ -204,11 +215,92 @@ namespace TraverserProject
 
             if (totalCost > PlayerUIManager.Singleton.localPlayer.playerStatsManager.bubbles)
             {
-                projectedBubblesHeldText.color = Color.red;
+                projectedBubblesHeldText.color = negativeColor;
             }
             else
             {
-                projectedBubblesHeldText.color = Color.white;
+                projectedBubblesHeldText.color = standardColor;
+            }
+        }
+
+        private void ChangeTextColorsDependingOnCosts()
+        {
+            PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+
+            int projectedVigorLevel = Mathf.RoundToInt(vigorSlider.value);
+            int projectedMindLevel = Mathf.RoundToInt(mindSlider.value);
+            int projectedEnduranceLevel = Mathf.RoundToInt(enduranceSlider.value);
+            int projectedStrengthLevel = Mathf.RoundToInt(strengthSlider.value);
+            int projectedDexterityLevel = Mathf.RoundToInt(dexteritySlider.value);
+            int projectedIntelligenceLevel = Mathf.RoundToInt(intelligenceSlider.value);
+            int projectedFaithLevel = Mathf.RoundToInt(faithSlider.value);
+            int projectedLuckLevel = Mathf.RoundToInt(luckSlider.value);
+
+            ChangeTextFieldToSpecificColorBasedOnStat(player, projectedVigorLevelText, player.playerNetworkManager.vigor.Value, projectedVigorLevel);
+            ChangeTextFieldToSpecificColorBasedOnStat(player, projectedMindLevelText, player.playerNetworkManager.mind.Value, projectedMindLevel);
+            ChangeTextFieldToSpecificColorBasedOnStat(player, projectedEnduranceLevelText, player.playerNetworkManager.endurance.Value, projectedEnduranceLevel);
+            ChangeTextFieldToSpecificColorBasedOnStat(player, projectedStrengthLevelText, player.playerNetworkManager.strength.Value, projectedStrengthLevel);
+            ChangeTextFieldToSpecificColorBasedOnStat(player, projectedDexterityLevelText, player.playerNetworkManager.dexterity.Value, projectedDexterityLevel);
+            ChangeTextFieldToSpecificColorBasedOnStat(player, projectedIntelligenceLevelText, player.playerNetworkManager.intelligence.Value, projectedIntelligenceLevel);
+            ChangeTextFieldToSpecificColorBasedOnStat(player, projectedFaithLevelText, player.playerNetworkManager.faith.Value, projectedFaithLevel);
+            ChangeTextFieldToSpecificColorBasedOnStat(player, projectedLuckLevelText, player.playerNetworkManager.luck.Value, projectedLuckLevel);
+
+            int projectedPlayerLevel = player.characterStatsManager.CalculateCharacterLevelBasedOnAttributes(true);
+            int playerLevel = player.characterStatsManager.CalculateCharacterLevelBasedOnAttributes();
+
+            if (projectedPlayerLevel == playerLevel)
+            {
+                projectedBubblesHeldText.color = standardColor;
+                projectedCharacterLevelText.color = standardColor;
+                bubblesCostText.color = standardColor;
+            }
+
+            if (totalLevelUpCost <= player.playerStatsManager.bubbles)
+            {
+                bubblesCostText.color = standardColor;
+
+                if (projectedPlayerLevel > playerLevel)
+                {
+                    projectedBubblesHeldText.color = negativeColor;
+                    projectedCharacterLevelText.color = positiveColor;
+                }
+            }
+            else
+            {
+                bubblesCostText.color = negativeColor;
+
+                if (projectedPlayerLevel > playerLevel)
+                    projectedCharacterLevelText.color = negativeColor;
+            }
+        }
+
+        private void ChangeTextFieldToSpecificColorBasedOnStat(PlayerManager player, TextMeshProUGUI textField, int stat, int projectedStat)
+        {
+            if (projectedStat == stat)
+                textField.color = standardColor;
+
+            if (totalLevelUpCost <= player.playerStatsManager.bubbles)
+            {
+
+                if (projectedStat > stat)
+                {
+                    textField.color = positiveColor;
+                }
+                else
+                {
+                    textField.color = standardColor;
+                }
+            }
+            else
+            {
+                if (projectedStat > stat)
+                {
+                    textField.color = negativeColor;
+                }
+                else
+                {
+                    textField.color = standardColor;
+                }
             }
         }
     }

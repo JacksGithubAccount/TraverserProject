@@ -32,11 +32,18 @@ namespace TraverserProject
         public int currentHealth;
         public float currentStamina;
         public int currentFocusPoints;
+        public int bubbles;
 
         [Header("Stats")]
-        public int vitality;
-        public int endurance;
+        public int vigor;
         public int mind;
+        public int endurance;
+        public int strength;
+        public int dexterity;
+        public int intelligence;
+        public int faith;
+        public int luck;
+
 
         [Header("Sites Of Grace")]
         public SerializableDictionary<int, bool> sitesOfGrace;

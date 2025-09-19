@@ -18,11 +18,11 @@ namespace TravserserProject
         [SerializeField] UI_StatBar focusPointBar;
 
         [Header("Runes")]
-        [SerializeField] float runeUpdateCountDelayTimer = 2.5f;
-        private int pendingRunesToAdd = 0;
-        private Coroutine waitThenAddRunesCoroutine;
-        [SerializeField] TextMeshProUGUI runesToAddText;
-        [SerializeField] TextMeshProUGUI runesCountText;
+        [SerializeField] float bubbleUpdateCountDelayTimer = 2.5f;
+        private int pendingBubblesToAdd = 0;
+        private Coroutine waitThenAddBubblesCoroutine;
+        [SerializeField] TextMeshProUGUI bubblesToAddText;
+        [SerializeField] TextMeshProUGUI bubblesCountText;
 
         [Header("Quick Slots")]
         [SerializeField] Image rightWeaponQuickSlotIcon;
@@ -71,40 +71,40 @@ namespace TravserserProject
             focusPointBar.gameObject.SetActive(true);
         }
 
-        public void SetRunesCount(int runesToAdd)
+        public void SetBubblesCount(int bubblesToAdd)
         {
-            pendingRunesToAdd += runesToAdd;
+            pendingBubblesToAdd += bubblesToAdd;
 
-            if (waitThenAddRunesCoroutine != null)
-                StopCoroutine(waitThenAddRunesCoroutine);
+            if (waitThenAddBubblesCoroutine != null)
+                StopCoroutine(waitThenAddBubblesCoroutine);
 
-            waitThenAddRunesCoroutine = StartCoroutine(WaitThenUpdateRuneCount());
+            waitThenAddBubblesCoroutine = StartCoroutine(WaitThenUpdateBubbleCount());
 
 
         }
 
-        private IEnumerator WaitThenUpdateRuneCount()
+        private IEnumerator WaitThenUpdateBubbleCount()
         {
-            float timer = runeUpdateCountDelayTimer;
-            int runesToAdd = pendingRunesToAdd;
-            runesToAddText.text = "+ " + runesToAdd.ToString();
-            runesToAddText.enabled = true;
+            float timer = bubbleUpdateCountDelayTimer;
+            int bubblesToAdd = pendingBubblesToAdd;
+            bubblesToAddText.text = "+ " + bubblesToAdd.ToString();
+            bubblesToAddText.enabled = true;
 
             while (timer > 0)
             {
                 timer -= Time.deltaTime;
 
-                if (runesToAdd != pendingRunesToAdd)
+                if (bubblesToAdd != pendingBubblesToAdd)
                 {
-                    runesToAdd = pendingRunesToAdd;
-                    runesToAddText.text = "+ " + runesToAdd.ToString();
+                    bubblesToAdd = pendingBubblesToAdd;
+                    bubblesToAddText.text = "+ " + bubblesToAdd.ToString();
                 }
 
                 yield return null;
             }
-            runesToAddText.enabled = false;
-            pendingRunesToAdd = 0;
-            runesCountText.text = PlayerUIManager.Singleton.localPlayer.playerStatsManager.bubbles.ToString();
+            bubblesToAddText.enabled = false;
+            pendingBubblesToAdd = 0;
+            bubblesCountText.text = PlayerUIManager.Singleton.localPlayer.playerStatsManager.bubbles.ToString();
             yield return null;
         }
 

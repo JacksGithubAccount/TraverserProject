@@ -67,7 +67,7 @@ namespace TraverserProject
             //}
 
             //add runes, also if multipliers to runes is applicable, put here
-            player.playerStatsManager.AddRunes(aiCharacter.characterStatsManager.runesDroppedOnDeath);
+            player.playerStatsManager.AddBubbles(aiCharacter.characterStatsManager.runesDroppedOnDeath);
         }
 
         private void HandleStanceBreak()
