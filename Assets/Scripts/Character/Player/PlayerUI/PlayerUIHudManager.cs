@@ -87,7 +87,18 @@ namespace TravserserProject
         {
             float timer = bubbleUpdateCountDelayTimer;
             int bubblesToAdd = pendingBubblesToAdd;
-            bubblesToAddText.text = "+ " + bubblesToAdd.ToString();
+            string addBubbleOperatorString = "+ ";
+
+            if (bubblesToAdd > 0)
+            {
+                addBubbleOperatorString = "+ ";
+            }
+            else
+            {
+                addBubbleOperatorString = "- ";
+            }
+
+            bubblesToAddText.text = addBubbleOperatorString + Mathf.Abs(bubblesToAdd).ToString();
             bubblesToAddText.enabled = true;
 
             while (timer > 0)

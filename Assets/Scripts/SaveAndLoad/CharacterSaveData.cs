@@ -13,6 +13,13 @@ namespace TraverserProject
         [Header("Character Name")]
         public string characterName = "Character";
 
+        [Header("Dead Spot")]
+        public bool hasDeadSpot = false;
+        public float deadSpotPositionX;
+        public float deadSpotPositionY;
+        public float deadSpotPositionZ;
+        public int deadSpotBubbleCount;
+
         [Header("Body Type")]
         public bool isMale = true;
         public int hairStyleID;
@@ -46,6 +53,7 @@ namespace TraverserProject
 
 
         [Header("Sites Of Grace")]
+        public int lastSiteOfGraceRestedAt = 0;
         public SerializableDictionary<int, bool> sitesOfGrace;
 
         [Header("Bosses")]

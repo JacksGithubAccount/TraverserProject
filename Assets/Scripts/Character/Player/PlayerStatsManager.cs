@@ -120,6 +120,8 @@ namespace TravserserProject
 
             PlayerUIManager.Singleton.playerUIHudManager.SetBubblesCount(bubbles);
         }
+
+
     }
 
 }

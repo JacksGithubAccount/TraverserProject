@@ -58,6 +58,13 @@ namespace TraverserProject
             isActivated.OnValueChanged += OnIsActivatedChanged;
 
             WorldObjectManager.Singleton.AddSiteOfGraceToList(this);
+            for (int i = 0; i < WorldObjectManager.Singleton.sitesOfGrace.Count; i++)
+            {
+                if (WorldObjectManager.Singleton.sitesOfGrace[i] == null)
+                {
+                    WorldObjectManager.Singleton.sitesOfGrace.RemoveAt(i);
+                }
+            }
         }
 
         public override void OnNetworkDespawn()
@@ -125,6 +132,8 @@ namespace TraverserProject
 
             if (player.playerCombatManager.isUsingItem)
                 return;
+
+            WorldSaveGameManager.Singleton.currentCharacterData.lastSiteOfGraceRestedAt = siteOfGraceID;
 
             if (!isActivated.Value)
             {

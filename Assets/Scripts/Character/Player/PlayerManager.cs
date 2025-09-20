@@ -106,8 +106,10 @@ namespace TraverserProject
             //body type
             playerNetworkManager.isMale.OnValueChanged += playerNetworkManager.OnIsMaleChanged;
 
-
+            //stats
             playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHealth;
+            //playerNetworkManager.currentFocusPoints.OnValueChanged += playerNetworkManager.OnFocusPointsChanged;
+            //playerNetworkManager.maxFocusPoints.OnValueChanged += playerNetworkManager.OnMaxFocusPointsChanged;
 
             //lock on
             playerNetworkManager.isLockedOn.OnValueChanged += playerNetworkManager.OnIsLockedOnChanged;
@@ -178,7 +180,10 @@ namespace TraverserProject
             //body type
             playerNetworkManager.isMale.OnValueChanged -= playerNetworkManager.OnIsMaleChanged;
 
+            //stats
             playerNetworkManager.currentHealth.OnValueChanged -= playerNetworkManager.CheckHealth;
+            //playerNetworkManager.currentFocusPoints.OnValueChanged -= playerNetworkManager.OnFocusPointsChanged;
+            //playerNetworkManager.maxFocusPoints.OnValueChanged -= playerNetworkManager.OnMaxFocusPointsChanged;
 
             //lock on
             playerNetworkManager.isLockedOn.OnValueChanged -= playerNetworkManager.OnIsLockedOnChanged;
@@ -241,6 +246,8 @@ namespace TraverserProject
             {
                 PlayerUIManager.Singleton.playerUIPopUpManager.SendYouDiedPopUp();
             }
+
+            WorldGameSessionManager.Singleton.WaitThenReviveHost();
 
             return base.ProcessDeathEvent(manuallySelectDeathAnimation);
         }
@@ -385,6 +392,8 @@ namespace TraverserProject
             playerNetworkManager.intelligence.Value = currentCharacterData.intelligence;
             playerNetworkManager.faith.Value = currentCharacterData.faith;
             playerNetworkManager.luck.Value = currentCharacterData.luck;
+
+
 
             //moved with implement save/load
             playerNetworkManager.maxHealth.Value = playerStatsManager.CalculateHealthBasedOnVitalityLevel(playerNetworkManager.vigor.Value);

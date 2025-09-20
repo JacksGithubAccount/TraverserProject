@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace TraverserProject
 {
@@ -26,6 +27,51 @@ namespace TraverserProject
             base.Awake();
 
             player = GetComponent<PlayerManager>();
+        }
+
+        private void Start()
+        {
+            SceneManager.activeSceneChanged += OnSceneChanged;
+        }
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            SceneManager.activeSceneChanged -= OnSceneChanged;
+        }
+
+        private void OnSceneChanged(Scene arg0, Scene arg1)
+        {
+            //Dead spot
+            if (WorldSaveGameManager.Singleton.currentCharacterData.hasDeadSpot)
+            {
+                Vector3 deadSpotPosition = new Vector3(WorldSaveGameManager.Singleton.currentCharacterData.deadSpotPositionX, WorldSaveGameManager.Singleton.currentCharacterData.deadSpotPositionY, WorldSaveGameManager.Singleton.currentCharacterData.deadSpotPositionZ);
+                CreateDeadSpot(deadSpotPosition, WorldSaveGameManager.Singleton.currentCharacterData.deadSpotBubbleCount, false);
+
+            }
+        }
+
+        public void CreateDeadSpot(Vector3 position, int bubbleCount, bool removePlayerRunes = true)
+        {
+            if (!player.IsHost)
+                return;
+
+            //Spawns dead spot and sets position
+            GameObject deadSpotFX = Instantiate(WorldCharacterEffectsManager.Singleton.deadSpotVFX);
+            deadSpotFX.GetComponent<NetworkObject>().Spawn();
+            deadSpotFX.transform.position = position;
+            //sets bubble count
+            PickUpBubblesInteractable pickUpBubbles = deadSpotFX.GetComponent<PickUpBubblesInteractable>();
+            pickUpBubbles.bubbleCount = bubbleCount;
+            if (removePlayerRunes)
+                player.playerStatsManager.AddBubbles(-player.playerStatsManager.bubbles);
+
+            WorldSaveGameManager.Singleton.currentCharacterData.hasDeadSpot = true;
+            WorldSaveGameManager.Singleton.currentCharacterData.deadSpotBubbleCount = pickUpBubbles.bubbleCount;
+            WorldSaveGameManager.Singleton.currentCharacterData.deadSpotPositionX = position.x;
+            WorldSaveGameManager.Singleton.currentCharacterData.deadSpotPositionY = position.y;
+            WorldSaveGameManager.Singleton.currentCharacterData.deadSpotPositionZ = position.z;
         }
 
         public void PerformWeaponBasedAction(WeaponItemAction weaponAction, WeaponItem weaponPerformingAction)
