@@ -11,6 +11,10 @@ namespace TraverserProject
         [SerializeField] GameObject instantiatedGameObject;
         private AICharacterManager aiCharacter;
 
+        [Header("Patrol")]
+        [SerializeField] bool hasPatrolPath = false;
+        [SerializeField] int patrolPathID = 0;
+
 
         private void Awake()
         {
@@ -33,8 +37,15 @@ namespace TraverserProject
                 instantiatedGameObject.GetComponent<NetworkObject>().Spawn();
                 aiCharacter = instantiatedGameObject.GetComponent<AICharacterManager>();
 
-                if (aiCharacter != null)
-                    WorldAIManager.Singleton.AddCharacterToSpawnedCharactersList(aiCharacter);
+                if (aiCharacter == null)
+                    return;
+
+                WorldAIManager.Singleton.AddCharacterToSpawnedCharactersList(aiCharacter);
+
+                if (hasPatrolPath)
+                    aiCharacter.idle.aiPatrolPath = WorldAIManager.Singleton.GetAIPatrolPathByID(patrolPathID);
+
+
             }
         }
 

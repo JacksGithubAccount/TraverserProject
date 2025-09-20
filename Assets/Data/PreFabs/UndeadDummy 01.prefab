@@ -85,7 +85,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091548821439231680}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -162,7 +162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.632046
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -170,7 +170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.7532845
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1068,6 +1068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7184e68bd01dc7946947f19239b47333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runesDroppedOnDeath: 50
   staminaRegenerationAmount: 2
   staminaRegenerationDelay: 2
   blockingPhysicalAbsorption: 0
@@ -1102,6 +1103,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d1a9441e1e65dd438ab34a2ef18c430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeQuickSlotItemFX: {fileID: 0}
+  activeSpellWarmUpFX: {fileID: 0}
+  activeDrawnProjectileFX: {fileID: 0}
   bloodSplatterVFX: {fileID: 1972549086604712929, guid: c90de004b46c5404387de1354ec6a546, type: 3}
   criticalBloodSplatterVFX: {fileID: 0}
   staticEffects: []
@@ -1166,7 +1170,9 @@ MonoBehaviour:
   isRolling: 0
   isGrounded: 1
   canRotate: 1
+  canRun: 1
   canMove: 1
+  canRoll: 1
 --- !u!114 &7208941246191151473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1319,11 +1325,25 @@ MonoBehaviour:
     m_InternalValue: 400
   maxHealth:
     m_InternalValue: 400
-  vitality:
+  currentFocusPoints:
+    m_InternalValue: 400
+  maxFocusPoints:
+    m_InternalValue: 400
+  vigor:
     m_InternalValue: 1
   endurance:
     m_InternalValue: 1
+  mind:
+    m_InternalValue: 1
   strength:
+    m_InternalValue: 1
+  dexterity:
+    m_InternalValue: 1
+  intelligence:
+    m_InternalValue: 1
+  faith:
+    m_InternalValue: 1
+  luck:
     m_InternalValue: 1
   strengthModifier:
     m_InternalValue: 1

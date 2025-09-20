@@ -24,6 +24,9 @@ namespace TraverserProject
         [Header("Bosses")]
         [SerializeField] List<AIBossCharacterManager> spawnedInBosses;
 
+        [Header("Patrol Paths")]
+        [SerializeField] List<AIPatrolPath> aiPatrolPaths = new List<AIPatrolPath>();
+
         private void Awake()
         {
             if (Singleton == null)
@@ -157,6 +160,26 @@ namespace TraverserProject
         private void DisableAllCharacters()
         {
 
+        }
+
+        public void AddPatrolPathToList(AIPatrolPath patrolPath)
+        {
+            if(aiPatrolPaths.Contains(patrolPath))
+				return;
+
+            aiPatrolPaths.Add(patrolPath);
+
+        }
+
+        public AIPatrolPath GetAIPatrolPathByID(int patrolPathID)
+        {
+            AIPatrolPath patrolPath = null;
+            for (int i = 0; i < aiPatrolPaths.Count; i++)
+            {
+                if (aiPatrolPaths[i].patrolPathID == patrolPathID)
+                    patrolPath = aiPatrolPaths[i];
+            }
+            return patrolPath;
         }
 
     }

@@ -86,8 +86,19 @@ namespace TraverserProject
 
             aiCharacterCombatManager.HandleActionRecovery(this);
 
+            if (navMeshAgent == null)
+                return;
+
             if (IsOwner)
                 ProcessStateMachine();
+
+            if (!navMeshAgent.enabled)
+                return;
+
+            Vector3 positionDifference = navMeshAgent.transform.position = transform.position;
+
+            if (positionDifference.magnitude > 0.2f)
+                navMeshAgent.transform.localPosition = Vector3.zero;
         }
 
         private void ProcessStateMachine()

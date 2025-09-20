@@ -176,3 +176,9 @@ public enum ItemPickUpType
     WorldSpawn,
     CharacterDrop
 }
+//AI States
+public enum IdleStateMode
+{
+    Idle,
+    Patrol
+}
