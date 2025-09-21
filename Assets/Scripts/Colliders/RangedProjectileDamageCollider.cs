@@ -32,6 +32,9 @@ namespace TraverserProject
         private void OnCollisionEnter(Collision collision)
         {
             CreatePenetrationIntoObject(collision);
+
+            WorldSoundFXManager.Singleton.AlertNearbyCharactersToSound(transform.position, 3);
+
             CharacterManager potentialTarget = collision.transform.gameObject.GetComponent<CharacterManager>();
 
 

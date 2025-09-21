@@ -1,6 +1,7 @@
+using TraverserProject;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
-using Unity.Netcode;
 
 namespace TraverserProject
 {
@@ -40,6 +41,9 @@ namespace TraverserProject
         private float stanceTickTimer = 0;
         [SerializeField] float defaultTimeUntilStanceRegenerationBegins = 15;
 
+        [Header("Debug")]
+        [SerializeField] bool investigateSound = false;
+        [SerializeField] Vector3 positionOfSound = Vector3.zero;
 
         protected override void Awake()
         {
@@ -49,9 +53,15 @@ namespace TraverserProject
             lockOnTransform = GetComponentInChildren<LockOnTransform>().transform;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             HandleStanceBreak();
+
+            if (investigateSound)
+            {
+                investigateSound = false;
+                AlertCharacterToSound(positionOfSound);
+            }
         }
 
         public void AwardRunesOnDeath(PlayerManager player)
@@ -127,6 +137,27 @@ namespace TraverserProject
             currentStance -= stanceDamage;
         }
 
+        public virtual void AlertCharacterToSound(Vector3 positionOfSound)
+        {
+            if (!aiCharacter.IsOwner)
+                return;
+
+            if (aiCharacter.isDead.Value)
+                return;
+
+            if (aiCharacter.idle == null)
+                return;
+
+            if (aiCharacter.investigateSound == null)
+                return;
+
+            if (!aiCharacter.idle.willInvestigateSound)
+                return;
+
+            aiCharacter.investigateSound.positionOfSound = positionOfSound;
+            aiCharacter.currentState = aiCharacter.currentState.SwitchState(aiCharacter, aiCharacter.investigateSound);
+        }
+
         public void FindATargetViaLineOfSight(AICharacterManager aiCharacter)
         {
             if (currentTarget != null)
@@ -178,6 +209,48 @@ namespace TraverserProject
         {
             if (aiCharacter.isPerformingAction)
                 return;
+
+            if (viewableAngle >= 20 && viewableAngle <= 60)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_45", true);
+            }
+            else if (viewableAngle <= -20 && viewableAngle >= -60)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_45", true);
+            }
+            else if (viewableAngle >= 61 && viewableAngle <= 110)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_90", true);
+            }
+            else if (viewableAngle <= -61 && viewableAngle >= -110)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_90", true);
+            }
+            else if (viewableAngle >= 110 && viewableAngle <= 145)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_135", true);
+            }
+            else if (viewableAngle <= -110 && viewableAngle >= -145)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_135", true);
+            }
+            else if (viewableAngle >= 146 && viewableAngle <= 180)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_180", true);
+            }
+            else if (viewableAngle <= 1 - 46 && viewableAngle >= -180)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_180", true);
+            }
+        }
+
+        public virtual void PivotTowardsPosition(AICharacterManager aiCharacter, Vector3 position)
+        {
+            if (aiCharacter.isPerformingAction)
+                return;
+
+            Vector3 targetsDirection = position = aiCharacter.transform.position;
+            float viewableAngle = WorldUtilityManager.Singleton.GetAngleOfTarget(aiCharacter.transform, targetsDirection);
 
             if (viewableAngle >= 20 && viewableAngle <= 60)
             {

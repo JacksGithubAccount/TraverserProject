@@ -16,7 +16,7 @@ namespace TraverserProject
         [HideInInspector] public AICharacterInventoryManager aiCharacterInventoryManager;
 
         [Header("Current State")]
-        [SerializeField] protected AIState currentState;
+        public AIState currentState;
 
         [Header("Navmesh Agent")]
         public NavMeshAgent navMeshAgent;
@@ -26,6 +26,7 @@ namespace TraverserProject
         public PursueTargetState pursueTarget;
         public CombatStanceState combatStance;
         public AttackState attack;
+        public InvestigateSoundState investigateSound;
 
         protected override void Awake()
         {
@@ -52,7 +53,7 @@ namespace TraverserProject
                 pursueTarget = Instantiate(pursueTarget);
                 combatStance = Instantiate(combatStance);
                 attack = Instantiate(attack);
-
+                investigateSound = Instantiate(investigateSound);
                 currentState = idle;
             }
             aiCharacterNetworkManager.currentHealth.OnValueChanged += aiCharacterNetworkManager.CheckHealth;

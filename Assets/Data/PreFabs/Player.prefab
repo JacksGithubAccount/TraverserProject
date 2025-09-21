@@ -12560,7 +12560,7 @@ MonoBehaviour:
     m_InternalValue: 400
   maxFocusPoints:
     m_InternalValue: 400
-  vitality:
+  vigor:
     m_InternalValue: 1
   endurance:
     m_InternalValue: 1
@@ -12911,6 +12911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747b93c38a71bea409263036dcfa4759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runesDroppedOnDeath: 50
   staminaRegenerationAmount: 50
   staminaRegenerationDelay: 2
   blockingPhysicalAbsorption: 0
@@ -12933,6 +12934,8 @@ MonoBehaviour:
   basePoiseDefense: 0
   defaultPoiseResetTime: 8
   poiseResetTimer: 0
+  bubbles: 0
+  bubbleMemory: 0
 --- !u!114 &9049186706091044288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16361,6 +16364,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8942101403275638195}
+  - component: {fileID: 7893105625457962852}
   m_Layer: 0
   m_Name: foot_r
   m_TagString: Untagged
@@ -16384,6 +16388,19 @@ Transform:
   - {fileID: 4572745550493545513}
   m_Father: {fileID: 6861698065247996941}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7893105625457962852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4664785727459120110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53d36b8bea695a0469aa11af84200e76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceToGround: 0.05
 --- !u!1 &4750327077728784844
 GameObject:
   m_ObjectHideFlags: 0
@@ -24217,6 +24234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7899254811413783142}
+  - component: {fileID: 1561463957198859322}
   m_Layer: 0
   m_Name: foot_l
   m_TagString: Untagged
@@ -24240,6 +24258,19 @@ Transform:
   - {fileID: 4975879671020942567}
   m_Father: {fileID: 1259800965668626969}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1561463957198859322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7177697934872074710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53d36b8bea695a0469aa11af84200e76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceToGround: 0.05
 --- !u!1 &7181553829498586865
 GameObject:
   m_ObjectHideFlags: 0

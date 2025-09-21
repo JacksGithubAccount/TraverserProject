@@ -17,6 +17,11 @@ namespace TraverserProject
         {
             PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(player.playerCombatManager.currentWeaponBeingUsed.blocking));
         }
+        public override void PlayFootStepSoundFX()
+        {
+            base.PlayFootStepSoundFX();
+            WorldSoundFXManager.Singleton.AlertNearbyCharactersToSound(transform.position, 2);
+        }
 
     }
 }

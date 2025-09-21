@@ -65,6 +65,7 @@ namespace TraverserProject
         private void PlayFootStepSoundFX()
         {
             character.characterSoundFXManager.PlayFootStepSoundFX();
+
         }
 
     }

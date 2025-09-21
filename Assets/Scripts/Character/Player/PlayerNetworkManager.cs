@@ -252,8 +252,18 @@ namespace TraverserProject
 
             if (player.IsOwner)
                 PlayerUIManager.Singleton.playerUIHudManager.SetSecondaryProjectileQuickSlotIcon(player.playerInventoryManager.secondaryProjectile);
+        }
 
+        public void OnFocusPointsChanged(int oldFP, int newFP)
+        {
+            if (player.IsOwner)
+                PlayerUIManager.Singleton.playerUIHudManager.SetNewFocusPointValue(oldFP, newFP);
+        }
 
+        public void OnMaxFocusPointsChanged(int oldFP, int newFP)
+        {
+            if (player.IsOwner)
+                PlayerUIManager.Singleton.playerUIHudManager.SetMaxFocusPointsValue(newFP);
         }
 
         public void OnIsHoldingArrowChanged(bool oldStatus, bool newStatus)

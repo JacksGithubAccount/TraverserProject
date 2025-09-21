@@ -21,6 +21,9 @@ namespace TraverserProject
         [SerializeField] float timeBetweenPatrols = 15;
         [SerializeField] float restTimer = 0;
 
+        [Header("Sleep Options")]
+        public bool willInvestigateSound = true;
+
         public override AIState Tick(AICharacterManager aiCharacter)
         {
             aiCharacter.aiCharacterCombatManager.FindATargetViaLineOfSight(aiCharacter);
@@ -29,8 +32,10 @@ namespace TraverserProject
             {
                 case IdleStateMode.Idle:
                     return Idle(aiCharacter);
+                    break;
                 case IdleStateMode.Patrol:
                     return Patrol(aiCharacter);
+                    break;
                 default:
                     break;
             }
@@ -143,7 +148,7 @@ namespace TraverserProject
                 hasPatrolDestination = true;
             }
 
-            if(aiPatrolPath == null)
+            if (aiPatrolPath == null)
                 idleStateMode = IdleStateMode.Idle;
 
             NavMeshPath path = new NavMeshPath();
