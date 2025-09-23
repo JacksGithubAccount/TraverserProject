@@ -42,6 +42,14 @@ namespace TraverserProject
 
         }
 
+        protected override void Start()
+        {
+            base.Start();
+
+            // if animator or gameobject gets disabled, keeps current animation when re-enabled
+            animator.keepAnimatorStateOnDisable = true;
+        }
+
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
@@ -57,6 +65,12 @@ namespace TraverserProject
                 currentState = idle;
             }
             aiCharacterNetworkManager.currentHealth.OnValueChanged += aiCharacterNetworkManager.CheckHealth;
+
+            if (!aiCharacterNetworkManager.isAwake.Value)
+                animator.Play(aiCharacterNetworkManager.sleepingAnimation.Value.ToString());
+
+            if (isDead.Value)
+                animator.Play("Dead_01");
         }
 
         public override void OnNetworkDespawn()

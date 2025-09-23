@@ -15,6 +15,8 @@ namespace TraverserProject
         [SerializeField] bool hasPatrolPath = false;
         [SerializeField] int patrolPathID = 0;
 
+        [Header("Sleep")]
+        [SerializeField] bool isSleeping = false;
 
         private void Awake()
         {
@@ -44,6 +46,9 @@ namespace TraverserProject
 
                 if (hasPatrolPath)
                     aiCharacter.idle.aiPatrolPath = WorldAIManager.Singleton.GetAIPatrolPathByID(patrolPathID);
+
+                if (isSleeping)
+                    aiCharacter.aiCharacterNetworkManager.isAwake.Value = false;
 
 
             }
