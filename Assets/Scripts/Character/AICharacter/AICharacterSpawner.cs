@@ -50,7 +50,7 @@ namespace TraverserProject
                 if (isSleeping)
                     aiCharacter.aiCharacterNetworkManager.isAwake.Value = false;
 
-
+                aiCharacter.aiCharacterNetworkManager.isActive.Value = false;
             }
         }
 
@@ -65,10 +65,13 @@ namespace TraverserProject
             instantiatedGameObject.transform.position = transform.position;
             instantiatedGameObject.transform.rotation = transform.rotation;
             aiCharacter.aiCharacterNetworkManager.currentHealth.Value = aiCharacter.aiCharacterNetworkManager.maxHealth.Value;
+            aiCharacter.aiCharacterCombatManager.SetTarget(null);
+
             if (aiCharacter.isDead.Value)
             {
                 aiCharacter.isDead.Value = false;
                 aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Empty", false, false, true, true, true, true);
+                aiCharacter.currentState.SwitchState(aiCharacter, aiCharacter.idle);
             }
 
             aiCharacter.characterUIManager.ResetCharacterHPBar();

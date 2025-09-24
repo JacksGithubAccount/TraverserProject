@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TraverserProject;
 using Unity.Netcode;
 using UnityEngine;
@@ -41,9 +42,8 @@ namespace TraverserProject
         private float stanceTickTimer = 0;
         [SerializeField] float defaultTimeUntilStanceRegenerationBegins = 15;
 
-        [Header("Debug")]
-        [SerializeField] bool investigateSound = false;
-        [SerializeField] Vector3 positionOfSound = Vector3.zero;
+        [Header("Activation Range")]
+        public List<PlayerManager> playersWithinActivationRange = new List<PlayerManager>();
 
         protected override void Awake()
         {
@@ -57,10 +57,33 @@ namespace TraverserProject
         {
             HandleStanceBreak();
 
-            if (investigateSound)
+        }
+
+        public void AddPlayerToPlayersWithinRange(PlayerManager player)
+        {
+            if (playersWithinActivationRange.Contains(player))
+                return;
+
+            playersWithinActivationRange.Add(player);
+
+            for (int i = 0; i < playersWithinActivationRange.Count; i++)
             {
-                investigateSound = false;
-                AlertCharacterToSound(positionOfSound);
+                if (playersWithinActivationRange[i] == null)
+                    playersWithinActivationRange.RemoveAt(i);
+            }
+        }
+
+        public void RemovePlayerFromPlayersWithinRange(PlayerManager player)
+        {
+            if (!playersWithinActivationRange.Contains(player))
+                return;
+
+            playersWithinActivationRange.Remove(player);
+
+            for (int i = 0; i < playersWithinActivationRange.Count; i++)
+            {
+                if (playersWithinActivationRange[i] == null)
+                    playersWithinActivationRange.RemoveAt(i);
             }
         }
 

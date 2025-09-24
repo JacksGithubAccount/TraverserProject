@@ -21,6 +21,9 @@ namespace TraverserProject
         private Coroutine despawnAllCharactersCoroutine;
         private Coroutine resetAllCharactersCoroutine;
 
+        [Header("Beacon Prefab")]
+        public GameObject beaconGameObject;
+
         [Header("Bosses")]
         [SerializeField] List<AIBossCharacterManager> spawnedInBosses;
 
@@ -164,8 +167,8 @@ namespace TraverserProject
 
         public void AddPatrolPathToList(AIPatrolPath patrolPath)
         {
-            if(aiPatrolPaths.Contains(patrolPath))
-				return;
+            if (aiPatrolPaths.Contains(patrolPath))
+                return;
 
             aiPatrolPaths.Add(patrolPath);
 

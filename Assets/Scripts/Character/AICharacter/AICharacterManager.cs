@@ -1,6 +1,7 @@
 using System.Globalization;
 using UnityEngine;
 using UnityEngine.AI;
+using Unity.Netcode;
 
 namespace TraverserProject
 {
@@ -27,6 +28,9 @@ namespace TraverserProject
         public CombatStanceState combatStance;
         public AttackState attack;
         public InvestigateSoundState investigateSound;
+
+        [Header("Activation Beacon")]
+        protected AIActivationBeacon beacon;
 
         protected override void Awake()
         {
@@ -71,6 +75,8 @@ namespace TraverserProject
 
             if (isDead.Value)
                 animator.Play("Dead_01");
+
+            CreateActivationBeacon();
         }
 
         public override void OnNetworkDespawn()
@@ -92,6 +98,14 @@ namespace TraverserProject
             base.OnDisable();
             if (characterUIManager.hasFloatingHPBar)
                 characterNetworkManager.currentHealth.OnValueChanged -= characterUIManager.OnHPChanged;
+        }
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            if (beacon != null)
+                Destroy(beacon);
         }
 
 
@@ -152,6 +166,74 @@ namespace TraverserProject
             else
             {
                 aiCharacterNetworkManager.isMoving.Value = false;
+            }
+        }
+
+        public void ActivateCharacter(PlayerManager player)
+        {
+            aiCharacterCombatManager.AddPlayerToPlayersWithinRange(player);
+
+            if (player.IsLocalPlayer)
+            {
+                //optionally enable renderers or disable for other players not near ai
+            }
+
+            if (!NetworkManager.Singleton.IsHost)
+                return;
+
+            if (aiCharacterCombatManager.playersWithinActivationRange.Count > 0)
+            {
+                aiCharacterNetworkManager.isActive.Value = true;
+            }
+            else
+            {
+                aiCharacterNetworkManager.isActive.Value = false;
+            }
+        }
+
+        public void DeactivateCharacter(PlayerManager player)
+        {
+            aiCharacterCombatManager.RemovePlayerFromPlayersWithinRange(player);
+
+            if (player.IsLocalPlayer)
+            {
+                //optionally disable renderers or disable for other players not near ai
+            }
+
+            if (beacon != null)
+            {
+                beacon.gameObject.transform.position = transform.position;
+                beacon.gameObject.SetActive(true);
+            }
+
+            if (!NetworkManager.Singleton.IsHost)
+                return;
+
+            if (aiCharacterCombatManager.playersWithinActivationRange.Count > 0)
+            {
+                aiCharacterNetworkManager.isActive.Value = true;
+            }
+            else
+            {
+                aiCharacterCombatManager.SetTarget(null);
+                aiCharacterNetworkManager.isActive.Value = false;
+            }
+        }
+
+        public void CreateActivationBeacon()
+        {
+            if (beacon == null)
+            {
+                GameObject beaconGameObject = Instantiate(WorldAIManager.Singleton.beaconGameObject);
+                beaconGameObject.transform.position = transform.position;
+
+                beacon = beaconGameObject.GetComponent<AIActivationBeacon>();
+                beacon.SetOwnerOfBeacon(this);
+            }
+            else
+            {
+                beacon.transform.position = transform.position;
+                beacon.gameObject.SetActive(true);
             }
         }
 
