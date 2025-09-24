@@ -27,10 +27,6 @@ namespace TraverserProject
             if (detector == null)
                 return;
 
-            PlayerManager player = other.GetComponent<PlayerManager>();
-
-            if (player == null)
-                return;
 
             ReactivateAICharacter(detector.player);
         }
