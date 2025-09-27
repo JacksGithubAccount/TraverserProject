@@ -237,7 +237,29 @@ namespace TraverserProject
                         player.LoadOtherPlayerCharacterWhenJoiningServer();
                     }
                 }
+
+                StartCoroutine(EmergeAtMostRecentSiteOfGrace());
             }
+        }
+
+        private IEnumerator EmergeAtMostRecentSiteOfGrace()
+        {
+            PlayerManager hostPlayer = null;
+
+            while (hostPlayer == null)
+            {
+                for (int i = 0; i < WorldGameSessionManager.Singleton.players.Count; i++)
+                {
+                    if (WorldGameSessionManager.Singleton.players[i].IsHost)
+                    {
+                        hostPlayer = WorldGameSessionManager.Singleton.players[i];
+                    }
+
+                }
+                yield return null;
+            }
+
+            WorldObjectManager.Singleton.sitesOfGrace[hostPlayer.playerNetworkManager.lastSiteOfGraceUsed.Value].TeleportToSiteOfGrace();
         }
 
         public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)

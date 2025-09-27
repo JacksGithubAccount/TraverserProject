@@ -11765,6 +11765,10 @@ PrefabInstance:
       propertyPath: NetworkConfig.PlayerPrefab
       value: 
       objectReference: {fileID: 3761150245944100862, guid: cfea91b7082860549a7fae1fcdb822ea, type: 3}
+    - target: {fileID: 314147973951974617, guid: 56279e3bed14bc146a3bd44d292c876f, type: 3}
+      propertyPath: NetworkConfig.NetworkTransport
+      value: 
+      objectReference: {fileID: 1091479506500575065}
     - target: {fileID: 1712097212632114613, guid: 56279e3bed14bc146a3bd44d292c876f, type: 3}
       propertyPath: m_Name
       value: WorldNetworkManager
@@ -11809,11 +11813,67 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3057625147215686439, guid: 56279e3bed14bc146a3bd44d292c876f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1712097212632114613, guid: 56279e3bed14bc146a3bd44d292c876f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1091479506500575066}
+    - targetCorrespondingSourceObject: {fileID: 1712097212632114613, guid: 56279e3bed14bc146a3bd44d292c876f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1091479506500575065}
   m_SourcePrefab: {fileID: 100100000, guid: 56279e3bed14bc146a3bd44d292c876f, type: 3}
+--- !u!1 &1091479506500575064 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1712097212632114613, guid: 56279e3bed14bc146a3bd44d292c876f, type: 3}
+  m_PrefabInstance: {fileID: 1091479506500575063}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1091479506500575065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091479506500575064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6960e84d07fb87f47956e7a81d71c4e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ProtocolType: 0
+  m_UseWebSockets: 0
+  m_UseEncryption: 0
+  m_MaxPacketQueueSize: 128
+  m_MaxPayloadSize: 6144
+  m_HeartbeatTimeoutMS: 500
+  m_ConnectTimeoutMS: 1000
+  m_MaxConnectAttempts: 60
+  m_DisconnectTimeoutMS: 30000
+  ConnectionData:
+    Address: 127.0.0.1
+    Port: 7777
+    ServerListenAddress: 127.0.0.1
+  DebugSimulator:
+    PacketDelayMS: 0
+    PacketJitterMS: 0
+    PacketDropRate: 0
+--- !u!114 &1091479506500575066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091479506500575064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44dd247a00edbfa44b77868d755af6ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  steamAppId: 480
+  targetSteamId: 0
+  userSteamId: 0
 --- !u!1 &1200261707549125721
 GameObject:
   m_ObjectHideFlags: 0
