@@ -12,6 +12,10 @@ namespace TraverserProject
 
         protected AICharacterManager aiCharacter;
 
+        [Header("Damage")]
+        [SerializeField] protected int baseDamage = 25;
+        [SerializeField] protected int basePoiseDamage = 25;
+
         [Header("Action Recovery")]
         public float actionRecoveryTimer = 0f;
 

@@ -128,12 +128,12 @@
     <Compile Include="Assets\Scripts\Effects\TakeBlockedDamageEffect.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerUI\PlayerUISiteOfGraceManager.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerUI\PlayerUITeleportLocationManager.cs" />
+    <Compile Include="Assets\Scripts\Colliders\ManualDamageCollider.cs" />
     <Compile Include="Assets\Scripts\SaveAndLoad\SerializableQuickSlotItem.cs" />
     <Compile Include="Assets\Scripts\Animator\ResetActionFlag.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerBodyManager.cs" />
     <Compile Include="Assets\Scripts\Character\AICharacter\State\BossSleepState.cs" />
     <Compile Include="Assets\Scripts\Menu Scene\TitleScreenManager.cs" />
-    <Compile Include="Assets\Scripts\Colliders\UndeadHandDamageCollider.cs" />
     <Compile Include="Assets\Scripts\Interactables\SiteOfGraceInteractable.cs" />
     <Compile Include="Assets\Scripts\World Manager\WorldCharacterEffectsManager.cs" />
     <Compile Include="Assets\Scripts\Character\AICharacter\UndeadCharacter\AIUndeadCombatManager.cs" />
@@ -203,6 +203,7 @@
     <Compile Include="Assets\Scripts\Items\Spells\FireBallSpell.cs" />
     <Compile Include="Assets\Scripts\World Manager\WorldSaveGameManager.cs" />
     <Compile Include="Assets\Scripts\Character\AICharacter\BossCharacters\Durk\AIDurkCharacterManager.cs" />
+    <Compile Include="Assets\Scripts\Character\AICharacter\KnightCharacter\AIKnightCombatManager.cs" />
     <Compile Include="Assets\Scripts\Utility\Utility_DestroyAfterTime.cs" />
     <Compile Include="Assets\PlayerControls.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerAimCameraFollowTransform.cs" />
@@ -730,16 +731,16 @@
       <HintPath>Library\PackageCache\com.unity.ext.nunit@031a54704bff\net40\unity-custom\nunit.framework.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Facepunch.Steamworks.Win64">
+      <HintPath>C:\UnityPackages\multiplayer-community-contributions-main\Transports\com.community.netcode.transport.facepunch\Runtime\Facepunch\Facepunch.Steamworks.Win64.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@7dcdc439b230\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@d6f9955a5d5f\Mono.Cecil.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Facepunch.Steamworks.Win64">
-      <HintPath>C:\UnityPackages\multiplayer-community-contributions-main\Transports\com.community.netcode.transport.facepunch\Runtime\Facepunch\Facepunch.Steamworks.Win64.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">

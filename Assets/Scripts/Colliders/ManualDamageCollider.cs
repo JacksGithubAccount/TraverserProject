@@ -3,7 +3,7 @@ using UnityEngine;
 namespace TraverserProject
 {
 
-    public class UndeadHandDamageCollider : DamageCollider
+    public class ManualDamageCollider : DamageCollider
     {
         [SerializeField] AICharacterManager undeadCharacter;
 

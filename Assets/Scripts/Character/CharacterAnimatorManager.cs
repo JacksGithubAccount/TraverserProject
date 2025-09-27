@@ -157,6 +157,13 @@ namespace TraverserProject
             character.animator.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);
 
         }
+        //this function will pass the raw number
+        public void SetAnimatorMovementParameters(float horizontalMovement, float verticalMovement)
+        {
+            character.animator.SetFloat(vertical, verticalMovement, 0.1f, Time.deltaTime);
+            character.animator.SetFloat(horizontal, horizontalMovement, 0.1f, Time.deltaTime);
+        }
+
         public virtual void PlayTargetActionAnimation(string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false, bool canRun = true, bool canRoll = false)
         {
             Debug.Log("Playing Animation: " + targetAnimation);

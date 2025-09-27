@@ -13,7 +13,6 @@ namespace TraverserProject
         public float stompAttackAOERadius = 1.5f;
 
         [Header("Damage")]
-        [SerializeField] int baseDamage = 25;
         [SerializeField] float attack01DamageModifier = 1.0f;
         [SerializeField] float attack02DamageModifier = 1.2f;
         [SerializeField] float attack03DamageModifier = 1.4f;

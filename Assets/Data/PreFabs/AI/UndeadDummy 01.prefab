@@ -528,10 +528,10 @@ PrefabInstance:
       addedObject: {fileID: 8750645136641881939}
     - targetCorrespondingSourceObject: {fileID: 7620755400191891017, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2517140498559477017}
+      addedObject: {fileID: 5210621364958428229}
     - targetCorrespondingSourceObject: {fileID: 7620755400191891017, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5210621364958428229}
+      addedObject: {fileID: 5339783209498547831}
     - targetCorrespondingSourceObject: {fileID: -6933984331131501845, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2448063479967878471}
@@ -543,10 +543,10 @@ PrefabInstance:
       addedObject: {fileID: 741493018701620892}
     - targetCorrespondingSourceObject: {fileID: 2062880239462900024, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1390053549631539005}
+      addedObject: {fileID: 8208157305228493610}
     - targetCorrespondingSourceObject: {fileID: 2062880239462900024, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8208157305228493610}
+      addedObject: {fileID: 8214249719149362661}
     - targetCorrespondingSourceObject: {fileID: 4394627511276918094, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9121522380739406811}
@@ -675,26 +675,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2062880239462900024, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
   m_PrefabInstance: {fileID: 4041791156846533342}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1390053549631539005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2645725149537303526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 625743700e9072b4c951e87da4de8ec3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageCollider: {fileID: 0}
-  physicalDamage: 0
-  magicDamage: 0
-  fireDamage: 0
-  lightningDamage: 0
-  holyDamage: 0
-  poiseDamage: 0
-  undeadCharacter: {fileID: 0}
 --- !u!135 &8208157305228493610
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -716,6 +696,26 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.13
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8214249719149362661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2645725149537303526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f5358cf312d1bf41a3676d759720697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageCollider: {fileID: 8208157305228493610}
+  physicalDamage: 0
+  magicDamage: 0
+  fireDamage: 0
+  lightningDamage: 0
+  holyDamage: 0
+  poiseDamage: 0
+  undeadCharacter: {fileID: -3101570621495118235}
 --- !u!4 &2784836472218291560 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7011284792763705418, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
@@ -1230,6 +1230,8 @@ MonoBehaviour:
   canBeBackstabbed: 1
   criticalAttackDistanceCheck: 0.7
   pendingCriticalDamage: 0
+  baseDamage: 25
+  basePoiseDamage: 25
   actionRecoveryTimer: 0
   enablePivot: 1
   distanceFromTarget: 0
@@ -1245,11 +1247,9 @@ MonoBehaviour:
   ignoreStanceBreak: 0
   stanceRegenerationTimer: 0
   defaultTimeUntilStanceRegenerationBegins: 15
-  investigateSound: 0
-  positionOfSound: {x: 0, y: 0, z: 0}
-  rightHandDamageCollider: {fileID: 1390053549631539005}
-  leftHandDamageCollider: {fileID: 2517140498559477017}
-  baseDamage: 25
+  playersWithinActivationRange: []
+  rightHandDamageCollider: {fileID: 0}
+  leftHandDamageCollider: {fileID: 0}
   attack01DamageModifier: 1
   attack02DamageModifier: 1.2
 --- !u!114 &575760709853360938
@@ -1599,26 +1599,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7620755400191891017, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
   m_PrefabInstance: {fileID: 4041791156846533342}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2517140498559477017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5896635833015127191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 625743700e9072b4c951e87da4de8ec3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageCollider: {fileID: 0}
-  physicalDamage: 0
-  magicDamage: 0
-  fireDamage: 0
-  lightningDamage: 0
-  holyDamage: 0
-  poiseDamage: 0
-  undeadCharacter: {fileID: 0}
 --- !u!135 &5210621364958428229
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1640,6 +1620,26 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.13
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5339783209498547831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5896635833015127191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f5358cf312d1bf41a3676d759720697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageCollider: {fileID: 5210621364958428229}
+  physicalDamage: 0
+  magicDamage: 0
+  fireDamage: 0
+  lightningDamage: 0
+  holyDamage: 0
+  poiseDamage: 0
+  undeadCharacter: {fileID: -3101570621495118235}
 --- !u!1 &6084215479676984050 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1407328588852412372, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
