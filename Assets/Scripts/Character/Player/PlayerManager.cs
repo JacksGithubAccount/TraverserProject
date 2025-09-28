@@ -97,6 +97,10 @@ namespace TraverserProject
                 playerNetworkManager.currentFocusPoints.OnValueChanged += PlayerUIManager.Singleton.playerUIHudManager.SetNewFocusPointValue;
                 playerNetworkManager.currentStamina.OnValueChanged += playerStatsManager.ResetStaminaRegenTimer;
 
+                playerNetworkManager.SetNewMaxHealthValue(0, playerNetworkManager.vigor.Value);
+                playerNetworkManager.SetNewMaxStaminaValue(0, playerNetworkManager.endurance.Value);
+                playerNetworkManager.SetNewMaxFocusPointValue(0, playerNetworkManager.mind.Value);
+
                 playerNetworkManager.isAiming.OnValueChanged += playerNetworkManager.OnIsAimingChanged;
             }
 

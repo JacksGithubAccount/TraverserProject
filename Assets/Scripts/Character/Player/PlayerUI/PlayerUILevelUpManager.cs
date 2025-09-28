@@ -48,26 +48,6 @@ namespace TraverserProject
         public Slider faithSlider;
         public Slider luckSlider;
 
-        [Header("Decrease Arrows")]
-        public Button vigorDecreaseArrow;
-        public Button mindDecreaseArrow;
-        public Button enduranceDecreaseArrow;
-        public Button strengthDecreaseArrow;
-        public Button dexterityDecreaseArrow;
-        public Button intelligenceDecreaseArrow;
-        public Button faithDecreaseArrow;
-        public Button luckDecreaseArrow;
-
-        [Header("Increase Arrows")]
-        public Button vigorIncreaseArrow;
-        public Button mindIncreaseArrow;
-        public Button enduranceIncreaseArrow;
-        public Button strengthIncreaseArrow;
-        public Button dexterityIncreaseArrow;
-        public Button intelligenceIncreaseArrow;
-        public Button faithIncreaseArrow;
-        public Button luckIncreaseArrow;
-
         [Header("Buttons")]
         [SerializeField] Button confirmLevelsButton;
 
@@ -140,9 +120,7 @@ namespace TraverserProject
 
             switch (currentSelectedAttribute)
             {
-                case CharacterAttribute.Vigor:
-                    vigorDecreaseArrow.enabled = true;
-                    vigorIncreaseArrow.enabled = true;
+                case CharacterAttribute.Vigor:                    
                     projectedVigorLevelText.text = vigorSlider.value.ToString();
                     break;
                 case CharacterAttribute.Mind:

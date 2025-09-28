@@ -69,6 +69,7 @@ namespace TraverserProject
                 currentState = idle;
             }
             aiCharacterNetworkManager.currentHealth.OnValueChanged += aiCharacterNetworkManager.CheckHealth;
+            aiCharacterNetworkManager.isBlocking.OnValueChanged += aiCharacterNetworkManager.OnIsBlockingChanged;
 
             if (!aiCharacterNetworkManager.isAwake.Value)
                 animator.Play(aiCharacterNetworkManager.sleepingAnimation.Value.ToString());
@@ -83,6 +84,7 @@ namespace TraverserProject
         {
             base.OnNetworkDespawn();
             aiCharacterNetworkManager.currentHealth.OnValueChanged -= aiCharacterNetworkManager.CheckHealth;
+            aiCharacterNetworkManager.isBlocking.OnValueChanged -= aiCharacterNetworkManager.OnIsBlockingChanged;
         }
 
         protected override void OnEnable()

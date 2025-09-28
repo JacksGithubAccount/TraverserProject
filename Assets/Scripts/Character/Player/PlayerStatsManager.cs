@@ -118,7 +118,7 @@ namespace TravserserProject
             bubbles += bubblesToAdd;
             bubbleMemory += bubblesToAdd;
 
-            PlayerUIManager.Singleton.playerUIHudManager.SetBubblesCount(bubbles);
+            PlayerUIManager.Singleton.playerUIHudManager.SetBubblesCount(bubblesToAdd);
         }
 
 

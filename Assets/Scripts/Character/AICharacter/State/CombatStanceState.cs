@@ -27,6 +27,12 @@ namespace TraverserProject
         private bool hasChosenCirclePath = false;
         private float strafeMoveAmount;
 
+        [Header("Blocking")]
+        [SerializeField] bool canBlock = false;
+        [SerializeField] int percentageOfTimeWillBlock = 75;
+        private bool hasRolledForBlockChance = false;
+        private bool willBlockDuringThisCombatRotation;
+
         public override AIState Tick(AICharacterManager aiCharacter)
         {
             if (aiCharacter.isPerformingAction)
@@ -53,6 +59,15 @@ namespace TraverserProject
 
             if (willCircleTarget)
                 SetCirclePath(aiCharacter);
+
+            if (canBlock && !hasRolledForBlockChance)
+            {
+                hasRolledForBlockChance = true;
+                willBlockDuringThisCombatRotation = RollForOutcomeChance(percentageOfTimeWillBlock);
+            }
+
+            if (willBlockDuringThisCombatRotation)
+                aiCharacter.aiCharacterNetworkManager.isBlocking.Value = true;
 
             if (!hasAttack)
             {
@@ -176,6 +191,10 @@ namespace TraverserProject
             base.ResetStateFlags(aiCharacter);
 
             hasRolledForComboChance = false;
+            hasRolledForBlockChance = false;
+            willBlockDuringThisCombatRotation = false;
+            hasChosenCirclePath = false;
+            strafeMoveAmount = 0;
             hasAttack = false;
         }
 

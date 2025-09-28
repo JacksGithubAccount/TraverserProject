@@ -18,6 +18,11 @@ namespace TraverserProject
         [Header("Sleep")]
         [SerializeField] bool isSleeping = false;
 
+        [Header("Stats")]
+        [SerializeField] bool manuallySetStats = true;
+        [SerializeField] int stamina = 180;
+        [SerializeField] int health = 400;
+
         private void Awake()
         {
 
@@ -49,6 +54,14 @@ namespace TraverserProject
 
                 if (isSleeping)
                     aiCharacter.aiCharacterNetworkManager.isAwake.Value = false;
+
+                if (manuallySetStats)
+                {
+                    aiCharacter.aiCharacterNetworkManager.maxHealth.Value = health;
+                    aiCharacter.aiCharacterNetworkManager.currentHealth.Value = health;
+                    aiCharacter.aiCharacterNetworkManager.maxStamina.Value = stamina;
+                    aiCharacter.aiCharacterNetworkManager.currentStamina.Value = stamina;
+                }
 
                 aiCharacter.aiCharacterNetworkManager.isActive.Value = false;
             }
