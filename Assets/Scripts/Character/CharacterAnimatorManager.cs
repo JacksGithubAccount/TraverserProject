@@ -85,7 +85,8 @@ namespace TraverserProject
                 finalList.Add(item);
             }
 
-            finalList.Remove(lastDamageAnimationPlayed);
+            if(finalList.Count > 1)
+                finalList.Remove(lastDamageAnimationPlayed);
 
             for (int i = finalList.Count - 1; i > -1; i--)
             {

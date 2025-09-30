@@ -16,8 +16,9 @@ namespace TraverserProject
 
         [Header("Combo")]
         [SerializeField] protected bool canPerformCombo = false;
-        [SerializeField] protected int chanceToPerformCombo = 25;
-        [SerializeField] bool hasRolledForComboChance = false;
+        [SerializeField] protected int percentageOfTimeWillPerformCombo = 25;
+        [SerializeField] public bool onlyPerformComboIfInitialAttackHits = false;
+        protected bool hasRolledForComboChance = false;
 
         [Header("Engagement Distance")]
         [SerializeField] public float maximumEngagementDistance = 5;
@@ -64,6 +65,12 @@ namespace TraverserProject
             {
                 hasRolledForBlockChance = true;
                 willBlockDuringThisCombatRotation = RollForOutcomeChance(percentageOfTimeWillBlock);
+            }
+
+            if (canPerformCombo && !hasRolledForComboChance)
+            {
+                hasRolledForComboChance = true;
+                aiCharacter.attack.willPerformCombo = RollForOutcomeChance(percentageOfTimeWillPerformCombo);
             }
 
             if (willBlockDuringThisCombatRotation)

@@ -37,20 +37,20 @@ namespace TraverserProject
         public void DisableArrows()
         {
             UI_Level_Up_Arrow_Button dbutton = decreaseArrow.GetComponent<UI_Level_Up_Arrow_Button>();
-
-            if (dbutton == null)
-                return;
-            
-            if (!dbutton.mouseOverArrow)
-                decreaseArrow.SetActive(false);
-
             UI_Level_Up_Arrow_Button ibutton = increaseArrow.GetComponent<UI_Level_Up_Arrow_Button>();
 
-            if (ibutton == null)
+            if (dbutton == null || ibutton == null)
                 return;
 
-            if (!ibutton.mouseOverArrow)
+
+            if (!dbutton.mouseOverArrow)
+            {
+                decreaseArrow.SetActive(false);
+            }
+            if (!ibutton.mouseOverArrow) { 
                 increaseArrow.SetActive(false);
+            }
+                
         }
 
         public void IncrementSliderValue()

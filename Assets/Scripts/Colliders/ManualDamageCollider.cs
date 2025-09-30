@@ -5,7 +5,7 @@ namespace TraverserProject
 
     public class ManualDamageCollider : DamageCollider
     {
-        [SerializeField] AICharacterManager undeadCharacter;
+        [SerializeField] AICharacterManager characterCausingDamage;
 
 
         protected override void Awake()
@@ -13,12 +13,12 @@ namespace TraverserProject
             base.Awake();
 
             damageCollider = GetComponent<Collider>();
-            undeadCharacter = GetComponentInParent<AICharacterManager>();
+            characterCausingDamage = GetComponentInParent<AICharacterManager>();
         }
 
         protected override void GetBlockingDotValues(CharacterManager damageTarget)
         {
-            directionFromAttackToDamageTarget = undeadCharacter.transform.position - damageTarget.transform.position;
+            directionFromAttackToDamageTarget = characterCausingDamage.transform.position - damageTarget.transform.position;
             dotValueFromAttackToDamageTarget = Vector3.Dot(directionFromAttackToDamageTarget, damageTarget.transform.forward);
         }
 
@@ -26,6 +26,8 @@ namespace TraverserProject
         {
             if (charactersDamaged.Contains(damageTarget))
                 return;
+
+            characterCausingDamage.aiCharacterCombatManager.hasHitTargetDuringCombo = true;
 
             charactersDamaged.Add(damageTarget);
 
@@ -37,7 +39,7 @@ namespace TraverserProject
             damageEffect.holyDamage = holyDamage;
             damageEffect.poiseDamage = poiseDamage;
             damageEffect.contactPoint = contactPoint;
-            damageEffect.angleHitFrom = Vector3.SignedAngle(undeadCharacter.transform.forward, damageTarget.transform.forward, Vector3.up);
+            damageEffect.angleHitFrom = Vector3.SignedAngle(characterCausingDamage.transform.forward, damageTarget.transform.forward, Vector3.up);
 
 
 
@@ -45,7 +47,7 @@ namespace TraverserProject
 
             if (damageTarget.IsOwner)
             {
-                damageTarget.characterNetworkManager.NofityTheServerOfCharacterDamageServerRpc(damageTarget.NetworkObjectId, undeadCharacter.NetworkObjectId,
+                damageTarget.characterNetworkManager.NofityTheServerOfCharacterDamageServerRpc(damageTarget.NetworkObjectId, characterCausingDamage.NetworkObjectId,
                     damageEffect.physicalDamage, damageEffect.magicDamage, damageEffect.fireDamage, damageEffect.lightningDamage, damageEffect.holyDamage, damageEffect.poiseDamage,
                     damageEffect.angleHitFrom, damageEffect.contactPoint.x, damageEffect.contactPoint.y, damageEffect.contactPoint.z);
             }
@@ -56,7 +58,7 @@ namespace TraverserProject
             if (charactersDamaged.Contains(damageTarget))
                 return;
 
-            if (!undeadCharacter.characterNetworkManager.isParryable.Value)
+            if (!characterCausingDamage.characterNetworkManager.isParryable.Value)
                 return;
 
             if (!damageTarget.IsOwner)
@@ -65,7 +67,7 @@ namespace TraverserProject
             if (damageTarget.characterNetworkManager.isParrying.Value)
             {
                 charactersDamaged.Add(damageTarget);
-                damageTarget.characterNetworkManager.NotifyTheServerOfParryServerRpc(undeadCharacter.NetworkObjectId);
+                damageTarget.characterNetworkManager.NotifyTheServerOfParryServerRpc(characterCausingDamage.NetworkObjectId);
                 damageTarget.characterAnimatorManager.PlayTargetActionAnimationInstantly("Parry_Land_01", true);
             }
         }

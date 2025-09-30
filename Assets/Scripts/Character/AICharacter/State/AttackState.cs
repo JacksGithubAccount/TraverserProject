@@ -28,17 +28,11 @@ namespace TraverserProject
 
             aiCharacter.characterAnimatorManager.UpdateAnimatorMovementParameters(0, 0, false);
 
-            if (willPerformCombo && !hasPerformedCombo)
-            {
-                if (currentAttack.comboAction != null)
-                {
-                    //hasPerformedCombo = true;
-                    //currentAttack.comboAction.AttemptToPerformAction(aiCharacter);
-                }
-            }
+            PerformCombo(aiCharacter);
 
             if (aiCharacter.isPerformingAction)
                 return this;
+
 
             if (!hasPerformedAttack)
             {
@@ -64,12 +58,44 @@ namespace TraverserProject
             aiCharacter.aiCharacterCombatManager.actionRecoveryTimer = currentAttack.actionRecoveryTime;
         }
 
-        protected override void ResetStateFlags(AICharacterManager aICharacter)
+        protected virtual void PerformCombo(AICharacterManager aiCharacter)
         {
-            base.ResetStateFlags(aICharacter);
+            bool canPerformTheCombo = false;
+
+            if (!willPerformCombo)
+                return;
+
+            if (hasPerformedCombo)
+                return;
+
+            if (currentAttack.comboAction == null)
+                return;
+
+
+            //if dont need to hit target, perform combo
+            if (aiCharacter.aiCharacterCombatManager.canPerformCombo && !aiCharacter.combatStance.onlyPerformComboIfInitialAttackHits)
+                canPerformTheCombo = true;
+
+            //if do need to hit target and target is hit, perform combo
+            if (aiCharacter.aiCharacterCombatManager.canPerformCombo && aiCharacter.combatStance.onlyPerformComboIfInitialAttackHits && aiCharacter.aiCharacterCombatManager.hasHitTargetDuringCombo)
+                canPerformTheCombo = true;
+
+
+
+            if (canPerformTheCombo)
+            {
+                hasPerformedCombo = true;
+                currentAttack.comboAction.AttemptToPerformAction(aiCharacter);
+            }
+        }
+
+        protected override void ResetStateFlags(AICharacterManager aiCharacter)
+        {
+            base.ResetStateFlags(aiCharacter);
 
             hasPerformedAttack = false;
             hasPerformedCombo = false;
+            willPerformCombo = false;
         }
     }
 }

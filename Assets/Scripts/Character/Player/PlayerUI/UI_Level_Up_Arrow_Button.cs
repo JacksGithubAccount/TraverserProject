@@ -13,5 +13,6 @@ public class UI_Level_Up_Arrow_Button : MonoBehaviour, IPointerEnterHandler, IPo
     public void OnPointerExit(PointerEventData eventData)
     {
         mouseOverArrow = false;
+        gameObject.SetActive(false);
     }
 }

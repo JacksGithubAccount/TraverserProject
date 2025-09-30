@@ -22,6 +22,12 @@ namespace TraverserProject
         [Header("Pivot")]
         public bool enablePivot = true;
 
+        [Header("Combo")]
+        public bool canPerformCombo = false;
+
+        [Header("Hit Check")]
+        public bool hasHitTargetDuringCombo = false;
+
         [Header("Target Information")]
         public float distanceFromTarget;
         public float viewableAngle;
@@ -360,6 +366,17 @@ namespace TraverserProject
                     actionRecoveryTimer -= Time.deltaTime;
                 }
             }
+        }
+
+        public override void EnableCanDoCombo()
+        {
+            canPerformCombo = true;
+        }
+
+        public override void DisableCanDoCombo()
+        {
+            canPerformCombo = false;
+            hasHitTargetDuringCombo = false;
         }
     }
 }

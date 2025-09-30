@@ -15,7 +15,13 @@ MonoBehaviour:
   aiCharacterAttacks:
   - {fileID: 11400000, guid: b7b0b3ff0a730f842a3d70423b1ad1cf, type: 2}
   - {fileID: 11400000, guid: 51eb83068ca133949b15399461c423af, type: 2}
-  canPerformCombo: 0
-  chanceToPerformCombo: 25
-  hasRolledForComboChance: 0
+  potentialAttacks: []
+  choosenAttack: {fileID: 0}
+  previousAttack: {fileID: 0}
+  canPerformCombo: 1
+  percentageOfTimeWillPerformCombo: 100
+  onlyPerformComboIfInitialAttackHits: 0
   maximumEngagementDistance: 5
+  willCircleTarget: 0
+  canBlock: 0
+  percentageOfTimeWillBlock: 75
