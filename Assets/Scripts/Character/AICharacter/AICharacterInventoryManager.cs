@@ -31,18 +31,22 @@ namespace TraverserProject
             if (!willDropItem)
                 return;
 
-            Item generatedItem = droppableItems[Random.Range(0, droppableItems.Length)];
+            if (droppableItems.Length > 0)
+            {
+                Item generatedItem = droppableItems[Random.Range(0, droppableItems.Length)];
 
-            if (generatedItem == null)
-                return;
+                if (generatedItem == null)
+                    return;
 
-            GameObject itemPickUpInteractableGameObject = Instantiate(WorldItemDatabase.Singleton.creatureDropPickUpItemPrefab);
-            PickUpItemInteractable pickUpInteractable = itemPickUpInteractableGameObject.GetComponent<PickUpItemInteractable>();
 
-            itemPickUpInteractableGameObject.GetComponent<NetworkObject>().Spawn();
-            pickUpInteractable.itemID.Value = generatedItem.itemID;
-            pickUpInteractable.networkPosition.Value = transform.position;
-            pickUpInteractable.droppingCreatureID.Value = aiCharacter.NetworkObjectId;
+                GameObject itemPickUpInteractableGameObject = Instantiate(WorldItemDatabase.Singleton.creatureDropPickUpItemPrefab);
+                PickUpItemInteractable pickUpInteractable = itemPickUpInteractableGameObject.GetComponent<PickUpItemInteractable>();
+
+                itemPickUpInteractableGameObject.GetComponent<NetworkObject>().Spawn();
+                pickUpInteractable.itemID.Value = generatedItem.itemID;
+                pickUpInteractable.networkPosition.Value = transform.position;
+                pickUpInteractable.droppingCreatureID.Value = aiCharacter.NetworkObjectId;
+            }
         }
 
     }

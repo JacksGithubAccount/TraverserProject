@@ -378,5 +378,41 @@ namespace TraverserProject
             canPerformCombo = false;
             hasHitTargetDuringCombo = false;
         }
+
+        public virtual void PerformEvasion()
+        {
+            if (currentTarget == null)
+                return;
+
+            if (distanceFromTarget > 5)
+                return;
+
+            //	METHOD 1: simply plays animation
+            //aiCharacter.aiCharacterNetworkManager.isInvulnerable.Value = true;
+            //aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Evade_01", true);
+
+            //	METHOD 2: rolls away from target
+            //aiCharacter.aiCharacterNetworkManager.isInvulnerable.Value = true;
+            //aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Evade_01", true);
+            //Vector3 directionToDodge = -aiCharacter.transform.forward;
+            //directionToDodge.y = 0;
+            //directionToDodge.Normalize();
+            //	optional to coroutine to smooth rotation
+            //aiCharacter.transform.rotation = Quaternion.LookRotation(directionToDodge);
+
+            //	METHOD 3: rolls random direction
+            aiCharacter.aiCharacterNetworkManager.isInvulnerable.Value = true;
+            aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Evade_01", true);
+            Vector3 directionToDodge = Random.insideUnitSphere.normalized;
+            directionToDodge.y = 0;
+            //	optional to coroutine to smooth rotation
+            aiCharacter.transform.rotation = Quaternion.LookRotation(directionToDodge);
+
+            //	METHOD 4: use blend tree
+            //1 select values and update network vert and horz
+            //2 play animation
+
+
+        }
     }
 }

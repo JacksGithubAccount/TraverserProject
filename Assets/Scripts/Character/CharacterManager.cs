@@ -34,8 +34,6 @@ namespace TraverserProject
 
         protected virtual void Awake()
         {
-            DontDestroyOnLoad(this);
-
             characterController = GetComponent<CharacterController>();
             animator = GetComponent<Animator>();
             characterNetworkManager = GetComponent<CharacterNetworkManager>();

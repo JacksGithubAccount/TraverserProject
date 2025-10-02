@@ -116,15 +116,15 @@ namespace TraverserProject
                 NetworkManager.Singleton.Shutdown();
 
                 Debug.Log($"Attempting to join game, {joinedLobby.Id}, from {steamID}");
-            ;
-            currentLobby = joinedLobby;
+                ;
+                currentLobby = joinedLobby;
 
-            //if we have a current lobby, join it
-            currentLobby?.Join();
+                //if we have a current lobby, join it
+                currentLobby?.Join();
+            }
         }
-		}
-		
-		private void OnLobbyEntered(Lobby lobby)
+
+        private void OnLobbyEntered(Lobby lobby)
         {
             if (NetworkManager.Singleton.IsHost)
             {
@@ -193,6 +193,8 @@ namespace TraverserProject
             PlayerUIManager.Singleton.playerUILoadingScreenManager.ActivateLoadingScreen();
 
             PlayerUIManager.Singleton.localPlayer.ReviveCharacter();
+
+            WorldAIManager.Singleton.ResetAllCharacters();
 
             for (int i = 0; i < WorldObjectManager.Singleton.sitesOfGrace.Count; i++)
             {

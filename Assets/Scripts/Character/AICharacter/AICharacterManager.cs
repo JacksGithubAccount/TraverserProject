@@ -171,7 +171,7 @@ namespace TraverserProject
             }
         }
 
-        public void ActivateCharacter(PlayerManager player)
+        public virtual void ActivateCharacter(PlayerManager player)
         {
             aiCharacterCombatManager.AddPlayerToPlayersWithinRange(player);
 
@@ -193,7 +193,7 @@ namespace TraverserProject
             }
         }
 
-        public void DeactivateCharacter(PlayerManager player)
+        public virtual void DeactivateCharacter(PlayerManager player)
         {
             aiCharacterCombatManager.RemovePlayerFromPlayersWithinRange(player);
 

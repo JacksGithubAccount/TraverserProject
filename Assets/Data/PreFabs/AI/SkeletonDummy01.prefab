@@ -7338,8 +7338,12 @@ MonoBehaviour:
   canBeBackstabbed: 1
   criticalAttackDistanceCheck: 0.7
   pendingCriticalDamage: 0
+  baseDamage: 25
+  basePoiseDamage: 25
   actionRecoveryTimer: 0
   enablePivot: 0
+  canPerformCombo: 0
+  hasHitTargetDuringCombo: 0
   distanceFromTarget: 0
   viewableAngle: 0
   targetsDirection: {x: 0, y: 0, z: 0}
@@ -7353,12 +7357,10 @@ MonoBehaviour:
   ignoreStanceBreak: 0
   stanceRegenerationTimer: 0
   defaultTimeUntilStanceRegenerationBegins: 15
-  investigateSound: 0
-  positionOfSound: {x: 0, y: 0, z: 0}
+  playersWithinActivationRange: []
   clubDamageCollider: {fileID: 3916656321501878968}
   stompCollider: {fileID: 8139985458824157583}
   stompAttackAOERadius: 1.5
-  baseDamage: 25
   attack01DamageModifier: 1
   attack02DamageModifier: 1.2
   attack03DamageModifier: 1.4
@@ -7431,7 +7433,7 @@ MonoBehaviour:
   pursueTarget: {fileID: 11400000, guid: 55419f248b0428e45a22a2002ca71b7a, type: 2}
   combatStance: {fileID: 11400000, guid: 326ecc394e1d27b4387c8464299dc703, type: 2}
   attack: {fileID: 11400000, guid: ef49e155246f6ab4b89274c9e846dc1f, type: 2}
-  investigateSound: {fileID: 0}
+  investigateSound: {fileID: 11400000, guid: a58ece1255684ba4185dc0ec95a28260, type: 2}
   bossID: 0
   bossIntroClip: {fileID: 8300000, guid: 51d84a0aee6c0c141b759f307ab5d41c, type: 3}
   bossBattleLoopClip: {fileID: 8300000, guid: 3fdfee6bb05f6a14c966fc34c2f58e0e, type: 3}

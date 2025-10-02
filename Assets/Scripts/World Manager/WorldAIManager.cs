@@ -165,6 +165,17 @@ namespace TraverserProject
 
         }
 
+        public void DisableAllBossFights()
+        {
+            for (int i = 0; i < spawnedInBosses.Count; i++)
+            {
+                if (spawnedInBosses[i] == null)
+                    continue;
+
+                spawnedInBosses[i].bossFightIsActive.Value = false;
+            }
+        }
+
         public void AddPatrolPathToList(AIPatrolPath patrolPath)
         {
             if (aiPatrolPaths.Contains(patrolPath))

@@ -34,6 +34,13 @@ namespace TraverserProject
         private bool hasRolledForBlockChance = false;
         private bool willBlockDuringThisCombatRotation;
 
+        [Header("Evasion")]
+        [SerializeField] bool canEvade = false;
+        [SerializeField] int percentageOfTimeWillEvade = 75;
+        private bool hasEvaded = false;
+        private bool hasRolledForEvasionChance = false;
+        private bool willEvadeDuringThisCombatRotation;
+
         public override AIState Tick(AICharacterManager aiCharacter)
         {
             if (aiCharacter.isPerformingAction)
@@ -41,6 +48,9 @@ namespace TraverserProject
 
             if (!aiCharacter.navMeshAgent.enabled)
                 aiCharacter.navMeshAgent.enabled = true;
+
+            if (aiCharacter.aiCharacterCombatManager.currentTarget.isDead.Value)
+                aiCharacter.aiCharacterCombatManager.SetTarget(null);
 
             //turns and face towards target when target is outside FOV
             if (aiCharacter.aiCharacterCombatManager.enablePivot)
@@ -67,6 +77,12 @@ namespace TraverserProject
                 willBlockDuringThisCombatRotation = RollForOutcomeChance(percentageOfTimeWillBlock);
             }
 
+            if (canEvade && !hasRolledForEvasionChance)
+            {
+                hasRolledForEvasionChance = true;
+                willEvadeDuringThisCombatRotation = RollForOutcomeChance(percentageOfTimeWillEvade);
+            }
+
             if (canPerformCombo && !hasRolledForComboChance)
             {
                 hasRolledForComboChance = true;
@@ -75,6 +91,12 @@ namespace TraverserProject
 
             if (willBlockDuringThisCombatRotation)
                 aiCharacter.aiCharacterNetworkManager.isBlocking.Value = true;
+
+            if (willEvadeDuringThisCombatRotation && aiCharacter.aiCharacterCombatManager.currentTarget.characterNetworkManager.isAttacking.Value && !hasEvaded)
+            {
+                hasEvaded = true;
+                aiCharacter.aiCharacterCombatManager.PerformEvasion();
+            }
 
             if (!hasAttack)
             {
@@ -197,12 +219,14 @@ namespace TraverserProject
         {
             base.ResetStateFlags(aiCharacter);
 
+            hasRolledForEvasionChance = false;
             hasRolledForComboChance = false;
             hasRolledForBlockChance = false;
             willBlockDuringThisCombatRotation = false;
             hasChosenCirclePath = false;
             strafeMoveAmount = 0;
             hasAttack = false;
+            hasEvaded = false;
         }
 
     }

@@ -80,6 +80,15 @@ namespace TraverserProject
             if (player.isDead.Value)
                 player.playerCombatManager.CreateDeadSpot(player.transform.position, player.playerStatsManager.bubbles);
 
+            if (player.isDead.Value && NetworkManager.Singleton.IsServer)
+            {
+                if (PlayerUIManager.Singleton.playerUIHudManager.currentBossHealthBar != null)
+                    PlayerUIManager.Singleton.playerUIHudManager.currentBossHealthBar.RemoveHPBar(1f);
+
+                //if like elden ring, disable all boss fight
+                WorldAIManager.Singleton.DisableAllBossFights();
+                //also kick all players from world
+            }
         }
 
         public void SetCharacterActionHand(bool rightHandedAction)

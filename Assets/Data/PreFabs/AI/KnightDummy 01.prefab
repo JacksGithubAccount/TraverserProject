@@ -238,7 +238,7 @@ MonoBehaviour:
   lightningDamage: 0
   holyDamage: 0
   poiseDamage: 0
-  undeadCharacter: {fileID: 8883432730431339116}
+  characterCausingDamage: {fileID: 0}
 --- !u!4 &8559675972268282694 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8704739715883739415, guid: 657579d186f7f8e45bd9ada60a0a95cf, type: 3}
@@ -1014,7 +1014,7 @@ MonoBehaviour:
   lightningDamage: 0
   holyDamage: 0
   poiseDamage: 0
-  undeadCharacter: {fileID: 0}
+  characterCausingDamage: {fileID: 0}
 --- !u!4 &3998856653136800086 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8298002316568741239, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
@@ -1367,7 +1367,7 @@ MonoBehaviour:
   aiCharacterCombatManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
   aiCharacterInventoryManager: {fileID: 0}
-  currentState: {fileID: 11400000, guid: b0db1e40aa2911148b99441ce4fc171d, type: 2}
+  currentState: {fileID: 11400000, guid: 1253f4c67aebd3f49ae51e0d99fea946, type: 2}
   navMeshAgent: {fileID: 0}
   idle: {fileID: 11400000, guid: 1253f4c67aebd3f49ae51e0d99fea946, type: 2}
   pursueTarget: {fileID: 11400000, guid: ce2ee9b649ab0134889f8d7efe16d53a, type: 2}
@@ -1713,6 +1713,8 @@ MonoBehaviour:
   basePoiseDamage: 25
   actionRecoveryTimer: 0
   enablePivot: 0
+  canPerformCombo: 0
+  hasHitTargetDuringCombo: 0
   distanceFromTarget: 0
   viewableAngle: 0
   targetsDirection: {x: 0, y: 0, z: 0}
@@ -1721,7 +1723,7 @@ MonoBehaviour:
   maximumFOV: 35
   attackRotationSpeed: 25
   maxStance: 150
-  currentStance: 0
+  currentStance: 150
   stanceRegeneratedPerSecond: 15
   ignoreStanceBreak: 0
   stanceRegenerationTimer: 0
@@ -1848,7 +1850,7 @@ MonoBehaviour:
   lightningDamage: 0
   holyDamage: 0
   poiseDamage: 0
-  undeadCharacter: {fileID: 0}
+  characterCausingDamage: {fileID: 0}
 --- !u!4 &6522068272529108552 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2221872609835778665, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
