@@ -286,7 +286,7 @@ namespace TraverserProject
             player.playerNetworkManager.mind.Value = 30;
 
             SaveGame();
-            LoadWorldScene(worldSceneIndex);
+            WorldSceneManager.Singleton.LoadWorldScene(worldSceneIndex);
         }
         public void LoadGame()
         {
@@ -296,7 +296,7 @@ namespace TraverserProject
             saveFileDataWriter.saveFileName = saveFileName;
             currentCharacterData = saveFileDataWriter.LoadSaveFile();
 
-            LoadWorldScene(worldSceneIndex);
+            WorldSceneManager.Singleton.LoadWorldScene(worldSceneIndex);
         }
 
         public void SaveGame()
@@ -348,14 +348,7 @@ namespace TraverserProject
             saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_10);
             characterSlot10 = saveFileDataWriter.LoadSaveFile();
         }
-        public void LoadWorldScene(int buildIndex)
-        {
-            PlayerUIManager.Singleton.playerUILoadingScreenManager.ActivateLoadingScreen();
-            string worldScene = SceneUtility.GetScenePathByBuildIndex(buildIndex);
-            NetworkManager.Singleton.SceneManager.LoadScene(worldScene, LoadSceneMode.Single);
-            player.LoadGameDataFromCurrentCharacterData(ref currentCharacterData);
 
-        }
         public int GetWorldSceneIndex()
         {
             return worldSceneIndex;
