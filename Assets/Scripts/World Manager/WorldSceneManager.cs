@@ -14,14 +14,29 @@ namespace TraverserProject
         //loaded scenes
         public List<Scene> loadedScenes = new List<Scene>();
 
+        //do not unload
+        public List<string> doNotUnloadList = new List<string>();
+
         //queued scenes
         private List<string> queuedSceneIDs = new List<string>();
+        private List<string> queuedUnloadSceneIDs = new List<string>();
         private int queuedScenesToLoad = 0;
+        private int queuedScenesToUnload = 0;
         private Coroutine loadingAdditiveScenesCoroutine;
+        private Coroutine unloadingAdditiveScenesCoroutine;
 
         //loading status
         private bool sceneIsLoading = false;
         private bool sceneIsUnloading = false;
+
+        [Header("Scene I.Ds")]
+        public string world = "World_01";
+        public string area_01_Subarea_00 = "Area_01_Subarea_00";
+        public string area_01_Subarea_01 = "Area_01_Subarea_01";
+        public string area_01_Subarea_02 = "Area_01_Subarea_02";
+        public string area_01_Subarea_03 = "Area_01_Subarea_03";
+        public string area_01_Subarea_04 = "Area_01_Subarea_04";
+        public string area_01_Subarea_05 = "Area_01_Subarea_05";
 
 
         private void Awake()
@@ -92,6 +107,16 @@ namespace TraverserProject
                     sceneIsLoading = false;
                     break;
                 case SceneEventType.UnloadComplete:
+                    if (queuedScenesToUnload <= 0)
+                        queuedUnloadSceneIDs.Clear();
+
+                    for (int i = 0; i < loadedScenes.Count; i++)
+                    {
+                        if (!loadedScenes[i].isLoaded)
+                            loadedScenes.RemoveAt(i);
+                    }
+
+                    sceneIsUnloading = false;
                     break;
                 case SceneEventType.SynchronizeComplete:
                     break;
@@ -104,6 +129,8 @@ namespace TraverserProject
             }
 
         }
+
+        //Scene loading
 
         public void LoadWorldScene(int buildIndex)
         {
@@ -171,6 +198,69 @@ namespace TraverserProject
             loadingAdditiveScenesCoroutine = null;
 
             yield return null;
+        }
+
+        //Scene unloading
+
+        private void UnloadAdditiveScene(string sceneName)
+        {
+            if (!NetworkManager.Singleton.IsServer)
+                return;
+
+            for (int i = 0; i < doNotUnloadList.Count; i++)
+            {
+                if (sceneName == doNotUnloadList[i])
+                    return;
+            }
+
+            for (int i = 0; i < loadedScenes.Count; i++)
+            {
+                if (loadedScenes[i] == null)
+                    continue;
+
+                if (loadedScenes[i].name == sceneName && loadedScenes[i].isLoaded)
+                {
+                    var sceneLoad = NetworkManager.SceneManager.UnloadScene(loadedScenes[i]);
+                    break;
+                }
+            }
+        }
+
+        public void UnloadAdditiveScenes(List<string> sceneList)
+        {
+            if (!NetworkManager.Singleton.IsServer)
+                return;
+
+            for (int i = 0; i < sceneList.Count; i++)
+            {
+                queuedUnloadSceneIDs.Add(sceneList[i]);
+            }
+
+            queuedScenesToUnload = queuedUnloadSceneIDs.Count;
+
+            if (unloadingAdditiveScenesCoroutine != null)
+                StopCoroutine(unloadingAdditiveScenesCoroutine);
+
+            unloadingAdditiveScenesCoroutine = StartCoroutine(UnloadAdditiveScenesCoroutine());
+        }
+
+        private IEnumerator UnloadAdditiveScenesCoroutine()
+        {
+            for (int i = 0; i < queuedUnloadSceneIDs.Count; i++)
+            {
+                while (sceneIsLoading || sceneIsUnloading)
+                {
+                    yield return new WaitForFixedUpdate();
+                }
+
+                UnloadAdditiveScene(queuedUnloadSceneIDs[i]);
+                queuedScenesToUnload--;
+
+                yield return null;
+            }
+
+            queuedScenesToUnload = 0;
+            unloadingAdditiveScenesCoroutine = null;
         }
 
     }
