@@ -209,7 +209,7 @@ namespace TraverserProject
 
                 if (lockOnTarget != null)
                 {
-                    Vector3 lockOnTargetsDirection = lockOnTarget.transform.position = player.transform.position;
+                    Vector3 lockOnTargetsDirection = lockOnTarget.transform.position - player.transform.position;
 
                     float distanceFromTarget = Vector3.Distance(player.transform.position, lockOnTarget.transform.position);
                     float viewableAngle = Vector3.Angle(lockOnTargetsDirection, cameraObject.transform.forward);
