@@ -1,5 +1,7 @@
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace TraverserProject
 {
@@ -8,12 +10,15 @@ namespace TraverserProject
     {
         public static WorldSubsceneManager Singleton;
 
-        private List<PlayerManager> playersIn_Area01_Subarea00 = new List<PlayerManager>();
-        private List<PlayerManager> playersIn_Area01_Subarea01 = new List<PlayerManager>();
-        private List<PlayerManager> playersIn_Area01_Subarea02 = new List<PlayerManager>();
-        private List<PlayerManager> playersIn_Area01_Subarea03 = new List<PlayerManager>();
-        private List<PlayerManager> playersIn_Area01_Subarea04 = new List<PlayerManager>();
-        private List<PlayerManager> playersIn_Area01_Subarea05 = new List<PlayerManager>();
+        [SerializeField] private List<PlayerManager> playersIn_Area01_Subarea00 = new List<PlayerManager>();
+        [SerializeField] private List<PlayerManager> playersIn_Area01_Subarea01 = new List<PlayerManager>();
+        [SerializeField] private List<PlayerManager> playersIn_Area01_Subarea02 = new List<PlayerManager>();
+        [SerializeField] private List<PlayerManager> playersIn_Area01_Subarea03 = new List<PlayerManager>();
+        [SerializeField] private List<PlayerManager> playersIn_Area01_Subarea04 = new List<PlayerManager>();
+        [SerializeField] private List<PlayerManager> playersIn_Area01_Subarea05 = new List<PlayerManager>();
+
+        [Header("Probe Volume Set")]
+        [SerializeField] ProbeVolumeBakingSet bakeSet;
 
         private void Awake()
         {
@@ -215,6 +220,10 @@ namespace TraverserProject
 
         private void AddPlayerToNewLocation(WorldSceneLocation area, PlayerManager player)
         {
+		//set the baking set
+        if (player.IsOwner)
+                StartCoroutine(WaitThenSetActiveScene(area));
+
             switch (area)
             {
                 case WorldSceneLocation.Area01_Subarea00:
@@ -288,13 +297,33 @@ namespace TraverserProject
                     break;
                 default:
                     break;
-
             }
 
             if (scenesToLoad.Count <= 0)
                 return;
 
             WorldSceneManager.Singleton.LoadAdditiveScenes(scenesToLoad);
+        }
+
+        private IEnumerator WaitThenSetActiveScene(WorldSceneLocation area)
+        {
+            bool hasScene = false;
+
+            while (!hasScene)
+            {
+                for (int i = 0; i < WorldSceneManager.Singleton.loadedScenes.Count; i++)
+                {
+                    if (WorldSceneManager.Singleton.loadedScenes[i].name == WorldSceneManager.Singleton.GetSceneIDFromWorldSceneLocation(area))
+                    {
+                        hasScene = true;
+                        ProbeReferenceVolume.instance.SetActiveScene(WorldSceneManager.Singleton.loadedScenes[i]);
+                        ProbeReferenceVolume.instance.SetActiveBakingSet(bakeSet);
+                    }
+                    yield return null;
+                }
+            }
+
+            yield return null;
         }
 
     }

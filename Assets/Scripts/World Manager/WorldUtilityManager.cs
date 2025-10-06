@@ -11,6 +11,11 @@ namespace TraverserProject
         [Header("Layers")]
         [SerializeField] LayerMask characterLayers;
         [SerializeField] LayerMask enviroLayers;
+        [SerializeField] LayerMask slipperyEnviroLayers;
+
+        [Header("Forces")]
+        public float slopeSlideForce = -15;
+
         private void Awake()
         {
             if (Singleton == null)
@@ -32,6 +37,11 @@ namespace TraverserProject
         public LayerMask GetEnviroLayers()
         {
             return enviroLayers;
+        }
+
+        public LayerMask GetSlipperyEnviroLayers()
+        {
+            return slipperyEnviroLayers;
         }
 
         public bool CanIDamageThisTarget(CharacterGroup attackingCharacter, CharacterGroup targetCharacter)

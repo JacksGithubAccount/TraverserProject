@@ -31,12 +31,12 @@ namespace TraverserProject
 
         [Header("Scene I.Ds")]
         public string world = "World_01";
-        public string area_01_Subarea_00 = "Area01_Subarea_00";
-        public string area_01_Subarea_01 = "Area01_Subarea_01";
-        public string area_01_Subarea_02 = "Area01_Subarea_02";
-        public string area_01_Subarea_03 = "Area01_Subarea_03";
-        public string area_01_Subarea_04 = "Area01_Subarea_04";
-        public string area_01_Subarea_05 = "Area01_Subarea_05";
+        public string area_01_Subarea_00 = "Area_01_Subarea_00";
+        public string area_01_Subarea_01 = "Area_01_Subarea_01";
+        public string area_01_Subarea_02 = "Area_01_Subarea_02";
+        public string area_01_Subarea_03 = "Area_01_Subarea_03";
+        public string area_01_Subarea_04 = "Area_01_Subarea_04";
+        public string area_01_Subarea_05 = "Area_01_Subarea_05";
 
 
         private void Awake()
@@ -283,6 +283,32 @@ namespace TraverserProject
             }
 
             UnloadAdditiveScenes(scenesToUnload);
+        }
+
+        //SCENE IDs
+        public string GetSceneIDFromWorldSceneLocation(WorldSceneLocation area)
+        {
+            string sceneID = "";
+
+            switch (area)
+            {
+                case WorldSceneLocation.Area01_Subarea00:
+                    return area_01_Subarea_00;
+                case WorldSceneLocation.Area01_Subarea01:
+                    return area_01_Subarea_01;
+                case WorldSceneLocation.Area01_Subarea02:
+                    return area_01_Subarea_02;
+                case WorldSceneLocation.Area01_Subarea03:
+                    return area_01_Subarea_03;
+                case WorldSceneLocation.Area01_Subarea04:
+                    return area_01_Subarea_04;
+                case WorldSceneLocation.Area01_Subarea05:
+                    return area_01_Subarea_05;
+                default:
+                    break;
+            }
+
+            return sceneID;
         }
 
     }
