@@ -51,6 +51,22 @@ namespace TraverserProject
         public float jumping_Light_Attack_01_Modifier = 1.0f;
         public float jumping_Heavy_Attack_01_Modifier = 1.5f;
 
+        [Header("Dual Attack Modifiers")]
+        public float dual_Light_Attack_01_Modifier = 0.77f;
+        public float dual_Light_Attack_02_Modifier = 0.87f;
+        public float dual_Heavy_Attack_01_Modifier = 0.94f;
+        public float dual_Heavy_Attack_02_Modifier = 1.0f;
+        public float dual_Charge_Attack_01_Modifier = 1.3f;
+        public float dual_Charge_Attack_02_Modifier = 1.4f;
+        public float dual_Running_Light_Attack_01_Modifier = 0.77f;
+        public float dual_Running_Heavy_Attack_01_Modifier = 0.94f;
+        public float dual_Rolling_Light_Attack_01_Modifier = 0.68f;
+        public float dual_Rolling_Heavy_Attack_01_Modifier = 0.81f;
+        public float dual_Backstep_Light_Attack_01_Modifier = 0.77f;
+        public float dual_Backstep_Heavy_Attack_01_Modifier = 0.9f;
+        public float dual_Jumping_Light_Attack_01_Modifier = 0.77f;
+        public float dual_Jumping_Heavy_Attack_01_Modifier = 0.98f;
+
         [Header("Stamina Cost Modifiers")]
         public int baseStaminaCost = 20;
         public float lightAttackStaminaCostMultiplier = 0.9f;

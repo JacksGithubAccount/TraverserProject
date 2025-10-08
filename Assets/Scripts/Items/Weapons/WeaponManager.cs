@@ -40,6 +40,21 @@ namespace TraverserProject
             meleeDamageCollider.backstep_Heavy_Attack_01_Modifier = weapon.backstep_Heavy_Attack_01_Modifier;
             meleeDamageCollider.jumping_Light_Attack_01_Modifier = weapon.jumping_Light_Attack_01_Modifier;
             meleeDamageCollider.jumping_Heavy_Attack_01_Modifier = weapon.jumping_Heavy_Attack_01_Modifier;
+
+            meleeDamageCollider.dual_Light_Attack_01_Modifier = weapon.dual_Light_Attack_01_Modifier;
+            meleeDamageCollider.dual_Light_Attack_02_Modifier = weapon.dual_Light_Attack_02_Modifier;
+            meleeDamageCollider.dual_Heavy_Attack_01_Modifier = weapon.dual_Heavy_Attack_01_Modifier;
+            meleeDamageCollider.dual_Heavy_Attack_02_Modifier = weapon.dual_Heavy_Attack_02_Modifier;
+            meleeDamageCollider.dual_Charge_Attack_01_Modifier = weapon.dual_Charge_Attack_01_Modifier;
+            meleeDamageCollider.dual_Charge_Attack_02_Modifier = weapon.dual_Charge_Attack_02_Modifier;
+            meleeDamageCollider.dual_Rolling_Light_Attack_01_Modifier = weapon.dual_Rolling_Light_Attack_01_Modifier;
+            meleeDamageCollider.dual_Rolling_Heavy_Attack_01_Modifier = weapon.dual_Rolling_Heavy_Attack_01_Modifier;
+            meleeDamageCollider.dual_Running_Light_Attack_01_Modifier = weapon.dual_Running_Light_Attack_01_Modifier;
+            meleeDamageCollider.dual_Running_Heavy_Attack_01_Modifier = weapon.dual_Running_Heavy_Attack_01_Modifier;
+            meleeDamageCollider.dual_Backstep_Light_Attack_01_Modifier = weapon.dual_Backstep_Light_Attack_01_Modifier;
+            meleeDamageCollider.dual_Backstep_Heavy_Attack_01_Modifier = weapon.dual_Backstep_Heavy_Attack_01_Modifier;
+            meleeDamageCollider.dual_Jumping_Light_Attack_01_Modifier = weapon.dual_Jumping_Light_Attack_01_Modifier;
+            meleeDamageCollider.dual_Jumping_Heavy_Attack_01_Modifier = weapon.dual_Jumping_Heavy_Attack_01_Modifier;
         }
 
     }

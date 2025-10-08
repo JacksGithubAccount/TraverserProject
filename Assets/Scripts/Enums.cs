@@ -159,7 +159,22 @@ public enum AttackType
     BackstepLightAttack01,
     BackstepHeavyAttack01,
     LightJumpingAttack01,
-    HeavyJumpingAttack01
+    HeavyJumpingAttack01,
+    DualLightAttack01,
+    DualLightAttack02,
+    DualHeavyAttack01,
+    DualHeavyAttack02,
+    DualChargedAttack01,
+    DualChargedAttack02,
+    DualRunningLightAttack01,
+    DualRunningHeavyAttack01,
+    DualRollingLightAttack01,
+    DualRollingHeavyAttack01,
+    DualBackstepLightAttack01,
+    DualBackstepHeavyAttack01,
+    DualJumpingLightAttack01,
+    DualJumpingHeavyAttack01
+
 }
 //calculate damage animation intensity
 public enum DamageIntensity

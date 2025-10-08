@@ -1115,6 +1115,28 @@ namespace TraverserProject
             }
         }
 
+        public void OpenMainHandDamageCollider()
+        {
+            rightWeaponManager.meleeDamageCollider.EnableDamageCollider();
+            player.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(player.playerInventoryManager.currentRightHandWeapon.whooshes));
+        }
+
+        public void CloseMainHandDamageCollider()
+        {
+            rightWeaponManager.meleeDamageCollider.DisableDamageCollider();
+        }
+
+        public void OpenOffHandDamageCollider()
+        {
+            leftWeaponManager.meleeDamageCollider.EnableDamageCollider();
+            player.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(player.playerInventoryManager.currentLeftHandWeapon.whooshes));
+        }
+
+        public void CloseOffHandDamageCollider()
+        {
+            leftWeaponManager.meleeDamageCollider.DisableDamageCollider();
+        }
+
         public void UnHideWeapons()
         {
             if (player.playerEquipmentManager.rightHandWeaponModel != null)

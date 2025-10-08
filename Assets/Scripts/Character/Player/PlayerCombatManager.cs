@@ -256,6 +256,48 @@ namespace TraverserProject
                 case AttackType.BackstepHeavyAttack01:
                     staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.backstepHeavyAttackStaminaCostMultiplier;
                     break;
+                case AttackType.DualLightAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.lightAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.DualLightAttack02:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.lightAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.DualHeavyAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.heavyAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.DualHeavyAttack02:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.heavyAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.DualChargedAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.chargedAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.DualChargedAttack02:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.chargedAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.DualRunningLightAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.runningLightAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.DualRunningHeavyAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.runningHeavyAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.DualRollingLightAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.rollingLightAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.DualRollingHeavyAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.rollingHeavyAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.DualBackstepLightAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.backstepLightAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.DualBackstepHeavyAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.backstepHeavyAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.DualJumpingLightAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.jumpingLightAttackStaminaCostMultiplier;
+                    break;
+                case AttackType.DualJumpingHeavyAttack01:
+                    staminaDeducted = currentWeaponBeingUsed.baseStaminaCost * currentWeaponBeingUsed.jumpingHeavyAttackStaminaCostMultiplier;
+                    break;
                 default:
                     break;
             }
@@ -283,7 +325,7 @@ namespace TraverserProject
             }
             else
             {
-
+                player.playerCombatManager.canComboWithOffHandWeapon = true;
             }
         }
 
