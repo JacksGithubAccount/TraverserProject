@@ -232,7 +232,6 @@ namespace TraverserProject
                         }
                         else
                         {
-                            Debug.Log("We Made It!");
                             availableTargets.Add(lockOnTarget);
                         }
                     }
@@ -317,6 +316,11 @@ namespace TraverserProject
             {
                 player.playerCombatManager.SetTarget(nearestLockOnTarget);
                 player.playerNetworkManager.isLockedOn.Value = true;
+
+                Vector2 lockOnCrosshairPosition = cameraObject.WorldToScreenPoint(nearestLockOnTarget.characterCombatManager.lockOnTransform.transform.position);
+                //lockOnCrosshairPosition.y = Screen.height - lockOnCrosshairPosition.y;
+                PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.transform.position = lockOnCrosshairPosition;
+                PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.SetActive(true);
             }
 
             yield return null;

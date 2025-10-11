@@ -43,6 +43,7 @@ namespace TravserserProject
 
         [Header("Crosshair")]
         public GameObject crossHair;
+        public GameObject lockOnCrossHair;
 
         public void ToggleHUD(bool status)
         {

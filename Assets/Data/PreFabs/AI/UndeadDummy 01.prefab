@@ -125,8 +125,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5319670896351546158}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.99381036, y: -0.11109034, z: -2.0758772e-15, w: 7.218229e-16}
-  m_LocalPosition: {x: -0.14724123, y: 0.1404458, z: -0.114}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.147, y: 0.151, z: -0.003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -715,7 +715,7 @@ MonoBehaviour:
   lightningDamage: 0
   holyDamage: 0
   poiseDamage: 0
-  undeadCharacter: {fileID: -3101570621495118235}
+  characterCausingDamage: {fileID: 0}
 --- !u!4 &2784836472218291560 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7011284792763705418, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
@@ -1174,6 +1174,15 @@ MonoBehaviour:
   canRun: 1
   canMove: 1
   canRoll: 1
+  isSliding: 0
+  isSlidingOffCharacter: 0
+  slopeSlideStartPositionYOffset: 1
+  slopeSlideSphereCastMaxDistance: 2
+  slopeSlideSpeed: -11
+  slopeSlideSpeedMultiplier: -3
+  slipperySurfaceMaxAngle: 15
+  characterSlideOffHeadCollisionMaxDistanceCheck: 5
+  characterCollisionCheckSphereMultiplier: 1.5
 --- !u!114 &7208941246191151473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1234,6 +1243,8 @@ MonoBehaviour:
   basePoiseDamage: 25
   actionRecoveryTimer: 0
   enablePivot: 1
+  canPerformCombo: 0
+  hasHitTargetDuringCombo: 0
   distanceFromTarget: 0
   viewableAngle: 0
   targetsDirection: {x: 0, y: 0, z: 0}
@@ -1639,7 +1650,7 @@ MonoBehaviour:
   lightningDamage: 0
   holyDamage: 0
   poiseDamage: 0
-  undeadCharacter: {fileID: -3101570621495118235}
+  characterCausingDamage: {fileID: 0}
 --- !u!1 &6084215479676984050 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1407328588852412372, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
