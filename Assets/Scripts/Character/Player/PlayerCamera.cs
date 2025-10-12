@@ -48,7 +48,8 @@ namespace TraverserProject
         private Transform followTransformWhenAiming;
         public Vector3 aimDirection;
 
-
+        [Header("Test")]
+        [SerializeField] GameObject testObject;
         private void Awake()
         {
             if (Singleton == null)
@@ -64,6 +65,15 @@ namespace TraverserProject
         {
             DontDestroyOnLoad(gameObject);
             cameraZPosition = cameraObject.transform.localPosition.z;
+        }
+
+        private void Update()
+        {
+            Vector3 targetLockOnTransform = testObject.transform.position;
+            Vector2 lockOnCrosshairPosition = RectTransformUtility.WorldToScreenPoint(cameraObject, targetLockOnTransform);
+            //lockOnCrosshairPosition.y = Screen.height - lockOnCrosshairPosition.y;
+            PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.transform.position = lockOnCrosshairPosition;
+            PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.SetActive(true);
         }
         public void HandleAllCameraActions()
         {
@@ -317,7 +327,9 @@ namespace TraverserProject
                 player.playerCombatManager.SetTarget(nearestLockOnTarget);
                 player.playerNetworkManager.isLockedOn.Value = true;
 
-                Vector2 lockOnCrosshairPosition = cameraObject.WorldToScreenPoint(nearestLockOnTarget.characterCombatManager.lockOnTransform.transform.position);
+                //draws lock on crosshair on lock on target
+                Vector3 targetLockOnTransform = nearestLockOnTarget.characterCombatManager.lockOnTransform.transform.position;
+                Vector2 lockOnCrosshairPosition = RectTransformUtility.WorldToScreenPoint(cameraObject, targetLockOnTransform);
                 //lockOnCrosshairPosition.y = Screen.height - lockOnCrosshairPosition.y;
                 PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.transform.position = lockOnCrosshairPosition;
                 PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.SetActive(true);

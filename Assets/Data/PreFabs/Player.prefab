@@ -12483,11 +12483,14 @@ MonoBehaviour:
   canMove: 1
   canRoll: 1
   isSliding: 0
+  isSlidingOffCharacter: 0
   slopeSlideStartPositionYOffset: 1
   slopeSlideSphereCastMaxDistance: 2
   slopeSlideSpeed: -11
   slopeSlideSpeedMultiplier: -3
   slipperySurfaceMaxAngle: 15
+  characterSlideOffHeadCollisionMaxDistanceCheck: 5
+  characterCollisionCheckSphereMultiplier: 1.5
   verticalMovement: 0
   horizontalMovement: 0
   moveAmount: 0
@@ -12497,7 +12500,7 @@ MonoBehaviour:
   rotationSpeed: 15
   sprintingStaminaCost: 2
   jumpStaminaCost: 25
-  jumpHeight: 4
+  jumpHeight: 2
   jumpForwardSpeed: 5
   freeFallSpeed: 2
   dodgeStaminaCost: 25
