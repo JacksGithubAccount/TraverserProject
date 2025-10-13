@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Netcode;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace TraverserProject
 {
@@ -102,8 +103,10 @@ namespace TraverserProject
 
 
             WorldAIManager.Singleton.ResetAllCharacters();
+            WorldInteractablesManager.Singleton.ResetAllRespawnableItems();
         }
 
+        
         private IEnumerator WaitForAnimationAndPopUpThenRestoreCollider()
         {
             yield return new WaitForSeconds(2);

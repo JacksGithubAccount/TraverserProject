@@ -189,7 +189,7 @@ public enum DamageIntensity
 public enum ItemPickUpType
 {
     WorldSpawn,
-    CharacterDrop
+    CharacterDrop    
 }
 //AI States
 public enum IdleStateMode

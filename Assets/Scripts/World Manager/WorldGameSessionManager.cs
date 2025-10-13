@@ -195,6 +195,7 @@ namespace TraverserProject
             PlayerUIManager.Singleton.localPlayer.ReviveCharacter();
 
             WorldAIManager.Singleton.ResetAllCharacters();
+            WorldInteractablesManager.Singleton.ResetAllRespawnableItems();
 
             for (int i = 0; i < WorldObjectManager.Singleton.sitesOfGrace.Count; i++)
             {

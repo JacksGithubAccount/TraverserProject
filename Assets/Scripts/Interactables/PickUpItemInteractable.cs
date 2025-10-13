@@ -20,7 +20,8 @@ namespace TraverserProject
 
         [Header("World Spawn Pick Up")]
         [SerializeField] int worldSpawnInteractableID;
-        [SerializeField] bool hasBeenLooted = false;
+        [SerializeField] public bool canRespawn = false;
+        [SerializeField] public bool hasBeenLooted = false;
 
         [Header("Drop SFX")]
         [SerializeField] AudioClip itemDropSFX;
@@ -78,16 +79,26 @@ namespace TraverserProject
                 return;
             }
 
-
-            if (!WorldSaveGameManager.Singleton.currentCharacterData.worldItemsLooted.ContainsKey(worldSpawnInteractableID))
+            if (!canRespawn)
             {
-                WorldSaveGameManager.Singleton.currentCharacterData.worldItemsLooted.Add(worldSpawnInteractableID, false);
+                if (!WorldSaveGameManager.Singleton.currentCharacterData.worldItemsLooted.ContainsKey(worldSpawnInteractableID))
+                {
+                    WorldSaveGameManager.Singleton.currentCharacterData.worldItemsLooted.Add(worldSpawnInteractableID, false);
+                }
+                hasBeenLooted = WorldSaveGameManager.Singleton.currentCharacterData.worldItemsLooted[worldSpawnInteractableID];
+            }else
+            {
+                WorldInteractablesManager.Singleton.worldRespawnItems.Add(this);
             }
-            hasBeenLooted = WorldSaveGameManager.Singleton.currentCharacterData.worldItemsLooted[worldSpawnInteractableID];
 
             if (hasBeenLooted)
+            {
                 gameObject.SetActive(false);
-
+            }
+            else
+            {
+                gameObject.SetActive(true);
+            }
         }
 
         public override void Interact(PlayerManager player)
@@ -109,7 +120,7 @@ namespace TraverserProject
 
             PlayerUIManager.Singleton.playerUIPopUpManager.SendItemPopUp(item, 1);
 
-            if (pickUpType == ItemPickUpType.WorldSpawn)
+            if (pickUpType == ItemPickUpType.WorldSpawn && !canRespawn)
             {
                 if (WorldSaveGameManager.Singleton.currentCharacterData.worldItemsLooted.ContainsKey((int)worldSpawnInteractableID))
                 {
@@ -118,7 +129,15 @@ namespace TraverserProject
                 WorldSaveGameManager.Singleton.currentCharacterData.worldItemsLooted.Add(worldSpawnInteractableID, true);
             }
 
-            DestroyThisNetworkObjectServerRpc();
+            if (!canRespawn)
+            {
+                DestroyThisNetworkObjectServerRpc();
+            }
+            else
+            {
+                hasBeenLooted = true;
+                gameObject.SetActive(false);
+            }
         }
 
         protected void OnItemIDChanged(int oldValue, int newValue)
