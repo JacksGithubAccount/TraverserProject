@@ -38,6 +38,13 @@ public enum CharacterAttribute
     Faith,
     Luck
 }
+//used to give characters proper dialogue sets
+public enum CharacterDialogueID
+{
+    NoDialogueID,
+    NamelessKnightDialogueID
+}
+
 //is tag for each weapon model instantiation slot
 public enum WeaponModelSlot
 {
@@ -189,7 +196,7 @@ public enum DamageIntensity
 public enum ItemPickUpType
 {
     WorldSpawn,
-    CharacterDrop    
+    CharacterDrop
 }
 //AI States
 public enum IdleStateMode

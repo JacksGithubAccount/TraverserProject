@@ -11,6 +11,7 @@ namespace TraverserProject
         [Header("Character Name")]
         public string characterName = "";
 
+        [HideInInspector] public AICharacterSoundFXManager aiCharacterSoundFXManager;
         [HideInInspector] public AICharacterNetworkManager aiCharacterNetworkManager;
         [HideInInspector] public AICharacterCombatManager aiCharacterCombatManager;
         [HideInInspector] public AICharacterLocomotionManager aiCharacterLocomotionManager;
@@ -36,6 +37,7 @@ namespace TraverserProject
         {
             base.Awake();
 
+            aiCharacterSoundFXManager = GetComponent<AICharacterSoundFXManager>();
             aiCharacterNetworkManager = GetComponent<AICharacterNetworkManager>();
             aiCharacterCombatManager = GetComponent<AICharacterCombatManager>();
             aiCharacterLocomotionManager = GetComponent<AICharacterLocomotionManager>();
