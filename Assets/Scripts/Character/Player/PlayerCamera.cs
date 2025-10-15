@@ -48,8 +48,8 @@ namespace TraverserProject
         private Transform followTransformWhenAiming;
         public Vector3 aimDirection;
 
-        [Header("Test")]
-        [SerializeField] GameObject testObject;
+        //[Header("Test")]
+        //[SerializeField] GameObject testObject;
         private void Awake()
         {
             if (Singleton == null)
@@ -69,11 +69,11 @@ namespace TraverserProject
 
         private void Update()
         {
-            Vector3 targetLockOnTransform = testObject.transform.position;
-            Vector2 lockOnCrosshairPosition = RectTransformUtility.WorldToScreenPoint(cameraObject, targetLockOnTransform);
-            //lockOnCrosshairPosition.y = Screen.height - lockOnCrosshairPosition.y;
-            PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.transform.position = lockOnCrosshairPosition;
-            PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.SetActive(true);
+            //Vector3 targetLockOnTransform = testObject.transform.position;
+            //Vector2 lockOnCrosshairPosition = RectTransformUtility.WorldToScreenPoint(cameraObject, targetLockOnTransform);
+            
+            //PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.transform.position = lockOnCrosshairPosition;
+            //PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.SetActive(true);
         }
         public void HandleAllCameraActions()
         {
@@ -309,6 +309,7 @@ namespace TraverserProject
         public void ClearLockOnTargets()
         {
             nearestLockOnTarget = null;
+            PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.SetActive(false);
             availableTargets.Clear();
         }
 
@@ -334,6 +335,7 @@ namespace TraverserProject
                 PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.transform.position = lockOnCrosshairPosition;
                 PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.SetActive(true);
             }
+
 
             yield return null;
         }

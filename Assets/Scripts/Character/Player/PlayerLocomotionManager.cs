@@ -20,7 +20,7 @@ namespace TraverserProject
 
         [Header("Jump")]
         [SerializeField] float jumpStaminaCost = 25;
-        [SerializeField] float jumpHeight = 1;
+        [SerializeField] float jumpHeight = 4;
         [SerializeField] float jumpForwardSpeed = 5;
         [SerializeField] float freeFallSpeed = 2;
         private Vector3 jumpDirection;
@@ -261,6 +261,9 @@ namespace TraverserProject
 
             if (player.playerNetworkManager.currentStamina.Value <= 0)
                 return;
+
+            if (player.IsOwner)
+                player.playerNetworkManager.isRolling.Value = true;
 
             if (PlayerInputManager.Singleton.moveAmount > 0) //roll
             {

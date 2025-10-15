@@ -37,7 +37,7 @@ namespace TraverserProject
         [SerializeField] float addedTorqueDebrisForceMaximum = 500;
 
         [Header("Instantiated Broken Object")]
-        private GameObject brokenObjectPrefab;
+        [SerializeField] private GameObject brokenObjectPrefab;
         private GameObject instantiatedBrokenObject;
 
         private void Awake()
@@ -99,7 +99,7 @@ namespace TraverserProject
 
             if (player != null)
             {
-                if (player.playerNetworkManager.isJumping.Value)
+                if (player.playerNetworkManager.isJumping.Value || player.playerNetworkManager.isRolling.Value)
                     BreakObject();
             }
 
@@ -118,15 +118,20 @@ namespace TraverserProject
             BreakObjectServerRpc();
         }
 
-        [ServerRpc]
+        [ServerRpc(RequireOwnership = false)]
         private void BreakObjectServerRpc()
         {
-
+            if (IsServer)
+                isBroken.Value = true;
         }
 
         private void OnIsBrokenChanged(bool oldStatus, bool newStatus)
         {
+            if (isBroken.Value && !isBrokenLocal)
+                PlayBreakFX();
 
+            if (!isBroken.Value && instantiatedBrokenObject != null)
+                Destroy(instantiatedBrokenObject);
         }
 
         private void PlayBreakFX()
@@ -149,21 +154,46 @@ namespace TraverserProject
                     rigidbodies[i].AddTorque(torqueDirection * Random.Range(addedTorqueDebrisForceMinimum, addedTorqueDebrisForceMaximum), ForceMode.Impulse);
                 }
             }
+
+            ToggleMeshRenderers(false);
+            ToggleMeshColliders(false);
+
+            if (audioSource == null)
+                return;
+
+            audioSource.PlayOneShot(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(brokenSFX));
         }
 
         private void OnNetworkPositionChanged(Vector3 oldPosition, Vector3 newPosition)
         {
-
+            transform.position = newPosition;
         }
 
         private void OnNetworkRotationChanged(Quaternion oldRotation, Quaternion newRotation)
         {
-
+            transform.rotation = newRotation;
         }
 
         private void ToggleMeshRenderers(bool status)
         {
+            for (int i = 0; i < meshRenderers.Length; i++)
+            {
+                if (meshRenderers[i] == null)
+                    return;
 
+                meshRenderers[i].enabled = status;
+            }
+        }
+
+        private void ToggleMeshColliders(bool status)
+        {
+            for (int i = 0; i < meshColliders.Length; i++)
+            {
+                if (meshColliders[i] == null)
+                    return;
+
+                meshColliders[i].enabled = status;
+            }
         }
 
     }

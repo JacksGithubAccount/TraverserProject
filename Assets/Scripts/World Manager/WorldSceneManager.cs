@@ -67,6 +67,8 @@ namespace TraverserProject
 
             NetworkManager.SceneManager.OnSceneEvent -= OnSceneEvent;
 
+            StartCoroutine(UnloadAllAdditiveScenesNonNetwork());
+
         }
 
         private void OnSceneEvent(SceneEvent sceneEvent)
@@ -263,6 +265,27 @@ namespace TraverserProject
 
             queuedScenesToUnload = 0;
             unloadingAdditiveScenesCoroutine = null;
+        }
+
+        private IEnumerator UnloadAllAdditiveScenesNonNetwork()
+        {
+            for (int i = 0; i < loadedScenes.Count; i++)
+            {
+                if (loadedScenes[i] == null)
+                    continue;
+
+                if (!loadedScenes[i].IsValid())
+                    continue;
+
+                var loadingOperation = SceneManager.UnloadSceneAsync(loadedScenes[i].name);
+
+                yield return null;
+
+                while (loadingOperation != null && !loadingOperation.isDone)
+                {
+                    yield return null;
+                }
+            }
         }
 
         public void CheckForUnrequiredScenes()

@@ -16,9 +16,11 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 8fc9fbe16e16390468aa6d028cca21ec, type: 3}
   itemDescription: A straight sword
   itemID: 2
-  weaponAnimator: {fileID: 0}
+  itemWeight: 0
+  weaponAnimator: {fileID: 22100000, guid: be65e939cf281a842bcbc0c517560755, type: 2}
   weaponModelType: 0
-  weaponModel: {fileID: 8238706765746017058, guid: fede4ab9dd844d44d9805fd04fb5fcfd, type: 3}
+  weaponClass: 0
+  weaponModel: {fileID: 8775460708073204182, guid: a433c2471ddc210439c12e0aa40422e5, type: 3}
   strengthREQ: 12
   dexterityREQ: 10
   intelligenceREQ: 0
@@ -41,6 +43,22 @@ MonoBehaviour:
   rolling_Heavy_Attack_01_Modifier: 1.3
   backstep_Light_Attack_01_Modifier: 1
   backstep_Heavy_Attack_01_Modifier: 1.4
+  jumping_Light_Attack_01_Modifier: 1
+  jumping_Heavy_Attack_01_Modifier: 1.5
+  dual_Light_Attack_01_Modifier: 0.77
+  dual_Light_Attack_02_Modifier: 0.87
+  dual_Heavy_Attack_01_Modifier: 0.94
+  dual_Heavy_Attack_02_Modifier: 1
+  dual_Charge_Attack_01_Modifier: 1.3
+  dual_Charge_Attack_02_Modifier: 1.4
+  dual_Running_Light_Attack_01_Modifier: 0.77
+  dual_Running_Heavy_Attack_01_Modifier: 0.94
+  dual_Rolling_Light_Attack_01_Modifier: 0.68
+  dual_Rolling_Heavy_Attack_01_Modifier: 0.81
+  dual_Backstep_Light_Attack_01_Modifier: 0.77
+  dual_Backstep_Heavy_Attack_01_Modifier: 0.9
+  dual_Jumping_Light_Attack_01_Modifier: 0.77
+  dual_Jumping_Heavy_Attack_01_Modifier: 0.98
   baseStaminaCost: 20
   lightAttackStaminaCostMultiplier: 0.9
   heavyAttackStaminaCostMultiplier: 1.3
@@ -51,6 +69,8 @@ MonoBehaviour:
   rollingHeavyAttackStaminaCostMultiplier: 1.4
   backstepLightAttackStaminaCostMultiplier: 0.9
   backstepHeavyAttackStaminaCostMultiplier: 1.3
+  jumpingLightAttackStaminaCostMultiplier: 1
+  jumpingHeavyAttackStaminaCostMultiplier: 2
   physicalBaseDamageAbsorption: 50
   magicBaseDamageAbsorption: 50
   fireBaseDamageAbsorption: 50
@@ -60,7 +80,11 @@ MonoBehaviour:
   oh_RB_Action: {fileID: 11400000, guid: be57d178e77a15549ae43da20eb6d228, type: 2}
   oh_RT_Action: {fileID: 11400000, guid: 20531202c3730b9468689c7c112b159c, type: 2}
   oh_LB_Action: {fileID: 11400000, guid: 79096931ddd6fbb48b35417a10d199ce, type: 2}
+  ashOfWarAction: {fileID: 0}
   whooshes:
   - {fileID: 8300000, guid: f444c045e25f5964b97a4fca35e2cf9c, type: 3}
   - {fileID: 8300000, guid: 9289b3a7fefc725459b47812d94fd4e5, type: 3}
   - {fileID: 8300000, guid: 2f33f1fab9562d74ba4c744705958f1d, type: 3}
+  blocking: []
+  riposte_Attack_01_Modifier: 3.3
+  backstab_Attack_01_Modifier: 3
