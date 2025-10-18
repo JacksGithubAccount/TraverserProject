@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.Netcode;
@@ -38,6 +39,12 @@ namespace TraverserProject
         public CharacterSaveData characterSlot08;
         public CharacterSaveData characterSlot09;
         public CharacterSaveData characterSlot10;
+
+        [Header("Stage IDs")]
+        public int namelessKnightDialogueStageID = 0;
+
+        [Header("Dialogues")]
+        [SerializeField] List<CharacterDialogue> namelessKnightDialogues = new List<CharacterDialogue>();
 
         private void Awake()
         {
@@ -295,7 +302,7 @@ namespace TraverserProject
             saveFileDataWriter.saveDataDirectoryPath = Application.persistentDataPath;
             saveFileDataWriter.saveFileName = saveFileName;
             currentCharacterData = saveFileDataWriter.LoadSaveFile();
-
+            GetStageIDsOnLoad();
             WorldSceneManager.Singleton.LoadWorldScene(worldSceneIndex);
         }
 
@@ -413,6 +420,68 @@ namespace TraverserProject
                 serializedQuickSlotItem.itemID = -1;
             }
             return serializedQuickSlotItem;
+        }
+
+        // load dialogue
+        public CharacterDialogue GetCharacterDialogueByEnum(CharacterDialogueID characterDialogueID)
+        {
+            CharacterDialogue dialogue = null;
+
+            switch (characterDialogueID)
+            {
+                case CharacterDialogueID.NoDialogueID:
+                    break;
+                case CharacterDialogueID.NamelessKnightDialogueID:
+                    dialogue = FindDialogueByStageID(namelessKnightDialogueStageID, namelessKnightDialogues);
+                    break;
+                default:
+                    break;
+            }
+
+            if (dialogue != null)
+                dialogue = Instantiate(dialogue);
+
+            return dialogue;
+        }
+
+
+
+        private CharacterDialogue FindDialogueByStageID(int stageID, List<CharacterDialogue> dialogueList)
+        {
+            CharacterDialogue dialogue = null;
+
+            for (int i = 0; i < dialogueList.Count; i++)
+            {
+                if (dialogueList[i] == null)
+                    continue;
+
+                if (dialogueList[i].requiredStageID == stageID)
+                {
+                    dialogue = dialogueList[i];
+                    break;
+                }
+            }
+
+            return dialogue;
+        }
+        public void SetStageOfDialogue(CharacterDialogueID characterDialogue, int stageIndex)
+        {
+            switch (characterDialogue)
+            {
+                case CharacterDialogueID.NoDialogueID:
+                    break;
+                case CharacterDialogueID.NamelessKnightDialogueID:
+                    namelessKnightDialogueStageID = stageIndex;
+                    currentCharacterData.namelessKnightStageID = namelessKnightDialogueStageID;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void GetStageIDsOnLoad()
+        {
+            namelessKnightDialogueStageID = currentCharacterData.namelessKnightStageID;
         }
     }
 }

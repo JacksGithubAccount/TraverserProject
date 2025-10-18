@@ -99,6 +99,9 @@ namespace TraverserProject
         public List<int> handEquipmentInInventory;
         public List<int> legEquipmentInInventory;
 
+        [Header("Dialogue")]
+        public int namelessKnightStageID = 0;
+
         public int currentSpell;
 
 

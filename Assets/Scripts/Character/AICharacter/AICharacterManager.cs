@@ -69,6 +69,8 @@ namespace TraverserProject
                 attack = Instantiate(attack);
                 investigateSound = Instantiate(investigateSound);
                 currentState = idle;
+
+
             }
             aiCharacterNetworkManager.currentHealth.OnValueChanged += aiCharacterNetworkManager.CheckHealth;
             aiCharacterNetworkManager.isBlocking.OnValueChanged += aiCharacterNetworkManager.OnIsBlockingChanged;

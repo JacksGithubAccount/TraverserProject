@@ -4,10 +4,13 @@ using System.Collections.Generic;
 
 namespace TraverserProject
 {
-    [CreateAssetMenu(menuName = "A.I/Dialogue")]
+    [CreateAssetMenu(menuName = "AI/Dialogue")]
 
     public class CharacterDialogue : ScriptableObject
     {
+        [Header("Dialogue Requirements")]
+        public int requiredStageID = 0;
+
         [Header("Greeting Dialogue")]
         [TextArea] public List<string> greetingDialogueString = new List<string>();
         public List<AudioClip> greetingDialogueAudio = new List<AudioClip>();
@@ -17,6 +20,11 @@ namespace TraverserProject
         [TextArea] public List<string> dialogueString = new List<string>();
         public List<AudioClip> dialogueAudio = new List<AudioClip>();
         public int dialogueIndex = 0;
+
+        [Header("Farewell Dialogue")]
+        [TextArea] public List<string> farewellDialogueString = new List<string>();
+        public List<AudioClip> farewellDialogueAudio = new List<AudioClip>();
+        private bool farewellHasPlayed = false;
 
         [Header("End Triggers")]
         [SerializeField] bool setStageIndex = false;
@@ -49,8 +57,17 @@ namespace TraverserProject
             {
                 PlayerUIManager.Singleton.playerUIPopUpManager.SetDialoguePopUpSubtitles(dialogueString[dialogueIndex]);
                 aiCharacter.aiCharacterSoundFXManager.PlaySoundFX(dialogueAudio[dialogueIndex]);
+                yield return new WaitForSeconds(dialogueAudio[dialogueIndex].length + 1);
                 dialogueIndex++;
-                yield return new WaitForSeconds( dialogueAudio[dialogueIndex].length + 1);
+            }
+
+            if (farewellDialogueAudio.Count != 0 && !farewellHasPlayed)
+            {
+                farewellHasPlayed = true;
+                int randomFarewellDialogueIndex = Random.Range(0, farewellDialogueAudio.Count);
+                PlayerUIManager.Singleton.playerUIPopUpManager.SetDialoguePopUpSubtitles(farewellDialogueString[randomFarewellDialogueIndex]);
+                aiCharacter.aiCharacterSoundFXManager.PlaySoundFX(farewellDialogueAudio[randomFarewellDialogueIndex]);
+                yield return new WaitForSeconds(farewellDialogueAudio[randomFarewellDialogueIndex].length + 1);
             }
 
             OnDialogueEnded(aiCharacter);
@@ -65,9 +82,7 @@ namespace TraverserProject
             dialogueIndex = 0;
 
             if (setStageIndex)
-            {
-
-            }
+                WorldSaveGameManager.Singleton.SetStageOfDialogue(aiCharacter.aiCharacterSoundFXManager.characterDialogueID, stageID);
 
             aiCharacter.aiCharacterSoundFXManager.OnCurrentDialogueEnded();
         }

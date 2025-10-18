@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity.Netcode;
 
 namespace TraverserProject
 {
@@ -11,9 +12,10 @@ namespace TraverserProject
         [SerializeField] AudioClip[] blockingSFX;
 
         [Header("Dialogue")]
+        public CharacterDialogueID characterDialogueID;
         public GameObject interactableDialogueCollider;
         public CharacterDialogue currentDialogue;
-        public CharacterDialogue farewellDialogue;
+        public GameObject interactableDialogueObject;
         public bool dialogueIsPlaying = false;
 
         protected override void Awake()
@@ -21,6 +23,20 @@ namespace TraverserProject
             base.Awake();
 
             aiCharacter = GetComponent<AICharacterManager>();
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+
+            if (characterDialogueID != CharacterDialogueID.NoDialogueID)
+            {
+                currentDialogue = WorldSaveGameManager.Singleton.GetCharacterDialogueByEnum(characterDialogueID);
+                interactableDialogueObject = Instantiate(WorldAIManager.Singleton.dialogueInteractable, transform);
+                NetworkObject networkObject = interactableDialogueObject.GetComponent<NetworkObject>();
+                networkObject.Spawn();
+                networkObject.TrySetParent(gameObject, true);
+            }
         }
 
         public override void PlayBlockSoundFX()
@@ -46,20 +62,7 @@ namespace TraverserProject
             }
         }
 
-        public void PlayFarewellDialogueEvent()
-        {
-            if (farewellDialogue == null)
-                return;
 
-            if (!dialogueIsPlaying)
-            {
-                farewellDialogue.PlayDialogueEvent(aiCharacter);
-            }
-            else
-            {
-                PlayerUIManager.Singleton.playerUIPopUpManager.SendNextDialoguePopUpInIndex(farewellDialogue, aiCharacter);
-            }
-        }
 
         public void CancelCurrentDialogueEvent()
         {
@@ -72,7 +75,7 @@ namespace TraverserProject
 
         public void OnCurrentDialogueEnded()
         {
-
+            currentDialogue = WorldSaveGameManager.Singleton.GetCharacterDialogueByEnum(characterDialogueID);
         }
 
 

@@ -324,15 +324,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.6105566
+      value: -0.05450332
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.00000047683716
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.622002
+      value: 0.032218456
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1120,14 +1120,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 631945539
-  InScenePlacedSourceGlobalObjectIdHash: 877406110
+  GlobalObjectIdHash: 3544967409
+  InScenePlacedSourceGlobalObjectIdHash: 631945539
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
+  SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
@@ -1756,12 +1756,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f2a1722ecbb584aa1a0c59cb18cec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
   damageGrunts: []
   attackGrunts: []
   footSteps: []
   blockingSFX:
   - {fileID: 8300000, guid: 431857fa264f4fd4d8d608c59d3b93f3, type: 3}
+  characterDialogueID: 1
   interactableDialogueCollider: {fileID: 0}
+  currentDialogue: {fileID: 0}
+  interactableDialogueObject: {fileID: 0}
   dialogueIsPlaying: 0
 --- !u!1 &5914042613956171416 stripped
 GameObject:

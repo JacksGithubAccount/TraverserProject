@@ -120,8 +120,10 @@ namespace TraverserProject
             if (dialogueCoroutine != null)
                 StopCoroutine(dialogueCoroutine);
 
-            dialogueCoroutine = StartCoroutine(dialogue.PlayDialogueCoroutine(aiCharacter));
+            PlayerUIManager.Singleton.playerUIPopUpManager.CloseAllPopUpWindows();
             PlayerUIManager.Singleton.popUpWindowIsOpen = true;
+
+            dialogueCoroutine = StartCoroutine(dialogue.PlayDialogueCoroutine(aiCharacter));
         }
 
         public void SendNextDialoguePopUpInIndex(CharacterDialogue dialogue, AICharacterManager aiCharacter)
@@ -134,8 +136,13 @@ namespace TraverserProject
             if (aiCharacter.aiCharacterSoundFXManager.dialogueIsPlaying)
                 aiCharacter.aiCharacterSoundFXManager.audioSource.Stop();
 
+            PlayerUIManager.Singleton.playerUIPopUpManager.CloseAllPopUpWindows();
+            PlayerUIManager.Singleton.popUpWindowIsOpen = true;
+
             currentDialogue.dialogueIndex++;
             dialogueCoroutine = StartCoroutine(dialogue.PlayDialogueCoroutine(aiCharacter));
+            
+
         }
 
         public void SetDialoguePopUpSubtitles(string dialogueText)
