@@ -16,7 +16,7 @@ namespace TraverserProject
         [Header("Core Dialogue")]
         [TextArea] public List<string> dialogueString = new List<string>();
         public List<AudioClip> dialogueAudio = new List<AudioClip>();
-        private bool hasPlayed = false;
+        public int dialogueIndex = 0;
 
         [Header("End Triggers")]
         [SerializeField] bool setStageIndex = false;
@@ -24,17 +24,52 @@ namespace TraverserProject
 
         public void PlayDialogueEvent(AICharacterManager aiCharacter)
         {
+            if (dialogueString.Count != dialogueAudio.Count)
+            {
+                Debug.Log("audio clip doesn't match subtitle count, missing files");
+                return;
+            }
 
+            aiCharacter.aiCharacterSoundFXManager.dialogueIsPlaying = true;
+            PlayerUIManager.Singleton.playerUIPopUpManager.SendDialoguePopUp(this, aiCharacter);
         }
 
-        private IEnumerator PlayDialogueCoroutine(AICharacterManager aiCharacter)
+        public IEnumerator PlayDialogueCoroutine(AICharacterManager aiCharacter)
         {
+            if (greetingDialogueAudio.Count != 0 && !greetingHasPlayed)
+            {
+                greetingHasPlayed = true;
+                int randomGreetingDialogueIndex = Random.Range(0, greetingDialogueAudio.Count);
+                PlayerUIManager.Singleton.playerUIPopUpManager.SetDialoguePopUpSubtitles(greetingDialogueString[randomGreetingDialogueIndex]);
+                aiCharacter.aiCharacterSoundFXManager.PlaySoundFX(greetingDialogueAudio[randomGreetingDialogueIndex]);
+                yield return new WaitForSeconds(greetingDialogueAudio[randomGreetingDialogueIndex].length + 1);
+            }
+
+            while (dialogueIndex < dialogueString.Count)
+            {
+                PlayerUIManager.Singleton.playerUIPopUpManager.SetDialoguePopUpSubtitles(dialogueString[dialogueIndex]);
+                aiCharacter.aiCharacterSoundFXManager.PlaySoundFX(dialogueAudio[dialogueIndex]);
+                dialogueIndex++;
+                yield return new WaitForSeconds( dialogueAudio[dialogueIndex].length + 1);
+            }
+
+            OnDialogueEnded(aiCharacter);
+            PlayerUIManager.Singleton.playerUIPopUpManager.EndDialoguePopUp();
+
             yield return null;
         }
 
         public void OnDialogueEnded(AICharacterManager aiCharacter)
         {
+            greetingHasPlayed = false;
+            dialogueIndex = 0;
 
+            if (setStageIndex)
+            {
+
+            }
+
+            aiCharacter.aiCharacterSoundFXManager.OnCurrentDialogueEnded();
         }
 
         public void OnDialogueCancelled(AICharacterManager aiCharacter)

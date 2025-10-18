@@ -27,11 +27,8 @@ namespace TraverserProject
 
         public virtual void Interact(PlayerManager player)
         {
-            Debug.Log("You have interacted!");
-
             if (!player.IsOwner)
                 return;
-
 
             interactableCollider.enabled = false;
             player.playerInteractionManager.RemoveInteractionFromList(this);
