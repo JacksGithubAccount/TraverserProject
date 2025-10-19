@@ -876,7 +876,7 @@ namespace TraverserProject
                 else
                 {
                     player.playerInventoryManager.rightHandWeaponIndex = firstWeaponPosition;
-                    player.playerInventoryManager.currentRightHandWeapon = selectedWeapon;
+                    player.playerInventoryManager.currentRightHandWeapon = firstWeapon;
                     player.playerNetworkManager.currentRightHandWeaponID.Value = firstWeapon.itemID;
                 }
                 return;
@@ -961,7 +961,7 @@ namespace TraverserProject
                 else
                 {
                     player.playerInventoryManager.leftHandWeaponIndex = firstWeaponPosition;
-                    player.playerInventoryManager.currentLeftHandWeapon = selectedWeapon;
+                    player.playerInventoryManager.currentLeftHandWeapon = firstWeapon;
                     player.playerNetworkManager.currentLeftHandWeaponID.Value = firstWeapon.itemID;
                 }
                 return;

@@ -80,7 +80,7 @@ namespace TraverserProject
             return spawnedInBosses.FirstOrDefault(boss => boss.bossID == ID);
         }
 
-        public void ResetAllCharacters()
+        public void SpawnAllCharacters()
         {
             isPerformingLoadingOperation = true;
 
@@ -106,7 +106,7 @@ namespace TraverserProject
             yield return null;
         }
 
-        public void ResetAllCharacter()
+        public void ResetAllCharacters()
         {
             isPerformingLoadingOperation = true;
 
