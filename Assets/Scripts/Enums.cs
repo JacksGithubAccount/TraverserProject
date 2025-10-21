@@ -73,6 +73,22 @@ public enum WeaponClass
     Bow
 }
 
+//determines upgrade level of an item
+public enum UpgradeLevel
+{
+    Zero,
+    One,
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Ten
+}
+
 //determines which catalyst is used to cast spell
 public enum SpellClass
 {

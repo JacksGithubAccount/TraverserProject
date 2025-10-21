@@ -6,6 +6,7 @@ namespace TraverserProject
     public class SerializableWeapon : ISerializationCallbackReceiver
     {
         [SerializeField] public int itemID;
+        [SerializeField] public int upgradeLevel;
         [SerializeField] public int ashofWarID;
 
         public WeaponItem GetWeapon()

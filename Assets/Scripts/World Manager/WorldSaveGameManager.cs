@@ -364,7 +364,9 @@ namespace TraverserProject
         public SerializableWeapon GetSerializableWeaponFromWeaponItem(WeaponItem weapon)
         {
             SerializableWeapon serializedWeapon = new SerializableWeapon();
+
             serializedWeapon.itemID = weapon.itemID;
+            serializedWeapon.upgradeLevel = (int)weapon.upgradeLevel;
 
             if (weapon.ashOfWarAction != null)
             {

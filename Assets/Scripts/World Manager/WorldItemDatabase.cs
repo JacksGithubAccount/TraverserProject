@@ -207,6 +207,8 @@ namespace TraverserProject
                 weapon.ashOfWarAction = ashOfWar;
             }
 
+            weapon.upgradeLevel = (UpgradeLevel)serializableWeapon.upgradeLevel;
+
             return weapon;
         }
 

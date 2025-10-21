@@ -184,7 +184,7 @@ namespace TraverserProject
         {
             for (int i = 0; i < queuedSceneIDs.Count; i++)
             {
-                while (sceneIsLoading || sceneIsUnloading)
+                while (sceneIsLoading || sceneIsLoading)
                 {
                     yield return null;
                 }
@@ -252,7 +252,7 @@ namespace TraverserProject
         {
             for (int i = 0; i < queuedUnloadSceneIDs.Count; i++)
             {
-                while (sceneIsLoading || sceneIsUnloading)
+                while (sceneIsLoading || sceneIsLoading)
                 {
                     yield return new WaitForFixedUpdate();
                 }
@@ -286,6 +286,8 @@ namespace TraverserProject
                     yield return null;
                 }
             }
+
+            yield return null;
         }
 
         public void CheckForUnrequiredScenes()

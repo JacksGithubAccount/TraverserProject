@@ -14,6 +14,9 @@ namespace TraverserProject
         [Header("Weapon Class")]
         public WeaponClass weaponClass;
 
+        [Header("Upgrade Level")]
+        public UpgradeLevel upgradeLevel;
+
         [Header("Weapon Model")]
         public GameObject weaponModel;
 
