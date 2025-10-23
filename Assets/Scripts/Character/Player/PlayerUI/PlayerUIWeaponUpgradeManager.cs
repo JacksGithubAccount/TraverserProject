@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,10 @@ namespace TraverserProject
     {
         [Header("Menus")]
         [SerializeField] GameObject confirmUpgradePopUp;
+
+        [Header("Text Fields")]
+        [SerializeField] TextMeshProUGUI currentMaterialsText;
+        [SerializeField] TextMeshProUGUI currentCostText;
 
         [Header("Confirm Upgrade Buttons")]
         [SerializeField] Button confirmUpgradeButton;
@@ -150,6 +155,19 @@ namespace TraverserProject
         {
             if (currentSelectedWeapon.itemID == WorldItemDatabase.Singleton.unarmedWeapon.itemID)
             {
+                PlayerUIManager.Singleton.PlayUnableToContinueSFX();
+                return;
+            }
+
+            if (!PlayerHasUpgradeCost())
+            {
+                PlayerUIManager.Singleton.PlayUnableToContinueSFX();
+                return;
+            }
+
+            if (currentSelectedWeapon.upgradeLevel == UpgradeLevel.Ten)
+            {
+                PlayerUIManager.Singleton.PlayUnableToContinueSFX();
                 return;
             }
 
@@ -206,26 +224,132 @@ namespace TraverserProject
         {
             currentSelectedEquipmentSlot = (EquipmentType)equipmentSlot;
 
+            bool hasCost = PlayerHasUpgradeCost();
+            Image currentSelectedEquipmentIcon = null;
+
+            Color iconColor = currentSelectedEquipmentIcon.color;
+            iconColor.a = 1;
+            rightHandSlot01.color = iconColor;
+            rightHandSlot02.color = iconColor;
+            rightHandSlot03.color = iconColor;
+            leftHandSlot01.color = iconColor;
+            leftHandSlot02.color = iconColor;
+            leftHandSlot03.color = iconColor;
+
+
             if (currentSelectedEquipmentSlot == EquipmentType.RightWeapon01)
+            {
                 currentSelectedWeapon = PlayerUIManager.Singleton.localPlayer.playerInventoryManager.weaponsInRightHandSlots[0];
+                currentSelectedEquipmentIcon = rightHandSlot01;
+            }
 
             if (currentSelectedEquipmentSlot == EquipmentType.RightWeapon02)
+            {
                 currentSelectedWeapon = PlayerUIManager.Singleton.localPlayer.playerInventoryManager.weaponsInRightHandSlots[1];
+                currentSelectedEquipmentIcon = rightHandSlot02;
+            }
 
             if (currentSelectedEquipmentSlot == EquipmentType.RightWeapon03)
+            {
                 currentSelectedWeapon = PlayerUIManager.Singleton.localPlayer.playerInventoryManager.weaponsInRightHandSlots[2];
+                currentSelectedEquipmentIcon = rightHandSlot03;
+            }
 
             if (currentSelectedEquipmentSlot == EquipmentType.LeftWeapon01)
+            {
                 currentSelectedWeapon = PlayerUIManager.Singleton.localPlayer.playerInventoryManager.weaponsInLeftHandSlots[0];
+                currentSelectedEquipmentIcon = leftHandSlot01;
+            }
 
             if (currentSelectedEquipmentSlot == EquipmentType.LeftWeapon02)
+            {
                 currentSelectedWeapon = PlayerUIManager.Singleton.localPlayer.playerInventoryManager.weaponsInLeftHandSlots[1];
+                currentSelectedEquipmentIcon = leftHandSlot02;
+            }
 
             if (currentSelectedEquipmentSlot == EquipmentType.LeftWeapon03)
+            {
                 currentSelectedWeapon = PlayerUIManager.Singleton.localPlayer.playerInventoryManager.weaponsInLeftHandSlots[2];
+                currentSelectedEquipmentIcon = leftHandSlot03;
+            }
+
+
+            if (hasCost)
+            {
+                iconColor.a = 1;
+                currentMaterialsText.color = Color.white;
+            }
+            else
+            {
+                iconColor.a = 0.2f;
+                currentMaterialsText.color = Color.red;
+            }
+            currentSelectedEquipmentIcon.color = iconColor;
+
+        }
+
+        private bool PlayerHasUpgradeCost()
+        {
+            return false;
         }
 
 
 
+        private UpgradeMaterial DetermineUpgradeCostOfWeapon(WeaponItem weapon)
+        {
+            UpgradeMaterial upgradeCost = new UpgradeMaterial();
+
+            switch (weapon.upgradeLevel)
+            {
+                case UpgradeLevel.Zero:
+                    upgradeCost.upgradeStone = UpgradeStone.Small;
+                    upgradeCost.currentItemAmount = 1;
+                    break;
+                case UpgradeLevel.One:
+                    upgradeCost.upgradeStone = UpgradeStone.Small;
+                    upgradeCost.currentItemAmount = 2;
+                    break;
+                case UpgradeLevel.Two:
+                    upgradeCost.upgradeStone = UpgradeStone.Small;
+                    upgradeCost.currentItemAmount = 3;
+                    break;
+                case UpgradeLevel.Three:
+                    upgradeCost.upgradeStone = UpgradeStone.Medium;
+                    upgradeCost.currentItemAmount = 1;
+                    break;
+                case UpgradeLevel.Four:
+                    upgradeCost.upgradeStone = UpgradeStone.Medium;
+                    upgradeCost.currentItemAmount = 2;
+                    break;
+                case UpgradeLevel.Five:
+                    upgradeCost.upgradeStone = UpgradeStone.Medium;
+                    upgradeCost.currentItemAmount = 3;
+                    break;
+                case UpgradeLevel.Six:
+                    upgradeCost.upgradeStone = UpgradeStone.Large;
+                    upgradeCost.currentItemAmount = 1;
+                    break;
+                case UpgradeLevel.Seven:
+                    upgradeCost.upgradeStone = UpgradeStone.Large;
+                    upgradeCost.currentItemAmount = 2;
+                    break;
+                case UpgradeLevel.Eight:
+                    upgradeCost.upgradeStone = UpgradeStone.Large;
+                    upgradeCost.currentItemAmount = 3;
+                    break;
+                case UpgradeLevel.Nine:
+                    upgradeCost.upgradeStone = UpgradeStone.Slab;
+                    upgradeCost.currentItemAmount = 1;
+                    break;
+                case UpgradeLevel.Ten:
+                    upgradeCost.upgradeStone = UpgradeStone.Slab;
+                    upgradeCost.currentItemAmount = 1;
+                    break;
+                default:
+                    break;
+            }
+            return upgradeCost;
+        }
     }
 }
+    

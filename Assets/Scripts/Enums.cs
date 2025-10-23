@@ -89,6 +89,14 @@ public enum UpgradeLevel
     Ten
 }
 
+public enum UpgradeStone
+{
+    Small,
+    Medium,
+    Large,
+    Slab
+}
+
 //determines which catalyst is used to cast spell
 public enum SpellClass
 {

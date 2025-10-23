@@ -8,6 +8,7 @@ namespace TraverserProject
     {
         public static PlayerUIManager Singleton { get; set; }
         [HideInInspector] public PlayerManager localPlayer;
+        private AudioSource audioSource;
 
         [Header("NETWORK JOIN")]
         [SerializeField] bool startGameAsClient;
@@ -37,6 +38,9 @@ namespace TraverserProject
             {
                 Destroy(gameObject);
             }
+
+            audioSource = GetComponent<AudioSource>();
+
             playerUIHudManager = GetComponentInChildren<PlayerUIHudManager>();
             playerUIPopUpManager = GetComponentInChildren<PlayerUIPopUpManager>();
             playerUICharacterMenuManager = GetComponentInChildren<PlayerUICharacterMenuManager>();
@@ -68,6 +72,31 @@ namespace TraverserProject
             playerUISiteOfGraceManager.CloseMenu();
             playerUITeleportLocationManager.CloseMenu();
             playerUILevelUpManager.CloseMenu();
+        }
+
+        // UI SFX
+        public void PlayUnableToContinueSFX()
+        {
+            if (WorldSoundFXManager.Singleton.unableToContinueUISFX == null)
+                return;
+
+            audioSource.PlayOneShot(WorldSoundFXManager.Singleton.unableToContinueUISFX);
+        }
+
+        public void ConfirmSFX()
+        {
+            if (WorldSoundFXManager.Singleton.confirmUISFX == null)
+                return;
+
+            audioSource.PlayOneShot(WorldSoundFXManager.Singleton.confirmUISFX);
+        }
+
+        public void HoverSFX()
+        {
+            if (WorldSoundFXManager.Singleton.hoverUISFX == null)
+                return;
+
+            audioSource.PlayOneShot(WorldSoundFXManager.Singleton.hoverUISFX);
         }
     }
 }

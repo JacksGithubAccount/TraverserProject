@@ -40,6 +40,9 @@ namespace TraverserProject
         [Header("Quick Slot")]
         [SerializeField] List<QuickSlotItem> quickSlotItems = new List<QuickSlotItem>();
 
+        [Header("Upgrade Materials")]
+        [SerializeField] List<UpgradeMaterial> upgradeMaterials = new List<UpgradeMaterial>();
+
         [Header("Items")]
         private List<Item> items = new List<Item>();
 
@@ -53,6 +56,7 @@ namespace TraverserProject
         [SerializeField] int spellItemKey = 7000;
         [SerializeField] int projectileItemKey = 8000;
         [SerializeField] int quickSlotItemKey = 9000;
+        [SerializeField] int upgradeMaterialItemKey = 10000;
 
         private void Awake()
         {
@@ -105,6 +109,11 @@ namespace TraverserProject
                 items.Add(item);
             }
 
+            foreach (var item in upgradeMaterials)
+            {
+                items.Add(item);
+            }
+
             foreach (var item in quickSlotItems)
             {
                 items.Add(item);
@@ -130,6 +139,8 @@ namespace TraverserProject
                     prefixKey = spellItemKey;
                 else if (items[i].GetType() == typeof(RangedProjectileItem))
                     prefixKey = projectileItemKey;
+                else if (items[i].GetType() == typeof(UpgradeMaterial))
+                    prefixKey = upgradeMaterialItemKey;
                 else if (items[i].GetType() == typeof(QuickSlotItem))
                     prefixKey = quickSlotItemKey;
 
@@ -182,6 +193,11 @@ namespace TraverserProject
         public RangedProjectileItem GetProjectileByID(int ID)
         {
             return projectiles.FirstOrDefault(item => item.itemID == ID);
+        }
+
+        public UpgradeMaterial GetUpgradeMaterialByID(int ID)
+        {
+            return upgradeMaterials.FirstOrDefault(item => item.itemID == ID);
         }
 
         public QuickSlotItem GetQuickSlotItemByID(int ID)
