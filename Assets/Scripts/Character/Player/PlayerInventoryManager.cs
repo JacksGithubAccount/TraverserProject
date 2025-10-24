@@ -41,8 +41,32 @@ namespace TraverserProject
 
         public void RemoveItemFromInventory(Item item)
         {
-            itemsInInventory.Remove(item);
 
+
+            bool isStackable = false;
+
+            if (item.maxItemAmount > 1)
+                isStackable = true;
+
+            if (isStackable)
+            {
+                for (int i = itemsInInventory.Count - 1; i > -1; i--)
+                {
+                    if (itemsInInventory[i].itemID == item.itemID)
+                    {
+                        itemsInInventory[i].currentItemAmount -= item.currentItemAmount;
+
+                        if (itemsInInventory[i].currentItemAmount <= 0)
+                            itemsInInventory.Remove(item);
+                    }
+                }
+            }
+            else
+            {
+                itemsInInventory.Remove(item);
+            }
+
+            //null checker
             for (int i = itemsInInventory.Count - 1; i > -1; i--)
             {
                 if (itemsInInventory[i] == null)

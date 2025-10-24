@@ -13,6 +13,12 @@ namespace TraverserProject
 
         public GameObject creatureDropPickUpItemPrefab;
 
+        [Header("Upgrade Stones")]
+        public UpgradeMaterial smallUpgradeStone;
+        public UpgradeMaterial mediumUpgradeStone;
+        public UpgradeMaterial largeUpgradeStone;
+        public UpgradeMaterial veryLargeUpgradeStone;
+
         [Header("Weapons")]
         [SerializeField] List<WeaponItem> weapons = new List<WeaponItem>();
 

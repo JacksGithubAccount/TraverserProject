@@ -34,6 +34,7 @@ namespace TraverserProject
         [Header("Seleted Slot")]
         public EquipmentType currentSelectedEquipmentSlot;
         private WeaponItem currentSelectedWeapon;
+        private UpgradeMaterial upgradeCost;
 
         [Header("Temp delete later")]
         [SerializeField] bool openMenu = false;
@@ -65,6 +66,9 @@ namespace TraverserProject
             confirmUpgradePopUp.SetActive(false);
             ToggleEquipmentButtons(true);
             RefreshEquipmentSlotIcons();
+
+            //selects the first button and factors cost
+            SelectEquipmentSlot(0);
         }
 
         public void ToggleEquipmentButtons(bool isEnabled)
@@ -182,7 +186,11 @@ namespace TraverserProject
             currentUpgradeLevel += 1;
             currentSelectedWeapon.upgradeLevel = (UpgradeLevel)currentUpgradeLevel;
             ToggleEquipmentButtons(true);
+            confirmUpgradePopUp.SetActive(false);
+            PlayerUIManager.Singleton.localPlayer.playerInventoryManager.RemoveItemFromInventory(upgradeCost);
             SelectLastSelectedEquipmentSlot();
+
+
         }
 
         public void SelectLastSelectedEquipmentSlot()
@@ -224,17 +232,8 @@ namespace TraverserProject
         {
             currentSelectedEquipmentSlot = (EquipmentType)equipmentSlot;
 
-            bool hasCost = PlayerHasUpgradeCost();
-            Image currentSelectedEquipmentIcon = null;
 
-            Color iconColor = currentSelectedEquipmentIcon.color;
-            iconColor.a = 1;
-            rightHandSlot01.color = iconColor;
-            rightHandSlot02.color = iconColor;
-            rightHandSlot03.color = iconColor;
-            leftHandSlot01.color = iconColor;
-            leftHandSlot02.color = iconColor;
-            leftHandSlot03.color = iconColor;
+            Image currentSelectedEquipmentIcon = null;
 
 
             if (currentSelectedEquipmentSlot == EquipmentType.RightWeapon01)
@@ -273,23 +272,91 @@ namespace TraverserProject
                 currentSelectedEquipmentIcon = leftHandSlot03;
             }
 
+            Color iconColor = currentSelectedEquipmentIcon.color;
+            iconColor.a = 1;
+            rightHandSlot01.color = iconColor;
+            rightHandSlot02.color = iconColor;
+            rightHandSlot03.color = iconColor;
+            leftHandSlot01.color = iconColor;
+            leftHandSlot02.color = iconColor;
+            leftHandSlot03.color = iconColor;
+
+            bool hasCost = PlayerHasUpgradeCost();
 
             if (hasCost)
             {
                 iconColor.a = 1;
                 currentMaterialsText.color = Color.white;
+                currentCostText.color = Color.white;
             }
             else
             {
                 iconColor.a = 0.2f;
                 currentMaterialsText.color = Color.red;
+                currentCostText.color = Color.red;
             }
             currentSelectedEquipmentIcon.color = iconColor;
+
+            if (currentSelectedWeapon.upgradeLevel == UpgradeLevel.Ten)
+            {
+                currentMaterialsText.text = "Current Materials: N/A";
+                currentCostText.color = Color.green;
+                currentCostText.text = "Weapon Fully Upgraded";
+            }
+
 
         }
 
         private bool PlayerHasUpgradeCost()
         {
+
+
+            upgradeCost = DetermineUpgradeCostOfWeapon(currentSelectedWeapon);
+
+            if (currentSelectedWeapon.itemID == WorldItemDatabase.Singleton.unarmedWeapon.itemID)
+                upgradeCost = null;
+
+            if (upgradeCost == null)
+            {
+                currentMaterialsText.text = "Current Materials: N/A";
+                currentCostText.text = "Materials Required: N/A";
+                return false;
+            }
+
+            bool playerHasMaterial = false;
+            bool playerHasMaterialAmount = false;
+
+            for (int i = 0; i < PlayerUIManager.Singleton.localPlayer.playerInventoryManager.itemsInInventory.Count; i++)
+            {
+                if (PlayerUIManager.Singleton.localPlayer.playerInventoryManager.itemsInInventory[i] is UpgradeMaterial)
+                {
+                    UpgradeMaterial playerMaterial = PlayerUIManager.Singleton.localPlayer.playerInventoryManager.itemsInInventory[i] as UpgradeMaterial;
+
+                    if (playerMaterial.upgradeStone != upgradeCost.upgradeStone)
+                        continue;
+
+                    playerHasMaterial = true;
+
+                    currentMaterialsText.text = "Current Materials: " + playerMaterial.itemName + " x" + playerMaterial.currentItemAmount;
+
+                    if (playerMaterial.currentItemAmount >= upgradeCost.currentItemAmount)
+                    {
+                        playerHasMaterialAmount = true;
+                        break;
+                    }
+
+
+
+                }
+            }
+
+            if (!playerHasMaterial)
+                currentMaterialsText.text = "Current Materials: " + upgradeCost.itemName + " x0";
+
+            if (playerHasMaterial && playerHasMaterialAmount)
+            {
+                return true;
+            }
             return false;
         }
 
@@ -297,59 +364,62 @@ namespace TraverserProject
 
         private UpgradeMaterial DetermineUpgradeCostOfWeapon(WeaponItem weapon)
         {
-            UpgradeMaterial upgradeCost = new UpgradeMaterial();
+            currentCostText.text = "Materials Required: N/A";
+            UpgradeMaterial upgradeCost = null;
 
             switch (weapon.upgradeLevel)
             {
                 case UpgradeLevel.Zero:
-                    upgradeCost.upgradeStone = UpgradeStone.Small;
+                    upgradeCost = Instantiate(WorldItemDatabase.Singleton.smallUpgradeStone);
                     upgradeCost.currentItemAmount = 1;
                     break;
                 case UpgradeLevel.One:
-                    upgradeCost.upgradeStone = UpgradeStone.Small;
+                    upgradeCost = Instantiate(WorldItemDatabase.Singleton.smallUpgradeStone);
                     upgradeCost.currentItemAmount = 2;
                     break;
                 case UpgradeLevel.Two:
-                    upgradeCost.upgradeStone = UpgradeStone.Small;
+                    upgradeCost = Instantiate(WorldItemDatabase.Singleton.smallUpgradeStone);
                     upgradeCost.currentItemAmount = 3;
                     break;
                 case UpgradeLevel.Three:
-                    upgradeCost.upgradeStone = UpgradeStone.Medium;
+                    upgradeCost = Instantiate(WorldItemDatabase.Singleton.mediumUpgradeStone);
                     upgradeCost.currentItemAmount = 1;
                     break;
                 case UpgradeLevel.Four:
-                    upgradeCost.upgradeStone = UpgradeStone.Medium;
+                    upgradeCost = Instantiate(WorldItemDatabase.Singleton.mediumUpgradeStone);
                     upgradeCost.currentItemAmount = 2;
                     break;
                 case UpgradeLevel.Five:
-                    upgradeCost.upgradeStone = UpgradeStone.Medium;
+                    upgradeCost = Instantiate(WorldItemDatabase.Singleton.mediumUpgradeStone);
                     upgradeCost.currentItemAmount = 3;
                     break;
                 case UpgradeLevel.Six:
-                    upgradeCost.upgradeStone = UpgradeStone.Large;
+                    upgradeCost = Instantiate(WorldItemDatabase.Singleton.largeUpgradeStone);
                     upgradeCost.currentItemAmount = 1;
                     break;
                 case UpgradeLevel.Seven:
-                    upgradeCost.upgradeStone = UpgradeStone.Large;
+                    upgradeCost = Instantiate(WorldItemDatabase.Singleton.largeUpgradeStone);
                     upgradeCost.currentItemAmount = 2;
                     break;
                 case UpgradeLevel.Eight:
-                    upgradeCost.upgradeStone = UpgradeStone.Large;
+                    upgradeCost = Instantiate(WorldItemDatabase.Singleton.largeUpgradeStone);
                     upgradeCost.currentItemAmount = 3;
                     break;
                 case UpgradeLevel.Nine:
-                    upgradeCost.upgradeStone = UpgradeStone.Slab;
+                    upgradeCost = Instantiate(WorldItemDatabase.Singleton.veryLargeUpgradeStone);
                     upgradeCost.currentItemAmount = 1;
                     break;
                 case UpgradeLevel.Ten:
-                    upgradeCost.upgradeStone = UpgradeStone.Slab;
+                    upgradeCost = Instantiate(WorldItemDatabase.Singleton.veryLargeUpgradeStone);
                     upgradeCost.currentItemAmount = 1;
                     break;
                 default:
                     break;
             }
+
+            currentCostText.text = "Materials Required: " + upgradeCost.itemName + " x" + upgradeCost.currentItemAmount;
+
             return upgradeCost;
         }
     }
 }
-    

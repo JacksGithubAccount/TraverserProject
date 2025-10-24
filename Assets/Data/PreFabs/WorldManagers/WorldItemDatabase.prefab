@@ -46,6 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unarmedWeapon: {fileID: 11400000, guid: 8ce237a8c1ddcf34aa6ecb1039b591af, type: 2}
   creatureDropPickUpItemPrefab: {fileID: 2616195271241893812, guid: 3a2c022b62587a742858a98ff9b6b3e8, type: 3}
+  smallUpgradeStone: {fileID: 11400000, guid: 1c439a1813d627542b71ac5d47ac0ca8, type: 2}
+  mediumUpgradeStone: {fileID: 11400000, guid: 951f7c71bcded944581ff05d4b287f9f, type: 2}
+  largeUpgradeStone: {fileID: 11400000, guid: 4314fe2158e2af8468b2364279131280, type: 2}
+  veryLargeUpgradeStone: {fileID: 11400000, guid: 3a24ed21a32462a419a4a3944f0a0d08, type: 2}
   weapons:
   - {fileID: 11400000, guid: 8ce237a8c1ddcf34aa6ecb1039b591af, type: 2}
   - {fileID: 11400000, guid: 64a3dcab51c176e409334284777e2c9a, type: 2}
@@ -74,8 +78,7 @@ MonoBehaviour:
   quickSlotItems:
   - {fileID: 11400000, guid: aedcc59cf0831af4eb8da47234130fb5, type: 2}
   - {fileID: 11400000, guid: d911e75c7092a0344a170eaa03d8e4a4, type: 2}
-  worldRespawnItems:
-  - {fileID: 0}
+  upgradeMaterials: []
   weaponItemKey: 1000
   headItemKey: 2000
   bodyItemKey: 3000
@@ -85,3 +88,4 @@ MonoBehaviour:
   spellItemKey: 7000
   projectileItemKey: 8000
   quickSlotItemKey: 9000
+  upgradeMaterialItemKey: 10000
