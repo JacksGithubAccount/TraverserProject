@@ -1,8 +1,9 @@
-using UnityEngine;
-using Unity.Netcode;
-using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Unity.Netcode;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace TraverserProject
 {
@@ -148,16 +149,20 @@ namespace TraverserProject
         }
 
         private void LoadAdditiveScene(string sceneName)
-        {
+        {           
             for (int i = 0; i < loadedScenes.Count; i++)
             {
+                var test = loadedScenes[i];
                 if (loadedScenes[i] == null)
                     continue;
 
                 if (loadedScenes[i].name == sceneName && loadedScenes[i].isLoaded)
                     return;
 
-                var loadSceneStatus = NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+                if (!SceneManager.GetSceneByName(sceneName).isLoaded)
+                {
+                    var loadSceneStatus = NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+                }               
 
             }
         }
@@ -184,7 +189,7 @@ namespace TraverserProject
         {
             for (int i = 0; i < queuedSceneIDs.Count; i++)
             {
-                while (sceneIsLoading || sceneIsLoading)
+                while (sceneIsLoading || sceneIsUnloading)
                 {
                     yield return null;
                 }
