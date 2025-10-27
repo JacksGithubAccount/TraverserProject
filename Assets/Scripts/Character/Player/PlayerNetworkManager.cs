@@ -232,7 +232,7 @@ namespace TraverserProject
             {
                 player.playerInventoryManager.currentQuickSlotItem = null;
             }
-
+            PlayerUIManager.Singleton.playerUIHudManager.SetQuickSlotItemQuickSlotIcon(player.playerInventoryManager.currentQuickSlotItem);
 
         }
 

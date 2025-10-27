@@ -252,6 +252,7 @@ namespace TraverserProject
             }
 
             PlayerUIManager.Singleton.playerUIEquipmentManager.SelectLastSelectedEquipmentSlot();
+            PlayerUIManager.Singleton.playerUIHudManager.SetQuickSlotItemQuickSlotIcon(player.playerInventoryManager.currentQuickSlotItem);
         }
 
     }

@@ -424,6 +424,7 @@ namespace TraverserProject
             {
                 SwitchQuickSlotItem();
             }
+            
 
         }
 
