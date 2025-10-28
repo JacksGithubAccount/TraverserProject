@@ -29,6 +29,7 @@ namespace TraverserProject
         [Header("End Triggers")]
         [SerializeField] bool setStageIndex = false;
         [SerializeField] int stageID = 0;
+        [SerializeField] DialogueEndEvents endEvent;
 
         public void PlayDialogueEvent(AICharacterManager aiCharacter)
         {
@@ -85,11 +86,34 @@ namespace TraverserProject
                 WorldSaveGameManager.Singleton.SetStageOfDialogue(aiCharacter.aiCharacterSoundFXManager.characterDialogueID, stageID);
 
             aiCharacter.aiCharacterSoundFXManager.OnCurrentDialogueEnded();
+
+            if (endEvent != DialogueEndEvents.None)
+            {
+                switch (endEvent)
+                {
+                    case DialogueEndEvents.None:
+                        break;
+                    case DialogueEndEvents.Blacksmith:
+                        PlayerUIManager.Singleton.playerUIWeaponUpgradeManager.OpenMenuAfterFixedFrame();
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         public void OnDialogueCancelled(AICharacterManager aiCharacter)
         {
-
+            switch (endEvent)
+            {
+                case DialogueEndEvents.None:
+                    break;
+                case DialogueEndEvents.Blacksmith:
+                    PlayerUIManager.Singleton.playerUIWeaponUpgradeManager.CloseMenu();
+                    break;
+                default:
+                    break;
+            }
         }
 
     }

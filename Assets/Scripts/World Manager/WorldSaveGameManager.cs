@@ -42,9 +42,11 @@ namespace TraverserProject
 
         [Header("Stage IDs")]
         public int namelessKnightDialogueStageID = 0;
+        public int blacksmithDialogueStageID = 0;
 
         [Header("Dialogues")]
         [SerializeField] List<CharacterDialogue> namelessKnightDialogues = new List<CharacterDialogue>();
+        [SerializeField] List<CharacterDialogue> blacksmithDialogues = new List<CharacterDialogue>();
 
         private void Awake()
         {
@@ -436,6 +438,9 @@ namespace TraverserProject
                 case CharacterDialogueID.NamelessKnightDialogueID:
                     dialogue = FindDialogueByStageID(namelessKnightDialogueStageID, namelessKnightDialogues);
                     break;
+                case CharacterDialogueID.BlacksmithDialogueID:
+                    dialogue = FindDialogueByStageID(blacksmithDialogueStageID, blacksmithDialogues);
+                    break;
                 default:
                     break;
             }
@@ -475,6 +480,10 @@ namespace TraverserProject
                 case CharacterDialogueID.NamelessKnightDialogueID:
                     namelessKnightDialogueStageID = stageIndex;
                     currentCharacterData.namelessKnightStageID = namelessKnightDialogueStageID;
+                    break;
+                case CharacterDialogueID.BlacksmithDialogueID:
+                    blacksmithDialogueStageID = stageIndex;
+                    currentCharacterData.blacksmithStageID = blacksmithDialogueStageID;
                     break;
                 default:
                     break;

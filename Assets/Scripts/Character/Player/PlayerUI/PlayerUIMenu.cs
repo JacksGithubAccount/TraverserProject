@@ -15,6 +15,21 @@ namespace TraverserProject
             menu.SetActive(true);
         }
 
+        public virtual void OpenMenuAfterFixedFrame()
+        {
+            if (menu.activeInHierarchy)
+                return;
+
+            StartCoroutine(WaitThenOpenMenu());
+        }
+
+        protected virtual IEnumerator WaitThenOpenMenu()
+        {
+            yield return new WaitForFixedUpdate();
+
+            OpenMenu();
+        }
+
         public virtual void CloseMenu()
         {
             PlayerUIManager.Singleton.menuWindowIsOpen = false;
@@ -33,8 +48,7 @@ namespace TraverserProject
         {
             yield return new WaitForFixedUpdate();
 
-            PlayerUIManager.Singleton.menuWindowIsOpen = false;
-            menu.SetActive(false);
+            CloseMenu();
         }
 
     }

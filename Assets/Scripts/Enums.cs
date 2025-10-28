@@ -42,7 +42,14 @@ public enum CharacterAttribute
 public enum CharacterDialogueID
 {
     NoDialogueID,
-    NamelessKnightDialogueID
+    NamelessKnightDialogueID,
+    BlacksmithDialogueID
+}
+
+public enum DialogueEndEvents
+{
+    None,
+    Blacksmith
 }
 
 //is tag for each weapon model instantiation slot

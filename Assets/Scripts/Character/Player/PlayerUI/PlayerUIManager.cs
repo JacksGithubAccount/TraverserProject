@@ -21,6 +21,7 @@ namespace TraverserProject
         [HideInInspector] public PlayerUITeleportLocationManager playerUITeleportLocationManager;
         [HideInInspector] public PlayerUILoadingScreenManager playerUILoadingScreenManager;
         [HideInInspector] public PlayerUILevelUpManager playerUILevelUpManager;
+        [HideInInspector] public PlayerUIWeaponUpgradeManager playerUIWeaponUpgradeManager;
 
         [Header("UI Flags")]
         public bool menuWindowIsOpen = false;
@@ -49,6 +50,7 @@ namespace TraverserProject
             playerUITeleportLocationManager = GetComponentInChildren<PlayerUITeleportLocationManager>();
             playerUILoadingScreenManager = GetComponentInChildren<PlayerUILoadingScreenManager>();
             playerUILevelUpManager = GetComponentInChildren<PlayerUILevelUpManager>();
+            playerUIWeaponUpgradeManager = GetComponentInChildren<PlayerUIWeaponUpgradeManager>();
         }
         private void Start()
         {
@@ -67,11 +69,12 @@ namespace TraverserProject
 
         public void CloseAllMenuWindows()
         {
-            playerUICharacterMenuManager.CloseMenu();
-            playerUIEquipmentManager.CloseMenu();
-            playerUISiteOfGraceManager.CloseMenu();
-            playerUITeleportLocationManager.CloseMenu();
-            playerUILevelUpManager.CloseMenu();
+            playerUICharacterMenuManager.CloseMenuAfterFixedFrame();
+            playerUIEquipmentManager.CloseMenuAfterFixedFrame();
+            playerUISiteOfGraceManager.CloseMenuAfterFixedFrame();
+            playerUITeleportLocationManager.CloseMenuAfterFixedFrame();
+            playerUILevelUpManager.CloseMenuAfterFixedFrame();
+            playerUIWeaponUpgradeManager.CloseMenuAfterFixedFrame();
         }
 
         // UI SFX
