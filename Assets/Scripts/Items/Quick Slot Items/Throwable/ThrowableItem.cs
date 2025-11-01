@@ -50,6 +50,9 @@ namespace TraverserProject
             instantiatedThrowableThrown.transform.localRotation = Quaternion.identity;
             instantiatedThrowableThrown.transform.parent = null;
 
+            ThrowableManager throwableManager = instantiatedThrowableThrown.GetComponent<ThrowableManager>();
+            throwableManager.InitializeThrowable(player);
+
             Destroy(instantiatedThrowableInHand);
 
 
