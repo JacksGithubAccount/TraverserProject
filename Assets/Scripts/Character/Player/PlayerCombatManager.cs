@@ -336,10 +336,7 @@ namespace TraverserProject
             player.playerCombatManager.canComboWithOffHandWeapon = false;
 
         }
-        public void FireArrow()
-        {
-            ReleaseArrow();
-        }
+
         public override void ReleaseArrow()
         {
             if (player.IsOwner)

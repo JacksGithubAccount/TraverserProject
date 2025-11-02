@@ -24,14 +24,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385122124448051381}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.8928151, y: -0.14375584, z: -0.22376692, w: 0.36351603}
-  m_LocalPosition: {x: -0.094, y: 0.045, z: -1.074}
+  m_LocalRotation: {x: 0.77842563, y: -0.3337046, z: -0.4976477, w: 0.18719357}
+  m_LocalPosition: {x: -0.2672361, y: 0.4472858, z: -0.9172451}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7709422440825209457}
   m_Father: {fileID: 4591133494783475614}
-  m_LocalEulerAnglesHint: {x: 35.787, y: -141.582, z: -148.87}
+  m_LocalEulerAnglesHint: {x: -2.333, y: -115.783, z: -135.055}
 --- !u!1 &758128053787367029
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,9 +127,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3649926580870538826}
-  - component: {fileID: 4362289971977449328}
-  - component: {fileID: 5315028831701593432}
   - component: {fileID: 268797774860837670}
+  - component: {fileID: 805072358746393080}
+  - component: {fileID: 2314577012101935074}
   m_Layer: 10
   m_Name: ThrowableDamageCollider
   m_TagString: Untagged
@@ -146,13 +146,33 @@ Transform:
   m_GameObject: {fileID: 1506567859791181302}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.095, z: 0.064}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4591133494783475614}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &4362289971977449328
+--- !u!114 &268797774860837670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506567859791181302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c28267d304a73304489516a8129be035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageCollider: {fileID: -416123790852298072}
+  physicalDamage: 0
+  magicDamage: 0
+  fireDamage: 100
+  lightningDamage: 0
+  holyDamage: 0
+  poiseDamage: 0
+  itemThrower: {fileID: 0}
+--- !u!54 &805072358746393080
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,12 +194,12 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &5315028831701593432
+--- !u!135 &2314577012101935074
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,28 +218,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.3
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &268797774860837670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1506567859791181302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c28267d304a73304489516a8129be035, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageCollider: {fileID: 0}
-  physicalDamage: 0
-  magicDamage: 0
-  fireDamage: 0
-  lightningDamage: 0
-  holyDamage: 0
-  poiseDamage: 0
-  itemThrower: {fileID: 0}
+  m_Radius: 0.5
+  m_Center: {x: 0.01, y: -0.1, z: 0.07}
 --- !u!1 &3621366037696577650
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +351,7 @@ GameObject:
   - component: {fileID: -4310765618579623136}
   - component: {fileID: -416123790852298072}
   - component: {fileID: 7480358264665482695}
+  - component: {fileID: 7524982149509326324}
   m_Layer: 14
   m_Name: Firebomb
   m_TagString: Untagged
@@ -417,12 +418,12 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0.03, y: -0.05, z: 0.03}
+  m_Radius: 0.2
+  m_Center: {x: 0.01, y: -0.1, z: 0.07}
 --- !u!114 &7480358264665482695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,5 +437,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  damageCollider: {fileID: 0}
+  damageCollider: {fileID: 268797774860837670}
   impactParticle: {fileID: 8194992990867289339, guid: 99bc28c0d45f51c4fbac01080b73edc7, type: 3}
+--- !u!114 &7524982149509326324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3818255587897451812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c28267d304a73304489516a8129be035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageCollider: {fileID: -416123790852298072}
+  physicalDamage: 0
+  magicDamage: 0
+  fireDamage: 0
+  lightningDamage: 0
+  holyDamage: 0
+  poiseDamage: 0
+  itemThrower: {fileID: 0}

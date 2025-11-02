@@ -35,12 +35,43 @@ namespace TraverserProject
                 CheckForBlock(damageTarget);
 
                 if (!damageTarget.characterNetworkManager.isInvulnerable.Value)
-                    DamageTarget(damageTarget);
-
-                throwableManager.WaitThenInstantiateDestructionFX(0.0f);
-
-
+                    DamageTarget(damageTarget);              
             }
+            
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {          
+            
+
+            CharacterManager potentialTarget = collision.transform.gameObject.GetComponent<CharacterManager>();
+
+            if (potentialTarget == null)
+                return;
+
+            if (itemThrower == null)
+                return;
+
+            if (potentialTarget == itemThrower)
+                return;
+
+            
+
+            WorldSoundFXManager.Singleton.AlertNearbyCharactersToSound(transform.position, 3);
+
+            Collider contactCollider = collision.gameObject.GetComponent<Collider>();
+
+            if (contactCollider != null)
+                contactPoint = contactCollider.ClosestPointOnBounds(transform.position);
+
+       
+
+            if (WorldUtilityManager.Singleton.CanIDamageThisTarget(itemThrower.characterGroup, potentialTarget.characterGroup))
+            {
+                CheckForBlock(potentialTarget);
+                DamageTarget(potentialTarget);
+            }
+            throwableManager.WaitThenInstantiateDestructionFX(0.0f);
         }
 
         protected override void CheckForParry(CharacterManager damageTarget)

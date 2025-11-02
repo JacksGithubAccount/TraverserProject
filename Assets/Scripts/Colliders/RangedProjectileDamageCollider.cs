@@ -13,6 +13,10 @@ namespace TraverserProject
         public Rigidbody rigidBody;
         private CapsuleCollider capsuleCollider;
 
+        [Header("Penetration")]
+        [SerializeField] float minimumPenetration = 0.0f;
+        [SerializeField] float maximumPenetration = 0.1f;
+
         protected override void Awake()
         {
             base.Awake();
@@ -102,7 +106,7 @@ namespace TraverserProject
                 gameObject.transform.SetParent(emptyObject.transform, true);
 
                 //how far the arrow penetrates
-                transform.position += transform.forward * (Random.Range(0.1f, 0.3f));
+                transform.position += transform.forward * (Random.Range(minimumPenetration, maximumPenetration));
 
                 //disables colliders and rigidbody
                 rigidBody.isKinematic = true;

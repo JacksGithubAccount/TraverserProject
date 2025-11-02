@@ -56,6 +56,8 @@ MonoBehaviour:
   poiseDamage: 0
   characterShootingProjectile: {fileID: 0}
   rigidBody: {fileID: 7890337553391711193}
+  minimumPenetration: -0.5
+  maximumPenetration: 0
 --- !u!54 &7890337553391711193
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -104,8 +106,8 @@ CapsuleCollider:
   serializedVersion: 2
   m_Radius: 0.02
   m_Height: 0.65
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.3, z: 0}
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.3}
 --- !u!1001 &1075402203052872656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -160,6 +162,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8401156109603033622, guid: 45804eb2722b83845adbcf2d72da12dd, type: 3}
       propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401156109603033622, guid: 45804eb2722b83845adbcf2d72da12dd, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401156109603033622, guid: 45804eb2722b83845adbcf2d72da12dd, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
