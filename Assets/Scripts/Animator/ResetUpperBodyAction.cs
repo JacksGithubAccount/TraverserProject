@@ -34,6 +34,12 @@ namespace TraverserProject
                 }
             }
 
+            if(player.IsOwner)
+            {
+                player.playerLocomotionManager.EnableCanRotate();
+                player.playerLocomotionManager.EnableCanMove();
+            }
+
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

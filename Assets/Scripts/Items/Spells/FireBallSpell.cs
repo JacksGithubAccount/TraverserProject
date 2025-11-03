@@ -104,8 +104,10 @@ namespace TraverserProject
             }
             else
             {
-                Vector3 forwardDirection = PlayerCamera.Singleton.transform.forward;
-                instantiatedReleasedSpellFX.transform.forward = forwardDirection;
+                //gets rotation of camera and direction of player so throwable is aimable along up and down but not side to side
+                Vector3 rotation = PlayerCamera.Singleton.cameraPivotTransform.eulerAngles;
+                Quaternion throwRotation = Quaternion.Euler(rotation.x, player.transform.eulerAngles.y, rotation.z);
+                instantiatedReleasedSpellFX.transform.rotation = throwRotation;
             }
 
             Rigidbody spellRigidBody = instantiatedReleasedSpellFX.GetComponent<Rigidbody>();

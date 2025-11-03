@@ -125,6 +125,16 @@ namespace TraverserProject
             canRotate = false;
         }
 
+        public void EnableCanMove()
+        {
+            canMove = true;
+        }
+
+        public void DisableCanMove()
+        {
+            canMove = false;
+        }
+
         //slopes and sliding
 
 

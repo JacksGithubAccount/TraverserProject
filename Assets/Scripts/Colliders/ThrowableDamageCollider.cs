@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 namespace TraverserProject
 {
@@ -35,12 +36,15 @@ namespace TraverserProject
                 CheckForBlock(damageTarget);
 
                 if (!damageTarget.characterNetworkManager.isInvulnerable.Value)
-                    DamageTarget(damageTarget);              
+                    DamageTarget(damageTarget);
+
+                throwableManager.WaitThenInstantiateDestructionFX(0.0f);
             }
             
+
         }
 
-        private void OnCollisionEnter(Collision collision)
+        /*private void OnCollisionEnter(Collision collision)
         {          
             
 
@@ -72,7 +76,7 @@ namespace TraverserProject
                 DamageTarget(potentialTarget);
             }
             throwableManager.WaitThenInstantiateDestructionFX(0.0f);
-        }
+        }*/
 
         protected override void CheckForParry(CharacterManager damageTarget)
         {

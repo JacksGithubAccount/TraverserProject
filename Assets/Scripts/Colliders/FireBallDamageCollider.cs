@@ -34,7 +34,7 @@ namespace TraverserProject
                 if (!damageTarget.characterNetworkManager.isInvulnerable.Value)
                     DamageTarget(damageTarget);
 
-                fireBallManager.WaitThenInstantiateSpellDestructionFX(0.4f);
+                fireBallManager.WaitThenInstantiateSpellDestructionFX(0.0f);
 
 
             }

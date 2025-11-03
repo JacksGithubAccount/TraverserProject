@@ -1,3 +1,4 @@
+using System.Runtime.ExceptionServices;
 using TraverserProject;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ namespace TraverserProject
 
         [Header("Throwable Model")]
         private GameObject instantiatedThrowableInHand = null;
+
+
         public override void AttemptToUseItem(PlayerManager player)
         {
             if (!CanIUseThisItem(player))
@@ -43,7 +46,7 @@ namespace TraverserProject
             }
             Transform itemInstantiationLocation;
             GameObject instantiatedThrowableThrown = Instantiate(itemModel, player.playerEquipmentManager.rightHandWeaponSlot.transform);
-            itemInstantiationLocation = instantiatedThrowableInHand.transform;
+            itemInstantiationLocation = player.playerEquipmentManager.rightHandWeaponSlot.transform;
 
             instantiatedThrowableThrown.transform.parent = itemInstantiationLocation.transform;
             instantiatedThrowableThrown.transform.localPosition = Vector3.zero;
@@ -51,10 +54,9 @@ namespace TraverserProject
             instantiatedThrowableThrown.transform.parent = null;
 
             ThrowableManager throwableManager = instantiatedThrowableThrown.GetComponent<ThrowableManager>();
+            
             throwableManager.InitializeThrowable(player);
-
             Destroy(instantiatedThrowableInHand);
-
 
             if (player.playerNetworkManager.isLockedOn.Value)
             {
@@ -62,15 +64,17 @@ namespace TraverserProject
             }
             else
             {
-                Vector3 forwardDirection = PlayerCamera.Singleton.transform.forward;
-                instantiatedThrowableThrown.transform.forward = forwardDirection;
+                //gets rotation of camera and direction of player so throwable is aimable along up and down but not side to side
+                Vector3 rotation = PlayerCamera.Singleton.cameraPivotTransform.eulerAngles;
+                Quaternion throwRotation = Quaternion.Euler(rotation.x, player.transform.eulerAngles.y, rotation.z);
+                instantiatedThrowableThrown.transform.rotation = throwRotation;
             }
 
-            Rigidbody spellRigidBody = instantiatedThrowableThrown.GetComponent<Rigidbody>();
+            Rigidbody rigidBody = instantiatedThrowableThrown.GetComponent<Rigidbody>();
             Vector3 upwardVelocityVector = instantiatedThrowableThrown.transform.up * upwardVelocity;
             Vector3 forwardVelocityVector = instantiatedThrowableThrown.transform.forward * forwardVelocity;
             Vector3 totalVelocity = upwardVelocityVector + forwardVelocityVector;
-            spellRigidBody.linearVelocity = totalVelocity;
+            rigidBody.linearVelocity = totalVelocity;
         }
 
         public override bool CanIUseThisItem(PlayerManager player)
@@ -79,6 +83,9 @@ namespace TraverserProject
                 return false;
 
             if (player.playerNetworkManager.isAttacking.Value)
+                return false;
+
+            if (player.playerCombatManager.isUsingItem)
                 return false;
 
             return true;

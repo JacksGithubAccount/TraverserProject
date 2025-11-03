@@ -29,6 +29,7 @@ namespace TraverserProject
             if (character.characterEffectsManager.activeQuickSlotItemFX != null)
                 Destroy(character.characterEffectsManager.activeQuickSlotItemFX);
 
+
             if (character.IsOwner)
             {
                 character.characterNetworkManager.isJumping.Value = false;
