@@ -12,6 +12,7 @@ namespace TraverserProject
         public virtual void OpenMenu()
         {
             PlayerUIManager.Singleton.menuWindowIsOpen = true;
+            PlayerUIManager.Singleton.openMenus.Push(this);
             menu.SetActive(true);
         }
 

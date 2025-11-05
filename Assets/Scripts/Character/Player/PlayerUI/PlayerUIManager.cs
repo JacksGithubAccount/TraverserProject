@@ -1,6 +1,8 @@
 using UnityEngine;
 using Unity.Netcode;
 using TravserserProject;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace TraverserProject
 {
@@ -22,10 +24,14 @@ namespace TraverserProject
         [HideInInspector] public PlayerUILoadingScreenManager playerUILoadingScreenManager;
         [HideInInspector] public PlayerUILevelUpManager playerUILevelUpManager;
         [HideInInspector] public PlayerUIWeaponUpgradeManager playerUIWeaponUpgradeManager;
+        [HideInInspector] public PlayerUIAnvilMenuManager playerUIAnvilMenuManager;
 
         [Header("UI Flags")]
         public bool menuWindowIsOpen = false;
         public bool popUpWindowIsOpen = false;
+
+        [Header("Open Menus")]
+        public Stack<PlayerUIMenu> openMenus = new Stack<PlayerUIMenu>();
 
 
         private void Awake()
@@ -51,6 +57,7 @@ namespace TraverserProject
             playerUILoadingScreenManager = GetComponentInChildren<PlayerUILoadingScreenManager>();
             playerUILevelUpManager = GetComponentInChildren<PlayerUILevelUpManager>();
             playerUIWeaponUpgradeManager = GetComponentInChildren<PlayerUIWeaponUpgradeManager>();
+            playerUIAnvilMenuManager = GetComponentInChildren<PlayerUIAnvilMenuManager>();
         }
         private void Start()
         {
@@ -75,6 +82,9 @@ namespace TraverserProject
             playerUITeleportLocationManager.CloseMenuAfterFixedFrame();
             playerUILevelUpManager.CloseMenuAfterFixedFrame();
             playerUIWeaponUpgradeManager.CloseMenuAfterFixedFrame();
+            playerUIAnvilMenuManager.CloseMenuAfterFixedFrame();
+
+            openMenus.Clear();
         }
 
         // UI SFX

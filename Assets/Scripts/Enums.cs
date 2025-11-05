@@ -52,6 +52,13 @@ public enum DialogueEndEvents
     Blacksmith
 }
 
+//determines build up status effect type
+public enum BuildUp
+{
+    Poison,
+    Bleed
+}
+
 //is tag for each weapon model instantiation slot
 public enum WeaponModelSlot
 {

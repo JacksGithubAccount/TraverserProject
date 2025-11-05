@@ -15,7 +15,7 @@ namespace TraverserProject
 
             WorldSaveGameManager.Singleton.SaveGame();
 
-            PlayerUIManager.Singleton.playerUIWeaponUpgradeManager.OpenMenu();
+            PlayerUIManager.Singleton.playerUIAnvilMenuManager.OpenMenu();
         }
 
         public override void OnTriggerExit(Collider other)

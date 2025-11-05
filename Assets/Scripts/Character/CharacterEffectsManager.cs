@@ -7,7 +7,7 @@ namespace TraverserProject
 
     public class CharacterEffectsManager : MonoBehaviour
     {
-        CharacterManager character;
+        protected CharacterManager character;
 
         [Header("Current FX")]
         public GameObject activeQuickSlotItemFX;
@@ -20,6 +20,9 @@ namespace TraverserProject
 
         [Header("Static Effects")]
         public List<StaticCharacterEffect> staticEffects = new List<StaticCharacterEffect>();
+
+        [Header("Timed Effects")]
+        public List<TimedCharacterEffect> timedEffects = new List<TimedCharacterEffect>();
 
         protected virtual void Awake()
         {
@@ -54,8 +57,25 @@ namespace TraverserProject
             }
         }
 
+        public virtual void AddBuildUps(BuildUp buildUpType, float amount)
+        {
+            if (!character.IsOwner)
+                return;
 
+            switch (buildUpType)
+            {
+                case BuildUp.Poison:
+                    character.characterNetworkManager.poisonBuildUp.Value += amount;
+                    break;
+                case BuildUp.Bleed:
+                    character.characterNetworkManager.bleedBuildUp.Value += amount;
+                    break;
+                default:
+                    break;
+            }
+        }
 
+        //Static Effects
         public void AddStaticEffect(StaticCharacterEffect effect)
         {
             staticEffects.Add(effect);
@@ -92,5 +112,71 @@ namespace TraverserProject
             }
 
         }
+
+        //Timed Effects
+
+        public void ProcessTimedEffects()
+        {
+            for (int i = 0; i < timedEffects.Count; i++)
+            {
+                if (timedEffects[i] == null)
+                    continue;
+
+                timedEffects[i].ProcessEffect(character);
+            }
+        }
+
+        public void AddTimedEffect(TimedCharacterEffect effect)
+        {
+            bool effectIsAlreadyOnCharacter = false;
+
+            for (int i = 0; i < timedEffects.Count; i++)
+            {
+                if (timedEffects[i] == null)
+                    continue;
+                if (timedEffects[i].effectID == effect.effectID)
+                {
+                    effectIsAlreadyOnCharacter = true;
+                    timedEffects[i].timeRemainingOnEffect = timedEffects[i].defaultLengthOfEffect;
+                }
+            }
+
+            if (!effectIsAlreadyOnCharacter)
+            {
+                timedEffects.Add(effect);
+                effect.timeRemainingOnEffect = effect.defaultLengthOfEffect;
+
+                effect.ProcessEffect(character);
+            }
+        }
+
+        public void RemoveTimedEffect(int effectID)
+        {
+            TimedCharacterEffect effect;
+
+            for (int i = 0; i < timedEffects.Count; i++)
+            {
+                if (timedEffects[i] == null)
+                    timedEffects.RemoveAt(i);
+            }
+        }
+
+        public TimedCharacterEffect CheckForTimedEffect(int effectID)
+        {
+            TimedCharacterEffect timedEffect = null;
+
+
+
+            for (int i = 0; i < timedEffects.Count; i++)
+            {
+                if (timedEffects[i].effectID == effectID)
+                {
+                    timedEffect = timedEffects[i];
+                    break;
+                }
+            }
+            return timedEffect;
+        }
+
     }
 }

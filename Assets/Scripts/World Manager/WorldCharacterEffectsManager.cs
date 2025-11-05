@@ -19,6 +19,10 @@ namespace TraverserProject
         public TakeBlockedDamageEffect takeBlockedDamageEffect;
         public TakeCriticalDamageEffect takeCriticalDamageEffect;
 
+        [Header("Build Ups")]
+        public TakeBuildUpEffect poisonBuildUpEffect;
+        public TakeBuildUpEffect bleedBuildUpEffect;
+
         [Header("Two Hand")]
         public TwoHandingEffect twoHandingEffect;
 
