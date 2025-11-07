@@ -94,7 +94,7 @@ namespace TraverserProject
                     case DialogueEndEvents.None:
                         break;
                     case DialogueEndEvents.Blacksmith:
-                        PlayerUIManager.Singleton.playerUIWeaponUpgradeManager.OpenMenuAfterFixedFrame();
+                        PlayerUIManager.Singleton.playerUIBlacksmithMenuManager.OpenMenuAfterFixedFrame();
                         break;
                     default:
                         break;
@@ -109,7 +109,7 @@ namespace TraverserProject
                 case DialogueEndEvents.None:
                     break;
                 case DialogueEndEvents.Blacksmith:
-                    PlayerUIManager.Singleton.playerUIWeaponUpgradeManager.CloseMenu();
+                    PlayerUIManager.Singleton.CloseAllOpenMenuWindows();
                     break;
                 default:
                     break;

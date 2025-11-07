@@ -431,7 +431,8 @@ namespace TraverserProject
                 //unlocked and not aiming
                 else
                 {
-                    Quaternion arrowRotation = Quaternion.LookRotation(player.transform.forward);
+                    Vector3 rotation = PlayerCamera.Singleton.cameraPivotTransform.eulerAngles;
+                    Quaternion arrowRotation = Quaternion.Euler(rotation.x, player.transform.eulerAngles.y, rotation.z);
                     projectileGameObject.transform.rotation = arrowRotation;
                 }
             }
