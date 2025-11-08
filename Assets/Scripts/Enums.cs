@@ -46,6 +46,13 @@ public enum CharacterDialogueID
     BlacksmithDialogueID
 }
 
+//used for determining dialogue from selecting talk in the menus
+public enum CharacterMenuDialogueID
+{
+    NoDialogueID,    
+    BlacksmithTalkDialogueID
+}
+
 public enum DialogueEndEvents
 {
     None,

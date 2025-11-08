@@ -13,8 +13,10 @@ namespace TraverserProject
 
         [Header("Dialogue")]
         public CharacterDialogueID characterDialogueID;
+        public CharacterMenuDialogueID characterMenuDialogueID;
         public GameObject interactableDialogueCollider;
         public CharacterDialogue currentDialogue;
+        public CharacterDialogue menuDialogue;
         public GameObject interactableDialogueObject;
         public bool dialogueIsPlaying = false;
 
@@ -36,6 +38,10 @@ namespace TraverserProject
                 NetworkObject networkObject = interactableDialogueObject.GetComponent<NetworkObject>();
                 networkObject.Spawn();
                 networkObject.TrySetParent(gameObject, true);
+            }
+            if(characterMenuDialogueID != CharacterMenuDialogueID.NoDialogueID)
+            {
+                menuDialogue = WorldSaveGameManager.Singleton.GetCharacterMenuDialogueByEnum(characterMenuDialogueID);
             }
         }
 
@@ -59,6 +65,21 @@ namespace TraverserProject
             else
             {
                 PlayerUIManager.Singleton.playerUIPopUpManager.SendNextDialoguePopUpInIndex(currentDialogue, aiCharacter);
+            }
+        }
+
+        public void PlayCurrentMenuDialogueEvent()
+        {
+            if (menuDialogue == null)
+                return;
+
+            if (!dialogueIsPlaying)
+            {
+                menuDialogue.PlayDialogueEvent(aiCharacter);
+            }
+            else
+            {
+                PlayerUIManager.Singleton.playerUIPopUpManager.SendNextDialoguePopUpInIndex(menuDialogue, aiCharacter);
             }
         }
 

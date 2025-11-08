@@ -102,6 +102,7 @@ namespace TraverserProject
         [Header("Dialogue")]
         public int namelessKnightStageID = 0;
         public int blacksmithStageID = 0;
+        public int blacksmithMenuStageID = 0;
 
         public int currentSpell;
 

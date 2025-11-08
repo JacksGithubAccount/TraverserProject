@@ -43,10 +43,14 @@ namespace TraverserProject
         [Header("Stage IDs")]
         public int namelessKnightDialogueStageID = 0;
         public int blacksmithDialogueStageID = 0;
+        public int blacksmithMenuDialogueStageID = 0;
 
         [Header("Dialogues")]
         [SerializeField] List<CharacterDialogue> namelessKnightDialogues = new List<CharacterDialogue>();
         [SerializeField] List<CharacterDialogue> blacksmithDialogues = new List<CharacterDialogue>();
+
+        [Header("Menu Dialogues")]
+        [SerializeField] List<CharacterDialogue> blacksmithMenuDialogues = new List<CharacterDialogue>();
 
         private void Awake()
         {
@@ -451,6 +455,27 @@ namespace TraverserProject
             return dialogue;
         }
 
+        public CharacterDialogue GetCharacterMenuDialogueByEnum(CharacterMenuDialogueID characterMenuDialogueID)
+        {
+            CharacterDialogue dialogue = null;
+
+            switch (characterMenuDialogueID)
+            {
+                case CharacterMenuDialogueID.NoDialogueID:
+                    break;
+                case CharacterMenuDialogueID.BlacksmithTalkDialogueID:
+                    dialogue = FindDialogueByStageID(blacksmithMenuDialogueStageID, blacksmithMenuDialogues);
+                    break;
+                default:
+                    break;
+            }
+
+            if (dialogue != null)
+                dialogue = Instantiate(dialogue);
+
+            return dialogue;
+        }
+
 
 
         private CharacterDialogue FindDialogueByStageID(int stageID, List<CharacterDialogue> dialogueList)
@@ -490,9 +515,26 @@ namespace TraverserProject
             }
         }
 
+        public void SetStageOfMenuDialogue(CharacterMenuDialogueID characterMenuDialogue, int stageIndex)
+        {
+            switch (characterMenuDialogue)
+            {
+                case CharacterMenuDialogueID.NoDialogueID:
+                    break;
+                case CharacterMenuDialogueID.BlacksmithTalkDialogueID:
+                    blacksmithDialogueStageID = stageIndex;
+                    currentCharacterData.blacksmithMenuStageID = blacksmithMenuDialogueStageID;
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void GetStageIDsOnLoad()
         {
             namelessKnightDialogueStageID = currentCharacterData.namelessKnightStageID;
+            blacksmithDialogueStageID = currentCharacterData.blacksmithStageID;
+            blacksmithMenuDialogueStageID = currentCharacterData.blacksmithMenuStageID;
         }
     }
 }

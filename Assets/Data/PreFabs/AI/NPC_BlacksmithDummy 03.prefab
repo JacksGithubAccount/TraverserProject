@@ -1335,6 +1335,7 @@ MonoBehaviour:
   bloodSplatterVFX: {fileID: 1972549086604712929, guid: c90de004b46c5404387de1354ec6a546, type: 3}
   criticalBloodSplatterVFX: {fileID: 0}
   staticEffects: []
+  timedEffects: []
 --- !u!114 &8883432730431339116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1540,6 +1541,10 @@ MonoBehaviour:
     m_InternalValue: 1
   luck:
     m_InternalValue: 1
+  poisonBuildUp:
+    m_InternalValue: 100
+  bleedBuildUp:
+    m_InternalValue: 100
   strengthModifier:
     m_InternalValue: 1
   isAwake:
@@ -1763,8 +1768,10 @@ MonoBehaviour:
   blockingSFX:
   - {fileID: 8300000, guid: 431857fa264f4fd4d8d608c59d3b93f3, type: 3}
   characterDialogueID: 2
+  characterMenuDialogueID: 1
   interactableDialogueCollider: {fileID: 0}
   currentDialogue: {fileID: 0}
+  menuDialogue: {fileID: 0}
   interactableDialogueObject: {fileID: 0}
   dialogueIsPlaying: 0
 --- !u!1 &5914042613956171416 stripped
