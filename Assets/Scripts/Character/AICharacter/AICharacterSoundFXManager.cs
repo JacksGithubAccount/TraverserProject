@@ -19,6 +19,7 @@ namespace TraverserProject
         public CharacterDialogue menuDialogue;
         public GameObject interactableDialogueObject;
         public bool dialogueIsPlaying = false;
+        public bool menuDialogueIsPlaying = false;
 
         protected override void Awake()
         {
@@ -73,6 +74,7 @@ namespace TraverserProject
             if (menuDialogue == null)
                 return;
 
+            menuDialogueIsPlaying = true;
             if (!dialogueIsPlaying)
             {
                 menuDialogue.PlayDialogueEvent(aiCharacter);
@@ -90,6 +92,7 @@ namespace TraverserProject
             if (dialogueIsPlaying)
             {
                 dialogueIsPlaying = false;
+                menuDialogueIsPlaying = false;
                 PlayerUIManager.Singleton.playerUIPopUpManager.CancelDialoguePopUp(aiCharacter);
             }
         }

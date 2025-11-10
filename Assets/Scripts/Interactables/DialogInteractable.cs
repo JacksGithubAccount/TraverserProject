@@ -31,7 +31,14 @@ namespace TraverserProject
                 WorldSaveGameManager.Singleton.SaveGame();
             }
 
-            aiCharacter.aiCharacterSoundFXManager.PlayCurrentDialogueEvent();
+            if (aiCharacter.aiCharacterSoundFXManager.menuDialogueIsPlaying)
+            {
+                aiCharacter.aiCharacterSoundFXManager.PlayCurrentMenuDialogueEvent();
+            }
+            else
+            {
+                aiCharacter.aiCharacterSoundFXManager.PlayCurrentDialogueEvent();
+            }
         }
 
         public override void OnTriggerEnter(Collider other)
