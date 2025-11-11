@@ -17,6 +17,10 @@ namespace TravserserProject
         [SerializeField] UI_StatBar staminaBar;
         [SerializeField] UI_StatBar focusPointBar;
 
+        [Header("Build Up Bars")]
+        [SerializeField] UI_BuildUpBar poisonBuildUpBar;
+        [SerializeField] UI_BuildUpBar bleedBuildUpBar;
+
         [Header("Runes")]
         [SerializeField] float bubbleUpdateCountDelayTimer = 2.5f;
         private int pendingBubblesToAdd = 0;
@@ -131,6 +135,38 @@ namespace TravserserProject
             pendingBubblesToAdd = 0;
             bubblesCountText.text = PlayerUIManager.Singleton.localPlayer.playerStatsManager.bubbles.ToString();
             yield return null;
+        }
+
+        public void SetBuildUpAmount(BuildUp buildUpType, int amount)
+        {
+            switch (buildUpType)
+            {
+                case BuildUp.Poison:
+                    poisonBuildUpBar.SetStat(amount);
+                    break;
+                case BuildUp.Bleed:
+                    bleedBuildUpBar.SetStat(amount);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void SetNewPoisonBuildUpAmount(float oldValue, float amount)
+        {
+            poisonBuildUpBar.SetStat(Mathf.RoundToInt(amount));
+        }
+
+        public void SetNewBleedBuildUpAmount(float oldValue, float amount)
+        {
+            bleedBuildUpBar.SetStat(Mathf.RoundToInt(amount));
+        }
+
+        public void SetMaxBuildUpCapacityValue(int buildUpCapacity)
+        {
+            poisonBuildUpBar.SetMaxStat(buildUpCapacity);
+            bleedBuildUpBar.SetMaxStat(buildUpCapacity);
+            //ETC
         }
 
         public void SetNewHealthValue(int oldValue, int newValue)

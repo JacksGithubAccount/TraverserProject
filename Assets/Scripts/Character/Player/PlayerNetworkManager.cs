@@ -125,6 +125,12 @@ namespace TraverserProject
             currentFocusPoints.Value = maxFocusPoints.Value;
         }
 
+        public void SetNewMaxBuildUpCapacityValue(int oldVitality, int newVitality)
+        {
+            buildUpCapacity.Value = player.playerStatsManager.CalculateBuildUpCapacityBasedOnVitalityLevel(newVitality);
+            PlayerUIManager.Singleton.playerUIHudManager.SetMaxBuildUpCapacityValue(Mathf.RoundToInt(buildUpCapacity.Value));
+        }
+
         public void OnHairStyleIDChange(int oldID, int newID)
         {
             player.playerBodyManager.ToggleHairType(hairStyleID.Value);

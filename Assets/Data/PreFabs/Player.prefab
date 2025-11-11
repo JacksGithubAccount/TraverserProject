@@ -12588,6 +12588,12 @@ MonoBehaviour:
     m_InternalValue: 1
   luck:
     m_InternalValue: 1
+  buildUpCapacity:
+    m_InternalValue: 100
+  poisonBuildUp:
+    m_InternalValue: 0
+  bleedBuildUp:
+    m_InternalValue: 0
   strengthModifier:
     m_InternalValue: 1
   characterName:
@@ -12969,6 +12975,11 @@ MonoBehaviour:
   bloodSplatterVFX: {fileID: 0}
   criticalBloodSplatterVFX: {fileID: 0}
   staticEffects: []
+  effectTickTimer: 0
+  defaultEffectTickTime: 1
+  timedEffects: []
+  applyPoisonBuildUp: 0
+  applyBleedBuildUp: 0
 --- !u!114 &6034644509893924099
 MonoBehaviour:
   m_ObjectHideFlags: 0

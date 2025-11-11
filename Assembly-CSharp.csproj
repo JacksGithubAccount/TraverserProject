@@ -65,7 +65,6 @@
     <Compile Include="Assets\Scripts\Character\AICharacter\State\InvestigateSoundState.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerCamera.cs" />
     <Compile Include="Assets\Scripts\Character\AICharacter\AICharacterSoundFXManager.cs" />
-    <Compile Include="Assets\Scripts\Effects\TakeCriticalDamageEffect.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterNetworkManager.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Scripts\Items\Weapons\WeaponModelInstantiationSlot.cs" />
@@ -74,9 +73,11 @@
     <Compile Include="Assets\Scripts\Character\AICharacter\AICharacterAnimatorManager.cs" />
     <Compile Include="Assets\Scripts\Menu Scene\UI_Color_Button.cs" />
     <Compile Include="Assets\Scripts\Character\AICharacter\State\CombatStanceState.cs" />
+    <Compile Include="Assets\Scripts\Effects\Base\InstantCharacterEffect.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerStatsManager.cs" />
     <Compile Include="Assets\Scripts\World Manager\WorldGameSessionManager.cs" />
     <Compile Include="Assets\Scripts\Items\EquipmentModel\EquipmentModel.cs" />
+    <Compile Include="Assets\Scripts\Effects\Base\StaticCharacterEffect.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterUIManager.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerUI\FadeLoadingIcon.cs" />
     <Compile Include="Assets\Scripts\Items\Spells\FireBallManager.cs" />
@@ -86,7 +87,6 @@
     <Compile Include="Assets\Scripts\Character\Player\PlayerInputManager.cs" />
     <Compile Include="Assets\Scripts\Character\AICharacter\AIPatrolPath.cs" />
     <Compile Include="Assets\Scripts\Items\Spells\SpellInstantiationLocation.cs" />
-    <Compile Include="Assets\Scripts\Effects\TwoHandingEffect.cs" />
     <Compile Include="Assets\Scripts\SaveAndLoad\CharacterSaveData.cs" />
     <Compile Include="Assets\Scripts\Items\Weapons\WeaponItem.cs" />
     <Compile Include="Assets\Scripts\Items\Weapon Actions\OffHandMeleeAction.cs" />
@@ -125,7 +125,6 @@
     <Compile Include="Assets\Scripts\Interactables\AnvilInteractable.cs" />
     <Compile Include="Assets\Scripts\Items\Weapon Actions\WeaponItemAction.cs" />
     <Compile Include="Assets\Scripts\Items\Equipment\ArmorItem.cs" />
-    <Compile Include="Assets\Scripts\Effects\StaticCharacterEffect.cs" />
     <Compile Include="Assets\Scripts\Colliders\MeleeWeaponDamageCollider.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\Animator\ResetIsChugging.cs" />
@@ -133,21 +132,22 @@
     <Compile Include="Assets\Scripts\Animator\ResetIsJumping.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerEquipmentManager.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerNetworkManager.cs" />
-    <Compile Include="Assets\Scripts\Effects\TakeBlockedDamageEffect.cs" />
-    <Compile Include="Assets\Scripts\Effects\TimedCharacterEffect.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerUI\PlayerUISiteOfGraceManager.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerUI\PlayerUITeleportLocationManager.cs" />
     <Compile Include="Assets\Scripts\Colliders\ManualDamageCollider.cs" />
     <Compile Include="Assets\Scripts\SaveAndLoad\SerializableQuickSlotItem.cs" />
     <Compile Include="Assets\Scripts\Animator\ResetActionFlag.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerBodyManager.cs" />
+    <Compile Include="Assets\Scripts\Effects\Base\TimedCharacterEffect.cs" />
     <Compile Include="Assets\Scripts\Items\Quick Slot Items\Throwable\ThrowableItem.cs" />
     <Compile Include="Assets\Scripts\Character\AICharacter\State\BossSleepState.cs" />
     <Compile Include="Assets\Scripts\Menu Scene\TitleScreenManager.cs" />
+    <Compile Include="Assets\Scripts\Effects\Instant\TakeBlockedDamageEffect.cs" />
     <Compile Include="Assets\Scripts\Interactables\SiteOfGraceInteractable.cs" />
     <Compile Include="Assets\Scripts\World Manager\WorldCharacterEffectsManager.cs" />
     <Compile Include="Assets\Scripts\Character\AICharacter\UndeadCharacter\AIUndeadCombatManager.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerUI\PlayerUIManager.cs" />
+    <Compile Include="Assets\Scripts\Effects\Instant\TakeBuildUpEffect.cs" />
     <Compile Include="Assets\Scripts\Interactables\DialogInteractable.cs" />
     <Compile Include="Assets\Data\Imports\Diabolical Games\Destructible Objects\Scripts\DestructibleObject.cs" />
     <Compile Include="Assets\Scripts\Menu Scene\TitleScreenLoadMenuInputManager.cs" />
@@ -178,13 +178,11 @@
     <Compile Include="Assets\Scripts\Character\Player\PlayerUI\PlayerUILoadingScreenManager.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerUI\PlayerUIBlacksmithMenuManager.cs" />
     <Compile Include="Assets\Scripts\Menu Scene\UI_Character_Save_Slot.cs" />
-    <Compile Include="Assets\Scripts\Effects\TakeBuildUpEffect.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerUI\PlayerUIHudManager.cs" />
     <Compile Include="Assets\Scripts\Items\Weapons\RangedWeaponItem.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\Items\Spells\SpellItem.cs" />
     <Compile Include="Assets\Scripts\Animator\ToggleAttackType.cs" />
-    <Compile Include="Assets\Scripts\Effects\TakeDamageEffect.cs" />
     <Compile Include="Assets\Scripts\Items\AshesOfWar\AshOfWar.cs" />
     <Compile Include="Assets\Scripts\World Manager\WorldSoundFXManager.cs" />
     <Compile Include="Assets\Scripts\World Manager\WorldItemDatabase.cs" />
@@ -207,10 +205,12 @@
     <Compile Include="Assets\Scripts\Character\CharacterManager.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerUI\PlayerUIWeaponUpgradeManager.cs" />
     <Compile Include="Assets\UI_Character_HP_Bar.cs" />
+    <Compile Include="Assets\Scripts\Effects\Timed\BuildUpEffect.cs" />
     <Compile Include="Assets\Scripts\Items\Weapon Actions\LightAttackWeaponItemAction.cs" />
     <Compile Include="Assets\Scripts\SaveAndLoad\SerializableFlask.cs" />
     <Compile Include="Assets\Data\Imports\Solodream\VFX_FireballPack\Scripts\FireballHorizontalMovement.cs" />
     <Compile Include="Assets\Scripts\Colliders\FireBallDamageCollider.cs" />
+    <Compile Include="Assets\Scripts\Effects\Instant\TakeDamageEffect.cs" />
     <Compile Include="Assets\Scripts\Items\Weapon Actions\FireProjectileAction.cs" />
     <Compile Include="Assets\Scripts\Character\Player\BeaconDetector.cs" />
     <Compile Include="Assets\Scripts\Interactables\PickUpItemInteractable.cs" />
@@ -229,13 +229,14 @@
     <Compile Include="Assets\Scripts\Utility\Utility_DestroyAfterTime.cs" />
     <Compile Include="Assets\PlayerControls.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerAimCameraFollowTransform.cs" />
-    <Compile Include="Assets\Scripts\Effects\InstantCharacterEffect.cs" />
+    <Compile Include="Assets\Scripts\Effects\Static\TwoHandingEffect.cs" />
     <Compile Include="Assets\Scripts\Character\AICharacter\AICharacterLocomotionManager.cs" />
     <Compile Include="Assets\Scripts\Colliders\DamageCollider.cs" />
     <Compile Include="Assets\Scripts\Character\CharacterAnimatorManager.cs" />
     <Compile Include="Assets\Scripts\Interactables\NetworkObjectSpawner.cs" />
     <Compile Include="Assets\Scripts\Character\Player\PlayerUI\PlayerUIMenu.cs" />
     <Compile Include="Assets\Scripts\Colliders\ThrowableDamageCollider.cs" />
+    <Compile Include="Assets\Scripts\Effects\Instant\TakeStaminaDamageCharacterEffect.cs" />
     <Compile Include="Assets\Scripts\World Manager\WorldObjectManager.cs" />
     <Compile Include="Assets\Scripts\Animator\ToggleBlockingController.cs" />
     <Compile Include="Assets\Scripts\Items\AshesOfWar\ParryAshOfWar.cs" />
@@ -246,8 +247,9 @@
     <Compile Include="Assets\Scripts\Character\AICharacter\AIActivationBeacon.cs" />
     <Compile Include="Assets\Scripts\Items\Equipment\HandEquipmentItem.cs" />
     <Compile Include="Assets\Scripts\Character\AICharacter\AICharacterSpawner.cs" />
-    <Compile Include="Assets\Scripts\Effects\TakeStaminaDamageCharacterEffect.cs" />
     <Compile Include="Assets\Scripts\Character\AICharacter\BossCharacters\Durk\AIDurkSoundFXManager.cs" />
+    <Compile Include="Assets\Scripts\Character\Player\PlayerUI\UI_BuildUpBar.cs" />
+    <Compile Include="Assets\Scripts\Effects\Instant\TakeCriticalDamageEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

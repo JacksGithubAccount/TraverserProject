@@ -134,6 +134,16 @@ namespace TravserserProject
             }
         }
 
+        public int CalculateBuildUpCapacityBasedOnVitalityLevel(int vitality)
+        {
+            float capacity = 0;
+
+            //any equation for capacity
+            capacity = vitality * 15;
+
+            return Mathf.RoundToInt(capacity);
+        }
+
         public virtual void RegenerateStamina()
         {
             if (!character.IsOwner)
@@ -182,6 +192,24 @@ namespace TravserserProject
             else
             {
                 totalPoiseDamage = 0;
+            }
+        }
+
+        public virtual void DegradeBuildUps(BuildUp buildUp, int amount, BuildUpEffect effect)
+        {
+            switch (buildUp)
+            {
+                case BuildUp.Poison:
+                    character.characterNetworkManager.poisonBuildUp.Value += amount;
+                    effect.buildUpRemaining = character.characterNetworkManager.poisonBuildUp.Value;
+
+                    break;
+                case BuildUp.Bleed:
+                    character.characterNetworkManager.bleedBuildUp.Value += amount;
+                    effect.buildUpRemaining = character.characterNetworkManager.bleedBuildUp.Value;
+                    break;
+                default:
+                    break;
             }
         }
     }
