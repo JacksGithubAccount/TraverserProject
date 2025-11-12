@@ -297,6 +297,7 @@ namespace TraverserProject
                 PlayerCamera.Singleton.cameraObject.fieldOfView = 60;
                 PlayerCamera.Singleton.cameraObject.nearClipPlane = 0.3f;
                 PlayerCamera.Singleton.cameraPivotTransform.localPosition = new Vector3(0, PlayerCamera.Singleton.cameraPivotYPositionOffset, 0);
+                PlayerCamera.Singleton.ResetCameraZPosition();
                 PlayerUIManager.Singleton.playerUIHudManager.crossHair.SetActive(false);
             }
             else
@@ -304,7 +305,7 @@ namespace TraverserProject
                 PlayerCamera.Singleton.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
                 PlayerCamera.Singleton.cameraPivotTransform.localEulerAngles = new Vector3(0, 0, 0);
                 PlayerCamera.Singleton.cameraObject.fieldOfView = 40;
-                PlayerCamera.Singleton.cameraObject.nearClipPlane = 1.3f;
+                PlayerCamera.Singleton.cameraObject.nearClipPlane = 1.1f;
                 PlayerCamera.Singleton.cameraPivotTransform.localPosition = Vector3.zero;
                 PlayerUIManager.Singleton.playerUIHudManager.crossHair.SetActive(true);
             }

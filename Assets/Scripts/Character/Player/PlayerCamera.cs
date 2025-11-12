@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace TraverserProject
 {
@@ -23,8 +24,8 @@ namespace TraverserProject
 
 
         [Header("Camera Values")]
-        private UnityEngine.Vector3 cameraVelocity;
-        private UnityEngine.Vector3 cameraObjectPosition;
+        private Vector3 cameraVelocity;
+        private Vector3 cameraObjectPosition;
         [SerializeField] float leftAndRightLookAngle;
         [SerializeField] float upAndDownLookAngle;
         private float cameraZPosition;
@@ -45,11 +46,8 @@ namespace TraverserProject
         public CharacterManager rightLockOnTarget;
 
         [Header("Ranged Aim")]
-        private Transform followTransformWhenAiming;
         public Vector3 aimDirection;
 
-        //[Header("Test")]
-        //[SerializeField] GameObject testObject;
         private void Awake()
         {
             if (Singleton == null)
@@ -199,6 +197,7 @@ namespace TraverserProject
                     cameraObject.transform.localPosition = cameraObjectPosition;
                     return;
                 }
+
                 cameraObjectPosition.z = Mathf.Lerp(cameraObject.transform.localPosition.z, targetCameraZPosition, 0.2f);
                 cameraObject.transform.localPosition = cameraObjectPosition;
 
@@ -294,6 +293,13 @@ namespace TraverserProject
 
                 }
             }
+        }
+
+        public void ResetCameraZPosition()
+        {
+            Vector3 position = cameraObject.transform.localPosition;
+            position.z = cameraZPosition;
+            cameraObject.transform.localPosition = position;
         }
 
         public void SetLockCameraHeight()
