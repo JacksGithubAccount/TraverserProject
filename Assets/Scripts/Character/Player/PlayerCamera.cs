@@ -98,9 +98,13 @@ namespace TraverserProject
 
         private void HandleRotations()
         {
-            if (player.playerNetworkManager.isAiming.Value)
+            if (player.playerNetworkManager.isAiming.Value && !player.playerNetworkManager.isHoldingArrow.Value)
             {
                 HandleAimRotations();
+            } 
+            else if (player.playerNetworkManager.isAiming.Value && player.playerNetworkManager.isHoldingArrow.Value)
+            {
+                HandleAimAndHoldingArrowRotations();
             }
             else
             {
@@ -129,6 +133,27 @@ namespace TraverserProject
             cameraRotationX.x = upAndDownLookAngle;
 
             cameraObject.transform.localEulerAngles = new Vector3(upAndDownLookAngle, leftAndRightLookAngle, 0);
+        }
+
+        private void HandleAimAndHoldingArrowRotations()
+        {
+            if (!player.playerLocomotionManager.isGrounded)
+                player.playerNetworkManager.isAiming.Value = false;
+
+            aimDirection = cameraObject.transform.forward.normalized;
+
+            Vector3 cameraRotationY = Vector3.zero;
+            Vector3 cameraRotationX = Vector3.zero;
+
+            leftAndRightLookAngle += (PlayerInputManager.Singleton.cameraHorizontalInput * leftAndRightRotationSpeed) * Time.deltaTime;
+            upAndDownLookAngle -= (PlayerInputManager.Singleton.cameraVerticalInput * upAndDownRotationSpeed) * Time.deltaTime;
+            upAndDownLookAngle = Mathf.Clamp(upAndDownLookAngle, minimumPivot, maximumPivot);
+
+            cameraRotationY.y = leftAndRightLookAngle;
+            cameraRotationX.x = upAndDownLookAngle;
+
+            cameraObject.transform.localEulerAngles = new Vector3(upAndDownLookAngle, leftAndRightLookAngle, 0);
+            
         }
 
         private void HandleStandardRotations()
