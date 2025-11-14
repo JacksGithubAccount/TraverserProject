@@ -151,7 +151,7 @@ namespace TraverserProject
             if (!player.characterLocomotionManager.canRotate)
                 return;
 
-            if (player.playerNetworkManager.isAiming.Value)
+            if (player.playerNetworkManager.isAiming.Value && !player.playerNetworkManager.isHoldingArrow.Value)
             {
                 HandleAimRotation();
             }

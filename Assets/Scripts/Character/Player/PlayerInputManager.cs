@@ -402,13 +402,13 @@ namespace TraverserProject
                     horizontalInput = 0.5f;
             }
 
-            if (!player.playerNetworkManager.isLockedOn.Value && !player.playerNetworkManager.isSprinting.Value)
+            if (player.playerNetworkManager.isLockedOn.Value && !player.playerNetworkManager.isSprinting.Value)
             {
                 player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontalInput, verticalInput, player.playerNetworkManager.isSprinting.Value);
                 return;
             }
 
-            if (!player.playerNetworkManager.isAiming.Value)
+            if (player.playerNetworkManager.isAiming.Value)
             {
                 player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontalInput, verticalInput, player.playerNetworkManager.isSprinting.Value);
                 return;
