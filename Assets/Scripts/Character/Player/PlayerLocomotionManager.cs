@@ -155,6 +155,10 @@ namespace TraverserProject
             {
                 HandleAimRotation();
             }
+            else if (player.playerNetworkManager.isAiming.Value && player.playerNetworkManager.isHoldingArrow.Value)
+            {
+                HandleAimAndHoldingRotation();
+            }
             else
             {
                 HandleStandardRotation();
@@ -172,6 +176,23 @@ namespace TraverserProject
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
             Quaternion finalRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             transform.rotation = finalRotation;
+        }
+
+        private void HandleAimAndHoldingRotation()
+        {
+            targetRotationDirection = Vector3.zero;
+            targetRotationDirection = PlayerCamera.Singleton.cameraObject.transform.forward * verticalMovement;
+            targetRotationDirection = targetRotationDirection + PlayerCamera.Singleton.cameraObject.transform.right * horizontalMovement;
+            targetRotationDirection.Normalize();
+            targetRotationDirection.y = 0;
+
+            if (targetRotationDirection == Vector3.zero)
+            {
+                targetRotationDirection = transform.forward;
+            }
+            Quaternion newRotation = Quaternion.LookRotation(targetRotationDirection);
+            Quaternion targetRotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = targetRotation;
         }
 
         private void HandleStandardRotation()

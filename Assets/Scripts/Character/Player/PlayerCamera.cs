@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TravserserProject;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -140,7 +141,11 @@ namespace TraverserProject
             if (!player.playerLocomotionManager.isGrounded)
                 player.playerNetworkManager.isAiming.Value = false;
 
+            player.playerLocomotionManager.DisableCanRotate();
+
             aimDirection = cameraObject.transform.forward.normalized;
+
+            PlayerUIManager.Singleton.localPlayer.transform.forward = cameraObject.transform.forward;
 
             Vector3 cameraRotationY = Vector3.zero;
             Vector3 cameraRotationX = Vector3.zero;
