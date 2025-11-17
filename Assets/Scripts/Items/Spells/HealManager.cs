@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace TraverserProject
@@ -20,7 +21,59 @@ namespace TraverserProject
             base.Awake();
 
             fireBallRigidBody = GetComponent<Rigidbody>();
-            //damageCollider = GetComponentInChildren<FireBallDamageCollider>();
+            damageCollider = GetComponentInChildren<HealDamageCollider>();
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+
+            if (spellTarget != null)
+                transform.LookAt(spellTarget.characterCombatManager.lockOnTransform.position);
+
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (!hasCollided)
+            {
+                hasCollided = true;
+                InstantiateSpellDestructionFX();
+            }
+        }
+
+        public void InitializeHeal(CharacterManager spellCaster)
+        {
+            damageCollider.spellCaster = spellCaster;
+
+            //setup damage formula
+            damageCollider.trueDamage = 150;
+
+        }
+
+        public void InstantiateSpellDestructionFX()
+        {
+            instantiatedDestructionFX = Instantiate(impactParticle, transform.position, Quaternion.identity);
+            
+            WorldSoundFXManager.Singleton.AlertNearbyCharactersToSound(transform.position, 5);
+            //Destroy(gameObject);
+        }
+
+        public void WaitThenInstantiateSpellDestructionFX(float timeToWait)
+        {
+            if (destructionFXCoroutine != null)
+                StopCoroutine(destructionFXCoroutine);
+
+            destructionFXCoroutine = StartCoroutine(WaitThenInstantiateFX(timeToWait));
+
+            StartCoroutine(WaitThenInstantiateFX(timeToWait));
+        }
+
+        private IEnumerator WaitThenInstantiateFX(float timeToWait)
+        {
+            yield return new WaitForSeconds(timeToWait);
+
+            InstantiateSpellDestructionFX();
         }
     }
 }

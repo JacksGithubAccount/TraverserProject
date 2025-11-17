@@ -2,8 +2,9 @@ using UnityEngine;
 
 namespace TraverserProject
 {
+    [CreateAssetMenu(menuName = "Items/Spells/Heal")]
     public class HealSpell : SpellItem
-    {
+    {        
         public override void AttemptToCastSpell(PlayerManager player)
         {
             base.AttemptToCastSpell(player);
@@ -70,7 +71,7 @@ namespace TraverserProject
             {
                 spellInstantiationLocation = player.playerEquipmentManager.leftWeaponManager.GetComponentInChildren<SpellInstantiationLocation>();
             }
-            instantiatedReleasedSpellFX.transform.parent = spellInstantiationLocation.transform;
+            instantiatedReleasedSpellFX.transform.parent = player.transform;
             instantiatedReleasedSpellFX.transform.localPosition = Vector3.zero;
             instantiatedReleasedSpellFX.transform.localRotation = Quaternion.identity;
             instantiatedReleasedSpellFX.transform.parent = null;
@@ -78,36 +79,7 @@ namespace TraverserProject
 
 
             HealManager healManager = instantiatedReleasedSpellFX.GetComponent<HealManager>();
-            HealManager.InitializeHeal(player);
-
-
-
-            //shows ignoring collision of caster, but that is already done elsewhere
-            /*Collider[] characterCollider = player.GetComponentInChildren<Collider>();
-			Collider characterCollisionCollider = player.GetComponent<Collider>();
-			Physics.IgnoreCollision(characterCollisionCollider, fireBallManager.damageCollider.damageCollider)
-			foreach(var collider in characterColliders)
-			{
-				Physics.IgnoreCollision(collider, fireBallManager.damageCollider.damageCollider, true);
-			}*/
-
-            if (player.playerNetworkManager.isLockedOn.Value)
-            {
-                instantiatedReleasedSpellFX.transform.LookAt(player.playerCombatManager.currentTarget.transform.position);
-            }
-            else
-            {
-                //gets rotation of camera and direction of player so throwable is aimable along up and down but not side to side
-                Vector3 rotation = PlayerCamera.Singleton.cameraPivotTransform.eulerAngles;
-                Quaternion throwRotation = Quaternion.Euler(rotation.x, player.transform.eulerAngles.y, rotation.z);
-                instantiatedReleasedSpellFX.transform.rotation = throwRotation;
-            }
-
-            Rigidbody spellRigidBody = instantiatedReleasedSpellFX.GetComponent<Rigidbody>();
-            Vector3 upwardVelocityVector = instantiatedReleasedSpellFX.transform.up * upwardVelocity;
-            Vector3 forwardVelocityVector = instantiatedReleasedSpellFX.transform.forward * forwardVelocity;
-            Vector3 totalVelocity = upwardVelocityVector + forwardVelocityVector;
-            spellRigidBody.linearVelocity = totalVelocity;
+            healManager.InitializeHeal(player);
         }
     }
 }

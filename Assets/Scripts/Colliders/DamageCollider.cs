@@ -15,6 +15,7 @@ namespace TraverserProject
         public float fireDamage = 0;
         public float lightningDamage = 0;
         public float holyDamage = 0;
+        public float trueDamage = 0;
 
         [Header("Poise")]
         public float poiseDamage = 0;
