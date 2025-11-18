@@ -18,6 +18,9 @@ namespace TraverserProject
         [SerializeField] GameObject bloodSplatterVFX;
         [SerializeField] GameObject criticalBloodSplatterVFX;
 
+        [Header("Status Effect VFX")]
+        [HideInInspector] public GameObject poisonedVFX;
+
         [Header("Static Effects")]
         public List<StaticCharacterEffect> staticEffects = new List<StaticCharacterEffect>();
 
@@ -190,6 +193,26 @@ namespace TraverserProject
                 }
             }
             return timedEffect;
+        }
+
+        public void ProcessPoisonDamage(int poisonDamage)
+        {
+            if (!character.IsOwner)
+                return;
+
+            if (character.isDead.Value)
+                return;
+
+            character.characterNetworkManager.currentHealth.Value -= poisonDamage;
+
+            if (character.characterNetworkManager.currentHealth.Value >= 1)
+                return;
+
+            if (!character.characterNetworkManager.isBeingCriticallyDamaged.Value)
+                character.characterAnimatorManager.PlayTargetActionAnimation("Dead_01", true);
+
+            character.characterNetworkManager.isPoisoned.Value = false;
+            character.isDead.Value = true;
         }
 
     }

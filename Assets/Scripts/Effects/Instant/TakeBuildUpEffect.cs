@@ -30,6 +30,9 @@ namespace TraverserProject
 
         private void CheckForPoisonedStatus(CharacterManager character)
         {
+            if (character.characterNetworkManager.isPoisoned.Value)
+                return;
+
             BuildUpEffect poisonBuildUp = character.characterEffectsManager.CheckForTimedEffect(WorldCharacterEffectsManager.Singleton.degradePoisonBuildUpEffect.effectID) as BuildUpEffect;
 
             if (poisonBuildUp == null)
@@ -37,6 +40,25 @@ namespace TraverserProject
                 poisonBuildUp = Instantiate(WorldCharacterEffectsManager.Singleton.degradePoisonBuildUpEffect);
                 character.characterEffectsManager.AddTimedEffect(poisonBuildUp);
                 poisonBuildUp.ProcessEffect(character);
+            }
+
+            if (character.characterNetworkManager.poisonBuildUp.Value > character.characterNetworkManager.buildUpCapacity.Value)
+            {
+                character.characterNetworkManager.poisonBuildUp.Value = 0;
+                character.characterNetworkManager.isPoisoned.Value = true;
+
+                PoisonedEffect poison = Instantiate(WorldCharacterEffectsManager.Singleton.poisonedEffect);
+                character.characterEffectsManager.AddTimedEffect(poison);
+
+                PlayerManager player = character as PlayerManager;
+
+                if (player == null)
+                    return;
+
+                if (!player.IsOwner)
+                    return;
+
+
             }
         }
 

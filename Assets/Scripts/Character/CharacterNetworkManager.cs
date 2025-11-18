@@ -5,7 +5,7 @@ namespace TraverserProject
 {
     public class CharacterNetworkManager : NetworkBehaviour
     {
-        CharacterManager character;
+        protected CharacterManager character;
 
         [Header("Active")]
         public NetworkVariable<bool> isActive = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -40,6 +40,8 @@ namespace TraverserProject
         public NetworkVariable<bool> isRipostable = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isBeingCriticallyDamaged = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isRolling = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> isPoisoned = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> isBloodLoss = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
         [Header("Resources")]
@@ -130,6 +132,32 @@ namespace TraverserProject
         public virtual void OnIsBlockingChanged(bool oldStatus, bool newStatus)
         {
             character.animator.SetBool("isBlocking", isBlocking.Value);
+        }
+
+        public virtual void OnIsPoisonedChanged(bool oldStatus, bool newStatus)
+        {
+            if (isPoisoned.Value)
+            {
+                if (character.characterEffectsManager.poisonedVFX != null)
+                    return;
+
+                GameObject poisonVFX = Instantiate(WorldCharacterEffectsManager.Singleton.poisonedVFX);
+                poisonVFX.transform.parent = character.characterCombatManager.lockOnTransform;
+                poisonVFX.transform.localPosition = Vector3.zero;
+                poisonVFX.transform.localRotation = Quaternion.identity;
+            }
+            else
+            {
+                if (character.characterEffectsManager.poisonedVFX == null)
+                    return;
+
+                //option 1
+                Destroy(character.characterEffectsManager.poisonedVFX);
+
+                //option 2
+                //Create a script on VFX and call function to "end" it and stop particles so they fade
+                // and dont stop suddenly then when faded destroy it
+            }
         }
 
 

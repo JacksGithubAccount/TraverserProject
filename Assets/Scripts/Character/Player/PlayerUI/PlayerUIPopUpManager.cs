@@ -112,6 +112,11 @@ namespace TraverserProject
 
         }
 
+        public void SendStatusEffectPopUp(BuildUp status)
+        {
+
+        }
+
         public void SendDialoguePopUp(CharacterDialogue dialogue, AICharacterManager aiCharacter)
         {
             PlayerUIManager.Singleton.playerUIHudManager.ToggleHUDWithoutPopUps(false);
@@ -141,7 +146,7 @@ namespace TraverserProject
 
             currentDialogue.dialogueIndex++;
             dialogueCoroutine = StartCoroutine(dialogue.PlayDialogueCoroutine(aiCharacter));
-            
+
 
         }
 

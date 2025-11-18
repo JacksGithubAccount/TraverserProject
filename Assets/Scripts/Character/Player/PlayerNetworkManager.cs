@@ -91,6 +91,32 @@ namespace TraverserProject
             }
         }
 
+        public override void OnIsPoisonedChanged(bool oldStatus, bool newStatus)
+        {
+            if (isPoisoned.Value)
+            {
+                if (character.characterEffectsManager.poisonedVFX != null)
+                    return;
+
+                GameObject poisonVFX = Instantiate(WorldCharacterEffectsManager.Singleton.poisonedVFX);
+                poisonVFX.transform.parent = character.characterCombatManager.lockOnTransform;
+                poisonVFX.transform.localPosition = Vector3.zero;
+                poisonVFX.transform.localRotation = Quaternion.identity;
+            }
+            else
+            {
+                if (character.characterEffectsManager.poisonedVFX == null)
+                    return;
+
+                Destroy(character.characterEffectsManager.poisonedVFX);
+            }
+
+            if (!player.IsOwner)
+                return;
+
+            PlayerUIManager.Singleton.playerUIPopUpManager.SendStatusEffectPopUp(BuildUp.Poison);
+        }
+
         public void SetCharacterActionHand(bool rightHandedAction)
         {
             if (rightHandedAction)

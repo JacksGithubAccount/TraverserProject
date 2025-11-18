@@ -10,6 +10,6 @@ namespace TraverserProject
         public CharacterManager characterCausingRecovery;
 
         [Header("Recovery")]
-
+        public int recoveryAmount;
     }
 }
