@@ -13,12 +13,17 @@ namespace TraverserProject
         public GameObject criticalBloodSplatterVFX;
         public GameObject healingFlaskVFX;
         public GameObject deadSpotVFX;
+        public GameObject healedVFX;
         public GameObject poisonedVFX;
+
 
         [Header("Damage")]
         public TakeDamageEffect takeDamageEffect;
         public TakeBlockedDamageEffect takeBlockedDamageEffect;
         public TakeCriticalDamageEffect takeCriticalDamageEffect;
+
+        [Header("Recovery")]
+        public TakeRecoveryEffect takeRecoveryEffect;
 
         [Header("Status Effects")]
         public PoisonedEffect poisonedEffect;

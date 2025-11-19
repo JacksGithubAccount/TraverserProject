@@ -17,6 +17,7 @@ namespace TraverserProject
         [Header("VFX")]
         [SerializeField] GameObject bloodSplatterVFX;
         [SerializeField] GameObject criticalBloodSplatterVFX;
+        [SerializeField] GameObject healedVFX;
 
         [Header("Status Effect VFX")]
         [HideInInspector] public GameObject poisonedVFX;
@@ -71,6 +72,17 @@ namespace TraverserProject
             else
             {
                 GameObject bloodSplatter = Instantiate(WorldCharacterEffectsManager.Singleton.criticalBloodSplatterVFX, contactPoint, Quaternion.identity);
+            }
+        }
+        public void PlayHealedVFX(Vector3 contactPoint)
+        {
+            if (healedVFX != null)
+            {
+                GameObject bloodSplatter = Instantiate(healedVFX, contactPoint, Quaternion.identity);
+            }
+            else
+            {
+                GameObject bloodSplatter = Instantiate(WorldCharacterEffectsManager.Singleton.healedVFX, contactPoint, Quaternion.identity);
             }
         }
 
