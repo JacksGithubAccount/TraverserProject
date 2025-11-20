@@ -16,6 +16,9 @@ namespace TraverserProject
         [Header("Damage Sounds")]
         public AudioClip[] physicalDamageSFX;
 
+        [Header("Recovery Sounds")]
+        public AudioClip[] healedSFX;
+
         [Header("Action Sounds")]
         public AudioClip pickUpItemSFX;
         public AudioClip rollSFX;

@@ -22,9 +22,9 @@ public enum CharacterSlot
 //process damage and character targeting
 public enum CharacterGroup
 {
-    Team01,
-    Team02,
-    Team03
+    Team01, //player
+    Team02, //enemies
+    Team03  //npc
 }
 //used to tag sliders for level up ui
 public enum CharacterAttribute

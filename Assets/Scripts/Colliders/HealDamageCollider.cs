@@ -5,7 +5,7 @@ namespace TraverserProject
     public class HealDamageCollider : SpellPointBlankDamageCollider
     {
         private HealManager healManager;
-
+        public int recoveryAmount;
 
         protected override void Awake()
         {
@@ -13,23 +13,37 @@ namespace TraverserProject
             healManager = GetComponentInParent<HealManager>();
         }
 
-        protected override void DamageTarget(CharacterManager damageTarget)
+        protected override void OnTriggerEnter(Collider other)
         {
-            if (charactersDamaged.Contains(damageTarget))
+            CharacterManager recoveryTarget = other.GetComponentInParent<CharacterManager>();
+
+            if (recoveryTarget != null)
+            {
+                if (!WorldUtilityManager.Singleton.CanIHealThisTarget(spellCaster.characterGroup, recoveryTarget.characterGroup))
+                    return;
+
+
+                if (!recoveryTarget.characterNetworkManager.isInvulnerable.Value)
+                    DamageTarget(recoveryTarget);
+
+                healManager.WaitThenInstantiateSpellDestructionFX(0.0f);
+
+
+            }
+        }
+
+        protected override void DamageTarget(CharacterManager recoveryTarget)
+        {
+            if (charactersDamaged.Contains(recoveryTarget))
                 return;
 
-            charactersDamaged.Add(damageTarget);
+            charactersDamaged.Add(recoveryTarget);
 
-            TakeDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.Singleton.takeDamageEffect);
-            damageEffect.physicalDamage = physicalDamage;
-            damageEffect.magicDamage = magicDamage;
-            damageEffect.fireDamage = fireDamage;
-            damageEffect.lightningDamage = lightningDamage;
-            damageEffect.holyDamage = holyDamage;
-            damageEffect.poiseDamage = poiseDamage;
-            damageEffect.contactPoint = contactPoint;
+            TakeRecoveryEffect recoveryEffect = Instantiate(WorldCharacterEffectsManager.Singleton.takeRecoveryEffect);
+            recoveryEffect.recoveryAmount = recoveryAmount;
 
-            damageTarget.characterEffectsManager.ProcessInstantEffect(damageEffect);
+
+            recoveryTarget.characterEffectsManager.ProcessInstantEffect(recoveryEffect);
         }
     }
 }

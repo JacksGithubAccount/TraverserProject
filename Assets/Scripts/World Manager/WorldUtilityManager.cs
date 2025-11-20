@@ -54,7 +54,8 @@ namespace TraverserProject
                         return false;
                     case CharacterGroup.Team02:
                         return true;
-
+                    case CharacterGroup.Team03:
+                        return true;
                     default:
                         break;
                 }
@@ -67,6 +68,70 @@ namespace TraverserProject
                         return true;
                     case CharacterGroup.Team02:
                         return false;
+                    case CharacterGroup.Team03:
+                        return true;
+                    default:
+                        break;
+                }
+            }
+            else if (attackingCharacter == CharacterGroup.Team03)
+            {
+                switch (targetCharacter)
+                {
+                    case CharacterGroup.Team01:
+                        return true;
+                    case CharacterGroup.Team02:
+                        return true;
+                    case CharacterGroup.Team03:
+                        return false;
+                    default:
+                        break;
+                }
+            }
+
+            return false;
+        }
+
+        public bool CanIHealThisTarget(CharacterGroup healingCharacter, CharacterGroup targetCharacter)
+        {
+            if (healingCharacter == CharacterGroup.Team01)
+            {
+                switch (targetCharacter)
+                {
+                    case CharacterGroup.Team01:
+                        return true;
+                    case CharacterGroup.Team02:
+                        return false;
+                    case CharacterGroup.Team03:
+                        return false;
+                    default:
+                        break;
+                }
+            }
+            else if (healingCharacter == CharacterGroup.Team02)
+            {
+                switch (targetCharacter)
+                {
+                    case CharacterGroup.Team01:
+                        return false;
+                    case CharacterGroup.Team02:
+                        return true;
+                    case CharacterGroup.Team03:
+                        return false;
+                    default:
+                        break;
+                }
+            }
+            else if (healingCharacter == CharacterGroup.Team03)
+            {
+                switch (targetCharacter)
+                {
+                    case CharacterGroup.Team01:
+                        return false;
+                    case CharacterGroup.Team02:
+                        return false;
+                    case CharacterGroup.Team03:
+                        return true;
                     default:
                         break;
                 }

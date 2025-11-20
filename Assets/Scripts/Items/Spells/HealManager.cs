@@ -47,7 +47,7 @@ namespace TraverserProject
             damageCollider.spellCaster = spellCaster;
 
             //setup damage formula
-            damageCollider.trueDamage = 150;
+            damageCollider.recoveryAmount = 50;
 
         }
 

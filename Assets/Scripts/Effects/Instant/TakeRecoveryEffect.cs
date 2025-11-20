@@ -51,20 +51,21 @@ namespace TraverserProject
                 finalRecoveryAmount = 1;
             }
 
-            character.characterNetworkManager.currentHealth.Value -= finalRecoveryAmount;
+            character.characterNetworkManager.currentHealth.Value += finalRecoveryAmount;
+            if (character.characterNetworkManager.currentHealth.Value > character.characterNetworkManager.maxHealth.Value)
+                character.characterNetworkManager.currentHealth.Value = character.characterNetworkManager.maxHealth.Value;
         }
 
         protected void PlayRecoveryVFX(CharacterManager character)
         {
-            //character.characterEffectsManager.PlayBloodSplatterVFX();
+            character.characterEffectsManager.PlayHealedVFX(character.characterCombatManager.lockOnTransform.position);
         }
 
         protected void PlayRecoverySFX(CharacterManager character)
         {
-            AudioClip physicalDamageSFX = WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(WorldSoundFXManager.Singleton.physicalDamageSFX);
+            AudioClip healedSFX = WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(WorldSoundFXManager.Singleton.healedSFX);
 
-            character.characterSoundFXManager.PlaySoundFX(physicalDamageSFX);
-            character.characterSoundFXManager.PlayDamageGruntFX();
+            character.characterSoundFXManager.PlaySoundFX(healedSFX);
         }
     }
 }
