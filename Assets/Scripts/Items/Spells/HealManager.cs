@@ -56,7 +56,6 @@ namespace TraverserProject
             instantiatedDestructionFX = Instantiate(impactParticle, transform.position, Quaternion.identity);
             
             WorldSoundFXManager.Singleton.AlertNearbyCharactersToSound(transform.position, 5);
-            //Destroy(gameObject);
         }
 
         public void WaitThenInstantiateSpellDestructionFX(float timeToWait)

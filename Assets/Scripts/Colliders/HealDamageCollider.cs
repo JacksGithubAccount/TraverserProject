@@ -7,6 +7,8 @@ namespace TraverserProject
         private HealManager healManager;
         public int recoveryAmount;
 
+        public float spellActivationLength = 3.0f;
+
         protected override void Awake()
         {
             base.Awake();
@@ -26,7 +28,7 @@ namespace TraverserProject
                 if (!recoveryTarget.characterNetworkManager.isInvulnerable.Value)
                     DamageTarget(recoveryTarget);
 
-                healManager.WaitThenInstantiateSpellDestructionFX(0.0f);
+                healManager.WaitThenInstantiateSpellDestructionFX(spellActivationLength);
 
 
             }

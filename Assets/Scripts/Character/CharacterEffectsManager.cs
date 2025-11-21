@@ -78,11 +78,11 @@ namespace TraverserProject
         {
             if (healedVFX != null)
             {
-                GameObject bloodSplatter = Instantiate(healedVFX, contactPoint, Quaternion.identity);
+                GameObject healedEffect = Instantiate(healedVFX, contactPoint, Quaternion.identity);
             }
             else
             {
-                GameObject bloodSplatter = Instantiate(WorldCharacterEffectsManager.Singleton.healedVFX, contactPoint, Quaternion.identity);
+                GameObject healedEffect = Instantiate(WorldCharacterEffectsManager.Singleton.healedVFX, contactPoint, Quaternion.identity);
             }
         }
 
