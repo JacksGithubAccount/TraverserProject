@@ -4,7 +4,9 @@ namespace TraverserProject
 {
     [CreateAssetMenu(menuName = "Items/Spells/Heal")]
     public class HealSpell : SpellItem
-    {        
+    {
+        [Header("Spell Activation")]
+        public float spellActivationLength = 3.0f;
         public override void AttemptToCastSpell(PlayerManager player)
         {
             base.AttemptToCastSpell(player);
@@ -78,8 +80,9 @@ namespace TraverserProject
 
 
 
-            HealManager healManager = instantiatedReleasedSpellFX.GetComponent<HealManager>();
+            HealActivationManager healManager = instantiatedReleasedSpellFX.GetComponent<HealActivationManager>();
             healManager.InitializeHeal(player);
+            healManager.WaitThenInstantiateSpellActivatedFX(spellActivationLength);
         }
     }
 }

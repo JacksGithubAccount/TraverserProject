@@ -5,9 +5,7 @@ namespace TraverserProject
     public class HealDamageCollider : SpellPointBlankDamageCollider
     {
         private HealManager healManager;
-        public int recoveryAmount;
-
-        public float spellActivationLength = 3.0f;
+        public int recoveryAmount;        
 
         protected override void Awake()
         {
@@ -27,10 +25,6 @@ namespace TraverserProject
 
                 if (!recoveryTarget.characterNetworkManager.isInvulnerable.Value)
                     DamageTarget(recoveryTarget);
-
-                healManager.WaitThenInstantiateSpellDestructionFX(spellActivationLength);
-
-
             }
         }
 

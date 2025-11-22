@@ -9,18 +9,16 @@ namespace TraverserProject
         public HealDamageCollider damageCollider;
 
         [Header("Instantiated FX")]
-        private GameObject instantiatedDestructionFX;
+        private GameObject instantiatedSpellPart2FX;
 
         private bool hasCollided = false;
         public bool isFullyCharged = false;
-        private Rigidbody fireBallRigidBody;
         private Coroutine destructionFXCoroutine;
 
         protected override void Awake()
         {
             base.Awake();
 
-            fireBallRigidBody = GetComponent<Rigidbody>();
             damageCollider = GetComponentInChildren<HealDamageCollider>();
         }
 
@@ -38,7 +36,6 @@ namespace TraverserProject
             if (!hasCollided)
             {
                 hasCollided = true;
-                InstantiateSpellDestructionFX();
             }
         }
 
@@ -49,30 +46,6 @@ namespace TraverserProject
             //setup damage formula
             damageCollider.recoveryAmount = 50;
 
-        }
-
-        public void InstantiateSpellDestructionFX()
-        {
-            instantiatedDestructionFX = Instantiate(impactParticle, transform.position, Quaternion.identity);
-            
-            WorldSoundFXManager.Singleton.AlertNearbyCharactersToSound(transform.position, 5);
-        }
-
-        public void WaitThenInstantiateSpellDestructionFX(float timeToWait)
-        {
-            if (destructionFXCoroutine != null)
-                StopCoroutine(destructionFXCoroutine);
-
-            destructionFXCoroutine = StartCoroutine(WaitThenInstantiateFX(timeToWait));
-
-            StartCoroutine(WaitThenInstantiateFX(timeToWait));
-        }
-
-        private IEnumerator WaitThenInstantiateFX(float timeToWait)
-        {
-            yield return new WaitForSeconds(timeToWait);
-
-            InstantiateSpellDestructionFX();
         }
     }
 }
