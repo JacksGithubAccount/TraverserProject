@@ -4,13 +4,13 @@ namespace TraverserProject
 {
     public class HealDamageCollider : SpellPointBlankDamageCollider
     {
-        private HealManager healManager;
+        private HealActivatedManager healManager;
         public int recoveryAmount;        
 
         protected override void Awake()
         {
             base.Awake();
-            healManager = GetComponentInParent<HealManager>();
+            healManager = GetComponentInParent<HealActivatedManager>();
         }
 
         protected override void OnTriggerEnter(Collider other)

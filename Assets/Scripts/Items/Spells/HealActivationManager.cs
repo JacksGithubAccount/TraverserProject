@@ -38,7 +38,7 @@ namespace TraverserProject
 
             instantiatedSpellActivatedFX = Instantiate(impactParticle, transform.position, Quaternion.identity);
 
-            HealManager healManager = instantiatedSpellActivatedFX.GetComponent<HealManager>();
+            HealActivatedManager healManager = instantiatedSpellActivatedFX.GetComponent<HealActivatedManager>();
             healManager.InitializeHeal(spellCaster);
 
             WorldSoundFXManager.Singleton.AlertNearbyCharactersToSound(transform.position, 5);
