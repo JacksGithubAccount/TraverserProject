@@ -12560,6 +12560,10 @@ MonoBehaviour:
     m_InternalValue: 0
   isRolling:
     m_InternalValue: 0
+  isPoisoned:
+    m_InternalValue: 0
+  isBloodLoss:
+    m_InternalValue: 0
   currentStamina:
     m_InternalValue: 100
   maxStamina:
@@ -12974,6 +12978,8 @@ MonoBehaviour:
   activeDrawnProjectileFX: {fileID: 0}
   bloodSplatterVFX: {fileID: 0}
   criticalBloodSplatterVFX: {fileID: 0}
+  healedVFX: {fileID: 0}
+  poisonedVFX: {fileID: 0}
   staticEffects: []
   effectTickTimer: 0
   defaultEffectTickTime: 1
@@ -13005,6 +13011,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 64a3dcab51c176e409334284777e2c9a, type: 2}
   - {fileID: 11400000, guid: e3ed7cd43284259468e4f2691d022aee, type: 2}
   leftHandWeaponIndex: 0
+  spellItemsInQuickSlots:
+  - {fileID: 11400000, guid: 612f6e7af2d1dab4b8940a48511f6162, type: 2}
+  - {fileID: 11400000, guid: 90bca23752031904badfc4e94de7bea6, type: 2}
+  - {fileID: 0}
+  quickSlotSpellIndex: 0
   currentSpell: {fileID: 11400000, guid: 612f6e7af2d1dab4b8940a48511f6162, type: 2}
   quickSlotItemsInQuickSlots:
   - {fileID: 11400000, guid: 44001833d5272d74283f5765afcb1f61, type: 2}

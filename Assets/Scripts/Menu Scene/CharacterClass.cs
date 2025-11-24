@@ -31,10 +31,13 @@ namespace TraverserProject
         [Header("QuickSlotItems")]
         public QuickSlotItem[] quickSlotItems = new QuickSlotItem[3];
 
+        [Header("Spells")]
+        public  SpellItem[] spellItems = new SpellItem[3];
+
         public void SetClass(PlayerManager player)
         {
             TitleScreenManager.Singleton.SetCharacterClass(player, vitality, endurance, mind, strength, dexterity, intelligence, faith, luck,
-                mainHandWeapons, offHandWeapons, headEquipment, bodyEquipment, legEquipment, handEquipment, quickSlotItems);
+                mainHandWeapons, offHandWeapons, headEquipment, bodyEquipment, legEquipment, handEquipment, quickSlotItems, spellItems);
     
         }
 

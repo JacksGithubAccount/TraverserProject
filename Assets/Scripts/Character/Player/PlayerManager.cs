@@ -341,10 +341,6 @@ namespace TraverserProject
             currentCharacterData.currentFocusPointsFlaskRemaining = playerNetworkManager.remainingFocusPointsFlasks.Value;
 
             //equipment
-            //currentCharacterData.headEquipment = playerInventoryManager.headEquipment.itemID;
-            //currentCharacterData.bodyEquipment = playerInventoryManager.bodyEquipment.itemID;
-            //currentCharacterData.handEquipment = playerInventoryManager.handEquipment.itemID;
-            //currentCharacterData.legEquipment = playerInventoryManager.legEquipment.itemID;
             currentCharacterData.headEquipment = playerNetworkManager.headEquipmentID.Value;
             currentCharacterData.bodyEquipment = playerNetworkManager.bodyEquipmentID.Value;
             currentCharacterData.handEquipment = playerNetworkManager.handEquipmentID.Value;
@@ -359,6 +355,12 @@ namespace TraverserProject
             currentCharacterData.leftWeapon01 = WorldSaveGameManager.Singleton.GetSerializableWeaponFromWeaponItem(playerInventoryManager.weaponsInLeftHandSlots[0]);
             currentCharacterData.leftWeapon02 = WorldSaveGameManager.Singleton.GetSerializableWeaponFromWeaponItem(playerInventoryManager.weaponsInLeftHandSlots[1]);
             currentCharacterData.leftWeapon03 = WorldSaveGameManager.Singleton.GetSerializableWeaponFromWeaponItem(playerInventoryManager.weaponsInLeftHandSlots[2]);
+
+            currentCharacterData.spellIndex = playerInventoryManager.quickSlotItemIndex;
+            currentCharacterData.spell01 = WorldSaveGameManager.Singleton.GetSerializableSpellFromSpellItem(playerInventoryManager.spellItemsInQuickSlots[0]);
+            currentCharacterData.spell02 = WorldSaveGameManager.Singleton.GetSerializableSpellFromSpellItem(playerInventoryManager.spellItemsInQuickSlots[1]);
+            currentCharacterData.spell03 = WorldSaveGameManager.Singleton.GetSerializableSpellFromSpellItem(playerInventoryManager.spellItemsInQuickSlots[2]);
+
 
             currentCharacterData.quickSlotIndex = playerInventoryManager.quickSlotItemIndex;
             currentCharacterData.quickSlotItem01 = WorldSaveGameManager.Singleton.GetSerializableQuickSlotItemFromQuickSlotItem(playerInventoryManager.quickSlotItemsInQuickSlots[0]);
@@ -506,6 +508,14 @@ namespace TraverserProject
             playerInventoryManager.weaponsInLeftHandSlots[0] = currentCharacterData.leftWeapon01.GetWeapon();
             playerInventoryManager.weaponsInLeftHandSlots[1] = currentCharacterData.leftWeapon02.GetWeapon();
             playerInventoryManager.weaponsInLeftHandSlots[2] = currentCharacterData.leftWeapon03.GetWeapon();
+
+            //spells
+            playerInventoryManager.quickSlotSpellIndex = currentCharacterData.spellIndex;
+            playerInventoryManager.spellItemsInQuickSlots[0] = currentCharacterData.spell01.GetSpell();
+            playerInventoryManager.spellItemsInQuickSlots[1] = currentCharacterData.spell02.GetSpell();
+            playerInventoryManager.spellItemsInQuickSlots[2] = currentCharacterData.spell03.GetSpell();
+            playerEquipmentManager.LoadSpellItemEquipment(playerInventoryManager.spellItemsInQuickSlots[playerInventoryManager.quickSlotSpellIndex]); //refreshes hud
+
 
             //quickslots
             playerInventoryManager.quickSlotItemIndex = currentCharacterData.quickSlotIndex;

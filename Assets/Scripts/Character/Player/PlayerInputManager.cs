@@ -34,6 +34,7 @@ namespace TraverserProject
         [SerializeField] bool jumpInput = false;
         [SerializeField] bool switch_Right_Weapon_Input = false;
         [SerializeField] bool switch_Left_Weapon_Input = false;
+        [SerializeField] bool switch_Quick_Slot_Spell_Input = false;
         [SerializeField] bool switch_Quick_Slot_Item_Input = false;
         [SerializeField] bool interaction_Input = false;
         [SerializeField] bool use_Item_Input = false;
@@ -127,6 +128,7 @@ namespace TraverserProject
                 playerControls.PlayerActions.SwitchRightWeapon.performed += i => switch_Right_Weapon_Input = true;
                 playerControls.PlayerActions.SwitchLeftWeapon.performed += i => switch_Left_Weapon_Input = true;
                 playerControls.PlayerActions.SwitchQuickSlotItem.performed += i => switch_Quick_Slot_Item_Input = true;
+                playerControls.PlayerActions.SwitchQuickSlotSpell.performed += i => switch_Quick_Slot_Spell_Input = true;
                 playerControls.PlayerActions.Interact.performed += i => interaction_Input = true;
                 playerControls.PlayerActions.X.performed += i => use_Item_Input = true;
 
@@ -218,6 +220,7 @@ namespace TraverserProject
             HandleLTInput();
             HandleSwitchRightWeaponInput();
             HandleSwitchLeftWeaponInput();
+            HandleSwitchQuickSlotSpellInput();
             HandleSwitchQuickSlotItemInput();
             HandleQueuedInputs();
             HandleInteractionInput();
@@ -600,6 +603,25 @@ namespace TraverserProject
         }
 
         private void HandleSwitchQuickSlotItemInput()
+        {
+            if (switch_Quick_Slot_Spell_Input)
+            {
+                switch_Quick_Slot_Spell_Input = false;
+
+                if (PlayerUIManager.Singleton.menuWindowIsOpen)
+                    return;
+
+                if (player.isPerformingAction)
+                    return;
+
+                if (player.playerCombatManager.isUsingItem)
+                    return;
+
+                player.playerEquipmentManager.SwitchQuickSlotSpell();
+            }
+        }
+
+        private void HandleSwitchQuickSlotSpellInput()
         {
             if (switch_Quick_Slot_Item_Input)
             {

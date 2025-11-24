@@ -236,6 +236,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""SwitchQuickSlotSpell"",
+                    ""type"": ""Button"",
+                    ""id"": ""3efaa81f-2099-4398-8a7b-64ae88da9e38"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""LB"",
                     ""type"": ""Button"",
                     ""id"": ""7ec05827-29d3-4e18-ab57-1e7c39fc4e9e"",
@@ -480,6 +489,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""238a1da8-9bd3-45cd-819d-65f7a5785bcb"",
+                    ""path"": ""<Keyboard>/backquote"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchQuickSlotSpell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""daa69628-4edb-4eae-8610-2bca9b7e30f6"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
@@ -717,6 +737,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerActions_HoldRB = m_PlayerActions.FindAction("HoldRB", throwIfNotFound: true);
         m_PlayerActions_X = m_PlayerActions.FindAction("X", throwIfNotFound: true);
         m_PlayerActions_SwitchQuickSlotItem = m_PlayerActions.FindAction("SwitchQuickSlotItem", throwIfNotFound: true);
+        m_PlayerActions_SwitchQuickSlotSpell = m_PlayerActions.FindAction("SwitchQuickSlotSpell", throwIfNotFound: true);
         m_PlayerActions_LB = m_PlayerActions.FindAction("LB", throwIfNotFound: true);
         m_PlayerActions_HoldLB = m_PlayerActions.FindAction("HoldLB", throwIfNotFound: true);
         m_PlayerActions_TwoHandWeapon = m_PlayerActions.FindAction("Two Hand Weapon", throwIfNotFound: true);
@@ -927,6 +948,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_HoldRB;
     private readonly InputAction m_PlayerActions_X;
     private readonly InputAction m_PlayerActions_SwitchQuickSlotItem;
+    private readonly InputAction m_PlayerActions_SwitchQuickSlotSpell;
     private readonly InputAction m_PlayerActions_LB;
     private readonly InputAction m_PlayerActions_HoldLB;
     private readonly InputAction m_PlayerActions_TwoHandWeapon;
@@ -987,6 +1009,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerActions/SwitchQuickSlotItem".
         /// </summary>
         public InputAction @SwitchQuickSlotItem => m_Wrapper.m_PlayerActions_SwitchQuickSlotItem;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerActions/SwitchQuickSlotSpell".
+        /// </summary>
+        public InputAction @SwitchQuickSlotSpell => m_Wrapper.m_PlayerActions_SwitchQuickSlotSpell;
         /// <summary>
         /// Provides access to the underlying input action "PlayerActions/LB".
         /// </summary>
@@ -1105,6 +1131,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SwitchQuickSlotItem.started += instance.OnSwitchQuickSlotItem;
             @SwitchQuickSlotItem.performed += instance.OnSwitchQuickSlotItem;
             @SwitchQuickSlotItem.canceled += instance.OnSwitchQuickSlotItem;
+            @SwitchQuickSlotSpell.started += instance.OnSwitchQuickSlotSpell;
+            @SwitchQuickSlotSpell.performed += instance.OnSwitchQuickSlotSpell;
+            @SwitchQuickSlotSpell.canceled += instance.OnSwitchQuickSlotSpell;
             @LB.started += instance.OnLB;
             @LB.performed += instance.OnLB;
             @LB.canceled += instance.OnLB;
@@ -1191,6 +1220,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SwitchQuickSlotItem.started -= instance.OnSwitchQuickSlotItem;
             @SwitchQuickSlotItem.performed -= instance.OnSwitchQuickSlotItem;
             @SwitchQuickSlotItem.canceled -= instance.OnSwitchQuickSlotItem;
+            @SwitchQuickSlotSpell.started -= instance.OnSwitchQuickSlotSpell;
+            @SwitchQuickSlotSpell.performed -= instance.OnSwitchQuickSlotSpell;
+            @SwitchQuickSlotSpell.canceled -= instance.OnSwitchQuickSlotSpell;
             @LB.started -= instance.OnLB;
             @LB.performed -= instance.OnLB;
             @LB.canceled -= instance.OnLB;
@@ -1545,6 +1577,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSwitchQuickSlotItem(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwitchQuickSlotSpell" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwitchQuickSlotSpell(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "LB" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

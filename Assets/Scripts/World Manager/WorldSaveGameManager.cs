@@ -415,6 +415,20 @@ namespace TraverserProject
             return serializedFlask;
         }
 
+        public SerializableSpell GetSerializableSpellFromSpellItem(SpellItem spellItem)
+        {
+            SerializableSpell serializedSpell = new SerializableSpell();
+            if (spellItem != null)
+            {
+                serializedSpell.itemID = spellItem.itemID;
+            }
+            else
+            {
+                serializedSpell.itemID = -1;
+            }
+            return serializedSpell;
+        }
+
         public SerializableQuickSlotItem GetSerializableQuickSlotItemFromQuickSlotItem(QuickSlotItem quickSlotItem)
         {
             SerializableQuickSlotItem serializedQuickSlotItem = new SerializableQuickSlotItem();

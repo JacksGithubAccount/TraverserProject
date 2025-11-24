@@ -79,6 +79,11 @@ namespace TraverserProject
         public SerializableWeapon leftWeapon02;
         public SerializableWeapon leftWeapon03;
 
+        public int spellIndex;
+        public SerializableSpell spell01;
+        public SerializableSpell spell02;
+        public SerializableSpell spell03;
+
         public int quickSlotIndex;
         public SerializableQuickSlotItem quickSlotItem01;
         public SerializableQuickSlotItem quickSlotItem02;

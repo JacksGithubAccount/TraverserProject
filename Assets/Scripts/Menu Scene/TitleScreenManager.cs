@@ -350,7 +350,7 @@ namespace TraverserProject
 
         public void SetCharacterClass(PlayerManager player, int vitality, int endurance, int mind, int strength, int dexterity, int intelligence, int faith, int luck
             , WeaponItem[] mainHandWeapons, WeaponItem[] offHandWeapons, HeadEquipmentItem headEquipment, BodyEquipmentItem bodyEquipment
-            , LegEquipmentItem legEquipment, HandEquipmentItem handEquipment, QuickSlotItem[] quickSlotItems)
+            , LegEquipmentItem legEquipment, HandEquipmentItem handEquipment, QuickSlotItem[] quickSlotItems, SpellItem[] spells)
         {
             hiddenHelmet = null;
 
@@ -425,6 +425,16 @@ namespace TraverserProject
             if (quickSlotItems[2] != null)
                 player.playerInventoryManager.quickSlotItemsInQuickSlots[2] = Instantiate(quickSlotItems[2]);
             player.playerEquipmentManager.LoadQuickSlotItemEquipment(player.playerInventoryManager.quickSlotItemsInQuickSlots[player.playerInventoryManager.quickSlotItemIndex]);
+
+            player.playerInventoryManager.quickSlotSpellIndex = 0;
+
+            if (spells[0] != null)
+                player.playerInventoryManager.spellItemsInQuickSlots[0] = Instantiate(spells[0]);
+            if (spells[1] != null)
+                player.playerInventoryManager.spellItemsInQuickSlots[1] = Instantiate(spells[1]);
+            if (spells[2] != null)
+                player.playerInventoryManager.spellItemsInQuickSlots[2] = Instantiate(spells[2]);
+            player.playerEquipmentManager.LoadSpellItemEquipment(player.playerInventoryManager.spellItemsInQuickSlots[player.playerInventoryManager.quickSlotSpellIndex]);
 
         }
 

@@ -394,7 +394,7 @@ namespace TraverserProject
                     }
                 }
 
-                if (itemCount <= 1)
+                if (itemCount < 1)
                 {
                     player.playerInventoryManager.quickSlotItemIndex = -1;
                     selectedItem = null;
@@ -425,6 +425,73 @@ namespace TraverserProject
                 SwitchQuickSlotItem();
             }
             
+
+        }
+
+        public void SwitchQuickSlotSpell()
+        {
+            if (!player.IsOwner)
+                return;
+
+
+            SpellItem selectedSpell = null;
+
+            player.playerInventoryManager.quickSlotSpellIndex += 1;
+
+            if (player.playerInventoryManager.quickSlotSpellIndex < 0 || player.playerInventoryManager.quickSlotSpellIndex > 2)
+            {
+                player.playerInventoryManager.quickSlotSpellIndex = 0;
+
+                float spellCount = 0;
+                SpellItem firstSpell = null;
+                int firstSpellPosition = 0;
+
+                //Checks if we are holding more than one weapon
+                for (int i = 0; i < player.playerInventoryManager.spellItemsInQuickSlots.Length; i++)
+                {
+                    if (player.playerInventoryManager.spellItemsInQuickSlots[i] != null)
+                    {
+                        spellCount += 1;
+
+                        if (firstSpell == null)
+                        {
+                            firstSpell = player.playerInventoryManager.spellItemsInQuickSlots[i];
+                            firstSpellPosition = i;
+                        }
+                    }
+                }
+
+                if (spellCount < 1)
+                {
+                    player.playerInventoryManager.quickSlotSpellIndex = -1;
+                    selectedSpell = null;
+                    player.playerNetworkManager.currentSpellID.Value = -1;
+                }
+                else
+                {
+                    player.playerInventoryManager.quickSlotSpellIndex = firstSpellPosition;
+                    player.playerNetworkManager.currentSpellID.Value = firstSpell.itemID;
+                }
+                return;
+            }
+
+
+            if (player.playerInventoryManager.spellItemsInQuickSlots[player.playerInventoryManager.quickSlotSpellIndex] != null)
+            {
+                selectedSpell = player.playerInventoryManager.spellItemsInQuickSlots[player.playerInventoryManager.quickSlotSpellIndex];
+                player.playerNetworkManager.currentSpellID.Value = player.playerInventoryManager.spellItemsInQuickSlots[player.playerInventoryManager.quickSlotSpellIndex].itemID;
+                return;
+            }
+            else
+            {
+                player.playerNetworkManager.currentSpellID.Value = -1;
+            }
+
+            if (selectedSpell == null && player.playerInventoryManager.quickSlotSpellIndex <= 2)
+            {
+                SwitchQuickSlotSpell();
+            }
+
 
         }
 
@@ -778,6 +845,25 @@ namespace TraverserProject
 
             if (player.IsOwner)
                 player.playerNetworkManager.secondaryProjectileID.Value = equipment.itemID;
+        }
+
+        //spells
+        public void LoadSpellItemEquipment(SpellItem equipment)
+        {
+            if (equipment == null)
+            {
+                if (player.IsOwner)
+                    player.playerNetworkManager.currentSpellID.Value = -1; //-1 will never be ID so it will always be null
+
+                player.playerInventoryManager.currentSpell = null;
+                return;
+            }
+
+            player.playerInventoryManager.currentSpell = equipment;
+
+
+            if (player.IsOwner)
+                player.playerNetworkManager.currentSpellID.Value = equipment.itemID;
         }
 
         //quick slots

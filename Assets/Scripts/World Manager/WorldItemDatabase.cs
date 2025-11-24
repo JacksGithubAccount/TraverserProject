@@ -257,6 +257,17 @@ namespace TraverserProject
             return flask;
         }
 
+        public SpellItem GetSpellFromSerializedData(SerializableSpell serializableSpell)
+        {
+            SpellItem spellItem = null;
+            if (GetSpellByID(serializableSpell.itemID))
+            {
+                spellItem = Instantiate(GetSpellByID(serializableSpell.itemID));
+            }
+
+            return spellItem;
+        }
+
         public QuickSlotItem GetQuickSlotItemFromSerializedData(SerializableQuickSlotItem serializableQuickSlotItem)
         {
             QuickSlotItem quickSlotItem = null;
