@@ -121,8 +121,11 @@ namespace TraverserProject
 
             //stats
             playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHealth;
-            //playerNetworkManager.currentFocusPoints.OnValueChanged += playerNetworkManager.OnFocusPointsChanged;
-            //playerNetworkManager.maxFocusPoints.OnValueChanged += playerNetworkManager.OnMaxFocusPointsChanged;
+            playerNetworkManager.currentFocusPoints.OnValueChanged += playerNetworkManager.OnFocusPointsChanged;
+            playerNetworkManager.maxFocusPoints.OnValueChanged += playerNetworkManager.OnMaxFocusPointsChanged;
+
+            //status effects
+            playerNetworkManager.isPoisoned.OnValueChanged += playerNetworkManager.OnIsPoisonedChanged;
 
             //lock on
             playerNetworkManager.isLockedOn.OnValueChanged += playerNetworkManager.OnIsLockedOnChanged;
@@ -201,8 +204,11 @@ namespace TraverserProject
 
             //stats
             playerNetworkManager.currentHealth.OnValueChanged -= playerNetworkManager.CheckHealth;
-            //playerNetworkManager.currentFocusPoints.OnValueChanged -= playerNetworkManager.OnFocusPointsChanged;
-            //playerNetworkManager.maxFocusPoints.OnValueChanged -= playerNetworkManager.OnMaxFocusPointsChanged;
+            playerNetworkManager.currentFocusPoints.OnValueChanged -= playerNetworkManager.OnFocusPointsChanged;
+            playerNetworkManager.maxFocusPoints.OnValueChanged -= playerNetworkManager.OnMaxFocusPointsChanged;
+
+            //status effects
+            playerNetworkManager.isPoisoned.OnValueChanged -= playerNetworkManager.OnIsPoisonedChanged;
 
             //lock on
             playerNetworkManager.isLockedOn.OnValueChanged -= playerNetworkManager.OnIsLockedOnChanged;
@@ -635,6 +641,9 @@ namespace TraverserProject
             //sync two hand status
             playerNetworkManager.OnIsTwoHandingRightWeaponChanged(false, playerNetworkManager.isTwoHandingRightWeapon.Value);
             playerNetworkManager.OnIsTwoHandingLeftWeaponChanged(false, playerNetworkManager.isTwoHandingLeftWeapon.Value);
+
+            //sync status effects
+            playerNetworkManager.OnIsPoisonedChanged(false, playerNetworkManager.isPoisoned.Value);
 
             //sync block status
             playerNetworkManager.OnIsBlockingChanged(false, playerNetworkManager.isBlocking.Value);

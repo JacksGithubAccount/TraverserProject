@@ -14,6 +14,9 @@ namespace TraverserProject
         [SerializeField] protected bool scaleBarLengthWithStats = true;
         [SerializeField] protected float widthScaleMultiplier = 1;
 
+        [Header("Fill Color")]
+        [SerializeField] protected Image fillImage;
+
         protected virtual void Awake()
         {
             slider = GetComponent<Slider>();
@@ -39,6 +42,21 @@ namespace TraverserProject
             {
                 rectTransform.sizeDelta = new Vector2(maxValue * widthScaleMultiplier, rectTransform.sizeDelta.y);
                 PlayerUIManager.Singleton.playerUIHudManager.RefreshHUD();
+            }
+        }
+
+        public void ToggleBarFillColor(bool isPoisoned)
+        {
+            if (fillImage == null)
+                return;
+
+            if (isPoisoned)
+            {
+                fillImage.color = WorldUtilityManager.Singleton.GetPoisonedColor();
+            }
+            else
+            {
+                fillImage.color = WorldUtilityManager.Singleton.GetRegularColor(); 
             }
         }
     }

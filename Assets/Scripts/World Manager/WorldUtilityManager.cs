@@ -13,6 +13,10 @@ namespace TraverserProject
         [SerializeField] LayerMask enviroLayers;
         [SerializeField] LayerMask slipperyEnviroLayers;
 
+        [Header("UI Colors")]
+        [SerializeField] Color regularColor;
+        [SerializeField] Color poisonedColor;
+
         [Header("Forces")]
         public float slopeSlideForce = -15;
 
@@ -42,6 +46,16 @@ namespace TraverserProject
         public LayerMask GetSlipperyEnviroLayers()
         {
             return slipperyEnviroLayers;
+        }
+
+        public Color GetRegularColor()
+        {
+            return regularColor;
+        }
+
+        public Color GetPoisonedColor()
+        {
+            return poisonedColor;
         }
 
         public bool CanIDamageThisTarget(CharacterGroup attackingCharacter, CharacterGroup targetCharacter)

@@ -93,6 +93,19 @@ namespace TraverserProject
 
         public override void OnIsPoisonedChanged(bool oldStatus, bool newStatus)
         {
+            if (player.IsOwner)
+            {
+                if (isPoisoned.Value)
+                {
+                    PlayerUIManager.Singleton.playerUIPopUpManager.SendStatusEffectPopUp(BuildUp.Poison);
+                    PlayerUIManager.Singleton.playerUIHudManager.healthBar.ToggleBarFillColor(true);
+                }
+                else
+                {
+                    PlayerUIManager.Singleton.playerUIHudManager.healthBar.ToggleBarFillColor(false);
+                }
+            }
+
             if (isPoisoned.Value)
             {
                 if (character.characterEffectsManager.poisonedVFX != null)
@@ -102,6 +115,7 @@ namespace TraverserProject
                 poisonVFX.transform.parent = character.characterCombatManager.lockOnTransform;
                 poisonVFX.transform.localPosition = Vector3.zero;
                 poisonVFX.transform.localRotation = Quaternion.identity;
+                character.characterEffectsManager.poisonedVFX = poisonVFX;
             }
             else
             {
@@ -111,10 +125,9 @@ namespace TraverserProject
                 Destroy(character.characterEffectsManager.poisonedVFX);
             }
 
-            if (!player.IsOwner)
-                return;
 
-            PlayerUIManager.Singleton.playerUIPopUpManager.SendStatusEffectPopUp(BuildUp.Poison);
+
+
         }
 
         public void SetCharacterActionHand(bool rightHandedAction)

@@ -13,7 +13,7 @@ namespace TravserserProject
         [SerializeField] CanvasGroup[] canvasGroup;
 
         [Header("Stat Bars")]
-        [SerializeField] UI_StatBar healthBar;
+        public UI_StatBar healthBar;
         [SerializeField] UI_StatBar staminaBar;
         [SerializeField] UI_StatBar focusPointBar;
 
