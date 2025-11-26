@@ -142,7 +142,14 @@ namespace TraverserProject
                     return;
 
                 GameObject poisonVFX = Instantiate(WorldCharacterEffectsManager.Singleton.poisonedVFX);
-                poisonVFX.transform.parent = character.characterCombatManager.lockOnTransform;
+                if (character.characterEffectsManager.effectTransform != null)
+                {
+                    poisonVFX.transform.parent = character.characterEffectsManager.effectTransform;
+                }
+                else
+                {
+                    poisonVFX.transform.parent = character.characterCombatManager.lockOnTransform;
+                }
                 poisonVFX.transform.localPosition = Vector3.zero;
                 poisonVFX.transform.localRotation = Quaternion.identity;
             }

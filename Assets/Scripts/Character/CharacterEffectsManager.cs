@@ -19,6 +19,9 @@ namespace TraverserProject
         [SerializeField] GameObject criticalBloodSplatterVFX;
         [SerializeField] GameObject healedVFX;
 
+        [Header("Status Effect Transform")]
+        [SerializeField] public Transform effectTransform;
+
         [Header("Status Effect VFX")]
         [HideInInspector] public GameObject poisonedVFX;
 
@@ -181,11 +184,10 @@ namespace TraverserProject
 
         public void RemoveTimedEffect(int effectID)
         {
-            TimedCharacterEffect effect;
 
             for (int i = 0; i < timedEffects.Count; i++)
             {
-                if (timedEffects[i] == null)
+                if (timedEffects[i] != null)
                     timedEffects.RemoveAt(i);
             }
         }

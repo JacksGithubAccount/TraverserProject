@@ -8,12 +8,18 @@ namespace TraverserProject
         private int poisonDamage = 1;
         private bool poisonDamageHasBeenCalculated = false;
 
+        [Header("Poison Damage")]
+        [SerializeField] int poisonDamagePerTick = 10;
+
         public override void ProcessEffect(CharacterManager character)
         {
             timeRemainingOnEffect -= 1;
 
             if (timeRemainingOnEffect <= 0 || character.isDead.Value)
+            {
                 character.characterEffectsManager.RemoveTimedEffect(effectID);
+                character.characterNetworkManager.isPoisoned.Value = false;
+            }
 
             if (!poisonDamageHasBeenCalculated)
             {
@@ -29,7 +35,7 @@ namespace TraverserProject
 
         private void CalculatePoisonDamage(CharacterManager character)
         {
-            poisonDamage = 10;
+            poisonDamage = poisonDamagePerTick;
         }
 
         private void ProcessPoisonDamage(CharacterManager character)

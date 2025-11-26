@@ -48,6 +48,7 @@ namespace TraverserProject
                 character.characterNetworkManager.isPoisoned.Value = true;
 
                 PoisonedEffect poison = Instantiate(WorldCharacterEffectsManager.Singleton.poisonedEffect);
+                poison.defaultLengthOfEffect = character.characterNetworkManager.buildUpCapacity.Value;
                 character.characterEffectsManager.AddTimedEffect(poison);
 
                 PlayerManager player = character as PlayerManager;
