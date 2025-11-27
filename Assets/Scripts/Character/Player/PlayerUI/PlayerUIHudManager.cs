@@ -303,8 +303,8 @@ namespace TravserserProject
             if (quickSlotItem.isConsumable)
             {
                 PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
-                quickSlotItemCount.text = quickSlotItem.GetCurrentAmount(player).ToString();
                 quickSlotItemCount.enabled = true;
+                quickSlotItemCount.text = quickSlotItem.GetCurrentAmount(player).ToString();                
             }
             else
             {

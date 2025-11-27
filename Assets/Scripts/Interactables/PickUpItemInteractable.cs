@@ -11,6 +11,7 @@ namespace TraverserProject
 
         [Header("Item")]
         [SerializeField] Item item;
+        [SerializeField] int itemAmount;
 
         [Header("Creature Loot Pick Up")]
         public NetworkVariable<int> itemID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -116,9 +117,18 @@ namespace TraverserProject
 
             player.playerAnimatorManager.PlayTargetActionAnimation("Pick_Up_Item_01", true);
 
+            if (item.maxItemAmount > 1)
+            {
+                item.currentItemAmount = itemAmount;
+            }
+            else
+            {
+                item.currentItemAmount = 1;
+            }
             player.playerInventoryManager.AddItemToInventory(item);
+            
 
-            PlayerUIManager.Singleton.playerUIPopUpManager.SendItemPopUp(item, 1);
+            PlayerUIManager.Singleton.playerUIPopUpManager.SendItemPopUp(item, item.currentItemAmount);
 
             if (pickUpType == ItemPickUpType.WorldSpawn && !canRespawn)
             {

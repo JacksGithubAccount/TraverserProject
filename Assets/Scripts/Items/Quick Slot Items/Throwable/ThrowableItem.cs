@@ -39,7 +39,7 @@ namespace TraverserProject
 
             if (player.IsOwner)
             {
-                //currentItemAmount--;
+                currentItemAmount--;
 
                 PlayerUIManager.Singleton.playerUIHudManager.SetQuickSlotItemQuickSlotIcon(player.playerInventoryManager.currentQuickSlotItem);
 
@@ -89,6 +89,15 @@ namespace TraverserProject
                 return false;
 
             return true;
+        }
+
+        public override int GetCurrentAmount(PlayerManager player)
+        {
+            int currentAmount = 0;
+
+                currentAmount = currentItemAmount;
+
+            return currentAmount;
         }
     }
 }

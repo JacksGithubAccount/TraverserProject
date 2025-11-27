@@ -435,7 +435,7 @@ namespace TraverserProject
             if (quickSlotItem != null)
             {
                 serializedQuickSlotItem.itemID = quickSlotItem.itemID;
-                serializedQuickSlotItem.itemAmount = quickSlotItem.itemAmount;
+                serializedQuickSlotItem.itemAmount = quickSlotItem.currentItemAmount;
             }
             else
             {

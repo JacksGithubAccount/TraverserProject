@@ -274,7 +274,7 @@ namespace TraverserProject
             if (GetQuickSlotItemByID(serializableQuickSlotItem.itemID))
             {
                 quickSlotItem = Instantiate(GetQuickSlotItemByID(serializableQuickSlotItem.itemID));
-                quickSlotItem.itemAmount = serializableQuickSlotItem.itemAmount;
+                quickSlotItem.currentItemAmount = serializableQuickSlotItem.itemAmount;
             }
 
             return quickSlotItem;
