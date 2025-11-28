@@ -31,20 +31,22 @@ namespace TraverserProject
             if (!CanIUseThisItem(player))
                 return;
 
-
-
             if (healthFlask && player.playerNetworkManager.remainingHealthFlasks.Value <= 0)
             {
                 if (player.playerCombatManager.isUsingItem == false)
+                {
+                    if (player.IsOwner)
+                    {
+                        player.playerAnimatorManager.PlayTargetActionAnimation(emptyFlaskAnimation, false, false, true, true, false);
+                        player.playerNetworkManager.HideWeaponsServerRpc();
+                    }
                     return;
+                }
+                    
 
                 player.playerCombatManager.isUsingItem = true;
 
-                if (player.IsOwner)
-                {
-                    player.playerAnimatorManager.PlayTargetActionAnimation(emptyFlaskAnimation, false, false, true, true, false);
-                    player.playerNetworkManager.HideWeaponsServerRpc();
-                }
+                
                 Destroy(player.playerEffectsManager.activeQuickSlotItemFX);
                 GameObject emptyFlask = Instantiate(emptyFlaskItem, player.playerEquipmentManager.rightHandWeaponSlot.transform);
                 player.playerEffectsManager.activeQuickSlotItemFX = emptyFlask;
@@ -54,15 +56,17 @@ namespace TraverserProject
             if (!healthFlask && player.playerNetworkManager.remainingFocusPointsFlasks.Value <= 0)
             {
                 if (player.playerCombatManager.isUsingItem == false)
+                {
+                    if (player.IsOwner)
+                    {
+                        player.playerAnimatorManager.PlayTargetActionAnimation(emptyFlaskAnimation, false, false, true, true, false);
+                        player.playerNetworkManager.HideWeaponsServerRpc();
+                    }
                     return;
+                }
 
                 player.playerCombatManager.isUsingItem = true;
-
-                if (player.IsOwner)
-                {
-                    player.playerAnimatorManager.PlayTargetActionAnimation(emptyFlaskAnimation, false, false, true, true, false);
-                    player.playerNetworkManager.HideWeaponsServerRpc();
-                }
+                
                 Destroy(player.playerEffectsManager.activeQuickSlotItemFX);
                 GameObject emptyFlask = Instantiate(emptyFlaskItem, player.playerEquipmentManager.rightHandWeaponSlot.transform);
                 player.playerEffectsManager.activeQuickSlotItemFX = emptyFlask;

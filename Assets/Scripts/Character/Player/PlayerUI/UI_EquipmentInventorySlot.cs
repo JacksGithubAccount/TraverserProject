@@ -209,10 +209,16 @@ namespace TraverserProject
                     equippedItem = player.playerInventoryManager.quickSlotItemsInQuickSlots[0];
                     if (equippedItem != null)
                     {
-                        player.playerInventoryManager.AddItemToInventory(equippedItem);
+                            player.playerInventoryManager.AddItemToInventory(equippedItem);
                     }
                     player.playerInventoryManager.quickSlotItemsInQuickSlots[0] = currentItem as QuickSlotItem;
+                    int itemCount = 1;
+                    if (player.playerInventoryManager.quickSlotItemsInQuickSlots[0].isConsumable)
+                    {
+                        itemCount = player.playerInventoryManager.quickSlotItemsInQuickSlots[0].currentItemAmount;
+                    }                    
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
+                    player.playerInventoryManager.quickSlotItemsInQuickSlots[0].currentItemAmount = itemCount;
 
                     if (player.playerInventoryManager.quickSlotItemIndex == 0)
                         player.playerNetworkManager.currentQuickSlotItemID.Value = currentItem.itemID;

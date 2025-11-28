@@ -40,8 +40,15 @@ namespace TraverserProject
             if (player.IsOwner)
             {
                 currentItemAmount--;
-
+                player.playerInventoryManager.quickSlotItemsInQuickSlots[player.playerInventoryManager.quickSlotItemIndex].currentItemAmount--;
                 PlayerUIManager.Singleton.playerUIHudManager.SetQuickSlotItemQuickSlotIcon(player.playerInventoryManager.currentQuickSlotItem);
+
+                //if out of items, remove from quickslot and current item
+                if(currentItemAmount <= 0)
+                {
+                    player.playerInventoryManager.quickSlotItemsInQuickSlots[player.playerInventoryManager.quickSlotItemIndex] = null;
+                    player.playerNetworkManager.currentQuickSlotItemID.Value = -1;
+                }
 
             }
             Transform itemInstantiationLocation;

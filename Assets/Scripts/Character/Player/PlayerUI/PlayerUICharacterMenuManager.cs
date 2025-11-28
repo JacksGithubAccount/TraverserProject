@@ -9,7 +9,7 @@ namespace TraverserProject
         public override void CloseMenu()
         {
             base.CloseMenu();
-            PlayerUIManager.Singleton.openMenus.Pop();
+            //PlayerUIManager.Singleton.openMenus.Pop();
         }
     }
 }
