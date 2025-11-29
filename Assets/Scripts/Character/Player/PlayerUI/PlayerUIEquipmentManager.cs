@@ -390,6 +390,11 @@ namespace TraverserProject
                     quickSlot03Count.enabled = false;
                 }
             }
+            else
+            {
+                quickSlot03EquipmentSlot.enabled = false;
+                quickSlot03Count.enabled = false;
+            }
         }
 
         private void ClearEquipmentInventory()

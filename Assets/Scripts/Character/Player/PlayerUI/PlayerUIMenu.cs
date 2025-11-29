@@ -38,6 +38,13 @@ namespace TraverserProject
         {
             PlayerUIManager.Singleton.menuWindowIsOpen = false;
             menu.SetActive(false);
+            PlayerUIManager.Singleton.openMenus.Pop();
+        }
+
+        public virtual void CloseMenuForOpeningAnotherMenu()
+        {
+            PlayerUIManager.Singleton.menuWindowIsOpen = false;
+            menu.SetActive(false);
         }
 
         public virtual void CloseMenuAfterFixedFrame()

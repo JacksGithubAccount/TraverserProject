@@ -714,7 +714,6 @@ namespace TraverserProject
                 {
                     var currentMenu = PlayerUIManager.Singleton.openMenus.Peek();
                     currentMenu.CloseMenu();
-                    PlayerUIManager.Singleton.openMenus.Pop();
                     if (PlayerUIManager.Singleton.openMenus.Count > 0)
                     {
                         var nextMenu = PlayerUIManager.Singleton.openMenus.Peek();

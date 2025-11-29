@@ -13,13 +13,16 @@ MonoBehaviour:
   m_Name: Medium Shield
   m_EditorClassIdentifier: 
   itemName: Straight Shield
-  itemIcon: {fileID: 21300000, guid: 8fc9fbe16e16390468aa6d028cca21ec, type: 3}
+  itemIcon: {fileID: 21300000, guid: 8fadaf6f2052efc48bbb42015e8dda5a, type: 3}
+  maxItemAmount: 1
+  currentItemAmount: 1
   itemDescription: A straight shield
   itemID: 4
   itemWeight: 0
   weaponAnimator: {fileID: 22100000, guid: 7f27c68c764b54744ac33791d6f1b113, type: 2}
   weaponModelType: 1
   weaponClass: 2
+  upgradeLevel: 0
   weaponModel: {fileID: 804672481472311766, guid: 3da51aa171325654c98549d4e85674d9, type: 3}
   strengthREQ: 10
   dexterityREQ: 10
@@ -43,6 +46,22 @@ MonoBehaviour:
   rolling_Heavy_Attack_01_Modifier: 1.3
   backstep_Light_Attack_01_Modifier: 1
   backstep_Heavy_Attack_01_Modifier: 1.4
+  jumping_Light_Attack_01_Modifier: 1
+  jumping_Heavy_Attack_01_Modifier: 1.5
+  dual_Light_Attack_01_Modifier: 0.77
+  dual_Light_Attack_02_Modifier: 0.87
+  dual_Heavy_Attack_01_Modifier: 0.94
+  dual_Heavy_Attack_02_Modifier: 1
+  dual_Charge_Attack_01_Modifier: 1.3
+  dual_Charge_Attack_02_Modifier: 1.4
+  dual_Running_Light_Attack_01_Modifier: 0.77
+  dual_Running_Heavy_Attack_01_Modifier: 0.94
+  dual_Rolling_Light_Attack_01_Modifier: 0.68
+  dual_Rolling_Heavy_Attack_01_Modifier: 0.81
+  dual_Backstep_Light_Attack_01_Modifier: 0.77
+  dual_Backstep_Heavy_Attack_01_Modifier: 0.9
+  dual_Jumping_Light_Attack_01_Modifier: 0.77
+  dual_Jumping_Heavy_Attack_01_Modifier: 0.98
   baseStaminaCost: 20
   lightAttackStaminaCostMultiplier: 0.9
   heavyAttackStaminaCostMultiplier: 1.3
@@ -53,6 +72,8 @@ MonoBehaviour:
   rollingHeavyAttackStaminaCostMultiplier: 1.4
   backstepLightAttackStaminaCostMultiplier: 0.9
   backstepHeavyAttackStaminaCostMultiplier: 1.3
+  jumpingLightAttackStaminaCostMultiplier: 1
+  jumpingHeavyAttackStaminaCostMultiplier: 2
   physicalBaseDamageAbsorption: 50
   magicBaseDamageAbsorption: 50
   fireBaseDamageAbsorption: 50

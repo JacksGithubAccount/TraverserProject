@@ -212,13 +212,13 @@ namespace TraverserProject
                             player.playerInventoryManager.AddItemToInventory(equippedItem);
                     }
                     player.playerInventoryManager.quickSlotItemsInQuickSlots[0] = currentItem as QuickSlotItem;
-                    int itemCount = 1;
+                    int itemCount0 = 1;
                     if (player.playerInventoryManager.quickSlotItemsInQuickSlots[0].isConsumable)
                     {
-                        itemCount = player.playerInventoryManager.quickSlotItemsInQuickSlots[0].currentItemAmount;
+                        itemCount0 = player.playerInventoryManager.quickSlotItemsInQuickSlots[0].currentItemAmount;
                     }                    
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
-                    player.playerInventoryManager.quickSlotItemsInQuickSlots[0].currentItemAmount = itemCount;
+                    player.playerInventoryManager.quickSlotItemsInQuickSlots[0].currentItemAmount = itemCount0;
 
                     if (player.playerInventoryManager.quickSlotItemIndex == 0)
                         player.playerNetworkManager.currentQuickSlotItemID.Value = currentItem.itemID;
@@ -232,7 +232,13 @@ namespace TraverserProject
                         player.playerInventoryManager.AddItemToInventory(equippedItem);
                     }
                     player.playerInventoryManager.quickSlotItemsInQuickSlots[1] = currentItem as QuickSlotItem;
+                    int itemCount1 = 1;
+                    if (player.playerInventoryManager.quickSlotItemsInQuickSlots[1].isConsumable)
+                    {
+                        itemCount1 = player.playerInventoryManager.quickSlotItemsInQuickSlots[1].currentItemAmount;
+                    }
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
+                    player.playerInventoryManager.quickSlotItemsInQuickSlots[1].currentItemAmount = itemCount1;
 
                     if (player.playerInventoryManager.quickSlotItemIndex == 1)
                         player.playerNetworkManager.currentQuickSlotItemID.Value = currentItem.itemID;
@@ -246,7 +252,13 @@ namespace TraverserProject
                         player.playerInventoryManager.AddItemToInventory(equippedItem);
                     }
                     player.playerInventoryManager.quickSlotItemsInQuickSlots[2] = currentItem as QuickSlotItem;
+                    int itemCount2 = 1;
+                    if (player.playerInventoryManager.quickSlotItemsInQuickSlots[2].isConsumable)
+                    {
+                        itemCount2 = player.playerInventoryManager.quickSlotItemsInQuickSlots[2].currentItemAmount;
+                    }
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
+                    player.playerInventoryManager.quickSlotItemsInQuickSlots[2].currentItemAmount = itemCount2;
 
                     if (player.playerInventoryManager.quickSlotItemIndex == 2)
                         player.playerNetworkManager.currentQuickSlotItemID.Value = currentItem.itemID;

@@ -7,12 +7,12 @@ namespace TraverserProject
     {
         public void OpenTeleportLocationMenu()
         {
-            CloseMenu();
+            CloseMenuForOpeningAnotherMenu();
             PlayerUIManager.Singleton.playerUITeleportLocationManager.OpenMenu();
         }
         public void OpenLevelUpMenu()
         {
-            CloseMenu();
+            CloseMenuForOpeningAnotherMenu();
             PlayerUIManager.Singleton.playerUILevelUpManager.OpenMenu();
         }
     }
