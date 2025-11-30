@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Enums : MonoBehaviour
 {
@@ -242,6 +243,15 @@ public enum ItemPickUpType
 {
     WorldSpawn,
     CharacterDrop
+}
+
+//determines projectile arc
+public enum ThrowableType
+{
+    Arc,
+    Straight,
+    Drop,
+    Back
 }
 //AI States
 public enum IdleStateMode

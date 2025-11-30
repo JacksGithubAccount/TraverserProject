@@ -11,8 +11,9 @@ namespace TraverserProject
         [Header("Animation")]
         [SerializeField] protected string useItemAnimation;
 
-        [Header("Consumable")]
+        [Header("Flags")]
         public bool isConsumable = true;
+        public bool dealsDamage = false;
 
         public virtual void AttemptToUseItem(PlayerManager player)
         {

@@ -15,7 +15,7 @@ namespace TraverserProject
         private GameObject instantiatedDestructionFX;
 
         private bool hasCollided = false;
-        private Rigidbody throwableRigidBody;
+        public Rigidbody throwableRigidBody;
         private Coroutine destructionFXCoroutine;
 
         [Header("VFX")]
@@ -52,10 +52,13 @@ namespace TraverserProject
 
         public void InitializeThrowable(CharacterManager thrower)
         {
+            if (damageCollider == null)
+                return;
+
             damageCollider.itemThrower = thrower;
 
             //setup damage formula
-            damageCollider.fireDamage = 150;
+            //damageCollider.fireDamage = 150;
 
         }
 

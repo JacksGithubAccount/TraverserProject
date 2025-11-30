@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
 using TraverserProject;
 using UnityEngine;
@@ -7,12 +8,15 @@ namespace TraverserProject
     [CreateAssetMenu(menuName = "Items/Consumables/Throwable")]
     public class ThrowableItem : QuickSlotItem
     {
+        [Header("Throwing Type")]
+        [SerializeField] ThrowableType throwableType;
+
         [Header("Projectile Velocity")]
-        [SerializeField] float upwardVelocity = 3;
-        [SerializeField] float forwardVelocity = 15;
+        [SerializeField] protected float upwardVelocity = 3;
+        [SerializeField] protected float forwardVelocity = 15;
 
         [Header("Throwable Model")]
-        private GameObject instantiatedThrowableInHand = null;
+        protected GameObject instantiatedThrowableInHand = null;
 
 
         public override void AttemptToUseItem(PlayerManager player)
@@ -44,42 +48,43 @@ namespace TraverserProject
                 PlayerUIManager.Singleton.playerUIHudManager.SetQuickSlotItemQuickSlotIcon(player.playerInventoryManager.currentQuickSlotItem);
 
                 //if out of items, remove from quickslot and current item
-                if(currentItemAmount <= 0)
+                if (currentItemAmount <= 0)
                 {
                     player.playerInventoryManager.quickSlotItemsInQuickSlots[player.playerInventoryManager.quickSlotItemIndex] = null;
                     player.playerNetworkManager.currentQuickSlotItemID.Value = -1;
                 }
 
             }
+
             Transform itemInstantiationLocation;
-            GameObject instantiatedThrowableThrown = Instantiate(itemModel, player.playerEquipmentManager.rightHandWeaponSlot.transform);
+            GameObject instantiatedThrowableItem = Instantiate(itemModel, player.playerEquipmentManager.rightHandWeaponSlot.transform);
             itemInstantiationLocation = player.playerEquipmentManager.rightHandWeaponSlot.transform;
 
-            instantiatedThrowableThrown.transform.parent = itemInstantiationLocation.transform;
-            instantiatedThrowableThrown.transform.localPosition = Vector3.zero;
-            instantiatedThrowableThrown.transform.localRotation = Quaternion.identity;
-            instantiatedThrowableThrown.transform.parent = null;
+            instantiatedThrowableItem.transform.parent = itemInstantiationLocation.transform;
+            instantiatedThrowableItem.transform.localPosition = Vector3.zero;
+            instantiatedThrowableItem.transform.localRotation = Quaternion.identity;
+            instantiatedThrowableItem.transform.parent = null;
 
-            ThrowableManager throwableManager = instantiatedThrowableThrown.GetComponent<ThrowableManager>();
-            
+            ThrowableManager throwableManager = instantiatedThrowableItem.GetComponent<ThrowableManager>();
+
             throwableManager.InitializeThrowable(player);
             Destroy(instantiatedThrowableInHand);
 
             if (player.playerNetworkManager.isLockedOn.Value)
             {
-                instantiatedThrowableThrown.transform.LookAt(player.playerCombatManager.currentTarget.transform.position);
+                instantiatedThrowableItem.transform.LookAt(player.playerCombatManager.currentTarget.transform.position);
             }
             else
             {
                 //gets rotation of camera and direction of player so throwable is aimable along up and down but not side to side
                 Vector3 rotation = PlayerCamera.Singleton.cameraPivotTransform.eulerAngles;
                 Quaternion throwRotation = Quaternion.Euler(rotation.x, player.transform.eulerAngles.y, rotation.z);
-                instantiatedThrowableThrown.transform.rotation = throwRotation;
+                instantiatedThrowableItem.transform.rotation = throwRotation;
             }
 
-            Rigidbody rigidBody = instantiatedThrowableThrown.GetComponent<Rigidbody>();
-            Vector3 upwardVelocityVector = instantiatedThrowableThrown.transform.up * upwardVelocity;
-            Vector3 forwardVelocityVector = instantiatedThrowableThrown.transform.forward * forwardVelocity;
+            Rigidbody rigidBody = instantiatedThrowableItem.GetComponent<Rigidbody>();
+            Vector3 upwardVelocityVector = instantiatedThrowableItem.transform.up;
+            Vector3 forwardVelocityVector = instantiatedThrowableItem.transform.forward * forwardVelocity;
             Vector3 totalVelocity = upwardVelocityVector + forwardVelocityVector;
             rigidBody.linearVelocity = totalVelocity;
         }
