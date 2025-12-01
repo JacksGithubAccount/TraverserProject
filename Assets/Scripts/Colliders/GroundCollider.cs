@@ -23,7 +23,7 @@ namespace TraverserProject
             CreateObjectOnGround(collision);
         }
 
-        private void CreateObjectOnGround(Collision hit)
+        public void CreateObjectOnGround(Collision hit)
         {
             if (!hasPenetratedSurface)
             {

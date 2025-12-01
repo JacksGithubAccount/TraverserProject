@@ -248,10 +248,9 @@ public enum ItemPickUpType
 //determines projectile arc
 public enum ThrowableType
 {
-    Arc,
-    Straight,
-    Drop,
-    Back
+    Destructible,
+    Lingering,
+    Persistant
 }
 //AI States
 public enum IdleStateMode

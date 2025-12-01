@@ -8,7 +8,7 @@ namespace TraverserProject
     [CreateAssetMenu(menuName = "Items/Consumables/Throwable")]
     public class ThrowableItem : QuickSlotItem
     {
-        [Header("Throwing Type")]
+        [Header("Throwable Type")]
         [SerializeField] ThrowableType throwableType;
 
         [Header("Projectile Velocity")]
@@ -17,6 +17,7 @@ namespace TraverserProject
 
         [Header("Throwable Model")]
         protected GameObject instantiatedThrowableInHand = null;
+
 
 
         public override void AttemptToUseItem(PlayerManager player)
@@ -66,6 +67,8 @@ namespace TraverserProject
             instantiatedThrowableItem.transform.parent = null;
 
             ThrowableManager throwableManager = instantiatedThrowableItem.GetComponent<ThrowableManager>();
+
+            throwableManager.throwableType = throwableType;
 
             throwableManager.InitializeThrowable(player);
             Destroy(instantiatedThrowableInHand);
