@@ -73,6 +73,25 @@ namespace TraverserProject
                 character.characterEffectsManager.AddTimedEffect(bleedBuildUp);
                 bleedBuildUp.ProcessEffect(character);
             }
+
+            if (character.characterNetworkManager.bleedBuildUp.Value > character.characterNetworkManager.buildUpCapacity.Value)
+            {
+                character.characterNetworkManager.bleedBuildUp.Value = 0;
+                character.characterNetworkManager.isBloodLoss.Value = true;
+
+                BloodLossEffect bloodLoss = Instantiate(WorldCharacterEffectsManager.Singleton.bloodLossEffect);
+                character.characterEffectsManager.ProcessInstantEffect(bloodLoss);
+
+                PlayerManager player = character as PlayerManager;
+
+                if (player == null)
+                    return;
+
+                if (!player.IsOwner)
+                    return;
+
+
+            }
         }
 
 

@@ -15,6 +15,7 @@ namespace TraverserProject
         public GameObject deadSpotVFX;
         public GameObject healedVFX;
         public GameObject poisonedVFX;
+        public GameObject bloodLossVFX;
 
 
         [Header("Damage")]
@@ -27,6 +28,7 @@ namespace TraverserProject
 
         [Header("Status Effects")]
         public PoisonedEffect poisonedEffect;
+        public BloodLossEffect bloodLossEffect;
 
         [Header("Take Build Ups")]
         public TakeBuildUpEffect takePoisonBuildUpEffect;

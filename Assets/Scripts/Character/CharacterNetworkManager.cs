@@ -167,6 +167,24 @@ namespace TraverserProject
             }
         }
 
+        public virtual void OnIsBloodLossChanged(bool oldStatus, bool newStatus)
+        {
+            if (isBloodLoss.Value)
+            {
+                GameObject bloodLossVFX = Instantiate(WorldCharacterEffectsManager.Singleton.bloodLossVFX);
+                if (character.characterEffectsManager.effectTransform != null)
+                {
+                    bloodLossVFX.transform.parent = character.characterEffectsManager.effectTransform;
+                }
+                else
+                {
+                    bloodLossVFX.transform.parent = character.characterCombatManager.lockOnTransform;
+                }
+                bloodLossVFX.transform.localPosition = Vector3.zero;
+                bloodLossVFX.transform.localRotation = Quaternion.identity;
+            }
+        }
+
 
 
         //used to cancel FX when poise broken

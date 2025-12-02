@@ -75,6 +75,7 @@ namespace TraverserProject
             aiCharacterNetworkManager.currentHealth.OnValueChanged += aiCharacterNetworkManager.CheckHealth;
             aiCharacterNetworkManager.isBlocking.OnValueChanged += aiCharacterNetworkManager.OnIsBlockingChanged;
             aiCharacterNetworkManager.isPoisoned.OnValueChanged += aiCharacterNetworkManager.OnIsPoisonedChanged;
+            aiCharacterNetworkManager.isBloodLoss.OnValueChanged += aiCharacterNetworkManager.OnIsBloodLossChanged;
 
             if (!aiCharacterNetworkManager.isAwake.Value)
                 animator.Play(aiCharacterNetworkManager.sleepingAnimation.Value.ToString());
@@ -96,6 +97,7 @@ namespace TraverserProject
             aiCharacterNetworkManager.currentHealth.OnValueChanged -= aiCharacterNetworkManager.CheckHealth;
             aiCharacterNetworkManager.isBlocking.OnValueChanged -= aiCharacterNetworkManager.OnIsBlockingChanged;
             aiCharacterNetworkManager.isPoisoned.OnValueChanged -= aiCharacterNetworkManager.OnIsPoisonedChanged;
+            aiCharacterNetworkManager.isBloodLoss.OnValueChanged -= aiCharacterNetworkManager.OnIsBloodLossChanged;
         }
 
         protected override void OnEnable()

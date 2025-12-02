@@ -91,6 +91,33 @@ namespace TraverserProject
             }
         }
 
+        public override void OnIsBloodLossChanged(bool oldStatus, bool newStatus)
+        {
+            if (isBloodLoss.Value)
+            {
+                GameObject bloodLossVFX = Instantiate(WorldCharacterEffectsManager.Singleton.bloodLossVFX);
+                if (character.characterEffectsManager.effectTransform != null)
+                {
+                    bloodLossVFX.transform.parent = character.characterEffectsManager.effectTransform;
+                }
+                else
+                {
+                    bloodLossVFX.transform.parent = character.characterCombatManager.lockOnTransform;
+                }
+                bloodLossVFX.transform.localPosition = Vector3.zero;
+                bloodLossVFX.transform.localRotation = Quaternion.identity;
+
+                if (player.IsOwner)
+                {
+                    PlayerUIManager.Singleton.playerUIPopUpManager.SendStatusEffectPopUp(BuildUp.Bleed);
+                    isBloodLoss.Value = false;
+                }
+            }
+
+
+
+        }
+
         public override void OnIsPoisonedChanged(bool oldStatus, bool newStatus)
         {
             if (player.IsOwner)
@@ -115,9 +142,10 @@ namespace TraverserProject
                 if (character.characterEffectsManager.effectTransform != null)
                 {
                     poisonVFX.transform.parent = character.characterEffectsManager.effectTransform;
-                } else
+                }
+                else
                 {
-                    poisonVFX.transform.parent = character.characterCombatManager.lockOnTransform;                    
+                    poisonVFX.transform.parent = character.characterCombatManager.lockOnTransform;
                 }
                 poisonVFX.transform.localPosition = Vector3.zero;
                 //poisonVFX.transform.localRotation = Quaternion.identity;

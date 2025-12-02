@@ -126,6 +126,7 @@ namespace TraverserProject
 
             //status effects
             playerNetworkManager.isPoisoned.OnValueChanged += playerNetworkManager.OnIsPoisonedChanged;
+            playerNetworkManager.isBloodLoss.OnValueChanged += playerNetworkManager.OnIsBloodLossChanged;
 
             //lock on
             playerNetworkManager.isLockedOn.OnValueChanged += playerNetworkManager.OnIsLockedOnChanged;
@@ -209,6 +210,7 @@ namespace TraverserProject
 
             //status effects
             playerNetworkManager.isPoisoned.OnValueChanged -= playerNetworkManager.OnIsPoisonedChanged;
+            playerNetworkManager.isBloodLoss.OnValueChanged -= playerNetworkManager.OnIsBloodLossChanged;
 
             //lock on
             playerNetworkManager.isLockedOn.OnValueChanged -= playerNetworkManager.OnIsLockedOnChanged;

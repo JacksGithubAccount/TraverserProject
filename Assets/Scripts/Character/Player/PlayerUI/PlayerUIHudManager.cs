@@ -137,21 +137,6 @@ namespace TravserserProject
             yield return null;
         }
 
-        public void SetBuildUpAmount(BuildUp buildUpType, int amount)
-        {
-            switch (buildUpType)
-            {
-                case BuildUp.Poison:
-                    poisonBuildUpBar.SetStat(amount);
-                    break;
-                case BuildUp.Bleed:
-                    bleedBuildUpBar.SetStat(amount);
-                    break;
-                default:
-                    break;
-            }
-        }
-
         public void SetNewPoisonBuildUpAmount(float oldValue, float amount)
         {
             poisonBuildUpBar.SetStat(Mathf.RoundToInt(amount));
@@ -304,7 +289,7 @@ namespace TravserserProject
             {
                 PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
                 quickSlotItemCount.enabled = true;
-                quickSlotItemCount.text = quickSlotItem.GetCurrentAmount(player).ToString();                
+                quickSlotItemCount.text = quickSlotItem.GetCurrentAmount(player).ToString();
             }
             else
             {
