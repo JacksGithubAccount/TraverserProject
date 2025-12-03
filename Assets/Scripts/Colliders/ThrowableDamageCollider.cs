@@ -17,6 +17,7 @@ namespace TraverserProject
         protected override void OnTriggerEnter(Collider other)
         {
             CharacterManager damageTarget = other.GetComponentInParent<CharacterManager>();
+            RaycastHit hit;
 
             if (damageTarget != null)
             {
@@ -38,7 +39,28 @@ namespace TraverserProject
                 if (!damageTarget.characterNetworkManager.isInvulnerable.Value)
                     DamageTarget(damageTarget);
 
-                throwableManager.WaitThenInstantiateDestructionFX(0.0f);
+                switch (throwableManager.throwableType)
+                {
+                    case ThrowableType.Destructible:
+                        throwableManager.WaitThenInstantiateDestructionFX(0.0f);
+                        break;
+                    case ThrowableType.Lingering:                        
+                        if (Physics.Raycast(transform.position, transform.forward, out hit))
+                        {
+                            throwableManager.CreateObjectOnCollision(other, false, hit);
+                        }                        
+                        break;
+                    case ThrowableType.Persistant:
+                        if (Physics.Raycast(transform.position, transform.forward, out hit))
+                        {
+                            throwableManager.CreateObjectOnCollision(other, true, hit);
+                        }
+                        break;
+                    default:
+                        break;
+
+                }
+                
             }
             
 

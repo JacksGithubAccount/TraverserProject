@@ -63,10 +63,10 @@ namespace TraverserProject
                         InstantiateDestructionFX();
                         break;
                     case ThrowableType.Lingering:
-                        CreateObjectOnGround(collision, false);
+                        CreateObjectOnCollision(collision, false);
                         break;
                     case ThrowableType.Persistant:
-                        CreateObjectOnGround(collision, true);
+                        CreateObjectOnCollision(collision, true);
                         break;
                     default:
                         break;
@@ -114,7 +114,7 @@ namespace TraverserProject
             InstantiateDestructionFX();
         }
 
-        private void CreateObjectOnGround(Collision hit, bool isPersistant)
+        public void CreateObjectOnCollision(Collision hit, bool isPersistant)
         {
             float penetrationDepth = 0;
             float upwardDepth = 0;
@@ -147,8 +147,53 @@ namespace TraverserProject
                 //disables colliders and rigidbody
                 throwableRigidBody.isKinematic = true;
 
-                //destroys collider and arrow after a time
-                Destroy(GetComponent<ThrowableDamageCollider>());
+                //destroys colliders and throwable after a time
+                Destroy(GetComponentInChildren<ThrowableDamageCollider>().damageCollider);
+                Destroy(GetComponentInChildren<ThrowableDamageCollider>());
+                Destroy(GetComponent<Collider>());
+
+                if (!isPersistant)
+                    Destroy(gameObject, 20);
+            }
+        }
+        public void CreateObjectOnCollision(Collider collider, bool isPersistant, RaycastHit hit)
+        {
+            float penetrationDepth = 0;
+            float upwardDepth = 0;
+
+            /*if (!isPersistant)
+            {
+                penetrationDepth = -.5f;
+                upwardDepth = 0;
+            }
+            else
+            {
+                penetrationDepth = 0;
+                upwardDepth = .1f;
+            }*/
+
+            if (!hasPenetratedSurface)
+            {
+                hasPenetratedSurface = true;
+
+                //contact point
+                gameObject.transform.position = hit.point;
+                var emptyObject = new GameObject();
+                emptyObject.transform.parent = collider.transform;
+                gameObject.transform.SetParent(emptyObject.transform, true);
+
+                //how far the arrow penetrates
+                transform.position += transform.forward * penetrationDepth;
+                transform.position += transform.up * upwardDepth;
+
+                //disables colliders and rigidbody
+                throwableRigidBody.isKinematic = true;
+
+                //destroys colliders
+                Destroy(GetComponentInChildren<ThrowableDamageCollider>().damageCollider);
+                Destroy(GetComponentInChildren<ThrowableDamageCollider>());
+                Destroy(GetComponent<Collider>());
+
                 if (!isPersistant)
                     Destroy(gameObject, 20);
             }
