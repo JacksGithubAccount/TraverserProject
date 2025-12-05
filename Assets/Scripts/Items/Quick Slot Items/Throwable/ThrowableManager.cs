@@ -161,16 +161,11 @@ namespace TraverserProject
             float penetrationDepth = 0;
             float upwardDepth = 0;
 
-            /*if (!isPersistant)
+            if (!isPersistant)
             {
-                penetrationDepth = -.5f;
+                penetrationDepth = -2.0f;
                 upwardDepth = 0;
             }
-            else
-            {
-                penetrationDepth = 0;
-                upwardDepth = .1f;
-            }*/
 
             if (!hasPenetratedSurface)
             {
@@ -183,8 +178,8 @@ namespace TraverserProject
                 gameObject.transform.SetParent(emptyObject.transform, true);
 
                 //how far the arrow penetrates
-                transform.position += transform.forward * penetrationDepth;
-                transform.position += transform.up * upwardDepth;
+                gameObject.transform.position += transform.forward * penetrationDepth;
+                gameObject.transform.position += transform.up * upwardDepth;
 
                 //disables colliders and rigidbody
                 throwableRigidBody.isKinematic = true;

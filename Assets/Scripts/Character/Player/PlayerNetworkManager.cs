@@ -243,6 +243,7 @@ namespace TraverserProject
                 {
                     PlayerUIManager.Singleton.playerUIHudManager.ToggleProjectileQuickSlotsVisibility(false);
                 }
+                player.playerEquipmentManager.LoadRightWeapon();
             }
         }
         public void OnCurrentLeftHandWeaponIDChange(int oldID, int newID)
