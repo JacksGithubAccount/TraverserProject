@@ -17,6 +17,10 @@ namespace TraverserProject
 
         [Header("Throwable Model")]
         protected GameObject instantiatedThrowableInHand = null;
+        protected Material materialForRandomColor;
+
+        [Header("Flags")]
+        [SerializeField] bool randomColors = false;
 
 
 
@@ -35,6 +39,13 @@ namespace TraverserProject
                 player.playerAnimatorManager.PlayTargetActionAnimation(useItemAnimation, false, false, true, true, false);
                 player.playerNetworkManager.HideWeaponsServerRpc();
                 instantiatedThrowableInHand = Instantiate(itemModel, player.playerEquipmentManager.rightHandWeaponSlot.transform);
+                Renderer renderer = instantiatedThrowableInHand.GetComponentInChildren<Renderer>();
+
+                if (randomColors)
+                {
+                    materialForRandomColor = WorldUtilityManager.Singleton.GetRandomMatFromRainbowMat();
+                    renderer.material = materialForRandomColor;
+                }
             }
         }
 
@@ -65,6 +76,16 @@ namespace TraverserProject
             instantiatedThrowableItem.transform.localPosition = Vector3.zero;
             instantiatedThrowableItem.transform.localRotation = Quaternion.identity;
             instantiatedThrowableItem.transform.parent = null;
+
+            if (randomColors)
+            {
+                Renderer renderer = instantiatedThrowableItem.GetComponentInChildren<Renderer>();
+                renderer.material = materialForRandomColor;
+
+                Light light = instantiatedThrowableItem.GetComponentInChildren<Light>();
+                if (light != null)
+                    light.color = renderer.material.color;
+            }
 
             ThrowableManager throwableManager = instantiatedThrowableItem.GetComponent<ThrowableManager>();
 

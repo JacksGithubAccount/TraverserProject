@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -16,6 +17,8 @@ namespace TraverserProject
         [Header("UI Colors")]
         [SerializeField] Color regularColor;
         [SerializeField] Color poisonedColor;
+
+        [SerializeField] List<Material> rainbowMats;
 
         [Header("Forces")]
         public float slopeSlideForce = -15;
@@ -56,6 +59,12 @@ namespace TraverserProject
         public Color GetPoisonedColor()
         {
             return poisonedColor;
+        }
+
+        public Material GetRandomMatFromRainbowMat()
+        {
+            int index = Random.Range(0, rainbowMats.Count);
+            return rainbowMats[index];
         }
 
         public bool CanIDamageThisTarget(CharacterGroup attackingCharacter, CharacterGroup targetCharacter)

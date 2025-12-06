@@ -7,6 +7,7 @@ namespace TraverserProject
     {
         public CharacterManager itemThrower;
         private ThrowableManager throwableManager;
+        bool hasPenetratedSurface;
 
         protected override void Awake()
         {

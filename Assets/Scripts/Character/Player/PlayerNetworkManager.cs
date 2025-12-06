@@ -224,7 +224,7 @@ namespace TraverserProject
 
         public void OnCurrentRightHandWeaponIDChange(int oldID, int newID)
         {
-            if (!player.IsOwner)
+            if (player.IsOwner)
             {
                 WeaponItem newWeapon = Instantiate(WorldItemDatabase.Singleton.GetWeaponByID(newID));
                 player.playerInventoryManager.currentRightHandWeapon = newWeapon;
@@ -243,12 +243,11 @@ namespace TraverserProject
                 {
                     PlayerUIManager.Singleton.playerUIHudManager.ToggleProjectileQuickSlotsVisibility(false);
                 }
-                player.playerEquipmentManager.LoadRightWeapon();
             }
         }
         public void OnCurrentLeftHandWeaponIDChange(int oldID, int newID)
         {
-            if (!player.IsOwner)
+            if (player.IsOwner)
             {
                 WeaponItem newWeapon = Instantiate(WorldItemDatabase.Singleton.GetWeaponByID(newID));
                 player.playerInventoryManager.currentLeftHandWeapon = newWeapon;

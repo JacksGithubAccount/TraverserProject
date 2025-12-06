@@ -28,8 +28,6 @@ namespace TraverserProject
         public ThrowableType throwableType;
 
 
-
-
         protected virtual void Awake()
         {
             throwableRigidBody = GetComponent<Rigidbody>();
@@ -48,7 +46,7 @@ namespace TraverserProject
                 transform.LookAt(target.characterCombatManager.lockOnTransform.position);
         }
 
-        private void OnCollisionEnter(Collision collision)
+        public void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.layer == 6)
                 return;
@@ -91,7 +89,8 @@ namespace TraverserProject
 
         public void InstantiateDestructionFX()
         {
-            instantiatedDestructionFX = Instantiate(impactParticle, transform.position, Quaternion.identity);
+            if(impactParticle !=null)
+                instantiatedDestructionFX = Instantiate(impactParticle, transform.position, Quaternion.identity);
             
             WorldSoundFXManager.Singleton.AlertNearbyCharactersToSound(transform.position, 5);
             Destroy(gameObject);
@@ -153,7 +152,10 @@ namespace TraverserProject
                 Destroy(GetComponent<Collider>());
 
                 if (!isPersistant)
+                {
                     Destroy(gameObject, 20);
+                }
+
             }
         }
         public void CreateObjectOnCollision(Collider collider, bool isPersistant, RaycastHit hit)
