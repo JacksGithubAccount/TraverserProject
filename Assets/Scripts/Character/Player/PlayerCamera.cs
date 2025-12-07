@@ -68,11 +68,16 @@ namespace TraverserProject
 
         private void Update()
         {
-            //Vector3 targetLockOnTransform = testObject.transform.position;
-            //Vector2 lockOnCrosshairPosition = RectTransformUtility.WorldToScreenPoint(cameraObject, targetLockOnTransform);
-            
-            //PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.transform.position = lockOnCrosshairPosition;
-            //PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.SetActive(true);
+            if (player == null)
+                return;
+
+            if (player.playerNetworkManager.isLockedOn.Value)
+            {
+                Vector3 targetLockOnTransform = nearestLockOnTarget.characterCombatManager.lockOnTransform.transform.position;
+                Vector2 lockOnCrosshairPosition = RectTransformUtility.WorldToScreenPoint(cameraObject, targetLockOnTransform);
+                PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.transform.position = lockOnCrosshairPosition;
+                PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.SetActive(true);
+            }
         }
         public void HandleAllCameraActions()
         {
@@ -182,7 +187,7 @@ namespace TraverserProject
 
                 //saves rotation to look angles so unlock doesnt snap too far away
                 leftAndRightLookAngle = transform.eulerAngles.y;
-                upAndDownLookAngle = transform.eulerAngles.x;
+                upAndDownLookAngle = cameraPivotTransform.eulerAngles.x;
             }
             else
             {
@@ -312,6 +317,7 @@ namespace TraverserProject
                             shortestDistanceOfRightTarget = distanceFromRightTarget;
                             rightLockOnTarget = availableTargets[k];
                         }
+                        
                     }
                 }
                 else
@@ -356,20 +362,13 @@ namespace TraverserProject
                 yield return null;
             }
 
-            ClearLockOnTargets();
+            //ClearLockOnTargets();
             HandleLocatingLockOnTargets();
 
             if (nearestLockOnTarget != null)
             {
                 player.playerCombatManager.SetTarget(nearestLockOnTarget);
                 player.playerNetworkManager.isLockedOn.Value = true;
-
-                //draws lock on crosshair on lock on target
-                Vector3 targetLockOnTransform = nearestLockOnTarget.characterCombatManager.lockOnTransform.transform.position;
-                Vector2 lockOnCrosshairPosition = RectTransformUtility.WorldToScreenPoint(cameraObject, targetLockOnTransform);
-                //lockOnCrosshairPosition.y = Screen.height - lockOnCrosshairPosition.y;
-                PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.transform.position = lockOnCrosshairPosition;
-                PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.SetActive(true);
             }
 
 
