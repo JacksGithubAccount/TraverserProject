@@ -1203,7 +1203,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.0005
+  m_Radius: 0.001
   m_Height: 0.0024
   m_Direction: 0
   m_Center: {x: 0.0011, y: 0.00035, z: 0.0002}
@@ -1561,6 +1561,7 @@ MonoBehaviour:
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
+  trueDamage: 0
   poiseDamage: 0
   durkManager: {fileID: 0}
 --- !u!1 &1330474279826985390
@@ -4429,6 +4430,7 @@ MonoBehaviour:
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
+  trueDamage: 0
   poiseDamage: 0
   bossCharacter: {fileID: 0}
 --- !u!1 &5686156205138479542
@@ -7255,7 +7257,13 @@ MonoBehaviour:
   activeDrawnProjectileFX: {fileID: 0}
   bloodSplatterVFX: {fileID: 0}
   criticalBloodSplatterVFX: {fileID: 0}
+  healedVFX: {fileID: 0}
+  effectTransform: {fileID: 0}
+  poisonedVFX: {fileID: 0}
   staticEffects: []
+  effectTickTimer: 0
+  defaultEffectTickTime: 1
+  timedEffects: []
 --- !u!114 &3768501074324438072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7314,6 +7322,15 @@ MonoBehaviour:
   canRun: 1
   canMove: 1
   canRoll: 1
+  isSliding: 0
+  isSlidingOffCharacter: 0
+  slopeSlideStartPositionYOffset: 1
+  slopeSlideSphereCastMaxDistance: 2
+  slopeSlideSpeed: -11
+  slopeSlideSpeedMultiplier: -3
+  slipperySurfaceMaxAngle: 15
+  characterSlideOffHeadCollisionMaxDistanceCheck: 5
+  characterCollisionCheckSphereMultiplier: 1.5
 --- !u!114 &688280012291426523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7378,6 +7395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27246b1fde6757744a32d3e8282d2af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
   damageGrunts:
   - {fileID: 8300000, guid: f322b7b936aca1045b330a48a519a1c5, type: 3}
   - {fileID: 8300000, guid: cf9c1ac5222b4314d8242e74d9508a9e, type: 3}
@@ -7423,6 +7441,7 @@ MonoBehaviour:
   characterGroup: 1
   isPerformingAction: 0
   characterName: SkelkieBoyy
+  aiCharacterSoundFXManager: {fileID: 0}
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterCombatManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
@@ -7506,6 +7525,12 @@ MonoBehaviour:
     m_InternalValue: 0
   isBeingCriticallyDamaged:
     m_InternalValue: 0
+  isRolling:
+    m_InternalValue: 0
+  isPoisoned:
+    m_InternalValue: 0
+  isBloodLoss:
+    m_InternalValue: 0
   currentStamina:
     m_InternalValue: 0
   maxStamina:
@@ -7534,6 +7559,12 @@ MonoBehaviour:
     m_InternalValue: 1
   luck:
     m_InternalValue: 1
+  buildUpCapacity:
+    m_InternalValue: 100
+  poisonBuildUp:
+    m_InternalValue: 0
+  bleedBuildUp:
+    m_InternalValue: 0
   strengthModifier:
     m_InternalValue: 1
   isAwake:

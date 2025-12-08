@@ -32,6 +32,9 @@ namespace TraverserProject
         string phaseShiftAnimation = "Phase_Change_01";
         [SerializeField] CombatStanceState phase02CombatStanceState;
 
+        [Header("Defeat")]
+        [SerializeField] string defeatMessage =  "GREAT FOE FELLED";
+
         protected override void Awake()
         {
             base.Awake();
@@ -116,7 +119,7 @@ namespace TraverserProject
         }
         public override IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
         {
-            PlayerUIManager.Singleton.playerUIPopUpManager.SendBossDefeatedPopUp("GREAT FOE FELLED");
+            PlayerUIManager.Singleton.playerUIPopUpManager.SendBossDefeatedPopUp(defeatMessage);
             if (IsOwner)
             {
                 characterNetworkManager.currentHealth.Value = 0;

@@ -85,6 +85,13 @@ namespace TraverserProject
                 Light light = instantiatedThrowableItem.GetComponentInChildren<Light>();
                 if (light != null)
                     light.color = renderer.material.color;
+
+                ParticleSystem particleSystem = instantiatedThrowableItem.GetComponentInChildren<ParticleSystem>();
+                if (particleSystem != null)
+                {
+                    var particleSystemMain = particleSystem.main;
+                    particleSystemMain.startColor = renderer.material.color;                    
+                }
             }
 
             ThrowableManager throwableManager = instantiatedThrowableItem.GetComponent<ThrowableManager>();
