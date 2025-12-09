@@ -11,10 +11,17 @@ namespace TraverserProject
         {
             AIBossCharacterManager boss = WorldAIManager.Singleton.GetBossCharacterByID(bossID);
 
-            if (boss != null)
+            if (boss == null)
+                return;
+
+            if (boss.hasBeenDefeated.Value)
             {
-                boss.WakeBoss();
+                gameObject.SetActive(false);
+                return;
             }
+
+            boss.WakeBoss();                
+
         }
 
     }
