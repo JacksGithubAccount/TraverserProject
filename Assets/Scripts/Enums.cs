@@ -50,7 +50,7 @@ public enum CharacterDialogueID
 //used for determining dialogue from selecting talk in the menus
 public enum CharacterMenuDialogueID
 {
-    NoDialogueID,    
+    NoDialogueID,
     BlacksmithTalkDialogueID
 }
 
@@ -64,7 +64,8 @@ public enum DialogueEndEvents
 public enum BuildUp
 {
     Poison,
-    Bleed
+    Bleed,
+    Frost
 }
 
 //is tag for each weapon model instantiation slot
@@ -245,7 +246,7 @@ public enum ItemPickUpType
     CharacterDrop
 }
 
-//determines projectile arc
+//determines projectile impact
 public enum ThrowableType
 {
     Destructible,

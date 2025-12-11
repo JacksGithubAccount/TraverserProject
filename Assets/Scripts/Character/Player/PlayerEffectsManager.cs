@@ -8,6 +8,7 @@ namespace TraverserProject
         [Header("Debug")]
         [SerializeField] bool applyPoisonBuildUp = false;
         [SerializeField] bool applyBleedBuildUp = false;
+        [SerializeField] bool applyFrostBuildUp = false;
 
         protected override void Update()
         {
@@ -24,6 +25,14 @@ namespace TraverserProject
             {
                 applyBleedBuildUp = false;
                 TakeBuildUpEffect buildUp = Instantiate(WorldCharacterEffectsManager.Singleton.takeBleedBuildUpEffect);
+                buildUp.buildUpAmount = 25;
+                character.characterEffectsManager.ProcessInstantEffect(buildUp);
+            }
+
+            if (applyFrostBuildUp)
+            {
+                applyFrostBuildUp = false;
+                TakeBuildUpEffect buildUp = Instantiate(WorldCharacterEffectsManager.Singleton.takeFrostBuildUpEffect);
                 buildUp.buildUpAmount = 25;
                 character.characterEffectsManager.ProcessInstantEffect(buildUp);
             }

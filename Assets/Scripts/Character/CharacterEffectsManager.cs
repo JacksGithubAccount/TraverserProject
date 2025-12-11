@@ -24,6 +24,7 @@ namespace TraverserProject
 
         [Header("Status Effect VFX")]
         [HideInInspector] public GameObject poisonedVFX;
+        [HideInInspector] public GameObject frostbiteVFX;
 
         [Header("Static Effects")]
         public List<StaticCharacterEffect> staticEffects = new List<StaticCharacterEffect>();
@@ -101,6 +102,9 @@ namespace TraverserProject
                     break;
                 case BuildUp.Bleed:
                     character.characterNetworkManager.bleedBuildUp.Value += amount;
+                    break;
+                case BuildUp.Frost:
+                    character.characterNetworkManager.frostBuildUp.Value += amount;
                     break;
                 default:
                     break;

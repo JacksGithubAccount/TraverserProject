@@ -158,10 +158,44 @@ namespace TraverserProject
 
                 Destroy(character.characterEffectsManager.poisonedVFX);
             }
+        }
 
+        public virtual void OnIsFrostbiteChanged(bool oldStatus, bool newStatus)
+        {
+            if (isFrostbite.Value)
+            {
+                if (player.IsOwner)
+                {
+                    PlayerUIManager.Singleton.playerUIPopUpManager.SendStatusEffectPopUp(BuildUp.Frost);
+                }
 
+                if (character.characterEffectsManager.frostbiteVFX != null)
+                    return;
 
+                GameObject frostVFX = Instantiate(WorldCharacterEffectsManager.Singleton.frostbiteVFX);
+                if (character.characterEffectsManager.effectTransform != null)
+                {
+                    frostVFX.transform.parent = character.characterEffectsManager.effectTransform;
+                }
+                else
+                {
+                    frostVFX.transform.parent = character.characterCombatManager.lockOnTransform;
+                }
+                frostVFX.transform.localPosition = Vector3.zero;
+                frostVFX.transform.localRotation = Quaternion.identity;
+            }
+            else
+            {
+                if (character.characterEffectsManager.frostbiteVFX == null)
+                    return;
 
+                //option 1
+                Destroy(character.characterEffectsManager.frostbiteVFX);
+
+                //option 2
+                //Create a script on VFX and call function to "end" it and stop particles so they fade
+                // and dont stop suddenly then when faded destroy it
+            }
         }
 
         public void SetCharacterActionHand(bool rightHandedAction)

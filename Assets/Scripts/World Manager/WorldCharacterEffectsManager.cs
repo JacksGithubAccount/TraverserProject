@@ -16,6 +16,7 @@ namespace TraverserProject
         public GameObject healedVFX;
         public GameObject poisonedVFX;
         public GameObject bloodLossVFX;
+        public GameObject frostbiteVFX;
 
 
         [Header("Damage")]
@@ -29,14 +30,17 @@ namespace TraverserProject
         [Header("Status Effects")]
         public PoisonedEffect poisonedEffect;
         public BloodLossEffect bloodLossEffect;
+        public FrostbiteEffect frostbiteEffect;
 
         [Header("Take Build Ups")]
         public TakeBuildUpEffect takePoisonBuildUpEffect;
         public TakeBuildUpEffect takeBleedBuildUpEffect;
+        public TakeBuildUpEffect takeFrostBuildUpEffect;
 
         [Header("Degrade Build Ups")]
         public BuildUpEffect degradePoisonBuildUpEffect;
         public BuildUpEffect degradeBleedBuildUpEffect;
+        public BuildUpEffect degradeFrostBuildUpEffect;
 
         [Header("Two Hand")]
         public TwoHandingEffect twoHandingEffect;

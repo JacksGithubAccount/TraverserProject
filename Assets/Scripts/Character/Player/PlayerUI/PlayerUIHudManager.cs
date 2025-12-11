@@ -20,6 +20,7 @@ namespace TravserserProject
         [Header("Build Up Bars")]
         [SerializeField] UI_BuildUpBar poisonBuildUpBar;
         [SerializeField] UI_BuildUpBar bleedBuildUpBar;
+        [SerializeField] UI_BuildUpBar frostBuildUpBar;
 
         [Header("Runes")]
         [SerializeField] float bubbleUpdateCountDelayTimer = 2.5f;
@@ -147,10 +148,16 @@ namespace TravserserProject
             bleedBuildUpBar.SetStat(Mathf.RoundToInt(amount));
         }
 
+        public void SetNewFrostBuildUpAmount(float oldValue, float amount)
+        {
+            frostBuildUpBar.SetStat(Mathf.RoundToInt(amount));
+        }
+
         public void SetMaxBuildUpCapacityValue(int buildUpCapacity)
         {
             poisonBuildUpBar.SetMaxStat(buildUpCapacity);
             bleedBuildUpBar.SetMaxStat(buildUpCapacity);
+            frostBuildUpBar.SetMaxStat(buildUpCapacity);
             //ETC
         }
 

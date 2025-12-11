@@ -105,6 +105,8 @@ namespace TraverserProject
                 //updates ui build up bars when build up changes
                 playerNetworkManager.poisonBuildUp.OnValueChanged += PlayerUIManager.Singleton.playerUIHudManager.SetNewPoisonBuildUpAmount;
                 playerNetworkManager.bleedBuildUp.OnValueChanged += PlayerUIManager.Singleton.playerUIHudManager.SetNewBleedBuildUpAmount;
+                playerNetworkManager.frostBuildUp.OnValueChanged += PlayerUIManager.Singleton.playerUIHudManager.SetNewFrostBuildUpAmount;
+
 
                 playerNetworkManager.SetNewMaxHealthValue(0, playerNetworkManager.vigor.Value);
                 playerNetworkManager.SetNewMaxStaminaValue(0, playerNetworkManager.endurance.Value);
@@ -127,6 +129,7 @@ namespace TraverserProject
             //status effects
             playerNetworkManager.isPoisoned.OnValueChanged += playerNetworkManager.OnIsPoisonedChanged;
             playerNetworkManager.isBloodLoss.OnValueChanged += playerNetworkManager.OnIsBloodLossChanged;
+            playerNetworkManager.isFrostbite.OnValueChanged += playerNetworkManager.OnIsFrostbiteChanged;
 
             //lock on
             playerNetworkManager.isLockedOn.OnValueChanged += playerNetworkManager.OnIsLockedOnChanged;
@@ -192,6 +195,7 @@ namespace TraverserProject
 
                 playerNetworkManager.poisonBuildUp.OnValueChanged -= PlayerUIManager.Singleton.playerUIHudManager.SetNewPoisonBuildUpAmount;
                 playerNetworkManager.bleedBuildUp.OnValueChanged -= PlayerUIManager.Singleton.playerUIHudManager.SetNewBleedBuildUpAmount;
+                playerNetworkManager.frostBuildUp.OnValueChanged -= PlayerUIManager.Singleton.playerUIHudManager.SetNewFrostBuildUpAmount;
 
 
                 playerNetworkManager.isAiming.OnValueChanged -= playerNetworkManager.OnIsAimingChanged;
@@ -211,6 +215,7 @@ namespace TraverserProject
             //status effects
             playerNetworkManager.isPoisoned.OnValueChanged -= playerNetworkManager.OnIsPoisonedChanged;
             playerNetworkManager.isBloodLoss.OnValueChanged -= playerNetworkManager.OnIsBloodLossChanged;
+            playerNetworkManager.isFrostbite.OnValueChanged -= playerNetworkManager.OnIsFrostbiteChanged;
 
             //lock on
             playerNetworkManager.isLockedOn.OnValueChanged -= playerNetworkManager.OnIsLockedOnChanged;

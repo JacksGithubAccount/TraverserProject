@@ -23,6 +23,9 @@ namespace TraverserProject
                 case BuildUp.Bleed:
                     CheckForBloodLossStatus(character);
                     break;
+                case BuildUp.Frost:
+                    CheckForFrostbiteStatus(character);
+                    break;
                 default:
                     break;
             }
@@ -81,6 +84,41 @@ namespace TraverserProject
 
                 BloodLossEffect bloodLoss = Instantiate(WorldCharacterEffectsManager.Singleton.bloodLossEffect);
                 character.characterEffectsManager.ProcessInstantEffect(bloodLoss);
+
+                PlayerManager player = character as PlayerManager;
+
+                if (player == null)
+                    return;
+
+                if (!player.IsOwner)
+                    return;
+
+
+            }
+        }
+
+        private void CheckForFrostbiteStatus(CharacterManager character)
+        {
+            if (character.characterNetworkManager.isFrostbite.Value)
+                return;
+
+            BuildUpEffect frostBuildUp = character.characterEffectsManager.CheckForTimedEffect(WorldCharacterEffectsManager.Singleton.degradeFrostBuildUpEffect.effectID) as BuildUpEffect;
+
+            if (frostBuildUp == null)
+            {
+                frostBuildUp = Instantiate(WorldCharacterEffectsManager.Singleton.degradeFrostBuildUpEffect);
+                character.characterEffectsManager.AddTimedEffect(frostBuildUp);
+                frostBuildUp.ProcessEffect(character);
+            }
+
+            if (character.characterNetworkManager.frostBuildUp.Value > character.characterNetworkManager.buildUpCapacity.Value)
+            {
+                character.characterNetworkManager.frostBuildUp.Value = 0;
+                character.characterNetworkManager.isFrostbite.Value = true;
+
+                FrostbiteEffect frost = Instantiate(WorldCharacterEffectsManager.Singleton.frostbiteEffect);
+                frost.defaultLengthOfEffect = character.characterNetworkManager.buildUpCapacity.Value;
+                character.characterEffectsManager.AddTimedEffect(frost);
 
                 PlayerManager player = character as PlayerManager;
 

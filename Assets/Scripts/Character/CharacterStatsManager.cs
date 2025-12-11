@@ -208,6 +208,10 @@ namespace TravserserProject
                     character.characterNetworkManager.bleedBuildUp.Value += amount;
                     effect.buildUpRemaining = character.characterNetworkManager.bleedBuildUp.Value;
                     break;
+                case BuildUp.Frost:
+                    character.characterNetworkManager.frostBuildUp.Value += amount;
+                    effect.buildUpRemaining = character.characterNetworkManager.frostBuildUp.Value;
+                    break;
                 default:
                     break;
             }

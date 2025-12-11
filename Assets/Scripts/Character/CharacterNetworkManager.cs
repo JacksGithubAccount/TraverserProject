@@ -42,6 +42,7 @@ namespace TraverserProject
         public NetworkVariable<bool> isRolling = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isPoisoned = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isBloodLoss = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> isFrostbite = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
         [Header("Resources")]
@@ -69,6 +70,8 @@ namespace TraverserProject
         public NetworkVariable<float> buildUpCapacity = new NetworkVariable<float>(100, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<float> poisonBuildUp = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<float> bleedBuildUp = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<float> frostBuildUp = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
 
         [Header("Stats Modifiers")]
         public NetworkVariable<int> strengthModifier = new NetworkVariable<int>(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -185,7 +188,38 @@ namespace TraverserProject
             }
         }
 
+        public virtual void OnIsFrostbiteChanged(bool oldStatus, bool newStatus)
+        {
+            if (isFrostbite.Value)
+            {
+                if (character.characterEffectsManager.frostbiteVFX != null)
+                    return;
 
+                GameObject frostVFX = Instantiate(WorldCharacterEffectsManager.Singleton.frostbiteVFX);
+                if (character.characterEffectsManager.effectTransform != null)
+                {
+                    frostVFX.transform.parent = character.characterEffectsManager.effectTransform;
+                }
+                else
+                {
+                    frostVFX.transform.parent = character.characterCombatManager.lockOnTransform;
+                }
+                frostVFX.transform.localPosition = Vector3.zero;
+                frostVFX.transform.localRotation = Quaternion.identity;
+            }
+            else
+            {
+                if (character.characterEffectsManager.frostbiteVFX == null)
+                    return;
+
+                //option 1
+                Destroy(character.characterEffectsManager.frostbiteVFX);
+
+                //option 2
+                //Create a script on VFX and call function to "end" it and stop particles so they fade
+                // and dont stop suddenly then when faded destroy it
+            }
+        }
 
         //used to cancel FX when poise broken
         [ServerRpc]
