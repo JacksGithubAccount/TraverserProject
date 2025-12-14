@@ -7,22 +7,22 @@ namespace TraverserProject
     public class LightningSpearManager : SpellManager
     {
         [Header("Colliders")]
-        public FireBallDamageCollider damageCollider;
+        public LightningSpearDamageCollider damageCollider;
 
         [Header("Instantiated FX")]
         private GameObject instantiatedDestructionFX;
 
         private bool hasCollided = false;
         public bool isFullyCharged = false;
-        private Rigidbody fireBallRigidBody;
+        private Rigidbody lightningSpearRigidBody;
         private Coroutine destructionFXCoroutine;
 
         protected override void Awake()
         {
             base.Awake();
 
-            fireBallRigidBody = GetComponent<Rigidbody>();
-            //damageCollider = GetComponentInChildren<FireBallDamageCollider>();
+            lightningSpearRigidBody = GetComponent<Rigidbody>();
+            damageCollider = GetComponentInChildren<LightningSpearDamageCollider>();
         }
 
         protected override void Update()
@@ -46,15 +46,15 @@ namespace TraverserProject
             }
         }
 
-        public void InitializeFireBall(CharacterManager spellCaster)
+        public void InitializeLightningSpear(CharacterManager spellCaster)
         {
             damageCollider.spellCaster = spellCaster;
 
             //setup damage formula
-            damageCollider.fireDamage = 150;
+            damageCollider.lightningDamage = 150;
 
             if (isFullyCharged)
-                damageCollider.fireDamage *= 1.4f;
+                damageCollider.lightningDamage *= 1.4f;
         }
 
         public void InstantiateSpellDestructionFX()
