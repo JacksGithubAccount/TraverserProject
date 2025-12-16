@@ -16,8 +16,10 @@ namespace TravserserProject
         [Header("Stamina Regeneration")]
         private float staminaRegenerationTimer = 0;
         private float staminaTickTimer = 0;
-        [SerializeField] float staminaRegenerationAmount = 50;
+        [SerializeField] float baseStaminaRegenerationAmount = 50;
+        private float staminaRegenerationAmount = 0;
         [SerializeField] float staminaRegenerationDelay = 2;
+        [SerializeField] float blockingStaminaRegenerationReduction = 0.2f;
 
         [Header("Blocking Absorptions")]
         public float blockingPhysicalAbsorption;
@@ -155,20 +157,29 @@ namespace TravserserProject
             if (character.isPerformingAction)
                 return;
 
+            if (character.characterNetworkManager.currentStamina.Value >= character.characterNetworkManager.maxStamina.Value)
+                return;
+
+            staminaRegenerationAmount = baseStaminaRegenerationAmount + (baseStaminaRegenerationAmount * (character.characterNetworkManager.staminaRegenerationModifier.Value / 100));
+
             staminaRegenerationTimer += Time.deltaTime;
 
             if (staminaRegenerationTimer >= staminaRegenerationDelay)
             {
-                if (character.characterNetworkManager.currentStamina.Value < character.characterNetworkManager.maxStamina.Value)
-                {
-                    staminaTickTimer += Time.deltaTime;
 
-                    if (staminaTickTimer >= 0.1)
-                    {
-                        staminaTickTimer = 0;
-                        character.characterNetworkManager.currentStamina.Value += staminaRegenerationAmount;
-                    }
+                staminaTickTimer += Time.deltaTime;
+
+                Debug.Log("Stamina Regeneration Amount: " + staminaRegenerationAmount);
+
+                if (character.characterNetworkManager.isBlocking.Value)
+                    staminaRegenerationAmount *= blockingStaminaRegenerationReduction;
+
+                if (staminaTickTimer >= 0.1)
+                {
+                    staminaTickTimer = 0;
+                    character.characterNetworkManager.currentStamina.Value += baseStaminaRegenerationAmount;
                 }
+
             }
 
         }

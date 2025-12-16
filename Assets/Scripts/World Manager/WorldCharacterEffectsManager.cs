@@ -24,6 +24,9 @@ namespace TraverserProject
         public TakeBlockedDamageEffect takeBlockedDamageEffect;
         public TakeCriticalDamageEffect takeCriticalDamageEffect;
 
+        [Header("Frostbite")]
+        public ModifyStaminaRegenerationForATimeEffect frostbiteStaminaRegenerationEffect;
+
         [Header("Recovery")]
         public TakeRecoveryEffect takeRecoveryEffect;
 

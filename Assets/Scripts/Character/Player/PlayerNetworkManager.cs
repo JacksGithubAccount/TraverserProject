@@ -160,7 +160,7 @@ namespace TraverserProject
             }
         }
 
-        public virtual void OnIsFrostbiteChanged(bool oldStatus, bool newStatus)
+        public override void OnIsFrostbiteChanged(bool oldStatus, bool newStatus)
         {
             if (isFrostbite.Value)
             {
