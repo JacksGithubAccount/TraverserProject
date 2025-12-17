@@ -191,8 +191,15 @@ namespace TraverserProject
 
             for (int i = 0; i < timedEffects.Count; i++)
             {
-                if (timedEffects[i] != null)
+                if (timedEffects[i] == null)
+                    return;
+
+                if (timedEffects[i].effectID == effectID)
+                {
+                    TimedCharacterEffect effect = timedEffects[i];
+                    effect.RemoveEffect(character);
                     timedEffects.RemoveAt(i);
+                }
             }
         }
 

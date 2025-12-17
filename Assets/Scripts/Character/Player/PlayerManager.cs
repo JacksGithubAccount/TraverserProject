@@ -651,6 +651,7 @@ namespace TraverserProject
 
             //sync status effects
             playerNetworkManager.OnIsPoisonedChanged(false, playerNetworkManager.isPoisoned.Value);
+            playerNetworkManager.OnIsFrostbiteChanged(false, playerNetworkManager.isFrostbite.Value);
 
             //sync block status
             playerNetworkManager.OnIsBlockingChanged(false, playerNetworkManager.isBlocking.Value);

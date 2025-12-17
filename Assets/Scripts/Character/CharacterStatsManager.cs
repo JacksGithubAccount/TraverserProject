@@ -177,7 +177,7 @@ namespace TravserserProject
                 if (staminaTickTimer >= 0.1)
                 {
                     staminaTickTimer = 0;
-                    character.characterNetworkManager.currentStamina.Value += baseStaminaRegenerationAmount;
+                    character.characterNetworkManager.currentStamina.Value += staminaRegenerationAmount;
                 }
 
             }

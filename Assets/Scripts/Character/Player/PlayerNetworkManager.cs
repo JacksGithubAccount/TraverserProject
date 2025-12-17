@@ -182,7 +182,8 @@ namespace TraverserProject
                     frostVFX.transform.parent = character.characterCombatManager.lockOnTransform;
                 }
                 frostVFX.transform.localPosition = Vector3.zero;
-                frostVFX.transform.localRotation = Quaternion.identity;
+                //frostVFX.transform.localRotation = Quaternion.identity;
+                character.characterEffectsManager.frostbiteVFX = frostVFX;
             }
             else
             {
@@ -191,6 +192,7 @@ namespace TraverserProject
 
                 //option 1
                 Destroy(character.characterEffectsManager.frostbiteVFX);
+                
 
                 //option 2
                 //Create a script on VFX and call function to "end" it and stop particles so they fade

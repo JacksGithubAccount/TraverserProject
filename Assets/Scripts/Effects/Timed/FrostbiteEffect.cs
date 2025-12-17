@@ -14,6 +14,19 @@ namespace TraverserProject
         {
             base.ProcessEffect(character);
 
+            if (timeRemainingOnEffect <= 0 || character.isDead.Value)
+            {
+                character.characterEffectsManager.RemoveTimedEffect(effectID);
+                character.characterEffectsManager.RemoveTimedEffect(WorldCharacterEffectsManager.Singleton.frostbiteStaminaRegenerationEffect.effectID);
+                character.characterNetworkManager.isFrostbite.Value = false;
+            }
+
+            if (!character.characterNetworkManager.isFrostbite.Value)
+            {
+                character.characterEffectsManager.RemoveTimedEffect(effectID);
+                character.characterEffectsManager.RemoveTimedEffect(WorldCharacterEffectsManager.Singleton.frostbiteStaminaRegenerationEffect.effectID);
+            }
+
             if (!effectHasBeenInitialized)
             {
                 effectHasBeenInitialized = true;
@@ -24,11 +37,16 @@ namespace TraverserProject
         public override void RemoveEffect(CharacterManager character)
         {
             base.RemoveEffect(character);
+
+            if (character.IsOwner)
+                character.characterNetworkManager.isFrostbite.Value = false;
+            
         }
 
         private void InflictStaminaRegenerationDebuff(CharacterManager character)
         {
             ModifyStaminaRegenerationForATimeEffect staminaDebuff = Instantiate(WorldCharacterEffectsManager.Singleton.frostbiteStaminaRegenerationEffect);
+            staminaDebuff.defaultLengthOfEffect = this.defaultLengthOfEffect;
             character.characterEffectsManager.AddTimedEffect(staminaDebuff);
 
             if (!character.IsOwner)
