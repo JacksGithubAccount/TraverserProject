@@ -46,14 +46,32 @@ public class StatusCureItem : QuickSlotItem
 
         }
 
-        Transform itemInstantiationLocation;
-        GameObject instantiatedThrowableItem = Instantiate(itemModel, player.playerEquipmentManager.rightHandWeaponSlot.transform);
-        itemInstantiationLocation = player.playerEquipmentManager.rightHandWeaponSlot.transform;
+        
 
-        instantiatedThrowableItem.transform.parent = itemInstantiationLocation.transform;
-        instantiatedThrowableItem.transform.localPosition = Vector3.zero;
-        instantiatedThrowableItem.transform.localRotation = Quaternion.identity;
-        instantiatedThrowableItem.transform.parent = null;
+        switch (buildUp)
+        {
+            case BuildUp.Poison:
+                statusCureVFX = Instantiate(WorldCharacterEffectsManager.Singleton.poisonCureVFX);
+                player.playerNetworkManager.poisonBuildUp.Value = 0;
+                player.playerNetworkManager.isPoisoned.Value = false;
+                break;
+            case BuildUp.Bleed:
+                statusCureVFX = Instantiate(WorldCharacterEffectsManager.Singleton.bloodLossCureVFX);
+                player.playerNetworkManager.bleedBuildUp.Value = 0;
+                player.playerNetworkManager.isBloodLoss.Value = false;
+                break;
+            case BuildUp.Frost:
+                statusCureVFX = Instantiate(WorldCharacterEffectsManager.Singleton.frostbiteCureVFX);
+                player.playerNetworkManager.frostBuildUp.Value = 0;
+                player.playerNetworkManager.isFrostbite.Value = false;
+                break;
+            default:
+                break;
+        }
+
+        statusCureVFX.transform.position = player.playerEffectsManager.effectTransform.position;
+        statusCureVFX.transform.root.rotation = Quaternion.identity;
+
 
 
 

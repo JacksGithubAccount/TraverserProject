@@ -12605,6 +12605,8 @@ MonoBehaviour:
     m_InternalValue: 0
   strengthModifier:
     m_InternalValue: 1
+  staminaRegenerationModifier:
+    m_InternalValue: 0
   characterName:
     m_InternalValue:
       utf8LengthInBytes: 9
@@ -12942,8 +12944,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runesDroppedOnDeath: 50
-  staminaRegenerationAmount: 50
+  baseStaminaRegenerationAmount: 50
   staminaRegenerationDelay: 2
+  blockingStaminaRegenerationReduction: 0.2
   blockingPhysicalAbsorption: 0
   blockingFireAbsorption: 0
   blockingMagicAbsorption: 0
@@ -13027,8 +13030,8 @@ MonoBehaviour:
   currentSpell: {fileID: 11400000, guid: c849838932c3fe943b7dbff7c8981786, type: 2}
   quickSlotItemsInQuickSlots:
   - {fileID: 11400000, guid: 2f5b3455b88448146b0c60c2756dcaa6, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: f0330c7fdea308646a82d3f157252565, type: 2}
+  - {fileID: 11400000, guid: de1eada264436224cb881becce1661ca, type: 2}
   quickSlotItemIndex: 0
   currentQuickSlotItem: {fileID: 11400000, guid: aedcc59cf0831af4eb8da47234130fb5, type: 2}
   headEquipment: {fileID: 11400000, guid: d4a06b49d42657449b74320981258cb1, type: 2}
@@ -21307,6 +21310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6767634676123900843}
   - component: {fileID: 3509101894663542653}
+  - component: {fileID: 9018673138625104091}
   m_Layer: 7
   m_Name: spine_02
   m_TagString: Untagged
@@ -21355,6 +21359,18 @@ CapsuleCollider:
   m_Height: 0.34
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9018673138625104091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6308016047536377958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35fdd8910e781b47a5d9b87820038f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6323323752501223887
 GameObject:
   m_ObjectHideFlags: 0

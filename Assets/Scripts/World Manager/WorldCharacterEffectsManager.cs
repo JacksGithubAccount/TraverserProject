@@ -17,6 +17,10 @@ namespace TraverserProject
         public GameObject poisonedVFX;
         public GameObject bloodLossVFX;
         public GameObject frostbiteVFX;
+        public GameObject poisonCureVFX;
+        public GameObject bloodLossCureVFX;
+        public GameObject frostbiteCureVFX;
+
 
 
         [Header("Damage")]
