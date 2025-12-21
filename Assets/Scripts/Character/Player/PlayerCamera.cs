@@ -150,9 +150,13 @@ namespace TraverserProject
 
             aimDirection = cameraObject.transform.forward.normalized;
 
-            //PlayerUIManager.Singleton.localPlayer.transform.forward = cameraObject.transform.forward;
-            UpperBodyTransform upperbodyTransform = player.GetComponentInChildren<UpperBodyTransform>();
-            upperbodyTransform.transform.forward = cameraObject.transform.forward;
+            Vector3 forwardXVector = cameraObject.transform.forward;
+            forwardXVector.y = 0;
+            PlayerUIManager.Singleton.localPlayer.transform.forward = forwardXVector;
+
+            //rotates upperbody, but twists in strange ways
+            //UpperBodyTransform upperbodyTransform = player.GetComponentInChildren<UpperBodyTransform>();
+            //upperbodyTransform.transform.right = cameraObject.transform.forward;
 
             Vector3 cameraRotationY = Vector3.zero;
             Vector3 cameraRotationX = Vector3.zero;
