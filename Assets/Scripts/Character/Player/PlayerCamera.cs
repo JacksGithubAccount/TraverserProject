@@ -153,10 +153,12 @@ namespace TraverserProject
             Vector3 forwardXVector = cameraObject.transform.forward;
             forwardXVector.y = 0;
             PlayerUIManager.Singleton.localPlayer.transform.forward = forwardXVector;
-
+                      
             //rotates upperbody, but twists in strange ways
             //UpperBodyTransform upperbodyTransform = player.GetComponentInChildren<UpperBodyTransform>();
             //upperbodyTransform.transform.right = cameraObject.transform.forward;
+            //upperbodyTransform.transform.rotation = cameraObject.transform.rotation;
+
 
             Vector3 cameraRotationY = Vector3.zero;
             Vector3 cameraRotationX = Vector3.zero;
