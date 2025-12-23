@@ -213,7 +213,6 @@ namespace TravserserProject
                 case BuildUp.Poison:
                     character.characterNetworkManager.poisonBuildUp.Value += amount;
                     effect.buildUpRemaining = character.characterNetworkManager.poisonBuildUp.Value;
-
                     break;
                 case BuildUp.Bleed:
                     character.characterNetworkManager.bleedBuildUp.Value += amount;

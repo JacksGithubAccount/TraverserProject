@@ -1,6 +1,7 @@
 using NUnit.Framework;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 namespace TraverserProject
 {
@@ -97,7 +98,7 @@ namespace TraverserProject
 
             switch (buildUpType)
             {
-                case BuildUp.Poison:
+                case BuildUp.Poison:                    
                     character.characterNetworkManager.poisonBuildUp.Value += amount;
                     break;
                 case BuildUp.Bleed:

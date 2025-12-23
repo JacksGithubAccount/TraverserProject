@@ -7,7 +7,7 @@ namespace TraverserProject
     {
         [Header("Build Up")]
         [SerializeField] BuildUp buildUpType;
-        public int buildUpAmount = 10;
+        public float buildUpAmount = 10;
 
         public override void ProcessEffect(CharacterManager character)
         {
