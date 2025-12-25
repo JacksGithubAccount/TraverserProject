@@ -18,6 +18,8 @@ namespace TraverserProject
         [SerializeField] Color regularColor;
         [SerializeField] Color poisonedColor;
 
+        [Header("Materials")]
+        [SerializeField] Material frozenMaterial;
         [SerializeField] List<Material> rainbowMats;
 
         [Header("Forces")]
@@ -59,6 +61,11 @@ namespace TraverserProject
         public Color GetPoisonedColor()
         {
             return poisonedColor;
+        }
+
+        public Material GetFrozenMaterial()
+        {
+            return frozenMaterial;
         }
 
         public Material GetRandomMatFromRainbowMat()

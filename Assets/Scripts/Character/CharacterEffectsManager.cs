@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
@@ -34,6 +35,14 @@ namespace TraverserProject
         [SerializeField] protected float effectTickTimer = 0;
         [SerializeField] protected float defaultEffectTickTime = 1;
         public List<TimedCharacterEffect> timedEffects = new List<TimedCharacterEffect>();
+
+        [Header("Renderers")]
+        private SkinnedMeshRenderer[] skinnedMeshRenderers;
+
+        private MeshRenderer[] meshRenderers;
+
+        [Header("Frozen")]
+        private Coroutine frozenCoroutine;
 
         protected virtual void Awake()
         {
@@ -98,7 +107,7 @@ namespace TraverserProject
 
             switch (buildUpType)
             {
-                case BuildUp.Poison:                    
+                case BuildUp.Poison:
                     character.characterNetworkManager.poisonBuildUp.Value += amount;
                     break;
                 case BuildUp.Bleed:
@@ -239,6 +248,78 @@ namespace TraverserProject
 
             character.characterNetworkManager.isPoisoned.Value = false;
             character.isDead.Value = true;
+        }
+
+        public void PlayFrozenFX()
+        {
+            skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+            meshRenderers = GetComponentsInChildren<MeshRenderer>();
+
+            if (frozenCoroutine != null)
+                StopCoroutine(frozenCoroutine);
+
+            frozenCoroutine = StartCoroutine(ActivateFrozenVFXCoroutine(WorldUtilityManager.Singleton.GetFrozenMaterial()));
+        }
+
+        private IEnumerator ActivateFrozenVFXCoroutine(Material frozenMaterial)
+        {
+            List<Material> originalSkinMeshMaterials = new List<Material>();
+            List<Material> originalMeshMaterials = new List<Material>();
+
+            bool rotationStatusOnFrozen = character.characterLocomotionManager.canRotate;
+            bool canMoveStatusOnFrozen = character.characterLocomotionManager.canMove;
+            bool isPerformingActionStatusOnFrozen = character.isPerformingAction;
+
+            character.characterLocomotionManager.canRotate = false;
+            character.characterLocomotionManager.canMove = false;
+            character.isPerformingAction = true;
+
+            for (int i = 0; i < skinnedMeshRenderers.Length; i++)
+            {
+                if (skinnedMeshRenderers[i] == null)
+                    continue;
+
+                originalSkinMeshMaterials.Add(Instantiate(skinnedMeshRenderers[i].material));
+                skinnedMeshRenderers[i].material = Instantiate(frozenMaterial);
+            }
+
+            for (int i = 0; i < meshRenderers.Length; i++)
+            {
+                if (meshRenderers[i] == null)
+                    continue;
+
+                originalMeshMaterials.Add(Instantiate(meshRenderers[i].material));
+                meshRenderers[i].material = Instantiate(frozenMaterial);
+            }
+
+            while (character.characterNetworkManager.isFrozen.Value)
+            {
+                yield return null;
+            }
+
+            for (int i = 0; i < skinnedMeshRenderers.Length; i++)
+            {
+                for (int j = 0; j < originalSkinMeshMaterials.Count; j++)
+                {
+                    skinnedMeshRenderers[i].material = originalSkinMeshMaterials[j];
+                }
+            }
+
+            for (int i = 0; i < meshRenderers.Length; i++)
+            {
+                for (int j = 0; j < originalMeshMaterials.Count; j++)
+                {
+                    meshRenderers[i].material = originalMeshMaterials[j];
+                }
+            }
+
+            character.characterLocomotionManager.canRotate = rotationStatusOnFrozen;
+            character.characterLocomotionManager.canMove = canMoveStatusOnFrozen;
+            character.isPerformingAction = isPerformingActionStatusOnFrozen;
+
+            //alternative to replacing material is to make a shader with a frozen property which could add layer
+            //of ice over the standard material using the shader, then instead of changing materials, set the 
+            //frozen variable value to the desired setting and change it back to 0 when unfrozen
         }
 
     }

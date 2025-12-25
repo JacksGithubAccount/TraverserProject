@@ -130,6 +130,7 @@ namespace TraverserProject
             playerNetworkManager.isPoisoned.OnValueChanged += playerNetworkManager.OnIsPoisonedChanged;
             playerNetworkManager.isBloodLoss.OnValueChanged += playerNetworkManager.OnIsBloodLossChanged;
             playerNetworkManager.isFrostbite.OnValueChanged += playerNetworkManager.OnIsFrostbiteChanged;
+            playerNetworkManager.isFrozen.OnValueChanged += playerNetworkManager.OnIsFrozenChanged;
 
             //lock on
             playerNetworkManager.isLockedOn.OnValueChanged += playerNetworkManager.OnIsLockedOnChanged;
@@ -216,6 +217,7 @@ namespace TraverserProject
             playerNetworkManager.isPoisoned.OnValueChanged -= playerNetworkManager.OnIsPoisonedChanged;
             playerNetworkManager.isBloodLoss.OnValueChanged -= playerNetworkManager.OnIsBloodLossChanged;
             playerNetworkManager.isFrostbite.OnValueChanged -= playerNetworkManager.OnIsFrostbiteChanged;
+            playerNetworkManager.isFrozen.OnValueChanged -= playerNetworkManager.OnIsFrozenChanged;
 
             //lock on
             playerNetworkManager.isLockedOn.OnValueChanged -= playerNetworkManager.OnIsLockedOnChanged;

@@ -43,6 +43,7 @@ namespace TraverserProject
         public NetworkVariable<bool> isPoisoned = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isBloodLoss = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isFrostbite = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> isFrozen = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
         [Header("Resources")]
@@ -207,6 +208,7 @@ namespace TraverserProject
                 }
                 frostVFX.transform.localPosition = Vector3.zero;
                 frostVFX.transform.localRotation = Quaternion.identity;
+                character.characterEffectsManager.frostbiteVFX = frostVFX;
             }
             else
             {
@@ -219,6 +221,19 @@ namespace TraverserProject
                 //option 2
                 //Create a script on VFX and call function to "end" it and stop particles so they fade
                 // and dont stop suddenly then when faded destroy it
+            }
+        }
+
+        public virtual void OnIsFrozenChanged(bool oldStatus, bool newStatus)
+        {
+            if (isFrozen.Value)
+            {
+                character.animator.speed = 0;
+                character.characterEffectsManager.PlayFrozenFX();
+            }
+            else
+            {
+                character.animator.speed = 1;
             }
         }
 

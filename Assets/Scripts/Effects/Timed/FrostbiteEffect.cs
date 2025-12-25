@@ -39,8 +39,11 @@ namespace TraverserProject
             base.RemoveEffect(character);
 
             if (character.IsOwner)
+            {
                 character.characterNetworkManager.isFrostbite.Value = false;
-            
+                character.characterNetworkManager.isFrozen.Value = false;
+            }
+
         }
 
         private void InflictStaminaRegenerationDebuff(CharacterManager character)
@@ -59,6 +62,7 @@ namespace TraverserProject
 
             character.characterNetworkManager.currentStamina.Value = 0;
             character.characterEffectsManager.ProcessEffectDamage(Mathf.RoundToInt(damage));
+            character.characterNetworkManager.isFrozen.Value = true;
         }
     }
 }

@@ -77,6 +77,8 @@ namespace TraverserProject
             aiCharacterNetworkManager.isPoisoned.OnValueChanged += aiCharacterNetworkManager.OnIsPoisonedChanged;
             aiCharacterNetworkManager.isBloodLoss.OnValueChanged += aiCharacterNetworkManager.OnIsBloodLossChanged;
             aiCharacterNetworkManager.isFrostbite.OnValueChanged += aiCharacterNetworkManager.OnIsFrostbiteChanged;
+            aiCharacterNetworkManager.isFrozen.OnValueChanged += aiCharacterNetworkManager.OnIsFrozenChanged;
+
 
             if (!aiCharacterNetworkManager.isAwake.Value)
                 animator.Play(aiCharacterNetworkManager.sleepingAnimation.Value.ToString());
@@ -100,6 +102,8 @@ namespace TraverserProject
             aiCharacterNetworkManager.isPoisoned.OnValueChanged -= aiCharacterNetworkManager.OnIsPoisonedChanged;
             aiCharacterNetworkManager.isBloodLoss.OnValueChanged -= aiCharacterNetworkManager.OnIsBloodLossChanged;
             aiCharacterNetworkManager.isFrostbite.OnValueChanged -= aiCharacterNetworkManager.OnIsFrostbiteChanged;
+            aiCharacterNetworkManager.isFrozen.OnValueChanged -= aiCharacterNetworkManager.OnIsFrozenChanged;
+
         }
 
         protected override void OnEnable()
