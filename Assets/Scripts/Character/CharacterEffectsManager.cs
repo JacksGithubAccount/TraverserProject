@@ -108,13 +108,16 @@ namespace TraverserProject
             switch (buildUpType)
             {
                 case BuildUp.Poison:
-                    character.characterNetworkManager.poisonBuildUp.Value += amount;
+                    if(!character.characterNetworkManager.isPoisoned.Value)
+                        character.characterNetworkManager.poisonBuildUp.Value += amount;
                     break;
                 case BuildUp.Bleed:
-                    character.characterNetworkManager.bleedBuildUp.Value += amount;
+                    if (!character.characterNetworkManager.isBloodLoss.Value)
+                        character.characterNetworkManager.bleedBuildUp.Value += amount;
                     break;
                 case BuildUp.Frost:
-                    character.characterNetworkManager.frostBuildUp.Value += amount;
+                    if (!character.characterNetworkManager.isFrostbite.Value)
+                        character.characterNetworkManager.frostBuildUp.Value += amount;
                     break;
                 default:
                     break;

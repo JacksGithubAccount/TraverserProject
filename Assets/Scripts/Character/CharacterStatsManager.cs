@@ -136,12 +136,32 @@ namespace TravserserProject
             }
         }
 
-        public int CalculateBuildUpCapacityBasedOnVitalityLevel(int vitality)
+        public int CalculateBuildUpCapacityBasedOnVigorLevel(int vigor)
         {
             float capacity = 0;
 
             //any equation for capacity
-            capacity = vitality * 15;
+            capacity = vigor * 15;
+
+            return Mathf.RoundToInt(capacity);
+        }
+
+        public int CalculateBuildUpCapacityBasedOnMindLevel(int mind)
+        {
+            float capacity = 0;
+
+            //any equation for capacity
+            capacity = mind * 15;
+
+            return Mathf.RoundToInt(capacity);
+        }
+
+        public int CalculateBuildUpCapacityBasedOnEnduranceLevel(int endurance)
+        {
+            float capacity = 0;
+
+            //any equation for capacity
+            capacity =  endurance * 15;
 
             return Mathf.RoundToInt(capacity);
         }

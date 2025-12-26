@@ -9,7 +9,8 @@ namespace TraverserProject
         public BuildUp buildUpType;
 
         [Header("Degradation")]
-        public int buildUpAmountDegradation = -1;
+        public int buildUpAmountDegradationWhenNotAfflicted = -1;
+        public int buildUpAmountDegradationWhenAfflicted = -1;
         public float buildUpRemaining = 1;
 
         public override void ProcessEffect(CharacterManager character)
@@ -17,10 +18,54 @@ namespace TraverserProject
             if (!character.IsOwner)
                 return;
 
-            if (buildUpRemaining < 0 || buildUpRemaining >= character.characterStatsManager.CalculateBuildUpCapacityBasedOnVitalityLevel(character.characterNetworkManager.vigor.Value))
-                character.characterEffectsManager.RemoveTimedEffect(effectID);
+            switch(buildUpType)
+            {
+                case BuildUp.Poison:
+                    if (buildUpRemaining <= 0)
+                    {
+                        character.characterEffectsManager.RemoveTimedEffect(effectID);
+                    }
+                    break;
+                case BuildUp.Bleed:
+                    if (buildUpRemaining <= 0)
+                    {
+                        character.characterEffectsManager.RemoveTimedEffect(effectID);
+                    }
+                    break;
+                case BuildUp.Frost:
+                    if (buildUpRemaining <= 0)
+                    {
+                        character.characterEffectsManager.RemoveTimedEffect(effectID);
+                    }
+                    break;
+
+            }           
+
 
             DegradeBuildUp(character);
+
+            switch (buildUpType)
+            {
+                case BuildUp.Poison:
+                    if (buildUpRemaining <= 0)
+                    {
+                        character.characterNetworkManager.poisonBuildUp.Value = 0;
+                    }
+                    break;
+                case BuildUp.Bleed:
+                    if (buildUpRemaining <= 0)
+                    {
+                        character.characterNetworkManager.bleedBuildUp.Value = 0;
+                    }
+                    break;
+                case BuildUp.Frost:
+                    if (buildUpRemaining <= 0)
+                    {
+                        character.characterNetworkManager.frostBuildUp.Value = 0;
+                    }
+                    break;
+
+            }
         }
 
         public override void RemoveEffect(CharacterManager character)
@@ -30,7 +75,31 @@ namespace TraverserProject
 
         private void DegradeBuildUp(CharacterManager character)
         {
-            character.characterStatsManager.DegradeBuildUps(buildUpType, buildUpAmountDegradation, this);
+            switch (buildUpType)
+            {
+                case BuildUp.Poison:
+                    if (character.characterNetworkManager.isPoisoned.Value)
+                        character.characterStatsManager.DegradeBuildUps(buildUpType, buildUpAmountDegradationWhenAfflicted, this);
+                    else
+                        character.characterStatsManager.DegradeBuildUps(buildUpType, buildUpAmountDegradationWhenNotAfflicted, this);
+                    break;
+                case BuildUp.Bleed:
+                    if (character.characterNetworkManager.isBloodLoss.Value)
+                        character.characterStatsManager.DegradeBuildUps(buildUpType, buildUpAmountDegradationWhenAfflicted, this);
+                    else
+                        character.characterStatsManager.DegradeBuildUps(buildUpType, buildUpAmountDegradationWhenNotAfflicted, this);
+                    break;
+                case BuildUp.Frost:
+                    if (character.characterNetworkManager.isFrostbite.Value)
+                        character.characterStatsManager.DegradeBuildUps(buildUpType, buildUpAmountDegradationWhenAfflicted, this);
+                    else
+                        character.characterStatsManager.DegradeBuildUps(buildUpType, buildUpAmountDegradationWhenNotAfflicted, this);
+                    break;
+                default:
+                    break;
+
+            }
+            
         }
 
     }

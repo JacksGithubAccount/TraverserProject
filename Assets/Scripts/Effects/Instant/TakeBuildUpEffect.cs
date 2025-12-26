@@ -28,13 +28,12 @@ namespace TraverserProject
                     break;
                 default:
                     break;
-            }
+            }            
         }
 
         private void CheckForPoisonedStatus(CharacterManager character)
         {
-            if (character.characterNetworkManager.isPoisoned.Value)
-                return;
+            
 
             BuildUpEffect poisonBuildUp = character.characterEffectsManager.CheckForTimedEffect(WorldCharacterEffectsManager.Singleton.degradePoisonBuildUpEffect.effectID) as BuildUpEffect;
 
@@ -45,13 +44,16 @@ namespace TraverserProject
                 poisonBuildUp.ProcessEffect(character);
             }
 
-            if (character.characterNetworkManager.poisonBuildUp.Value > character.characterNetworkManager.buildUpCapacity.Value)
+            if (character.characterNetworkManager.isPoisoned.Value)
+                return;
+
+            if (character.characterNetworkManager.poisonBuildUp.Value > character.characterNetworkManager.poisonBuildUpCapacity.Value)
             {
-                character.characterNetworkManager.poisonBuildUp.Value = 0;
+                //character.characterNetworkManager.poisonBuildUp.Value = 0;
                 character.characterNetworkManager.isPoisoned.Value = true;
 
                 PoisonedEffect poison = Instantiate(WorldCharacterEffectsManager.Singleton.poisonedEffect);
-                poison.defaultLengthOfEffect = character.characterNetworkManager.buildUpCapacity.Value;
+                poison.defaultLengthOfEffect = character.characterNetworkManager.poisonBuildUpCapacity.Value;
                 character.characterEffectsManager.AddTimedEffect(poison);
 
                 PlayerManager player = character as PlayerManager;
@@ -77,9 +79,9 @@ namespace TraverserProject
                 bleedBuildUp.ProcessEffect(character);
             }
 
-            if (character.characterNetworkManager.bleedBuildUp.Value > character.characterNetworkManager.buildUpCapacity.Value)
+            if (character.characterNetworkManager.bleedBuildUp.Value > character.characterNetworkManager.bleedBuildUpCapacity.Value)
             {
-                character.characterNetworkManager.bleedBuildUp.Value = 0;
+                //character.characterNetworkManager.bleedBuildUp.Value = 0;
                 character.characterNetworkManager.isBloodLoss.Value = true;
 
                 BloodLossEffect bloodLoss = Instantiate(WorldCharacterEffectsManager.Singleton.bloodLossEffect);
@@ -111,13 +113,13 @@ namespace TraverserProject
                 frostBuildUp.ProcessEffect(character);
             }
 
-            if (character.characterNetworkManager.frostBuildUp.Value > character.characterNetworkManager.buildUpCapacity.Value)
+            if (character.characterNetworkManager.frostBuildUp.Value > character.characterNetworkManager.frostBuildUpCapacity.Value)
             {
-                character.characterNetworkManager.frostBuildUp.Value = 0;
+                //character.characterNetworkManager.frostBuildUp.Value = 0;
                 character.characterNetworkManager.isFrostbite.Value = true;
 
                 FrostbiteEffect frost = Instantiate(WorldCharacterEffectsManager.Singleton.frostbiteEffect);
-                frost.defaultLengthOfEffect = character.characterNetworkManager.buildUpCapacity.Value;
+                frost.defaultLengthOfEffect = character.characterNetworkManager.frostBuildUpCapacity.Value;
                 character.characterEffectsManager.AddTimedEffect(frost);
 
                 PlayerManager player = character as PlayerManager;
