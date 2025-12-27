@@ -50,18 +50,21 @@ namespace TraverserProject
                     if (buildUpRemaining <= 0)
                     {
                         character.characterNetworkManager.poisonBuildUp.Value = 0;
+                        character.characterNetworkManager.isPoisoned.Value = false;
                     }
                     break;
                 case BuildUp.Bleed:
                     if (buildUpRemaining <= 0)
                     {
                         character.characterNetworkManager.bleedBuildUp.Value = 0;
+                        character.characterNetworkManager.isBloodLoss.Value = false;
                     }
                     break;
                 case BuildUp.Frost:
                     if (buildUpRemaining <= 0)
                     {
                         character.characterNetworkManager.frostBuildUp.Value = 0;
+                        character.characterNetworkManager.isFrostbite.Value = false;
                     }
                     break;
 
