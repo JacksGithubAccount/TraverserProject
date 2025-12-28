@@ -9,8 +9,8 @@ namespace TraverserProject
         public BuildUp buildUpType;
 
         [Header("Degradation")]
-        public int buildUpAmountDegradationWhenNotAfflicted = -1;
-        public int buildUpAmountDegradationWhenAfflicted = -1;
+        public float buildUpAmountDegradationWhenNotAfflicted = -1;
+        public float buildUpAmountDegradationWhenAfflicted = -1;
         public float buildUpRemaining = 1;
 
         public override void ProcessEffect(CharacterManager character)

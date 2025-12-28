@@ -49,7 +49,7 @@ namespace TraverserProject
 
             if (character.characterNetworkManager.poisonBuildUp.Value > character.characterNetworkManager.poisonBuildUpCapacity.Value)
             {
-                //character.characterNetworkManager.poisonBuildUp.Value = 0;
+                character.characterNetworkManager.poisonBuildUp.Value = character.characterNetworkManager.poisonBuildUpCapacity.Value;
                 character.characterNetworkManager.isPoisoned.Value = true;
 
                 PoisonedEffect poison = Instantiate(WorldCharacterEffectsManager.Singleton.poisonedEffect);
@@ -81,7 +81,7 @@ namespace TraverserProject
 
             if (character.characterNetworkManager.bleedBuildUp.Value > character.characterNetworkManager.bleedBuildUpCapacity.Value)
             {
-                //character.characterNetworkManager.bleedBuildUp.Value = 0;
+                //character.characterNetworkManager.bleedBuildUp.Value = character.characterNetworkManager.bleedBuildUpCapacity.Value;
                 character.characterNetworkManager.isBloodLoss.Value = true;
 
                 BloodLossEffect bloodLoss = Instantiate(WorldCharacterEffectsManager.Singleton.bloodLossEffect);
@@ -115,7 +115,7 @@ namespace TraverserProject
 
             if (character.characterNetworkManager.frostBuildUp.Value > character.characterNetworkManager.frostBuildUpCapacity.Value)
             {
-                //character.characterNetworkManager.frostBuildUp.Value = 0;
+                character.characterNetworkManager.frostBuildUp.Value = character.characterNetworkManager.frostBuildUpCapacity.Value;
                 character.characterNetworkManager.isFrostbite.Value = true;
 
                 FrostbiteEffect frost = Instantiate(WorldCharacterEffectsManager.Singleton.frostbiteEffect);

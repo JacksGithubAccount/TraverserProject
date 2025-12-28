@@ -226,7 +226,7 @@ namespace TravserserProject
             }
         }
 
-        public virtual void DegradeBuildUps(BuildUp buildUp, int amount, BuildUpEffect effect)
+        public virtual void DegradeBuildUps(BuildUp buildUp, float amount, BuildUpEffect effect)
         {
             switch (buildUp)
             {
