@@ -94,9 +94,9 @@ namespace TraverserProject
                 playerNetworkManager.mind.OnValueChanged += playerNetworkManager.SetNewMaxFocusPointValue;
 
                 //updates build up capacity when certain stats change
-                playerNetworkManager.vigor.OnValueChanged += playerNetworkManager.SetNewMaxPoisonBuildUpCapacityValue;
-                playerNetworkManager.endurance.OnValueChanged += playerNetworkManager.SetNewMaxBleedBuildUpCapacityValue;
-                playerNetworkManager.endurance.OnValueChanged += playerNetworkManager.SetNewMaxFrostBuildUpCapacityValue;
+                playerNetworkManager.vigor.OnValueChanged += playerNetworkManager.SetNewMaxImmunityBuildUpCapacityValue;
+                playerNetworkManager.endurance.OnValueChanged += playerNetworkManager.SetNewMaxRobustnessBuildUpCapacityValue;
+                playerNetworkManager.mind.OnValueChanged += playerNetworkManager.SetNewMaxFocusBuildUpCapacityValue;
 
                 //updates ui stat bars when a stat changes
                 playerNetworkManager.currentHealth.OnValueChanged += PlayerUIManager.Singleton.playerUIHudManager.SetNewHealthValue;
@@ -189,9 +189,9 @@ namespace TraverserProject
                 playerNetworkManager.endurance.OnValueChanged -= playerNetworkManager.SetNewMaxStaminaValue;
                 playerNetworkManager.mind.OnValueChanged -= playerNetworkManager.SetNewMaxFocusPointValue;
 
-                playerNetworkManager.vigor.OnValueChanged -= playerNetworkManager.SetNewMaxPoisonBuildUpCapacityValue;
-                playerNetworkManager.endurance.OnValueChanged -= playerNetworkManager.SetNewMaxBleedBuildUpCapacityValue;
-                playerNetworkManager.endurance.OnValueChanged -= playerNetworkManager.SetNewMaxFrostBuildUpCapacityValue;
+                playerNetworkManager.vigor.OnValueChanged -= playerNetworkManager.SetNewMaxImmunityBuildUpCapacityValue;
+                playerNetworkManager.endurance.OnValueChanged -= playerNetworkManager.SetNewMaxRobustnessBuildUpCapacityValue;
+                playerNetworkManager.mind.OnValueChanged -= playerNetworkManager.SetNewMaxFocusBuildUpCapacityValue;
 
                 playerNetworkManager.currentHealth.OnValueChanged -= PlayerUIManager.Singleton.playerUIHudManager.SetNewHealthValue;
                 playerNetworkManager.currentStamina.OnValueChanged -= PlayerUIManager.Singleton.playerUIHudManager.SetNewStaminaValue;
@@ -464,9 +464,9 @@ namespace TraverserProject
             playerNetworkManager.currentStamina.Value = currentCharacterData.currentStamina;
             playerNetworkManager.maxFocusPoints.Value = playerStatsManager.CalculateFocusPointsBasedOnMindLevel(playerNetworkManager.mind.Value);
             playerNetworkManager.currentFocusPoints.Value = currentCharacterData.currentFocusPoints;
-            playerNetworkManager.poisonBuildUpCapacity.Value = playerStatsManager.CalculateBuildUpCapacityBasedOnVigorLevel(playerNetworkManager.vigor.Value);
-            playerNetworkManager.bleedBuildUpCapacity.Value = playerStatsManager.CalculateBuildUpCapacityBasedOnEnduranceLevel(playerNetworkManager.endurance.Value);
-            playerNetworkManager.frostBuildUpCapacity.Value = playerStatsManager.CalculateBuildUpCapacityBasedOnEnduranceLevel(playerNetworkManager.endurance.Value);
+            playerNetworkManager.immunityBuildUpCapacity.Value = playerStatsManager.CalculateBuildUpCapacityBasedOnVigorLevelAndEquipment(playerNetworkManager.vigor.Value);
+            playerNetworkManager.robustnessBuildUpCapacity.Value = playerStatsManager.CalculateBuildUpCapacityBasedOnEnduranceLevelAndEquipment(playerNetworkManager.endurance.Value);
+            playerNetworkManager.focusBuildUpCapacity.Value = playerStatsManager.CalculateBuildUpCapacityBasedOnMindLevelAndEquipment(playerNetworkManager.mind.Value);
 
             playerStatsManager.AddBubbles(currentCharacterData.bubbles);
 

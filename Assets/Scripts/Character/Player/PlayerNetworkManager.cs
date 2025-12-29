@@ -239,20 +239,20 @@ namespace TraverserProject
             currentFocusPoints.Value = maxFocusPoints.Value;
         }
 
-        public void SetNewMaxPoisonBuildUpCapacityValue(int oldVitality, int newVitality)
+        public void SetNewMaxImmunityBuildUpCapacityValue(int oldVitality, int newVitality)
         {
-            poisonBuildUpCapacity.Value = player.playerStatsManager.CalculateBuildUpCapacityBasedOnVigorLevel(newVitality);
-            PlayerUIManager.Singleton.playerUIHudManager.SetMaxPoisonBuildUpCapacityValue(Mathf.RoundToInt(poisonBuildUpCapacity.Value));
+            immunityBuildUpCapacity.Value = player.playerStatsManager.CalculateBuildUpCapacityBasedOnVigorLevelAndEquipment(newVitality);
+            PlayerUIManager.Singleton.playerUIHudManager.SetMaxPoisonBuildUpCapacityValue(Mathf.RoundToInt(immunityBuildUpCapacity.Value));
         }
-        public void SetNewMaxBleedBuildUpCapacityValue(int oldEndurace, int newEndurance)
+        public void SetNewMaxRobustnessBuildUpCapacityValue(int oldEndurace, int newEndurance)
         {
-            bleedBuildUpCapacity.Value = player.playerStatsManager.CalculateBuildUpCapacityBasedOnEnduranceLevel(newEndurance);
-            PlayerUIManager.Singleton.playerUIHudManager.SetMaxBleedBuildUpCapacityValue(Mathf.RoundToInt(bleedBuildUpCapacity.Value));
+            robustnessBuildUpCapacity.Value = player.playerStatsManager.CalculateBuildUpCapacityBasedOnEnduranceLevelAndEquipment(newEndurance);
+            PlayerUIManager.Singleton.playerUIHudManager.SetMaxBleedBuildUpCapacityValue(Mathf.RoundToInt(robustnessBuildUpCapacity.Value));
         }
-        public void SetNewMaxFrostBuildUpCapacityValue(int oldEndurace, int newEndurance)
+        public void SetNewMaxFocusBuildUpCapacityValue(int oldEndurace, int newEndurance)
         {
-            frostBuildUpCapacity.Value = player.playerStatsManager.CalculateBuildUpCapacityBasedOnEnduranceLevel(newEndurance);
-            PlayerUIManager.Singleton.playerUIHudManager.SetMaxFrostBuildUpCapacityValue(Mathf.RoundToInt(frostBuildUpCapacity.Value));
+            focusBuildUpCapacity.Value = player.playerStatsManager.CalculateBuildUpCapacityBasedOnEnduranceLevelAndEquipment(newEndurance);
+            PlayerUIManager.Singleton.playerUIHudManager.SetMaxFrostBuildUpCapacityValue(Mathf.RoundToInt(focusBuildUpCapacity.Value));
         }
 
         public void OnHairStyleIDChange(int oldID, int newID)

@@ -94,6 +94,15 @@ namespace TravserserProject
             return Mathf.RoundToInt(focusPoints);
         }
 
+        public virtual void CalculateTotalArmorAbsorption()
+        {
+            armorPhysicalDamageAbsorption += armorPhysicalDamageAbsorption * (character.characterNetworkManager.armorPhysicalDamageAbsorptionModifer.Value / 100);
+            armorMagicDamageAbsorption += armorPhysicalDamageAbsorption * (character.characterNetworkManager.armorMagicDamageAbsorptionModifer.Value / 100);
+            armorFireDamageAbsorption += armorPhysicalDamageAbsorption * (character.characterNetworkManager.armorFireDamageAbsorptionModifer.Value / 100);
+            armorLightningDamageAbsorption += armorPhysicalDamageAbsorption * (character.characterNetworkManager.armorLightningDamageAbsorptionModifer.Value / 100);
+            armorHolyDamageAbsorption += armorPhysicalDamageAbsorption * (character.characterNetworkManager.armorHolyDamageAbsorptionModifer.Value / 100);
+        }
+
         public int CalculateCharacterLevelBasedOnAttributes(bool calculateProjectedLevel = false)
         {
             if (calculateProjectedLevel)
@@ -136,7 +145,7 @@ namespace TravserserProject
             }
         }
 
-        public int CalculateBuildUpCapacityBasedOnVigorLevel(int vigor)
+        public virtual int CalculateBuildUpCapacityBasedOnVigorLevelAndEquipment(int vigor)
         {
             float capacity = 0;
 
@@ -146,7 +155,7 @@ namespace TravserserProject
             return Mathf.RoundToInt(capacity);
         }
 
-        public int CalculateBuildUpCapacityBasedOnMindLevel(int mind)
+        public virtual int CalculateBuildUpCapacityBasedOnMindLevelAndEquipment(int mind)
         {
             float capacity = 0;
 
@@ -156,7 +165,7 @@ namespace TravserserProject
             return Mathf.RoundToInt(capacity);
         }
 
-        public int CalculateBuildUpCapacityBasedOnEnduranceLevel(int endurance)
+        public virtual int CalculateBuildUpCapacityBasedOnEnduranceLevelAndEquipment(int endurance)
         {
             float capacity = 0;
 

@@ -1,5 +1,6 @@
 using TraverserProject;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 namespace TravserserProject
 {
@@ -28,7 +29,7 @@ namespace TravserserProject
             CalculateFocusPointsBasedOnMindLevel(player.playerNetworkManager.mind.Value);
         }
 
-        public void CalculateTotalArmorAbsorption()
+        public override void CalculateTotalArmorAbsorption()
         {
             armorPhysicalDamageAbsorption = 0;
             armorMagicDamageAbsorption = 0;
@@ -111,6 +112,44 @@ namespace TravserserProject
                 basePoiseDefense += player.playerInventoryManager.legEquipment.poise;
 
             }
+
+            //totals
+            armorPhysicalDamageAbsorption += armorPhysicalDamageAbsorption * (player.playerNetworkManager.armorPhysicalDamageAbsorptionModifer.Value / 100);
+            armorMagicDamageAbsorption += armorPhysicalDamageAbsorption * (player.playerNetworkManager.armorMagicDamageAbsorptionModifer.Value / 100);
+            armorFireDamageAbsorption += armorPhysicalDamageAbsorption * (player.playerNetworkManager.armorFireDamageAbsorptionModifer.Value / 100);
+            armorLightningDamageAbsorption += armorPhysicalDamageAbsorption * (player.playerNetworkManager.armorLightningDamageAbsorptionModifer.Value / 100);
+            armorHolyDamageAbsorption += armorPhysicalDamageAbsorption * (player.playerNetworkManager.armorHolyDamageAbsorptionModifer.Value / 100);
+
+        }
+
+        public override int CalculateBuildUpCapacityBasedOnVigorLevelAndEquipment(int vigor)
+        {
+            float capacity = 0;
+
+            //any equation for capacity
+            capacity = vigor * 15 + player.playerStatsManager.armorImmunity;
+
+            return Mathf.RoundToInt(capacity);
+        }
+
+        public override int CalculateBuildUpCapacityBasedOnMindLevelAndEquipment(int mind)
+        {
+            float capacity = 0;
+
+            //any equation for capacity
+            capacity = mind * 15 + player.playerStatsManager.armorFocus;
+
+            return Mathf.RoundToInt(capacity);
+        }
+
+        public override int CalculateBuildUpCapacityBasedOnEnduranceLevelAndEquipment(int endurance)
+        {
+            float capacity = 0;
+
+            //any equation for capacity
+            capacity = endurance * 15 + player.playerStatsManager.armorRobustness;
+
+            return Mathf.RoundToInt(capacity);
         }
 
         public void AddBubbles(int bubblesToAdd)

@@ -47,13 +47,13 @@ namespace TraverserProject
             if (character.characterNetworkManager.isPoisoned.Value)
                 return;
 
-            if (character.characterNetworkManager.poisonBuildUp.Value > character.characterNetworkManager.poisonBuildUpCapacity.Value)
+            if (character.characterNetworkManager.poisonBuildUp.Value > character.characterNetworkManager.immunityBuildUpCapacity.Value)
             {
-                character.characterNetworkManager.poisonBuildUp.Value = character.characterNetworkManager.poisonBuildUpCapacity.Value;
+                character.characterNetworkManager.poisonBuildUp.Value = character.characterNetworkManager.immunityBuildUpCapacity.Value;
                 character.characterNetworkManager.isPoisoned.Value = true;
 
                 PoisonedEffect poison = Instantiate(WorldCharacterEffectsManager.Singleton.poisonedEffect);
-                poison.defaultLengthOfEffect = character.characterNetworkManager.poisonBuildUpCapacity.Value;
+                poison.defaultLengthOfEffect = character.characterNetworkManager.immunityBuildUpCapacity.Value;
                 character.characterEffectsManager.AddTimedEffect(poison);
 
                 PlayerManager player = character as PlayerManager;
@@ -79,7 +79,7 @@ namespace TraverserProject
                 bleedBuildUp.ProcessEffect(character);
             }
 
-            if (character.characterNetworkManager.bleedBuildUp.Value > character.characterNetworkManager.bleedBuildUpCapacity.Value)
+            if (character.characterNetworkManager.bleedBuildUp.Value > character.characterNetworkManager.robustnessBuildUpCapacity.Value)
             {
                 //character.characterNetworkManager.bleedBuildUp.Value = character.characterNetworkManager.bleedBuildUpCapacity.Value;
                 character.characterNetworkManager.isBloodLoss.Value = true;
@@ -113,13 +113,13 @@ namespace TraverserProject
                 frostBuildUp.ProcessEffect(character);
             }
 
-            if (character.characterNetworkManager.frostBuildUp.Value > character.characterNetworkManager.frostBuildUpCapacity.Value)
+            if (character.characterNetworkManager.frostBuildUp.Value > character.characterNetworkManager.robustnessBuildUpCapacity.Value)
             {
-                character.characterNetworkManager.frostBuildUp.Value = character.characterNetworkManager.frostBuildUpCapacity.Value;
+                character.characterNetworkManager.frostBuildUp.Value = character.characterNetworkManager.robustnessBuildUpCapacity.Value;
                 character.characterNetworkManager.isFrostbite.Value = true;
 
                 FrostbiteEffect frost = Instantiate(WorldCharacterEffectsManager.Singleton.frostbiteEffect);
-                frost.defaultLengthOfEffect = character.characterNetworkManager.frostBuildUpCapacity.Value;
+                frost.defaultLengthOfEffect = character.characterNetworkManager.robustnessBuildUpCapacity.Value;
                 character.characterEffectsManager.AddTimedEffect(frost);
 
                 PlayerManager player = character as PlayerManager;

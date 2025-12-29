@@ -18,6 +18,7 @@ namespace TraverserProject
             {
                 character.characterEffectsManager.RemoveTimedEffect(effectID);
                 character.characterEffectsManager.RemoveTimedEffect(WorldCharacterEffectsManager.Singleton.frostbiteStaminaRegenerationEffect.effectID);
+                character.characterEffectsManager.RemoveTimedEffect(WorldCharacterEffectsManager.Singleton.frostbiteAbsorptionDebuffEffect.effectID);
                 character.characterNetworkManager.isFrostbite.Value = false;
             }
 
@@ -25,12 +26,14 @@ namespace TraverserProject
             {
                 character.characterEffectsManager.RemoveTimedEffect(effectID);
                 character.characterEffectsManager.RemoveTimedEffect(WorldCharacterEffectsManager.Singleton.frostbiteStaminaRegenerationEffect.effectID);
+                character.characterEffectsManager.RemoveTimedEffect(WorldCharacterEffectsManager.Singleton.frostbiteAbsorptionDebuffEffect.effectID);
             }
 
             if (!effectHasBeenInitialized)
             {
                 effectHasBeenInitialized = true;
                 InflictStaminaRegenerationDebuff(character);
+                InflictArmorAbsorptionDebuff(character);
             }
         }
 
@@ -63,6 +66,18 @@ namespace TraverserProject
             character.characterNetworkManager.currentStamina.Value = 0;
             character.characterEffectsManager.ProcessEffectDamage(Mathf.RoundToInt(damage));
             character.characterNetworkManager.isFrozen.Value = true;
+        }
+
+        private void InflictArmorAbsorptionDebuff(CharacterManager character)
+        {
+            ModifyArmorAbsorptionForATimeEffect absorptionDebuff = Instantiate(WorldCharacterEffectsManager.Singleton.frostbiteAbsorptionDebuffEffect);
+            character.characterEffectsManager.AddTimedEffect(absorptionDebuff);
+
+            if (!character.IsOwner)
+                return;
+
+            character.characterStatsManager.CalculateTotalArmorAbsorption();
+
         }
     }
 }

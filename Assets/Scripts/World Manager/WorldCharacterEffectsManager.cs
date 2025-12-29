@@ -30,6 +30,7 @@ namespace TraverserProject
 
         [Header("Frostbite")]
         public ModifyStaminaRegenerationForATimeEffect frostbiteStaminaRegenerationEffect;
+        public ModifyArmorAbsorptionForATimeEffect frostbiteAbsorptionDebuffEffect;
 
         [Header("Recovery")]
         public TakeRecoveryEffect takeRecoveryEffect;
