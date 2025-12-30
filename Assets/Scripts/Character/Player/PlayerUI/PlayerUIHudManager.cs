@@ -153,19 +153,20 @@ namespace TravserserProject
             frostBuildUpBar.SetStat(Mathf.RoundToInt(amount));
         }
 
-        public void SetMaxPoisonBuildUpCapacityValue(int buildUpCapacity)
+        public void SetMaxImmunityBuildUpCapacityValue(int buildUpCapacity)
         {
             poisonBuildUpBar.SetMaxStat(buildUpCapacity);            
             //ETC
         }
-        public void SetMaxBleedBuildUpCapacityValue(int buildUpCapacity)
+        public void SetMaxRobustnessBuildUpCapacityValue(int buildUpCapacity)
         {
             bleedBuildUpBar.SetMaxStat(buildUpCapacity);
+            frostBuildUpBar.SetMaxStat(buildUpCapacity);
             //ETC
         }
-        public void SetMaxFrostBuildUpCapacityValue(int buildUpCapacity)
+        public void SetMaxFocusBuildUpCapacityValue(int buildUpCapacity)
         {
-            frostBuildUpBar.SetMaxStat(buildUpCapacity);
+            
             //ETC
         }
 

@@ -6,7 +6,7 @@ namespace TraverserProject
     public class ModifyStaminaRegenerationForATimeEffect : TimedCharacterEffect
     {
         [Header("Regeneration")]
-        [SerializeField] float staminaRegenerationPercentageModifier = 15;
+        [SerializeField] public float staminaRegenerationPercentageModifier = 15;
 
         [Header("Effect Processed")]
         private bool effectHasBeenInitialized = false;

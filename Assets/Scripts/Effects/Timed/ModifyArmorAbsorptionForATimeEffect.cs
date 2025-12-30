@@ -6,11 +6,11 @@ namespace TraverserProject
     public class ModifyArmorAbsorptionForATimeEffect : TimedCharacterEffect
     {
         [Header("Armor Absorption")]
-        [SerializeField] float armorPhysicalDamageAbsorptionModifer = 0;
-        [SerializeField] float armorMagicDamageAbsorptionModifer = 0;
-        [SerializeField] float armorFireDamageAbsorptionModifer = 0;
-        [SerializeField] float armorLightningDamageAbsorptionModifer = 0;
-        [SerializeField] float armorHolyDamageAbsorptionModifer = 0;
+        [SerializeField] public float armorPhysicalDamageAbsorptionModifer = 0;
+        [SerializeField] public float armorMagicDamageAbsorptionModifer = 0;
+        [SerializeField] public float armorFireDamageAbsorptionModifer = 0;
+        [SerializeField] public float armorLightningDamageAbsorptionModifer = 0;
+        [SerializeField] public float armorHolyDamageAbsorptionModifer = 0;
 
         [Header("Effect Processed")]
         private bool effectHasBeenInitialized = false;

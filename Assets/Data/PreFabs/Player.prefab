@@ -12567,6 +12567,8 @@ MonoBehaviour:
     m_InternalValue: 0
   isFrostbite:
     m_InternalValue: 0
+  isFrozen:
+    m_InternalValue: 0
   currentStamina:
     m_InternalValue: 100
   maxStamina:
@@ -12595,7 +12597,11 @@ MonoBehaviour:
     m_InternalValue: 1
   luck:
     m_InternalValue: 1
-  buildUpCapacity:
+  immunityBuildUpCapacity:
+    m_InternalValue: 100
+  robustnessBuildUpCapacity:
+    m_InternalValue: 100
+  focusBuildUpCapacity:
     m_InternalValue: 100
   poisonBuildUp:
     m_InternalValue: 0
@@ -12606,6 +12612,16 @@ MonoBehaviour:
   strengthModifier:
     m_InternalValue: 1
   staminaRegenerationModifier:
+    m_InternalValue: 0
+  armorPhysicalDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorMagicDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorFireDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorLightningDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorHolyDamageAbsorptionModifer:
     m_InternalValue: 0
   characterName:
     m_InternalValue:
@@ -13030,7 +13046,7 @@ MonoBehaviour:
   currentSpell: {fileID: 11400000, guid: c849838932c3fe943b7dbff7c8981786, type: 2}
   quickSlotItemsInQuickSlots:
   - {fileID: 11400000, guid: 2f5b3455b88448146b0c60c2756dcaa6, type: 2}
-  - {fileID: 11400000, guid: f0330c7fdea308646a82d3f157252565, type: 2}
+  - {fileID: 11400000, guid: d8fc43fd4b28b2d43bd70c57b173d99d, type: 2}
   - {fileID: 11400000, guid: de1eada264436224cb881becce1661ca, type: 2}
   quickSlotItemIndex: 0
   currentQuickSlotItem: {fileID: 11400000, guid: aedcc59cf0831af4eb8da47234130fb5, type: 2}

@@ -100,7 +100,9 @@ namespace TraverserProject
             player.playerNetworkManager.currentHealth.Value = player.playerNetworkManager.maxHealth.Value;
             player.playerNetworkManager.currentStamina.Value = player.playerNetworkManager.maxStamina.Value;
 
-
+            player.playerNetworkManager.poisonBuildUp.Value = 0;
+            player.playerNetworkManager.bleedBuildUp.Value = 0;
+            player.playerNetworkManager.frostBuildUp.Value = 0;
 
             WorldAIManager.Singleton.ResetAllCharacters();
             WorldInteractablesManager.Singleton.ResetAllRespawnableItems();

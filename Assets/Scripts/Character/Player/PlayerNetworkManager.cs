@@ -88,6 +88,10 @@ namespace TraverserProject
                 //if like elden ring, disable all boss fight
                 WorldAIManager.Singleton.DisableAllBossFights();
                 //also kick all players from world
+
+                poisonBuildUp.Value = 0;
+                bleedBuildUp.Value = 0;
+                frostBuildUp.Value = 0;
             }
         }
 
@@ -242,17 +246,17 @@ namespace TraverserProject
         public void SetNewMaxImmunityBuildUpCapacityValue(int oldVitality, int newVitality)
         {
             immunityBuildUpCapacity.Value = player.playerStatsManager.CalculateBuildUpCapacityBasedOnVigorLevelAndEquipment(newVitality);
-            PlayerUIManager.Singleton.playerUIHudManager.SetMaxPoisonBuildUpCapacityValue(Mathf.RoundToInt(immunityBuildUpCapacity.Value));
+            PlayerUIManager.Singleton.playerUIHudManager.SetMaxImmunityBuildUpCapacityValue(Mathf.RoundToInt(immunityBuildUpCapacity.Value));
         }
         public void SetNewMaxRobustnessBuildUpCapacityValue(int oldEndurace, int newEndurance)
         {
             robustnessBuildUpCapacity.Value = player.playerStatsManager.CalculateBuildUpCapacityBasedOnEnduranceLevelAndEquipment(newEndurance);
-            PlayerUIManager.Singleton.playerUIHudManager.SetMaxBleedBuildUpCapacityValue(Mathf.RoundToInt(robustnessBuildUpCapacity.Value));
+            PlayerUIManager.Singleton.playerUIHudManager.SetMaxRobustnessBuildUpCapacityValue(Mathf.RoundToInt(robustnessBuildUpCapacity.Value));
         }
-        public void SetNewMaxFocusBuildUpCapacityValue(int oldEndurace, int newEndurance)
+        public void SetNewMaxFocusBuildUpCapacityValue(int oldMind, int newMind)
         {
-            focusBuildUpCapacity.Value = player.playerStatsManager.CalculateBuildUpCapacityBasedOnEnduranceLevelAndEquipment(newEndurance);
-            PlayerUIManager.Singleton.playerUIHudManager.SetMaxFrostBuildUpCapacityValue(Mathf.RoundToInt(focusBuildUpCapacity.Value));
+            focusBuildUpCapacity.Value = player.playerStatsManager.CalculateBuildUpCapacityBasedOnMindLevelAndEquipment(newMind);
+            PlayerUIManager.Singleton.playerUIHudManager.SetMaxFocusBuildUpCapacityValue(Mathf.RoundToInt(focusBuildUpCapacity.Value));
         }
 
         public void OnHairStyleIDChange(int oldID, int newID)

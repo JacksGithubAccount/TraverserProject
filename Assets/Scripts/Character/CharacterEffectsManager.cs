@@ -249,7 +249,7 @@ namespace TraverserProject
             if (!character.characterNetworkManager.isBeingCriticallyDamaged.Value)
                 character.characterAnimatorManager.PlayTargetActionAnimation("Dead_01", true);
 
-            character.characterNetworkManager.isPoisoned.Value = false;
+            //character.characterNetworkManager.isPoisoned.Value = false;
             character.isDead.Value = true;
         }
 

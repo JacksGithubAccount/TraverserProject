@@ -32,6 +32,10 @@ namespace TraverserProject
         public ModifyStaminaRegenerationForATimeEffect frostbiteStaminaRegenerationEffect;
         public ModifyArmorAbsorptionForATimeEffect frostbiteAbsorptionDebuffEffect;
 
+        [Header("Item Status Buff")]
+        public ModifyStaminaRegenerationForATimeEffect itemStaminaRegenerationEffect;
+        public ModifyArmorAbsorptionForATimeEffect itemAbsorptionBuffEffect;
+
         [Header("Recovery")]
         public TakeRecoveryEffect takeRecoveryEffect;
 
