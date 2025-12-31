@@ -59,18 +59,21 @@ namespace TraverserProject
             }
 
 
+            if (armorPhysicalDamageAbsorptionModifier != 0 && armorMagicDamageAbsorptionModifier != 0 && armorFireDamageAbsorptionModifier != 0 &&
+                armorLightningDamageAbsorptionModifier != 0 && armorHolyDamageAbsorptionModifier != 0)
+            {
+                ModifyArmorAbsorptionForATimeEffect absorptionBuff = Instantiate(WorldCharacterEffectsManager.Singleton.itemAbsorptionBuffEffect);
+                absorptionBuff.armorPhysicalDamageAbsorptionModifer = armorPhysicalDamageAbsorptionModifier;
+                absorptionBuff.armorFireDamageAbsorptionModifer = armorFireDamageAbsorptionModifier;
+                absorptionBuff.armorMagicDamageAbsorptionModifer = armorMagicDamageAbsorptionModifier;
+                absorptionBuff.armorLightningDamageAbsorptionModifer = armorLightningDamageAbsorptionModifier;
+                absorptionBuff.armorHolyDamageAbsorptionModifer = armorHolyDamageAbsorptionModifier;
+                absorptionBuff.defaultLengthOfEffect = buffDuration;
 
-            ModifyArmorAbsorptionForATimeEffect absorptionBuff = Instantiate(WorldCharacterEffectsManager.Singleton.itemAbsorptionBuffEffect);
-            absorptionBuff.armorPhysicalDamageAbsorptionModifer = armorPhysicalDamageAbsorptionModifier;
-            absorptionBuff.armorFireDamageAbsorptionModifer = armorFireDamageAbsorptionModifier;
-            absorptionBuff.armorMagicDamageAbsorptionModifer = armorMagicDamageAbsorptionModifier;
-            absorptionBuff.armorLightningDamageAbsorptionModifer = armorLightningDamageAbsorptionModifier;
-            absorptionBuff.armorHolyDamageAbsorptionModifer = armorHolyDamageAbsorptionModifier;
-            absorptionBuff.defaultLengthOfEffect = buffDuration;
+                player.playerEffectsManager.AddTimedEffect(absorptionBuff);
 
-            player.playerEffectsManager.AddTimedEffect(absorptionBuff);
-
-            player.playerStatsManager.CalculateTotalArmorAbsorption();
+                player.playerStatsManager.CalculateTotalArmorAbsorption();
+            }
 
             if(staminaRegenerationPercentageModifier != 0)
             {
