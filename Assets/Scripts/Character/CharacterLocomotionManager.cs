@@ -24,6 +24,8 @@ namespace TraverserProject
         public bool canRun = true;
         public bool canMove = true;
         public bool canRoll = true;
+        public bool isRidingLift = false;
+
         public bool isSliding = false;
         public bool isSlidingOffCharacter = false;
 

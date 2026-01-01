@@ -1,0 +1,212 @@
+using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
+using Unity.Netcode;
+
+namespace TraverserProject
+{
+
+    public class ElevatorInteractable : Interactable
+    {
+        [Header("Network Position")]
+        public NetworkVariable<Vector3> networkPosition = new NetworkVariable<Vector3>(Vector3.zero, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> elevatorIsRising = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> elevatorIsDescending = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        [SerializeField] float networkPositionSmoothTime = 0.1f;
+        [SerializeField] float yMovementOffset = 0.3f;
+
+        [Header("Destination")]
+        [SerializeField] float moveSpeed = 2;
+        [SerializeField] Vector3 destinationHigh;
+        [SerializeField] Vector3 destinationLow;
+
+        [Header("Characters On Elevator")]
+        [SerializeField] protected List<CharacterManager> charactersOnElevator = new List<CharacterManager>();
+
+        [Header("SFX")]
+        private AudioSource elevatorAudioSource;
+        [SerializeField] private AudioClip elevatorMovingSFX;
+        [SerializeField] private AudioClip[] elevatorStoppingSFX;
+
+        public override void OnTriggerEnter(Collider other)
+        {
+            CharacterManager character = other.GetComponent<CharacterManager>();
+
+            if (character != null)
+                AddCharacterToListOfCharactersOnElevator(character);
+
+            if (elevatorIsRising.Value || elevatorIsDescending.Value)
+                return;
+
+            base.OnTriggerEnter(other);
+        }
+
+        public override void OnTriggerExit(Collider other)
+        {
+            base.OnTriggerExit(other);
+
+            CharacterManager character = other.GetComponent<CharacterManager>();
+
+            if (character != null)
+                RemoveCharacterFromListOfCharactersOnElevator(character);
+
+        }
+
+        public override void Interact(PlayerManager player)
+        {
+            base.Interact(player);
+
+            if (player.IsOwner)
+                ActivateElevatorServerRpc();
+        }
+
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+
+            if (!IsOwner)
+            {
+                transform.localPosition = networkPosition.Value;
+            }
+            else
+            {
+                networkPosition.Value = transform.localPosition;
+            }
+
+            if (elevatorIsRising.Value)
+                ActivateElevator(true);
+
+            if (elevatorIsDescending.Value)
+                ActivateElevator(false);
+        }
+
+        public override void OnNetworkDespawn()
+        {
+            base.OnNetworkDespawn();
+        }
+
+        private void ActivateElevator(bool isRising)
+        {
+
+        }
+
+        private IEnumerator MoveElevatorCoroutine(bool isRising)
+        {
+            interactableCollider.enabled = false;
+
+            //when elevator starts, remove it as an interable whilst it is going
+            for (int i = 0; i < charactersOnElevator.Count; i++)
+            {
+                if (charactersOnElevator[i] == null)
+                    continue;
+
+                PlayerManager player = charactersOnElevator[i] as PlayerManager;
+
+                if (player == null)
+                    continue;
+
+                player.playerInteractionManager.RemoveInteractionFromList(this);
+            }
+
+            //SFX
+            elevatorAudioSource.clip = elevatorMovingSFX;
+            elevatorAudioSource.Play();
+
+            //Determines destination
+            Vector3 destination = destinationHigh;
+            if (!isRising)
+                destination = destinationLow;
+
+            //moves the elevator
+            while (transform.localPosition != destination)
+            {
+                transform.localPosition = Vector3.MoveTowards(transform.localPosition, destination, moveSpeed * Time.deltaTime);
+                Vector3 velocityOfMovement = Vector3.MoveTowards(transform.position, destination, moveSpeed + Time.deltaTime);
+
+                if (IsOwner)
+                    networkPosition.Value = transform.localPosition;
+
+                for (int i = 0; i < charactersOnElevator.Count; i++)
+                {
+                    if (charactersOnElevator[i] == null)
+                        continue;
+
+                    if (charactersOnElevator[i].gameObject.activeInHierarchy)
+                        RemoveCharacterFromListOfCharactersOnElevator(charactersOnElevator[i]);
+
+                    //If using foot IK, disable here temporarily. it may cause weird artifacts with feet otherwise
+
+                    if (!charactersOnElevator[i].characterNetworkManager.isJumping.Value)
+                        charactersOnElevator[i].transform.position = new Vector3(charactersOnElevator[i].transform.position.x, velocityOfMovement.y + yMovementOffset, charactersOnElevator[i].transform.position.z);
+
+
+                    yield return null;
+                }
+
+                //stops movement flags
+                if (IsOwner)
+                {
+                    elevatorIsRising.Value = false;
+                    elevatorIsDescending.Value = false;
+                }
+
+                //stops movement SFX
+                elevatorAudioSource.Stop();
+                //plays stopped SFX
+                elevatorAudioSource.PlayOneShot(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(elevatorStoppingSFX));
+
+                //if animating elevator, stop animation here
+
+                //re-enable interaction with elevator
+                interactableCollider.enabled = true;
+
+                yield return null;
+            }
+        }
+
+
+    private void AddCharacterToListOfCharactersOnElevator(CharacterManager character)
+        {
+            if (charactersOnElevator.Contains(character))
+                return;
+
+            charactersOnElevator.Add(character);
+            character.characterLocomotionManager.isRidingLift = true;
+        }
+
+        private void RemoveCharacterFromListOfCharactersOnElevator(CharacterManager character)
+        {
+            if (!charactersOnElevator.Contains(character))
+                return;
+
+            charactersOnElevator.Remove(character);
+            character.characterLocomotionManager.isRidingLift = false;
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        private void ActivateElevatorServerRpc()
+        {
+            if (IsServer)
+                ActivateElevatorClientRpc();
+        }
+
+        [ClientRpc]
+        private void ActivateElevatorClientRpc()
+        {
+            if (transform.localPosition == destinationHigh)
+            {
+                if (IsOwner)
+                    elevatorIsDescending.Value = true;
+
+                ActivateElevator(false);
+            }
+            else if (transform.localPosition == destinationLow)
+            {
+                if (IsOwner)
+                    elevatorIsRising.Value = true;
+
+                ActivateElevator(true);
+            }
+        }
+    }
+}
