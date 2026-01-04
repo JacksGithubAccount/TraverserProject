@@ -21,7 +21,8 @@ namespace TraverserProject
         public GameObject bloodLossCureVFX;
         public GameObject frostbiteCureVFX;
 
-
+        [Header("Swings")]
+        public GameObject weaponSwingVFX;
 
         [Header("Damage")]
         public TakeDamageEffect takeDamageEffect;

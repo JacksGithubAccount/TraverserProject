@@ -11,14 +11,34 @@ namespace TraverserProject
         [SerializeField] string light_Attack_02 = "Main_Light_Attack_02";
         [SerializeField] string light_Jumping_Attack_01 = "Main_Jumping_Light_Attack_01";
 
+        [SerializeField] float lAtk01VFXstartDelay = 0.5f;
+        [SerializeField] Vector3 lAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
+        [SerializeField] Vector3 lAtk01VFXRotation = new Vector3(-35, -85, -40);
+        [SerializeField] float lAtk02VFXstartDelay = 0.5f;
+        [SerializeField] Vector3 lAtk02VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
+        [SerializeField] Vector3 lAtk02VFXRotation = new Vector3(33, 96, 60);
+
+        [SerializeField] float jumpLAtk01VFXstartDelay = 0.5f;
+        [SerializeField] Vector3 jumpLAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
+        [SerializeField] Vector3 jumpLAtk01VFXRotation = new Vector3(-35, -85, -40);
+
         [Header("Running Attacks")]
         [SerializeField] string running_Light_Attack_01 = "Main_Run_Light_Attack_01";
+        [SerializeField] float runLAtk01VFXstartDelay = 0.5f;
+        [SerializeField] Vector3 runLAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
+        [SerializeField] Vector3 runLAtk01VFXRotation = new Vector3(-35, -85, -40);
 
         [Header("Rolling Attacks")]
         [SerializeField] string rolling_Light_Attack_01 = "Main_Roll_Light_Attack_01";
+        [SerializeField] float rollLAtk01VFXstartDelay = 0.5f;
+        [SerializeField] Vector3 rollLAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
+        [SerializeField] Vector3 rollLAtk01VFXRotation = new Vector3(-35, -85, -40);
 
         [Header("Backstep Attacks")]
         [SerializeField] string backstep_Light_Attack_01 = "Main_Backstep_Light_Attack_01";
+        [SerializeField] float bsLAtk01VFXstartDelay = 0.5f;
+        [SerializeField] Vector3 bsLAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
+        [SerializeField] Vector3 bsLAtk01VFXRotation = new Vector3(-35, -85, -40);
 
         //twohand
         [Header("Light Attacks")]
@@ -26,14 +46,34 @@ namespace TraverserProject
         [SerializeField] string twoh_light_Attack_02 = "2H_Light_Attack_02";
         [SerializeField] string twoh_light_Jumping_Attack_01 = "2H_Jumping_Light_Attack_01";
 
+        [SerializeField] float hAtk01VFXstartDelay = 0.5f;
+        [SerializeField] Vector3 hAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
+        [SerializeField] Vector3 hAtk01VFXRotation = new Vector3(-35, -85, -40);
+        [SerializeField] float hAtk02VFXstartDelay = 0.5f;
+        [SerializeField] Vector3 hAtk02VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
+        [SerializeField] Vector3 hAtk02VFXRotation = new Vector3(33, 96, 60);
+
+        [SerializeField] float jumpHAtk01VFXstartDelay = 0.5f;
+        [SerializeField] Vector3 jumpHAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
+        [SerializeField] Vector3 jumpHAtk01VFXRotation = new Vector3(-35, -85, -40);
+
         [Header("Running Attacks")]
         [SerializeField] string twoh_running_Light_Attack_01 = "2H_Run_Light_Attack_01";
+        [SerializeField] float runHAtk01VFXstartDelay = 0.5f;
+        [SerializeField] Vector3 runHAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
+        [SerializeField] Vector3 runHAtk01VFXRotation = new Vector3(-35, -85, -40);
 
         [Header("Rolling Attacks")]
         [SerializeField] string twoh_rolling_Light_Attack_01 = "2H_Roll_Light_Attack_01";
+        [SerializeField] float rollHAtk01VFXstartDelay = 0.5f;
+        [SerializeField] Vector3 rollHAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
+        [SerializeField] Vector3 rollHAtk01VFXRotation = new Vector3(-35, -85, -40);
 
         [Header("Backstep Attacks")]
         [SerializeField] string twoh_backstep_Light_Attack_01 = "2H_Backstep_Light_Attack_01";
+        [SerializeField] float bsHAtk01VFXstartDelay = 0.5f;
+        [SerializeField] Vector3 bsHAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
+        [SerializeField] Vector3 bsHAtk01VFXRotation = new Vector3(-35, -85, -40);
 
         public override void AttemptToPerformAction(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
@@ -114,15 +154,18 @@ namespace TraverserProject
                 if (playerPerformingAction.characterCombatManager.lastAttackAnimationPerformed == light_Attack_01)
                 {
                     playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.LightAttack02, light_Attack_02, true);
+                    PlayWeaponSwingVFX(weaponPerformingAction, playerPerformingAction, lAtk02VFXstartDelay, lAtk02VFXPosition, lAtk02VFXRotation);
                 }
                 else
                 {
                     playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.LightAttack01, light_Attack_01, true);
+                    PlayWeaponSwingVFX(weaponPerformingAction, playerPerformingAction, lAtk01VFXstartDelay, lAtk01VFXPosition, lAtk01VFXRotation);
                 }
             }
             else if (!playerPerformingAction.isPerformingAction)
             {
                 playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.LightAttack01, light_Attack_01, true);
+                PlayWeaponSwingVFX(weaponPerformingAction, playerPerformingAction, lAtk01VFXstartDelay, lAtk01VFXPosition, lAtk01VFXRotation);
             }
         }
 

@@ -11,6 +11,9 @@ namespace TraverserProject
         [Header("Model Instantiation")]
         public WeaponModelType weaponModelType;
 
+        [Header("VFX")]
+        [HideInInspector] public GameObject weaponSwingVFX;
+
         [Header("Weapon Class")]
         public WeaponClass weaponClass;
 

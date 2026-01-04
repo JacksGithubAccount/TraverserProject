@@ -19,5 +19,19 @@ namespace TraverserProject
 
         }
 
+        protected virtual void PlayWeaponSwingVFX(WeaponItem weaponPerformingAction, PlayerManager playerPerformingAction, float startDelay, Vector3 localPosition, Vector3 rotation)
+        {
+            if (WorldCharacterEffectsManager.Singleton.weaponSwingVFX != null)
+            {
+                weaponPerformingAction.weaponSwingVFX = Instantiate(WorldCharacterEffectsManager.Singleton.weaponSwingVFX);
+                ParticleSystem ps = weaponPerformingAction.weaponSwingVFX.GetComponentInChildren<ParticleSystem>();
+                var psmain = ps.main;
+                psmain.startDelay = startDelay;
+                weaponPerformingAction.weaponSwingVFX.transform.position = playerPerformingAction.playerEffectsManager.effectTransform.position;
+                weaponPerformingAction.weaponSwingVFX.transform.forward = playerPerformingAction.transform.forward;
+                weaponPerformingAction.weaponSwingVFX.transform.eulerAngles += rotation;
+            }
+        }
+
     }
 }
