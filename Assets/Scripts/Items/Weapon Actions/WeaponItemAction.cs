@@ -27,6 +27,7 @@ namespace TraverserProject
                 ParticleSystem ps = weaponPerformingAction.weaponSwingVFX.GetComponentInChildren<ParticleSystem>();
                 var psmain = ps.main;
                 psmain.startDelay = startDelay;
+                ps.transform.localPosition = localPosition;
                 weaponPerformingAction.weaponSwingVFX.transform.position = playerPerformingAction.playerEffectsManager.effectTransform.position;
                 weaponPerformingAction.weaponSwingVFX.transform.forward = playerPerformingAction.transform.forward;
                 weaponPerformingAction.weaponSwingVFX.transform.eulerAngles += rotation;

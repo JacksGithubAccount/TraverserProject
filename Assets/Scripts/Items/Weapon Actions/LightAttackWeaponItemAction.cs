@@ -46,34 +46,34 @@ namespace TraverserProject
         [SerializeField] string twoh_light_Attack_02 = "2H_Light_Attack_02";
         [SerializeField] string twoh_light_Jumping_Attack_01 = "2H_Jumping_Light_Attack_01";
 
-        [SerializeField] float hAtk01VFXstartDelay = 0.5f;
-        [SerializeField] Vector3 hAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
-        [SerializeField] Vector3 hAtk01VFXRotation = new Vector3(-35, -85, -40);
-        [SerializeField] float hAtk02VFXstartDelay = 0.5f;
-        [SerializeField] Vector3 hAtk02VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
-        [SerializeField] Vector3 hAtk02VFXRotation = new Vector3(33, 96, 60);
+        [SerializeField] float twohAtk01VFXstartDelay = 0.5f;
+        [SerializeField] Vector3 twohAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
+        [SerializeField] Vector3 twohAtk01VFXRotation = new Vector3(-35, -85, -40);
+        [SerializeField] float twohAtk02VFXstartDelay = 0.5f;
+        [SerializeField] Vector3 twohAtk02VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
+        [SerializeField] Vector3 twohAtk02VFXRotation = new Vector3(33, 96, 60);
 
         [SerializeField] float jumpHAtk01VFXstartDelay = 0.5f;
-        [SerializeField] Vector3 jumpHAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
-        [SerializeField] Vector3 jumpHAtk01VFXRotation = new Vector3(-35, -85, -40);
+        [SerializeField] Vector3 jumpTwoHAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
+        [SerializeField] Vector3 jumpTwoHAtk01VFXRotation = new Vector3(-35, -85, -40);
 
         [Header("Running Attacks")]
         [SerializeField] string twoh_running_Light_Attack_01 = "2H_Run_Light_Attack_01";
-        [SerializeField] float runHAtk01VFXstartDelay = 0.5f;
-        [SerializeField] Vector3 runHAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
-        [SerializeField] Vector3 runHAtk01VFXRotation = new Vector3(-35, -85, -40);
+        [SerializeField] float runTwoHAtk01VFXstartDelay = 0.5f;
+        [SerializeField] Vector3 runTwoHAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
+        [SerializeField] Vector3 runTwoHAtk01VFXRotation = new Vector3(-35, -85, -40);
 
         [Header("Rolling Attacks")]
         [SerializeField] string twoh_rolling_Light_Attack_01 = "2H_Roll_Light_Attack_01";
-        [SerializeField] float rollHAtk01VFXstartDelay = 0.5f;
-        [SerializeField] Vector3 rollHAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
-        [SerializeField] Vector3 rollHAtk01VFXRotation = new Vector3(-35, -85, -40);
+        [SerializeField] float rollTwoHAtk01VFXstartDelay = 0.5f;
+        [SerializeField] Vector3 rollTwoHAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
+        [SerializeField] Vector3 rollTwoHAtk01VFXRotation = new Vector3(-35, -85, -40);
 
         [Header("Backstep Attacks")]
         [SerializeField] string twoh_backstep_Light_Attack_01 = "2H_Backstep_Light_Attack_01";
-        [SerializeField] float bsHAtk01VFXstartDelay = 0.5f;
-        [SerializeField] Vector3 bsHAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
-        [SerializeField] Vector3 bsHAtk01VFXRotation = new Vector3(-35, -85, -40);
+        [SerializeField] float bsTwoHAtk01VFXstartDelay = 0.5f;
+        [SerializeField] Vector3 bsTwoHAtk01VFXPosition = new Vector3(2.5f, 1.2f, 3.8f);
+        [SerializeField] Vector3 bsTwoHAtk01VFXRotation = new Vector3(-35, -85, -40);
 
         public override void AttemptToPerformAction(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
@@ -177,15 +177,18 @@ namespace TraverserProject
                 if (playerPerformingAction.characterCombatManager.lastAttackAnimationPerformed == twoh_light_Attack_01)
                 {
                     playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.LightAttack02, twoh_light_Attack_02, true);
+                    PlayWeaponSwingVFX(weaponPerformingAction, playerPerformingAction, twohAtk02VFXstartDelay, twohAtk02VFXPosition, twohAtk02VFXRotation);
                 }
                 else
                 {
                     playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.LightAttack01, twoh_light_Attack_01, true);
+                    PlayWeaponSwingVFX(weaponPerformingAction, playerPerformingAction, twohAtk01VFXstartDelay, twohAtk01VFXPosition, twohAtk01VFXRotation);
                 }
             }
             else if (!playerPerformingAction.isPerformingAction)
             {
                 playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.LightAttack01, twoh_light_Attack_01, true);
+                PlayWeaponSwingVFX(weaponPerformingAction, playerPerformingAction, twohAtk01VFXstartDelay, twohAtk01VFXPosition, twohAtk01VFXRotation);
             }
         }
 
@@ -195,7 +198,7 @@ namespace TraverserProject
                 return;
 
             playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.LightJumpingAttack01, light_Jumping_Attack_01, true);
-
+            PlayWeaponSwingVFX(weaponPerformingAction, playerPerformingAction, jumpLAtk01VFXstartDelay, jumpLAtk01VFXPosition, jumpLAtk01VFXRotation);
 
         }
 
@@ -205,7 +208,7 @@ namespace TraverserProject
                 return;
 
             playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.LightJumpingAttack01, twoh_light_Jumping_Attack_01, true);
-
+            PlayWeaponSwingVFX(weaponPerformingAction, playerPerformingAction, jumpLAtk01VFXstartDelay, jumpTwoHAtk01VFXPosition, jumpTwoHAtk01VFXRotation);
 
         }
 
@@ -214,10 +217,12 @@ namespace TraverserProject
             if (playerPerformingAction.playerNetworkManager.isTwoHandingWeapon.Value)
             {
                 playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.RunningLightAttack01, twoh_running_Light_Attack_01, true);
+                PlayWeaponSwingVFX(weaponPerformingAction, playerPerformingAction, runTwoHAtk01VFXstartDelay, runTwoHAtk01VFXPosition, runTwoHAtk01VFXRotation);
             }
             else
             {
                 playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.RunningLightAttack01, running_Light_Attack_01, true);
+                PlayWeaponSwingVFX(weaponPerformingAction, playerPerformingAction, runLAtk01VFXstartDelay, runLAtk01VFXPosition, runLAtk01VFXRotation);
             }
         }
 
@@ -227,11 +232,12 @@ namespace TraverserProject
             if (playerPerformingAction.playerNetworkManager.isTwoHandingWeapon.Value)
             {
                 playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.RollingLightAttack01, twoh_rolling_Light_Attack_01, true);
+                PlayWeaponSwingVFX(weaponPerformingAction, playerPerformingAction, rollTwoHAtk01VFXstartDelay, rollTwoHAtk01VFXPosition, rollTwoHAtk01VFXRotation);
             }
             else
             {
                 playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.RollingLightAttack01, rolling_Light_Attack_01, true);
-
+                PlayWeaponSwingVFX(weaponPerformingAction, playerPerformingAction, rollLAtk01VFXstartDelay, rollLAtk01VFXPosition, rollLAtk01VFXRotation);
             }
 
         }
@@ -242,10 +248,12 @@ namespace TraverserProject
             if (playerPerformingAction.playerNetworkManager.isTwoHandingWeapon.Value)
             {
                 playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.BackstepLightAttack01, twoh_backstep_Light_Attack_01, true);
+                PlayWeaponSwingVFX(weaponPerformingAction, playerPerformingAction, bsTwoHAtk01VFXstartDelay, bsTwoHAtk01VFXPosition, bsTwoHAtk01VFXRotation);
             }
             else
             {
                 playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.BackstepLightAttack01, backstep_Light_Attack_01, true);
+                PlayWeaponSwingVFX(weaponPerformingAction, playerPerformingAction, bsLAtk01VFXstartDelay, bsLAtk01VFXPosition, bsLAtk01VFXRotation);
             }
         }
     }
