@@ -17,40 +17,36 @@ namespace TraverserProject
 
         [Header("Destination")]
         [SerializeField] float moveSpeed = 2;
-        [SerializeField] Vector3 destinationHigh;
-        [SerializeField] Vector3 destinationLow;
+        public Vector3 destinationHigh;
+        public Vector3 destinationLow;
 
         [Header("Characters On Elevator")]
         [SerializeField] protected List<CharacterManager> charactersOnElevator = new List<CharacterManager>();
+
+        [Header("Recall Locations")]
+        [SerializeField] CallElevatorInteractable lowDestinationRecall;
+        [SerializeField] CallElevatorInteractable highDestinationRecall;
 
         [Header("SFX")]
         private AudioSource elevatorAudioSource;
         [SerializeField] private AudioClip elevatorMovingSFX;
         [SerializeField] private AudioClip[] elevatorStoppingSFX;
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            elevatorAudioSource = GetComponent<AudioSource>();
+        }
+
         public override void OnTriggerEnter(Collider other)
         {
-            CharacterManager character = other.GetComponent<CharacterManager>();
-
-            if (character != null)
-                AddCharacterToListOfCharactersOnElevator(character);
-
             if (elevatorIsRising.Value || elevatorIsDescending.Value)
                 return;
 
             base.OnTriggerEnter(other);
         }
 
-        public override void OnTriggerExit(Collider other)
-        {
-            base.OnTriggerExit(other);
-
-            CharacterManager character = other.GetComponent<CharacterManager>();
-
-            if (character != null)
-                RemoveCharacterFromListOfCharactersOnElevator(character);
-
-        }
 
         public override void Interact(PlayerManager player)
         {
@@ -87,7 +83,14 @@ namespace TraverserProject
 
         private void ActivateElevator(bool isRising)
         {
+            if (isRising)
+            {
+                StartCoroutine(MoveElevatorCoroutine(isRising));
+            }
+            else
+            {
 
+            }
         }
 
         private IEnumerator MoveElevatorCoroutine(bool isRising)
@@ -117,6 +120,9 @@ namespace TraverserProject
             if (!isRising)
                 destination = destinationLow;
 
+            lowDestinationRecall.RemoveInteractionFromPlayers();
+            highDestinationRecall.RemoveInteractionFromPlayers();
+
             //moves the elevator
             while (transform.localPosition != destination)
             {
@@ -131,7 +137,7 @@ namespace TraverserProject
                     if (charactersOnElevator[i] == null)
                         continue;
 
-                    if (charactersOnElevator[i].gameObject.activeInHierarchy)
+                    if (!charactersOnElevator[i].gameObject.activeInHierarchy)
                         RemoveCharacterFromListOfCharactersOnElevator(charactersOnElevator[i]);
 
                     //If using foot IK, disable here temporarily. it may cause weird artifacts with feet otherwise
@@ -150,6 +156,9 @@ namespace TraverserProject
                     elevatorIsDescending.Value = false;
                 }
 
+                lowDestinationRecall.ReturnInteractionToPlayers();
+                highDestinationRecall.ReturnInteractionToPlayers();
+
                 //stops movement SFX
                 elevatorAudioSource.Stop();
                 //plays stopped SFX
@@ -165,7 +174,7 @@ namespace TraverserProject
         }
 
 
-    private void AddCharacterToListOfCharactersOnElevator(CharacterManager character)
+        public void AddCharacterToListOfCharactersOnElevator(CharacterManager character)
         {
             if (charactersOnElevator.Contains(character))
                 return;
@@ -174,7 +183,7 @@ namespace TraverserProject
             character.characterLocomotionManager.isRidingLift = true;
         }
 
-        private void RemoveCharacterFromListOfCharactersOnElevator(CharacterManager character)
+        public void RemoveCharacterFromListOfCharactersOnElevator(CharacterManager character)
         {
             if (!charactersOnElevator.Contains(character))
                 return;
@@ -184,7 +193,7 @@ namespace TraverserProject
         }
 
         [ServerRpc(RequireOwnership = false)]
-        private void ActivateElevatorServerRpc()
+        public void ActivateElevatorServerRpc()
         {
             if (IsServer)
                 ActivateElevatorClientRpc();
