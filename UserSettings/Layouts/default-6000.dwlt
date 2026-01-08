@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2331
     height: 1277
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Project
   m_RootView: {fileID: 10}
   m_MinSize: {x: 875, y: 482}
   m_MaxSize: {x: 10000, y: 10000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 188
+  controlID: 180
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 0
-  controlID: 112
+  controlID: 2724
   draggingID: 0
 --- !u!114 &9
 MonoBehaviour:
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 150}
   m_MaxSize: {x: 16192, y: 24288}
   vertical: 1
-  controlID: 111
+  controlID: 2723
   draggingID: 0
 --- !u!114 &10
 MonoBehaviour:
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 150}
   m_MaxSize: {x: 24288, y: 24288}
   vertical: 0
-  controlID: 110
+  controlID: 2722
   draggingID: 0
 --- !u!114 &14
 MonoBehaviour:
@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: SceneView
+  m_Name: AnimatorControllerTool
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -348,17 +348,17 @@ MonoBehaviour:
     y: 0
     width: 1446
     height: 759
-  m_MinSize: {x: 202, y: 226}
+  m_MinSize: {x: 52, y: 76}
   m_MaxSize: {x: 4002, y: 4026}
-  m_ActualView: {fileID: 23}
+  m_ActualView: {fileID: 24}
   m_Panes:
   - {fileID: 23}
   - {fileID: 24}
   - {fileID: 18}
   - {fileID: 17}
   - {fileID: 16}
-  m_Selected: 0
-  m_LastSelected: 2
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1490,7 +1490,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Data/PreFabs/Interactable Objects
+    - Assets/Data/PreFabs
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1500,16 +1500,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Data/PreFabs/Interactable Objects
+  - Assets/Data/PreFabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\jckzh\source\repos\TraverserProject
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 32}
-    m_SelectedIDs: 42080100
-    m_LastClickedID: 67650
-    m_ExpandedIDs: 000000000405010010080100120801002a0801002c080100523e010000ca9a3b
+    m_SelectedIDs: 20080100
+    m_LastClickedID: 67616
+    m_ExpandedIDs: 0000000002050100080801002008010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1538,7 +1538,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000004050100
+    m_ExpandedIDs: 0000000002050100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1659,10 +1659,10 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 48}
-    m_SelectedIDs: 1c080100
-    m_LastClickedID: 67612
-    m_ExpandedIDs: 0000000004050100120801001e08010000ca9a3b
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 12080100
+    m_LastClickedID: 67602
+    m_ExpandedIDs: 00000000020501001408010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1691,7 +1691,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: dc73ffff
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000004050100
+    m_ExpandedIDs: 0000000002050100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1788,9 +1788,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 38050100
+      m_SelectedIDs: 98ce0000
       m_LastClickedID: 0
-      m_ExpandedIDs: 5268ffffba94fffff6a4fffff2faffff24100100
+      m_ExpandedIDs: feacfeff0ebdffff26d6ffff18e6fffff2faffff0c130100ac1301009e4c0200
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -2360,9 +2360,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -0.10113284, y: 1.2360038, z: 16.532267}
+    m_Target: {x: -7.779701, y: -1.1457268, z: 1.3756263}
     speed: 2
-    m_Value: {x: -0.10113284, y: 1.2360038, z: 16.532267}
+    m_Value: {x: -7.779701, y: -1.1457268, z: 1.3756263}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -2408,9 +2408,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.15716206, y: 0.1574119, z: -0.025053818, w: 0.974749}
+    m_Target: {x: 0.12612703, y: -0.79557675, z: 0.17789084, w: 0.5654607}
     speed: 2
-    m_Value: {x: 0.15714306, y: 0.15739287, z: -0.02505079, w: 0.9746312}
+    m_Value: {x: 0.12295268, y: -0.8197184, z: 0.19233426, w: 0.5253113}
   m_Size:
     m_Target: 4.4835777
     speed: 2
@@ -2469,9 +2469,9 @@ MonoBehaviour:
     m_TextWithWhitespace: "Animator\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 528
-    y: 24
-    width: 1491
+    x: 684
+    y: 94
+    width: 1444
     height: 733
   m_SerializedDataModeController:
     m_DataMode: 0

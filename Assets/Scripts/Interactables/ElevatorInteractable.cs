@@ -89,7 +89,7 @@ namespace TraverserProject
             }
             else
             {
-
+                StartCoroutine(MoveElevatorCoroutine(isRising));
             }
         }
 
@@ -127,7 +127,7 @@ namespace TraverserProject
             while (transform.localPosition != destination)
             {
                 transform.localPosition = Vector3.MoveTowards(transform.localPosition, destination, moveSpeed * Time.deltaTime);
-                Vector3 velocityOfMovement = Vector3.MoveTowards(transform.position, destination, moveSpeed + Time.deltaTime);
+                Vector3 velocityOfMovement = Vector3.MoveTowards(transform.position, destination, moveSpeed * Time.deltaTime);
 
                 if (IsOwner)
                     networkPosition.Value = transform.localPosition;
