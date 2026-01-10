@@ -18120,6 +18120,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door Interactable
       objectReference: {fileID: 0}
+    - target: {fileID: 4902486630713580094, guid: 2e9231d6855365c4990add6c4618ad2d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.00000333786
+      objectReference: {fileID: 0}
+    - target: {fileID: 4902486630713580094, guid: 2e9231d6855365c4990add6c4618ad2d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00013637543
+      objectReference: {fileID: 0}
+    - target: {fileID: 4902486630713580094, guid: 2e9231d6855365c4990add6c4618ad2d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4902486630713580094, guid: 2e9231d6855365c4990add6c4618ad2d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4902486630713580094, guid: 2e9231d6855365c4990add6c4618ad2d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4902486630713580094, guid: 2e9231d6855365c4990add6c4618ad2d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4902486630713580094, guid: 2e9231d6855365c4990add6c4618ad2d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6234684209746178291, guid: 2e9231d6855365c4990add6c4618ad2d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.018053
@@ -18163,8 +18191,77 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 699999234175032661, guid: 2e9231d6855365c4990add6c4618ad2d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 641635008}
+    - targetCorrespondingSourceObject: {fileID: 5711392470776447108, guid: 2e9231d6855365c4990add6c4618ad2d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 641635006}
   m_SourcePrefab: {fileID: 100100000, guid: 2e9231d6855365c4990add6c4618ad2d, type: 3}
+--- !u!1 &641635004 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5711392470776447108, guid: 2e9231d6855365c4990add6c4618ad2d, type: 3}
+  m_PrefabInstance: {fileID: 641635003}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &641635006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641635004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b01fecc076c079246893ab618062012e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  interactableText: 
+  interactableCollider: {fileID: 0}
+  hostOnlyInteractable: 1
+  networkPosition:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  doorIsOpening:
+    m_InternalValue: 0
+  doorIsClosing:
+    m_InternalValue: 0
+  networkPositionSmoothTime: 0.1
+  moveSpeed: 2
+  destinationOpen: {x: 0, y: 0, z: 0}
+  destinationClose: {x: 0, y: 0, z: 0}
+  doorOpeningSFX: {fileID: 0}
+  doorClosingSFX: []
+--- !u!1 &641635007 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 699999234175032661, guid: 2e9231d6855365c4990add6c4618ad2d, type: 3}
+  m_PrefabInstance: {fileID: 641635003}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &641635008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641635007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2722463480
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &643051386
 GameObject:
   m_ObjectHideFlags: 0
