@@ -83,14 +83,7 @@ namespace TraverserProject
 
         private void ActivateElevator(bool isRising)
         {
-            if (isRising)
-            {
-                StartCoroutine(MoveElevatorCoroutine(isRising));
-            }
-            else
-            {
-                StartCoroutine(MoveElevatorCoroutine(isRising));
-            }
+            StartCoroutine(MoveElevatorCoroutine(isRising));
         }
 
         private IEnumerator MoveElevatorCoroutine(bool isRising)

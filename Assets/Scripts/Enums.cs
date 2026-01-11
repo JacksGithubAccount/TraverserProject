@@ -68,6 +68,13 @@ public enum BuildUp
     Frost
 }
 
+public enum DoorState
+{
+    Open,
+    Locked,
+    CantOpenFromThisSide
+}
+
 //is tag for each weapon model instantiation slot
 public enum WeaponModelSlot
 {

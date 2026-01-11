@@ -9,6 +9,7 @@ namespace TraverserProject
         public static WorldInteractablesManager Singleton;
         [Header("World Respawn Items")]
         public List<PickUpItemInteractable> worldRespawnItems = new List<PickUpItemInteractable>();
+        public List<DoorInteractable> doorInteractables = new List<DoorInteractable>();
 
         private void Awake()
         {

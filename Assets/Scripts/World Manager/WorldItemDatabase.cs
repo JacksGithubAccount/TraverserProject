@@ -49,6 +49,9 @@ namespace TraverserProject
         [Header("Upgrade Materials")]
         [SerializeField] List<UpgradeMaterial> upgradeMaterials = new List<UpgradeMaterial>();
 
+        [Header("Key Items")]
+        [SerializeField] List<KeyItem> keyItems = new List<KeyItem>();
+
         [Header("Items")]
         private List<Item> items = new List<Item>();
 
@@ -63,6 +66,7 @@ namespace TraverserProject
         [SerializeField] int projectileItemKey = 8000;
         [SerializeField] int quickSlotItemKey = 9000;
         [SerializeField] int upgradeMaterialItemKey = 10000;
+        [SerializeField] int keyItemKey = 11000;
 
         private void Awake()
         {
@@ -125,6 +129,11 @@ namespace TraverserProject
                 items.Add(item);
             }
 
+            foreach(var item in keyItems)
+            {
+                items.Add(item);
+            }
+
             for (int i = 0; i < items.Count; i++)
             {
                 int prefixKey = 0;
@@ -149,6 +158,8 @@ namespace TraverserProject
                     prefixKey = upgradeMaterialItemKey;
                 else if (items[i].GetType() == typeof(QuickSlotItem))
                     prefixKey = quickSlotItemKey;
+                else if (items[i].GetType() == typeof(KeyItem))
+                    prefixKey = keyItemKey;
 
                 items[i].itemID = prefixKey + i;
             }
@@ -211,6 +222,10 @@ namespace TraverserProject
             return quickSlotItems.FirstOrDefault(item => item.itemID == ID);
         }
 
+        public KeyItem GetKeyItemByID(int ID)
+        {
+            return keyItems.FirstOrDefault(item => item.itemID == ID);
+        }
 
         //item serialization
 
@@ -278,6 +293,18 @@ namespace TraverserProject
             }
 
             return quickSlotItem;
+        }
+
+        public KeyItem GetKeyItemFromSerializedData(SerializableKeyItem serializableKeyItem)
+        {
+            KeyItem keyItem = null;
+            if (GetQuickSlotItemByID(serializableKeyItem.itemID))
+            {
+                keyItem = Instantiate(GetKeyItemByID(serializableKeyItem.itemID));
+                keyItem.currentItemAmount = serializableKeyItem.itemAmount;
+            }
+
+            return keyItem;
         }
 
     }
