@@ -14,12 +14,16 @@ namespace TraverserProject
         public NetworkVariable<bool> doorIsClosing = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         [SerializeField] float networkPositionSmoothTime = 0.1f;
 
+        [Header("Door Pivot Transform")]
+        public GameObject doorPivotTransform;
+
         [Header("Lock")]
         public int doorID;
         public DoorState doorState = DoorState.Open;
 
         [Header("Destination")]
         [SerializeField] float moveSpeed = 2;
+        [SerializeField] float moveMagnitude = 10;
         public Vector3 destinationOpen;
         public Vector3 destinationClose;
 
@@ -27,7 +31,7 @@ namespace TraverserProject
         [SerializeField] protected List<CharacterManager> charactersInFrontOfDoor = new List<CharacterManager>();
 
         [Header("Back of door Location")]
-        [SerializeField] CallElevatorInteractable backDoorInteractable;
+        [SerializeField] BackDoorInteractable backDoorInteractable;
 
         [Header("SFX")]
         private AudioSource doorAudioSource;
@@ -117,13 +121,13 @@ namespace TraverserProject
             backDoorInteractable.RemoveInteractionFromPlayers();
 
             //moves the elevator
-            while (transform.localPosition != destination)
+            while (doorPivotTransform.transform.localPosition != destination)
             {
-                transform.localEulerAngles = Vector3.MoveTowards(transform.localPosition, destination, moveSpeed * Time.deltaTime);
-                Vector3 velocityOfMovement = Vector3.MoveTowards(transform.position, destination, moveSpeed * Time.deltaTime);
+                doorPivotTransform.transform.localEulerAngles = Vector3.RotateTowards(doorPivotTransform.transform.localEulerAngles, destination, moveSpeed * Time.deltaTime, moveMagnitude * Time.deltaTime);
+                Vector3 velocityOfMovement = Vector3.RotateTowards(doorPivotTransform.transform.eulerAngles, destination, moveSpeed * Time.deltaTime, moveMagnitude * Time.deltaTime);
 
                 if (IsOwner)
-                    networkPosition.Value = transform.localEulerAngles;
+                    networkPosition.Value = doorPivotTransform.transform.localEulerAngles;
 
                 for (int i = 0; i < charactersInFrontOfDoor.Count; i++)
                 {
