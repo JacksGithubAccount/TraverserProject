@@ -88,7 +88,8 @@ namespace TraverserProject
 
         private IEnumerator MoveElevatorCoroutine(bool isRising)
         {
-            interactableCollider.enabled = false;
+            if (interactableCollider != null)
+                interactableCollider.enabled = false;
 
             //when elevator starts, remove it as an interable whilst it is going
             for (int i = 0; i < charactersOnElevator.Count; i++)
@@ -160,7 +161,8 @@ namespace TraverserProject
                 //if animating elevator, stop animation here
 
                 //re-enable interaction with elevator
-                interactableCollider.enabled = true;
+                if (interactableCollider != null)
+                    interactableCollider.enabled = true;
 
                 yield return null;
             }
