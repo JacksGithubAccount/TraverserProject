@@ -102,6 +102,7 @@ namespace TraverserProject
             {
                 yield return null;
             }
+
             buttonHasBeenPressed = false;
             animator.Play(releaseButtonAnimation);
         }

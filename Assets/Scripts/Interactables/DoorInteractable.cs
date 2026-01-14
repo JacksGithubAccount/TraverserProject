@@ -142,33 +142,33 @@ namespace TraverserProject
                     if (!charactersInFrontOfDoor[i].characterNetworkManager.isJumping.Value)
                         charactersInFrontOfDoor[i].transform.position = new Vector3(charactersInFrontOfDoor[i].transform.position.x, velocityOfMovement.y, charactersInFrontOfDoor[i].transform.position.z);
 
-
-                    yield return null;
                 }
-
-                //stops movement flags
-                if (IsOwner)
-                {
-                    doorIsOpening.Value = false;
-                    doorIsClosing.Value = false;
-                }
-
-                backDoorInteractable.ReturnInteractionToPlayers();
-
-                //stops movement SFX
-                doorAudioSource.Stop();
-                //plays stopped SFX
-                doorAudioSource.PlayOneShot(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(doorClosingSFX));
-
-                //if animating elevator, stop animation here
-
-                //re-enable interaction with elevator
-                interactableCollider.enabled = true;
-
                 yield return null;
             }
 
+            //stops movement flags
+            if (IsOwner)
+            {
+                doorIsOpening.Value = false;
+                doorIsClosing.Value = false;
+            }
+
+            backDoorInteractable.ReturnInteractionToPlayers();
+
+            //stops movement SFX
+            doorAudioSource.Stop();
+            //plays stopped SFX
+            doorAudioSource.PlayOneShot(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(doorClosingSFX));
+
+            //if animating elevator, stop animation here
+
+            //re-enable interaction with elevator
+            interactableCollider.enabled = true;
+
+            yield return null;
         }
+
+        
         public void AddCharacterToListOfCharactersInFrontOfDoor(CharacterManager character)
         {
             if (charactersInFrontOfDoor.Contains(character))

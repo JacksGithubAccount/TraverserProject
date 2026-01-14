@@ -139,34 +139,34 @@ namespace TraverserProject
                     if (!charactersOnElevator[i].characterNetworkManager.isJumping.Value)
                         charactersOnElevator[i].transform.position = new Vector3(charactersOnElevator[i].transform.position.x, velocityOfMovement.y + yMovementOffset, charactersOnElevator[i].transform.position.z);
 
-
-                    yield return null;
                 }
-
-                //stops movement flags
-                if (IsOwner)
-                {
-                    elevatorIsRising.Value = false;
-                    elevatorIsDescending.Value = false;
-                }
-
-                lowDestinationRecall.ReturnInteractionToPlayers();
-                highDestinationRecall.ReturnInteractionToPlayers();
-
-                //stops movement SFX
-                elevatorAudioSource.Stop();
-                //plays stopped SFX
-                elevatorAudioSource.PlayOneShot(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(elevatorStoppingSFX));
-
-                //if animating elevator, stop animation here
-
-                //re-enable interaction with elevator
-                if (interactableCollider != null)
-                    interactableCollider.enabled = true;
-
                 yield return null;
             }
+
+            //stops movement flags
+            if (IsOwner)
+            {
+                elevatorIsRising.Value = false;
+                elevatorIsDescending.Value = false;
+            }
+
+            lowDestinationRecall.ReturnInteractionToPlayers();
+            highDestinationRecall.ReturnInteractionToPlayers();
+
+            //stops movement SFX
+            elevatorAudioSource.Stop();
+            //plays stopped SFX
+            elevatorAudioSource.PlayOneShot(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(elevatorStoppingSFX));
+
+            //if animating elevator, stop animation here
+
+            //re-enable interaction with elevator
+            if (interactableCollider != null)
+                interactableCollider.enabled = true;
+
+            yield return null;
         }
+        
 
 
         public void AddCharacterToListOfCharactersOnElevator(CharacterManager character)
