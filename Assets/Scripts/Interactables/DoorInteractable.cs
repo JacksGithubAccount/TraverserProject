@@ -20,6 +20,10 @@ namespace TraverserProject
         [Header("Lock")]
         public int doorID;
         public DoorState doorState = DoorState.Open;
+        public KeyItem keyToUnlockDoor;
+        [SerializeField] string unlockMessage = "Used KeyItemNameHere";
+        [SerializeField] string lockedMessage = "It's locked";
+        [SerializeField] string doesNotOpenFromThisSideMessage = "Does not open from this side";
 
         [Header("Destination")]
         [SerializeField] float moveSpeed = 2;
@@ -86,9 +90,45 @@ namespace TraverserProject
             base.OnNetworkDespawn();
         }
 
-        private void ActivateDoor(bool isOpening)
+        private void ActivateDoor(bool isOpening, bool isAtSideThatCantOpen = false)
         {
-            StartCoroutine(MoveDoorCoroutine(isOpening));
+            PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+            switch (doorState)
+            {
+                case DoorState.Open:
+                    StartCoroutine(MoveDoorCoroutine(isOpening));
+                    break;
+                case DoorState.Locked:
+                    if (player == null)
+                        break;
+                    if (keyToUnlockDoor == null)
+                        break;
+
+                    if (player.playerInventoryManager.itemsInInventory.Contains(keyToUnlockDoor))
+                    {
+                        unlockMessage = "Used " + keyToUnlockDoor.name;
+                        PlayerUIManager.Singleton.playerUIPopUpManager.SendPlayerMessagePopUp(unlockMessage);
+                        doorState = DoorState.Open;
+                        StartCoroutine(MoveDoorCoroutine(isOpening));
+                    }
+                    else
+                    {
+                        PlayerUIManager.Singleton.playerUIPopUpManager.SendPlayerMessagePopUp(lockedMessage);
+                    }
+
+                    break;
+
+                case DoorState.CantOpenFromThisSide:
+                    if (isAtSideThatCantOpen)
+                        PlayerUIManager.Singleton.playerUIPopUpManager.SendPlayerMessagePopUp(doesNotOpenFromThisSideMessage);
+                    else
+                    {                        
+                        doorState = DoorState.Open;
+                        StartCoroutine(MoveDoorCoroutine(isOpening));
+                    }
+                    break;
+            }
+            
         }
 
         private IEnumerator MoveDoorCoroutine(bool isOpening)

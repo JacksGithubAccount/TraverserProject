@@ -125,6 +125,7 @@ namespace TraverserProject
             StartCoroutine(FadeOutThenDestroy(popUpWarning.canvas, 2, popUp));
         }
 
+
         public void SendDialoguePopUp(CharacterDialogue dialogue, AICharacterManager aiCharacter)
         {
             PlayerUIManager.Singleton.playerUIHudManager.ToggleHUDWithoutPopUps(false);
