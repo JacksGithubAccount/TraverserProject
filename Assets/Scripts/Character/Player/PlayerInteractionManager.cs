@@ -8,7 +8,7 @@ namespace TraverserProject
     {
         PlayerManager player;
 
-        private List<Interactable> currentInteractableActions;
+        [SerializeField] List<Interactable> currentInteractableActions;
 
         private void Awake()
         {

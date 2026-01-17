@@ -114,6 +114,7 @@ namespace TraverserProject
                     else
                     {
                         PlayerUIManager.Singleton.playerUIPopUpManager.SendPlayerMessagePopUp(lockedMessage);
+                        interactableCollider.enabled = true;
                     }
 
                     break;
@@ -135,19 +136,29 @@ namespace TraverserProject
         {
             interactableCollider.enabled = false;
 
-            //when elevator starts, remove it as an interable whilst it is going
-            for (int i = 0; i < charactersInFrontOfDoor.Count; i++)
+            if (!isOpening)
             {
-                if (charactersInFrontOfDoor[i] == null)
-                    continue;
-
-                PlayerManager player = charactersInFrontOfDoor[i] as PlayerManager;
-
-                if (player == null)
-                    continue;
-
-                player.playerInteractionManager.RemoveInteractionFromList(this);
+                if (IsOwner)
+                    doorIsClosing.Value = true;
+            }else
+            {
+                if (IsOwner)
+                    doorIsOpening.Value = true;
             }
+
+                //when elevator starts, remove it as an interable whilst it is going
+                for (int i = 0; i < charactersInFrontOfDoor.Count; i++)
+                {
+                    if (charactersInFrontOfDoor[i] == null)
+                        continue;
+
+                    PlayerManager player = charactersInFrontOfDoor[i] as PlayerManager;
+
+                    if (player == null)
+                        continue;
+
+                    player.playerInteractionManager.RemoveInteractionFromList(this);
+                }
 
             //SFX
             doorAudioSource.clip = doorOpeningSFX;
@@ -239,15 +250,13 @@ namespace TraverserProject
         {
             if (transform.localEulerAngles == destinationOpen)
             {
-                if (IsOwner)
-                    doorIsClosing.Value = true;
+                
 
                 ActivateDoor(false);
             }
             else if (transform.localEulerAngles == destinationClose)
             {
-                if (IsOwner)
-                    doorIsOpening.Value = true;
+                
 
                 ActivateDoor(true);
             }
