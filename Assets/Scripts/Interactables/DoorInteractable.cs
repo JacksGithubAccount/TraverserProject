@@ -239,26 +239,26 @@ namespace TraverserProject
         }
 
         [ServerRpc(RequireOwnership = false)]
-        public void ActivateDoorServerRpc()
+        public void ActivateDoorServerRpc(bool isBackdoor = false)
         {
             if (IsServer)
-                ActivateDoorClientRpc();
+                ActivateDoorClientRpc(isBackdoor);
         }
 
         [ClientRpc]
-        private void ActivateDoorClientRpc()
+        private void ActivateDoorClientRpc(bool isBackdoor = false)
         {
             if (transform.localEulerAngles == destinationOpen)
             {
                 
 
-                ActivateDoor(false);
+                ActivateDoor(false, isBackdoor);
             }
             else if (transform.localEulerAngles == destinationClose)
             {
                 
 
-                ActivateDoor(true);
+                ActivateDoor(true, isBackdoor);
             }
         }
     }

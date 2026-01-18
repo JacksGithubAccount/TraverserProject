@@ -15,7 +15,7 @@ namespace TraverserProject
 
         public override void Interact(PlayerManager player)
         {
-            door.ActivateDoorServerRpc();
+            door.ActivateDoorServerRpc(true);
 
         }
 
