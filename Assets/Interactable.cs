@@ -7,7 +7,7 @@ namespace TraverserProject
     public class Interactable : NetworkBehaviour
     {
         public string interactableText;
-        [SerializeField] protected Collider interactableCollider;
+        [SerializeField] public Collider interactableCollider;
         [SerializeField] protected bool hostOnlyInteractable = true;
 
 

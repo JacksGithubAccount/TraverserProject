@@ -13,6 +13,8 @@ namespace TraverserProject
         public NetworkVariable<bool> doorIsOpening = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> doorIsClosing = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         [SerializeField] float networkPositionSmoothTime = 0.1f;
+        public NetworkVariable<bool> isOpened = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
 
         [Header("Door Pivot Transform")]
         public GameObject doorPivotTransform;
@@ -76,6 +78,14 @@ namespace TraverserProject
             else
             {
                 networkPosition.Value = transform.localPosition;
+                if (WorldSaveGameManager.Singleton.currentCharacterData.doorsOpened.ContainsKey(doorID))
+                {
+                    isOpened.Value = WorldSaveGameManager.Singleton.currentCharacterData.doorsOpened[doorID];
+                }
+                else
+                {
+                    isOpened.Value = false;
+                }
             }
 
             if (doorIsOpening.Value)
@@ -83,6 +93,13 @@ namespace TraverserProject
 
             if (doorIsClosing.Value)
                 ActivateDoor(false);
+
+            if(isOpened.Value)
+            {
+                doorPivotTransform.transform.localEulerAngles =  destinationOpen;
+                interactableCollider.enabled = false;
+                backDoorInteractable.interactableCollider.enabled = false;
+            }
         }
 
         public override void OnNetworkDespawn()
@@ -135,6 +152,12 @@ namespace TraverserProject
         private IEnumerator MoveDoorCoroutine(bool isOpening)
         {
             interactableCollider.enabled = false;
+            isOpened.Value = true;
+
+            if (WorldSaveGameManager.Singleton.currentCharacterData.sitesOfGrace.ContainsKey(doorID))
+                WorldSaveGameManager.Singleton.currentCharacterData.sitesOfGrace.Remove(doorID);
+
+            WorldSaveGameManager.Singleton.currentCharacterData.doorsOpened.Add(doorID, true);
 
             if (!isOpening)
             {
@@ -171,7 +194,7 @@ namespace TraverserProject
 
             backDoorInteractable.RemoveInteractionFromPlayers();
 
-            //moves the elevator
+            //moves the door
             while (doorPivotTransform.transform.localPosition != destination)
             {
                 doorPivotTransform.transform.localEulerAngles = Vector3.RotateTowards(doorPivotTransform.transform.localEulerAngles, destination, moveSpeed * Time.deltaTime, moveMagnitude * Time.deltaTime);

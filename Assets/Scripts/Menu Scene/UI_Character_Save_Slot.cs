@@ -30,6 +30,7 @@ namespace TraverserProject
                 if (saveFileDataWriter.CheckToSeeIfFileExist())
                 {
                     characterName.text = WorldSaveGameManager.Singleton.characterSlot01.characterName;
+                    timePlayed.text = WorldSaveGameManager.Singleton.characterSlot01.secondsPlayed.ToString();
                 }
                 else
                 {

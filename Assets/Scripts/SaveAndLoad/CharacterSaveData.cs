@@ -63,6 +63,9 @@ namespace TraverserProject
         [Header("World Items")]
         public SerializableDictionary<int, bool> worldItemsLooted;
 
+        [Header("Doors")]
+        public SerializableDictionary<int, bool> doorsOpened;
+
         [Header("Equipment")]
         public int headEquipment;
         public int bodyEquipment;
@@ -118,6 +121,7 @@ namespace TraverserProject
             bossesAwakened = new SerializableDictionary<int, bool>();
             bossesDefeated = new SerializableDictionary<int, bool>();
             worldItemsLooted = new SerializableDictionary<int, bool>();
+            doorsOpened = new SerializableDictionary<int, bool>();
 
             weaponsInInventory = new List<SerializableWeapon>();
             projectilesInInventory = new List<SerializableRangedProjectile>();
