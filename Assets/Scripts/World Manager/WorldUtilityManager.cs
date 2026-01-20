@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -70,7 +71,7 @@ namespace TraverserProject
 
         public Material GetRandomMatFromRainbowMat()
         {
-            int index = Random.Range(0, rainbowMats.Count);
+            int index = UnityEngine.Random.Range(0, rainbowMats.Count);
             return rainbowMats[index];
         }
 
@@ -240,6 +241,16 @@ namespace TraverserProject
                     break;
             }
             return position;
+        }
+
+        public string ConvertSecondsToHHMMSSFormat(float totalSeconds)
+        {
+            int hours = (int)TimeSpan.FromSeconds(totalSeconds).TotalHours;
+            int minutes = TimeSpan.FromSeconds(totalSeconds).Minutes;
+            int seconds = TimeSpan.FromSeconds(totalSeconds).Seconds;
+            string formattedTime = string.Format("{0:00}:{1:00}:{2:00}", hours, minutes, seconds);
+
+            return formattedTime;
         }
     }
 }

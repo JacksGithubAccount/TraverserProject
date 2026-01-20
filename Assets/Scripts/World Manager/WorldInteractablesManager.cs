@@ -9,7 +9,11 @@ namespace TraverserProject
         public static WorldInteractablesManager Singleton;
         [Header("World Respawn Items")]
         public List<PickUpItemInteractable> worldRespawnItems = new List<PickUpItemInteractable>();
+
+        [Header("Interactables to ID")]
+        public List<SiteOfGraceInteractable> siteOfGraceInteractables = new List<SiteOfGraceInteractable>();
         public List<DoorInteractable> doorInteractables = new List<DoorInteractable>();
+
 
         private void Awake()
         {
@@ -27,6 +31,7 @@ namespace TraverserProject
         {
             DontDestroyOnLoad(gameObject);
         }
+
         public void ResetAllRespawnableItems()
         {
             foreach(PickUpItemInteractable item in worldRespawnItems)

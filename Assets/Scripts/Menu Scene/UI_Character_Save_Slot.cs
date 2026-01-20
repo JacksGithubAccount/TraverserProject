@@ -1,5 +1,6 @@
-using UnityEngine;
+using System;
 using TMPro;
+using UnityEngine;
 
 namespace TraverserProject
 {
@@ -30,7 +31,7 @@ namespace TraverserProject
                 if (saveFileDataWriter.CheckToSeeIfFileExist())
                 {
                     characterName.text = WorldSaveGameManager.Singleton.characterSlot01.characterName;
-                    timePlayed.text = WorldSaveGameManager.Singleton.characterSlot01.secondsPlayed.ToString();
+                    timePlayed.text = WorldUtilityManager.Singleton.ConvertSecondsToHHMMSSFormat(WorldSaveGameManager.Singleton.characterSlot01.secondsPlayed);
                 }
                 else
                 {
@@ -43,7 +44,8 @@ namespace TraverserProject
                 saveFileDataWriter.saveFileName = WorldSaveGameManager.Singleton.DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(characterSlot);
                 if (saveFileDataWriter.CheckToSeeIfFileExist())
                 {
-                    characterName.text = WorldSaveGameManager.Singleton.characterSlot02.characterName;
+                    characterName.text = WorldSaveGameManager.Singleton.characterSlot02.characterName;               
+                    timePlayed.text = WorldUtilityManager.Singleton.ConvertSecondsToHHMMSSFormat(WorldSaveGameManager.Singleton.characterSlot02.secondsPlayed);
                 }
                 else
                 {
@@ -57,6 +59,7 @@ namespace TraverserProject
                 if (saveFileDataWriter.CheckToSeeIfFileExist())
                 {
                     characterName.text = WorldSaveGameManager.Singleton.characterSlot03.characterName;
+                    timePlayed.text = WorldUtilityManager.Singleton.ConvertSecondsToHHMMSSFormat(WorldSaveGameManager.Singleton.characterSlot03.secondsPlayed);
                 }
                 else
                 {
@@ -70,6 +73,7 @@ namespace TraverserProject
                 if (saveFileDataWriter.CheckToSeeIfFileExist())
                 {
                     characterName.text = WorldSaveGameManager.Singleton.characterSlot04.characterName;
+                    timePlayed.text = WorldUtilityManager.Singleton.ConvertSecondsToHHMMSSFormat(WorldSaveGameManager.Singleton.characterSlot04.secondsPlayed);
                 }
                 else
                 {
@@ -83,6 +87,7 @@ namespace TraverserProject
                 if (saveFileDataWriter.CheckToSeeIfFileExist())
                 {
                     characterName.text = WorldSaveGameManager.Singleton.characterSlot05.characterName;
+                    timePlayed.text = WorldUtilityManager.Singleton.ConvertSecondsToHHMMSSFormat(WorldSaveGameManager.Singleton.characterSlot05.secondsPlayed);
                 }
                 else
                 {
@@ -96,6 +101,7 @@ namespace TraverserProject
                 if (saveFileDataWriter.CheckToSeeIfFileExist())
                 {
                     characterName.text = WorldSaveGameManager.Singleton.characterSlot06.characterName;
+                    timePlayed.text = WorldUtilityManager.Singleton.ConvertSecondsToHHMMSSFormat(WorldSaveGameManager.Singleton.characterSlot06.secondsPlayed);
                 }
                 else
                 {
@@ -109,6 +115,7 @@ namespace TraverserProject
                 if (saveFileDataWriter.CheckToSeeIfFileExist())
                 {
                     characterName.text = WorldSaveGameManager.Singleton.characterSlot07.characterName;
+                    timePlayed.text = WorldUtilityManager.Singleton.ConvertSecondsToHHMMSSFormat(WorldSaveGameManager.Singleton.characterSlot07.secondsPlayed);
                 }
                 else
                 {
@@ -122,6 +129,7 @@ namespace TraverserProject
                 if (saveFileDataWriter.CheckToSeeIfFileExist())
                 {
                     characterName.text = WorldSaveGameManager.Singleton.characterSlot08.characterName;
+                    timePlayed.text = WorldUtilityManager.Singleton.ConvertSecondsToHHMMSSFormat(WorldSaveGameManager.Singleton.characterSlot08.secondsPlayed);
                 }
                 else
                 {
@@ -135,6 +143,7 @@ namespace TraverserProject
                 if (saveFileDataWriter.CheckToSeeIfFileExist())
                 {
                     characterName.text = WorldSaveGameManager.Singleton.characterSlot09.characterName;
+                    timePlayed.text = WorldUtilityManager.Singleton.ConvertSecondsToHHMMSSFormat(WorldSaveGameManager.Singleton.characterSlot09.secondsPlayed);
                 }
                 else
                 {
@@ -148,6 +157,7 @@ namespace TraverserProject
                 if (saveFileDataWriter.CheckToSeeIfFileExist())
                 {
                     characterName.text = WorldSaveGameManager.Singleton.characterSlot10.characterName;
+                    timePlayed.text = WorldUtilityManager.Singleton.ConvertSecondsToHHMMSSFormat(WorldSaveGameManager.Singleton.characterSlot10.secondsPlayed);
                 }
                 else
                 {

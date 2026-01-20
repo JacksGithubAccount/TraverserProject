@@ -12,7 +12,7 @@ namespace TraverserProject
         public NetworkVariable<Vector3> networkPosition = new NetworkVariable<Vector3>(Vector3.zero, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> doorIsOpening = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> doorIsClosing = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-        [SerializeField] float networkPositionSmoothTime = 0.1f;
+        //[SerializeField] float networkPositionSmoothTime = 0.1f;
         public NetworkVariable<bool> isOpened = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
@@ -49,6 +49,10 @@ namespace TraverserProject
             base.Awake();
 
             doorAudioSource = GetComponent<AudioSource>();
+
+            //have to manually assign id, this is random based on load
+            //WorldInteractablesManager.Singleton.doorInteractables.Add(this);
+            //doorID = WorldInteractablesManager.Singleton.doorInteractables.IndexOf(this);
         }
 
         public override void OnTriggerEnter(Collider other)

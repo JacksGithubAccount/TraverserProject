@@ -24,6 +24,9 @@ namespace TraverserProject
         [HideInInspector] public PlayerEffectsManager playerEffectsManager;
         [HideInInspector] public PlayerBodyManager playerBodyManager;
 
+        [Header("Time Played")]
+        [SerializeField] float timePlayed = 0;
+
         protected override void Awake()
         {
             base.Awake();
@@ -42,6 +45,7 @@ namespace TraverserProject
 
         protected override void Update()
         {
+            timePlayed += Time.deltaTime;
             base.Update();
 
             if (!IsOwner)
@@ -333,6 +337,7 @@ namespace TraverserProject
             currentCharacterData.xPosition = transform.position.x;
             currentCharacterData.yPosition = transform.position.y;
             currentCharacterData.zPosition = transform.position.z;
+            currentCharacterData.secondsPlayed = timePlayed;
 
             //stats
             currentCharacterData.currentHealth = playerNetworkManager.currentHealth.Value;
@@ -444,6 +449,7 @@ namespace TraverserProject
             playerBodyManager.ToggleBodyType(currentCharacterData.isMale);
             Vector3 myPosition = new Vector3(currentCharacterData.xPosition, currentCharacterData.yPosition, currentCharacterData.zPosition);
             transform.position = myPosition;
+            timePlayed = currentCharacterData.secondsPlayed;
 
             //Stats
             playerNetworkManager.vigor.Value = currentCharacterData.vigor;

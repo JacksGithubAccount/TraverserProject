@@ -208,7 +208,7 @@ namespace TraverserProject
                 return;
 
             playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(weaponPerformingAction, AttackType.LightJumpingAttack01, twoh_light_Jumping_Attack_01, true);
-            PlayWeaponSwingVFX(weaponPerformingAction, playerPerformingAction, jumpLAtk01VFXstartDelay, jumpTwoHAtk01VFXPosition, jumpTwoHAtk01VFXRotation);
+            PlayWeaponSwingVFX(weaponPerformingAction, playerPerformingAction, jumpHAtk01VFXstartDelay, jumpTwoHAtk01VFXPosition, jumpTwoHAtk01VFXRotation);
 
         }
 
