@@ -24,8 +24,8 @@ namespace TraverserProject
         [SerializeField] protected List<CharacterManager> charactersOnElevator = new List<CharacterManager>();
 
         [Header("Recall Locations")]
-        [SerializeField] CallElevatorInteractable lowDestinationRecall;
-        [SerializeField] CallElevatorInteractable highDestinationRecall;
+        public CallElevatorInteractable lowDestinationRecall;
+        public CallElevatorInteractable highDestinationRecall;
 
         [Header("SFX")]
         private AudioSource elevatorAudioSource;
@@ -166,7 +166,7 @@ namespace TraverserProject
 
             yield return null;
         }
-        
+
 
 
         public void AddCharacterToListOfCharactersOnElevator(CharacterManager character)

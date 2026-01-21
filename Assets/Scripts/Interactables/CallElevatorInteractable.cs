@@ -7,7 +7,7 @@ namespace TraverserProject
 
     public class CallElevatorInteractable : Interactable
     {
-        [SerializeField] ElevatorInteractable elevator;
+        [SerializeField] protected ElevatorInteractable elevator;
         public List<PlayerManager> playersWithinInteractionTrigger = new List<PlayerManager>();
 
         [Header("Top/Bottom Call")]
