@@ -15,6 +15,10 @@ namespace TraverserProject
         //[SerializeField] float networkPositionSmoothTime = 0.1f;
         public NetworkVariable<bool> isOpened = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+        [Header("Animation")]
+        [SerializeField] Animator animator;
+        [SerializeField] string openDoorAnimation;
+        [SerializeField] string closeDoorAnimation;
 
         [Header("Door Pivot Transform")]
         public GameObject doorPivotTransform;
@@ -28,8 +32,6 @@ namespace TraverserProject
         [SerializeField] string doesNotOpenFromThisSideMessage = "Does not open from this side";
 
         [Header("Destination")]
-        [SerializeField] float moveSpeed = 2;
-        [SerializeField] float moveMagnitude = 10;
         public Vector3 destinationOpen;
         public Vector3 destinationClose;
 
@@ -191,38 +193,13 @@ namespace TraverserProject
             doorAudioSource.clip = doorOpeningSFX;
             doorAudioSource.Play();
 
-            //Determines destination
-            Vector3 destination = destinationOpen;
-            if (!isOpening)
-                destination = destinationClose;
-
             backDoorInteractable.RemoveInteractionFromPlayers();
 
             //moves the door
-            while (doorPivotTransform.transform.localPosition != destination)
-            {
-                doorPivotTransform.transform.localEulerAngles = Vector3.RotateTowards(doorPivotTransform.transform.localEulerAngles, destination, moveSpeed * Time.deltaTime, moveMagnitude * Time.deltaTime);
-                Vector3 velocityOfMovement = Vector3.RotateTowards(doorPivotTransform.transform.eulerAngles, destination, moveSpeed * Time.deltaTime, moveMagnitude * Time.deltaTime);
-
-                if (IsOwner)
-                    networkPosition.Value = doorPivotTransform.transform.localEulerAngles;
-
-                for (int i = 0; i < charactersInFrontOfDoor.Count; i++)
-                {
-                    if (charactersInFrontOfDoor[i] == null)
-                        continue;
-
-                    if (!charactersInFrontOfDoor[i].gameObject.activeInHierarchy)
-                        RemoveCharacterFromListOfCharactersInFrontOfDoor(charactersInFrontOfDoor[i]);
-
-                    //If using foot IK, disable here temporarily. it may cause weird artifacts with feet otherwise
-
-                    if (!charactersInFrontOfDoor[i].characterNetworkManager.isJumping.Value)
-                        charactersInFrontOfDoor[i].transform.position = new Vector3(charactersInFrontOfDoor[i].transform.position.x, velocityOfMovement.y, charactersInFrontOfDoor[i].transform.position.z);
-
-                }
-                yield return null;
-            }
+            if (isOpening)
+                animator.Play(openDoorAnimation);
+            else 
+                animator.Play(closeDoorAnimation);
 
             //stops movement flags
             if (IsOwner)
