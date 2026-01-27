@@ -80,10 +80,10 @@ namespace TraverserProject
             switch (sceneEvent.SceneEventType)
             {
                 case SceneEventType.Load:
-                    sceneIsLoading = true;
+
                     break;
                 case SceneEventType.Unload:
-                    sceneIsUnloading = true;
+
                     break;
                 case SceneEventType.Synchronize:
                     break;
@@ -98,9 +98,6 @@ namespace TraverserProject
                     //called when scene is loaded and adds to loaded scene list
                     loadedScenes.Add(sceneEvent.Scene);
 
-                    //clears list IDs with scenes to load is zero
-                    if (queuedScenesToLoad <= 0)
-                        queuedSceneIDs.Clear();
 
                     //double checks if scene is loaded, if they are, remove from list
                     for (int i = 0; i < loadedScenes.Count; i++)
@@ -112,8 +109,6 @@ namespace TraverserProject
                     sceneIsLoading = false;
                     break;
                 case SceneEventType.UnloadComplete:
-                    if (queuedScenesToUnload <= 0)
-                        queuedUnloadSceneIDs.Clear();
 
                     for (int i = 0; i < loadedScenes.Count; i++)
                     {
@@ -149,22 +144,20 @@ namespace TraverserProject
         }
 
         private void LoadAdditiveScene(string sceneName)
-        {           
+        {
             for (int i = 0; i < loadedScenes.Count; i++)
             {
-                var test = loadedScenes[i];
                 if (loadedScenes[i] == null)
                     continue;
 
                 if (loadedScenes[i].name == sceneName && loadedScenes[i].isLoaded)
                     return;
 
-                if (!SceneManager.GetSceneByName(sceneName).isLoaded)
-                {
-                    var loadSceneStatus = NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
-                }               
-
             }
+
+            sceneIsLoading = true;
+            var loadSceneStatus = NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+
         }
 
         public void LoadAdditiveScenes(List<string> scenesToLoad)
@@ -187,23 +180,43 @@ namespace TraverserProject
         //used to load multiple additive scenes at once when entering new area
         private IEnumerator LoadAdditiveScenesCoroutine()
         {
+            float waitTime = 0.1f;
+
             for (int i = 0; i < queuedSceneIDs.Count; i++)
             {
+                //if loading screen is active or players are resting at site of grace, wait time = 0
+                if (PlayerUIManager.Singleton.playerUILoadingScreenManager.LoadingScreenIsActive())
+                    waitTime = 0;
+
                 while (sceneIsLoading || sceneIsUnloading)
                 {
-                    yield return null;
+                    yield return new WaitForSeconds(waitTime);
                 }
 
                 if (queuedSceneIDs[i] == null)
+                {
+                    queuedScenesToLoad--;
                     continue;
+                }
 
                 LoadAdditiveScene(queuedSceneIDs[i]);
+
+                while (sceneIsLoading || sceneIsUnloading)
+                {
+                    yield return new WaitForSeconds(waitTime);
+                }
+
                 queuedScenesToLoad--;
+
+                if (queuedScenesToLoad <= 0)
+                {
+                    queuedSceneIDs.Clear();
+                }
 
                 yield return new WaitForFixedUpdate();
 
             }
-            queuedScenesToLoad = 0;
+
             loadingAdditiveScenesCoroutine = null;
 
             yield return null;
@@ -229,6 +242,7 @@ namespace TraverserProject
 
                 if (loadedScenes[i].name == sceneName && loadedScenes[i].isLoaded)
                 {
+                    sceneIsUnloading = true;
                     var sceneLoad = NetworkManager.SceneManager.UnloadScene(loadedScenes[i]);
                     break;
                 }
@@ -255,20 +269,45 @@ namespace TraverserProject
 
         private IEnumerator UnloadAdditiveScenesCoroutine()
         {
+            float waitTime = 1.0f;
             for (int i = 0; i < queuedUnloadSceneIDs.Count; i++)
             {
+                //if loading screen is active or players are resting at site of grace, wait time = 0
+                if (PlayerUIManager.Singleton.playerUILoadingScreenManager.LoadingScreenIsActive())
+                    waitTime = 0;
+
                 while (sceneIsLoading || sceneIsLoading)
                 {
-                    yield return new WaitForFixedUpdate();
+                    yield return new WaitForSeconds(waitTime);
+                }
+
+                //do not unload scenes while we are loading new areas as new areas may add these scenes to do not unload list
+                while (queuedScenesToLoad > 0)
+                {
+                    yield return new WaitForSeconds(waitTime);
+                }
+
+                if (queuedUnloadSceneIDs[i] == null)
+                {
+                    queuedScenesToUnload--;
+                    continue;
                 }
 
                 UnloadAdditiveScene(queuedUnloadSceneIDs[i]);
+
+                while (sceneIsLoading || sceneIsLoading)
+                {
+                    yield return new WaitForSeconds(waitTime);
+                }
+
                 queuedScenesToUnload--;
+
+                if (queuedScenesToUnload <= 0)
+                    queuedUnloadSceneIDs.Clear();
 
                 yield return null;
             }
 
-            queuedScenesToUnload = 0;
             unloadingAdditiveScenesCoroutine = null;
         }
 

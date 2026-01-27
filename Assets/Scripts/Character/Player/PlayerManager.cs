@@ -24,6 +24,9 @@ namespace TraverserProject
         [HideInInspector] public PlayerEffectsManager playerEffectsManager;
         [HideInInspector] public PlayerBodyManager playerBodyManager;
 
+        [Header("Area")]
+        public WorldLocationSceneSet areaCurrentlyIn;
+
         [Header("Time Played")]
         [SerializeField] float timePlayed = 0;
 

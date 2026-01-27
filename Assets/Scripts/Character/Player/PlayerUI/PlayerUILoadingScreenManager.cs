@@ -77,5 +77,10 @@ namespace TraverserProject
             yield return null;
         }
 
+        public bool LoadingScreenIsActive()
+        {
+            return loadingScreen.activeSelf;
+        }
+
     }
 }

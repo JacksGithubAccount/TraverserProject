@@ -7,7 +7,7 @@ namespace TraverserProject
     public class EventTriggerLoadScene : MonoBehaviour
     {
         [Header("Area")]
-        [SerializeField] WorldSceneLocation area;
+        [SerializeField] WorldLocationSceneSet area;
 
         private void OnTriggerEnter(Collider other)
         {

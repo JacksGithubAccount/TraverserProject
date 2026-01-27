@@ -10,12 +10,7 @@ namespace TraverserProject
     {
         public static WorldSubsceneManager Singleton;
 
-        [SerializeField] private List<PlayerManager> playersIn_Area01_Subarea00 = new List<PlayerManager>();
-        [SerializeField] private List<PlayerManager> playersIn_Area01_Subarea01 = new List<PlayerManager>();
-        [SerializeField] private List<PlayerManager> playersIn_Area01_Subarea02 = new List<PlayerManager>();
-        [SerializeField] private List<PlayerManager> playersIn_Area01_Subarea03 = new List<PlayerManager>();
-        [SerializeField] private List<PlayerManager> playersIn_Area01_Subarea04 = new List<PlayerManager>();
-        [SerializeField] private List<PlayerManager> playersIn_Area01_Subarea05 = new List<PlayerManager>();
+        private Dictionary<WorldLocationSceneSet, List<PlayerManager>> playersInLocation = new Dictionary<WorldLocationSceneSet, List<PlayerManager>>();
 
         [Header("Probe Volume Set")]
         [SerializeField] ProbeVolumeBakingSet bakeSet;
@@ -32,29 +27,7 @@ namespace TraverserProject
             }
         }
 
-        private void RemovePlayerFromPreviousLocation(PlayerManager player)
-        {
-            if (player == null)
-                return;
 
-            if (playersIn_Area01_Subarea00.Contains(player))
-                playersIn_Area01_Subarea00.Remove(player);
-
-            if (playersIn_Area01_Subarea01.Contains(player))
-                playersIn_Area01_Subarea01.Remove(player);
-
-            if (playersIn_Area01_Subarea02.Contains(player))
-                playersIn_Area01_Subarea02.Remove(player);
-
-            if (playersIn_Area01_Subarea03.Contains(player))
-                playersIn_Area01_Subarea03.Remove(player);
-
-            if (playersIn_Area01_Subarea04.Contains(player))
-                playersIn_Area01_Subarea04.Remove(player);
-
-            if (playersIn_Area01_Subarea05.Contains(player))
-                playersIn_Area01_Subarea05.Remove(player);
-        }
 
         public List<string> GenerateDoNotUnloadListBasedOfPlayerLocations()
         {
@@ -63,112 +36,39 @@ namespace TraverserProject
             //world scene is never unloaded
             doNotUnloadLocations.Add(WorldSceneManager.Singleton.world);
 
-            int playersInScene;
+            List<WorldLocationSceneSet> areasWithPlayersActive = new List<WorldLocationSceneSet>();
 
-            //Subarea 00
-            playersInScene = 0;
-
-            for (int i = 0; i < playersIn_Area01_Subarea00.Count; i++)
+            //search each world scene with active entries
+            foreach (KeyValuePair<WorldLocationSceneSet, List<PlayerManager>> pair in playersInLocation)
             {
-                if (playersIn_Area01_Subarea00[i] != null)
-                    playersInScene++;
+                //null checker and clean
+                for (int i = 0; i < pair.Value.Count; i++)
+                {
+                    if (pair.Value[i] == null)
+                        pair.Value.RemoveAt(i);
+                }
+
+                //if a scene has at least one player, add that scene to active players
+                if (pair.Value.Count > 0 && !areasWithPlayersActive.Contains(pair.Key))
+                    areasWithPlayersActive.Add(pair.Key);
             }
 
-            if (playersInScene > 0)
+            //go through world locations that are active, adn add their required scenes to the do not unload list
+            for (int i = 0; i < areasWithPlayersActive.Count; i++)
             {
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_00);
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_01);
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_04);
+                List<string> scenesRequired = areasWithPlayersActive[i].GetRequiredSceneIDsForWorldLocation();
+
+                for (int j = 0; j < scenesRequired.Count; j++)
+                {
+                    doNotUnloadLocations.Add(scenesRequired[j]);
+                }
             }
 
-            //Subarea 01
-            playersInScene = 0;
-
-            for (int i = 0; i < playersIn_Area01_Subarea01.Count; i++)
-            {
-                if (playersIn_Area01_Subarea01[i] != null)
-                    playersInScene++;
-            }
-
-            if (playersInScene > 0)
-            {
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_00);
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_01);
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_02);
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_04);
-            }
-
-            //Subarea 02
-            playersInScene = 0;
-
-            for (int i = 0; i < playersIn_Area01_Subarea02.Count; i++)
-            {
-                if (playersIn_Area01_Subarea02[i] != null)
-                    playersInScene++;
-            }
-
-            if (playersInScene > 0)
-            {
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_02);
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_03);
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_01);
-            }
-
-            //Subarea 03
-            playersInScene = 0;
-
-            for (int i = 0; i < playersIn_Area01_Subarea03.Count; i++)
-            {
-                if (playersIn_Area01_Subarea03[i] != null)
-                    playersInScene++;
-            }
-
-            if (playersInScene > 0)
-            {
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_03);
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_02);
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_04);
-            }
-
-            //Subarea 04
-            playersInScene = 0;
-
-            for (int i = 0; i < playersIn_Area01_Subarea04.Count; i++)
-            {
-                if (playersIn_Area01_Subarea04[i] != null)
-                    playersInScene++;
-            }
-
-            if (playersInScene > 0)
-            {
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_04);
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_00);
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_01);
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_03);
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_05);
-            }
-
-            //Subarea 05
-            playersInScene = 0;
-
-            for (int i = 0; i < playersIn_Area01_Subarea05.Count; i++)
-            {
-                if (playersIn_Area01_Subarea05[i] != null)
-                    playersInScene++;
-            }
-
-            if (playersInScene > 0)
-            {
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_05);
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_00);
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_01);
-                doNotUnloadLocations.Add(WorldSceneManager.Singleton.area_01_Subarea_04);
-            }
             return doNotUnloadLocations;
         }
 
         //called whenever a player enters a new additive scene
-        public void LoadAreaBasedOnAreaCurrentlyIn(WorldSceneLocation areaCurrentlyIn, PlayerManager player)
+        public void LoadAreaBasedOnAreaCurrentlyIn(WorldLocationSceneSet areaCurrentlyIn, PlayerManager player)
         {
             if (IsPlayerAlreadyInArea(areaCurrentlyIn, player))
                 return;
@@ -182,122 +82,69 @@ namespace TraverserProject
             WorldSceneManager.Singleton.CheckForUnrequiredScenes();
         }
 
-        private bool IsPlayerAlreadyInArea(WorldSceneLocation area, PlayerManager player)
+        private bool IsPlayerAlreadyInArea(WorldLocationSceneSet area, PlayerManager player)
         {
             bool isPlayerInArea = false;
 
-            switch (area)
-            {
-                case WorldSceneLocation.Area01_Subarea00:
-                    if (playersIn_Area01_Subarea00.Contains(player))
-                        isPlayerInArea = true;
-                    break;
-                case WorldSceneLocation.Area01_Subarea01:
-                    if (playersIn_Area01_Subarea01.Contains(player))
-                        isPlayerInArea = true;
-                    break;
-                case WorldSceneLocation.Area01_Subarea02:
-                    if (playersIn_Area01_Subarea02.Contains(player))
-                        isPlayerInArea = true;
-                    break;
-                case WorldSceneLocation.Area01_Subarea03:
-                    if (playersIn_Area01_Subarea03.Contains(player))
-                        isPlayerInArea = true;
-                    break;
-                case WorldSceneLocation.Area01_Subarea04:
-                    if (playersIn_Area01_Subarea04.Contains(player))
-                        isPlayerInArea = true;
-                    break;
-                case WorldSceneLocation.Area01_Subarea05:
-                    if (playersIn_Area01_Subarea05.Contains(player))
-                        isPlayerInArea = true;
-                    break;
-                default:
-                    break;
-            }
+            if (playersInLocation.ContainsKey(area) && playersInLocation[area].Contains(player))
+                isPlayerInArea = true;
+
             return isPlayerInArea;
         }
 
-        private void AddPlayerToNewLocation(WorldSceneLocation area, PlayerManager player)
+        private void RemovePlayerFromPreviousLocation(PlayerManager player)
         {
-		//set the baking set
-        if (player.IsOwner)
-                StartCoroutine(WaitThenSetActiveScene(area));
+            if (player == null)
+                return;
 
-            switch (area)
+            foreach (KeyValuePair<WorldLocationSceneSet, List<PlayerManager>> pair in playersInLocation)
             {
-                case WorldSceneLocation.Area01_Subarea00:
-                    if (!playersIn_Area01_Subarea00.Contains(player))
-                        playersIn_Area01_Subarea00.Add(player);
-                    break;
-                case WorldSceneLocation.Area01_Subarea01:
-                    if (!playersIn_Area01_Subarea01.Contains(player))
-                        playersIn_Area01_Subarea01.Add(player);
-                    break;
-                case WorldSceneLocation.Area01_Subarea02:
-                    if (!playersIn_Area01_Subarea02.Contains(player))
-                        playersIn_Area01_Subarea02.Add(player);
-                    break;
-                case WorldSceneLocation.Area01_Subarea03:
-                    if (!playersIn_Area01_Subarea03.Contains(player))
-                        playersIn_Area01_Subarea03.Add(player);
-                    break;
-                case WorldSceneLocation.Area01_Subarea04:
-                    if (!playersIn_Area01_Subarea04.Contains(player))
-                        playersIn_Area01_Subarea04.Add(player);
-                    break;
-                case WorldSceneLocation.Area01_Subarea05:
-                    if (!playersIn_Area01_Subarea05.Contains(player))
-                        playersIn_Area01_Subarea05.Add(player);
-                    break;
-                default:
-                    break;
+                if (pair.Value.Contains(player))
+                    pair.Value.Remove(player);
+
+                //null checker and clean
+                for (int i = 0; i < pair.Value.Count; i++)
+                {
+                    if (pair.Value[i] == null)
+                        pair.Value.RemoveAt(i);
+                }
             }
         }
 
-        private void LoadAdditiveScenesAroundCurrentArea(WorldSceneLocation area)
+        private void AddPlayerToNewLocation(WorldLocationSceneSet area, PlayerManager player)
+        {
+            if (player == null)
+                return;
+            //set the baking set
+            if (player.IsOwner)
+                StartCoroutine(WaitThenSetActiveScene());
+
+            if (!playersInLocation.ContainsKey(area))
+                playersInLocation[area] = new List<PlayerManager>();
+
+            if (!playersInLocation[area].Contains(player))
+                playersInLocation[area].Add(player);
+
+            player.areaCurrentlyIn = area;
+
+            foreach (KeyValuePair<WorldLocationSceneSet, List<PlayerManager>> pair in playersInLocation)
+            {
+                //null checker and clean
+                for (int i = 0; i < pair.Value.Count; i++)
+                {
+                    if (pair.Value[i] == null)
+                        pair.Value.RemoveAt(i);
+                }
+            }
+        }
+
+        private void LoadAdditiveScenesAroundCurrentArea(WorldLocationSceneSet area)
         {
             List<string> scenesToLoad = new List<string>();
 
-            switch (area)
-            {
-                case WorldSceneLocation.Area01_Subarea00:
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_00);
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_01);
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_04);
-                    break;
-                case WorldSceneLocation.Area01_Subarea01:
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_00);
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_01);
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_02);
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_04);
-                    break;
-                case WorldSceneLocation.Area01_Subarea02:
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_02);
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_03);
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_01);
-                    break;
-                case WorldSceneLocation.Area01_Subarea03:
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_03);
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_02);
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_04);
-                    break;
-                case WorldSceneLocation.Area01_Subarea04:
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_04);
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_00);
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_01);
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_03);
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_05);
-                    break;
-                case WorldSceneLocation.Area01_Subarea05:
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_05);
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_00);
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_01);
-                    scenesToLoad.Add(WorldSceneManager.Singleton.area_01_Subarea_04);
-                    break;
-                default:
-                    break;
-            }
+            List<WorldLocationSceneSet> worldLocations = new List<WorldLocationSceneSet>();
+
+            scenesToLoad = area.GetRequiredSceneIDsForWorldLocation();
 
             if (scenesToLoad.Count <= 0)
                 return;
@@ -305,7 +152,7 @@ namespace TraverserProject
             WorldSceneManager.Singleton.LoadAdditiveScenes(scenesToLoad);
         }
 
-        private IEnumerator WaitThenSetActiveScene(WorldSceneLocation area)
+        private IEnumerator WaitThenSetActiveScene()
         {
             bool hasScene = false;
 
@@ -313,7 +160,7 @@ namespace TraverserProject
             {
                 for (int i = 0; i < WorldSceneManager.Singleton.loadedScenes.Count; i++)
                 {
-                    if (WorldSceneManager.Singleton.loadedScenes[i].name == WorldSceneManager.Singleton.GetSceneIDFromWorldSceneLocation(area))
+                    if (WorldSceneManager.Singleton.loadedScenes[i].name == WorldSceneManager.Singleton.world)
                     {
                         hasScene = true;
                         ProbeReferenceVolume.instance.SetActiveScene(WorldSceneManager.Singleton.loadedScenes[i]);
