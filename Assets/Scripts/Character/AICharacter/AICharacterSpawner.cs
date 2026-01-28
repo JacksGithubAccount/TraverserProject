@@ -36,6 +36,9 @@ namespace TraverserProject
 
         public void AttemptToSpawnCharacter()
         {
+            if (instantiatedGameObject != null)
+                return;
+
             if (characterGameObject != null)
             {
                 instantiatedGameObject = Instantiate(characterGameObject);
