@@ -19,9 +19,11 @@ namespace TraverserProject
         [SerializeField] bool isSleeping = false;
 
         [Header("Stats")]
+        public int spawnerID;
         [SerializeField] bool manuallySetStats = true;
         [SerializeField] int stamina = 180;
         [SerializeField] int health = 400;
+
 
         private void Awake()
         {
@@ -31,6 +33,7 @@ namespace TraverserProject
         private void Start()
         {
             WorldAIManager.Singleton.SpawnCharacter(this);
+
             gameObject.SetActive(false);
         }
 
@@ -46,6 +49,7 @@ namespace TraverserProject
                 instantiatedGameObject.transform.rotation = transform.rotation;
                 instantiatedGameObject.GetComponent<NetworkObject>().Spawn();
                 aiCharacter = instantiatedGameObject.GetComponent<AICharacterManager>();
+                aiCharacter.spawnerID = spawnerID;
 
                 if (aiCharacter == null)
                     return;

@@ -52,8 +52,11 @@ namespace TraverserProject
         {
             if (NetworkManager.Singleton.IsServer)
             {
-                aiCharacterSpawners.Add(aiCharacterSpawner);
-                aiCharacterSpawner.AttemptToSpawnCharacter();
+                if (!spawnedInCharacters.Exists(x => x.spawnerID == aiCharacterSpawner.spawnerID))
+                {
+                    aiCharacterSpawners.Add(aiCharacterSpawner);
+                    aiCharacterSpawner.AttemptToSpawnCharacter();
+                }               
             }
         }
 

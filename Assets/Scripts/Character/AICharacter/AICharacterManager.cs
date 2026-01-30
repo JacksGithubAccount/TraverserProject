@@ -2,6 +2,7 @@ using System.Globalization;
 using UnityEngine;
 using UnityEngine.AI;
 using Unity.Netcode;
+using System.Data;
 
 namespace TraverserProject
 {
@@ -10,7 +11,7 @@ namespace TraverserProject
     {
         [Header("Character Name")]
         public string characterName = "";
-
+        public int spawnerID;
         [HideInInspector] public AICharacterSoundFXManager aiCharacterSoundFXManager;
         [HideInInspector] public AICharacterNetworkManager aiCharacterNetworkManager;
         [HideInInspector] public AICharacterCombatManager aiCharacterCombatManager;
