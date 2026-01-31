@@ -998,6 +998,8 @@ namespace TraverserProject
                 rightHandWeaponSlot.PlaceWeaponModelIntoSlot(rightHandWeaponModel);
                 rightWeaponManager = rightHandWeaponModel.GetComponent<WeaponManager>();
                 rightWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
+                if (rightWeaponManager.WeaponTrailVFX != null)
+                    rightWeaponManager.WeaponTrailVFX.Stop();
                 player.playerAnimatorManager.UpdateAnimatorController(player.playerInventoryManager.currentRightHandWeapon.weaponAnimator);
             }
         }
@@ -1099,6 +1101,8 @@ namespace TraverserProject
                 }
 
                 leftWeaponManager = leftHandWeaponModel.GetComponent<WeaponManager>();
+                if(leftWeaponManager.WeaponTrailVFX != null)
+                    leftWeaponManager.WeaponTrailVFX.Stop();
                 leftWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
             }
         }
@@ -1181,11 +1185,15 @@ namespace TraverserProject
             if (player.playerNetworkManager.isUsingRightHand.Value)
             {
                 rightWeaponManager.meleeDamageCollider.EnableDamageCollider();
+                if (rightWeaponManager.WeaponTrailVFX != null)
+                    rightWeaponManager.WeaponTrailVFX.Play();
                 player.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(player.playerInventoryManager.currentRightHandWeapon.whooshes));
             }
             else if (player.playerNetworkManager.isUsingLeftHand.Value)
             {
                 leftWeaponManager.meleeDamageCollider.EnableDamageCollider();
+                if (leftWeaponManager.WeaponTrailVFX != null)
+                    rightWeaponManager.WeaponTrailVFX.Play();
                 player.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(player.playerInventoryManager.currentLeftHandWeapon.whooshes));
             }
         }
@@ -1195,33 +1203,45 @@ namespace TraverserProject
             if (player.playerNetworkManager.isUsingRightHand.Value)
             {
                 rightWeaponManager.meleeDamageCollider.DisableDamageCollider();
+                if (rightWeaponManager.WeaponTrailVFX != null)
+                    rightWeaponManager.WeaponTrailVFX.Stop();
             }
             else if (player.playerNetworkManager.isUsingLeftHand.Value)
             {
                 leftWeaponManager.meleeDamageCollider.DisableDamageCollider();
+                if (leftWeaponManager.WeaponTrailVFX != null)
+                    leftWeaponManager.WeaponTrailVFX.Stop();
             }
         }
 
         public void OpenMainHandDamageCollider()
         {
             rightWeaponManager.meleeDamageCollider.EnableDamageCollider();
+            if (rightWeaponManager.WeaponTrailVFX != null)
+                rightWeaponManager.WeaponTrailVFX.Play();
             player.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(player.playerInventoryManager.currentRightHandWeapon.whooshes));
         }
 
         public void CloseMainHandDamageCollider()
         {
             rightWeaponManager.meleeDamageCollider.DisableDamageCollider();
+            if (rightWeaponManager.WeaponTrailVFX != null)
+                rightWeaponManager.WeaponTrailVFX.Stop();
         }
 
         public void OpenOffHandDamageCollider()
         {
             leftWeaponManager.meleeDamageCollider.EnableDamageCollider();
+            if (leftWeaponManager.WeaponTrailVFX != null)
+                leftWeaponManager.WeaponTrailVFX.Play();
             player.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(player.playerInventoryManager.currentLeftHandWeapon.whooshes));
         }
 
         public void CloseOffHandDamageCollider()
         {
             leftWeaponManager.meleeDamageCollider.DisableDamageCollider();
+            if (leftWeaponManager.WeaponTrailVFX != null)
+                leftWeaponManager.WeaponTrailVFX.Stop();
         }
 
         public void UnHideWeapons()

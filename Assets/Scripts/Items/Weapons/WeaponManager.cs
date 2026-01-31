@@ -6,6 +6,7 @@ namespace TraverserProject
     public class WeaponManager : MonoBehaviour
     {
         public MeleeWeaponDamageCollider meleeDamageCollider;
+        public ParticleSystem WeaponTrailVFX; 
 
 
         private void Awake()
