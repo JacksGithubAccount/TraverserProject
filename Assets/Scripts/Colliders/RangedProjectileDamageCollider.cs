@@ -17,6 +17,9 @@ namespace TraverserProject
         [SerializeField] float minimumPenetration = 0.0f;
         [SerializeField] float maximumPenetration = 0.1f;
 
+        [Header("VFX")]
+        [SerializeField] ParticleSystem trailVFX;
+
         protected override void Awake()
         {
             base.Awake();
@@ -111,6 +114,12 @@ namespace TraverserProject
                 //disables colliders and rigidbody
                 rigidBody.isKinematic = true;
                 capsuleCollider.enabled = false;
+
+                //disables vfx trail
+                if (trailVFX != null)
+                {
+                    trailVFX.Stop();
+                }
 
                 //destroys collider and arrow after a time
                 Destroy(GetComponent<RangedProjectileDamageCollider>());
