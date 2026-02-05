@@ -22,7 +22,7 @@ namespace TraverserProject
             base.Awake();
 
             fireBallRigidBody = GetComponent<Rigidbody>();
-            //damageCollider = GetComponentInChildren<FireBallDamageCollider>();
+            damageCollider = GetComponentInChildren<FireBallDamageCollider>();
         }
 
         protected override void Update()

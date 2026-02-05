@@ -84,8 +84,8 @@ namespace TraverserProject
             //var ve = instantiatedReleasedSpellFX.GetComponent<VisualEffect>();
             //ve.playRate = 7.5f;
 
-            FireBallManager fireBallManager = instantiatedReleasedSpellFX.GetComponent<FireBallManager>();
-            fireBallManager.InitializeFireBall(player);
+            FlameFistManager flameFistManager = instantiatedReleasedSpellFX.GetComponent<FlameFistManager>();
+            flameFistManager.InitializeFireBall(player);
 
 
 
@@ -169,9 +169,9 @@ namespace TraverserProject
             instantiatedReleasedSpellFX.transform.localRotation = Quaternion.identity;
             instantiatedReleasedSpellFX.transform.parent = null;
 
-            FireBallManager fireBallManager = instantiatedReleasedSpellFX.GetComponent<FireBallManager>();
-            fireBallManager.isFullyCharged = true;
-            fireBallManager.InitializeFireBall(player);
+            FlameFistManager flameFistManager = instantiatedReleasedSpellFX.GetComponent<FlameFistManager>();
+            flameFistManager.isFullyCharged = true;
+            flameFistManager.InitializeFireBall(player);
 
             //shows ignoring collision of caster, but that is already done elsewhere
             /*Collider[] characterCollider = player.GetComponentInChildren<Collider>();

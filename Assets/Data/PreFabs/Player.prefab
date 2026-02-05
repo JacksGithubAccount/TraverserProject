@@ -12457,6 +12457,8 @@ MonoBehaviour:
   playerInteractionManager: {fileID: 0}
   playerEffectsManager: {fileID: 0}
   playerBodyManager: {fileID: 0}
+  areaCurrentlyIn: {fileID: 0}
+  timePlayed: 0
 --- !u!114 &8018114286529381242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12483,6 +12485,8 @@ MonoBehaviour:
   canRun: 1
   canMove: 1
   canRoll: 1
+  isRidingLift: 0
+  isOpeningDoor: 0
   isSliding: 0
   isSlidingOffCharacter: 0
   slopeSlideStartPositionYOffset: 1
@@ -13039,11 +13043,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e3ed7cd43284259468e4f2691d022aee, type: 2}
   leftHandWeaponIndex: 0
   spellItemsInQuickSlots:
+  - {fileID: 11400000, guid: 1f24f521d7294aa4a8fc15067fe2914f, type: 2}
   - {fileID: 11400000, guid: c849838932c3fe943b7dbff7c8981786, type: 2}
   - {fileID: 0}
-  - {fileID: 0}
   quickSlotSpellIndex: 0
-  currentSpell: {fileID: 11400000, guid: c849838932c3fe943b7dbff7c8981786, type: 2}
+  currentSpell: {fileID: 11400000, guid: 1f24f521d7294aa4a8fc15067fe2914f, type: 2}
   quickSlotItemsInQuickSlots:
   - {fileID: 11400000, guid: 2f5b3455b88448146b0c60c2756dcaa6, type: 2}
   - {fileID: 11400000, guid: d8fc43fd4b28b2d43bd70c57b173d99d, type: 2}
@@ -13206,6 +13210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ff6d7f0ced83d4386bf5eadaf35aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentInteractableActions: []
 --- !u!114 &5796847305617921371
 MonoBehaviour:
   m_ObjectHideFlags: 0
