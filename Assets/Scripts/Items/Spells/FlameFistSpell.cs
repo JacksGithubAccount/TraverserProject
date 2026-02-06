@@ -6,10 +6,6 @@ namespace TraverserProject
     [CreateAssetMenu(menuName = "Items/Spells/Flame Fist")]
     public class FlameFistSpell : SpellItem
     {
-        [Header("Projectile Velocity")]
-        [SerializeField] float upwardVelocity = 3;
-        [SerializeField] float forwardVelocity = 15;
-
         public override void AttemptToCastSpell(PlayerManager player)
         {
             base.AttemptToCastSpell(player);
@@ -110,11 +106,6 @@ namespace TraverserProject
                 instantiatedReleasedSpellFX.transform.rotation = throwRotation;
             }
 
-            Rigidbody spellRigidBody = instantiatedReleasedSpellFX.GetComponent<Rigidbody>();
-            Vector3 upwardVelocityVector = instantiatedReleasedSpellFX.transform.up * upwardVelocity;
-            Vector3 forwardVelocityVector = instantiatedReleasedSpellFX.transform.forward * forwardVelocity;
-            Vector3 totalVelocity = upwardVelocityVector + forwardVelocityVector;
-            spellRigidBody.linearVelocity = totalVelocity;
         }
 
         public override void SuccessfullyChargeSpell(PlayerManager player)
@@ -194,11 +185,6 @@ namespace TraverserProject
                 instantiatedReleasedSpellFX.transform.rotation = throwRotation;
             }
 
-            Rigidbody spellRigidBody = instantiatedReleasedSpellFX.GetComponent<Rigidbody>();
-            Vector3 upwardVelocityVector = instantiatedReleasedSpellFX.transform.up * upwardVelocity;
-            Vector3 forwardVelocityVector = instantiatedReleasedSpellFX.transform.forward * forwardVelocity;
-            Vector3 totalVelocity = upwardVelocityVector + forwardVelocityVector;
-            spellRigidBody.linearVelocity = totalVelocity;
         }
 
 

@@ -14,14 +14,13 @@ namespace TraverserProject
 
         private bool hasCollided = false;
         public bool isFullyCharged = false;
-        private Rigidbody flameFistRigidBody;
+
         private Coroutine destructionFXCoroutine;
 
         protected override void Awake()
         {
             base.Awake();
 
-            flameFistRigidBody = GetComponent<Rigidbody>();
             damageCollider = GetComponentInChildren<FireBallDamageCollider>();
         }
 
