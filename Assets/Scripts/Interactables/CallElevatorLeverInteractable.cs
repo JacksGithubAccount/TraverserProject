@@ -46,6 +46,7 @@ namespace TraverserProject
             if (elevator.elevatorIsDescending.Value || elevator.elevatorIsRising.Value)
                 return;
 
+            PlayerUIManager.Singleton.localPlayer.playerAnimatorManager.PlayTargetActionAnimation("Pulling_Lever_01", true);
             PullLeverServerRpc();
         }
 
