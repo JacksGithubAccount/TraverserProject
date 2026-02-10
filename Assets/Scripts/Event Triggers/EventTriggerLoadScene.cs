@@ -24,7 +24,7 @@ namespace TraverserProject
 
         private void AddPlayerToArea(PlayerManager player)
         {
-            WorldSubsceneManager.Singleton.LoadAreaBasedOnAreaCurrentlyIn(area, player);
+            WorldLocationManager.Singleton.LoadAreaBasedOnAreaCurrentlyIn(area, player);
         }
 
     }

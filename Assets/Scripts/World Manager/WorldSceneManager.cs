@@ -30,6 +30,9 @@ namespace TraverserProject
         private bool sceneIsLoading = false;
         private bool sceneIsUnloading = false;
 
+        //Scene Renderers
+        private Coroutine requiredRenderersCoroutine;
+
         [Header("Scene I.Ds")]
         public string world = "World_01";
         public string area_01_Subarea_00 = "Area_01_Subarea_00";
@@ -334,26 +337,6 @@ namespace TraverserProject
             yield return null;
         }
 
-        public void CheckForUnrequiredScenes()
-        {
-            List<string> scenesToUnload = new List<string>();
-
-            for (int i = 0; i < loadedScenes.Count; i++)
-            {
-                scenesToUnload.Add(loadedScenes[i].name);
-            }
-
-            doNotUnloadList = WorldSubsceneManager.Singleton.GenerateDoNotUnloadListBasedOfPlayerLocations();
-
-            for (int i = 0; i < scenesToUnload.Count; i++)
-            {
-                if (doNotUnloadList.Contains(scenesToUnload[i]))
-                    scenesToUnload.Remove(scenesToUnload[i]);
-            }
-
-            UnloadAdditiveScenes(scenesToUnload);
-        }
-
         //SCENE IDs
         public string GetSceneIDFromWorldSceneLocation(WorldSceneLocation area)
         {
@@ -379,6 +362,93 @@ namespace TraverserProject
 
             return sceneID;
         }
+
+        public void CheckForUnrequiredScenes()
+        {
+            List<string> scenesToUnload = new List<string>();
+
+            for (int i = 0; i < loadedScenes.Count; i++)
+            {
+                scenesToUnload.Add(loadedScenes[i].name);
+            }
+
+            doNotUnloadList = WorldLocationManager.Singleton.GenerateDoNotUnloadListBasedOfPlayerLocations();
+
+            for (int i = 0; i < scenesToUnload.Count; i++)
+            {
+                if (doNotUnloadList.Contains(scenesToUnload[i]))
+                    scenesToUnload.Remove(scenesToUnload[i]);
+            }
+
+            UnloadAdditiveScenes(scenesToUnload);
+        }
+
+        public void CheckForRequiredRenderers()
+        {
+            if (WorldLocationManager.Singleton == null)
+                return;
+
+            if (requiredRenderersCoroutine != null)
+                StopCoroutine(requiredRenderersCoroutine);
+
+            WorldLocationSceneSet location = PlayerUIManager.Singleton.localPlayer.areaCurrentlyIn;
+
+            if (location != null)
+                requiredRenderersCoroutine = StartCoroutine(CheckForRequiredSceneRenderersCoroutine(location));
+        }
+
+        private IEnumerator CheckForRequiredSceneRenderersCoroutine(WorldLocationSceneSet location)
+        {
+            List<string> scenesRelevantToLocationCurrentlyIn = location.GetRequiredSceneIDsForWorldLocation();
+            List<int> sceneBuildIndexes = new List<int>();
+
+            if (scenesRelevantToLocationCurrentlyIn != null)
+            {
+                for (int i = 0; i < scenesRelevantToLocationCurrentlyIn.Count; i++)
+                {
+                    sceneBuildIndexes.Add(GetBuildIndexFromSceneID(scenesRelevantToLocationCurrentlyIn[i]));
+                }
+            }
+
+            for (int i = 0; i < WorldLocationManager.Singleton.worldLocationRenderers.Count; i++)
+            {
+                if (WorldLocationManager.Singleton.worldLocationRenderers[i] == null)
+                    continue;
+
+                if (sceneBuildIndexes.Contains(WorldLocationManager.Singleton.worldLocationRenderers[i].renderSceneID))
+                {
+                    if (PlayerUIManager.Singleton.playerUILoadingScreenManager.LoadingScreenIsActive())
+                    {
+                        WorldLocationManager.Singleton.worldLocationRenderers[i].ToggleMeshRenderers(true);
+                    }
+                    else
+                    {
+                        WorldLocationManager.Singleton.worldLocationRenderers[i].ToggleAllMeshRenderersOverTime(true);
+                    }
+                }
+                else
+                {
+                    if (PlayerUIManager.Singleton.playerUILoadingScreenManager.LoadingScreenIsActive())
+                    {
+                        WorldLocationManager.Singleton.worldLocationRenderers[i].ToggleMeshRenderers(false);
+                    }
+                    else
+                    {
+                        WorldLocationManager.Singleton.worldLocationRenderers[i].ToggleAllMeshRenderersOverTime(false);
+                    }
+                }
+            }
+            yield return null;
+        }
+
+        public int GetBuildIndexFromSceneID(string sceneID)
+        {
+            int buildIndex = SceneUtility.GetBuildIndexByScenePath(sceneID);
+            return buildIndex;
+
+        }
+
+
 
     }
 }
