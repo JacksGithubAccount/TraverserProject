@@ -9,6 +9,8 @@ namespace TraverserProject
             interactableCollider.enabled = false;
             player.playerInteractionManager.RemoveInteractionFromList(this);
             PlayerUIManager.Singleton.playerUIPopUpManager.CloseAllPopUpWindows();
+
+            player.playerAnimatorManager.PlayTargetActionAnimation("Ladder_Climb_Up_01", true); 
         }
     }
 }

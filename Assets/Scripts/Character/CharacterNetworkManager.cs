@@ -44,6 +44,8 @@ namespace TraverserProject
         public NetworkVariable<bool> isBloodLoss = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isFrostbite = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isFrozen = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<bool> isExitingLadder = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
 
 
         [Header("Resources")]
@@ -243,6 +245,11 @@ namespace TraverserProject
             {
                 character.animator.speed = 1;
             }
+        }
+
+        public virtual void OnIsExitingLadderChanged(bool oldStatus, bool newStatus)
+        {
+            character.animator.SetBool("isExitingLadder", isExitingLadder.Value);
         }
 
         //used to cancel FX when poise broken

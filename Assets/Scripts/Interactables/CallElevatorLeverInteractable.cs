@@ -22,10 +22,10 @@ namespace TraverserProject
 
         public override void Interact(PlayerManager player)
         {
-            ActivateElevatorWithLever();
+            ActivateElevatorWithLever(player);
         }
 
-        private void ActivateElevatorWithLever()
+        private void ActivateElevatorWithLever(PlayerManager player)
         {
             if (elevator.lowDestinationRecall is CallElevatorLeverInteractable)
             {
@@ -46,7 +46,7 @@ namespace TraverserProject
             if (elevator.elevatorIsDescending.Value || elevator.elevatorIsRising.Value)
                 return;
 
-            PlayerUIManager.Singleton.localPlayer.playerAnimatorManager.PlayTargetActionAnimation("Pulling_Lever_01", true);
+            player.playerAnimatorManager.PlayTargetActionAnimation("Pulling_Lever_01", true);
             PullLeverServerRpc();
         }
 
