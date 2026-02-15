@@ -10,6 +10,7 @@ namespace TraverserProject
             player.playerInteractionManager.RemoveInteractionFromList(this);
             PlayerUIManager.Singleton.playerUIPopUpManager.CloseAllPopUpWindows();
 
+            player.playerLocomotionManager.isOnLadder = true;
             player.playerAnimatorManager.PlayTargetActionAnimation("Ladder_Start_Climbing_From_Bottom_01", true); 
         }
     }
