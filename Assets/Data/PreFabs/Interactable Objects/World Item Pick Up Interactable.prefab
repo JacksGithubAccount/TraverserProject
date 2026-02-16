@@ -4949,7 +4949,7 @@ Transform:
   m_GameObject: {fileID: 2616195271241893812}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5926938, y: -0.76556396, z: -2.427122}
+  m_LocalPosition: {x: -6.438203, y: 0.8799998, z: 5.8852963}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9846,17 +9846,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   interactableText: Pick Up Item
-  interactableCollider: {fileID: 0}
+  interactableCollider: {fileID: 3626049610414021617}
   hostOnlyInteractable: 1
   pickUpType: 0
-  item: {fileID: 11400000, guid: 64a3dcab51c176e409334284777e2c9a, type: 2}
+  item: {fileID: 11400000, guid: b6d5e52d44593da408fd1cc5c140ccf7, type: 2}
+  itemAmount: 1
   itemID:
-    m_InternalValue: 0
+    m_InternalValue: 25
   networkPosition:
     m_InternalValue: {x: 0, y: 0, z: 0}
   droppingCreatureID:
     m_InternalValue: 0
-  trackDroppingCreaturesPosition: 1
+  trackDroppingCreaturesPosition: 0
   worldSpawnInteractableID: 0
   canRespawn: 0
   hasBeenLooted: 0
@@ -9880,7 +9881,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2
+  m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &2078110021371968989
 AudioSource:

@@ -10,8 +10,8 @@ namespace TraverserProject
         public ItemPickUpType pickUpType;
 
         [Header("Item")]
-        [SerializeField] Item item;
-        [SerializeField] int itemAmount;
+        [SerializeField] public Item item;
+        [SerializeField] public int itemAmount;
 
         [Header("Creature Loot Pick Up")]
         public NetworkVariable<int> itemID = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -142,11 +142,13 @@ namespace TraverserProject
             if (!canRespawn)
             {
                 DestroyThisNetworkObjectServerRpc();
+                gameObject.SetActive(false);
             }
             else
             {
                 hasBeenLooted = true;
                 gameObject.SetActive(false);
+                Destroy(gameObject);
             }
         }
 

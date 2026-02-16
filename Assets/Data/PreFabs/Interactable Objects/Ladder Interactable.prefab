@@ -155,6 +155,7 @@ Transform:
   - {fileID: 1462976163210117868}
   - {fileID: 8795642003173351948}
   - {fileID: 7694049294416777465}
+  - {fileID: 6125317861268610184}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1706787021621690515
@@ -169,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3598784743
+  GlobalObjectIdHash: 1806464776
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -198,6 +199,7 @@ MonoBehaviour:
   interactableText: Ladder
   interactableCollider: {fileID: 3227728561588410048}
   hostOnlyInteractable: 0
+  playerStandingPosition: {fileID: 6125317861268610184}
 --- !u!135 &3227728561588410048
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -285,6 +287,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5c0f03397fa0642bef00d0e1e32a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8759686422467747374
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6125317861268610184}
+  m_Layer: 0
+  m_Name: Player Standing Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6125317861268610184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8759686422467747374}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 147237666896949011}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &981214561992777025
 PrefabInstance:
   m_ObjectHideFlags: 0
