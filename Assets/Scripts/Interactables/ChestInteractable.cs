@@ -53,8 +53,8 @@ namespace TraverserProject
         {
             yield return new WaitForSeconds(1f);
             Transform itemTransform = new GameObject().transform;
-            //itemTransform.position = new Vector3(transform.position.x,transform.position.y + .8f,transform.position.z);
-            itemTransform.position = new Vector3(0, .8f, 0);
+            itemTransform.position = new Vector3(transform.position.x,transform.position.y + .8f,transform.position.z);
+            //itemTransform.position = new Vector3(0, .8f, 0);
             Instantiate(itemInteractable, itemTransform);
         }
     }

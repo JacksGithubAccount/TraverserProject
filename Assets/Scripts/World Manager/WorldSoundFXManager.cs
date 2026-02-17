@@ -33,6 +33,9 @@ namespace TraverserProject
         public AudioClip hoverUISFX;
         public AudioClip confirmUISFX;
 
+        [Header("Wall Sounds")]
+        public AudioClip illusoryWallSFX;
+
 
         private void Awake()
         {
