@@ -25,6 +25,10 @@ namespace TraverserProject
         [SerializeField] float freeFallSpeed = 2;
         private Vector3 jumpDirection;
 
+        [Header("Ladder")]
+        [SerializeField] Vector3 ladderDirection;
+        [SerializeField] float ladderClimbSpeed = 2;
+
         [Header("Dodge")]
         private Vector3 RollDirection;
         [SerializeField] float dodgeStaminaCost = 25;
@@ -67,6 +71,7 @@ namespace TraverserProject
             HandleRotation();
             HandleJumpingMovement();
             HandleFreeFallMovement();
+            HandleLadderMovement();
         }
         private void GetMovementValues()
         {
@@ -127,6 +132,21 @@ namespace TraverserProject
             if (player.playerNetworkManager.isJumping.Value)
             {
                 player.characterController.Move(jumpDirection * jumpForwardSpeed * Time.deltaTime);
+            }
+        }
+
+        private void HandleLadderMovement()
+        {
+            if(player.playerLocomotionManager.isOnLadder)
+            {
+                Vector3 ladderDirection;// = PlayerCamera.Singleton.transform.up * verticalMovement;
+
+                ladderDirection = transform.forward * verticalMovement;
+                ladderDirection = moveDirection + transform.right * horizontalMovement;
+
+                player.characterController.Move(ladderDirection * ladderClimbSpeed * Time.deltaTime);
+
+                
             }
         }
 
