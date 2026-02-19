@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 using System.Collections.Generic;
 using System.Collections;
 
@@ -57,6 +58,11 @@ namespace TraverserProject
 
                 rootGameObjects.Add(rootObjectsInScene[i]);
             }
+
+            //this code will only run in editor, you need the #if here for that check
+#if UNITY_EDITOR
+				EditorUtility.SetDirty(this);
+#endif
         }
 
         public void ToggleRootObjects(bool status)
@@ -68,6 +74,11 @@ namespace TraverserProject
 
                 rootGameObjects[i].SetActive(status);
             }
+
+            //this code will only run in editor, you need the #if here for that check
+#if UNITY_EDITOR
+				EditorUtility.SetDirty(this);
+#endif
         }
         private IEnumerator EnableRootGameObjectsOverTime()
         {
@@ -97,6 +108,11 @@ namespace TraverserProject
                 if (!meshRenderers.Contains(allMeshRenderers[i]))
                     meshRenderers.Add(allMeshRenderers[i]);
             }
+
+            //this code will only run in editor, you need the #if here for that check
+#if UNITY_EDITOR
+				EditorUtility.SetDirty(this);
+#endif
         }
 
         public void ToggleMeshRenderers(bool status)
@@ -108,6 +124,11 @@ namespace TraverserProject
 
                 meshRenderers[i].enabled = status;
             }
+
+            //this code will only run in editor, you need the #if here for that check
+#if UNITY_EDITOR
+				EditorUtility.SetDirty(this);
+#endif
         }
 
         public void ToggleAllMeshRenderersOverTime(bool status)

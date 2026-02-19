@@ -110,6 +110,7 @@ namespace TraverserProject
                     }
 
                     sceneIsLoading = false;
+                    CheckForRequiredRenderers();
                     break;
                 case SceneEventType.UnloadComplete:
 
@@ -399,6 +400,11 @@ namespace TraverserProject
 
         private IEnumerator CheckForRequiredSceneRenderersCoroutine(WorldLocationSceneSet location)
         {
+            while (sceneIsLoading)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
             List<string> scenesRelevantToLocationCurrentlyIn = location.GetRequiredSceneIDsForWorldLocation();
             List<int> sceneBuildIndexes = new List<int>();
 

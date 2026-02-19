@@ -191,5 +191,37 @@ namespace TraverserProject
                 worldLocationRenderers.Add(worldLocationRendererManager);
         }
 
+        //Toggle game mode (disables all root objects and renderers so they can be enabled as needed during gameplay)
+        public void ToggleGameMode()
+        {
+            WorldLocationRendererManager[] rendererManagers = FindObjectsByType<WorldLocationRendererManager>(FindObjectsSortMode.None);
+
+            for (int i = 0; i < rendererManagers.Length; i++)
+            {
+                if (rendererManagers[i] == null)
+                    continue;
+
+                rendererManagers[i].FindAllMeshRenderers();
+                rendererManagers[i].FindAllRootObjects();
+                rendererManagers[i].ToggleMeshRenderers(false);
+                rendererManagers[i].ToggleRootObjects(false);
+            }
+        }
+
+        //toggle light bake mode (Enables all root objects and renderers so you can world build/bake lighting
+        public void ToggleLightBakeMode()
+        {
+            WorldLocationRendererManager[] rendererManagers = FindObjectsByType<WorldLocationRendererManager>(FindObjectsSortMode.None);
+
+            for (int i = 0; i < rendererManagers.Length; i++)
+            {
+                if (rendererManagers[i] == null)
+                    continue;
+
+                rendererManagers[i].ToggleMeshRenderers(true);
+                rendererManagers[i].ToggleRootObjects(true);
+            }
+        }
+
     }
 }
