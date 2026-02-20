@@ -5,9 +5,10 @@ namespace TraverserProject
     public class PlayerLocomotionManager : CharacterLocomotionManager
     {
         PlayerManager player;
-        [HideInInspector] public float verticalMovement;
-        [HideInInspector] public float horizontalMovement;
-        [HideInInspector] public float moveAmount;
+        [Header("Player Movements")]
+        public float verticalMovement;
+        public float horizontalMovement;
+        public float moveAmount;
 
         [Header("Movement Settings")]
         private Vector3 moveDirection;
@@ -71,7 +72,7 @@ namespace TraverserProject
             HandleRotation();
             HandleJumpingMovement();
             HandleFreeFallMovement();
-            HandleLadderMovement();
+            //HandleLadderMovement();
         }
         private void GetMovementValues()
         {
@@ -139,12 +140,22 @@ namespace TraverserProject
         {
             if(player.playerLocomotionManager.isOnLadder)
             {
-                Vector3 ladderDirection;// = PlayerCamera.Singleton.transform.up * verticalMovement;
+                //Vector3 ladderDirection;// = PlayerCamera.Singleton.transform.up * verticalMovement;
+                yVelocity.y = 0;
+                currentLadderClimbPosition++;
 
-                ladderDirection = transform.forward * verticalMovement;
-                ladderDirection = moveDirection + transform.right * horizontalMovement;
+                if (currentLadderClimbPosition < 0)
+                    currentLadderClimbPosition = 0;
 
-                player.characterController.Move(ladderDirection * ladderClimbSpeed * Time.deltaTime);
+                if (currentLadderClimbPosition >= interactedLadderClimbPositions.Length)
+                    currentLadderClimbPosition = interactedLadderClimbPositions.Length - 1;
+
+                player.transform.position = interactedLadderClimbPositions[currentLadderClimbPosition].position;
+
+                //ladderDirection = PlayerCamera.Singleton.cameraObject.transform.forward * PlayerInputManager.Singleton.verticalInput;
+                //ladderDirection += PlayerCamera.Singleton.cameraObject.transform.right * PlayerInputManager.Singleton.horizontalInput;
+
+                //player.characterController.Move(ladderDirection * ladderClimbSpeed * Time.deltaTime);
 
                 
             }

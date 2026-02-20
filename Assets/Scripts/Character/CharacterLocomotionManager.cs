@@ -43,6 +43,10 @@ namespace TraverserProject
         [SerializeField] float characterSlideOffHeadCollisionMaxDistanceCheck = 5;
         [SerializeField] float characterCollisionCheckSphereMultiplier = 1.5f;
 
+        [Header("Ladder")]
+        public Transform[] interactedLadderClimbPositions;
+        public int currentLadderClimbPosition;
+
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         protected virtual void Awake()
         {
@@ -54,6 +58,8 @@ namespace TraverserProject
             HandleGroundCheck();
             SetGroundedVelocity();
             HandleSlopeSlideCheck();
+
+            
 
             if (character.characterLocomotionManager.isGrounded)
             {
@@ -77,6 +83,9 @@ namespace TraverserProject
                 yVelocity.y += gravityForce * Time.deltaTime;
 
             }
+
+            if (character.characterLocomotionManager.isOnLadder)
+                yVelocity.y = 0;
 
             character.characterController.Move(yVelocity * Time.deltaTime);
         }
