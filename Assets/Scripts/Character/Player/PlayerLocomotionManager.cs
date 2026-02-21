@@ -72,7 +72,6 @@ namespace TraverserProject
             HandleRotation();
             HandleJumpingMovement();
             HandleFreeFallMovement();
-            //HandleLadderMovement();
         }
         private void GetMovementValues()
         {
@@ -82,8 +81,7 @@ namespace TraverserProject
             //clamp the movements
         }
         private void HandleGroundedMovement()
-        {
-
+        {          
             if (player.characterLocomotionManager.canMove || player.playerLocomotionManager.canRotate)
             {
                 GetMovementValues();
@@ -114,7 +112,8 @@ namespace TraverserProject
 
             }
             else
-            {
+            {               
+
                 if (PlayerInputManager.Singleton.moveAmount > 0.5f)
                 {
                     //running speed
@@ -141,7 +140,6 @@ namespace TraverserProject
             if(player.playerLocomotionManager.isOnLadder)
             {
                 //Vector3 ladderDirection;// = PlayerCamera.Singleton.transform.up * verticalMovement;
-                yVelocity.y = 0;
                 currentLadderClimbPosition++;
 
                 if (currentLadderClimbPosition < 0)
@@ -163,6 +161,9 @@ namespace TraverserProject
 
         private void HandleFreeFallMovement()
         {
+            if (player.playerLocomotionManager.isOnLadder)
+                return;
+
             if (!player.characterLocomotionManager.isGrounded)
             {
                 Vector3 freeFallDirection;

@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: SceneView
+  m_Name: GameView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -348,16 +348,16 @@ MonoBehaviour:
     y: 0
     width: 1448
     height: 759
-  m_MinSize: {x: 202, y: 226}
-  m_MaxSize: {x: 4002, y: 4026}
-  m_ActualView: {fileID: 22}
+  m_MinSize: {x: 50, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 22}
   - {fileID: 23}
   - {fileID: 17}
   - {fileID: 16}
-  m_Selected: 0
-  m_LastSelected: 2
+  m_Selected: 2
+  m_LastSelected: 1
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -693,7 +693,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -772,7 +772,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Data/Imports/VanillaLoopStudio/FreeSampleAnimationSet/Art/Animations/LadderSet/Mannequin/RootMotion
+    - Assets/Scripts/Character
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -782,16 +782,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Data/Imports/VanillaLoopStudio/FreeSampleAnimationSet/Art/Animations/LadderSet/Mannequin/RootMotion
+  - Assets/Scripts/Character
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\jckzh\source\repos\TraverserProject
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 304}
-    m_SelectedIDs: 00060100
-    m_LastClickedID: 67072
-    m_ExpandedIDs: 00000000b2020100e8050100020601000406010006060100080601000a0601000c0601000e06010000ca9a3b
+    scrollPos: {x: 0, y: 736}
+    m_SelectedIDs: 441a0100
+    m_LastClickedID: 72260
+    m_ExpandedIDs: 00000000b2020100e8050100f6050100020601000406010006060100080601000a0601000c0601000e06010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -942,9 +942,9 @@ MonoBehaviour:
     m_IsLocked: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: dcd40100
-    m_LastClickedID: 120028
-    m_ExpandedIDs: 00000000b2020100e60501001cd4010036d4010042d4010000ca9a3b
+    m_SelectedIDs: 70060100
+    m_LastClickedID: 67184
+    m_ExpandedIDs: 00000000b2020100e605010072060100740601007606010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1070,9 +1070,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 6ed20000
       m_LastClickedID: 0
-      m_ExpandedIDs: 9a58fefff2faffff
+      m_ExpandedIDs: a6effefff2faffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 

@@ -85,7 +85,7 @@ namespace TraverserProject
             }
 
             if (character.characterLocomotionManager.isOnLadder)
-                yVelocity.y = 0;
+                yVelocity = Vector3.zero;
 
             character.characterController.Move(yVelocity * Time.deltaTime);
         }
