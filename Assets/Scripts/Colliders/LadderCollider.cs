@@ -14,6 +14,7 @@ namespace TraverserProject
             if(character.characterLocomotionManager.isOnLadder)
             {
                 character.characterNetworkManager.isExitingLadder.Value = true;
+                
             }
 
         }

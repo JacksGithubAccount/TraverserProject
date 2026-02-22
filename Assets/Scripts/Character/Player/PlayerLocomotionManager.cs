@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 namespace TraverserProject
 {
@@ -135,11 +136,18 @@ namespace TraverserProject
             }
         }
 
-        private void HandleLadderMovement()
+        private void HandleLadderMovementUp()
         {
             if(player.playerLocomotionManager.isOnLadder)
             {
-                //Vector3 ladderDirection;// = PlayerCamera.Singleton.transform.up * verticalMovement;
+                if (currentLadderClimbPosition == interactedLadderClimbPositions.Length - 1)
+                {
+                    player.playerAnimatorManager.PlayTargetActionAnimation("Ladder_Climb_To_Top_01", true);
+                    player.playerNetworkManager.isExitingLadder.Value = true;
+                    player.playerLocomotionManager.isOnLadder = false;
+                    return;
+                }
+
                 currentLadderClimbPosition++;
 
                 if (currentLadderClimbPosition < 0)
@@ -148,15 +156,35 @@ namespace TraverserProject
                 if (currentLadderClimbPosition >= interactedLadderClimbPositions.Length)
                     currentLadderClimbPosition = interactedLadderClimbPositions.Length - 1;
 
-                player.transform.position = interactedLadderClimbPositions[currentLadderClimbPosition].position;
-
-                //ladderDirection = PlayerCamera.Singleton.cameraObject.transform.forward * PlayerInputManager.Singleton.verticalInput;
-                //ladderDirection += PlayerCamera.Singleton.cameraObject.transform.right * PlayerInputManager.Singleton.horizontalInput;
-
-                //player.characterController.Move(ladderDirection * ladderClimbSpeed * Time.deltaTime);
-
-                
+                player.transform.position = interactedLadderClimbPositions[currentLadderClimbPosition].position;                
             }
+        }
+        private void HandleLadderMovementDown()
+        {
+            if (player.playerLocomotionManager.isOnLadder)
+            {
+                if (currentLadderClimbPosition == 0)
+                {
+                    player.playerAnimatorManager.PlayTargetActionAnimation("Ladder_Start_Climbing_To_Bottom_01", true);
+                    player.playerNetworkManager.isExitingLadder.Value = true;
+                    player.playerLocomotionManager.isOnLadder = false;
+                    return;
+                }
+
+                currentLadderClimbPosition--;
+
+                if (currentLadderClimbPosition < 0)
+                    currentLadderClimbPosition = 0;
+
+                if (currentLadderClimbPosition >= interactedLadderClimbPositions.Length)
+                    currentLadderClimbPosition = interactedLadderClimbPositions.Length - 1;
+
+                player.transform.position = interactedLadderClimbPositions[currentLadderClimbPosition].position;
+            }
+        }
+        private void DisableIsOnLadder()
+        {
+            player.playerLocomotionManager.isOnLadder = false;
         }
 
         private void HandleFreeFallMovement()
