@@ -8,6 +8,16 @@ namespace TraverserProject
         public Transform playerStandingPosition;
         public Transform[] playerClimbingPositions;
 
+        [Header("Ladder Top Interactable")]
+        public LadderTopInteractable ladderTopInteractable;
+
+        private void Awake()
+        {
+            if (ladderTopInteractable != null)
+            {
+                ladderTopInteractable.playerClimbingPositions = playerClimbingPositions;
+            }
+        }
         public override void Interact(PlayerManager player)
         {
             //interactableCollider.enabled = false;

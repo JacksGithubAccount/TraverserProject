@@ -144,7 +144,6 @@ namespace TraverserProject
                 {
                     player.playerAnimatorManager.PlayTargetActionAnimation("Ladder_Climb_To_Top_01", true);
                     player.playerNetworkManager.isExitingLadder.Value = true;
-                    player.playerLocomotionManager.isOnLadder = false;
                     return;
                 }
 
@@ -167,7 +166,6 @@ namespace TraverserProject
                 {
                     player.playerAnimatorManager.PlayTargetActionAnimation("Ladder_Start_Climbing_To_Bottom_01", true);
                     player.playerNetworkManager.isExitingLadder.Value = true;
-                    player.playerLocomotionManager.isOnLadder = false;
                     return;
                 }
 
