@@ -7,9 +7,9 @@
             "actions": [
                 {
                     "name": "Movement",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "bae08953-cdec-4a8d-a2b5-07be62b2d661",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -252,6 +252,15 @@
                     "name": "Sprint",
                     "type": "PassThrough",
                     "id": "42e2b969-e2a0-4ac3-b634-8156f43ff4e3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sneak",
+                    "type": "PassThrough",
+                    "id": "59f8fe71-9d59-45b0-868c-9bd92bcffe02",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold",
@@ -552,6 +561,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "02670173-94b4-4d6c-a6ab-9edc391b9c26",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sneak",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

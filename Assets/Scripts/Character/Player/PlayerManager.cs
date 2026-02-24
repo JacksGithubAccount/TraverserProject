@@ -177,6 +177,7 @@ namespace TraverserProject
             playerNetworkManager.isTwoHandingLeftWeapon.OnValueChanged += playerNetworkManager.OnIsTwoHandingLeftWeaponChanged;
             //flags
             playerNetworkManager.isChargingAttack.OnValueChanged += playerNetworkManager.OnIsChargingAttackChanged;
+            playerNetworkManager.isSneaking.OnValueChanged += playerNetworkManager.OnIsSneakingChanged;
 
             if (IsOwner && !IsServer)
             {
@@ -267,7 +268,7 @@ namespace TraverserProject
 
             //flags
             playerNetworkManager.isChargingAttack.OnValueChanged -= playerNetworkManager.OnIsChargingAttackChanged;
-
+            playerNetworkManager.isSneaking.OnValueChanged -= playerNetworkManager.OnIsSneakingChanged;
         }
 
         private void OnClientConnectedCallback(ulong clientID)

@@ -16,7 +16,11 @@ namespace TraverserProject
         private Vector3 targetRotationDirection;
         [SerializeField] float walkingSpeed = 2;
         [SerializeField] float runningSpeed = 5;
+        [SerializeField] float runningBackwardSpeed = 4;
         [SerializeField] float sprintingSpeed = 7;
+        [SerializeField] float sneakingWalkSpeed = 1.1f;
+        [SerializeField] float sneakingRunSpeed = 3f;
+        [SerializeField] float sneakingRunBackwardSpeed = 2.8f;
         [SerializeField] float rotationSpeed = 15;
         [SerializeField] int sprintingStaminaCost = 2;
 
@@ -82,7 +86,7 @@ namespace TraverserProject
             //clamp the movements
         }
         private void HandleGroundedMovement()
-        {          
+        {
             if (player.characterLocomotionManager.canMove || player.playerLocomotionManager.canRotate)
             {
                 GetMovementValues();
@@ -109,23 +113,18 @@ namespace TraverserProject
 
             if (player.playerNetworkManager.isSprinting.Value)
             {
-                player.characterController.Move(moveDirection * sprintingSpeed * Time.deltaTime);
-
+                MoveAtSprintingSpeed();
+                return;
             }
-            else
-            {               
 
-                if (PlayerInputManager.Singleton.moveAmount > 0.5f)
-                {
-                    //running speed
-                    player.characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
-                }
-                else if (PlayerInputManager.Singleton.moveAmount <= 0.5f)
-                {
-                    //walk speed
-                    player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
-                }
+            if (player.playerNetworkManager.isSneaking.Value)
+            {
+                MoveAtSneakingSpeed();
+                return;
             }
+
+            MoveAtRegularSpeed();
+
         }
 
         private void HandleJumpingMovement()
@@ -138,7 +137,7 @@ namespace TraverserProject
 
         private void HandleLadderMovementUp()
         {
-            if(player.playerLocomotionManager.isOnLadder)
+            if (player.playerLocomotionManager.isOnLadder)
             {
                 if (currentLadderClimbPosition == interactedLadderClimbPositions.Length - 1)
                 {
@@ -155,7 +154,7 @@ namespace TraverserProject
                 if (currentLadderClimbPosition >= interactedLadderClimbPositions.Length)
                     currentLadderClimbPosition = interactedLadderClimbPositions.Length - 1;
 
-                player.transform.position = interactedLadderClimbPositions[currentLadderClimbPosition].position;                
+                player.transform.position = interactedLadderClimbPositions[currentLadderClimbPosition].position;
             }
         }
         private void HandleLadderMovementDown()
@@ -322,6 +321,7 @@ namespace TraverserProject
             if (moveAmount >= 0.5)
             {
                 player.playerNetworkManager.isSprinting.Value = true;
+                player.playerNetworkManager.isSneaking.Value = false;
             }
             else
             {
@@ -415,6 +415,59 @@ namespace TraverserProject
         public void ApplyJumpingVelocity()
         {
             yVelocity.y = Mathf.Sqrt(jumpHeight * -2 * gravityForce);
+        }
+
+        private void MoveAtRegularSpeed()
+        {
+            if (!player.characterController.enabled)
+                return;
+
+            //if you want to make it so that running backwards whilst locked on is at a different speed vs running forward
+            if (player.playerNetworkManager.isLockedOn.Value && verticalMovement < -0.5f)
+            {
+                player.characterController.Move(moveDirection * runningBackwardSpeed * Time.deltaTime);
+                return;
+            }
+
+            if (PlayerInputManager.Singleton.moveAmount > 0.5f)
+            {
+                player.characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
+            }
+            else if (PlayerInputManager.Singleton.moveAmount <= 0.5f)
+            {
+                player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
+            }
+
+        }
+
+        private void MoveAtSprintingSpeed()
+        {
+            if (!player.characterController.enabled)
+                return;
+
+            player.characterController.Move(moveDirection * sprintingSpeed * Time.deltaTime);
+        }
+
+        private void MoveAtSneakingSpeed()
+        {
+            if (!player.characterController.enabled)
+                return;
+
+            //if you want to make it so that running backwards whilst locked on is at a different speed vs running forward
+            if (player.playerNetworkManager.isLockedOn.Value && verticalMovement < -0.5f)
+            {
+                player.characterController.Move(moveDirection * sneakingRunBackwardSpeed * Time.deltaTime);
+                return;
+            }
+
+            if (PlayerInputManager.Singleton.moveAmount > 0.5f)
+            {
+                player.characterController.Move(moveDirection * sneakingRunSpeed * Time.deltaTime);
+            }
+            else if (PlayerInputManager.Singleton.moveAmount <= 0.5f)
+            {
+                player.characterController.Move(moveDirection * sneakingWalkSpeed * Time.deltaTime);
+            }
         }
     }
 }

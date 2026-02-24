@@ -64,8 +64,10 @@ namespace TraverserProject
 
         private void PlayFootStepSoundFX()
         {
-            character.characterSoundFXManager.PlayFootStepSoundFX();
+            if (character.characterNetworkManager.isSneaking.Value)
+                return;
 
+            character.characterSoundFXManager.PlayFootStepSoundFX();
         }
 
     }

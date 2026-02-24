@@ -32,6 +32,7 @@ namespace TraverserProject
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool sprintInput = false;
         [SerializeField] bool jumpInput = false;
+        [SerializeField] bool sneakInput = false;
         [SerializeField] bool switch_Right_Weapon_Input = false;
         [SerializeField] bool switch_Left_Weapon_Input = false;
         [SerializeField] bool switch_Quick_Slot_Spell_Input = false;
@@ -125,6 +126,7 @@ namespace TraverserProject
                 //actions
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
+                playerControls.PlayerActions.Sneak.performed += i => sneakInput = true;
                 playerControls.PlayerActions.SwitchRightWeapon.performed += i => switch_Right_Weapon_Input = true;
                 playerControls.PlayerActions.SwitchLeftWeapon.performed += i => switch_Left_Weapon_Input = true;
                 playerControls.PlayerActions.SwitchQuickSlotItem.performed += i => switch_Quick_Slot_Item_Input = true;
@@ -211,6 +213,7 @@ namespace TraverserProject
             HandleDodgeInput();
             HandleSprintInput();
             HandleJumpInput();
+            HandleSneakInput();
             HandleRBInput();
             HandleHoldRBInput();
             HandleLBInput();
@@ -465,6 +468,22 @@ namespace TraverserProject
                     return;
 
                 player.playerLocomotionManager.AttemptToPerformJump();
+            }
+        }
+
+        private void HandleSneakInput()
+        {
+            if (sneakInput)
+            {
+                sneakInput = false;
+
+                if (PlayerUIManager.Singleton.menuWindowIsOpen)
+                    return;
+
+                player.playerNetworkManager.isSneaking.Value = !player.playerNetworkManager.isSneaking.Value;
+                player.playerNetworkManager.isBlocking.Value = false;
+
+                player.playerCombatManager.CheckForHiddenStatus();
             }
         }
 

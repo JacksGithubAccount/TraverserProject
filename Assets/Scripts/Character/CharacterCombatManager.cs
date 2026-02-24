@@ -1,8 +1,9 @@
-using UnityEngine;
-using Unity.Netcode;
-using static UnityEngine.GridBrushBase;
-using UnityEngine.TextCore.Text;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.Netcode;
+using UnityEngine;
+using UnityEngine.TextCore.Text;
+using static UnityEngine.GridBrushBase;
 
 namespace TraverserProject
 {
@@ -38,6 +39,9 @@ namespace TraverserProject
         [SerializeField] float criticalAttackDistanceCheck = 0.7f;
         public int pendingCriticalDamage;
 
+        [Header("Characters Targeting Me")]
+        public List<CharacterManager> charactersTargetingMe = new List<CharacterManager>();
+
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();
@@ -51,6 +55,7 @@ namespace TraverserProject
                 {
                     currentTarget = newTarget;
                     character.characterNetworkManager.currentTargetNetworkObjectID.Value = newTarget.GetComponent<NetworkObject>().NetworkObjectId;
+                    newTarget.characterNetworkManager.AddCharacterToListOfCharactersTargetingMeServerRpc(character.NetworkObjectId);
                 }
                 else
                 {
@@ -201,6 +206,24 @@ namespace TraverserProject
                 yield return null;
 
             }
+        }
+
+        public void CheckForHiddenStatus()
+        {
+            for (int i = 0; i < character.characterCombatManager.charactersTargetingMe.Count; i++)
+            {
+                if (character.characterCombatManager.charactersTargetingMe[i] == null)
+                    character.characterCombatManager.charactersTargetingMe.RemoveAt(i);
+            }
+
+            if (!character.IsOwner)
+                return;
+
+            if (character.characterCombatManager.charactersTargetingMe.Count > 0)
+                character.characterNetworkManager.isHidden.Value = false;
+
+            if (character.characterCombatManager.charactersTargetingMe.Count <= 0)
+                character.characterNetworkManager.isHidden.Value = true;
         }
 
         public void EnableIsInvulnerable()

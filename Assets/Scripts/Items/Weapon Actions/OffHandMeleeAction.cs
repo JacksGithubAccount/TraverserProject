@@ -89,6 +89,7 @@ namespace TraverserProject
             if (playerPerformingAction.IsOwner)
             {
                 playerPerformingAction.playerNetworkManager.isBlocking.Value = true;
+                playerPerformingAction.playerNetworkManager.isSneaking.Value = false;
             }
         }
 

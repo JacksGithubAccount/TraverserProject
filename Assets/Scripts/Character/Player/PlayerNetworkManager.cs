@@ -116,7 +116,8 @@ namespace TraverserProject
                     PlayerUIManager.Singleton.playerUIPopUpManager.SendStatusEffectPopUp(BuildUp.Bleed);
                     isBloodLoss.Value = false;
                 }
-            }else
+            }
+            else
             {
                 bleedBuildUp.Value = 0;
             }
@@ -201,12 +202,17 @@ namespace TraverserProject
 
                 //option 1
                 Destroy(character.characterEffectsManager.frostbiteVFX);
-                
+
 
                 //option 2
                 //Create a script on VFX and call function to "end" it and stop particles so they fade
                 // and dont stop suddenly then when faded destroy it
             }
+        }
+
+        public void OnIsSneakingChanged(bool oldStatus, bool newStatus)
+        {
+            player.animator.SetBool("isSneaking", isSneaking.Value);
         }
 
         public void SetCharacterActionHand(bool rightHandedAction)

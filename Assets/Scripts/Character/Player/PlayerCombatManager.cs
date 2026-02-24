@@ -131,7 +131,10 @@ namespace TraverserProject
             character.characterAnimatorManager.PlayTargetActionAnimationInstantly("Riposte_01", true);
 
             if (character.IsOwner)
+            {
+                character.characterNetworkManager.isSneaking.Value = false;
                 character.characterNetworkManager.isInvulnerable.Value = true;
+            }
 
             TakeCriticalDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.Singleton.takeCriticalDamageEffect);
 
@@ -185,7 +188,10 @@ namespace TraverserProject
             character.characterAnimatorManager.PlayTargetActionAnimationInstantly("Backstab_01", true);
 
             if (character.IsOwner)
+            {
+                character.characterNetworkManager.isSneaking.Value = false;
                 character.characterNetworkManager.isInvulnerable.Value = true;
+            }
 
             TakeCriticalDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.Singleton.takeCriticalDamageEffect);
 
