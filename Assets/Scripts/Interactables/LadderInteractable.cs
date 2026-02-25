@@ -11,8 +11,10 @@ namespace TraverserProject
         [Header("Ladder Top Interactable")]
         public LadderTopInteractable ladderTopInteractable;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             if (ladderTopInteractable != null)
             {
                 ladderTopInteractable.playerClimbingPositions = playerClimbingPositions;

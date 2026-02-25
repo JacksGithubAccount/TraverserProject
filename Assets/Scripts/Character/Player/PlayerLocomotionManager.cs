@@ -431,10 +431,12 @@ namespace TraverserProject
 
             if (PlayerInputManager.Singleton.moveAmount > 0.5f)
             {
+                //running speed
                 player.characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
             }
             else if (PlayerInputManager.Singleton.moveAmount <= 0.5f)
             {
+                //walk speed
                 player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
             }
 
