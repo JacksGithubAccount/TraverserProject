@@ -160,8 +160,8 @@ namespace TraverserProject
             interactableCollider.enabled = false;
             isOpened.Value = true;
 
-            if (WorldSaveGameManager.Singleton.currentCharacterData.sitesOfGrace.ContainsKey(doorID))
-                WorldSaveGameManager.Singleton.currentCharacterData.sitesOfGrace.Remove(doorID);
+            if (WorldSaveGameManager.Singleton.currentCharacterData.doorsOpened.ContainsKey(doorID))
+                WorldSaveGameManager.Singleton.currentCharacterData.doorsOpened.Remove(doorID);
 
             WorldSaveGameManager.Singleton.currentCharacterData.doorsOpened.Add(doorID, true);
 
