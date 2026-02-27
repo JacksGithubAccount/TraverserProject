@@ -17,6 +17,7 @@ namespace TraverserProject
 
         [Header("Nonshortcut Interactable")]
         [SerializeField] Interactable nonShortcutInteractable;
+        [SerializeField] Interactable[] nonShortcutInteractables;
 
         [Header("SFX")]
         [SerializeField] AudioSource shortcutAudioSource;
@@ -34,25 +35,32 @@ namespace TraverserProject
         {
             base.OnNetworkSpawn();
 
-                if (WorldSaveGameManager.Singleton.currentCharacterData.doorsOpened.ContainsKey(shortcutID))
-                {
+            if (WorldSaveGameManager.Singleton.currentCharacterData.doorsOpened.ContainsKey(shortcutID))
+            {
                 isActivated.Value = WorldSaveGameManager.Singleton.currentCharacterData.doorsOpened[shortcutID];
-                }
-                else
-                {
+            }
+            else
+            {
                 isActivated.Value = false;
-                }
-
-
+            }
 
             if (isActivated.Value)
             {
                 animator.Play(activatedShortcutAnimation);
             }
 
-            if(nonShortcutInteractable != null)
+            if (nonShortcutInteractable != null)
             {
                 nonShortcutInteractable.interactableCollider.enabled = false;
+            }
+
+            nonShortcutInteractables = GetComponentsInChildren<Interactable>();
+            foreach (var i in nonShortcutInteractables)
+            {
+                if (i.interactableCollider == interactableCollider)
+                    continue;
+
+                i.interactableCollider.enabled = false;
             }
         }
 
@@ -94,9 +102,15 @@ namespace TraverserProject
 
             //if animating elevator, stop animation here
 
-            if (nonShortcutInteractable != null)
+            if (interactableCollider != null)
+                interactableCollider.enabled = false;
+
+            foreach (var i in nonShortcutInteractables)
             {
-                nonShortcutInteractable.interactableCollider.enabled = true;
+                if (i.interactableCollider == interactableCollider)
+                    continue;
+
+                i.interactableCollider.enabled = true;
             }
 
             yield return null;
