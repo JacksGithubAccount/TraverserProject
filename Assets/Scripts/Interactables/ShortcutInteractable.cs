@@ -35,9 +35,9 @@ namespace TraverserProject
         {
             base.OnNetworkSpawn();
 
-            if (WorldSaveGameManager.Singleton.currentCharacterData.doorsOpened.ContainsKey(shortcutID))
+            if (WorldSaveGameManager.Singleton.currentCharacterData.shortcutsActivated.ContainsKey(shortcutID))
             {
-                isActivated.Value = WorldSaveGameManager.Singleton.currentCharacterData.doorsOpened[shortcutID];
+                isActivated.Value = WorldSaveGameManager.Singleton.currentCharacterData.shortcutsActivated[shortcutID];
             }
             else
             {
