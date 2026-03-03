@@ -53,6 +53,8 @@ namespace TraverserProject
             {
                 if (newTarget != null)
                 {
+                    if (currentTarget != null)
+                        currentTarget.characterNetworkManager.RemoveCharacterFromListOfCharactersTargetingMeServerRpc(character.NetworkObjectId);
                     currentTarget = newTarget;
                     character.characterNetworkManager.currentTargetNetworkObjectID.Value = newTarget.GetComponent<NetworkObject>().NetworkObjectId;
                     newTarget.characterNetworkManager.AddCharacterToListOfCharactersTargetingMeServerRpc(character.NetworkObjectId);
@@ -60,6 +62,7 @@ namespace TraverserProject
                 else
                 {
                     currentTarget = null;
+                    character.characterNetworkManager.ClearTargetServerRpc();
                 }
             }
         }
