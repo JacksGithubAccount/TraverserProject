@@ -12487,6 +12487,7 @@ MonoBehaviour:
   canRoll: 1
   isRidingLift: 0
   isOpeningDoor: 0
+  isOnLadder: 0
   isSliding: 0
   isSlidingOffCharacter: 0
   slopeSlideStartPositionYOffset: 1
@@ -12496,18 +12497,26 @@ MonoBehaviour:
   slipperySurfaceMaxAngle: 15
   characterSlideOffHeadCollisionMaxDistanceCheck: 5
   characterCollisionCheckSphereMultiplier: 1.5
+  interactedLadderClimbPositions: []
+  currentLadderClimbPosition: 0
   verticalMovement: 0
   horizontalMovement: 0
   moveAmount: 0
   walkingSpeed: 1.5
   runningSpeed: 3
+  runningBackwardSpeed: 4
   sprintingSpeed: 7
+  sneakingWalkSpeed: 1.1
+  sneakingRunSpeed: 3
+  sneakingRunBackwardSpeed: 2.8
   rotationSpeed: 15
   sprintingStaminaCost: 2
   jumpStaminaCost: 25
   jumpHeight: 2
   jumpForwardSpeed: 5
   freeFallSpeed: 2
+  ladderDirection: {x: 0, y: 0, z: 0}
+  ladderClimbSpeed: 2
   dodgeStaminaCost: 25
 --- !u!114 &3422114819537383880
 MonoBehaviour:
@@ -12557,6 +12566,10 @@ MonoBehaviour:
     m_InternalValue: 0
   isJumping:
     m_InternalValue: 0
+  isSneaking:
+    m_InternalValue: 0
+  isHidden:
+    m_InternalValue: 0
   isChargingAttack:
     m_InternalValue: 0
   isRipostable:
@@ -12572,6 +12585,8 @@ MonoBehaviour:
   isFrostbite:
     m_InternalValue: 0
   isFrozen:
+    m_InternalValue: 0
+  isExitingLadder:
     m_InternalValue: 0
   currentStamina:
     m_InternalValue: 100
@@ -13050,7 +13065,7 @@ MonoBehaviour:
   currentSpell: {fileID: 11400000, guid: 1f24f521d7294aa4a8fc15067fe2914f, type: 2}
   quickSlotItemsInQuickSlots:
   - {fileID: 11400000, guid: 2f5b3455b88448146b0c60c2756dcaa6, type: 2}
-  - {fileID: 11400000, guid: d8fc43fd4b28b2d43bd70c57b173d99d, type: 2}
+  - {fileID: 11400000, guid: b6d5e52d44593da408fd1cc5c140ccf7, type: 2}
   - {fileID: 11400000, guid: 0177aa9cba8a84e48b36c8127e1cbd4a, type: 2}
   quickSlotItemIndex: 0
   currentQuickSlotItem: {fileID: 11400000, guid: aedcc59cf0831af4eb8da47234130fb5, type: 2}
@@ -13265,6 +13280,7 @@ MonoBehaviour:
   canBeBackstabbed: 1
   criticalAttackDistanceCheck: 0.7
   pendingCriticalDamage: 0
+  charactersTargetingMe: []
   currentWeaponBeingUsed: {fileID: 0}
   currentProjectileBeingUsed: 0
   canComboWithMainHandWeapon: 0

@@ -287,7 +287,7 @@ namespace TraverserProject
             if (IsServer)
                 RemoveCharacterFromListOfCharactersTargetingMeClientRpc(characterTargetingMeID);
         }
-        [ClientRpc(RequireOwnership = false)]
+        [ClientRpc()]
         protected virtual void RemoveCharacterFromListOfCharactersTargetingMeClientRpc(ulong characterTargetingMeID)
         {
             if (!NetworkManager.Singleton.SpawnManager.SpawnedObjects.ContainsKey(characterTargetingMeID))

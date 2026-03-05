@@ -51,10 +51,11 @@ namespace TraverserProject
         {
             if (character.IsOwner)
             {
+                if (currentTarget != null)
+                    currentTarget.characterNetworkManager.RemoveCharacterFromListOfCharactersTargetingMeServerRpc(character.NetworkObjectId);
+
                 if (newTarget != null)
-                {
-                    if (currentTarget != null)
-                        currentTarget.characterNetworkManager.RemoveCharacterFromListOfCharactersTargetingMeServerRpc(character.NetworkObjectId);
+                {                    
                     currentTarget = newTarget;
                     character.characterNetworkManager.currentTargetNetworkObjectID.Value = newTarget.GetComponent<NetworkObject>().NetworkObjectId;
                     newTarget.characterNetworkManager.AddCharacterToListOfCharactersTargetingMeServerRpc(character.NetworkObjectId);
