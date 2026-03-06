@@ -329,8 +329,15 @@ namespace TraverserProject
 
                 if (PlayerCamera.Singleton.nearestLockOnTarget != null)
                 {
-                    player.playerCombatManager.SetTarget(PlayerCamera.Singleton.nearestLockOnTarget);
-                    player.playerNetworkManager.isLockedOn.Value = true;
+                    if (!PlayerCamera.Singleton.nearestLockOnTarget.isDead.Value)
+                    {
+                        player.playerCombatManager.SetTarget(PlayerCamera.Singleton.nearestLockOnTarget);
+                        player.playerNetworkManager.isLockedOn.Value = true;
+                    }else
+                    {
+                        player.playerCombatManager.SetTarget(null);
+                        player.playerNetworkManager.isLockedOn.Value = false;
+                    }
                 }
             }
         }

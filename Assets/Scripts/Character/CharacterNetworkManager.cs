@@ -119,7 +119,10 @@ namespace TraverserProject
             character.animator.SetBool("isDead", character.isDead.Value);
 
             if (IsOwner)
+            {
                 character.characterCombatManager.SetTarget(null);
+
+            }
         }
 
         public virtual void OnLockOnTargetIDChange(ulong oldID, ulong newID)
