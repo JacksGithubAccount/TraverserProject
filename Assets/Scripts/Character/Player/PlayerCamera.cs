@@ -73,12 +73,13 @@ namespace TraverserProject
 
             if (player.playerNetworkManager.isLockedOn.Value)
             {
-                Vector3 targetLockOnTransform = nearestLockOnTarget.characterCombatManager.lockOnTransform.transform.position;
-                Vector2 lockOnCrosshairPosition = RectTransformUtility.WorldToScreenPoint(cameraObject, targetLockOnTransform);
-                PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.transform.position = lockOnCrosshairPosition;
-                PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.SetActive(true);
+                
+
+
+                
             }
         }
+        
         public void HandleAllCameraActions()
         {
             if (player != null)
@@ -270,6 +271,9 @@ namespace TraverserProject
                         continue;
 
                     if (lockOnTarget.transform.root == player.transform.root)
+                        continue;
+
+                    if (availableTargets.Contains(lockOnTarget))
                         continue;
 
 

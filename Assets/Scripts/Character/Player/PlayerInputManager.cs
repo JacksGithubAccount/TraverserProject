@@ -299,11 +299,26 @@ namespace TraverserProject
                 if (player.playerCombatManager.currentTarget == null)
                     return;
 
+                Vector3 targetLockOnTransform = PlayerCamera.Singleton.nearestLockOnTarget.characterCombatManager.lockOnTransform.transform.position;
+                Vector2 lockOnCrosshairPosition = RectTransformUtility.WorldToScreenPoint(PlayerCamera.Singleton.cameraObject, targetLockOnTransform);
+                PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.transform.position = lockOnCrosshairPosition;
+                PlayerUIManager.Singleton.playerUIHudManager.lockOnCrossHair.SetActive(true);
+
                 if (player.playerCombatManager.currentTarget.isDead.Value)
                 {
-                    player.playerNetworkManager.isLockedOn.Value = false;
+                    PlayerCamera.Singleton.ClearLockOnTargets();
+                    PlayerCamera.Singleton.HandleLocatingLockOnTargets();
+                    if (PlayerCamera.Singleton.nearestLockOnTarget == null)
+                    {
+                        PlayerCamera.Singleton.ClearLockOnTargets();
+                        player.playerCombatManager.SetTarget(null);
+                        player.playerNetworkManager.isLockedOn.Value = false;
+                    }
+                    else
+                    {
+                        player.playerCombatManager.SetTarget(PlayerCamera.Singleton.nearestLockOnTarget);
+                    }
                 }
-
                 if (lockOnCoroutine != null)
                     StopCoroutine(lockOnCoroutine);
 
@@ -329,15 +344,10 @@ namespace TraverserProject
 
                 if (PlayerCamera.Singleton.nearestLockOnTarget != null)
                 {
-                    if (!PlayerCamera.Singleton.nearestLockOnTarget.isDead.Value)
-                    {
+                    
                         player.playerCombatManager.SetTarget(PlayerCamera.Singleton.nearestLockOnTarget);
                         player.playerNetworkManager.isLockedOn.Value = true;
-                    }else
-                    {
-                        player.playerCombatManager.SetTarget(null);
-                        player.playerNetworkManager.isLockedOn.Value = false;
-                    }
+                    
                 }
             }
         }
