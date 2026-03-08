@@ -1247,10 +1247,20 @@ namespace TraverserProject
         public void UnHideWeapons()
         {
             if (player.playerEquipmentManager.rightHandWeaponModel != null)
+            {
                 player.playerEquipmentManager.rightHandWeaponModel.SetActive(true);
+                WeaponManager weapon = player.playerEquipmentManager.rightHandWeaponModel.GetComponent<WeaponManager>();
+                if (weapon.WeaponTrailVFX != null)
+                    weapon.WeaponTrailVFX.Stop();
+            }
 
             if (player.playerEquipmentManager.leftHandWeaponModel != null)
+            {
                 player.playerEquipmentManager.leftHandWeaponModel.SetActive(true);
+                WeaponManager weapon = player.playerEquipmentManager.leftHandWeaponModel.GetComponent<WeaponManager>();
+                if (weapon.WeaponTrailVFX != null)
+                    weapon.WeaponTrailVFX.Stop();
+            }
         }
     }
 }

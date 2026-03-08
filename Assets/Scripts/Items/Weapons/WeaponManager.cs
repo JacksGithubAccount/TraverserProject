@@ -12,7 +12,9 @@ namespace TraverserProject
         private void Awake()
         {
             meleeDamageCollider = GetComponentInChildren<MeleeWeaponDamageCollider>();
+            
         }
+
 
         public void SetWeaponDamage(CharacterManager characterWieldingWeapon, WeaponItem weapon)
         {

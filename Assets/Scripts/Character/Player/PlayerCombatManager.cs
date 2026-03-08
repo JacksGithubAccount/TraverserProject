@@ -80,9 +80,9 @@ namespace TraverserProject
             {
                 weaponAction.AttemptToPerformAction(player, weaponPerformingAction);
 
-                WeaponManager weaponManager = weaponPerformingAction.weaponModel.GetComponent<WeaponManager>();
-                if (weaponManager.WeaponTrailVFX != null)
-                    weaponManager.WeaponTrailVFX.Play();
+                //WeaponManager weaponManager = weaponPerformingAction.weaponModel.GetComponent<WeaponManager>();
+                //if (weaponManager.WeaponTrailVFX != null)
+                //    weaponManager.WeaponTrailVFX.Play();
 
                 player.playerNetworkManager.NotifyTheServerOfWeaponActionServerRpc(NetworkManager.Singleton.LocalClientId, weaponAction.actionID, weaponPerformingAction.itemID);
             }
