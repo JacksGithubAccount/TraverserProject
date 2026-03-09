@@ -41,10 +41,6 @@ namespace TraverserProject
             damageEffect.contactPoint = contactPoint;
             damageEffect.angleHitFrom = Vector3.SignedAngle(characterCausingDamage.transform.forward, damageTarget.transform.forward, Vector3.up);
 
-
-
-            //damageTarget.characterEffectsManager.ProcessInstantEffect(damageEffect);
-
             if (damageTarget.IsOwner)
             {
                 damageTarget.characterNetworkManager.NofityTheServerOfCharacterDamageServerRpc(damageTarget.NetworkObjectId, characterCausingDamage.NetworkObjectId,

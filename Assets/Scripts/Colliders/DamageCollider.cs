@@ -47,8 +47,9 @@ namespace TraverserProject
                 CheckForParry(damageTarget);
 
                 if (!damageTarget.characterNetworkManager.isInvulnerable.Value)
+                {
                     DamageTarget(damageTarget);
-
+                }
             }
         }
 

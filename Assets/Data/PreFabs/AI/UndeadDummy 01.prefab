@@ -342,7 +342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2062880239462900024, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2261973912390581236, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       propertyPath: m_Layer
@@ -426,7 +426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7620755400191891017, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8101567051441690793, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
       propertyPath: m_Layer
@@ -1071,8 +1071,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runesDroppedOnDeath: 50
-  staminaRegenerationAmount: 2
+  baseStaminaRegenerationAmount: 50
   staminaRegenerationDelay: 2
+  blockingStaminaRegenerationReduction: 0.2
   blockingPhysicalAbsorption: 0
   blockingFireAbsorption: 0
   blockingMagicAbsorption: 0
@@ -1113,6 +1114,7 @@ MonoBehaviour:
   healedVFX: {fileID: 0}
   effectTransform: {fileID: 0}
   poisonedVFX: {fileID: 0}
+  frostbiteVFX: {fileID: 0}
   staticEffects: []
   effectTickTimer: 0
   defaultEffectTickTime: 1
@@ -1145,6 +1147,7 @@ MonoBehaviour:
   characterGroup: 1
   isPerformingAction: 0
   characterName: 
+  spawnerID: 0
   aiCharacterSoundFXManager: {fileID: 0}
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterCombatManager: {fileID: 0}
@@ -1183,6 +1186,9 @@ MonoBehaviour:
   canRun: 1
   canMove: 1
   canRoll: 1
+  isRidingLift: 0
+  isOpeningDoor: 0
+  isOnLadder: 0
   isSliding: 0
   isSlidingOffCharacter: 0
   slopeSlideStartPositionYOffset: 1
@@ -1192,6 +1198,8 @@ MonoBehaviour:
   slipperySurfaceMaxAngle: 15
   characterSlideOffHeadCollisionMaxDistanceCheck: 5
   characterCollisionCheckSphereMultiplier: 1.5
+  interactedLadderClimbPositions: []
+  currentLadderClimbPosition: 0
 --- !u!114 &7208941246191151473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1248,6 +1256,7 @@ MonoBehaviour:
   canBeBackstabbed: 1
   criticalAttackDistanceCheck: 0.7
   pendingCriticalDamage: 0
+  charactersTargetingMe: []
   baseDamage: 25
   basePoiseDamage: 25
   actionRecoveryTimer: 0
@@ -1334,6 +1343,10 @@ MonoBehaviour:
     m_InternalValue: 0
   isJumping:
     m_InternalValue: 0
+  isSneaking:
+    m_InternalValue: 0
+  isHidden:
+    m_InternalValue: 0
   isChargingAttack:
     m_InternalValue: 0
   isRipostable:
@@ -1345,6 +1358,12 @@ MonoBehaviour:
   isPoisoned:
     m_InternalValue: 0
   isBloodLoss:
+    m_InternalValue: 0
+  isFrostbite:
+    m_InternalValue: 0
+  isFrozen:
+    m_InternalValue: 0
+  isExitingLadder:
     m_InternalValue: 0
   currentStamina:
     m_InternalValue: 100
@@ -1374,14 +1393,32 @@ MonoBehaviour:
     m_InternalValue: 1
   luck:
     m_InternalValue: 1
-  buildUpCapacity:
+  immunityBuildUpCapacity:
+    m_InternalValue: 100
+  robustnessBuildUpCapacity:
+    m_InternalValue: 100
+  focusBuildUpCapacity:
     m_InternalValue: 100
   poisonBuildUp:
     m_InternalValue: 0
   bleedBuildUp:
     m_InternalValue: 0
+  frostBuildUp:
+    m_InternalValue: 0
   strengthModifier:
     m_InternalValue: 1
+  staminaRegenerationModifier:
+    m_InternalValue: 0
+  armorPhysicalDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorMagicDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorFireDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorLightningDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorHolyDamageAbsorptionModifer:
+    m_InternalValue: 0
   isAwake:
     m_InternalValue: 1
   sleepingAnimation:
