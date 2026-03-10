@@ -19,6 +19,9 @@ namespace TraverserProject
         }
         public override void PlayFootStepSoundFX()
         {
+            if (player.playerNetworkManager.isSneaking.Value)
+                return;
+
             base.PlayFootStepSoundFX();
             WorldSoundFXManager.Singleton.AlertNearbyCharactersToSound(transform.position, 2);
         }

@@ -42,6 +42,9 @@ namespace TraverserProject
         [Header("Characters Targeting Me")]
         public List<CharacterManager> charactersTargetingMe = new List<CharacterManager>();
 
+        [Header("Stealth")]
+        public List<StealthObject> stealthObjectsCurrentlyStandingIn = new List<StealthObject>();
+
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();
@@ -55,7 +58,7 @@ namespace TraverserProject
                     currentTarget.characterNetworkManager.RemoveCharacterFromListOfCharactersTargetingMeServerRpc(character.NetworkObjectId);
 
                 if (newTarget != null)
-                {                    
+                {
                     currentTarget = newTarget;
                     character.characterNetworkManager.currentTargetNetworkObjectID.Value = newTarget.GetComponent<NetworkObject>().NetworkObjectId;
                     newTarget.characterNetworkManager.AddCharacterToListOfCharactersTargetingMeServerRpc(character.NetworkObjectId);
@@ -303,6 +306,41 @@ namespace TraverserProject
         public void DestroyAllCurrentActionFX()
         {
             character.characterNetworkManager.DestroyAllCurrentActionFXServerRpc();
+        }
+
+        //Stealth Objects
+        public void AddStealthObject(StealthObject stealthObject)
+        {
+            for (int i = 0; i < stealthObjectsCurrentlyStandingIn.Count; i++)
+            {
+                if (stealthObjectsCurrentlyStandingIn[i] == null)
+                    stealthObjectsCurrentlyStandingIn.RemoveAt(i);
+            }
+
+            if (stealthObject == null)
+                return;
+
+            if (stealthObjectsCurrentlyStandingIn.Contains(stealthObject))
+                return;
+
+            stealthObjectsCurrentlyStandingIn.Add(stealthObject);
+        }
+
+        public void RemoveStealthObject(StealthObject stealthObject)
+        {
+            if (stealthObject == null)
+                return;
+
+            if (stealthObjectsCurrentlyStandingIn.Contains(stealthObject))
+                return;
+
+            stealthObjectsCurrentlyStandingIn.Remove(stealthObject);
+
+            for (int i = 0; i < stealthObjectsCurrentlyStandingIn.Count; i++)
+            {
+                if (stealthObjectsCurrentlyStandingIn[i] == null)
+                    stealthObjectsCurrentlyStandingIn.RemoveAt(i);
+            }
         }
     }
 }

@@ -55,6 +55,10 @@ namespace TraverserProject
         [Header("Activation Range")]
         public List<PlayerManager> playersWithinActivationRange = new List<PlayerManager>();
 
+
+        //is on world utility manager, but can be placed here if want for different values for different ai
+        //public float hiddenTargetDetectionRadiusPenalty = 0.5f;
+
         protected override void Awake()
         {
             base.Awake();
@@ -194,7 +198,7 @@ namespace TraverserProject
             }
 
             aiCharacter.investigateSound.positionOfSound = positionOfSound;
-            aiCharacter.currentState = aiCharacter.currentState.SwitchState(aiCharacter, aiCharacter.investigateSound);
+            aiCharacter.currentState = aiCharacter.currentState.ManuallySwitchState(aiCharacter, aiCharacter.investigateSound);
         }
 
         public void FindATargetViaLineOfSight(AICharacterManager aiCharacter)
@@ -216,6 +220,21 @@ namespace TraverserProject
 
                 if (targetCharacter.isDead.Value)
                     continue;
+
+                if (targetCharacter.characterNetworkManager.isSneaking.Value && targetCharacter.characterNetworkManager.isHidden.Value)
+                {
+                    if (targetCharacter.characterCombatManager.stealthObjectsCurrentlyStandingIn.Count > 0)
+                        continue;
+
+                    float distanceFromPotentialTarget = Vector3.Distance(aiCharacter.transform.position, targetCharacter.transform.position);
+                    float maxDistance = detectionRadius * WorldUtilityManager.Singleton.hiddenTargetDetectionRadiusPenalty;
+
+                    //optionally, make them investigate instead of ignore
+                    AlertCharacterToSound(targetCharacter.transform.position);
+
+                    if (distanceFromPotentialTarget > maxDistance)
+                        continue;
+                }
 
                 if (WorldUtilityManager.Singleton.CanIDamageThisTarget(aiCharacter.characterGroup, targetCharacter.characterGroup))
                 {

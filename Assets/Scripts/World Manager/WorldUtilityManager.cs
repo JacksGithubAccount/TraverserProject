@@ -26,6 +26,9 @@ namespace TraverserProject
         [Header("Forces")]
         public float slopeSlideForce = -15;
 
+        [Header("Detection")]
+        public float hiddenTargetDetectionRadiusPenalty = 0.5f; //modifier of distance an AI can detect their target if they are sneaking and hidden
+
         private void Awake()
         {
             if (Singleton == null)

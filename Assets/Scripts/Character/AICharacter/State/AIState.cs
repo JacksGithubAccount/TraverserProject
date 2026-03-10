@@ -18,6 +18,14 @@ namespace TraverserProject
             return newState;
         }
 
+        //called from outside a state, triggered by other scripts or functions (such as investigate sound)
+        public virtual AIState ManuallySwitchState(AICharacterManager aiCharacter, AIState newState)
+        {
+            aiCharacter.hasManuallySwitchedState = true;
+            ResetStateFlags(aiCharacter);
+            return newState;
+        }
+
         protected virtual void ResetStateFlags(AICharacterManager aICharacter)
         {
 

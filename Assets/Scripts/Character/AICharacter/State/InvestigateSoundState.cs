@@ -18,7 +18,7 @@ namespace TraverserProject
         [SerializeField] float investigationTimer = 0;
 
         public override AIState Tick(AICharacterManager aiCharacter)
-        {        
+        {
 
             if (aiCharacter.isPerformingAction)
                 return this;
@@ -62,30 +62,29 @@ namespace TraverserProject
             //can use flag to due other things on arrival like search
 
             if (destinationReached)
-		{
-			if(investigationTimer<investigationTime)
-			{
-				investigationTimer += Time.deltaTime;
-			}
-			else
-			{
-				return SwitchState(aiCharacter, aiCharacter.idle);
-}
-		}
-			
-		return this;
-	}
-	
-	protected override void ResetStateFlags(AICharacterManager aiCharacter)
-{
-    base.ResetStateFlags(aiCharacter);
+            {
+                if (investigationTimer < investigationTime)
+                {
+                    investigationTimer += Time.deltaTime;
+                }
+                else
+                {
+                    return SwitchState(aiCharacter, aiCharacter.idle);
+                }
+            }
 
-    aiCharacter.navMeshAgent.enabled = false;
-    destinationReached = false;
-    destinationSet = false;
-    investigationTimer = 0;
-    positionOfSound = Vector3.zero;
-}
+            return this;
+        }
 
-}
+        protected override void ResetStateFlags(AICharacterManager aiCharacter)
+        {
+            base.ResetStateFlags(aiCharacter);
+
+            aiCharacter.navMeshAgent.enabled = false;
+            destinationReached = false;
+            destinationSet = false;
+            investigationTimer = 0;
+        }
+
+    }
 }

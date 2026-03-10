@@ -20,6 +20,7 @@ namespace TraverserProject
 
         [Header("Current State")]
         public AIState currentState;
+        [HideInInspector] public bool hasManuallySwitchedState = false;
 
         [Header("Navmesh Agent")]
         public NavMeshAgent navMeshAgent;
@@ -156,10 +157,12 @@ namespace TraverserProject
         {
             AIState nextState = currentState?.Tick(this);
 
-            if (nextState != null)
+            if (nextState != null && !hasManuallySwitchedState)
             {
                 currentState = nextState;
             }
+
+            hasManuallySwitchedState = false;
 
             navMeshAgent.transform.localPosition = Vector3.zero;
             navMeshAgent.transform.localRotation = Quaternion.identity;
