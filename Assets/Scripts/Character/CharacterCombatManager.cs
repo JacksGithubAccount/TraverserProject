@@ -331,7 +331,7 @@ namespace TraverserProject
             if (stealthObject == null)
                 return;
 
-            if (stealthObjectsCurrentlyStandingIn.Contains(stealthObject))
+            if (!stealthObjectsCurrentlyStandingIn.Contains(stealthObject))
                 return;
 
             stealthObjectsCurrentlyStandingIn.Remove(stealthObject);
