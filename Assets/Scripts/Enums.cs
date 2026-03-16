@@ -260,6 +260,15 @@ public enum ThrowableType
     Lingering,
     Persistant
 }
+
+public enum itemCategory
+{
+    Plant,
+    Rock,
+    Wood,
+    Flammable,
+    Fuel
+}
 //AI States
 public enum IdleStateMode
 {

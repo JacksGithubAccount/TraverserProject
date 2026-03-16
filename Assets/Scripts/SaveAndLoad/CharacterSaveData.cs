@@ -89,6 +89,7 @@ namespace TraverserProject
         public SerializableSpell spell01;
         public SerializableSpell spell02;
         public SerializableSpell spell03;
+        public int currentSpell;
 
         public int quickSlotIndex;
         public SerializableQuickSlotItem quickSlotItem01;
@@ -115,8 +116,8 @@ namespace TraverserProject
         public int blacksmithStageID = 0;
         public int blacksmithMenuStageID = 0;
 
-        public int currentSpell;
-
+        [Header("Crafting")]
+        public SerializableDictionary<int, bool> recipesUnlocked;
 
         public CharacterSaveData()
         {
