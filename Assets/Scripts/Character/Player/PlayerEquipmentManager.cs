@@ -424,7 +424,7 @@ namespace TraverserProject
             {
                 SwitchQuickSlotItem();
             }
-            
+
 
         }
 
@@ -998,8 +998,7 @@ namespace TraverserProject
                 rightHandWeaponSlot.PlaceWeaponModelIntoSlot(rightHandWeaponModel);
                 rightWeaponManager = rightHandWeaponModel.GetComponent<WeaponManager>();
                 rightWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
-                if (rightWeaponManager.WeaponTrailVFX != null)
-                    rightWeaponManager.WeaponTrailVFX.Stop();
+
                 player.playerAnimatorManager.UpdateAnimatorController(player.playerInventoryManager.currentRightHandWeapon.weaponAnimator);
             }
         }
@@ -1101,8 +1100,7 @@ namespace TraverserProject
                 }
 
                 leftWeaponManager = leftHandWeaponModel.GetComponent<WeaponManager>();
-                if(leftWeaponManager.WeaponTrailVFX != null)
-                    leftWeaponManager.WeaponTrailVFX.Stop();
+                
                 leftWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
             }
         }
@@ -1184,16 +1182,15 @@ namespace TraverserProject
         {
             if (player.playerNetworkManager.isUsingRightHand.Value)
             {
+                rightWeaponManager.ToggleWeaponTrail(true);
                 rightWeaponManager.meleeDamageCollider.EnableDamageCollider();
-                if (rightWeaponManager.WeaponTrailVFX != null)
-                    rightWeaponManager.WeaponTrailVFX.Play();
+
                 player.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(player.playerInventoryManager.currentRightHandWeapon.whooshes));
             }
             else if (player.playerNetworkManager.isUsingLeftHand.Value)
             {
+                leftWeaponManager.ToggleWeaponTrail(true);
                 leftWeaponManager.meleeDamageCollider.EnableDamageCollider();
-                if (leftWeaponManager.WeaponTrailVFX != null)
-                    rightWeaponManager.WeaponTrailVFX.Play();
                 player.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(player.playerInventoryManager.currentLeftHandWeapon.whooshes));
             }
         }
@@ -1202,46 +1199,42 @@ namespace TraverserProject
         {
             if (player.playerNetworkManager.isUsingRightHand.Value)
             {
+                rightWeaponManager.ToggleWeaponTrail(false);
                 rightWeaponManager.meleeDamageCollider.DisableDamageCollider();
-                if (rightWeaponManager.WeaponTrailVFX != null)
-                    rightWeaponManager.WeaponTrailVFX.Stop();
             }
             else if (player.playerNetworkManager.isUsingLeftHand.Value)
             {
+                leftWeaponManager.ToggleWeaponTrail(false);
                 leftWeaponManager.meleeDamageCollider.DisableDamageCollider();
-                if (leftWeaponManager.WeaponTrailVFX != null)
-                    leftWeaponManager.WeaponTrailVFX.Stop();
             }
         }
 
         public void OpenMainHandDamageCollider()
         {
+            rightWeaponManager.ToggleWeaponTrail(true);
             rightWeaponManager.meleeDamageCollider.EnableDamageCollider();
-            if (rightWeaponManager.WeaponTrailVFX != null)
-                rightWeaponManager.WeaponTrailVFX.Play();
             player.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(player.playerInventoryManager.currentRightHandWeapon.whooshes));
         }
 
         public void CloseMainHandDamageCollider()
         {
+            rightWeaponManager.ToggleWeaponTrail(false);
             rightWeaponManager.meleeDamageCollider.DisableDamageCollider();
-            if (rightWeaponManager.WeaponTrailVFX != null)
-                rightWeaponManager.WeaponTrailVFX.Stop();
         }
 
         public void OpenOffHandDamageCollider()
         {
+            leftWeaponManager.ToggleWeaponTrail(true);
             leftWeaponManager.meleeDamageCollider.EnableDamageCollider();
-            if (leftWeaponManager.WeaponTrailVFX != null)
-                leftWeaponManager.WeaponTrailVFX.Play();
+
             player.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(player.playerInventoryManager.currentLeftHandWeapon.whooshes));
         }
 
         public void CloseOffHandDamageCollider()
         {
+            leftWeaponManager.ToggleWeaponTrail(false);
             leftWeaponManager.meleeDamageCollider.DisableDamageCollider();
-            if (leftWeaponManager.WeaponTrailVFX != null)
-                leftWeaponManager.WeaponTrailVFX.Stop();
+
         }
 
         public void UnHideWeapons()
@@ -1250,16 +1243,14 @@ namespace TraverserProject
             {
                 player.playerEquipmentManager.rightHandWeaponModel.SetActive(true);
                 WeaponManager weapon = player.playerEquipmentManager.rightHandWeaponModel.GetComponent<WeaponManager>();
-                if (weapon.WeaponTrailVFX != null)
-                    weapon.WeaponTrailVFX.Stop();
+                weapon.ToggleWeaponTrail(false);
             }
 
             if (player.playerEquipmentManager.leftHandWeaponModel != null)
             {
                 player.playerEquipmentManager.leftHandWeaponModel.SetActive(true);
                 WeaponManager weapon = player.playerEquipmentManager.leftHandWeaponModel.GetComponent<WeaponManager>();
-                if (weapon.WeaponTrailVFX != null)
-                    weapon.WeaponTrailVFX.Stop();
+                weapon.ToggleWeaponTrail(false);
             }
         }
     }

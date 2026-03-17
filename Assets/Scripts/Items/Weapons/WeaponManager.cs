@@ -5,14 +5,20 @@ namespace TraverserProject
 
     public class WeaponManager : MonoBehaviour
     {
+        //trail options
+        //1 unity trail system
+        [Header("Weapon Trail")]
+        [SerializeField] TrailRenderer trailRenderer;
+        [SerializeField] ParticleSystem WeaponTrailVFX;
+
+        [Header("Collider")]
         public MeleeWeaponDamageCollider meleeDamageCollider;
-        public ParticleSystem WeaponTrailVFX; 
 
 
         private void Awake()
         {
             meleeDamageCollider = GetComponentInChildren<MeleeWeaponDamageCollider>();
-            
+
         }
 
 
@@ -88,6 +94,24 @@ namespace TraverserProject
             meleeDamageCollider.dual_Backstep_Heavy_Attack_01_Modifier = weapon.dual_Backstep_Heavy_Attack_01_Modifier;
             meleeDamageCollider.dual_Jumping_Light_Attack_01_Modifier = weapon.dual_Jumping_Light_Attack_01_Modifier;
             meleeDamageCollider.dual_Jumping_Heavy_Attack_01_Modifier = weapon.dual_Jumping_Heavy_Attack_01_Modifier;
+        }
+
+        public void ToggleWeaponTrail(bool status)
+        {
+            if (trailRenderer != null)
+                trailRenderer.emitting = status;
+
+            if (WeaponTrailVFX == null)
+                return;
+
+            if (status)
+            {
+                WeaponTrailVFX.Play();
+            }
+            else
+            {
+                WeaponTrailVFX.Stop();
+            }
         }
 
     }
