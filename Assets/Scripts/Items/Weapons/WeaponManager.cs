@@ -5,9 +5,8 @@ namespace TraverserProject
 
     public class WeaponManager : MonoBehaviour
     {
-        //trail options
-        //1 unity trail system
         [Header("Weapon Trail")]
+        //pick one, use both if crazy enough
         [SerializeField] TrailRenderer trailRenderer;
         [SerializeField] ParticleSystem WeaponTrailVFX;
 

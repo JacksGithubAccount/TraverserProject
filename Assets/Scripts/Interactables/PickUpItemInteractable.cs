@@ -117,6 +117,15 @@ namespace TraverserProject
 
             player.playerAnimatorManager.PlayTargetActionAnimation("Pick_Up_Item_01", true);
 
+            if (item.GetType() == typeof(Recipe))
+            {
+                if (WorldSaveGameManager.Singleton.currentCharacterData.recipesUnlocked.ContainsKey(item.itemID))                
+                    WorldSaveGameManager.Singleton.currentCharacterData.recipesUnlocked.Remove(item.itemID);
+                
+                WorldSaveGameManager.Singleton.currentCharacterData.recipesUnlocked.Add(item.itemID, true);
+
+            }
+
             if (item.maxItemAmount > 1)
             {
                 item.currentItemAmount = itemAmount;
