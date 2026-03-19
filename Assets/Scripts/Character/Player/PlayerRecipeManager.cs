@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace TraverserProject
 {
-    public class WorldRecipeManager : MonoBehaviour
+    public class PlayerRecipeManager : MonoBehaviour
     {
-        public static WorldRecipeManager Singleton;
+        public static PlayerRecipeManager Singleton;
 
         [Header("Recipes")]
-        public List<Recipe> sitesOfGrace;
+        public List<Recipe> recipesLearnt;
 
         private void Awake()
         {

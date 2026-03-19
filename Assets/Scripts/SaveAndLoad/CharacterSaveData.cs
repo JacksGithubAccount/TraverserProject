@@ -117,7 +117,7 @@ namespace TraverserProject
         public int blacksmithMenuStageID = 0;
 
         [Header("Crafting")]
-        public SerializableDictionary<int, bool> recipesUnlocked;
+        public List<Recipe> recipesLearnt;
 
         public CharacterSaveData()
         {

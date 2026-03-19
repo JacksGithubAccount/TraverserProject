@@ -23,6 +23,7 @@ namespace TraverserProject
         [HideInInspector] public PlayerInteractionManager playerInteractionManager;
         [HideInInspector] public PlayerEffectsManager playerEffectsManager;
         [HideInInspector] public PlayerBodyManager playerBodyManager;
+        [HideInInspector] public PlayerRecipeManager playerRecipeManager;
 
         [Header("Area")]
         public WorldLocationSceneSet areaCurrentlyIn;
@@ -44,6 +45,7 @@ namespace TraverserProject
             playerInteractionManager = GetComponent<PlayerInteractionManager>();
             playerEffectsManager = GetComponent<PlayerEffectsManager>();
             playerBodyManager = GetComponent<PlayerBodyManager>();
+            playerRecipeManager = GetComponent<PlayerRecipeManager>();
         }
 
         protected override void Update()
@@ -359,6 +361,9 @@ namespace TraverserProject
 
             currentCharacterData.bubbles = playerStatsManager.bubbles;
 
+            //recipes
+            currentCharacterData.recipesLearnt = playerRecipeManager.recipesLearnt;
+
             //body
             currentCharacterData.hairStyleID = playerNetworkManager.hairStyleID.Value;
             currentCharacterData.hairColorRed = playerNetworkManager.hairColorRed.Value;
@@ -482,6 +487,9 @@ namespace TraverserProject
 
             playerNetworkManager.remainingHealthFlasks.Value = currentCharacterData.currentHealthFlaskRemaining;
             playerNetworkManager.remainingFocusPointsFlasks.Value = currentCharacterData.currentFocusPointsFlaskRemaining;
+
+            //recipes
+            playerRecipeManager.recipesLearnt = currentCharacterData.recipesLearnt;
 
             //body
             playerNetworkManager.hairStyleID.Value = currentCharacterData.hairStyleID;
