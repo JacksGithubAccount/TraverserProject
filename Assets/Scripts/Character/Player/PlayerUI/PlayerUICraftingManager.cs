@@ -8,9 +8,9 @@ namespace TraverserProject
     public class PlayerUICraftingManager : PlayerUIMenu
     {
         [Header("Recipes Window")]
-        [SerializeField] GameObject equipmentInventoryWindow;
-        [SerializeField] GameObject equipmentInventorySlotPrefab;
-        [SerializeField] Transform equipmentInventoryContentWindow;
+        [SerializeField] GameObject craftingRecipeWindow;
+        [SerializeField] GameObject craftingRecipeSlotPrefab;
+        [SerializeField] Transform craftingRecipeContentWindow;
         [SerializeField] Recipe currentlySelectedRecipe;
 
         public override void OpenMenu()
@@ -44,16 +44,16 @@ namespace TraverserProject
 
             for (int i = 0; i < player.playerRecipeManager.recipesLearnt.Count; i++)
             {
-                GameObject inventorySlotGameObject = Instantiate(equipmentInventorySlotPrefab, equipmentInventoryContentWindow);
-                UI_EquipmentInventorySlot equipmentInventorySlot = inventorySlotGameObject.GetComponent<UI_EquipmentInventorySlot>();
-                //equipmentInventorySlot.AddItem(weaponsInInventory[i]);
+                GameObject craftingSlotGameObject = Instantiate(craftingRecipeSlotPrefab, craftingRecipeContentWindow);
+                UI_CraftingRecipeSlot craftingRecipeSlot = craftingSlotGameObject.GetComponent<UI_CraftingRecipeSlot>();
+                craftingRecipeSlot.AddRecipe(player.playerRecipeManager.recipesLearnt[i]);
 
                 if (!hasSelectedFirstInventorySlot)
                 {
                     hasSelectedFirstInventorySlot = true;
-                    Button inventorySlotButton = inventorySlotGameObject.GetComponent<Button>();
-                    inventorySlotButton.Select();
-                    inventorySlotButton.OnSelect(null);
+                    Button craftingSlotButton = craftingSlotGameObject.GetComponent<Button>();
+                    craftingSlotButton.Select();
+                    craftingSlotButton.OnSelect(null);
 
                 }
             }

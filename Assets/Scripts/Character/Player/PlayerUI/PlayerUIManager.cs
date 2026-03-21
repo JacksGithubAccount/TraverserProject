@@ -26,6 +26,7 @@ namespace TraverserProject
         [HideInInspector] public PlayerUIWeaponUpgradeManager playerUIWeaponUpgradeManager;
         [HideInInspector] public PlayerUIAnvilMenuManager playerUIAnvilMenuManager;
         [HideInInspector] public PlayerUIBlacksmithMenuManager playerUIBlacksmithMenuManager;
+        [HideInInspector] public PlayerUICraftingManager playerUICraftingManager;
 
         [Header("UI Flags")]
         public bool menuWindowIsOpen = false;
@@ -60,6 +61,7 @@ namespace TraverserProject
             playerUIWeaponUpgradeManager = GetComponentInChildren<PlayerUIWeaponUpgradeManager>();
             playerUIAnvilMenuManager = GetComponentInChildren<PlayerUIAnvilMenuManager>();
             playerUIBlacksmithMenuManager = GetComponentInChildren<PlayerUIBlacksmithMenuManager>();
+            playerUICraftingManager = GetComponentInChildren<PlayerUICraftingManager>();
         }
         private void Start()
         {
@@ -85,6 +87,8 @@ namespace TraverserProject
             playerUILevelUpManager.CloseMenuAfterFixedFrame();
             playerUIWeaponUpgradeManager.CloseMenuAfterFixedFrame();
             playerUIAnvilMenuManager.CloseMenuAfterFixedFrame();
+            playerUIBlacksmithMenuManager.CloseMenuAfterFixedFrame();
+            playerUICraftingManager.CloseMenuAfterFixedFrame();
 
             openMenus.Clear();
         }

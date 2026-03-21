@@ -135,6 +135,7 @@ namespace TraverserProject
             bodyEquipmentInInventory = new List<int>();
             handEquipmentInInventory = new List<int>();
             legEquipmentInInventory = new List<int>();
+            recipesLearnt = new List<Recipe>();
 
         }
     }

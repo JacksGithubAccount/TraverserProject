@@ -8,7 +8,7 @@ namespace TraverserProject
         public static PlayerRecipeManager Singleton;
 
         [Header("Recipes")]
-        public List<Recipe> recipesLearnt;
+        public List<Recipe> recipesLearnt = new List<Recipe>();
 
         private void Awake()
         {

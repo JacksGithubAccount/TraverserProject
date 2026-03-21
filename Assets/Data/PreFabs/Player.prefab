@@ -12343,6 +12343,7 @@ GameObject:
   - component: {fileID: 1298057709493842833}
   - component: {fileID: 5796847305617921371}
   - component: {fileID: -348975591456630097}
+  - component: {fileID: 3135155213357953342}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -12457,6 +12458,7 @@ MonoBehaviour:
   playerInteractionManager: {fileID: 0}
   playerEffectsManager: {fileID: 0}
   playerBodyManager: {fileID: 0}
+  playerRecipeManager: {fileID: 0}
   areaCurrentlyIn: {fileID: 0}
   timePlayed: 0
 --- !u!114 &8018114286529381242
@@ -13281,11 +13283,27 @@ MonoBehaviour:
   criticalAttackDistanceCheck: 0.7
   pendingCriticalDamage: 0
   charactersTargetingMe: []
+  stealthObjectsCurrentlyStandingIn: []
   currentWeaponBeingUsed: {fileID: 0}
   currentProjectileBeingUsed: 0
   canComboWithMainHandWeapon: 0
   canComboWithOffHandWeapon: 0
   isUsingItem: 0
+--- !u!114 &3135155213357953342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3761150245944100862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60e80e2096fbe154a91a2b838f8ce2bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recipesLearnt:
+  - {fileID: 11400000, guid: 3aa785d8f7ceb7444b70cb14b5723e0d, type: 2}
+  - {fileID: 11400000, guid: d711b4d16e1408446a9ed60f74de8b11, type: 2}
 --- !u!1 &3777490511738098112
 GameObject:
   m_ObjectHideFlags: 0

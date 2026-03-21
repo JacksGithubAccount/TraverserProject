@@ -119,10 +119,10 @@ namespace TraverserProject
 
             if (item.GetType() == typeof(Recipe))
             {
-                if (WorldSaveGameManager.Singleton.currentCharacterData.recipesLearnt.ContainsKey(item.itemID))                
-                    WorldSaveGameManager.Singleton.currentCharacterData.recipesLearnt.Remove(item.itemID);
+                if (WorldSaveGameManager.Singleton.currentCharacterData.recipesLearnt.Contains((Recipe)item))                
+                    WorldSaveGameManager.Singleton.currentCharacterData.recipesLearnt.Remove((Recipe)item);
                 
-                WorldSaveGameManager.Singleton.currentCharacterData.recipesLearnt.Add(item.itemID, true);
+                WorldSaveGameManager.Singleton.currentCharacterData.recipesLearnt.Add((Recipe)item);
 
             }
 
