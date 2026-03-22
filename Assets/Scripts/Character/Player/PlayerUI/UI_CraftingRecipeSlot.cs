@@ -21,7 +21,7 @@ namespace TraverserProject
             itemIcon.enabled = true;
 
             currentRecipe = recipe;
-            itemIcon.sprite = recipe.itemIcon;
+            itemIcon.sprite = recipe.craftedItem.itemIcon;
         }
         public void SelectSlot()
         {
@@ -37,5 +37,7 @@ namespace TraverserProject
         { 
             
         }
+
+        
     }
 }

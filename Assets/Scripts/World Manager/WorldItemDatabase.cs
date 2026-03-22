@@ -52,8 +52,13 @@ namespace TraverserProject
         [Header("Key Items")]
         [SerializeField] List<KeyItem> keyItems = new List<KeyItem>();
 
+        [Header("Item Category Icons")]
+        public List<Sprite> itemCategoryIcons = new List<Sprite>();
+
         [Header("Items")]
         private List<Item> items = new List<Item>();
+
+        
 
         [Header("Item ID Prefix Keys")]
         [SerializeField] int weaponItemKey = 1000;

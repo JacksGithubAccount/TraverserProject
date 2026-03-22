@@ -7,8 +7,10 @@ namespace TraverserProject
     [CreateAssetMenu(menuName = "Items/Recipe")]
     public class Recipe : KeyItem
     {
-        [SerializeField] Recipe craftedItem;
-        [SerializeField] List<Item> itemIngredients;
-        [SerializeField] List<itemCategory> categoryIngrdients;
+        public Item craftedItem;
+        public List<Item> itemIngredients;
+        public List<int> itemIngredientsAmount;
+        public List<ItemCategory> categoryIngredients;
+        public List<int> categoryIngredientsAmount;
     }
 }

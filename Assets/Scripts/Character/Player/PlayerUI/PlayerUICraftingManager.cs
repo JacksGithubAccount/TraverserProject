@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,13 @@ namespace TraverserProject
         [SerializeField] GameObject craftingRecipeSlotPrefab;
         [SerializeField] Transform craftingRecipeContentWindow;
         [SerializeField] Recipe currentlySelectedRecipe;
+
+        [Header("Recipe Information Window")]
+        [SerializeField] GameObject craftingItemInformationWindow;
+        [SerializeField] GameObject craftingItemInformationPrefab;
+        [SerializeField] Image craftingItemInformationImage;
+        [SerializeField] TextMeshProUGUI craftingItemInformationText;
+        [SerializeField] Transform craftingItemInformationContentWindow;
 
         public override void OpenMenu()
         {
@@ -63,6 +71,20 @@ namespace TraverserProject
         public void CraftSelectedItem()
         {
 
+        }
+
+        public void DisplayRecipeInformation(Recipe recipe)
+        {
+            craftingItemInformationText.text = recipe.craftedItem.itemName;
+            craftingItemInformationImage.sprite = recipe.craftedItem.itemIcon;
+
+            for (int i = 0; i < recipe.itemIngredients.Count; i++)
+            {
+                GameObject craftingSlotGameObject = Instantiate(craftingItemInformationPrefab, craftingItemInformationContentWindow);
+                UI_CraftingItemInformationSlot craftingItemInformationSlot = craftingSlotGameObject.GetComponent<UI_CraftingItemInformationSlot>();
+                craftingItemInformationSlot.AddItem(recipe.itemIngredients[i]);
+                //add count
+            }
         }
     }
 }

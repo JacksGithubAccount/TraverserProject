@@ -261,7 +261,7 @@ public enum ThrowableType
     Persistant
 }
 
-public enum itemCategory
+public enum ItemCategory
 {
     Plant,
     Rock,
