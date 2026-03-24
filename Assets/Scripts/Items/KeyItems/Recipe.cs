@@ -10,7 +10,7 @@ namespace TraverserProject
         public Item craftedItem;
         public List<Item> itemIngredients;
         public List<int> itemIngredientsAmount;
-        public List<ItemCategory> categoryIngredients;
-        public List<int> categoryIngredientsAmount;
+        public List<ItemCategory> itemCategoryIngredients;
+        public List<int> itemCategoryIngredientsAmount;
     }
 }

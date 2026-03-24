@@ -26,6 +26,7 @@ namespace TraverserProject
         public void SelectSlot()
         {
             highlightIcon.enabled = true;
+            PlayerUIManager.Singleton.playerUICraftingManager.DisplayRecipeInformation(currentRecipe);
         }
 
         public void DeselectSlot()
@@ -34,7 +35,7 @@ namespace TraverserProject
         }
 
         public void SelectRecipe() 
-        { 
+        {
             
         }
 

@@ -8,8 +8,7 @@ namespace TraverserProject
 {
 
     public class PlayerUIEquipmentManager : PlayerUIMenu
-    {
-
+    {        
         [Header("Weapon Slots")]
         [SerializeField] Image rightHandSlot01;
         private Button rightHandSlot01Button;
@@ -59,6 +58,7 @@ namespace TraverserProject
         [SerializeField] GameObject equipmentInventorySlotPrefab;
         [SerializeField] Transform equipmentInventoryContentWindow;
         [SerializeField] Item currentlySelectedItem;
+        [HideInInspector] List<GameObject> equipmentInventorySlotPrefabs = new List<GameObject>();
 
         private void Awake()
         {
@@ -465,6 +465,7 @@ namespace TraverserProject
 
         public void LoadWeaponInventory()
         {
+            ClearEquipmentInventorySlotPrefabs();
             PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
             List<WeaponItem> weaponsInInventory = new List<WeaponItem>();
 
@@ -491,6 +492,7 @@ namespace TraverserProject
                 GameObject inventorySlotGameObject = Instantiate(equipmentInventorySlotPrefab, equipmentInventoryContentWindow);
                 UI_EquipmentInventorySlot equipmentInventorySlot = inventorySlotGameObject.GetComponent<UI_EquipmentInventorySlot>();
                 equipmentInventorySlot.AddItem(weaponsInInventory[i]);
+                equipmentInventorySlotPrefabs.Add(equipmentInventorySlot.gameObject);
 
                 if (!hasSelectedFirstInventorySlot)
                 {
@@ -505,6 +507,7 @@ namespace TraverserProject
 
         private void LoadHeadEquipmentInventory()
         {
+            ClearEquipmentInventorySlotPrefabs();
             PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
             List<HeadEquipmentItem> headEquipmentInInventory = new List<HeadEquipmentItem>();
 
@@ -531,6 +534,7 @@ namespace TraverserProject
                 GameObject inventorySlotGameObject = Instantiate(equipmentInventorySlotPrefab, equipmentInventoryContentWindow);
                 UI_EquipmentInventorySlot equipmentInventorySlot = inventorySlotGameObject.GetComponent<UI_EquipmentInventorySlot>();
                 equipmentInventorySlot.AddItem(headEquipmentInInventory[i]);
+                equipmentInventorySlotPrefabs.Add(equipmentInventorySlot.gameObject);
 
                 if (!hasSelectedFirstInventorySlot)
                 {
@@ -545,6 +549,7 @@ namespace TraverserProject
 
         private void LoadBodyEquipmentInventory()
         {
+            ClearEquipmentInventorySlotPrefabs();
             PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
             List<BodyEquipmentItem> bodyEquipmentInInventory = new List<BodyEquipmentItem>();
 
@@ -571,6 +576,7 @@ namespace TraverserProject
                 GameObject inventorySlotGameObject = Instantiate(equipmentInventorySlotPrefab, equipmentInventoryContentWindow);
                 UI_EquipmentInventorySlot equipmentInventorySlot = inventorySlotGameObject.GetComponent<UI_EquipmentInventorySlot>();
                 equipmentInventorySlot.AddItem(bodyEquipmentInInventory[i]);
+                equipmentInventorySlotPrefabs.Add(equipmentInventorySlot.gameObject);
 
                 if (!hasSelectedFirstInventorySlot)
                 {
@@ -585,6 +591,7 @@ namespace TraverserProject
 
         private void LoadHandEquipmentInventory()
         {
+            ClearEquipmentInventorySlotPrefabs();
             PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
             List<HandEquipmentItem> handEquipmentInInventory = new List<HandEquipmentItem>();
 
@@ -611,6 +618,7 @@ namespace TraverserProject
                 GameObject inventorySlotGameObject = Instantiate(equipmentInventorySlotPrefab, equipmentInventoryContentWindow);
                 UI_EquipmentInventorySlot equipmentInventorySlot = inventorySlotGameObject.GetComponent<UI_EquipmentInventorySlot>();
                 equipmentInventorySlot.AddItem(handEquipmentInInventory[i]);
+                equipmentInventorySlotPrefabs.Add(equipmentInventorySlot.gameObject);
 
                 if (!hasSelectedFirstInventorySlot)
                 {
@@ -625,6 +633,7 @@ namespace TraverserProject
 
         private void LoadLegEquipmentInventory()
         {
+            ClearEquipmentInventorySlotPrefabs();
             PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
             List<LegEquipmentItem> legEquipmentInInventory = new List<LegEquipmentItem>();
 
@@ -651,6 +660,7 @@ namespace TraverserProject
                 GameObject inventorySlotGameObject = Instantiate(equipmentInventorySlotPrefab, equipmentInventoryContentWindow);
                 UI_EquipmentInventorySlot equipmentInventorySlot = inventorySlotGameObject.GetComponent<UI_EquipmentInventorySlot>();
                 equipmentInventorySlot.AddItem(legEquipmentInInventory[i]);
+                equipmentInventorySlotPrefabs.Add(equipmentInventorySlot.gameObject);
 
                 if (!hasSelectedFirstInventorySlot)
                 {
@@ -665,6 +675,7 @@ namespace TraverserProject
 
         public void LoadProjectileInventory()
         {
+            ClearEquipmentInventorySlotPrefabs();
             PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
             List<RangedProjectileItem> projectilesInInventory = new List<RangedProjectileItem>();
 
@@ -691,6 +702,7 @@ namespace TraverserProject
                 GameObject inventorySlotGameObject = Instantiate(equipmentInventorySlotPrefab, equipmentInventoryContentWindow);
                 UI_EquipmentInventorySlot equipmentInventorySlot = inventorySlotGameObject.GetComponent<UI_EquipmentInventorySlot>();
                 equipmentInventorySlot.AddItem(projectilesInInventory[i]);
+                equipmentInventorySlotPrefabs.Add(equipmentInventorySlot.gameObject);
 
                 if (!hasSelectedFirstInventorySlot)
                 {
@@ -705,6 +717,7 @@ namespace TraverserProject
 
         public void LoadQuickSlotInventory()
         {
+            ClearEquipmentInventorySlotPrefabs();
             PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
             List<QuickSlotItem> quickSlotItemsInInventory = new List<QuickSlotItem>();
 
@@ -731,6 +744,7 @@ namespace TraverserProject
                 GameObject inventorySlotGameObject = Instantiate(equipmentInventorySlotPrefab, equipmentInventoryContentWindow);
                 UI_EquipmentInventorySlot equipmentInventorySlot = inventorySlotGameObject.GetComponent<UI_EquipmentInventorySlot>();
                 equipmentInventorySlot.AddItem(quickSlotItemsInInventory[i]);
+                equipmentInventorySlotPrefabs.Add(equipmentInventorySlot.gameObject);
 
                 if (!hasSelectedFirstInventorySlot)
                 {
@@ -741,6 +755,15 @@ namespace TraverserProject
 
                 }
             }
+        }
+
+        private void ClearEquipmentInventorySlotPrefabs()
+        {
+            foreach(GameObject item in equipmentInventorySlotPrefabs)
+            {
+                Destroy(item);
+            }
+            equipmentInventorySlotPrefabs.Clear();
         }
 
         public void SelectEquipmentSlot(int equipmentSlot)

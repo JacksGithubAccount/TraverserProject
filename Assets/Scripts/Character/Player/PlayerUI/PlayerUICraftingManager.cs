@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -20,6 +21,7 @@ namespace TraverserProject
         [SerializeField] Image craftingItemInformationImage;
         [SerializeField] TextMeshProUGUI craftingItemInformationText;
         [SerializeField] Transform craftingItemInformationContentWindow;
+        [HideInInspector] private List<GameObject> craftingItemInformationPrefabs = new List<GameObject>();
 
         public override void OpenMenu()
         {
@@ -75,6 +77,7 @@ namespace TraverserProject
 
         public void DisplayRecipeInformation(Recipe recipe)
         {
+            ClearCraftingItemInformationPrefabs();
             craftingItemInformationText.text = recipe.craftedItem.itemName;
             craftingItemInformationImage.sprite = recipe.craftedItem.itemIcon;
 
@@ -82,9 +85,26 @@ namespace TraverserProject
             {
                 GameObject craftingSlotGameObject = Instantiate(craftingItemInformationPrefab, craftingItemInformationContentWindow);
                 UI_CraftingItemInformationSlot craftingItemInformationSlot = craftingSlotGameObject.GetComponent<UI_CraftingItemInformationSlot>();
-                craftingItemInformationSlot.AddItem(recipe.itemIngredients[i]);
-                //add count
+                craftingItemInformationSlot.AddItem(recipe.itemIngredients[i], recipe.itemIngredientsAmount[i]);
+                craftingItemInformationPrefabs.Add(craftingItemInformationSlot.gameObject);
             }
+
+            for (int i = 0; i < recipe.itemCategoryIngredients.Count; i++)
+            {
+                GameObject craftingSlotGameObject = Instantiate(craftingItemInformationPrefab, craftingItemInformationContentWindow);
+                UI_CraftingItemInformationSlot craftingItemInformationSlot = craftingSlotGameObject.GetComponent<UI_CraftingItemInformationSlot>();
+                craftingItemInformationSlot.AddItemCategory(recipe.itemCategoryIngredients[i], recipe.itemCategoryIngredientsAmount[i]);
+                craftingItemInformationPrefabs.Add(craftingItemInformationSlot.gameObject);
+            }
+        }
+
+        private void ClearCraftingItemInformationPrefabs()
+        {
+            foreach(GameObject item in craftingItemInformationPrefabs)
+            {
+                Destroy(item);
+            }
+            craftingItemInformationPrefabs.Clear();
         }
     }
 }
