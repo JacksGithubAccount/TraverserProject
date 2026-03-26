@@ -49,6 +49,9 @@ namespace TraverserProject
         [Header("Upgrade Materials")]
         [SerializeField] List<UpgradeMaterial> upgradeMaterials = new List<UpgradeMaterial>();
 
+        [Header("Crafting Materials")]
+        [SerializeField] List<CraftingMaterial> craftingMaterials = new List<CraftingMaterial>();
+
         [Header("Key Items")]
         [SerializeField] List<KeyItem> keyItems = new List<KeyItem>();
 
@@ -71,7 +74,8 @@ namespace TraverserProject
         [SerializeField] int projectileItemKey = 8000;
         [SerializeField] int quickSlotItemKey = 9000;
         [SerializeField] int upgradeMaterialItemKey = 10000;
-        [SerializeField] int keyItemKey = 11000;
+        [SerializeField] int craftingMaterialItemKey = 11000;
+        [SerializeField] int keyItemKey = 12000;
 
         private void Awake()
         {
@@ -129,6 +133,11 @@ namespace TraverserProject
                 items.Add(item);
             }
 
+            foreach (var item in craftingMaterials)
+            {
+                items.Add(item);
+            }
+
             foreach (var item in quickSlotItems)
             {
                 items.Add(item);
@@ -161,6 +170,8 @@ namespace TraverserProject
                     prefixKey = projectileItemKey;
                 else if (items[i].GetType() == typeof(UpgradeMaterial))
                     prefixKey = upgradeMaterialItemKey;
+                else if (items[i].GetType() == typeof(CraftingMaterial))
+                    prefixKey = craftingMaterialItemKey;
                 else if (items[i].GetType() == typeof(QuickSlotItem))
                     prefixKey = quickSlotItemKey;
                 else if (items[i].GetType() == typeof(KeyItem))
@@ -220,6 +231,11 @@ namespace TraverserProject
         public UpgradeMaterial GetUpgradeMaterialByID(int ID)
         {
             return upgradeMaterials.FirstOrDefault(item => item.itemID == ID);
+        }
+
+        public CraftingMaterial GetCraftingMaterialByID(int ID)
+        {
+            return craftingMaterials.FirstOrDefault(item => item.itemID == ID);
         }
 
         public QuickSlotItem GetQuickSlotItemByID(int ID)
