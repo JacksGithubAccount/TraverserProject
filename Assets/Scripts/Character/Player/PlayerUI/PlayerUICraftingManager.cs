@@ -106,5 +106,15 @@ namespace TraverserProject
             }
             craftingItemInformationPrefabs.Clear();
         }
+        
+        public void DisplayIngredientMenuSelection()
+        {
+
+        }
+
+        public void DisplayItemCategoryIngredientSelection()
+        {
+
+        }
     }
 }
