@@ -12,6 +12,22 @@ namespace TraverserProject
         public TextMeshProUGUI itemAmountText;
         [SerializeField] public ItemCategory currentItemCategory;
 
+
+        public void AddItem(Item item, int amount)
+        {
+            if (item == null)
+            {
+                itemIcon.enabled = false;
+                return;
+            }
+
+            itemIcon.enabled = true;
+
+            //currentItem = item;
+            itemIcon.sprite = item.itemIcon;
+            itemAmountText.text = "x" + amount;
+            itemNameText.text = item.name;
+        }
         public void AddItemCategory(ItemCategory itemCategory, int amount)
         {
             itemIcon.enabled = true;

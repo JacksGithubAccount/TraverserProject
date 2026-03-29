@@ -23,6 +23,12 @@ namespace TraverserProject
         [SerializeField] Transform craftingItemInformationContentWindow;
         [HideInInspector] private List<GameObject> craftingItemInformationPrefabs = new List<GameObject>();
 
+        [Header("Ingredient Selection Window")]
+        [SerializeField] GameObject ingredientSelectionInformationWindow;
+        [SerializeField] GameObject ingredientSelectionInformationPrefab;
+        [SerializeField] Transform ingredientSelectionInformationContentWindow;
+        [HideInInspector] private List<GameObject> ingredientSelectionInformationPrefabs = new List<GameObject>();
+
         public override void OpenMenu()
         {
             base.OpenMenu();
@@ -107,9 +113,30 @@ namespace TraverserProject
             craftingItemInformationPrefabs.Clear();
         }
         
-        public void DisplayIngredientMenuSelection()
+        public void DisplayIngredientMenuSelection(Recipe recipe)
         {
+            ClearIngredientSelectionInformationPrefabs();
+            for (int i = 0; i < recipe.itemIngredients.Count; i++)
+            {
+                
+            }
 
+            for (int i = 0; i < recipe.itemCategoryIngredients.Count; i++)
+            {
+                GameObject craftingSlotGameObject = Instantiate(craftingItemInformationPrefab, craftingItemInformationContentWindow);
+                UI_CraftingIngredientMenuSelectionButton ingredientSelectionButton = craftingSlotGameObject.GetComponent<UI_CraftingIngredientMenuSelectionButton>();
+                ingredientSelectionButton.AddItemCategory(recipe.itemCategoryIngredients[i], recipe.itemCategoryIngredientsAmount[i]);
+                ingredientSelectionInformationPrefabs.Add(ingredientSelectionButton.gameObject);
+            }
+        }
+
+        private void ClearIngredientSelectionInformationPrefabs()
+        {
+            foreach (GameObject item in ingredientSelectionInformationPrefabs)
+            {
+                Destroy(item);
+            }
+            ingredientSelectionInformationPrefabs.Clear();
         }
 
         public void DisplayItemCategoryIngredientSelection()

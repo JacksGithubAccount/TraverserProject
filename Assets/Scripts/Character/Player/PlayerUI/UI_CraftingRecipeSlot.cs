@@ -36,7 +36,7 @@ namespace TraverserProject
 
         public void SelectRecipe() 
         {
-            PlayerUIManager.Singleton.playerUICraftingManager.DisplayIngredientMenuSelection();
+            PlayerUIManager.Singleton.playerUICraftingManager.DisplayIngredientMenuSelection(currentRecipe);
         }
 
         
