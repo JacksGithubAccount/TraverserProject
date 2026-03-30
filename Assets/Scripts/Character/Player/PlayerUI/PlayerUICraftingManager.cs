@@ -29,6 +29,12 @@ namespace TraverserProject
         [SerializeField] Transform ingredientSelectionInformationContentWindow;
         [HideInInspector] private List<GameObject> ingredientSelectionInformationPrefabs = new List<GameObject>();
 
+        [Header("Item Category Ingredient Selection Window")]
+        [SerializeField] GameObject itemCategoryIngredientSelectionInformationWindow;
+        [SerializeField] GameObject itemCategoryIngredientSelectionInformationPrefab;
+        [SerializeField] Transform itemCategoryIngredientSelectionInformationContentWindow;
+        [HideInInspector] private List<GameObject> itemCategoryIngredientSelectionInformationPrefabs = new List<GameObject>();
+
         public override void OpenMenu()
         {
             base.OpenMenu();
@@ -139,9 +145,40 @@ namespace TraverserProject
             ingredientSelectionInformationPrefabs.Clear();
         }
 
-        public void DisplayItemCategoryIngredientSelection()
+        public void DisplayItemCategoryIngredientSelection(ItemCategory itemCategory)
         {
+            PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+            List<CraftingMaterial> itemCategoryInInventory = new List<CraftingMaterial>();
 
+            for (int i = 0; i < player.playerInventoryManager.itemsInInventory.Count; i++)
+            {
+                CraftingMaterial craftingMaterial = player.playerInventoryManager.itemsInInventory[i] as CraftingMaterial;
+
+                if (craftingMaterial != null)
+                {
+                    if (craftingMaterial.itemCategory.Contains(itemCategory))
+                        itemCategoryInInventory.Add(craftingMaterial);
+                }
+            }
+
+            bool hasSelectedFirstInventorySlot = false;
+
+            for (int i = 0; i < itemCategoryInInventory.Count; i++)
+            {
+                GameObject inventorySlotGameObject = Instantiate(equipmentInventorySlotPrefab, equipmentInventoryContentWindow);
+                UI_EquipmentInventorySlot equipmentInventorySlot = inventorySlotGameObject.GetComponent<UI_EquipmentInventorySlot>();
+                equipmentInventorySlot.AddItem(weaponsInInventory[i]);
+                equipmentInventorySlotPrefabs.Add(equipmentInventorySlot.gameObject);
+
+                if (!hasSelectedFirstInventorySlot)
+                {
+                    hasSelectedFirstInventorySlot = true;
+                    Button inventorySlotButton = inventorySlotGameObject.GetComponent<Button>();
+                    inventorySlotButton.Select();
+                    inventorySlotButton.OnSelect(null);
+
+                }
+            }
         }
     }
 }

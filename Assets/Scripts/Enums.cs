@@ -263,6 +263,7 @@ public enum ThrowableType
 
 public enum ItemCategory
 {
+    None,
     Plant,
     Rock,
     Wood,
