@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using NUnit.Framework;
 
 namespace TraverserProject
 {
@@ -8,6 +9,8 @@ namespace TraverserProject
     {
         [Header("Menu")]
         [SerializeField] GameObject menu;
+
+        
 
         public virtual void OpenMenu()
         {
@@ -25,6 +28,14 @@ namespace TraverserProject
                 return;
 
             StartCoroutine(WaitThenOpenMenu());
+        }
+
+        public virtual void OpenSubMenu(GameObject subMenu)
+        {
+            if (!PlayerUIManager.Singleton.openSubmenus.Contains(subMenu))
+                PlayerUIManager.Singleton.openSubmenus.Push(subMenu);
+
+            subMenu.SetActive(true);
         }
 
         protected virtual IEnumerator WaitThenOpenMenu()
@@ -46,6 +57,16 @@ namespace TraverserProject
         {
             PlayerUIManager.Singleton.menuWindowIsOpen = false;
             menu.SetActive(false);
+        }
+
+        public virtual void CloseSubMenu()
+        {
+            GameObject subMenu;
+            if (PlayerUIManager.Singleton.openSubmenus.Count > 0)
+            {
+                subMenu = PlayerUIManager.Singleton.openSubmenus.Pop();
+                subMenu.SetActive(false);
+            }
         }
 
         public virtual void CloseMenuAfterFixedFrame()

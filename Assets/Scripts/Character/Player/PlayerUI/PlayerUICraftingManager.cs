@@ -23,6 +23,9 @@ namespace TraverserProject
         [SerializeField] Transform craftingItemInformationContentWindow;
         [HideInInspector] private List<GameObject> craftingItemInformationPrefabs = new List<GameObject>();
 
+        [Header("Crafting Input Window")]
+        [SerializeField] GameObject craftingInputWindow;
+
         [Header("Ingredient Selection Window")]
         [SerializeField] GameObject ingredientSelectionInformationWindow;
         [SerializeField] GameObject ingredientSelectionInformationPrefab;
@@ -122,6 +125,7 @@ namespace TraverserProject
         public void DisplayIngredientMenuSelection(Recipe recipe)
         {
             ClearIngredientSelectionInformationPrefabs();
+            OpenSubMenu(craftingInputWindow);
             for (int i = 0; i < recipe.itemIngredients.Count; i++)
             {
                 
@@ -129,8 +133,8 @@ namespace TraverserProject
 
             for (int i = 0; i < recipe.itemCategoryIngredients.Count; i++)
             {
-                GameObject craftingSlotGameObject = Instantiate(craftingItemInformationPrefab, craftingItemInformationContentWindow);
-                UI_CraftingIngredientMenuSelectionButton ingredientSelectionButton = craftingSlotGameObject.GetComponent<UI_CraftingIngredientMenuSelectionButton>();
+                GameObject ingredientSelectionGameObject = Instantiate(ingredientSelectionInformationPrefab, ingredientSelectionInformationContentWindow);
+                UI_CraftingIngredientMenuSelectionButton ingredientSelectionButton = ingredientSelectionGameObject.GetComponent<UI_CraftingIngredientMenuSelectionButton>();
                 ingredientSelectionButton.AddItemCategory(recipe.itemCategoryIngredients[i], recipe.itemCategoryIngredientsAmount[i]);
                 ingredientSelectionInformationPrefabs.Add(ingredientSelectionButton.gameObject);
             }
@@ -165,10 +169,10 @@ namespace TraverserProject
 
             for (int i = 0; i < itemCategoryInInventory.Count; i++)
             {
-                GameObject inventorySlotGameObject = Instantiate(equipmentInventorySlotPrefab, equipmentInventoryContentWindow);
-                UI_EquipmentInventorySlot equipmentInventorySlot = inventorySlotGameObject.GetComponent<UI_EquipmentInventorySlot>();
-                equipmentInventorySlot.AddItem(weaponsInInventory[i]);
-                equipmentInventorySlotPrefabs.Add(equipmentInventorySlot.gameObject);
+                GameObject inventorySlotGameObject = Instantiate(itemCategoryIngredientSelectionInformationPrefab, itemCategoryIngredientSelectionInformationContentWindow);
+                UI_ItemCategoryIngredientSelectionSlot itemCategoryIngredientSelectionSlot = inventorySlotGameObject.GetComponent<UI_ItemCategoryIngredientSelectionSlot>();
+                itemCategoryIngredientSelectionSlot.AddItem(itemCategoryInInventory[i]);
+                itemCategoryIngredientSelectionInformationPrefabs.Add(itemCategoryIngredientSelectionSlot.gameObject);
 
                 if (!hasSelectedFirstInventorySlot)
                 {

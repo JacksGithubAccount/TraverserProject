@@ -90,7 +90,7 @@ namespace TraverserProject
             base.OpenMenu();
 
             ToggleEquipmentButtons(true);
-            equipmentInventoryWindow.SetActive(false);
+            PlayerUIManager.Singleton.CloseAllSubMenuWindows();
             RefreshMenu();
             RefreshEquipmentSlotIcons();
         }
@@ -186,6 +186,7 @@ namespace TraverserProject
             }
 
             equipmentInventoryWindow.SetActive(false);
+            //CloseSubMenu();
         }
 
         private void RefreshEquipmentSlotIcons()
@@ -409,6 +410,7 @@ namespace TraverserProject
         {
             ToggleEquipmentButtons(false);
             equipmentInventoryWindow.SetActive(true);
+            //OpenSubMenu(equipmentInventoryWindow);
 
             switch (currentSelectedEquipmentSlot)
             {

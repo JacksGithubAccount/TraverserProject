@@ -753,6 +753,31 @@ namespace TraverserProject
                 }
                 else
                 {
+
+                        PlayerUIManager.Singleton.playerUIPopUpManager.CloseAllPopUpWindows();
+                        PlayerUIManager.Singleton.CloseAllMenuWindows();
+                    
+                }
+            }
+
+        }
+
+        private void HandleCloseUIInput()
+        {
+            if (closeMenuInput)
+            {
+                closeMenuInput = false;
+
+                if (!PlayerUIManager.Singleton.menuWindowIsOpen)
+                    return;
+
+                if (PlayerUIManager.Singleton.openSubmenus.Count > 0)
+                {
+                    var currentMenu = PlayerUIManager.Singleton.openMenus.Peek();
+                    currentMenu.CloseSubMenu();
+                }
+                else
+                {
                     var currentMenu = PlayerUIManager.Singleton.openMenus.Peek();
                     currentMenu.CloseMenu();
                     if (PlayerUIManager.Singleton.openMenus.Count > 0)
@@ -766,20 +791,7 @@ namespace TraverserProject
                         PlayerUIManager.Singleton.CloseAllMenuWindows();
                     }
                 }
-            }
 
-        }
-
-        private void HandleCloseUIInput()
-        {
-            if (closeMenuInput)
-            {
-                closeMenuInput = false;
-
-                if (PlayerUIManager.Singleton.menuWindowIsOpen)
-                {
-                    PlayerUIManager.Singleton.CloseAllMenuWindows();
-                }
             }
         }
     }

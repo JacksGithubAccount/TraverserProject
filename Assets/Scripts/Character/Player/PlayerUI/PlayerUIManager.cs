@@ -34,6 +34,7 @@ namespace TraverserProject
 
         [Header("Open Menus")]
         public Stack<PlayerUIMenu> openMenus = new Stack<PlayerUIMenu>();
+        public Stack<GameObject> openSubmenus = new Stack<GameObject>();
 
 
         private void Awake()
@@ -89,7 +90,7 @@ namespace TraverserProject
             playerUIAnvilMenuManager.CloseMenuAfterFixedFrame();
             playerUIBlacksmithMenuManager.CloseMenuAfterFixedFrame();
             playerUICraftingManager.CloseMenuAfterFixedFrame();
-
+            CloseAllSubMenuWindows();
             openMenus.Clear();
         }
 
@@ -100,6 +101,15 @@ namespace TraverserProject
                 menu.CloseMenu();
             }
             openMenus.Clear();
+        }
+
+        public void CloseAllSubMenuWindows()
+        {
+            foreach (var menu in openMenus)
+            {
+                menu.CloseSubMenu();
+            }
+            openSubmenus.Clear();
         }
 
         // UI SFX
