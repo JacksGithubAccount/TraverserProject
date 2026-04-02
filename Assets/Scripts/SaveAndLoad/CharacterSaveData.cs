@@ -65,6 +65,8 @@ namespace TraverserProject
 
         [Header("Doors")]
         public SerializableDictionary<int, bool> doorsOpened;
+        //alternative way to save door state
+        public List<string> doorsOpenedAlt;
 
         [Header("Shortcuts")]
         public SerializableDictionary<int, bool> shortcutsActivated;
@@ -126,7 +128,8 @@ namespace TraverserProject
             bossesDefeated = new SerializableDictionary<int, bool>();
             worldItemsLooted = new SerializableDictionary<int, bool>();
             doorsOpened = new SerializableDictionary<int, bool>();
-            shortcutsActivated = new SerializableDictionary<int, bool>();  
+            doorsOpenedAlt = new List<string>();
+            shortcutsActivated = new SerializableDictionary<int, bool>();
 
             weaponsInInventory = new List<SerializableWeapon>();
             projectilesInInventory = new List<SerializableRangedProjectile>();
