@@ -75,11 +75,25 @@ namespace TraverserProject
             highlightIcon.enabled = false;
         }
 
-        public void SelectItemCategory()
+        public void ButtonClick()
         {
-            if (currentItemCategory == ItemCategory.None)
-                return;
+            if (currentItem != null)
+            {
+                SelectItem();
+            }
+            else if (currentItemCategory != ItemCategory.None)
+            {
+                SelectItemCategory();
+            }
+        }
 
+        private void SelectItem()
+        {
+            //should do nothing or indicate that item is fulfilled/unfulfilled
+        }
+
+        private void SelectItemCategory()
+        {
             PlayerUIManager.Singleton.playerUICraftingManager.DisplayItemCategoryIngredientSelection(currentItemCategory);
         }
     }

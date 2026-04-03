@@ -14,6 +14,7 @@ namespace TraverserProject
         [SerializeField] GameObject craftingRecipeSlotPrefab;
         [SerializeField] Transform craftingRecipeContentWindow;
         [SerializeField] Recipe currentlySelectedRecipe;
+        [HideInInspector] private List<GameObject> craftingRecipeSlotPrefabs = new List<GameObject>();
 
         [Header("Recipe Information Window")]
         [SerializeField] GameObject craftingItemInformationWindow;
@@ -67,11 +68,13 @@ namespace TraverserProject
 
             bool hasSelectedFirstInventorySlot = false;
 
+            ClearGameObjectPrefabs(craftingRecipeSlotPrefabs);
             for (int i = 0; i < player.playerRecipeManager.recipesLearnt.Count; i++)
             {
                 GameObject craftingSlotGameObject = Instantiate(craftingRecipeSlotPrefab, craftingRecipeContentWindow);
                 UI_CraftingRecipeSlot craftingRecipeSlot = craftingSlotGameObject.GetComponent<UI_CraftingRecipeSlot>();
                 craftingRecipeSlot.AddRecipe(player.playerRecipeManager.recipesLearnt[i]);
+                craftingRecipeSlotPrefabs.Add(craftingRecipeSlot.gameObject);
 
                 if (!hasSelectedFirstInventorySlot)
                 {
@@ -85,6 +88,15 @@ namespace TraverserProject
 
         }
 
+        private void ClearGameObjectPrefabs(List<GameObject> listOfGameObjectPrefabs)
+        {
+            foreach (GameObject item in listOfGameObjectPrefabs)
+            {
+                Destroy(item);
+            }
+            listOfGameObjectPrefabs.Clear();
+        }
+
         public void CraftSelectedItem()
         {
 
@@ -92,7 +104,7 @@ namespace TraverserProject
 
         public void DisplayRecipeInformation(Recipe recipe)
         {
-            ClearCraftingItemInformationPrefabs();
+            ClearGameObjectPrefabs(craftingItemInformationPrefabs);
             craftingItemInformationText.text = recipe.craftedItem.itemName;
             craftingItemInformationImage.sprite = recipe.craftedItem.itemIcon;
 
@@ -112,23 +124,17 @@ namespace TraverserProject
                 craftingItemInformationPrefabs.Add(craftingItemInformationSlot.gameObject);
             }
         }
-
-        private void ClearCraftingItemInformationPrefabs()
-        {
-            foreach(GameObject item in craftingItemInformationPrefabs)
-            {
-                Destroy(item);
-            }
-            craftingItemInformationPrefabs.Clear();
-        }
         
         public void DisplayIngredientMenuSelection(Recipe recipe)
         {
-            ClearIngredientSelectionInformationPrefabs();
+            ClearGameObjectPrefabs(ingredientSelectionInformationPrefabs);
             OpenSubMenu(craftingInputWindow);
             for (int i = 0; i < recipe.itemIngredients.Count; i++)
             {
-                
+                GameObject ingredientSelectionGameObject = Instantiate(ingredientSelectionInformationPrefab, ingredientSelectionInformationContentWindow);
+                UI_CraftingIngredientMenuSelectionButton ingredientSelectionButton = ingredientSelectionGameObject.GetComponent<UI_CraftingIngredientMenuSelectionButton>();
+                ingredientSelectionButton.AddItem(recipe.itemIngredients[i], recipe.itemIngredientsAmount[i]);
+                ingredientSelectionInformationPrefabs.Add(ingredientSelectionButton.gameObject);
             }
 
             for (int i = 0; i < recipe.itemCategoryIngredients.Count; i++)
@@ -139,15 +145,7 @@ namespace TraverserProject
                 ingredientSelectionInformationPrefabs.Add(ingredientSelectionButton.gameObject);
             }
         }
-
-        private void ClearIngredientSelectionInformationPrefabs()
-        {
-            foreach (GameObject item in ingredientSelectionInformationPrefabs)
-            {
-                Destroy(item);
-            }
-            ingredientSelectionInformationPrefabs.Clear();
-        }
+   
 
         public void DisplayItemCategoryIngredientSelection(ItemCategory itemCategory)
         {

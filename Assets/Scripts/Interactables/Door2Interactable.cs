@@ -26,6 +26,14 @@ namespace TraverserProject
         [SerializeField] AudioSource audioSource;
         [SerializeField] private AudioClip doorOpeningSFX;
 
+        [Header("Levers & Buttons")]
+        [SerializeField] ActivateOtherInteractableInteractable[] leversAndButtons;
+
+        [Header("Cannot Open From This Side")]
+        [SerializeField]
+        MessageInteractable cannotOpenFromThisSideInteractable;
+
+
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
@@ -59,18 +67,40 @@ namespace TraverserProject
             isOpen.OnValueChanged -= OnIsOpenChanged;
         }
 
+        private void DisableDoorInteractions()
+        {
+            if (interactableCollider != null)
+                interactableCollider.enabled = false;
+
+            for (int i = 0; i > leversAndButtons.Length; i++)
+            {
+                if (leversAndButtons[i] == null)
+                    continue;
+
+                leversAndButtons[i].interactableCollider.enabled = false;
+                PlayerUIManager.Singleton.localPlayer.playerInteractionManager.RemoveInteractionFromList(leversAndButtons[i]);
+            }
+
+            if (cannotOpenFromThisSideInteractable != null)
+            {
+                cannotOpenFromThisSideInteractable.interactableCollider.enabled = false;
+                PlayerUIManager.Singleton.localPlayer.playerInteractionManager.RemoveInteractionFromList(cannotOpenFromThisSideInteractable);
+            }
+        }
+
         private void OnIsOpenChanged(bool oldStatus, bool newStatus)
         {
             if (isOpen.Value)
             {
-                interactableCollider.enabled = false;
-
+                DisableDoorInteractions();
             }
         }
 
         public override void Interact(PlayerManager player)
         {
-            base.Interact(player);
+            PlayerUIManager.Singleton.playerUIPopUpManager.CloseAllPopUpWindows();
+
+            WorldSaveGameManager.Singleton.SaveGame();
 
             if (requiresItem && PlayerHasKey(player))
             {
@@ -96,8 +126,7 @@ namespace TraverserProject
             if (isOpen.Value)
             {
                 animator.Play(openedDoorAnimation);
-
-                //disable cannot open from this side collider
+                DisableDoorInteractions();
             }
 
         }
@@ -137,7 +166,9 @@ namespace TraverserProject
         {
             animator.Play(openDoorAnimation);
             audioSource.PlayOneShot(doorOpeningSFX);
-            interactableCollider.enabled = false;
+
+            if (interactableCollider != null)
+                interactableCollider.enabled = false;
         }
     }
 }
