@@ -164,6 +164,7 @@ namespace TraverserProject
             }
 
             bool hasSelectedFirstInventorySlot = false;
+            ClearGameObjectPrefabs(itemCategoryIngredientSelectionInformationPrefabs);
 
             for (int i = 0; i < itemCategoryInInventory.Count; i++)
             {
