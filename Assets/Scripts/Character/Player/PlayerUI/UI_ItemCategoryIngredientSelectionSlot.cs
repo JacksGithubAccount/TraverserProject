@@ -35,7 +35,25 @@ namespace TraverserProject
 
         public void SelectItem()
         {
+            PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+            Item equippedItem;
 
-        }
+            switch (PlayerUIManager.Singleton.playerUIEquipmentManager.currentSelectedEquipmentSlot)
+            {
+                case EquipmentType.RightWeapon01:
+                    equippedItem = player.playerInventoryManager.weaponsInRightHandSlots[0];
+                    if (equippedItem.itemID != WorldItemDatabase.Singleton.unarmedWeapon.itemID)
+                    {
+                        player.playerInventoryManager.AddItemToInventory(equippedItem);
+                    }
+                    player.playerInventoryManager.weaponsInRightHandSlots[0] = currentItem as WeaponItem;
+                    player.playerInventoryManager.RemoveItemFromInventory(currentItem);
+
+                    if (player.playerInventoryManager.rightHandWeaponIndex == 0)
+                        player.playerNetworkManager.currentRightHandWeaponID.Value = currentItem.itemID;
+
+                    PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
+                    break;
+            }
     }
 }

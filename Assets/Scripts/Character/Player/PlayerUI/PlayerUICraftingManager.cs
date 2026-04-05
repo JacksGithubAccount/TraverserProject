@@ -38,6 +38,7 @@ namespace TraverserProject
         [SerializeField] GameObject itemCategoryIngredientSelectionInformationPrefab;
         [SerializeField] Transform itemCategoryIngredientSelectionInformationContentWindow;
         [HideInInspector] private List<GameObject> itemCategoryIngredientSelectionInformationPrefabs = new List<GameObject>();
+        [HideInInspector] public List<Item> selectedItems = new List<Item>();
 
         public override void OpenMenu()
         {
