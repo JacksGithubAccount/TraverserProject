@@ -1,18 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UI_Level_Up_Arrow_Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UI_Level_Up_Arrow_Button : UI_Arrow_Button, IPointerEnterHandler, IPointerExitHandler
 {
-    public bool mouseOverArrow = false;
-
-    public void OnPointerEnter(PointerEventData eventData)
+    public override void OnPointerExit(PointerEventData eventData)
     {
-        mouseOverArrow = true;
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        mouseOverArrow = false;
+        base.OnPointerExit(eventData);
         gameObject.SetActive(false);
     }
 }

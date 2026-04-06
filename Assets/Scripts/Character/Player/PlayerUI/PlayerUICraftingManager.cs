@@ -38,7 +38,19 @@ namespace TraverserProject
         [SerializeField] GameObject itemCategoryIngredientSelectionInformationPrefab;
         [SerializeField] Transform itemCategoryIngredientSelectionInformationContentWindow;
         [HideInInspector] private List<GameObject> itemCategoryIngredientSelectionInformationPrefabs = new List<GameObject>();
+
+        [Header("Craft Button")]
         [HideInInspector] public List<Item> selectedItems = new List<Item>();
+        public UI_CraftingIngredientMenuSelectionButton currentlySelectedIngredientMenuButton;
+        public Slider craftItemAmountSlider;
+        [SerializeField] TextMeshProUGUI craftingItemAmountText;
+        [SerializeField] Button CraftConfimButton;
+
+        [Header("Text Colors")]
+        [SerializeField] Color standardColor = Color.white;
+        [SerializeField] Color negativeColor = Color.red;
+        [SerializeField] Color positiveColor = Color.blue;
+
 
         public override void OpenMenu()
         {
@@ -151,6 +163,8 @@ namespace TraverserProject
         public void DisplayItemCategoryIngredientSelection(ItemCategory itemCategory)
         {
             PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+
+            itemCategoryIngredientSelectionInformationWindow.SetActive(true);
             List<CraftingMaterial> itemCategoryInInventory = new List<CraftingMaterial>();
 
             for (int i = 0; i < player.playerInventoryManager.itemsInInventory.Count; i++)
@@ -183,6 +197,76 @@ namespace TraverserProject
 
                 }
             }
+        }
+        public void SelectIngredientMenuButtonSlot(UI_CraftingIngredientMenuSelectionButton ingredientMenuSelectionButton)
+        {
+            currentlySelectedIngredientMenuButton = ingredientMenuSelectionButton;
+        }
+        public void SelectLastSelectedIngredientMenuButton()
+        {
+            Button lastSelectedButton = null;
+            //ToggleEquipmentButtons(true);
+            lastSelectedButton = currentlySelectedIngredientMenuButton.GetComponent<Button>();
+
+            if (lastSelectedButton != null)
+            {
+                lastSelectedButton.Select();
+                lastSelectedButton.OnSelect(null);
+            }
+
+            itemCategoryIngredientSelectionInformationWindow.SetActive(false);
+            //CloseSubMenu();
+        }
+
+        public void UpdateSliderBasedOnCraftItemAmount()
+        {
+            PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+
+
+
+            craftingItemAmountText.text = "x" + craftItemAmountSlider.value.ToString();
+
+            foreach (var item in ingredientSelectionInformationPrefabs)
+            {
+                UI_CraftingIngredientMenuSelectionButton button;
+                button = item.GetComponent<UI_CraftingIngredientMenuSelectionButton>();
+
+                if (button == null)
+                    continue;
+
+                button.UpdateItemRequirementTextBasedOnCraftItemAmounts((int)craftItemAmountSlider.value);
+
+                if (button.selectedItem == null)
+                    return;
+
+                if (button.currentTotalItemAmountRequired > button.selectedItem.currentItemAmount)
+                {
+                    CraftConfimButton.interactable = false;
+                }
+                else
+                {
+                    CraftConfimButton.interactable = true;
+                }
+
+                ChangeTextFieldToSpecificColorBasedOnAmount(button.itemAmountText, button.selectedItem.currentItemAmount, button.currentTotalItemAmountRequired);
+            }
+
+        }
+
+        private void ChangeTextFieldToSpecificColorBasedOnAmount(TextMeshProUGUI textField, int itemAmount, int requiredAmount)
+        {
+            if (requiredAmount == itemAmount)
+                textField.color = standardColor;
+
+            if (requiredAmount > itemAmount)
+            {
+                textField.color = negativeColor;
+            }
+            else
+            {
+                textField.color = standardColor;
+            }
+
         }
     }
 }

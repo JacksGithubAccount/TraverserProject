@@ -13,6 +13,9 @@ namespace TraverserProject
         public TextMeshProUGUI itemAmountText;
         [SerializeField] public Item currentItem;
         [SerializeField] public ItemCategory currentItemCategory;
+        [SerializeField] public int currentItemAmountRequired;
+        [SerializeField] public int currentTotalItemAmountRequired;
+        [SerializeField] public Item selectedItem;
         public bool hasItemsInInventory = false;
 
 
@@ -38,10 +41,11 @@ namespace TraverserProject
                 amountInInventory = itemInPlayerInventory.currentItemAmount;
 
             currentItem = item;
-            itemAmountText.text = amountInInventory + "/" + amountRequired;
+            currentItemAmountRequired = amountRequired;
+            itemAmountText.text = amountInInventory + "/" + currentItemAmountRequired;
             itemNameText.text = item.name;
         }
-        public void AddItemCategory(ItemCategory itemCategory, int amount)
+        public void AddItemCategory(ItemCategory itemCategory, int amountRequired)
         {
             itemIcon.enabled = true;
             PlayerManager player = PlayerUIManager.Singleton.localPlayer;
@@ -60,10 +64,27 @@ namespace TraverserProject
 
             currentItemCategory = itemCategory;
 
-                itemAmountText.text = "0/" + amount;
-                itemNameText.text = itemCategory.ToString();
-            
+            currentItemAmountRequired = amountRequired;
+            itemAmountText.text = "0/" + currentItemAmountRequired;
+            itemNameText.text = itemCategory.ToString();           
 
+        }
+
+        public void AddSelectedItem(Item item)
+        {
+            selectedItem = item;
+            
+            itemAmountText.text = selectedItem.currentItemAmount + "/" + currentItemAmountRequired;
+            PlayerUIManager.Singleton.playerUICraftingManager.SelectLastSelectedIngredientMenuButton();
+        }
+
+        public void UpdateItemRequirementTextBasedOnCraftItemAmounts(int amount)
+        {
+            currentTotalItemAmountRequired = currentItemAmountRequired * amount;
+            if(selectedItem == null)
+                itemAmountText.text = "0" + "/" + currentTotalItemAmountRequired;
+            else
+                itemAmountText.text = selectedItem.currentItemAmount + "/" + currentTotalItemAmountRequired;
         }
         public void SelectSlot()
         {
@@ -77,6 +98,7 @@ namespace TraverserProject
 
         public void ButtonClick()
         {
+            PlayerUIManager.Singleton.playerUICraftingManager.SelectIngredientMenuButtonSlot(this);
             if (currentItem != null)
             {
                 SelectItem();
