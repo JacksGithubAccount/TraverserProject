@@ -112,7 +112,34 @@ namespace TraverserProject
 
         public void CraftSelectedItem()
         {
+            PlayerManager player = PlayerUIManager.Singleton.localPlayer;
 
+            PlayerUIManager.Singleton.ConfirmSFX();
+            CloseSubMenu();
+
+            //adds crafted item to inventory
+            Item craftedItem = currentlySelectedRecipe.craftedItem;
+            craftedItem.currentItemAmount = (int)craftItemAmountSlider.value;
+            player.playerInventoryManager.AddItemToInventory(craftedItem);
+
+            //removes ingredients from inventory
+            List<Item> ingredients = new List<Item>();
+            foreach (var prefab in ingredientSelectionInformationPrefabs)
+            {
+                UI_CraftingIngredientMenuSelectionButton button;
+                button = prefab.GetComponent<UI_CraftingIngredientMenuSelectionButton>();
+
+                if (button == null)
+                    continue;
+
+                Item ingredient = button.currentItem;
+                ingredient.currentItemAmount = button.currentTotalItemAmountRequired;
+                ingredients.Add(ingredient);
+            }
+            foreach(Item ingredient in ingredients)
+            {
+                player.playerInventoryManager.RemoveItemFromInventory(ingredient);
+            }
         }
 
         public void DisplayRecipeInformation(Recipe recipe)

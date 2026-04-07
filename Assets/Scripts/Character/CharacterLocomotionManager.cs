@@ -26,7 +26,11 @@ namespace TraverserProject
         public bool canRoll = true;
         public bool isRidingLift = false;
         public bool isOpeningDoor = false;
-        public bool isOnLadder = false;
+        public bool isOnLadder = false; //for ladder1
+        public bool isExitingLadder = false;
+        [HideInInspector] public bool canExitTopOfLadder = false;
+        [HideInInspector] public bool canExitLadderWithRightHand = false;
+        [HideInInspector] public bool canExitLadderWithLeftHand = false;
 
         public bool isSliding = false;
         public bool isSlidingOffCharacter = false;
@@ -59,7 +63,7 @@ namespace TraverserProject
             SetGroundedVelocity();
             HandleSlopeSlideCheck();
 
-            
+
 
             if (character.characterLocomotionManager.isGrounded)
             {
@@ -146,6 +150,16 @@ namespace TraverserProject
         public void DisableCanMove()
         {
             canMove = false;
+        }
+
+        public void EnableCanRoll()
+        {
+            canRoll = true;
+        }
+
+        public void DisableCanRoll()
+        {
+            canRoll = false;
         }
 
         //slopes and sliding
