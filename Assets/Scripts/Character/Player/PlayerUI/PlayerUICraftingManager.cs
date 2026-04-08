@@ -167,6 +167,7 @@ namespace TraverserProject
         
         public void DisplayIngredientMenuSelection(Recipe recipe)
         {
+            currentlySelectedRecipe = recipe;
             ClearGameObjectPrefabs(ingredientSelectionInformationPrefabs);
             OpenSubMenu(craftingInputWindow);
             for (int i = 0; i < recipe.itemIngredients.Count; i++)
