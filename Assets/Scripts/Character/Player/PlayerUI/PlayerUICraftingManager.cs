@@ -118,7 +118,7 @@ namespace TraverserProject
             CloseSubMenu();
 
             //adds crafted item to inventory
-            Item craftedItem = currentlySelectedRecipe.craftedItem;
+            Item craftedItem = Instantiate(currentlySelectedRecipe.craftedItem);
             craftedItem.currentItemAmount = (int)craftItemAmountSlider.value;
             player.playerInventoryManager.AddItemToInventory(craftedItem);
 
@@ -132,7 +132,7 @@ namespace TraverserProject
                 if (button == null)
                     continue;
 
-                Item ingredient = button.currentItem;
+                Item ingredient = Instantiate(button.selectedItem);
                 ingredient.currentItemAmount = button.currentTotalItemAmountRequired;
                 ingredients.Add(ingredient);
             }
@@ -185,6 +185,7 @@ namespace TraverserProject
                 ingredientSelectionButton.AddItemCategory(recipe.itemCategoryIngredients[i], recipe.itemCategoryIngredientsAmount[i]);
                 ingredientSelectionInformationPrefabs.Add(ingredientSelectionButton.gameObject);
             }
+            craftItemAmountSlider.value = 1;
         }
    
 

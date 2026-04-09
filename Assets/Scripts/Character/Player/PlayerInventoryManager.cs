@@ -38,7 +38,52 @@ namespace TraverserProject
 
         public void AddItemToInventory(Item item)
         {
-            itemsInInventory.Add(item);
+            bool isStackable = false;
+
+            if (item.maxItemAmount > 1)
+                isStackable = true;
+
+            if (isStackable)
+            {
+                bool isInQuickSlot = false;
+
+                foreach(var qsItem in quickSlotItemsInQuickSlots)
+                {
+                    if (qsItem.itemID == item.itemID)
+                        isInQuickSlot = true;
+                }
+
+                if (isInQuickSlot)
+                {
+                    foreach (var qsItem in quickSlotItemsInQuickSlots)
+                    {
+                        if (qsItem.itemID == item.itemID)
+                        { 
+                            qsItem.currentItemAmount += item.currentItemAmount;
+
+                            if (qsItem.currentItemAmount > 99)
+                                qsItem.currentItemAmount = 99;
+                        }
+                    }
+                }
+
+                if (itemsInInventory.Find(x => x.itemID == item.itemID) && !isInQuickSlot)
+                {
+                    Item itemInInventory = itemsInInventory.Find(x => x.itemID == item.itemID);
+                    itemInInventory.currentItemAmount += item.currentItemAmount;
+
+                    if (itemInInventory.currentItemAmount > 99)
+                        itemInInventory.currentItemAmount = 99;
+                }
+                else if(!itemsInInventory.Find(x => x.itemID == item.itemID) && !isInQuickSlot)
+                {
+                    itemsInInventory.Add(item);
+                }
+            }
+            else
+            {
+                itemsInInventory.Add(item);
+            }
         }
 
         public void RemoveItemFromInventory(Item item)

@@ -11,11 +11,11 @@ namespace TraverserProject
         public Image highlightIcon;
         public TextMeshProUGUI itemNameText;
         public TextMeshProUGUI itemAmountText;
-        [SerializeField] public Item currentItem;
+        [SerializeField] public Item currentItem; //generated when  button is created
         [SerializeField] public ItemCategory currentItemCategory;
         [SerializeField] public int currentItemAmountRequired;
         [SerializeField] public int currentTotalItemAmountRequired;
-        [SerializeField] public Item selectedItem;
+        [SerializeField] public Item selectedItem; //item chosen from item category goes here
         public bool hasItemsInInventory = false;
 
 
@@ -42,6 +42,7 @@ namespace TraverserProject
 
             currentItem = item;
             currentItemAmountRequired = amountRequired;
+            currentTotalItemAmountRequired = amountRequired;
             itemAmountText.text = amountInInventory + "/" + currentItemAmountRequired;
             itemNameText.text = item.name;
         }
@@ -65,6 +66,7 @@ namespace TraverserProject
             currentItemCategory = itemCategory;
 
             currentItemAmountRequired = amountRequired;
+            currentTotalItemAmountRequired = amountRequired;
             itemAmountText.text = "0/" + currentItemAmountRequired;
             itemNameText.text = itemCategory.ToString();           
 
@@ -74,7 +76,7 @@ namespace TraverserProject
         {
             selectedItem = item;
             
-            itemAmountText.text = selectedItem.currentItemAmount + "/" + currentItemAmountRequired;
+            itemAmountText.text = selectedItem.currentItemAmount + "/" + currentTotalItemAmountRequired;
             PlayerUIManager.Singleton.playerUICraftingManager.SelectLastSelectedIngredientMenuButton();
         }
 
