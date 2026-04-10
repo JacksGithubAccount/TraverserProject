@@ -44,7 +44,7 @@ namespace TraverserProject
         public UI_CraftingIngredientMenuSelectionButton currentlySelectedIngredientMenuButton;
         public Slider craftItemAmountSlider;
         [SerializeField] TextMeshProUGUI craftingItemAmountText;
-        [SerializeField] Button CraftConfimButton;
+        [SerializeField] Button craftConfimButton;
 
         [Header("Text Colors")]
         [SerializeField] Color standardColor = Color.white;
@@ -186,6 +186,8 @@ namespace TraverserProject
                 ingredientSelectionInformationPrefabs.Add(ingredientSelectionButton.gameObject);
             }
             craftItemAmountSlider.value = 1;
+            craftConfimButton.interactable = false;
+            UpdateSliderBasedOnCraftItemAmount();
         }
    
 
@@ -243,6 +245,7 @@ namespace TraverserProject
                 lastSelectedButton.OnSelect(null);
             }
 
+            UpdateSliderBasedOnCraftItemAmount();
             itemCategoryIngredientSelectionInformationWindow.SetActive(false);
             //CloseSubMenu();
         }
@@ -255,6 +258,7 @@ namespace TraverserProject
 
             craftingItemAmountText.text = "x" + craftItemAmountSlider.value.ToString();
 
+            bool sufficientIndredientAmount = true;
             foreach (var item in ingredientSelectionInformationPrefabs)
             {
                 UI_CraftingIngredientMenuSelectionButton button;
@@ -265,19 +269,26 @@ namespace TraverserProject
 
                 button.UpdateItemRequirementTextBasedOnCraftItemAmounts((int)craftItemAmountSlider.value);
 
-                if (button.selectedItem == null)
-                    return;
-
-                if (button.currentTotalItemAmountRequired > button.selectedItem.currentItemAmount)
+                if (button.selectedItem != null)
                 {
-                    CraftConfimButton.interactable = false;
+
+                    if (button.currentTotalItemAmountRequired > button.selectedItem.currentItemAmount)
+                    {
+                        craftConfimButton.interactable = false;
+                        sufficientIndredientAmount = false;
+                    }
+                    ChangeTextFieldToSpecificColorBasedOnAmount(button.itemAmountText, button.selectedItem.currentItemAmount, button.currentTotalItemAmountRequired);
                 }
                 else
                 {
-                    CraftConfimButton.interactable = true;
-                }
+                    sufficientIndredientAmount = false;
+                    ChangeTextFieldToSpecificColorBasedOnAmount(button.itemAmountText, 0, button.currentTotalItemAmountRequired);
+                }                    
+            }
 
-                ChangeTextFieldToSpecificColorBasedOnAmount(button.itemAmountText, button.selectedItem.currentItemAmount, button.currentTotalItemAmountRequired);
+            if(sufficientIndredientAmount)
+            {
+                craftConfimButton.interactable = true;
             }
 
         }
