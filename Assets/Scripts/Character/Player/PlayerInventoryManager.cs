@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ namespace TraverserProject
 
     public class PlayerInventoryManager : CharacterInventoryManager
     {
+        PlayerManager player;
+
         [Header("Weapons")]
         public WeaponItem currentRightHandWeapon;
         public WeaponItem currentLeftHandWeapon;
@@ -36,6 +39,91 @@ namespace TraverserProject
         [Header("Inventory")]
         public List<Item> itemsInInventory;
 
+        [Header("Debug")]
+        [SerializeField] bool dropItem = false;
+
+
+        protected override void Awake()
+        {
+            base.Awake();
+            player = GetComponent<PlayerManager>();
+        }
+
+        private void Update()
+        {
+            if (dropItem)
+            {
+                dropItem = false;
+                Item test = new Item();
+                test.itemID = 28;
+                test.currentItemAmount = 1;
+
+                DropItemFromInventory(test);
+            }
+        }
+
+        public bool CheckIfItemIsInInventoryOrEquipSlots(Item item)
+        {
+            bool isInInventoryorEquipped = false;
+
+            isInInventoryorEquipped = itemsInInventory.Contains(item);
+            if (!isInInventoryorEquipped)
+            {
+                foreach (var qsItem in quickSlotItemsInQuickSlots)
+                {
+                    if (qsItem.itemID == item.itemID)
+                        isInInventoryorEquipped = true;
+                }
+                foreach (var rhItem in weaponsInRightHandSlots)
+                {
+                    if (rhItem.itemID == item.itemID)
+                        isInInventoryorEquipped = true;
+                }
+                foreach (var lhItem in weaponsInLeftHandSlots)
+                {
+                    if (lhItem.itemID == item.itemID)
+                        isInInventoryorEquipped = true;
+                }
+
+            }
+
+            return isInInventoryorEquipped;
+        }
+
+        public Item GetItemInInventoryOrEquipSlots(Item item)
+        {
+            Item itemInInventoryOrEquipped;
+
+            itemInInventoryOrEquipped = player.playerInventoryManager.itemsInInventory.Find(x => x.itemID == item.itemID);
+
+            if (itemInInventoryOrEquipped == null)
+            {
+                foreach (var qsItem in quickSlotItemsInQuickSlots)
+                {
+                    if (qsItem.itemID == item.itemID)
+                        itemInInventoryOrEquipped = qsItem;
+                }
+                if (itemInInventoryOrEquipped == null)
+                {
+                    foreach (var rhItem in weaponsInRightHandSlots)
+                    {
+                        if (rhItem.itemID == item.itemID)
+                            itemInInventoryOrEquipped = rhItem;
+                    }
+
+                    if (itemInInventoryOrEquipped == null)
+                    {
+                        foreach (var lhItem in weaponsInLeftHandSlots)
+                        {
+                            if (lhItem.itemID == item.itemID)
+                                itemInInventoryOrEquipped = lhItem;
+                        }
+                    }
+                }
+            }
+
+            return itemInInventoryOrEquipped;
+        }
         public void AddItemToInventory(Item item)
         {
             bool isStackable = false;
@@ -119,6 +207,17 @@ namespace TraverserProject
                     itemsInInventory.RemoveAt(i);
                 }
             }
+        }
+
+        public void DropItemFromInventory(Item item)
+        {
+
+            GameObject itemDrop = Instantiate(WorldItemDatabase.Singleton.inventoryDropItemPickUpInteractable);
+            itemDrop.transform.position = player.transform.position;
+            PickUpItemInteractable itemInteractable = itemDrop.GetComponent<PickUpItemInteractable>();
+            itemInteractable.itemID.Value = item.itemID;
+            itemInteractable.itemAmount = item.currentItemAmount;
+            //RemoveItemFromInventory(item);
         }
     }
 }

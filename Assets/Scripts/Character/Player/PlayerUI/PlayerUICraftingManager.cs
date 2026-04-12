@@ -1,3 +1,4 @@
+using Steamworks.Ugc;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
@@ -9,6 +10,10 @@ namespace TraverserProject
 {
     public class PlayerUICraftingManager : PlayerUIMenu
     {
+        [Header("Craft Message Pop Up")]
+        [SerializeField] GameObject craftMessagePopUpGameObject;
+        [SerializeField] TextMeshProUGUI craftMessagePopUpText;
+
         [Header("Recipes Window")]
         [SerializeField] GameObject craftingRecipeWindow;
         [SerializeField] GameObject craftingRecipeSlotPrefab;
@@ -58,6 +63,13 @@ namespace TraverserProject
 
             CheckForUnlockedRecipes();
 
+        }
+
+        public void SendCraftMessagePopUp(string messageText)
+        {
+            craftMessagePopUpText.text = messageText;
+            //craftMessagePopUpGameObject.SetActive(true);
+            OpenSubMenu(craftMessagePopUpGameObject);
         }
 
         private void CheckForUnlockedRecipes()
@@ -185,9 +197,18 @@ namespace TraverserProject
                 ingredientSelectionButton.AddItemCategory(recipe.itemCategoryIngredients[i], recipe.itemCategoryIngredientsAmount[i]);
                 ingredientSelectionInformationPrefabs.Add(ingredientSelectionButton.gameObject);
             }
+            //resets craft mount
             craftItemAmountSlider.value = 1;
+
             craftConfimButton.interactable = false;
             UpdateSliderBasedOnCraftItemAmount();
+
+            //changes max craftable so you cant craft more than mx stacks
+            if (PlayerUIManager.Singleton.localPlayer.playerInventoryManager.CheckIfItemIsInInventoryOrEquipSlots(currentlySelectedRecipe.craftedItem))
+            {
+                Item item = PlayerUIManager.Singleton.localPlayer.playerInventoryManager.GetItemInInventoryOrEquipSlots(currentlySelectedRecipe.craftedItem);
+                craftItemAmountSlider.maxValue = item.maxItemAmount - item.currentItemAmount;
+            }
         }
    
 
@@ -236,7 +257,6 @@ namespace TraverserProject
         public void SelectLastSelectedIngredientMenuButton()
         {
             Button lastSelectedButton = null;
-            //ToggleEquipmentButtons(true);
             lastSelectedButton = currentlySelectedIngredientMenuButton.GetComponent<Button>();
 
             if (lastSelectedButton != null)
@@ -247,14 +267,29 @@ namespace TraverserProject
 
             UpdateSliderBasedOnCraftItemAmount();
             itemCategoryIngredientSelectionInformationWindow.SetActive(false);
-            //CloseSubMenu();
+        }
+
+        public bool CheckInventoryForFullItemStack(Item item)
+        {
+            bool isInventoryItemStackFull = false;
+
+            if (PlayerUIManager.Singleton.localPlayer.playerInventoryManager.itemsInInventory.Contains(item))
+            {
+                foreach (var itemInInventory in PlayerUIManager.Singleton.localPlayer.playerInventoryManager.itemsInInventory)
+                {
+                    if (itemInInventory.itemID == item.itemID)
+                    {
+                        if (itemInInventory.currentItemAmount + currentlySelectedRecipe.craftedItemAmount > item.maxItemAmount)
+                            isInventoryItemStackFull = true;
+                    }
+                }
+            }
+            return isInventoryItemStackFull;
         }
 
         public void UpdateSliderBasedOnCraftItemAmount()
         {
             PlayerManager player = PlayerUIManager.Singleton.localPlayer;
-
-
 
             craftingItemAmountText.text = "x" + craftItemAmountSlider.value.ToString();
 

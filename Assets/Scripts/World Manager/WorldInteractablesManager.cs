@@ -14,6 +14,8 @@ namespace TraverserProject
         public List<SiteOfGraceInteractable> siteOfGraceInteractables = new List<SiteOfGraceInteractable>();
         public List<DoorInteractable> doorInteractables = new List<DoorInteractable>();
 
+        
+
 
         private void Awake()
         {

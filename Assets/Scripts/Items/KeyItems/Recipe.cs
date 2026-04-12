@@ -8,6 +8,7 @@ namespace TraverserProject
     public class Recipe : KeyItem
     {
         public Item craftedItem;
+        public int craftedItemAmount;
         public List<Item> itemIngredients;
         public List<int> itemIngredientsAmount;
         public List<ItemCategory> itemCategoryIngredients;

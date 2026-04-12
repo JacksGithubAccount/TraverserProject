@@ -62,6 +62,7 @@ namespace TraverserProject
             messagePopUpGameObject.SetActive(true);
         }
 
+
         public void SendItemPopUp(Item item, int amount)
         {
             itemAmount.enabled = false;

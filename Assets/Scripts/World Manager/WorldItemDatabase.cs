@@ -11,7 +11,9 @@ namespace TraverserProject
 
         public WeaponItem unarmedWeapon;
 
+        [Header("Item Drop")]        
         public GameObject creatureDropPickUpItemPrefab;
+        public GameObject inventoryDropItemPickUpInteractable;
 
         [Header("Upgrade Stones")]
         public UpgradeMaterial smallUpgradeStone;
