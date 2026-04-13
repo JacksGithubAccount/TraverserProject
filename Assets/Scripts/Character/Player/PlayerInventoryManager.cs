@@ -183,7 +183,26 @@ namespace TraverserProject
 
             if (isStackable)
             {
-                for (int i = itemsInInventory.Count - 1; i > -1; i--)
+                if(CheckIfItemIsInInventoryOrEquipSlots(item))
+                {
+                    Item itemInInventory = GetItemInInventoryOrEquipSlots(item);
+                    itemInInventory.currentItemAmount -= item.currentItemAmount;
+
+                    if (itemInInventory.currentItemAmount <= 0)
+                    {
+                        itemsInInventory.Remove(item);
+                        for (int i = 0; i < quickSlotItemsInQuickSlots.Length; i++)
+                        {
+                            if (quickSlotItemsInQuickSlots[i].itemID == item.itemID)
+                            {
+                                quickSlotItemsInQuickSlots[i] = null;
+                            }
+                        }
+                    }
+                }
+
+
+                /*for (int i = itemsInInventory.Count - 1; i > -1; i--)
                 {
                     if (itemsInInventory[i].itemID == item.itemID)
                     {
@@ -192,11 +211,18 @@ namespace TraverserProject
                         if (itemsInInventory[i].currentItemAmount <= 0)
                             itemsInInventory.Remove(item);
                     }
-                }
+                }*/
             }
             else
             {
                 itemsInInventory.Remove(item);
+                for (int i = 0; i < quickSlotItemsInQuickSlots.Length; i++)
+                {
+                    if (quickSlotItemsInQuickSlots[i].itemID == item.itemID)
+                    {
+                        quickSlotItemsInQuickSlots[i] = null;
+                    }
+                }
             }
 
             //null checker

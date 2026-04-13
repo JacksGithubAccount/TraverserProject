@@ -31,16 +31,19 @@ namespace TraverserProject
             itemIcon.enabled = true;
 
             Item itemInPlayerInventory = null;
-            if (player.playerInventoryManager.itemsInInventory.Contains(item))
-                itemInPlayerInventory = player.playerInventoryManager.itemsInInventory.Find(x =>  x.name == item.name);
+            if (player.playerInventoryManager.CheckIfItemIsInInventoryOrEquipSlots(item))
+                itemInPlayerInventory = player.playerInventoryManager.GetItemInInventoryOrEquipSlots(item);
 
             int amountInInventory;
             if (itemInPlayerInventory == null)
                 amountInInventory = 0;
             else
+            {
                 amountInInventory = itemInPlayerInventory.currentItemAmount;
+                selectedItem = itemInPlayerInventory;
+            }
 
-            currentItem = item;
+            currentItem = item;            
             currentItemAmountRequired = amountRequired;
             currentTotalItemAmountRequired = amountRequired;
             itemAmountText.text = amountInInventory + "/" + currentItemAmountRequired;

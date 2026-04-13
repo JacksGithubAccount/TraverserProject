@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace TraverserProject
@@ -62,14 +63,19 @@ namespace TraverserProject
             base.OpenMenu();
 
             CheckForUnlockedRecipes();
+        }
 
+        public override void CloseSubMenu()
+        {
+            base.CloseSubMenu();
+            ToggleGameObjectPrefabs(craftingRecipeSlotPrefabs, true);
         }
 
         public void SendCraftMessagePopUp(string messageText)
         {
             craftMessagePopUpText.text = messageText;
-            //craftMessagePopUpGameObject.SetActive(true);
             OpenSubMenu(craftMessagePopUpGameObject);
+            ToggleGameObjectPrefabs(craftingRecipeSlotPrefabs, false);
         }
 
         private void CheckForUnlockedRecipes()
@@ -120,6 +126,19 @@ namespace TraverserProject
                 Destroy(item);
             }
             listOfGameObjectPrefabs.Clear();
+        }
+
+        private void ToggleGameObjectPrefabs(List<GameObject> listOfGameObjectPrefabs, bool toggle)
+        {
+            foreach (GameObject item in listOfGameObjectPrefabs)
+            {
+                Button button = item.GetComponent<Button>();
+                EventTrigger et = item.GetComponent<EventTrigger>();
+                if(button != null)
+                    button.enabled = toggle;
+                if(et != null)
+                    et.enabled = toggle;
+            }
         }
 
         public void CraftSelectedItem()
@@ -182,6 +201,7 @@ namespace TraverserProject
             currentlySelectedRecipe = recipe;
             ClearGameObjectPrefabs(ingredientSelectionInformationPrefabs);
             OpenSubMenu(craftingInputWindow);
+            ToggleGameObjectPrefabs(craftingRecipeSlotPrefabs, false);
             for (int i = 0; i < recipe.itemIngredients.Count; i++)
             {
                 GameObject ingredientSelectionGameObject = Instantiate(ingredientSelectionInformationPrefab, ingredientSelectionInformationContentWindow);
@@ -203,7 +223,7 @@ namespace TraverserProject
             craftConfimButton.interactable = false;
             UpdateSliderBasedOnCraftItemAmount();
 
-            //changes max craftable so you cant craft more than mx stacks
+            //changes max craftable so you cant craft more than max stacks
             if (PlayerUIManager.Singleton.localPlayer.playerInventoryManager.CheckIfItemIsInInventoryOrEquipSlots(currentlySelectedRecipe.craftedItem))
             {
                 Item item = PlayerUIManager.Singleton.localPlayer.playerInventoryManager.GetItemInInventoryOrEquipSlots(currentlySelectedRecipe.craftedItem);
@@ -269,20 +289,18 @@ namespace TraverserProject
             itemCategoryIngredientSelectionInformationWindow.SetActive(false);
         }
 
-        public bool CheckInventoryForFullItemStack(Item item)
+        public bool CheckInventoryForFullItemStack(Recipe recipe)
         {
             bool isInventoryItemStackFull = false;
 
-            if (PlayerUIManager.Singleton.localPlayer.playerInventoryManager.itemsInInventory.Contains(item))
+            if (PlayerUIManager.Singleton.localPlayer.playerInventoryManager.CheckIfItemIsInInventoryOrEquipSlots(recipe.craftedItem))
             {
-                foreach (var itemInInventory in PlayerUIManager.Singleton.localPlayer.playerInventoryManager.itemsInInventory)
-                {
-                    if (itemInInventory.itemID == item.itemID)
-                    {
-                        if (itemInInventory.currentItemAmount + currentlySelectedRecipe.craftedItemAmount > item.maxItemAmount)
-                            isInventoryItemStackFull = true;
-                    }
-                }
+
+                Item itemInInventory = PlayerUIManager.Singleton.localPlayer.playerInventoryManager.GetItemInInventoryOrEquipSlots(recipe.craftedItem);
+                if (itemInInventory.currentItemAmount + recipe.craftedItemAmount > recipe.craftedItem.maxItemAmount)
+                    isInventoryItemStackFull = true;
+
+
             }
             return isInventoryItemStackFull;
         }

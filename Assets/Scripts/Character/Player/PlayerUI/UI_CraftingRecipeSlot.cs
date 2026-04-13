@@ -11,6 +11,11 @@ namespace TraverserProject
         public Image greyOutIcon;
         [SerializeField] public Recipe currentRecipe;
 
+        private void Awake()
+        {
+            greyOutIcon.enabled = false;
+            highlightIcon.enabled = false;
+        }
         public void AddRecipe(Recipe recipe)
         {
             highlightIcon.enabled = false;
@@ -25,9 +30,9 @@ namespace TraverserProject
             currentRecipe = recipe;
             itemIcon.sprite = recipe.craftedItem.itemIcon;
 
-            if(PlayerUIManager.Singleton.playerUICraftingManager.CheckInventoryForFullItemStack(currentRecipe.craftedItem))
+            if(PlayerUIManager.Singleton.playerUICraftingManager.CheckInventoryForFullItemStack(currentRecipe))
             {
-                highlightIcon.enabled = true;
+                greyOutIcon.enabled = true;
             }
         }
 
@@ -45,8 +50,8 @@ namespace TraverserProject
 
         public void AttemptToSelectRecipe()
         {
-            if (PlayerUIManager.Singleton.playerUICraftingManager.CheckInventoryForFullItemStack(currentRecipe.craftedItem))
-            {
+            if (PlayerUIManager.Singleton.playerUICraftingManager.CheckInventoryForFullItemStack(currentRecipe))
+            {                
                 PlayerUIManager.Singleton.playerUICraftingManager.SendCraftMessagePopUp("Item has reached full capacity.");
             }
             else
