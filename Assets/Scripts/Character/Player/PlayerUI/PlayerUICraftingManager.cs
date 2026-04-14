@@ -52,6 +52,14 @@ namespace TraverserProject
         [SerializeField] TextMeshProUGUI craftingItemAmountText;
         [SerializeField] Button craftConfimButton;
 
+        [Header("Item Amount Texts")]
+        [SerializeField] TextMeshProUGUI heldCraftedItemAmountText;
+        private string heldCraftedItemAmountTextString = "Held Items: ";
+        [SerializeField] TextMeshProUGUI willCraftItemAmountText;
+        private string willCraftItemAmountTextString = "Crafted Amount: ";
+        [SerializeField] TextMeshProUGUI totalCraftItemAmountText;
+        private string totalCraftItemAmountTextString = "Total Amount: ";
+
         [Header("Text Colors")]
         [SerializeField] Color standardColor = Color.white;
         [SerializeField] Color negativeColor = Color.red;
@@ -150,7 +158,7 @@ namespace TraverserProject
 
             //adds crafted item to inventory
             Item craftedItem = Instantiate(currentlySelectedRecipe.craftedItem);
-            craftedItem.currentItemAmount = (int)craftItemAmountSlider.value;
+            craftedItem.currentItemAmount = currentlySelectedRecipe.craftedItemAmount * (int)craftItemAmountSlider.value;
             player.playerInventoryManager.AddItemToInventory(craftedItem);
 
             //removes ingredients from inventory
@@ -223,12 +231,21 @@ namespace TraverserProject
             craftConfimButton.interactable = false;
             UpdateSliderBasedOnCraftItemAmount();
 
-            //changes max craftable so you cant craft more than max stacks
+            //changes max craftable so you cant craft more than max stacks and sets items text
             if (PlayerUIManager.Singleton.localPlayer.playerInventoryManager.CheckIfItemIsInInventoryOrEquipSlots(currentlySelectedRecipe.craftedItem))
             {
                 Item item = PlayerUIManager.Singleton.localPlayer.playerInventoryManager.GetItemInInventoryOrEquipSlots(currentlySelectedRecipe.craftedItem);
-                craftItemAmountSlider.maxValue = item.maxItemAmount - item.currentItemAmount;
+                craftItemAmountSlider.maxValue = (item.maxItemAmount - item.currentItemAmount) / currentlySelectedRecipe.craftedItemAmount;
+                heldCraftedItemAmountText.text = heldCraftedItemAmountTextString + item.currentItemAmount;
+                totalCraftItemAmountText.text = totalCraftItemAmountTextString + ((currentlySelectedRecipe.craftedItemAmount * craftItemAmountSlider.value) + item.currentItemAmount);
             }
+            else
+            {
+                heldCraftedItemAmountText.text = heldCraftedItemAmountTextString + 0;
+                totalCraftItemAmountText.text = totalCraftItemAmountTextString + (currentlySelectedRecipe.craftedItemAmount * craftItemAmountSlider.value);
+            }
+            willCraftItemAmountText.text = willCraftItemAmountTextString + currentlySelectedRecipe.craftedItemAmount * craftItemAmountSlider.value;
+            
         }
    
 
@@ -310,6 +327,16 @@ namespace TraverserProject
             PlayerManager player = PlayerUIManager.Singleton.localPlayer;
 
             craftingItemAmountText.text = "x" + craftItemAmountSlider.value.ToString();
+            willCraftItemAmountText.text = willCraftItemAmountTextString + currentlySelectedRecipe.craftedItemAmount * craftItemAmountSlider.value;
+            if (PlayerUIManager.Singleton.localPlayer.playerInventoryManager.CheckIfItemIsInInventoryOrEquipSlots(currentlySelectedRecipe.craftedItem))
+            {
+                Item item = PlayerUIManager.Singleton.localPlayer.playerInventoryManager.GetItemInInventoryOrEquipSlots(currentlySelectedRecipe.craftedItem);
+                totalCraftItemAmountText.text = totalCraftItemAmountTextString + ((currentlySelectedRecipe.craftedItemAmount * craftItemAmountSlider.value) + item.currentItemAmount);
+            }
+            else
+            {
+                totalCraftItemAmountText.text = totalCraftItemAmountTextString + (currentlySelectedRecipe.craftedItemAmount * craftItemAmountSlider.value);
+            }
 
             bool sufficientIndredientAmount = true;
             foreach (var item in ingredientSelectionInformationPrefabs)

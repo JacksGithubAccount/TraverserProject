@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.UI;
+using TMPro;
 
 namespace TraverserProject
 {
@@ -9,6 +10,7 @@ namespace TraverserProject
         public Image itemIcon;
         public Image highlightIcon;
         public Image greyOutIcon;
+        [SerializeField] TextMeshProUGUI craftedItemAmountText;
         [SerializeField] public Recipe currentRecipe;
 
         private void Awake()
@@ -29,8 +31,9 @@ namespace TraverserProject
 
             currentRecipe = recipe;
             itemIcon.sprite = recipe.craftedItem.itemIcon;
+            craftedItemAmountText.text = "x" + recipe.craftedItemAmount.ToString();
 
-            if(PlayerUIManager.Singleton.playerUICraftingManager.CheckInventoryForFullItemStack(currentRecipe))
+            if (PlayerUIManager.Singleton.playerUICraftingManager.CheckInventoryForFullItemStack(currentRecipe))
             {
                 greyOutIcon.enabled = true;
             }
