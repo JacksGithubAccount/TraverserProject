@@ -22,6 +22,7 @@ namespace TraverserProject
 
         private Coroutine enterLadderCoroutine;
         private Coroutine exitLadderCoroutine;
+        private Coroutine delayPopUpCoroutine;
         private PlayerManager playerClimbingLadder = null;
 
         [Header("Animation")]
@@ -29,6 +30,61 @@ namespace TraverserProject
         [SerializeField] string climbUpLadderEnterAnimation = "Climb_Up_Ladder_Enter_01";
         [SerializeField] string climbUpLadderExitRightAnimation = "Climb_Up_Ladder_Exit_R_01";
         [SerializeField] string climbUpLadderExitLeftAnimation = "Climb_Up_Ladder_Exit_L_01";
+
+        public override void OnTriggerEnter(Collider other)
+        {
+            base.OnTriggerEnter(other);
+
+            PlayerManager player = other.GetComponent<PlayerManager>();
+
+            if (player == null)
+                return;
+
+            if (!player.IsOwner)
+                return;
+
+            playerClimbingLadder = player;
+
+            if (!player.playerNetworkManager.isClimbingLadder.Value)
+                player.playerInteractionManager.AddInteractionToList(this);
+
+            if (player.playerNetworkManager.isClimbingLadder.Value)
+            {
+                //wait for stop climbing ladder to send interaction pop up
+                if (delayPopUpCoroutine != null)
+                    StopCoroutine(delayPopUpCoroutine);
+
+                delayPopUpCoroutine = StartCoroutine(WaitForPlayerToConcludeClimbingBeforeSendingPopUp());
+            }
+
+            if (!player.playerNetworkManager.isClimbingLadder.Value)
+                return;
+
+            if (exitLadderCoroutine != null)
+                StopCoroutine(exitLadderCoroutine);
+
+            exitLadderCoroutine = StartCoroutine(CheckForExitCoroutine(player));
+        }
+
+        public override void OnTriggerExit(Collider other)
+        {
+            base.OnTriggerExit(other);
+
+            PlayerManager player = other.GetComponent<PlayerManager>();
+
+            if (player == null)
+                return;
+
+            if (!player.IsOwner)
+                return;
+
+            playerClimbingLadder = null;
+
+            player.playerInteractionManager.RemoveInteractionFromList(this);
+
+            if (exitLadderCoroutine != null)
+                StopCoroutine(exitLadderCoroutine);
+        }
 
         public override void Interact(PlayerManager player)
         {
@@ -104,6 +160,10 @@ namespace TraverserProject
             }
         }
 
+
+
+        //Exiting ladder logic
+
         private void CheckForExit(PlayerManager player)
         {
             if (!player.playerNetworkManager.isClimbingLadder.Value)
@@ -133,6 +193,11 @@ namespace TraverserProject
                 player.playerLocomotionManager.DisableCanRotate();
                 player.isPerformingAction = true;
                 player.characterController.enabled = false;
+
+
+                StartCoroutine(LimitExitHeightCoroutine(player));
+                //force player to minimum height
+                StartCoroutine(ForcePlayerToMinimumExitHeightCoroutine(player));
 
                 if (player.playerLocomotionManager.canExitLadderWithRightHand)
                 {
@@ -168,6 +233,54 @@ namespace TraverserProject
                 }
             }
 
+        }
+
+        private IEnumerator CheckForExitCoroutine(PlayerManager player)
+        {
+            while (player.playerNetworkManager.isClimbingLadder.Value)
+            {
+                CheckForExit(player);
+                yield return null;
+            }
+            yield return null;
+        }
+
+        //Sync/lock player to proper exit height(failsafe for if animation root motion moves the player too high or low)
+        private IEnumerator LimitExitHeightCoroutine(PlayerManager player)
+        {
+            while (player.playerLocomotionManager.isExitingLadder)
+            {
+                if (player.transform.position.y > maxHeightTransform.position.y)
+                    player.transform.position = new Vector3(player.transform.position.x, maxHeightTransform.position.y, player.transform.position.z);
+
+                yield return null;
+            }
+        }
+
+        private IEnumerator ForcePlayerToMinimumExitHeightCoroutine(PlayerManager player)
+        {
+            //wait length of exit animation to get to its peak height
+            yield return new WaitForSeconds(1);
+
+            while (player.playerLocomotionManager.isExitingLadder)
+            {
+                if (player.transform.position.y < maxHeightTransform.position.y)
+                    player.transform.position = new Vector3(player.transform.position.x, maxHeightTransform.position.y, player.transform.position.z);
+
+                yield return null;
+            }
+        }
+
+        //Do not send "Climb pop up" whilst already climbing
+        private IEnumerator WaitForPlayerToConcludeClimbingBeforeSendingPopUp()
+        {
+            while (playerClimbingLadder != null && playerClimbingLadder.playerNetworkManager.isClimbingLadder.Value)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            if (playerClimbingLadder != null)
+                playerClimbingLadder.playerInteractionManager.AddInteractionToList(this);
         }
     }
 }
