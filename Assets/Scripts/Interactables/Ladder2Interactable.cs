@@ -16,7 +16,7 @@ namespace TraverserProject
         [SerializeField] Transform topExitStartPositionLeftIdlePosition;  //exit position if left hand is higher
 
         [Header("Exiting Top")]
-        [SerializeField] Transform maxHeightTransform; //max height you are allowed when exiting a ladder at the top(blends player to proper ground when exiting)
+        [SerializeField] Transform maxTopExitHeightTransform; //max height you are allowed when exiting a ladder at the top(blends player to proper ground when exiting)
         private Vector3 refVelocity = Vector3.zero;
         [SerializeField] float smoothTime = 0.2f;
 
@@ -250,8 +250,8 @@ namespace TraverserProject
         {
             while (player.playerLocomotionManager.isExitingLadder)
             {
-                if (player.transform.position.y > maxHeightTransform.position.y)
-                    player.transform.position = new Vector3(player.transform.position.x, maxHeightTransform.position.y, player.transform.position.z);
+                if (player.transform.position.y > maxTopExitHeightTransform.position.y)
+                    player.transform.position = new Vector3(player.transform.position.x, maxTopExitHeightTransform.position.y, player.transform.position.z);
 
                 yield return null;
             }
@@ -264,8 +264,8 @@ namespace TraverserProject
 
             while (player.playerLocomotionManager.isExitingLadder)
             {
-                if (player.transform.position.y < maxHeightTransform.position.y)
-                    player.transform.position = new Vector3(player.transform.position.x, maxHeightTransform.position.y, player.transform.position.z);
+                if (player.transform.position.y < maxTopExitHeightTransform.position.y)
+                    player.transform.position = new Vector3(player.transform.position.x, maxTopExitHeightTransform.position.y, player.transform.position.z);
 
                 yield return null;
             }

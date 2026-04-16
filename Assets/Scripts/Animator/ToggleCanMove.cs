@@ -34,7 +34,7 @@ namespace TraverserProject
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (!activateOnStateEnter)
+            if (activateOnStateEnter)
                 return;
 
             if (character == null)

@@ -7,8 +7,11 @@ namespace TraverserProject
 {
     public class UI_CraftingIngredientMenuSelectionButton : MonoBehaviour
     {
+        [Header("Icons")]
         public Image itemIcon;
         public Image highlightIcon;
+
+        [Header("Item")]
         public TextMeshProUGUI itemNameText;
         public TextMeshProUGUI itemAmountText;
         [SerializeField] public Item currentItem; //generated when  button is created
@@ -50,8 +53,7 @@ namespace TraverserProject
             itemNameText.text = item.name;
         }
         public void AddItemCategory(ItemCategory itemCategory, int amountRequired)
-        {
-            itemIcon.enabled = true;
+        {            
             PlayerManager player = PlayerUIManager.Singleton.localPlayer;
             List<CraftingMaterial> itemCategoryInInventory = new List<CraftingMaterial>();
 
@@ -78,7 +80,10 @@ namespace TraverserProject
         public void AddSelectedItem(Item item)
         {
             selectedItem = item;
-            
+
+            itemIcon.enabled = true;
+            itemIcon.sprite = item.itemIcon;
+
             itemAmountText.text = selectedItem.currentItemAmount + "/" + currentTotalItemAmountRequired;
             PlayerUIManager.Singleton.playerUICraftingManager.SelectLastSelectedIngredientMenuButton();
         }
