@@ -148,6 +148,23 @@ namespace TraverserProject
             character.animator.SetBool("isMoving", isMoving.Value);
         }
 
+        public void OnIsClimbingLadderChanged(bool oldStatus, bool newStatus)
+        {
+            character.animator.SetBool("isClimbingLadder", isClimbingLadder.Value);
+            if (isClimbingLadder.Value)
+            {
+                //optionally hide weapons here if not done by RPC
+                character.characterLocomotionManager.ignoreGravity = true;
+                //disable any other unrelated IK systems here
+            }
+            else
+            {
+                //optionally unhide weapons
+                character.characterLocomotionManager.ignoreGravity = false;
+                //re-enable IK systems disabled above
+            }
+        }
+
         public virtual void OnIsActiveChanged(bool oldStatus, bool newStatus)
         {
             gameObject.SetActive(isActive.Value);

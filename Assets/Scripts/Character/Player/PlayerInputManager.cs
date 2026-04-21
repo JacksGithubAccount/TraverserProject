@@ -344,10 +344,10 @@ namespace TraverserProject
 
                 if (PlayerCamera.Singleton.nearestLockOnTarget != null)
                 {
-                    
-                        player.playerCombatManager.SetTarget(PlayerCamera.Singleton.nearestLockOnTarget);
-                        player.playerNetworkManager.isLockedOn.Value = true;
-                    
+
+                    player.playerCombatManager.SetTarget(PlayerCamera.Singleton.nearestLockOnTarget);
+                    player.playerNetworkManager.isLockedOn.Value = true;
+
                 }
             }
         }
@@ -392,6 +392,12 @@ namespace TraverserProject
 
             moveAmount = Mathf.Clamp01(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
 
+            if (!player.playerLocomotionManager.canMove)
+            {
+                player.playerNetworkManager.isMoving.Value = false;
+                return;
+            }
+
             //clamps movement values
             if (moveAmount <= 0.5 && moveAmount > 0)
             {
@@ -425,6 +431,19 @@ namespace TraverserProject
                     horizontalInput = 0.5f;
             }
 
+            if (!player.characterController.enabled)
+            {
+                player.playerNetworkManager.isMoving.Value = false;
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, 0, false);
+                return;
+            }
+
+            if (player.playerNetworkManager.isClimbingLadder.Value)
+            {
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontalInput, verticalInput, false);
+                return;
+            }
+
             if (player.playerNetworkManager.isLockedOn.Value && !player.playerNetworkManager.isSprinting.Value)
             {
                 player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontalInput, verticalInput, player.playerNetworkManager.isSprinting.Value);
@@ -432,11 +451,6 @@ namespace TraverserProject
             }
 
             if (player.playerNetworkManager.isAiming.Value)
-            {
-                player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontalInput, verticalInput, player.playerNetworkManager.isSprinting.Value);
-                return;
-            }
-            if (player.playerLocomotionManager.isOnLadder)
             {
                 player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontalInput, verticalInput, player.playerNetworkManager.isSprinting.Value);
                 return;
@@ -754,9 +768,9 @@ namespace TraverserProject
                 else
                 {
 
-                        PlayerUIManager.Singleton.playerUIPopUpManager.CloseAllPopUpWindows();
-                        PlayerUIManager.Singleton.CloseAllMenuWindows();
-                    
+                    PlayerUIManager.Singleton.playerUIPopUpManager.CloseAllPopUpWindows();
+                    PlayerUIManager.Singleton.CloseAllMenuWindows();
+
                 }
             }
 

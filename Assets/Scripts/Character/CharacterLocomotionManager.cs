@@ -18,6 +18,7 @@ namespace TraverserProject
         protected float inAirTimer = 0;
 
         [Header("Flags")]
+        public bool ignoreGravity = false;
         public bool isRolling = false;
         public bool isGrounded = true;
         public bool canRotate = true;
@@ -60,6 +61,10 @@ namespace TraverserProject
         protected virtual void Update()
         {
             HandleGroundCheck();
+
+            if (ignoreGravity)
+                return;
+
             SetGroundedVelocity();
             HandleSlopeSlideCheck();
 
@@ -88,10 +93,8 @@ namespace TraverserProject
 
             }
 
-            if (character.characterLocomotionManager.isOnLadder)
-                yVelocity = Vector3.zero;
-
-            character.characterController.Move(yVelocity * Time.deltaTime);
+            if (character.characterController.enabled)
+                character.characterController.Move(yVelocity * Time.deltaTime);
         }
 
         protected void OnControllerColliderHit(ControllerColliderHit hit)
@@ -162,9 +165,23 @@ namespace TraverserProject
             canRoll = false;
         }
 
+        public void EnableIsClimbingLadder()
+        {
+            if (!character.IsOwner)
+                return;
+
+            character.characterNetworkManager.isClimbingLadder.Value = true;
+        }
+
+        public void DisableIsClimbingLadder()
+        {
+            if (!character.IsOwner)
+                return;
+
+            character.characterNetworkManager.isClimbingLadder.Value = false;
+        }
+
         //slopes and sliding
-
-
         private void HandleSlopeSlideCheck()
         {
             if (slopeSlideVelocity == Vector3.zero)

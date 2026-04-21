@@ -19,6 +19,8 @@ namespace TraverserProject
             character.characterLocomotionManager.canRun = true;
             character.characterLocomotionManager.canRoll = true;
             character.characterLocomotionManager.isRolling = false;
+            character.characterLocomotionManager.ignoreGravity = false; //if have flying enemies, make a check for this via thier locomotion manager
+            character.characterLocomotionManager.isExitingLadder = false;
             character.characterCombatManager.DisableCanDoCombo();
             character.characterCombatManager.DisableCanDoRollingAttack();
             character.characterCombatManager.DisableCanDoBackstepAttack();
@@ -39,6 +41,7 @@ namespace TraverserProject
                 character.characterNetworkManager.isBeingCriticallyDamaged.Value = false;
                 character.characterNetworkManager.isParrying.Value = false;
                 character.characterNetworkManager.isRolling.Value = false;
+                character.characterNetworkManager.isClimbingLadder.Value = false;
             }
 
         }

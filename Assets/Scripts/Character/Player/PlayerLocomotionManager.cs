@@ -87,6 +87,9 @@ namespace TraverserProject
         }
         private void HandleGroundedMovement()
         {
+            if (player.playerNetworkManager.isClimbingLadder.Value)
+                return;
+
             if (player.characterLocomotionManager.canMove || player.playerLocomotionManager.canRotate)
             {
                 GetMovementValues();
@@ -135,59 +138,9 @@ namespace TraverserProject
             }
         }
 
-        private void HandleLadderMovementUp()
-        {
-            if (player.playerLocomotionManager.isOnLadder)
-            {
-                if (currentLadderClimbPosition == interactedLadderClimbPositions.Length - 1)
-                {
-                    player.playerAnimatorManager.PlayTargetActionAnimation("Ladder_Climb_To_Top_01", true);
-                    player.playerNetworkManager.isExitingLadder.Value = true;
-                    return;
-                }
-
-                currentLadderClimbPosition++;
-
-                if (currentLadderClimbPosition < 0)
-                    currentLadderClimbPosition = 0;
-
-                if (currentLadderClimbPosition >= interactedLadderClimbPositions.Length)
-                    currentLadderClimbPosition = interactedLadderClimbPositions.Length - 1;
-
-                player.transform.position = interactedLadderClimbPositions[currentLadderClimbPosition].position;
-            }
-        }
-        private void HandleLadderMovementDown()
-        {
-            if (player.playerLocomotionManager.isOnLadder)
-            {
-                if (currentLadderClimbPosition == 0)
-                {
-                    player.playerAnimatorManager.PlayTargetActionAnimation("Ladder_Start_Climbing_To_Bottom_01", true);
-                    player.playerNetworkManager.isExitingLadder.Value = true;
-                    return;
-                }
-
-                currentLadderClimbPosition--;
-
-                if (currentLadderClimbPosition < 0)
-                    currentLadderClimbPosition = 0;
-
-                if (currentLadderClimbPosition >= interactedLadderClimbPositions.Length)
-                    currentLadderClimbPosition = interactedLadderClimbPositions.Length - 1;
-
-                player.transform.position = interactedLadderClimbPositions[currentLadderClimbPosition].position;
-            }
-        }
-        private void DisableIsOnLadder()
-        {
-            player.playerLocomotionManager.isOnLadder = false;
-        }
-
+        
         private void HandleFreeFallMovement()
         {
-            if (player.playerLocomotionManager.isOnLadder)
-                return;
 
             if (!player.characterLocomotionManager.isGrounded)
             {
@@ -197,7 +150,8 @@ namespace TraverserProject
                 freeFallDirection = freeFallDirection + PlayerCamera.Singleton.transform.right * PlayerInputManager.Singleton.horizontalInput;
                 freeFallDirection.y = 0;
 
-                player.characterController.Move(freeFallDirection * freeFallSpeed * Time.deltaTime);
+                if (player.characterController.enabled)
+                    player.characterController.Move(freeFallDirection * freeFallSpeed * Time.deltaTime);
             }
         }
         private void HandleRotation()

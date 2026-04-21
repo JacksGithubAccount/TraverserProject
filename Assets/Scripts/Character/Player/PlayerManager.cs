@@ -180,6 +180,7 @@ namespace TraverserProject
             //flags
             playerNetworkManager.isChargingAttack.OnValueChanged += playerNetworkManager.OnIsChargingAttackChanged;
             playerNetworkManager.isSneaking.OnValueChanged += playerNetworkManager.OnIsSneakingChanged;
+            playerNetworkManager.isClimbingLadder.OnValueChanged += playerNetworkManager.OnIsClimbingLadderChanged;
 
             if (IsOwner && !IsServer)
             {
@@ -271,6 +272,7 @@ namespace TraverserProject
             //flags
             playerNetworkManager.isChargingAttack.OnValueChanged -= playerNetworkManager.OnIsChargingAttackChanged;
             playerNetworkManager.isSneaking.OnValueChanged -= playerNetworkManager.OnIsSneakingChanged;
+            playerNetworkManager.isClimbingLadder.OnValueChanged -= playerNetworkManager.OnIsClimbingLadderChanged;
         }
 
         private void OnClientConnectedCallback(ulong clientID)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ namespace TraverserProject
         [SerializeField] Transform inventoryContentWindow;
         [SerializeField] Item currentlySelectedItem;
         [HideInInspector] List<GameObject> inventorySlotPrefabs = new List<GameObject>();
+        [SerializeField] TextMeshProUGUI categoryNameText;
 
 
         public override void OpenMenu()
@@ -21,7 +23,7 @@ namespace TraverserProject
             ToggleInventoryButtons(true);
             PlayerUIManager.Singleton.CloseAllSubMenuWindows();
             //RefreshMenu();
-
+            LoadInventory();
         }
 
         public void ToggleInventoryButtons(bool isEnabled)
@@ -36,18 +38,19 @@ namespace TraverserProject
         public void LoadInventory()
         {
             ClearInventorySlotPrefabs();
+            categoryNameText.text = "Recent Items";
             PlayerManager player = PlayerUIManager.Singleton.localPlayer;
-            List<WeaponItem> weaponsInInventory = new List<WeaponItem>();
+            List<Item> itemsInInventory = new List<Item>();
 
             for (int i = 0; i < player.playerInventoryManager.itemsInInventory.Count; i++)
             {
-                WeaponItem weapon = player.playerInventoryManager.itemsInInventory[i] as WeaponItem;
+                Item item = player.playerInventoryManager.itemsInInventory[i];
 
-                if (weapon != null)
-                    weaponsInInventory.Add(weapon);
+                if (item != null)
+                    itemsInInventory.Add(item);
             }
 
-            if (weaponsInInventory.Count <= 0)
+            if (itemsInInventory.Count <= 0)
             {
                 inventoryWindow.SetActive(false);
                 ToggleInventoryButtons(true);
@@ -57,11 +60,11 @@ namespace TraverserProject
 
             bool hasSelectedFirstInventorySlot = false;
 
-            for (int i = 0; i < weaponsInInventory.Count; i++)
+            for (int i = 0; i < itemsInInventory.Count; i++)
             {
                 GameObject inventorySlotGameObject = Instantiate(inventorySlotPrefab, inventoryContentWindow);
-                UI_EquipmentInventorySlot inventorySlot = inventorySlotGameObject.GetComponent<UI_EquipmentInventorySlot>();
-                inventorySlot.AddItem(weaponsInInventory[i]);
+                UI_InventorySlot inventorySlot = inventorySlotGameObject.GetComponent<UI_InventorySlot>();
+                inventorySlot.AddItem(itemsInInventory[i]);
                 inventorySlotPrefabs.Add(inventorySlot.gameObject);
 
                 if (!hasSelectedFirstInventorySlot)

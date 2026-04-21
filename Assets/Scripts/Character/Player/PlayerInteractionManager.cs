@@ -63,10 +63,18 @@ namespace TraverserProject
 
         public void RemoveInteractionFromList(Interactable interactableObject)
         {
-            if (currentInteractableActions.Contains(interactableObject))
+            bool hasOnlyThisInteraction = false;
+            if (currentInteractableActions.Contains(interactableObject) && currentInteractableActions.Count == 1)
+            {
                 currentInteractableActions.Remove(interactableObject);
+                hasOnlyThisInteraction = true;
+            }
+
 
             RefreshInteractionList();
+
+            if (hasOnlyThisInteraction)
+                PlayerUIManager.Singleton.playerUIPopUpManager.CloseAllPopUpWindows();
         }
 
         public void Interact()

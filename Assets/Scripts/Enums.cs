@@ -270,6 +270,29 @@ public enum ItemCategory
     Flammable,
     Fuel
 }
+
+public enum ItemType
+{
+    Tool,
+    CraftingMaterial,
+    UpgradeMaterial,
+    KeyItem,
+    Sorcery,
+    Incantation,
+    Pyromancy,
+    AshesOfWar,
+    MeleeWeapon,
+    RangedWeaponAndCatalyst,
+    ArrowAndBolt,
+    Shield,
+    Head,
+    Chest,
+    Arms,
+    Legs,
+    Accessory,
+    Info,
+    Gestures
+}
 //AI States
 public enum IdleStateMode
 {
