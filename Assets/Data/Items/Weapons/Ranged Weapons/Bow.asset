@@ -14,14 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Bow
   itemIcon: {fileID: 21300000, guid: 9a8430c940c52b94181190d754689930, type: 3}
+  maxItemAmount: 1
+  currentItemAmount: 1
   itemDescription: 'bow bow bow bopw
 
 '
   itemID: 7
+  itemType: 10
   itemWeight: 0
   weaponAnimator: {fileID: 22100000, guid: e50b900e92de9ad4a94d37bfc1b28c60, type: 2}
   weaponModelType: 0
+  weaponSwingVFX: {fileID: 0}
   weaponClass: 6
+  upgradeLevel: 0
   weaponModel: {fileID: 402896073157354646, guid: 0ace464557109f94fad0da275f015e9e, type: 3}
   strengthREQ: 3
   dexterityREQ: 7
@@ -47,6 +52,20 @@ MonoBehaviour:
   backstep_Heavy_Attack_01_Modifier: 1.4
   jumping_Light_Attack_01_Modifier: 1
   jumping_Heavy_Attack_01_Modifier: 1.5
+  dual_Light_Attack_01_Modifier: 0.77
+  dual_Light_Attack_02_Modifier: 0.87
+  dual_Heavy_Attack_01_Modifier: 0.94
+  dual_Heavy_Attack_02_Modifier: 1
+  dual_Charge_Attack_01_Modifier: 1.3
+  dual_Charge_Attack_02_Modifier: 1.4
+  dual_Running_Light_Attack_01_Modifier: 0.77
+  dual_Running_Heavy_Attack_01_Modifier: 0.94
+  dual_Rolling_Light_Attack_01_Modifier: 0.68
+  dual_Rolling_Heavy_Attack_01_Modifier: 0.81
+  dual_Backstep_Light_Attack_01_Modifier: 0.77
+  dual_Backstep_Heavy_Attack_01_Modifier: 0.9
+  dual_Jumping_Light_Attack_01_Modifier: 0.77
+  dual_Jumping_Heavy_Attack_01_Modifier: 0.98
   baseStaminaCost: 20
   lightAttackStaminaCostMultiplier: 0.9
   heavyAttackStaminaCostMultiplier: 1.3

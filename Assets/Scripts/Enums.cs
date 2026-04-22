@@ -273,6 +273,7 @@ public enum ItemCategory
 
 public enum ItemType
 {
+    None,
     Tool,
     CraftingMaterial,
     UpgradeMaterial,

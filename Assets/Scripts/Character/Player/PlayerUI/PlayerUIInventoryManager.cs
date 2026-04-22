@@ -23,7 +23,7 @@ namespace TraverserProject
             ToggleInventoryButtons(true);
             PlayerUIManager.Singleton.CloseAllSubMenuWindows();
             //RefreshMenu();
-            LoadInventory();
+            LoadRecentItemsInventory();
         }
 
         public void ToggleInventoryButtons(bool isEnabled)
@@ -35,14 +35,14 @@ namespace TraverserProject
 
         }
 
-        public void LoadInventory()
+        public void LoadRecentItemsInventory()
         {
             ClearInventorySlotPrefabs();
             categoryNameText.text = "Recent Items";
             PlayerManager player = PlayerUIManager.Singleton.localPlayer;
             List<Item> itemsInInventory = new List<Item>();
 
-            for (int i = 0; i < player.playerInventoryManager.itemsInInventory.Count; i++)
+            for (int i = player.playerInventoryManager.itemsInInventory.Count - 1; i > 0; i--)
             {
                 Item item = player.playerInventoryManager.itemsInInventory[i];
 
@@ -55,6 +55,49 @@ namespace TraverserProject
                 inventoryWindow.SetActive(false);
                 ToggleInventoryButtons(true);
                 //RefreshMenu();
+                return;
+            }
+
+            bool hasSelectedFirstInventorySlot = false;
+
+            for (int i = 0; i < itemsInInventory.Count; i++)
+            {
+                GameObject inventorySlotGameObject = Instantiate(inventorySlotPrefab, inventoryContentWindow);
+                UI_InventorySlot inventorySlot = inventorySlotGameObject.GetComponent<UI_InventorySlot>();
+                inventorySlot.AddItem(itemsInInventory[i]);
+                inventorySlotPrefabs.Add(inventorySlot.gameObject);
+
+                if (!hasSelectedFirstInventorySlot)
+                {
+                    hasSelectedFirstInventorySlot = true;
+                    Button inventorySlotButton = inventorySlotGameObject.GetComponent<Button>();
+                    inventorySlotButton.Select();
+                    inventorySlotButton.OnSelect(null);
+
+                }
+            }
+        }
+
+        public void LoadInventoryBasedOnItemType(ItemType itemType)
+        {
+            ClearInventorySlotPrefabs();
+            categoryNameText.text = itemType.ToString();
+            PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+            List<Item> itemsInInventory = new List<Item>();
+
+            for (int i = 0; i < player.playerInventoryManager.itemsInInventory.Count; i++)
+            {                
+                Item item = player.playerInventoryManager.itemsInInventory[i];
+
+                if (item == null)
+                    continue;
+
+                if(item.itemType == itemType)
+                    itemsInInventory.Add(item);
+            }
+
+            if (itemsInInventory.Count <= 0)
+            {
                 return;
             }
 

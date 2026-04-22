@@ -9,6 +9,10 @@ namespace TraverserProject
         public Image highlightIcon;
         [SerializeField] public Item currentItem;
 
+        private void Awake()
+        {
+            highlightIcon.enabled = false;
+        }
         public void AddItem(Item item)
         {
             if (item == null)
@@ -31,6 +35,11 @@ namespace TraverserProject
         public void DeselectSlot()
         {
             highlightIcon.enabled = false;
+        }
+
+        public void DisplayInventoryBasedOnItemType(int itemType)
+        {
+            PlayerUIManager.Singleton.playerUIInventoryManager.LoadInventoryBasedOnItemType((ItemType)itemType);
         }
     }
 }
