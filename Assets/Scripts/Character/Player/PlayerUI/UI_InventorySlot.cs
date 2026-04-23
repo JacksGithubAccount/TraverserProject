@@ -9,6 +9,9 @@ namespace TraverserProject
         public Image highlightIcon;
         [SerializeField] public Item currentItem;
 
+        [Header("Inventory Category Select")]
+        public ItemType itemType;
+
         private void Awake()
         {
             highlightIcon.enabled = false;
@@ -39,7 +42,10 @@ namespace TraverserProject
 
         public void DisplayInventoryBasedOnItemType(int itemType)
         {
-            PlayerUIManager.Singleton.playerUIInventoryManager.LoadInventoryBasedOnItemType((ItemType)itemType);
+            if(itemType == 0)
+                PlayerUIManager.Singleton.playerUIInventoryManager.LoadRecentItemsInventory();
+            else
+                PlayerUIManager.Singleton.playerUIInventoryManager.LoadInventoryBasedOnItemType((ItemType)itemType);
         }
     }
 }

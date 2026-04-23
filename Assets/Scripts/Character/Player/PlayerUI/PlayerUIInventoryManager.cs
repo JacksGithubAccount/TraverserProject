@@ -15,6 +15,12 @@ namespace TraverserProject
         [HideInInspector] List<GameObject> inventorySlotPrefabs = new List<GameObject>();
         [SerializeField] TextMeshProUGUI categoryNameText;
 
+        [Header("Inventory Category Select")]
+        [SerializeField] Scrollbar inventoryCategorySelectScrollbar;
+        public int inventoryCategorySelectScrollbarIndex;
+        public ItemType currentSelectedInventoryCategorySelectSlot;
+        public List<GameObject> inventoryCategorySelectSlotPrefabs = new List<GameObject>();
+
 
         public override void OpenMenu()
         {
@@ -35,6 +41,7 @@ namespace TraverserProject
 
         }
 
+        //Inventory Category Select
         public void LoadRecentItemsInventory()
         {
             ClearInventorySlotPrefabs();
@@ -119,6 +126,19 @@ namespace TraverserProject
 
                 }
             }
+        }
+
+
+        public void SelectInventoryCategorySelectSlot(int slotNumber)
+        {
+            currentSelectedInventoryCategorySelectSlot = (ItemType)slotNumber;            
+        }
+
+        public void ChangeSelectedInventoryCategorySelectSlot(int slotNumber)
+        {
+            Button button = inventoryCategorySelectSlotPrefabs[slotNumber].GetComponent<Button>();
+            button.Select();
+            button.OnSelect(null);
         }
 
         private void ClearInventorySlotPrefabs()
