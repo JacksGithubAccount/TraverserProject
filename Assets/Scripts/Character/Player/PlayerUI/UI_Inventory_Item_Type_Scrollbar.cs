@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 namespace TraverserProject
 {
@@ -10,6 +11,7 @@ namespace TraverserProject
         [SerializeField] float scrollAmount = 0.0623f;
         Scrollbar scrollbar;
         [SerializeField] ScrollRect scrollRect;
+        [SerializeField] RectTransform viewport;
 
         [Header("Increase / Decrease Arrows")]
         public GameObject decreaseArrow;
@@ -21,7 +23,7 @@ namespace TraverserProject
         }
 
         public void IncrementSliderValue()
-        {            
+        {
 
             int slotnumber = (int)PlayerUIManager.Singleton.playerUIInventoryManager.currentSelectedInventoryCategorySelectSlot + 1;
             if (slotnumber > 19)
@@ -31,33 +33,50 @@ namespace TraverserProject
 
             PlayerUIManager.Singleton.playerUIInventoryManager.ChangeSelectedInventoryCategorySelectSlot(slotnumber);
 
-            if (scrollbar.value >= 1)
-                scrollbar.value = 0;
-            else
+            if (!IsSelectedPrefabInViewOfViewport(slotnumber))
             {
-
-                slotnumber = Mathf.Clamp(slotnumber - 1, 0, PlayerUIManager.Singleton.playerUIInventoryManager.inventoryCategorySelectSlotPrefabs.Count - 1);
-
-                                //scrollbar.value += scrollAmount;
-                float i = ((float)slotnumber / PlayerUIManager.Singleton.playerUIInventoryManager.inventoryCategorySelectSlotPrefabs.Count - 1);
-                scrollRect.horizontalNormalizedPosition = Mathf.Lerp(scrollRect.horizontalNormalizedPosition, 1f - i, Time.deltaTime / 0.2f);
+                if (slotnumber== 0)
+                    scrollbar.value = 0;
+                else
+                {
+                    scrollbar.value += scrollAmount;
+                    //slotnumber = Mathf.Clamp(slotnumber + 1, 0, PlayerUIManager.Singleton.playerUIInventoryManager.inventoryCategorySelectSlotPrefabs.Count - 1);
+                    //float i = ((float)slotnumber / PlayerUIManager.Singleton.playerUIInventoryManager.inventoryCategorySelectSlotPrefabs.Count - 1);
+                    //scrollRect.horizontalNormalizedPosition = Mathf.Lerp(scrollRect.horizontalNormalizedPosition, 1f - i, Time.deltaTime / 0.2f);
+                }
             }
         }
 
         public void DecrementSliderValue()
         {
-            if (scrollbar.value <= 0)
-                scrollbar.value = 1;
-            else
-                scrollbar.value -= scrollAmount;
-
             int slotnumber = (int)PlayerUIManager.Singleton.playerUIInventoryManager.currentSelectedInventoryCategorySelectSlot - 1;
             if (slotnumber < 0)
             {
                 slotnumber = 19;
             }
             PlayerUIManager.Singleton.playerUIInventoryManager.ChangeSelectedInventoryCategorySelectSlot(slotnumber);
-            
+
+
+            if (!IsSelectedPrefabInViewOfViewport(slotnumber))
+            {
+                if (slotnumber == 19)
+                    scrollbar.value = 1;
+                else
+                {
+                    scrollbar.value -= scrollAmount;
+                    //slotnumber = Mathf.Clamp(slotnumber - 1, 0, PlayerUIManager.Singleton.playerUIInventoryManager.inventoryCategorySelectSlotPrefabs.Count - 1);
+                    //float i = ((float)slotnumber / PlayerUIManager.Singleton.playerUIInventoryManager.inventoryCategorySelectSlotPrefabs.Count - 1);
+                    //scrollRect.horizontalNormalizedPosition = Mathf.Lerp(scrollRect.horizontalNormalizedPosition, -(1f - i), Time.deltaTime / 0.2f);
+                }
+            }
+        }
+
+        private bool IsSelectedPrefabInViewOfViewport(int slotNumber)
+        {
+            RectTransform rect = PlayerUIManager.Singleton.playerUIInventoryManager.inventoryCategorySelectSlotPrefabs[slotNumber].GetComponent<RectTransform>();
+            Vector2 v = rect.position;
+            bool inView = RectTransformUtility.RectangleContainsScreenPoint(viewport, v);
+            return inView;
         }
     }
 }
