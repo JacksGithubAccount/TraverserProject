@@ -23155,7 +23155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0.00008583069, y: -13.953796}
+  m_AnchoredPosition: {x: 0.00024414062, y: -13.953796}
   m_SizeDelta: {x: 2212.9, y: -119.0276}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1455153934010118543
@@ -31030,7 +31030,7 @@ GameObject:
   - component: {fileID: 8890023171198226483}
   - component: {fileID: 8850025637855807113}
   - component: {fileID: 1981673598969317480}
-  - component: {fileID: 1646420397363958529}
+  - component: {fileID: 8119422513435905318}
   m_Layer: 0
   m_Name: IncreaseArrow (1)
   m_TagString: Untagged
@@ -31152,7 +31152,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1646420397363958529
+--- !u!114 &8119422513435905318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -31161,10 +31161,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5535812375639021809}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b10a77560f6b97b4c874084f4f31b521, type: 3}
+  m_Script: {fileID: 11500000, guid: 75e54bbf68d5cf74aa20041912d5bfdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mouseOverArrow: 0
+  isPressed: 0
+  isIncreaseArrow: 1
+  scrollbar: {fileID: 1023462610787743095}
 --- !u!1 &5549140544051267349
 GameObject:
   m_ObjectHideFlags: 0
@@ -44010,7 +44013,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1689993566097403384}
   m_HandleRect: {fileID: 7051014789602378006}
   m_Direction: 0
-  m_Value: 0
+  m_Value: -0.00000006921708
   m_Size: 0.20304286
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -50764,7 +50767,8 @@ GameObject:
   - component: {fileID: 1756919292856829964}
   - component: {fileID: 2494696274727776248}
   - component: {fileID: 5472716980561906947}
-  - component: {fileID: 800651090399686394}
+  - component: {fileID: 777262461912593161}
+  - component: {fileID: 8954848689474881594}
   m_Layer: 0
   m_Name: DecreaseArrow (1)
   m_TagString: Untagged
@@ -50886,7 +50890,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &800651090399686394
+--- !u!114 &777262461912593161
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50895,10 +50899,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 8629401883203645681}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b10a77560f6b97b4c874084f4f31b521, type: 3}
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 8
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1023462610787743095}
+          m_TargetAssemblyTypeName: TraverserProject.UI_Inventory_Item_Type_Scrollbar,
+            Assembly-CSharp
+          m_MethodName: DecrementSliderValue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &8954848689474881594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8629401883203645681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75e54bbf68d5cf74aa20041912d5bfdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mouseOverArrow: 0
+  isPressed: 0
+  isIncreaseArrow: 1
+  scrollbar: {fileID: 1023462610787743095}
 --- !u!1 &8649958384418005907
 GameObject:
   m_ObjectHideFlags: 0
