@@ -150,6 +150,21 @@ namespace TraverserProject
             inventorySlotPrefabs.Clear();
         }
 
+        public void UseSelectedItem()
+        {
+
+        }
+
+        public void DropSelectedItem()
+        {
+
+        }
+
+        public void DiscardSelectedItem()
+        {
+
+        }
+
     }
 
 }
