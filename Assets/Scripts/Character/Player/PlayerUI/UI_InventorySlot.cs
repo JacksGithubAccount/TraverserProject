@@ -7,6 +7,8 @@ namespace TraverserProject
     {
         public Image itemIcon;
         public Image highlightIcon;
+        public Image greyedOutIcon;
+        public Image GlowIcon;
         [SerializeField] public Item currentItem;
 
         [Header("Inventory Category Select")]
@@ -15,6 +17,8 @@ namespace TraverserProject
         private void Awake()
         {
             highlightIcon.enabled = false;
+            greyedOutIcon.enabled = false;
+            GlowIcon.enabled = false;
         }
         public void AddItem(Item item)
         {
@@ -46,6 +50,11 @@ namespace TraverserProject
                 PlayerUIManager.Singleton.playerUIInventoryManager.LoadRecentItemsInventory();
             else
                 PlayerUIManager.Singleton.playerUIInventoryManager.LoadInventoryBasedOnItemType((ItemType)itemType);
+        }
+
+        public void OpenInventorySelectionMenu()
+        {
+            PlayerUIManager.Singleton.playerUIInventoryManager.OpenInventorySelectionMenu(this);
         }
     }
 }

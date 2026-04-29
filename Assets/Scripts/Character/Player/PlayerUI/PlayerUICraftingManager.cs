@@ -134,20 +134,7 @@ namespace TraverserProject
                 Destroy(item);
             }
             listOfGameObjectPrefabs.Clear();
-        }
-
-        private void ToggleGameObjectPrefabs(List<GameObject> listOfGameObjectPrefabs, bool toggle)
-        {
-            foreach (GameObject item in listOfGameObjectPrefabs)
-            {
-                Button button = item.GetComponent<Button>();
-                EventTrigger et = item.GetComponent<EventTrigger>();
-                if(button != null)
-                    button.enabled = toggle;
-                if(et != null)
-                    et.enabled = toggle;
-            }
-        }
+        }        
 
         public void CraftSelectedItem()
         {

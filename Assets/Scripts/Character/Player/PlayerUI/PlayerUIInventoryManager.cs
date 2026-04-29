@@ -21,6 +21,9 @@ namespace TraverserProject
         public ItemType currentSelectedInventoryCategorySelectSlot;
         public List<GameObject> inventoryCategorySelectSlotPrefabs = new List<GameObject>();
 
+        [Header("InventorySelectionMenu")]
+        [SerializeField] GameObject inventorySelectionMenuWindow;
+
 
         public override void OpenMenu()
         {
@@ -148,6 +151,21 @@ namespace TraverserProject
                 Destroy(item);
             }
             inventorySlotPrefabs.Clear();
+        }
+
+        public void OpenInventorySelectionMenu(UI_InventorySlot itemSlot)
+        {
+            currentlySelectedItem = itemSlot.currentItem;
+            OpenSubMenu(inventorySelectionMenuWindow);
+            ToggleGameObjectPrefabs(inventorySlotPrefabs, false);
+            ToggleGameObjectPrefabs(inventoryCategorySelectSlotPrefabs, false);
+            foreach(var slot in inventorySlotPrefabs)
+            {
+                UI_InventorySlot islot = slot.GetComponent<UI_InventorySlot>();
+                islot.greyedOutIcon.enabled = false;
+            }
+            itemSlot.GlowIcon.enabled = true;
+
         }
 
         public void UseSelectedItem()

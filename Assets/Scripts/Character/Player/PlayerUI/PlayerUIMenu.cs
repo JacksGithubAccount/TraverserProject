@@ -1,6 +1,9 @@
-using UnityEngine;
-using System.Collections;
 using NUnit.Framework;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace TraverserProject
 {
@@ -43,6 +46,19 @@ namespace TraverserProject
             yield return new WaitForFixedUpdate();
 
             OpenMenu();
+        }
+
+        protected void ToggleGameObjectPrefabs(List<GameObject> listOfGameObjectPrefabs, bool toggle)
+        {
+            foreach (GameObject item in listOfGameObjectPrefabs)
+            {
+                Button button = item.GetComponent<Button>();
+                EventTrigger et = item.GetComponent<EventTrigger>();
+                if (button != null)
+                    button.enabled = toggle;
+                if (et != null)
+                    et.enabled = toggle;
+            }
         }
 
         public virtual void CloseMenu()
