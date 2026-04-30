@@ -165,6 +165,9 @@ namespace TraverserProject
                 islot.greyedOutIcon.enabled = false;
             }
             itemSlot.GlowIcon.enabled = true;
+            Image image = itemSlot.GetComponent<Image>();
+
+            inventorySelectionMenuWindow.transform.position = new Vector3(itemSlot.transform.position.x + image.flexibleWidth, inventorySelectionMenuWindow.transform.position.y, inventorySelectionMenuWindow.transform.position.z);
 
         }
 
