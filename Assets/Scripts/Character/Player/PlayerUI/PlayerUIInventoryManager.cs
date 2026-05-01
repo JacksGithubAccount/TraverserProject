@@ -23,7 +23,8 @@ namespace TraverserProject
 
         [Header("InventorySelectionMenu")]
         [SerializeField] GameObject inventorySelectionMenuWindow;
-
+        [SerializeField] GameObject closeSubmenuWindow;
+        [SerializeField] Button inventorySelectionMenuUseTextButton;
 
         public override void OpenMenu()
         {
@@ -33,6 +34,14 @@ namespace TraverserProject
             PlayerUIManager.Singleton.CloseAllSubMenuWindows();
             //RefreshMenu();
             LoadRecentItemsInventory();
+        }
+
+        public override void CloseSubMenu()
+        {
+            base.CloseSubMenu();
+            closeSubmenuWindow.SetActive(false);
+            ToggleGameObjectPrefabs(inventorySlotPrefabs, true);
+            ToggleGameObjectPrefabs(inventoryCategorySelectSlotPrefabs, true);
         }
 
         public void ToggleInventoryButtons(bool isEnabled)
@@ -156,6 +165,11 @@ namespace TraverserProject
         public void OpenInventorySelectionMenu(UI_InventorySlot itemSlot)
         {
             currentlySelectedItem = itemSlot.currentItem;
+
+            if (currentlySelectedItem.itemType != ItemType.Tool)
+                inventorySelectionMenuUseTextButton.interactable = false;
+
+            closeSubmenuWindow.SetActive(true);
             OpenSubMenu(inventorySelectionMenuWindow);
             ToggleGameObjectPrefabs(inventorySlotPrefabs, false);
             ToggleGameObjectPrefabs(inventoryCategorySelectSlotPrefabs, false);
@@ -165,10 +179,11 @@ namespace TraverserProject
                 islot.greyedOutIcon.enabled = false;
             }
             itemSlot.GlowIcon.enabled = true;
-            Image image = itemSlot.GetComponent<Image>();
+            RectTransform imageRectTransform = itemSlot.GetComponent<RectTransform>();
+            RectTransform menuWindowRectTransform = inventorySelectionMenuWindow.GetComponent<RectTransform>();
+            inventorySelectionMenuWindow.transform.position = new Vector3(itemSlot.transform.position.x + imageRectTransform.rect.width + menuWindowRectTransform.rect.width, imageRectTransform.transform.position.y - menuWindowRectTransform.rect.height, inventorySelectionMenuWindow.transform.position.z);
 
-            inventorySelectionMenuWindow.transform.position = new Vector3(itemSlot.transform.position.x + image.flexibleWidth, inventorySelectionMenuWindow.transform.position.y, inventorySelectionMenuWindow.transform.position.z);
-
+            
         }
 
         public void UseSelectedItem()
