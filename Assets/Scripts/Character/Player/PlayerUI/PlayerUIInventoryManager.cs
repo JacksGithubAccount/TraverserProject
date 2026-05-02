@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -168,6 +169,8 @@ namespace TraverserProject
 
             if (currentlySelectedItem.itemType != ItemType.Tool)
                 inventorySelectionMenuUseTextButton.interactable = false;
+            else
+                inventorySelectionMenuUseTextButton.interactable = true;
 
             closeSubmenuWindow.SetActive(true);
             OpenSubMenu(inventorySelectionMenuWindow);
@@ -188,17 +191,31 @@ namespace TraverserProject
 
         public void UseSelectedItem()
         {
+            CloseSubMenu();
+            PlayerUIManager.Singleton.CloseAllMenuWindows();
 
+            PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+            QuickSlotItem qsItem = currentlySelectedItem as QuickSlotItem;
+            if (qsItem == null)
+                return;
+
+            qsItem.AttemptToUseItem(player);
+            player.playerNetworkManager.NotifyTheServerOfQuickSlotItemActionServerRpc(NetworkManager.Singleton.LocalClientId, qsItem.itemID);
         }
 
         public void DropSelectedItem()
         {
+            CloseSubMenu();
+            PlayerUIManager.Singleton.CloseAllMenuWindows();
 
+            PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+            player.playerInventoryManager.DropItemFromInventory(currentlySelectedItem);
         }
 
         public void DiscardSelectedItem()
         {
-
+            PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+            player.playerInventoryManager.RemoveItemFromInventory(currentlySelectedItem);
         }
 
     }
