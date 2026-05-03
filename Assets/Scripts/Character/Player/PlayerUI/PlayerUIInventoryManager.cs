@@ -26,6 +26,9 @@ namespace TraverserProject
         [SerializeField] GameObject inventorySelectionMenuWindow;
         [SerializeField] GameObject closeSubmenuWindow;
         [SerializeField] Button inventorySelectionMenuUseTextButton;
+        [SerializeField] Slider inventorySelectionAmountSlider;
+        private int selectedInventorySelectionMenuButton; // 0 none, 1 use, 2 drop, 3 discard
+        [SerializeField] TextMeshProUGUI inventorySelectionAmountText;
 
         public override void OpenMenu()
         {
@@ -189,6 +192,43 @@ namespace TraverserProject
             
         }
 
+        public void AttemptToOpenInventorySelectionAmountMenu()
+        {
+            //consider usable souls
+        }
+
+        public void SelectInventorySelectionMenuButton(int number)
+        {
+            selectedInventorySelectionMenuButton = number;
+        }
+
+        public void ConfirmInventorySelectionAmount()
+        {
+            Item item = Instantiate(currentlySelectedItem);
+            item.currentItemAmount = (int)inventorySelectionAmountSlider.value;
+
+            if (selectedInventorySelectionMenuButton == 0)
+                return;
+            else if (selectedInventorySelectionMenuButton == 1)
+                UseSelectedItem();
+            else if (selectedInventorySelectionMenuButton == 2)
+                DropSelectedItem(item);
+            else if (selectedInventorySelectionMenuButton == 3)
+                DiscardSelectedItem(item);
+        }
+
+        public void UpdateSliderValue()
+        {
+            PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+
+            inventorySelectionAmountText.text = "x" + inventorySelectionAmountSlider.value.ToString();
+
+            if(inventorySelectionAmountSlider.value > currentlySelectedItem.currentItemAmount)
+                inventorySelectionAmountSlider.value = currentlySelectedItem.currentItemAmount;
+        }
+
+
+
         public void UseSelectedItem()
         {
             CloseSubMenu();
@@ -203,19 +243,19 @@ namespace TraverserProject
             player.playerNetworkManager.NotifyTheServerOfQuickSlotItemActionServerRpc(NetworkManager.Singleton.LocalClientId, qsItem.itemID);
         }
 
-        public void DropSelectedItem()
+        public void DropSelectedItem(Item item)
         {
             CloseSubMenu();
             PlayerUIManager.Singleton.CloseAllMenuWindows();
 
             PlayerManager player = PlayerUIManager.Singleton.localPlayer;
-            player.playerInventoryManager.DropItemFromInventory(currentlySelectedItem);
+            player.playerInventoryManager.DropItemFromInventory(item);
         }
 
-        public void DiscardSelectedItem()
+        public void DiscardSelectedItem(Item item)
         {
             PlayerManager player = PlayerUIManager.Singleton.localPlayer;
-            player.playerInventoryManager.RemoveItemFromInventory(currentlySelectedItem);
+            player.playerInventoryManager.RemoveItemFromInventory(item);
         }
 
     }
