@@ -27,14 +27,15 @@ namespace TraverserProject
         public bool canRoll = true;
         public bool isRidingLift = false;
         public bool isOpeningDoor = false;
-        public bool isOnLadder = false; //for ladder1
         public bool isExitingLadder = false;
+        public bool canBeKnockedOffLadder = false;
         [HideInInspector] public bool canExitTopOfLadder = false;
         [HideInInspector] public bool canExitLadderWithRightHand = false;
         [HideInInspector] public bool canExitLadderWithLeftHand = false;
 
-        public bool isSliding = false;
-        public bool isSlidingOffCharacter = false;
+        [Header("Ladder")]
+        public float knockOffLadderWindow = 10;
+        private Coroutine enableCanBeKnockedOffLadderCoroutine;
 
         [Header("Slope Sliding")]
         [SerializeField] float slopeSlideStartPositionYOffset = 1;
@@ -43,6 +44,8 @@ namespace TraverserProject
         [SerializeField] float slopeSlideSpeed = -11;
         [SerializeField] float slopeSlideSpeedMultiplier = -3;
         [SerializeField] float slipperySurfaceMaxAngle = 15;
+        public bool isSliding = false;
+        public bool isSlidingOffCharacter = false;
         private bool slideUntilGrounded = false;
         private Coroutine slideOffCharacterCoroutine;
         [SerializeField] float characterSlideOffHeadCollisionMaxDistanceCheck = 5;
@@ -344,7 +347,30 @@ namespace TraverserProject
 
         }
 
+        public void EnableCanBeKnockedOffLadderForATime(float time)
+        {
+            if (enableCanBeKnockedOffLadderCoroutine != null)
+                StopCoroutine(enableCanBeKnockedOffLadderCoroutine);
 
+            enableCanBeKnockedOffLadderCoroutine = StartCoroutine(CanBeKnockedOffLadderCoroutine(time));
+            canBeKnockedOffLadder = true;
+        }
+
+        private IEnumerator CanBeKnockedOffLadderCoroutine(float time)
+        {
+            yield return new WaitForSeconds(time);
+            canBeKnockedOffLadder = false;
+        }
+
+        public void FallFromLadder()
+        {
+            if (!character.IsOwner)
+                return;
+
+            character.characterNetworkManager.isClimbingLadder.Value = false;
+            character.characterAnimatorManager.PlayTargetActionAnimationInstantly("Ladder_Fall_Idle_01", true);
+
+        }
 
     }
 }

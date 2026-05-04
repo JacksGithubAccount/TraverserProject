@@ -126,6 +126,28 @@ namespace TraverserProject
             if (character.isDead.Value)
                 return;
 
+            if (character.characterNetworkManager.isClimbingLadder.Value)
+            {
+                //eldenring's method - if hit twice within x time, fall off
+                if (character.characterLocomotionManager.canBeKnockedOffLadder)
+                {
+                    KnockCharacterOffLadder(character);
+                    return;
+                }
+                else
+                {
+                    character.characterLocomotionManager.EnableCanBeKnockedOffLadderForATime(character.characterLocomotionManager.knockOffLadderWindow);
+                }
+
+
+                //falls if poise is broken
+                //if(poiseIsBroken)
+                //{
+                //	KnockCharacterOffLadder(character);
+                //	return;
+                //}
+            }
+
             if (poiseIsBroken)
             {
                 //front
@@ -197,6 +219,15 @@ namespace TraverserProject
             }
 
 
+        }
+
+        protected void KnockCharacterOffLadder(CharacterManager character)
+        {
+            if (!character.IsOwner)
+                return;
+
+            character.characterAnimatorManager.PlayTargetActionAnimationInstantly("Ladder_Fall_Start_01", true);
+            character.characterLocomotionManager.isExitingLadder = false;
         }
 
     }

@@ -181,6 +181,7 @@ namespace TraverserProject
             playerNetworkManager.isChargingAttack.OnValueChanged += playerNetworkManager.OnIsChargingAttackChanged;
             playerNetworkManager.isSneaking.OnValueChanged += playerNetworkManager.OnIsSneakingChanged;
             playerNetworkManager.isClimbingLadder.OnValueChanged += playerNetworkManager.OnIsClimbingLadderChanged;
+            playerNetworkManager.isSlidingDownLadder.OnValueChanged += playerNetworkManager.OnIsSlidingDownLadderChanged;
 
             if (IsOwner && !IsServer)
             {
@@ -273,6 +274,8 @@ namespace TraverserProject
             playerNetworkManager.isChargingAttack.OnValueChanged -= playerNetworkManager.OnIsChargingAttackChanged;
             playerNetworkManager.isSneaking.OnValueChanged -= playerNetworkManager.OnIsSneakingChanged;
             playerNetworkManager.isClimbingLadder.OnValueChanged -= playerNetworkManager.OnIsClimbingLadderChanged;
+            playerNetworkManager.isSlidingDownLadder.OnValueChanged -= playerNetworkManager.OnIsSlidingDownLadderChanged;
+
         }
 
         private void OnClientConnectedCallback(ulong clientID)
@@ -683,6 +686,8 @@ namespace TraverserProject
 
             //sync block status
             playerNetworkManager.OnIsBlockingChanged(false, playerNetworkManager.isBlocking.Value);
+
+            playerNetworkManager.OnIsClimbingLadderChanged(false, playerNetworkManager.isClimbingLadder.Value);
 
             //lock on
             if (playerNetworkManager.isLockedOn.Value)

@@ -132,15 +132,20 @@ namespace TraverserProject
 
         private void HandleJumpingMovement()
         {
+            if (player.playerNetworkManager.isClimbingLadder.Value)
+                return;
+
             if (player.playerNetworkManager.isJumping.Value)
             {
                 player.characterController.Move(jumpDirection * jumpForwardSpeed * Time.deltaTime);
             }
         }
 
-        
+
         private void HandleFreeFallMovement()
         {
+            if (player.playerNetworkManager.isClimbingLadder.Value)
+                return;
 
             if (!player.characterLocomotionManager.isGrounded)
             {
@@ -261,6 +266,14 @@ namespace TraverserProject
 
         public void HandleSprinting()
         {
+            if (player.playerNetworkManager.isClimbingLadder.Value)
+            {
+                if (isExitingLadder)
+                    return;
+
+                player.playerNetworkManager.isSlidingDownLadder.Value = true;
+                return;
+            }
             if (player.isPerformingAction)
             {
                 player.playerNetworkManager.isSprinting.Value = false;
@@ -289,6 +302,18 @@ namespace TraverserProject
         }
         public void AttemptToPerformDodge()
         {
+            if (player.playerNetworkManager.isClimbingLadder.Value)
+            {
+                if (!canMove)
+                    return;
+
+                if (isExitingLadder)
+                    return;
+
+                JumpOffLadder();
+
+                return;
+            }
             if (!player.playerLocomotionManager.canRoll)
                 return;
 
@@ -369,6 +394,14 @@ namespace TraverserProject
         public void ApplyJumpingVelocity()
         {
             yVelocity.y = Mathf.Sqrt(jumpHeight * -2 * gravityForce);
+        }
+
+        private void JumpOffLadder()
+        {
+            //optionally, can add small amount of velocity upward when exiting ladder so you don't fall instantly
+            yVelocity.y = Mathf.Sqrt(1 * -2 * gravityForce);
+            player.playerNetworkManager.isClimbingLadder.Value = false;
+            player.playerAnimatorManager.PlayTargetActionAnimation("Ladder_Jump_Start_01", true);
         }
 
         private void MoveAtRegularSpeed()

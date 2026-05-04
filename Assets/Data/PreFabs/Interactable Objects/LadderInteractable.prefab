@@ -63,8 +63,10 @@ MonoBehaviour:
   smoothTime: 0.2
   climbDownLadderEnterAnimation: Climb_Down_Ladder_Enter_01
   climbUpLadderEnterAnimation: Climb_Up_Ladder_Enter_01
-  climbUpLadderExitRightAnimation: Climb_Up_Ladder_Exit_R_01
-  climbUpLadderExitLeftAnimation: Climb_Up_Ladder_Exit_L_01
+  climbUpLadderExitUpRightAnimation: Climb_Up_Ladder_Exit_R_01
+  climbUpLadderExitUpLeftAnimation: Climb_Up_Ladder_Exit_L_01
+  climbUpLadderExitDownRightAnimation: Climb_Down_Ladder_Exit_R_01
+  climbUpLadderExitDownLeftAnimation: Climb_Down_Ladder_Exit_L_01
 --- !u!65 &4276906003825763179
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -169,7 +171,7 @@ Transform:
   m_GameObject: {fileID: 1892222225659803799}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.263, y: 0.329, z: 0}
+  m_LocalPosition: {x: 0, y: 0.329, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -235,8 +237,10 @@ MonoBehaviour:
   smoothTime: 0.2
   climbDownLadderEnterAnimation: Climb_Down_Ladder_Enter_01
   climbUpLadderEnterAnimation: Climb_Up_Ladder_Enter_01
-  climbUpLadderExitRightAnimation: Climb_Up_Ladder_Exit_R_01
-  climbUpLadderExitLeftAnimation: Climb_Up_Ladder_Exit_L_01
+  climbUpLadderExitUpRightAnimation: Climb_Up_Ladder_Exit_R_01
+  climbUpLadderExitUpLeftAnimation: Climb_Up_Ladder_Exit_L_01
+  climbUpLadderExitDownRightAnimation: Climb_Down_Ladder_Exit_R_01
+  climbUpLadderExitDownLeftAnimation: Climb_Down_Ladder_Exit_L_01
 --- !u!65 &7472616040944319049
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -257,7 +261,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.5, y: 1.5, z: 1.5}
-  m_Center: {x: 1, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -1}
 --- !u!54 &6020049337973459187
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -398,7 +402,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 1
-  m_Center: {x: 1, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -1}
 --- !u!1 &7241804079468606043
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,7 +428,7 @@ Transform:
   m_GameObject: {fileID: 7241804079468606043}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -486,7 +490,7 @@ Transform:
   m_GameObject: {fileID: 8632696551689330180}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.383, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -526,19 +530,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db92c35dd407dfa499ee8a0d16373d9f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db92c35dd407dfa499ee8a0d16373d9f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db92c35dd407dfa499ee8a0d16373d9f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db92c35dd407dfa499ee8a0d16373d9f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db92c35dd407dfa499ee8a0d16373d9f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -546,7 +550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db92c35dd407dfa499ee8a0d16373d9f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db92c35dd407dfa499ee8a0d16373d9f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

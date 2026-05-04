@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 namespace TraverserProject
 {
@@ -110,7 +111,7 @@ namespace TraverserProject
             rotationDirection.y = 0;
             player.transform.position = startPosition.transform.position;
             player.transform.rotation = Quaternion.LookRotation(rotationDirection);
-            player.playerNetworkManager.HideWeaponsServerRpc();
+
 
             if (isTopOfLadder)
             {
@@ -189,6 +190,7 @@ namespace TraverserProject
                     return;
 
                 player.playerLocomotionManager.isExitingLadder = true;
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, 1, false); // locks your vertical to forward, whilst exiting top of ladder
                 player.playerLocomotionManager.DisableCanRotate();
                 player.playerLocomotionManager.EnableIsClimbingLadder();
                 player.isPerformingAction = true;
@@ -221,7 +223,13 @@ namespace TraverserProject
                 player.playerLocomotionManager.DisableCanRotate();
 
                 if (player.playerNetworkManager.isSlidingDownLadder.Value)
+                {
                     player.playerAnimatorManager.PlayTargetActionAnimation("Ladder Empty", true);
+                    player.playerAnimatorManager.PlayTargetActionAnimation("Ladder_Jump_Start_01", true);
+                    player.playerNetworkManager.isClimbingLadder.Value = false;
+                    return;
+
+                }
 
                 if (player.playerLocomotionManager.canExitLadderWithRightHand)
                 {

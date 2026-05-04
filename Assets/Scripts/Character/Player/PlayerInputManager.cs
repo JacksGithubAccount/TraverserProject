@@ -487,6 +487,7 @@ namespace TraverserProject
             else
             {
                 player.playerNetworkManager.isSprinting.Value = false;
+                player.playerNetworkManager.isSlidingDownLadder.Value = false;
             }
         }
         private void HandleJumpInput()

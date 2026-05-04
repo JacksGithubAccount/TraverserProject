@@ -22,6 +22,7 @@ namespace TraverserProject
         [HideInInspector] public CharacterLocomotionManager characterLocomotionManager;
         [HideInInspector] public CharacterUIManager characterUIManager;
         [HideInInspector] public CharacterStatsManager characterStatsManager;
+        [HideInInspector] public CharacterEquipmentManager characterEquipmentManager;
 
         [Header("Character Group")]
         public CharacterGroup characterGroup;
@@ -44,6 +45,7 @@ namespace TraverserProject
             characterLocomotionManager = GetComponent<CharacterLocomotionManager>();
             characterUIManager = GetComponent<CharacterUIManager>();
             characterStatsManager = GetComponent<CharacterStatsManager>();
+            characterEquipmentManager = GetComponent<CharacterEquipmentManager>();
         }
         protected virtual void Start()
         {

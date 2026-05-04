@@ -15,5 +15,15 @@ namespace TraverserProject
 
         }
 
+        public virtual void HideWeapons()
+        {
+
+        }
+
+        public virtual void UnHideWeapons()
+        {
+
+        }
+
     }
 }

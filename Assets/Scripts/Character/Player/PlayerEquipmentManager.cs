@@ -1100,7 +1100,7 @@ namespace TraverserProject
                 }
 
                 leftWeaponManager = leftHandWeaponModel.GetComponent<WeaponManager>();
-                
+
                 leftWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
             }
         }
@@ -1237,7 +1237,12 @@ namespace TraverserProject
 
         }
 
-        public void UnHideWeapons()
+        public override void HideWeapons()
+        {
+            player.playerNetworkManager.HideWeaponsServerRpc();
+        }
+
+        public override void UnHideWeapons()
         {
             if (player.playerEquipmentManager.rightHandWeaponModel != null)
             {
