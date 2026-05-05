@@ -26,8 +26,11 @@ namespace TraverserProject
         [SerializeField] GameObject inventorySelectionMenuWindow;
         [SerializeField] GameObject closeSubmenuWindow;
         [SerializeField] Button inventorySelectionMenuUseTextButton;
-        [SerializeField] Slider inventorySelectionAmountSlider;
         private int selectedInventorySelectionMenuButton; // 0 none, 1 use, 2 drop, 3 discard
+
+        [Header("InventorySelectionAmountMenu")]
+        [SerializeField] GameObject inventorySelectionAmountMenuWindow;
+        [SerializeField] Slider inventorySelectionAmountSlider;        
         [SerializeField] TextMeshProUGUI inventorySelectionAmountText;
 
         public override void OpenMenu()
@@ -90,6 +93,13 @@ namespace TraverserProject
                 inventorySlot.AddItem(itemsInInventory[i]);
                 inventorySlotPrefabs.Add(inventorySlot.gameObject);
 
+                inventorySlot.CurrentItemAmountText.enabled = false;
+                if (inventorySlot.currentItem.currentItemAmount > 1)
+                {
+                    inventorySlot.CurrentItemAmountText.text = "x" + inventorySlot.currentItem.currentItemAmount;
+                    inventorySlot.CurrentItemAmountText.enabled = true;
+                }
+
                 if (!hasSelectedFirstInventorySlot)
                 {
                     hasSelectedFirstInventorySlot = true;
@@ -132,6 +142,13 @@ namespace TraverserProject
                 UI_InventorySlot inventorySlot = inventorySlotGameObject.GetComponent<UI_InventorySlot>();
                 inventorySlot.AddItem(itemsInInventory[i]);
                 inventorySlotPrefabs.Add(inventorySlot.gameObject);
+
+                inventorySlot.CurrentItemAmountText.enabled = false;
+                if (inventorySlot.currentItem.currentItemAmount > 1)
+                {
+                    inventorySlot.CurrentItemAmountText.text = "x" + inventorySlot.currentItem.currentItemAmount;
+                    inventorySlot.CurrentItemAmountText.enabled = true;
+                }
 
                 if (!hasSelectedFirstInventorySlot)
                 {
@@ -182,10 +199,12 @@ namespace TraverserProject
             foreach(var slot in inventorySlotPrefabs)
             {
                 UI_InventorySlot islot = slot.GetComponent<UI_InventorySlot>();
-                islot.greyedOutIcon.enabled = false;
+                islot.greyedOutIcon.enabled = false;            
             }
             itemSlot.GlowIcon.enabled = true;
+
             RectTransform imageRectTransform = itemSlot.GetComponent<RectTransform>();
+            
             RectTransform menuWindowRectTransform = inventorySelectionMenuWindow.GetComponent<RectTransform>();
             inventorySelectionMenuWindow.transform.position = new Vector3(itemSlot.transform.position.x + imageRectTransform.rect.width + menuWindowRectTransform.rect.width, imageRectTransform.transform.position.y - menuWindowRectTransform.rect.height, inventorySelectionMenuWindow.transform.position.z);
 
@@ -195,6 +214,11 @@ namespace TraverserProject
         public void AttemptToOpenInventorySelectionAmountMenu()
         {
             //consider usable souls
+            OpenSubMenu(inventorySelectionAmountMenuWindow);
+
+            RectTransform imageRectTransform = inventorySelectionMenuWindow.GetComponent<RectTransform>();
+            RectTransform menuWindowRectTransform = inventorySelectionAmountMenuWindow.GetComponent<RectTransform>();
+            inventorySelectionAmountMenuWindow.transform.position = new Vector3(inventorySelectionMenuWindow.transform.position.x + imageRectTransform.rect.width + menuWindowRectTransform.rect.width, imageRectTransform.transform.position.y - menuWindowRectTransform.rect.height, inventorySelectionAmountMenuWindow.transform.position.z);
         }
 
         public void SelectInventorySelectionMenuButton(int number)

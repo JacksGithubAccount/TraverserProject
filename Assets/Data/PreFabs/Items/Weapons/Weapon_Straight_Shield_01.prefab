@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aabeed291e5f8464ba87cf74e6312263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trailRenderer: {fileID: 0}
+  WeaponTrailVFX: {fileID: 0}
   meleeDamageCollider: {fileID: 8488698031435709849}
 --- !u!1 &4092702882696553361
 GameObject:
@@ -118,6 +120,7 @@ MonoBehaviour:
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
+  trueDamage: 0
   poiseDamage: 0
   characterCausingDamage: {fileID: 0}
   light_Attack_01_Modifier: 0
@@ -132,6 +135,22 @@ MonoBehaviour:
   rolling_Heavy_Attack_01_Modifier: 0
   backstep_Light_Attack_01_Modifier: 0
   backstep_Heavy_Attack_01_Modifier: 0
+  jumping_Light_Attack_01_Modifier: 0
+  jumping_Heavy_Attack_01_Modifier: 0
+  dual_Light_Attack_01_Modifier: 0
+  dual_Light_Attack_02_Modifier: 0
+  dual_Heavy_Attack_01_Modifier: 0
+  dual_Heavy_Attack_02_Modifier: 0
+  dual_Charge_Attack_01_Modifier: 0
+  dual_Charge_Attack_02_Modifier: 0
+  dual_Running_Light_Attack_01_Modifier: 0
+  dual_Running_Heavy_Attack_01_Modifier: 0
+  dual_Rolling_Light_Attack_01_Modifier: 0
+  dual_Rolling_Heavy_Attack_01_Modifier: 0
+  dual_Backstep_Light_Attack_01_Modifier: 0
+  dual_Backstep_Heavy_Attack_01_Modifier: 0
+  dual_Jumping_Light_Attack_01_Modifier: 0
+  dual_Jumping_Heavy_Attack_01_Modifier: 0
 --- !u!1 &7726850520175626377
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,6 +235,10 @@ PrefabInstance:
     - target: {fileID: 4534530363515280, guid: e6083eef65c09b5499703a6b9fd1e928, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23262953457976804, guid: e6083eef65c09b5499703a6b9fd1e928, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

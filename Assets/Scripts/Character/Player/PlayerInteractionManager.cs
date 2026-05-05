@@ -64,11 +64,13 @@ namespace TraverserProject
         public void RemoveInteractionFromList(Interactable interactableObject)
         {
             bool hasOnlyThisInteraction = false;
-            if (currentInteractableActions.Contains(interactableObject) && currentInteractableActions.Count == 1)
+            if (currentInteractableActions.Contains(interactableObject))
             {
-                currentInteractableActions.Remove(interactableObject);
-                hasOnlyThisInteraction = true;
+                currentInteractableActions.Remove(interactableObject);                
             }
+
+            if(currentInteractableActions.Count == 1)
+                hasOnlyThisInteraction = true;
 
 
             RefreshInteractionList();

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ namespace TraverserProject
         public Image highlightIcon;
         public Image greyedOutIcon;
         public Image GlowIcon;
+        public TextMeshProUGUI CurrentItemAmountText;
         [SerializeField] public Item currentItem;
 
         [Header("Inventory Category Select")]
