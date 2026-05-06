@@ -206,7 +206,7 @@ namespace TraverserProject
             RectTransform imageRectTransform = itemSlot.GetComponent<RectTransform>();
             
             RectTransform menuWindowRectTransform = inventorySelectionMenuWindow.GetComponent<RectTransform>();
-            inventorySelectionMenuWindow.transform.position = new Vector3(itemSlot.transform.position.x + imageRectTransform.rect.width + menuWindowRectTransform.rect.width, imageRectTransform.transform.position.y - menuWindowRectTransform.rect.height, inventorySelectionMenuWindow.transform.position.z);
+            inventorySelectionMenuWindow.transform.position = new Vector3(imageRectTransform.transform.position.x + imageRectTransform.rect.width, imageRectTransform.transform.position.y, inventorySelectionMenuWindow.transform.position.z);
 
             
         }
