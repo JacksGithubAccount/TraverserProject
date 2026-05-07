@@ -8,6 +8,7 @@ namespace TraverserProject
     {
         PlayerManager player;
 
+        public AICharacterManager dialogueCharacter;
         [SerializeField] List<Interactable> currentInteractableActions;
 
         private void Awake()
@@ -66,10 +67,10 @@ namespace TraverserProject
             bool hasOnlyThisInteraction = false;
             if (currentInteractableActions.Contains(interactableObject))
             {
-                currentInteractableActions.Remove(interactableObject);                
+                currentInteractableActions.Remove(interactableObject);
             }
 
-            if(currentInteractableActions.Count == 1)
+            if (currentInteractableActions.Count == 1)
                 hasOnlyThisInteraction = true;
 
 

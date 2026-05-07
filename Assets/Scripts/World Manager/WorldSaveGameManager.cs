@@ -44,10 +44,12 @@ namespace TraverserProject
         public int namelessKnightDialogueStageID = 0;
         public int blacksmithDialogueStageID = 0;
         public int blacksmithMenuDialogueStageID = 0;
+        public int shopkeeperDialogueStageID = 0;
 
         [Header("Dialogues")]
         [SerializeField] List<CharacterDialogue> namelessKnightDialogues = new List<CharacterDialogue>();
         [SerializeField] List<CharacterDialogue> blacksmithDialogues = new List<CharacterDialogue>();
+        [SerializeField] List<CharacterDialogue> shopkeeperDialogues = new List<CharacterDialogue>();
 
         [Header("Menu Dialogues")]
         [SerializeField] List<CharacterDialogue> blacksmithMenuDialogues = new List<CharacterDialogue>();
@@ -459,6 +461,9 @@ namespace TraverserProject
                 case CharacterDialogueID.BlacksmithDialogueID:
                     dialogue = FindDialogueByStageID(blacksmithDialogueStageID, blacksmithDialogues);
                     break;
+                case CharacterDialogueID.ShopkeeperDialogueID:
+                    dialogue = FindDialogueByStageID(shopkeeperDialogueStageID, shopkeeperDialogues);
+                    break;
                 default:
                     break;
             }
@@ -524,6 +529,10 @@ namespace TraverserProject
                     blacksmithDialogueStageID = stageIndex;
                     currentCharacterData.blacksmithStageID = blacksmithDialogueStageID;
                     break;
+                case CharacterDialogueID.ShopkeeperDialogueID:
+                    shopkeeperDialogueStageID = stageIndex;
+                    currentCharacterData.shopkeeperStageID = shopkeeperDialogueStageID;
+                    break;
                 default:
                     break;
             }
@@ -549,6 +558,7 @@ namespace TraverserProject
             namelessKnightDialogueStageID = currentCharacterData.namelessKnightStageID;
             blacksmithDialogueStageID = currentCharacterData.blacksmithStageID;
             blacksmithMenuDialogueStageID = currentCharacterData.blacksmithMenuStageID;
+            shopkeeperDialogueStageID = currentCharacterData.shopkeeperStageID;
         }
     }
 }

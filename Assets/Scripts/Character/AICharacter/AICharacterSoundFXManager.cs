@@ -40,7 +40,7 @@ namespace TraverserProject
                 networkObject.Spawn();
                 networkObject.TrySetParent(gameObject, true);
             }
-            if(characterMenuDialogueID != CharacterMenuDialogueID.NoDialogueID)
+            if (characterMenuDialogueID != CharacterMenuDialogueID.NoDialogueID)
             {
                 menuDialogue = WorldSaveGameManager.Singleton.GetCharacterMenuDialogueByEnum(characterMenuDialogueID);
             }
@@ -95,6 +95,9 @@ namespace TraverserProject
                 menuDialogueIsPlaying = false;
                 PlayerUIManager.Singleton.playerUIPopUpManager.CancelDialoguePopUp(aiCharacter);
             }
+
+            if (PlayerUIManager.Singleton.localPlayer.playerInteractionManager.dialogueCharacter == aiCharacter)
+                PlayerUIManager.Singleton.localPlayer.playerInteractionManager.dialogueCharacter = null;
         }
 
         public void OnCurrentDialogueEnded()

@@ -36,9 +36,6 @@ namespace TraverserProject
         public RangedProjectileItem mainProjectile;
         public RangedProjectileItem secondaryProjectile;
 
-        [Header("Inventory")]
-        public List<Item> itemsInInventory;
-
         [Header("Debug")]
         [SerializeField] bool dropItem = false;
 
@@ -124,7 +121,8 @@ namespace TraverserProject
 
             return itemInInventoryOrEquipped;
         }
-        public void AddItemToInventory(Item item)
+
+        public override void AddItemToInventory(Item item)
         {
             bool isStackable = false;
 
@@ -135,7 +133,7 @@ namespace TraverserProject
             {
                 bool isInQuickSlot = false;
 
-                foreach(var qsItem in quickSlotItemsInQuickSlots)
+                foreach (var qsItem in quickSlotItemsInQuickSlots)
                 {
                     if (qsItem.itemID == item.itemID)
                         isInQuickSlot = true;
@@ -146,7 +144,7 @@ namespace TraverserProject
                     foreach (var qsItem in quickSlotItemsInQuickSlots)
                     {
                         if (qsItem.itemID == item.itemID)
-                        { 
+                        {
                             qsItem.currentItemAmount += item.currentItemAmount;
 
                             if (qsItem.currentItemAmount > 99)
@@ -163,7 +161,7 @@ namespace TraverserProject
                     if (itemInInventory.currentItemAmount > 99)
                         itemInInventory.currentItemAmount = 99;
                 }
-                else if(!itemsInInventory.Find(x => x.itemID == item.itemID) && !isInQuickSlot)
+                else if (!itemsInInventory.Find(x => x.itemID == item.itemID) && !isInQuickSlot)
                 {
                     itemsInInventory.Add(item);
                 }
@@ -174,7 +172,7 @@ namespace TraverserProject
             }
         }
 
-        public void RemoveItemFromInventory(Item item)
+        public override void RemoveItemFromInventory(Item item)
         {
             bool isStackable = false;
 
@@ -183,7 +181,7 @@ namespace TraverserProject
 
             if (isStackable)
             {
-                if(CheckIfItemIsInInventoryOrEquipSlots(item))
+                if (CheckIfItemIsInInventoryOrEquipSlots(item))
                 {
                     Item itemInInventory = GetItemInInventoryOrEquipSlots(item);
                     itemInInventory.currentItemAmount -= item.currentItemAmount;
@@ -202,16 +200,7 @@ namespace TraverserProject
                 }
 
 
-                /*for (int i = itemsInInventory.Count - 1; i > -1; i--)
-                {
-                    if (itemsInInventory[i].itemID == item.itemID)
-                    {
-                        itemsInInventory[i].currentItemAmount -= item.currentItemAmount;
 
-                        if (itemsInInventory[i].currentItemAmount <= 0)
-                            itemsInInventory.Remove(item);
-                    }
-                }*/
             }
             else
             {
@@ -222,15 +211,6 @@ namespace TraverserProject
                     {
                         quickSlotItemsInQuickSlots[i] = null;
                     }
-                }
-            }
-
-            //null checker
-            for (int i = itemsInInventory.Count - 1; i > -1; i--)
-            {
-                if (itemsInInventory[i] == null)
-                {
-                    itemsInInventory.RemoveAt(i);
                 }
             }
         }

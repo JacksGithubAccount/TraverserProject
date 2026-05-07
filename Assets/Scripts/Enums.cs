@@ -44,7 +44,8 @@ public enum CharacterDialogueID
 {
     NoDialogueID,
     NamelessKnightDialogueID,
-    BlacksmithDialogueID
+    BlacksmithDialogueID,
+    ShopkeeperDialogueID
 }
 
 //used for determining dialogue from selecting talk in the menus
@@ -57,7 +58,16 @@ public enum CharacterMenuDialogueID
 public enum DialogueEndEvents
 {
     None,
-    Blacksmith
+    Blacksmith,
+    NPCWindow 	//sometimes NPC's will have a window open where you can buy/sell/talk, if you don't want to jump straight to a merchant window, use this
+
+}
+
+//Used to determine which ship inventory should be loaded
+public enum Shops
+{
+    None,
+    TutorialShop
 }
 
 //determines build up status effect type
@@ -312,3 +322,4 @@ public enum WorldSceneLocation
     Area01_Subarea04,
     Area01_Subarea05
 }
+

@@ -31,6 +31,11 @@ namespace TraverserProject
                 WorldSaveGameManager.Singleton.SaveGame();
             }
 
+            if (aiCharacter == null)
+                return;
+
+            player.playerInteractionManager.dialogueCharacter = aiCharacter;
+
             if (aiCharacter.aiCharacterSoundFXManager.menuDialogueIsPlaying)
             {
                 aiCharacter.aiCharacterSoundFXManager.PlayCurrentMenuDialogueEvent();

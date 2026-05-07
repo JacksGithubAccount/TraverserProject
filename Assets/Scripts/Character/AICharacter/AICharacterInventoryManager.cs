@@ -11,6 +11,9 @@ namespace TraverserProject
         public int dropItemChance = 10;
         [SerializeField] Item[] droppableItems;
 
+        [Header("Shop")]
+        public Shops characterShopID;
+
         protected override void Awake()
         {
             base.Awake();
