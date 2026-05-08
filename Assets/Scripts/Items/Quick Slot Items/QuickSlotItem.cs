@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace TraverserProject
@@ -20,22 +21,59 @@ namespace TraverserProject
             if (!CanIUseThisItem(player))
                 return;
 
-            player.playerAnimatorManager.PlayTargetActionAnimation(useItemAnimation, true);
+            if (currentItemAmount < 1)
+                return;
+
+            player.playerCombatManager.isUsingItem = true;
+
+            if (player.IsOwner)
+            {
+                player.playerAnimatorManager.PlayTargetActionAnimation(useItemAnimation, false, false, true, true, false);
+                player.playerNetworkManager.HideWeaponsServerRpc();
+
+            }
         }
 
         public virtual void SuccessfullyUseItem(PlayerManager player)
         {
+            if (player.IsOwner)
+            {
+                bool isInQuickSlot = false;
+                QuickSlotItem qsItem = player.playerInventoryManager.quickSlotItemsInQuickSlots.SingleOrDefault(x => x.itemID == this.itemID);
+                currentItemAmount--;
+                player.playerInventoryManager.quickSlotItemsInQuickSlots[player.playerInventoryManager.quickSlotItemIndex].currentItemAmount--;
+                PlayerUIManager.Singleton.playerUIHudManager.SetQuickSlotItemQuickSlotIcon(player.playerInventoryManager.currentQuickSlotItem);
 
+                //if out of items, remove from quickslot and current item
+                if (currentItemAmount <= 0)
+                {
+                    player.playerInventoryManager.quickSlotItemsInQuickSlots[player.playerInventoryManager.quickSlotItemIndex] = null;
+                    player.playerNetworkManager.currentQuickSlotItemID.Value = -1;
+                }
+            }
         }
 
         public virtual bool CanIUseThisItem(PlayerManager player)
         {
+            if (!player.playerCombatManager.isUsingItem && player.isPerformingAction)
+                return false;
+
+            if (player.playerNetworkManager.isAttacking.Value)
+                return false;
+
+            if (player.playerCombatManager.isUsingItem)
+                return false;
+
             return true;
         }
 
         public virtual int GetCurrentAmount(PlayerManager player)
         {
-            return 0;
+            int currentAmount = 0;
+
+            currentAmount = currentItemAmount;
+
+            return currentAmount;
         }
 
     }

@@ -171,8 +171,7 @@ namespace TraverserProject
                 itemsInInventory.Add(item);
             }
         }
-
-        public override void RemoveItemFromInventory(Item item)
+        public void RemoveItemFromQuickSlotOrInventory(Item item)
         {
             bool isStackable = false;
 
@@ -198,9 +197,6 @@ namespace TraverserProject
                         }
                     }
                 }
-
-
-
             }
             else
             {
@@ -214,7 +210,6 @@ namespace TraverserProject
                 }
             }
         }
-
         public void DropItemFromInventory(Item item)
         {
 
