@@ -53,11 +53,26 @@ public class UI_Craft_Amount_Slider : MonoBehaviour
 
     public void IncrementSliderValue()
     {
-        slider.value++;
+        if (slider.value == slider.maxValue)
+        {
+            slider.value = slider.minValue;
+        }
+        else
+        {
+            slider.value++;
+        }
+
     }
 
     public void DecrementSliderValue()
     {
-        slider.value--;
+        if (slider.value == slider.minValue)
+        {
+            slider.value = slider.maxValue;
+        }
+        else
+        {
+            slider.value--;
+        }
     }
 }

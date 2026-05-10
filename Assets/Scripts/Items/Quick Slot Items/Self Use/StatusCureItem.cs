@@ -9,23 +9,6 @@ public class StatusCureItem : QuickSlotItem
 
     protected GameObject statusCureVFX;
 
-    public override void AttemptToUseItem(PlayerManager player)
-    {
-        if (!CanIUseThisItem(player))
-            return;
-
-        if (currentItemAmount < 1)
-            return;
-
-        player.playerCombatManager.isUsingItem = true;
-
-        if (player.IsOwner)
-        {
-            player.playerAnimatorManager.PlayTargetActionAnimation(useItemAnimation, false, false, true, true, false);
-            player.playerNetworkManager.HideWeaponsServerRpc();
-
-        }
-    }
 
     public override void SuccessfullyUseItem(PlayerManager player)
     {
@@ -77,26 +60,4 @@ public class StatusCureItem : QuickSlotItem
 
     }
 
-    public override bool CanIUseThisItem(PlayerManager player)
-    {
-        if (!player.playerCombatManager.isUsingItem && player.isPerformingAction)
-            return false;
-
-        if (player.playerNetworkManager.isAttacking.Value)
-            return false;
-
-        if (player.playerCombatManager.isUsingItem)
-            return false;
-
-        return true;
-    }
-
-    public override int GetCurrentAmount(PlayerManager player)
-    {
-        int currentAmount = 0;
-
-        currentAmount = currentItemAmount;
-
-        return currentAmount;
-    }
 }

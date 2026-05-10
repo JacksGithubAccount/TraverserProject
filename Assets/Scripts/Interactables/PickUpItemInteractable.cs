@@ -157,7 +157,7 @@ namespace TraverserProject
             {
                 hasBeenLooted = true;
                 gameObject.SetActive(false);
-                Destroy(gameObject);
+                DestroyThisNetworkObjectServerRpc();
             }
         }
 
