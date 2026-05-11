@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace TraverserProject
@@ -126,6 +127,7 @@ namespace TraverserProject
         {
             bool isStackable = false;
 
+
             if (item.maxItemAmount > 1)
                 isStackable = true;
 
@@ -156,8 +158,8 @@ namespace TraverserProject
                 if (itemsInInventory.Find(x => x.itemID == item.itemID) && !isInQuickSlot)
                 {
                     Item itemInInventory = itemsInInventory.Find(x => x.itemID == item.itemID);
-                    itemInInventory.currentItemAmount += item.currentItemAmount;
-
+                    itemInInventory.currentItemAmount = itemInInventory.currentItemAmount + item.currentItemAmount;
+                    
                     if (itemInInventory.currentItemAmount > 99)
                         itemInInventory.currentItemAmount = 99;
                 }
@@ -214,11 +216,12 @@ namespace TraverserProject
         {
 
             GameObject itemDrop = Instantiate(WorldItemDatabase.Singleton.inventoryDropItemPickUpInteractable);
-            itemDrop.transform.position = player.transform.position;
             PickUpItemInteractable itemInteractable = itemDrop.GetComponent<PickUpItemInteractable>();
+            itemDrop.GetComponent<NetworkObject>().Spawn();            
             itemInteractable.itemID.Value = item.itemID;
-            itemInteractable.itemAmount = item.currentItemAmount;
-            //RemoveItemFromInventory(item);
+            itemInteractable.networkPosition.Value = transform.position;
+            itemInteractable.itemAmount = item.currentItemAmount;            
+            RemoveItemFromInventory(item);
         }
     }
 }

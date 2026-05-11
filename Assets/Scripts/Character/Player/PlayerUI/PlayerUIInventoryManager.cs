@@ -214,6 +214,15 @@ namespace TraverserProject
         public void AttemptToOpenInventorySelectionAmountMenu()
         {
             //consider usable souls
+            if (selectedInventorySelectionMenuButton == 1)
+            {
+                if (currentlySelectedItem.GetType() != typeof(BubblesItem))
+                {
+                    ConfirmInventorySelectionAmount();
+                    return;
+                }
+            }
+
             OpenSubMenu(inventorySelectionAmountMenuWindow);
 
             RectTransform imageRectTransform = inventorySelectionMenuWindow.GetComponent<RectTransform>();
@@ -232,6 +241,7 @@ namespace TraverserProject
         {
             Item item = Instantiate(currentlySelectedItem);
             item.currentItemAmount = (int)inventorySelectionAmountSlider.value;
+            
 
             if (selectedInventorySelectionMenuButton == 0)
                 return;
@@ -280,6 +290,9 @@ namespace TraverserProject
 
         public void DiscardSelectedItem(Item item)
         {
+            CloseSubMenu();
+            PlayerUIManager.Singleton.CloseAllMenuWindows();
+
             PlayerManager player = PlayerUIManager.Singleton.localPlayer;
             player.playerInventoryManager.RemoveItemFromInventory(item);
         }

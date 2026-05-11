@@ -125,19 +125,20 @@ namespace TraverserProject
                 WorldSaveGameManager.Singleton.currentCharacterData.recipesLearnt.Add((Recipe)item);
 
             }
-
+            Item iitem = Instantiate(item);
             if (item.maxItemAmount > 1)
             {
-                item.currentItemAmount = itemAmount;
+                iitem.currentItemAmount = itemAmount;
             }
             else
             {
-                item.currentItemAmount = 1;
+                iitem.currentItemAmount = 1;
             }
-            player.playerInventoryManager.AddItemToInventory(item);
+
+            player.playerInventoryManager.AddItemToInventory(iitem);
             
 
-            PlayerUIManager.Singleton.playerUIPopUpManager.SendItemPopUp(item, item.currentItemAmount);
+            PlayerUIManager.Singleton.playerUIPopUpManager.SendItemPopUp(iitem, iitem.currentItemAmount);
 
             if (pickUpType == ItemPickUpType.WorldSpawn && !canRespawn)
             {
@@ -211,7 +212,7 @@ namespace TraverserProject
         {
             if (IsServer)
             {
-                GetComponent<NetworkObject>().Despawn();
+                GetComponent<NetworkObject>().Despawn(false);
             }
         }
     }

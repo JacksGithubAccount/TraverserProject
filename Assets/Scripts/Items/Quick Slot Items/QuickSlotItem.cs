@@ -34,11 +34,28 @@ namespace TraverserProject
             }
         }
 
+        public virtual void AttemptToUseMultipleItems(PlayerManager player)
+        {
+            if (!CanIUseThisItem(player))
+                return;
+
+            if (currentItemAmount < 1)
+                return;
+
+            player.playerCombatManager.isUsingItem = true;
+
+            if (player.IsOwner)
+            {
+                player.playerAnimatorManager.PlayTargetActionAnimation(useItemAnimation, false, false, true, true, false);
+                player.playerNetworkManager.HideWeaponsServerRpc();
+
+            }
+        }
+
         public virtual void SuccessfullyUseItem(PlayerManager player)
         {
             if (player.IsOwner)
             {
-                bool isInQuickSlot = false;
                 QuickSlotItem qsItem = player.playerInventoryManager.quickSlotItemsInQuickSlots.SingleOrDefault(x => x.itemID == this.itemID);
                 currentItemAmount--;
                 player.playerInventoryManager.quickSlotItemsInQuickSlots[player.playerInventoryManager.quickSlotItemIndex].currentItemAmount--;

@@ -85,7 +85,7 @@ MonoBehaviour:
   isActivated:
     m_InternalValue: 0
   shortcutID: 0
-  nonShortcutInteractable: {fileID: 7686698200009321193}
+  nonShortcutInteractable: {fileID: 0}
   nonShortcutInteractables: []
   shortcutAudioSource: {fileID: 3368850187531738439}
   shortcutActivatingSFX: {fileID: 8300000, guid: 9b0a37f6dc30c0344ae2f09d96aef35c, type: 3}
@@ -397,7 +397,9 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 6.41
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2276959191887968300, guid: 1ca42ce6efa45c44ba30d750b18bb9d8, type: 3}
+    - {fileID: 992275613160224940, guid: 1ca42ce6efa45c44ba30d750b18bb9d8, type: 3}
     m_RemovedGameObjects:
     - {fileID: 540161015423255193, guid: 1ca42ce6efa45c44ba30d750b18bb9d8, type: 3}
     m_AddedGameObjects: []
@@ -466,14 +468,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 6.6, z: 2.4}
   m_Center: {x: 0, y: 2.85, z: 0}
---- !u!114 &7686698200009321193 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2276959191887968300, guid: 1ca42ce6efa45c44ba30d750b18bb9d8, type: 3}
-  m_PrefabInstance: {fileID: 8445868999047795397}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f9755c7b331b41469c7319963d61281, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -438,7 +438,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5822408614867484080}
   - component: {fileID: 3954260286355039294}
-  - component: {fileID: 2276959191887968300}
   - component: {fileID: 867131598299967411}
   m_Layer: 0
   m_Name: Split Ladder Interactable
@@ -480,7 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3017949406
+  GlobalObjectIdHash: 3554486819
   InScenePlacedSourceGlobalObjectIdHash: 2210631690
   DeferredDespawnTick: 0
   Ownership: 1
@@ -493,28 +492,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &2276959191887968300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2078437287192529758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f9755c7b331b41469c7319963d61281, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  interactableText: Ladder
-  interactableCollider: {fileID: 867131598299967411}
-  hostOnlyInteractable: 0
-  playerStandingPosition: {fileID: 7690163778902077118}
-  playerClimbingPositions:
-  - {fileID: 3546196100348609215}
-  - {fileID: 1534574386836978986}
-  - {fileID: 1863288513957165300}
-  ladderTopInteractable: {fileID: 992275613160224940}
 --- !u!135 &867131598299967411
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1605,7 +1582,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1651727665905104858}
   - component: {fileID: 6637545892707774437}
-  - component: {fileID: 992275613160224940}
   m_Layer: 0
   m_Name: Top Ladder Interactable
   m_TagString: Untagged
@@ -1649,24 +1625,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &992275613160224940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7815129621871446485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69952e6a8bc36294c917fc15c5df4626, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  interactableText: Climb Ladder
-  interactableCollider: {fileID: 6637545892707774437}
-  hostOnlyInteractable: 1
-  playerStandingPositionAtTop: {fileID: 5858643883776556123}
-  playerClimbingPositions: []
 --- !u!1 &7824003500146353830
 GameObject:
   m_ObjectHideFlags: 0
