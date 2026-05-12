@@ -16,6 +16,9 @@ namespace TraverserProject
         public bool isConsumable = true;
         public bool dealsDamage = false;
 
+        [Header("Multiple Item Use")]
+        public int numberOfItemsToUse = 1;
+
         public virtual void AttemptToUseItem(PlayerManager player)
         {
             if (!CanIUseThisItem(player))
@@ -34,7 +37,7 @@ namespace TraverserProject
             }
         }
 
-        public virtual void AttemptToUseMultipleItems(PlayerManager player)
+        public virtual void AttemptToUseMultipleItems(PlayerManager player, int numberOfItemsToUse)
         {
             if (!CanIUseThisItem(player))
                 return;
@@ -50,6 +53,7 @@ namespace TraverserProject
                 player.playerNetworkManager.HideWeaponsServerRpc();
 
             }
+
         }
 
         public virtual void SuccessfullyUseItem(PlayerManager player)
@@ -57,8 +61,21 @@ namespace TraverserProject
             if (player.IsOwner)
             {
                 QuickSlotItem qsItem = player.playerInventoryManager.quickSlotItemsInQuickSlots.SingleOrDefault(x => x.itemID == this.itemID);
-                currentItemAmount--;
-                player.playerInventoryManager.quickSlotItemsInQuickSlots[player.playerInventoryManager.quickSlotItemIndex].currentItemAmount--;
+                if (numberOfItemsToUse == 1)
+                {
+                    currentItemAmount--;
+                    if (qsItem != null)
+                        qsItem.currentItemAmount--;
+                }
+                else if ( numberOfItemsToUse > 1)
+                {
+                    currentItemAmount -= numberOfItemsToUse;
+                    if (qsItem != null)
+                        qsItem.currentItemAmount -= numberOfItemsToUse;
+
+                    numberOfItemsToUse = 1;
+                }
+
                 PlayerUIManager.Singleton.playerUIHudManager.SetQuickSlotItemQuickSlotIcon(player.playerInventoryManager.currentQuickSlotItem);
 
                 //if out of items, remove from quickslot and current item
