@@ -5,36 +5,8 @@ using UnityEngine.UI;
 namespace TraverserProject
 {
 
-    public class UI_EquipmentInventorySlot : MonoBehaviour
+    public class UI_EquipmentInventorySlot : UI_InventorySlot
     {
-
-        public Image itemIcon;
-        public Image highlightIcon;
-        [SerializeField] public Item currentItem;
-
-        public void AddItem(Item item)
-        {
-            if (item == null)
-            {
-                itemIcon.enabled = false;
-                return;
-            }
-
-            itemIcon.enabled = true;
-
-            currentItem = item;
-            itemIcon.sprite = item.itemIcon;
-        }
-
-        public void SelectSlot()
-        {
-            highlightIcon.enabled = true;
-        }
-
-        public void DeselectSlot()
-        {
-            highlightIcon.enabled = false;
-        }
 
         public void EquipItem()
         {
@@ -209,14 +181,14 @@ namespace TraverserProject
                     equippedItem = player.playerInventoryManager.quickSlotItemsInQuickSlots[0];
                     if (equippedItem != null)
                     {
-                            player.playerInventoryManager.AddItemToInventory(equippedItem);
+                        player.playerInventoryManager.AddItemToInventory(equippedItem);
                     }
                     player.playerInventoryManager.quickSlotItemsInQuickSlots[0] = currentItem as QuickSlotItem;
                     int itemCount0 = 1;
                     if (player.playerInventoryManager.quickSlotItemsInQuickSlots[0].isConsumable)
                     {
                         itemCount0 = player.playerInventoryManager.quickSlotItemsInQuickSlots[0].currentItemAmount;
-                    }                    
+                    }
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
                     player.playerInventoryManager.quickSlotItemsInQuickSlots[0].currentItemAmount = itemCount0;
 

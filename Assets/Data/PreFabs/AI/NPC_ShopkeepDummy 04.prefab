@@ -1373,7 +1373,7 @@ MonoBehaviour:
   characterEquipmentManager: {fileID: 0}
   characterGroup: 0
   isPerformingAction: 0
-  characterName: 
+  characterName: Marvin
   spawnerID: 0
   aiCharacterSoundFXManager: {fileID: 0}
   aiCharacterNetworkManager: {fileID: 0}
@@ -1388,6 +1388,8 @@ MonoBehaviour:
   combatStance: {fileID: 11400000, guid: 53ff37f0db8a7b94cb9a50992870c975, type: 2}
   attack: {fileID: 11400000, guid: ce0c8eb25f3b9344ab2a45643eaae533, type: 2}
   investigateSound: {fileID: 11400000, guid: ec903751695cbe046a23c20613f425ef, type: 2}
+  isShop: 1
+  isBlacksmith: 0
 --- !u!114 &7304563110396155058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1760,7 +1762,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af101b79c803fa74d9765bb9c95c302a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsInInventory: []
+  itemsInInventory:
+  - {fileID: 11400000, guid: f0330c7fdea308646a82d3f157252565, type: 2}
+  - {fileID: 11400000, guid: 2136559b2bbf9ce42b3d1be103acd38b, type: 2}
+  - {fileID: 11400000, guid: 6c1434286fddb5345b6af99db1eaecb9, type: 2}
+  - {fileID: 11400000, guid: 1f24f521d7294aa4a8fc15067fe2914f, type: 2}
   dropItemChance: 10
   droppableItems:
   - {fileID: 11400000, guid: 64a3dcab51c176e409334284777e2c9a, type: 2}

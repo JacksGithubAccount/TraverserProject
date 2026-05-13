@@ -28,6 +28,8 @@ namespace TraverserProject
         [HideInInspector] public PlayerUIAnvilMenuManager playerUIAnvilMenuManager;
         [HideInInspector] public PlayerUIBlacksmithMenuManager playerUIBlacksmithMenuManager;
         [HideInInspector] public PlayerUICraftingManager playerUICraftingManager;
+        [HideInInspector] public PlayerUIDialogueWindowManager playerUIDialogueWindowManager;
+        [HideInInspector] public PlayerUIShopManager playerUIShopManager;
 
         [Header("UI Flags")]
         public bool menuWindowIsOpen = false;
@@ -65,6 +67,8 @@ namespace TraverserProject
             playerUIAnvilMenuManager = GetComponentInChildren<PlayerUIAnvilMenuManager>();
             playerUIBlacksmithMenuManager = GetComponentInChildren<PlayerUIBlacksmithMenuManager>();
             playerUICraftingManager = GetComponentInChildren<PlayerUICraftingManager>();
+            playerUIDialogueWindowManager = GetComponentInChildren<PlayerUIDialogueWindowManager>();
+            playerUIShopManager = GetComponentInChildren<PlayerUIShopManager>();
         }
         private void Start()
         {

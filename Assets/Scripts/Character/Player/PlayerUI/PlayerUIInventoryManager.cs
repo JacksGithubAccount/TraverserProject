@@ -89,7 +89,7 @@ namespace TraverserProject
             for (int i = 0; i < itemsInInventory.Count; i++)
             {
                 GameObject inventorySlotGameObject = Instantiate(inventorySlotPrefab, inventoryContentWindow);
-                UI_InventorySlot inventorySlot = inventorySlotGameObject.GetComponent<UI_InventorySlot>();
+                UI_PlayerInventorySlot inventorySlot = inventorySlotGameObject.GetComponent<UI_PlayerInventorySlot>();
                 inventorySlot.AddItem(itemsInInventory[i]);
                 inventorySlotPrefabs.Add(inventorySlot.gameObject);
 
@@ -139,7 +139,7 @@ namespace TraverserProject
             for (int i = 0; i < itemsInInventory.Count; i++)
             {
                 GameObject inventorySlotGameObject = Instantiate(inventorySlotPrefab, inventoryContentWindow);
-                UI_InventorySlot inventorySlot = inventorySlotGameObject.GetComponent<UI_InventorySlot>();
+                UI_PlayerInventorySlot inventorySlot = inventorySlotGameObject.GetComponent<UI_PlayerInventorySlot>();
                 inventorySlot.AddItem(itemsInInventory[i]);
                 inventorySlotPrefabs.Add(inventorySlot.gameObject);
 
@@ -183,7 +183,7 @@ namespace TraverserProject
             inventorySlotPrefabs.Clear();
         }
 
-        public void OpenInventorySelectionMenu(UI_InventorySlot itemSlot)
+        public void OpenInventorySelectionMenu(UI_PlayerInventorySlot itemSlot)
         {
             currentlySelectedItem = itemSlot.currentItem;
 
@@ -198,7 +198,7 @@ namespace TraverserProject
             ToggleGameObjectPrefabs(inventoryCategorySelectSlotPrefabs, false);
             foreach(var slot in inventorySlotPrefabs)
             {
-                UI_InventorySlot islot = slot.GetComponent<UI_InventorySlot>();
+                UI_PlayerInventorySlot islot = slot.GetComponent<UI_PlayerInventorySlot>();
                 islot.greyedOutIcon.enabled = false;            
             }
             itemSlot.GlowIcon.enabled = true;

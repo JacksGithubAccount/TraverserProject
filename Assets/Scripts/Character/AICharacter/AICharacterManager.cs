@@ -35,6 +35,10 @@ namespace TraverserProject
         [Header("Activation Beacon")]
         protected AIActivationBeacon beacon;
 
+        [Header("Interactions")]
+        public bool isShop = false;
+        public bool isBlacksmith = false;
+
         protected override void Awake()
         {
             base.Awake();
