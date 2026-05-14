@@ -508,6 +508,13 @@ namespace TraverserProject
 
         public void SuccessfullyUseQuickSlotItem()
         {
+            if(player.playerInventoryManager.menuSelectedQuickSlotItem != null)
+            {
+                player.playerInventoryManager.menuSelectedQuickSlotItem.SuccessfullyUseItem(player);
+                player.playerInventoryManager.menuSelectedQuickSlotItem = null;
+                return;
+            }
+
             if (player.playerInventoryManager.currentQuickSlotItem != null)
                 player.playerInventoryManager.currentQuickSlotItem.SuccessfullyUseItem(player);
         }

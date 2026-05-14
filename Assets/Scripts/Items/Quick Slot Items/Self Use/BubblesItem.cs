@@ -15,7 +15,7 @@ namespace TraverserProject
         public override void SuccessfullyUseItem(PlayerManager player)
         {
             base.SuccessfullyUseItem(player);
-            player.playerStatsManager.AddBubbles(bubblesGainOnUse);
+            player.playerStatsManager.AddBubbles(bubblesGainOnUse * numberOfItemsToUse);
         }
     }
 }

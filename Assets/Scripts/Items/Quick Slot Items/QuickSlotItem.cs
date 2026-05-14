@@ -15,8 +15,9 @@ namespace TraverserProject
         [Header("Flags")]
         public bool isConsumable = true;
         public bool dealsDamage = false;
+        
 
-        [Header("Multiple Item Use")]
+        [Header("Batch Item Use")]
         public int numberOfItemsToUse = 1;
 
         public virtual void AttemptToUseItem(PlayerManager player)
@@ -37,24 +38,6 @@ namespace TraverserProject
             }
         }
 
-        public virtual void AttemptToUseMultipleItems(PlayerManager player, int numberOfItemsToUse)
-        {
-            if (!CanIUseThisItem(player))
-                return;
-
-            if (currentItemAmount < 1)
-                return;
-
-            player.playerCombatManager.isUsingItem = true;
-
-            if (player.IsOwner)
-            {
-                player.playerAnimatorManager.PlayTargetActionAnimation(useItemAnimation, false, false, true, true, false);
-                player.playerNetworkManager.HideWeaponsServerRpc();
-
-            }
-
-        }
 
         public virtual void SuccessfullyUseItem(PlayerManager player)
         {

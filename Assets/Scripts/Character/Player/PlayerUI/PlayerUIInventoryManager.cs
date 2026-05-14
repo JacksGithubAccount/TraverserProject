@@ -276,6 +276,8 @@ namespace TraverserProject
                 return;
 
             qsItem.numberOfItemsToUse = (int)inventorySelectionAmountSlider.value;
+            player.playerInventoryManager.menuSelectedQuickSlotItem = qsItem;
+
             qsItem.AttemptToUseItem(player);
             player.playerNetworkManager.NotifyTheServerOfQuickSlotItemActionServerRpc(NetworkManager.Singleton.LocalClientId, qsItem.itemID);
         }
