@@ -49,6 +49,8 @@ namespace TraverserProject
             if (item.maxItemAmount > 1)
                 isStackable = true;
 
+            Item itemInInventory = itemsInInventory.Find(x => x.itemID == item.itemID);
+
             if (isStackable)
             {
                 for (int i = itemsInInventory.Count - 1; i > -1; i--)
@@ -58,13 +60,13 @@ namespace TraverserProject
                         itemsInInventory[i].currentItemAmount -= item.currentItemAmount;
 
                         if (itemsInInventory[i].currentItemAmount <= 0)
-                            itemsInInventory.Remove(item);
+                            itemsInInventory.Remove(itemInInventory);
                     }
                 }
             }
             else
             {
-                itemsInInventory.Remove(item);
+                itemsInInventory.Remove(itemInInventory);
             }
 
             //null checker

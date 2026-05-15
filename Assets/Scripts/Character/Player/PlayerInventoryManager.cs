@@ -65,7 +65,7 @@ namespace TraverserProject
         {
             bool isInInventoryorEquipped = false;
 
-            isInInventoryorEquipped = itemsInInventory.Contains(item);
+            isInInventoryorEquipped = itemsInInventory.Find(x => x.itemID == item.itemID);
             if (!isInInventoryorEquipped)
             {
                 foreach (var qsItem in quickSlotItemsInQuickSlots)
@@ -181,29 +181,32 @@ namespace TraverserProject
             if (item.maxItemAmount > 1)
                 isStackable = true;
 
+            if (!CheckIfItemIsInInventoryOrEquipSlots(item))
+                return;
+
+            Item itemInInventory = GetItemInInventoryOrEquipSlots(item);
+
             if (isStackable)
             {
-                if (CheckIfItemIsInInventoryOrEquipSlots(item))
-                {
-                    Item itemInInventory = GetItemInInventoryOrEquipSlots(item);
-                    itemInInventory.currentItemAmount -= item.currentItemAmount;
 
-                    if (itemInInventory.currentItemAmount <= 0)
+                itemInInventory.currentItemAmount -= item.currentItemAmount;
+
+                if (itemInInventory.currentItemAmount <= 0)
+                {
+                    itemsInInventory.Remove(itemInInventory);
+                    for (int i = 0; i < quickSlotItemsInQuickSlots.Length; i++)
                     {
-                        itemsInInventory.Remove(item);
-                        for (int i = 0; i < quickSlotItemsInQuickSlots.Length; i++)
+                        if (quickSlotItemsInQuickSlots[i].itemID == item.itemID)
                         {
-                            if (quickSlotItemsInQuickSlots[i].itemID == item.itemID)
-                            {
-                                quickSlotItemsInQuickSlots[i] = null;
-                            }
+                            quickSlotItemsInQuickSlots[i] = null;
                         }
                     }
                 }
             }
+
             else
             {
-                itemsInInventory.Remove(item);
+                itemsInInventory.Remove(itemInInventory);
                 for (int i = 0; i < quickSlotItemsInQuickSlots.Length; i++)
                 {
                     if (quickSlotItemsInQuickSlots[i].itemID == item.itemID)
@@ -221,8 +224,8 @@ namespace TraverserProject
             itemDrop.GetComponent<NetworkObject>().Spawn();            
             itemInteractable.itemID.Value = item.itemID;
             itemInteractable.networkPosition.Value = transform.position;
-            itemInteractable.itemAmount = item.currentItemAmount;            
-            RemoveItemFromInventory(item);
+            itemInteractable.itemAmount = item.currentItemAmount;
+            RemoveItemFromQuickSlotOrInventory(item);
         }
     }
 }

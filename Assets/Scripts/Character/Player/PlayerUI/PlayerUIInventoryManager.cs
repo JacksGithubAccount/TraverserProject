@@ -33,6 +33,10 @@ namespace TraverserProject
         [SerializeField] Slider inventorySelectionAmountSlider;        
         [SerializeField] TextMeshProUGUI inventorySelectionAmountText;
 
+        [Header("Inventory Detail Menu")]
+        [SerializeField] GameObject inventoryDetailWindow;
+        [SerializeField] TextMeshProUGUI inventoryDetailItemNameText;
+
         public override void OpenMenu()
         {
             base.OpenMenu();
@@ -297,7 +301,7 @@ namespace TraverserProject
             PlayerUIManager.Singleton.CloseAllMenuWindows();
 
             PlayerManager player = PlayerUIManager.Singleton.localPlayer;
-            player.playerInventoryManager.RemoveItemFromInventory(item);
+            player.playerInventoryManager.RemoveItemFromQuickSlotOrInventory(item);
         }
 
     }
