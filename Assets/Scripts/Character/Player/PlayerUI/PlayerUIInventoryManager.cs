@@ -36,6 +36,8 @@ namespace TraverserProject
         [Header("Inventory Detail Menu")]
         [SerializeField] GameObject inventoryDetailWindow;
         [SerializeField] TextMeshProUGUI inventoryDetailItemNameText;
+        [SerializeField] Image inventoryDetailImage;
+        [SerializeField] TextMeshProUGUI inventoryDetailItemDescriptionText;
 
         public override void OpenMenu()
         {
@@ -62,6 +64,13 @@ namespace TraverserProject
                 gameObject.SetActive(isEnabled);
             }
 
+        }
+
+        public void DispayItemDetail(Item item)
+        {
+            inventoryDetailItemNameText.text = item.itemName;
+            inventoryDetailImage.sprite = item.itemIcon;
+            inventoryDetailItemDescriptionText.text = item.itemDescription;
         }
 
         //Inventory Category Select

@@ -39,6 +39,7 @@ namespace TraverserProject
         public void SelectSlot()
         {
             highlightIcon.enabled = true;
+            PlayerUIManager.Singleton.playerUIInventoryManager.DispayItemDetail(currentItem);
         }
 
         public void DeselectSlot()
