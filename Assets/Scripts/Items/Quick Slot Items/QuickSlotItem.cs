@@ -6,6 +6,9 @@ namespace TraverserProject
 
     public class QuickSlotItem : Item
     {
+        [Header("Description")]
+        [TextArea] public string itemUsage;
+
         [Header("Item Model")]
         [SerializeField] protected GameObject itemModel;
 

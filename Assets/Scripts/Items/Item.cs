@@ -13,7 +13,7 @@ namespace TraverserProject
         public int maxItemAmount = 1;
         public int currentItemAmount = 1;
 
-        [TextArea] public string itemDescription;
+        [TextArea] public string itemDescription;        
         public int itemID;
         public ItemType itemType = ItemType.None;
 

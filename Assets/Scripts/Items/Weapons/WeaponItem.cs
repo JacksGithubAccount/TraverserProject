@@ -5,6 +5,9 @@ namespace TraverserProject
 
     public class WeaponItem : EquipmentItem
     {
+        [Header("Description")]
+        [TextArea] public string itemSkillDescription = "";        
+
         [Header("Animations")]
         public AnimatorOverrideController weaponAnimator;
 

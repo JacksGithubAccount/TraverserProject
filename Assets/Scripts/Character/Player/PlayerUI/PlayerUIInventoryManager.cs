@@ -38,6 +38,7 @@ namespace TraverserProject
         [SerializeField] TextMeshProUGUI inventoryDetailItemNameText;
         [SerializeField] Image inventoryDetailImage;
         [SerializeField] TextMeshProUGUI inventoryDetailItemDescriptionText;
+        [SerializeField] TextMeshProUGUI inventoryDetailItemSkillDescriptionText;
 
         public override void OpenMenu()
         {
@@ -71,6 +72,11 @@ namespace TraverserProject
             inventoryDetailItemNameText.text = item.itemName;
             inventoryDetailImage.sprite = item.itemIcon;
             inventoryDetailItemDescriptionText.text = item.itemDescription;
+            if (item as WeaponItem)
+            {
+                WeaponItem weaponItem = (WeaponItem)item;
+
+            }
         }
 
         //Inventory Category Select
