@@ -12444,6 +12444,7 @@ MonoBehaviour:
   characterLocomotionManager: {fileID: 0}
   characterUIManager: {fileID: 0}
   characterStatsManager: {fileID: 0}
+  characterEquipmentManager: {fileID: 0}
   characterGroup: 0
   isPerformingAction: 0
   respawnCharacter: 0
@@ -12490,18 +12491,19 @@ MonoBehaviour:
   canRoll: 1
   isRidingLift: 0
   isOpeningDoor: 0
-  isOnLadder: 0
   isExitingLadder: 0
+  canBeKnockedOffLadder: 0
   canExitTopOfLadder: 0
   canExitLadderWithRightHand: 0
   canExitLadderWithLeftHand: 0
-  isSliding: 0
-  isSlidingOffCharacter: 0
+  knockOffLadderWindow: 10
   slopeSlideStartPositionYOffset: 1
   slopeSlideSphereCastMaxDistance: 2
   slopeSlideSpeed: -11
   slopeSlideSpeedMultiplier: -3
   slipperySurfaceMaxAngle: 15
+  isSliding: 0
+  isSlidingOffCharacter: 0
   characterSlideOffHeadCollisionMaxDistanceCheck: 5
   characterCollisionCheckSphereMultiplier: 1.5
   interactedLadderClimbPositions: []
@@ -13055,6 +13057,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87e1482e7f139c74bb42016530a83dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemsInInventory:
+  - {fileID: 11400000, guid: 2136559b2bbf9ce42b3d1be103acd38b, type: 2}
+  - {fileID: 11400000, guid: 5e71dc28b7f4e344a866875bc002bce4, type: 2}
+  - {fileID: 11400000, guid: d4a06b49d42657449b74320981258cb1, type: 2}
+  - {fileID: 11400000, guid: 8455b6ba01765074183d43f2b2e44a95, type: 2}
+  - {fileID: 11400000, guid: 3a24ed21a32462a419a4a3944f0a0d08, type: 2}
+  - {fileID: 11400000, guid: 4314fe2158e2af8468b2364279131280, type: 2}
+  - {fileID: 11400000, guid: 951f7c71bcded944581ff05d4b287f9f, type: 2}
+  - {fileID: 11400000, guid: 1c439a1813d627542b71ac5d47ac0ca8, type: 2}
+  - {fileID: 11400000, guid: 3ee4de27f654b3c47927e8024f72c51e, type: 2}
+  - {fileID: 11400000, guid: f095cc94da52ad3418a67b98e35afac7, type: 2}
+  - {fileID: 11400000, guid: b6d5e52d44593da408fd1cc5c140ccf7, type: 2}
+  - {fileID: 11400000, guid: b989280cce39ab048853bf5cf206358d, type: 2}
   currentRightHandWeapon: {fileID: 11400000, guid: 64a3dcab51c176e409334284777e2c9a, type: 2}
   currentLeftHandWeapon: {fileID: 11400000, guid: 5e71dc28b7f4e344a866875bc002bce4, type: 2}
   currentTwoHandWeapon: {fileID: 0}
@@ -13080,24 +13095,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 91fa5aa3cd3bcfd40b51d8de1cd1e4b2, type: 2}
   quickSlotItemIndex: 0
   currentQuickSlotItem: {fileID: 11400000, guid: aedcc59cf0831af4eb8da47234130fb5, type: 2}
+  menuSelectedQuickSlotItem: {fileID: 0}
   headEquipment: {fileID: 11400000, guid: d4a06b49d42657449b74320981258cb1, type: 2}
   bodyEquipment: {fileID: 11400000, guid: d7f23dd81588e284892606c920126316, type: 2}
   handEquipment: {fileID: 11400000, guid: 404cac2c9b0f0f240a6ac1a7bd8e74cb, type: 2}
   legEquipment: {fileID: 11400000, guid: 0ac3f505a2054504a8c167b1834bb5b1, type: 2}
   mainProjectile: {fileID: 11400000, guid: c769f95361625fa4d98e2a4e4d9ac4b1, type: 2}
   secondaryProjectile: {fileID: 0}
-  itemsInInventory:
-  - {fileID: 11400000, guid: 2136559b2bbf9ce42b3d1be103acd38b, type: 2}
-  - {fileID: 11400000, guid: 5e71dc28b7f4e344a866875bc002bce4, type: 2}
-  - {fileID: 11400000, guid: d4a06b49d42657449b74320981258cb1, type: 2}
-  - {fileID: 11400000, guid: 8455b6ba01765074183d43f2b2e44a95, type: 2}
-  - {fileID: 11400000, guid: 3a24ed21a32462a419a4a3944f0a0d08, type: 2}
-  - {fileID: 11400000, guid: 4314fe2158e2af8468b2364279131280, type: 2}
-  - {fileID: 11400000, guid: 951f7c71bcded944581ff05d4b287f9f, type: 2}
-  - {fileID: 11400000, guid: 1c439a1813d627542b71ac5d47ac0ca8, type: 2}
-  - {fileID: 11400000, guid: 3ee4de27f654b3c47927e8024f72c51e, type: 2}
-  - {fileID: 11400000, guid: f095cc94da52ad3418a67b98e35afac7, type: 2}
-  - {fileID: 11400000, guid: b6d5e52d44593da408fd1cc5c140ccf7, type: 2}
   dropItem: 0
 --- !u!114 &2442665282701344435
 MonoBehaviour:
@@ -13240,6 +13244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16ff6d7f0ced83d4386bf5eadaf35aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueCharacter: {fileID: 0}
   currentInteractableActions: []
 --- !u!114 &5796847305617921371
 MonoBehaviour:

@@ -7,7 +7,7 @@ namespace TraverserProject
     public class QuickSlotItem : Item
     {
         [Header("Description")]
-        [TextArea] public string itemUsage;
+        [TextArea] public string itemEffect;
 
         [Header("Item Model")]
         [SerializeField] protected GameObject itemModel;
@@ -22,6 +22,15 @@ namespace TraverserProject
 
         [Header("Batch Item Use")]
         public int numberOfItemsToUse = 1;
+
+        [Header("Costs")]
+        public int FPCost = 0;
+
+        [Header("Scaling")]
+        public int strengthScaling = 0;
+        public int dexterityScaling = 0;
+        public int intelligenceScaling = 0;
+        public int faithScaling = 0;
 
         public virtual void AttemptToUseItem(PlayerManager player)
         {

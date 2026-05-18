@@ -5,9 +5,6 @@ namespace TraverserProject
 
     public class WeaponItem : EquipmentItem
     {
-        [Header("Description")]
-        [TextArea] public string itemSkillDescription = "";        
-
         [Header("Animations")]
         public AnimatorOverrideController weaponAnimator;
 
@@ -32,14 +29,27 @@ namespace TraverserProject
         public int intelligenceREQ = 0;
         public int faithREQ = 0;
 
+        [Header("Weapon Scaling")]
+        public int strengthScaling = 0;
+        public int dexterityScaling = 0;
+        public int intelligenceScaling = 0;
+        public int faithScaling = 0;
+
         [Header("Weapon Base Damage")]
         public int physicalDamage = 0;
         public int magicDamage = 0;
         public int fireDamage = 0;
         public int lightningDamage = 0;
         public int holyDamage = 0;
+        public float CriticalModifier = 1.00f;
 
-
+        [Header("Weapon Blocking Absorption")]
+        public float physicalBaseDamageAbsorption = 50;
+        public float magicBaseDamageAbsorption = 50;
+        public float fireBaseDamageAbsorption = 50;
+        public float lightningBaseDamageAbsorption = 50;
+        public float holyBaseDamageAbsorption = 50;
+        public float stability = 50;
 
         [Header("Weapon Base Poise Damage")]
         public float poiseDamage = 10;
@@ -89,14 +99,7 @@ namespace TraverserProject
         public float backstepHeavyAttackStaminaCostMultiplier = 1.3f;
         public float jumpingLightAttackStaminaCostMultiplier = 1.0f;
         public float jumpingHeavyAttackStaminaCostMultiplier = 2.0f;
-
-        [Header("Weapon Blocking Absorption")]
-        public float physicalBaseDamageAbsorption = 50;
-        public float magicBaseDamageAbsorption = 50;
-        public float fireBaseDamageAbsorption = 50;
-        public float lightningBaseDamageAbsorption = 50;
-        public float holyBaseDamageAbsorption = 50;
-        public float stability = 50;
+        
 
         [Header("Actions")]
         public WeaponItemAction oh_RB_Action; //one hand right bumper

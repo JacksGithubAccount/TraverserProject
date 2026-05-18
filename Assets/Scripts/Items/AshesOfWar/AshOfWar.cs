@@ -2,11 +2,14 @@ using UnityEngine;
 
 namespace TraverserProject
 {
-
     public class AshOfWar : Item
     {
         [Header("Ash of War information")]
         public WeaponClass[] usableWeaponClasses;
+
+        [Header("Description")]
+        [TextArea] public string ashOfWarDescription = "";
+
         [Header("Costs")]
         public int focusPointCost = 20;
         public int staminaCost = 20;
@@ -28,7 +31,7 @@ namespace TraverserProject
 
         protected virtual void DeductFocusPointCost(PlayerManager playerPerformingAction)
         {
-
+            playerPerformingAction.playerNetworkManager.currentFocusPoints.Value -= focusPointCost;
         }
 
     }

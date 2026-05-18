@@ -8,8 +8,8 @@ namespace TraverserProject
     public class CraftingMaterial : Item
     {
         [Header("Description")]
-        [TextArea] public string itemUsage;
-        [TextArea] public string itemWhereToFind;
+        [TextArea] public string itemEffect;
+        [TextArea] public string itemObtained;
 
         public List<ItemCategory> itemCategory;
     }

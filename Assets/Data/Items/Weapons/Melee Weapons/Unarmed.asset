@@ -18,9 +18,11 @@ MonoBehaviour:
   currentItemAmount: 1
   itemDescription: 
   itemID: 0
+  itemType: 0
   itemWeight: 0
   weaponAnimator: {fileID: 22100000, guid: 9ee0b67cccb2343409d3e678150447bb, type: 2}
   weaponModelType: 0
+  weaponSwingVFX: {fileID: 0}
   weaponClass: 3
   upgradeLevel: 0
   weaponModel: {fileID: 5843861863679961298, guid: 8ea61d3a29ce1e143a0d877d49ff978d, type: 3}
@@ -28,11 +30,21 @@ MonoBehaviour:
   dexterityREQ: 0
   intelligenceREQ: 0
   faithREQ: 0
+  strengthScaling: 0
+  dexterityScaling: 0
+  intelligenceScaling: 0
+  faithScaling: 0
   physicalDamage: 10
   magicDamage: 0
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
+  physicalBaseDamageAbsorption: 50
+  magicBaseDamageAbsorption: 50
+  fireBaseDamageAbsorption: 50
+  lightningBaseDamageAbsorption: 50
+  holyBaseDamageAbsorption: 50
+  stability: 50
   poiseDamage: 10
   light_Attack_01_Modifier: 1
   light_Attack_02_Modifier: 1.1
@@ -74,16 +86,10 @@ MonoBehaviour:
   backstepHeavyAttackStaminaCostMultiplier: 1.3
   jumpingLightAttackStaminaCostMultiplier: 1
   jumpingHeavyAttackStaminaCostMultiplier: 2
-  physicalBaseDamageAbsorption: 50
-  magicBaseDamageAbsorption: 50
-  fireBaseDamageAbsorption: 50
-  lightningBaseDamageAbsorption: 50
-  holyBaseDamageAbsorption: 50
-  stability: 50
   oh_RB_Action: {fileID: 11400000, guid: be57d178e77a15549ae43da20eb6d228, type: 2}
   oh_RT_Action: {fileID: 11400000, guid: 20531202c3730b9468689c7c112b159c, type: 2}
   oh_LB_Action: {fileID: 11400000, guid: 79096931ddd6fbb48b35417a10d199ce, type: 2}
-  ashOfWarAction: {fileID: 0}
+  ashOfWarAction: {fileID: 11400000, guid: 648b3dd4ab5d8984ea0a5d7dc1790b5e, type: 2}
   whooshes: []
   blocking: []
   riposte_Attack_01_Modifier: 3.3

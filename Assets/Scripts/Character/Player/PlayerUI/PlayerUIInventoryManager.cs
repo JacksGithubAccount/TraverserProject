@@ -40,6 +40,79 @@ namespace TraverserProject
         [SerializeField] TextMeshProUGUI inventoryDetailItemDescriptionText;
         [SerializeField] TextMeshProUGUI inventoryDetailItemSkillDescriptionText;
 
+        [Header("Inventory WeaponItem Stats Menu")]
+        [SerializeField] GameObject weaponItemStatsWindow;
+        [SerializeField] TextMeshProUGUI weaponItemClassText;
+        [SerializeField] TextMeshProUGUI weaponItemPhysicalDamageTypeText;
+        [SerializeField] TextMeshProUGUI weaponItemAshOfWarNameText;
+        [SerializeField] TextMeshProUGUI weaponItemAshOfWarFPCostText;
+        [SerializeField] TextMeshProUGUI weaponItemWeightText;
+        [SerializeField] TextMeshProUGUI weaponItemPhysicalAttackPowerText;
+        [SerializeField] TextMeshProUGUI weaponItemMagicAttackPowerText;
+        [SerializeField] TextMeshProUGUI weaponItemFireAttackPowerText;
+        [SerializeField] TextMeshProUGUI weaponItemLightningAttackPowerText;
+        [SerializeField] TextMeshProUGUI weaponItemHolyAttackPowerText;
+        [SerializeField] TextMeshProUGUI weaponItemCriticalAttackPowerText;
+        [SerializeField] TextMeshProUGUI weaponItemPhysicalGuardNegationText;
+        [SerializeField] TextMeshProUGUI weaponItemMagicGuardNegationText;
+        [SerializeField] TextMeshProUGUI weaponItemFireGuardNegationText;
+        [SerializeField] TextMeshProUGUI weaponItemLightningGuardNegationText;
+        [SerializeField] TextMeshProUGUI weaponItemHolyGuardNegationText;
+        [SerializeField] TextMeshProUGUI weaponItemStabilityText;
+        [SerializeField] TextMeshProUGUI weaponItemSTRAttributeREQText;
+        [SerializeField] TextMeshProUGUI weaponItemDEXAttributeREQText;
+        [SerializeField] TextMeshProUGUI weaponItemINTAttributeREQText;
+        [SerializeField] TextMeshProUGUI weaponItemFAIAttributeREQText;
+        [SerializeField] TextMeshProUGUI weaponItemSTRAttributeScalingText;
+        [SerializeField] TextMeshProUGUI weaponItemDEXAttributeScalingText;
+        [SerializeField] TextMeshProUGUI weaponItemINTAttributeScalingText;
+        [SerializeField] TextMeshProUGUI weaponItemFAIAttributeScalingText;
+        [SerializeField] TextMeshProUGUI weaponItemPassive1Text;
+        [SerializeField] TextMeshProUGUI weaponItemPassive2Text;
+        [SerializeField] TextMeshProUGUI weaponItemPassive3Text;
+
+        [Header("Inventory ArmorItem Stats Menu")]
+        [SerializeField] GameObject armorItemStatsWindow;
+        [SerializeField] TextMeshProUGUI armorItemWeightText;
+        [SerializeField] TextMeshProUGUI armorItemPhysicalDamageNegationText;
+        [SerializeField] TextMeshProUGUI armorItemBluntDamageNegationText;
+        [SerializeField] TextMeshProUGUI armorItemPierceDamageNegationText;
+        [SerializeField] TextMeshProUGUI armorItemSlashDamageNegationText;
+        [SerializeField] TextMeshProUGUI armorItemMagicDamageNegationText;
+        [SerializeField] TextMeshProUGUI armorItemFireDamageNegationText;
+        [SerializeField] TextMeshProUGUI armorItemLightningDamageNegationText;
+        [SerializeField] TextMeshProUGUI armorItemHolyDamageNegationText;
+        [SerializeField] TextMeshProUGUI armorItemImmunityResistanceText;
+        [SerializeField] TextMeshProUGUI armorItemRobustnessResistanceText;
+        [SerializeField] TextMeshProUGUI armorItemFocusResistanceText;
+        [SerializeField] TextMeshProUGUI armorItemVitalityResistanceText;
+        [SerializeField] TextMeshProUGUI armorItemPoiseText;
+
+        [Header("Inventory AccessoryItem Stats Menu")]
+        [SerializeField] GameObject accessoryItemStatsWindow;
+        [SerializeField] TextMeshProUGUI accessoryItemWeightText;
+        [SerializeField] TextMeshProUGUI accessoryItemEffectText;
+
+        [Header("Inventory ToolItem Stats Menu")]
+        [SerializeField] GameObject toolItemStatsWindow;
+        [SerializeField] TextMeshProUGUI toolItemTypeText;
+        [SerializeField] TextMeshProUGUI toolItemNumberHeldText;
+        [SerializeField] TextMeshProUGUI toolItemStoredText;
+        [SerializeField] TextMeshProUGUI toolItemFPCostText;
+        [SerializeField] TextMeshProUGUI toolItemEffectText;
+        [SerializeField] TextMeshProUGUI toolItemSTRAttributeScalingText;
+        [SerializeField] TextMeshProUGUI toolItemDEXAttributeScalingText;
+        [SerializeField] TextMeshProUGUI toolItemINTAttributeScalingText;
+        [SerializeField] TextMeshProUGUI toolItemFAIAttributeScalingText;
+
+        [Header("Inventory CraftingItem Stats Menu")]
+        [SerializeField] GameObject craftingItemStatsWindow;
+        [SerializeField] TextMeshProUGUI craftingItemTypeText;
+        [SerializeField] TextMeshProUGUI craftingItemNumberHeldText;
+        [SerializeField] TextMeshProUGUI craftingItemStoredText;
+        [SerializeField] TextMeshProUGUI craftingItemEffectText;
+        [SerializeField] TextMeshProUGUI craftingItemObtainedText;
+
         public override void OpenMenu()
         {
             base.OpenMenu();
@@ -67,6 +140,14 @@ namespace TraverserProject
 
         }
 
+        private void DisableAllStatsWindows()
+        {
+            weaponItemStatsWindow.SetActive(false);
+            armorItemStatsWindow.SetActive(false);
+            accessoryItemStatsWindow.SetActive(false);
+            toolItemStatsWindow.SetActive(false);
+            craftingItemStatsWindow.SetActive(false);
+        }
         public void DispayItemDetail(Item item)
         {
             inventoryDetailItemNameText.text = item.itemName;
@@ -74,8 +155,116 @@ namespace TraverserProject
             inventoryDetailItemDescriptionText.text = item.itemDescription;
             if (item as WeaponItem)
             {
+                DisableAllStatsWindows();
+                weaponItemStatsWindow.SetActive(true);
+                
                 WeaponItem weaponItem = (WeaponItem)item;
+                inventoryDetailItemSkillDescriptionText.text = weaponItem.ashOfWarAction.ashOfWarDescription;
 
+                weaponItemClassText.text = weaponItem.weaponClass.ToString();
+                weaponItemPhysicalDamageTypeText.text = "Placeholder";
+                weaponItemAshOfWarNameText.text = weaponItem.ashOfWarAction.itemName;
+                weaponItemAshOfWarFPCostText.text = weaponItem.ashOfWarAction.focusPointCost.ToString();
+                weaponItemWeightText.text = weaponItem.itemWeight.ToString();
+
+                weaponItemPhysicalAttackPowerText.text = weaponItem.physicalDamage.ToString();
+                weaponItemMagicAttackPowerText.text = weaponItem.magicDamage.ToString();
+                weaponItemFireAttackPowerText.text = weaponItem.fireDamage.ToString();
+                weaponItemLightningAttackPowerText.text = weaponItem.lightningDamage.ToString();
+                weaponItemHolyAttackPowerText.text = weaponItem.holyDamage.ToString();
+                weaponItemCriticalAttackPowerText.text = weaponItem.CriticalModifier.ToString();
+
+                weaponItemPhysicalGuardNegationText.text = weaponItem.physicalBaseDamageAbsorption.ToString();
+                weaponItemMagicGuardNegationText.text = weaponItem.magicBaseDamageAbsorption.ToString(); 
+                weaponItemFireGuardNegationText.text = weaponItem.fireBaseDamageAbsorption.ToString(); 
+                weaponItemLightningGuardNegationText.text = weaponItem.lightningBaseDamageAbsorption.ToString(); 
+                weaponItemHolyGuardNegationText.text = weaponItem.holyBaseDamageAbsorption.ToString(); 
+                weaponItemStabilityText.text = weaponItem.stability.ToString(); ;
+
+                weaponItemSTRAttributeREQText.text = weaponItem.strengthREQ.ToString();
+                weaponItemDEXAttributeREQText.text = weaponItem.dexterityREQ.ToString(); 
+                weaponItemINTAttributeREQText.text = weaponItem.intelligenceREQ.ToString(); 
+                weaponItemFAIAttributeREQText.text = weaponItem.faithREQ.ToString();
+
+                weaponItemSTRAttributeScalingText.text = weaponItem.strengthScaling.ToString();
+                weaponItemDEXAttributeScalingText.text = weaponItem.dexterityScaling.ToString(); 
+                weaponItemINTAttributeScalingText.text = weaponItem.intelligenceScaling.ToString(); 
+                weaponItemFAIAttributeScalingText.text = weaponItem.faithScaling.ToString(); 
+            }
+            else if(item as ArmorItem)
+            {
+                DisableAllStatsWindows();
+                armorItemStatsWindow.SetActive(true);
+
+                inventoryDetailItemSkillDescriptionText.text = "";
+
+                ArmorItem armorItem = (ArmorItem)item;
+                armorItemWeightText.text = armorItem.itemWeight.ToString();
+
+                armorItemPhysicalDamageNegationText.text = armorItem.physicalDamageAbsorption.ToString();
+                armorItemBluntDamageNegationText.text = armorItem.bluntDamageAbsorption.ToString();
+                armorItemPierceDamageNegationText.text = armorItem.pierceDamageAbsorption.ToString();
+                armorItemSlashDamageNegationText.text = armorItem.slashDamageAbsorption.ToString();
+                armorItemMagicDamageNegationText.text = armorItem.magicDamageAbsorption.ToString();
+                armorItemFireDamageNegationText.text = armorItem.fireDamageAbsorption.ToString();
+                armorItemLightningDamageNegationText.text = armorItem.lightningDamageAbsorption.ToString();
+                armorItemHolyDamageNegationText.text = armorItem.holyDamageAbsorption.ToString();
+
+                armorItemImmunityResistanceText.text = armorItem.immunity.ToString();
+                armorItemRobustnessResistanceText.text = armorItem.robustness.ToString();
+                armorItemFocusResistanceText.text = armorItem.focus.ToString();
+                armorItemVitalityResistanceText.text = armorItem.vitality.ToString();
+                armorItemPoiseText.text = armorItem.poise.ToString();
+            }
+            else if(item as AccessoryItem)
+            {
+                DisableAllStatsWindows();
+                accessoryItemStatsWindow.SetActive(true);
+                
+                inventoryDetailItemSkillDescriptionText.text = "";
+
+                AccessoryItem accessoryItem = (AccessoryItem)item;
+                accessoryItemWeightText.text = accessoryItem.itemWeight.ToString();
+                accessoryItemEffectText.text = accessoryItem.itemEffect;
+            }
+            else if(item as QuickSlotItem)
+            {
+                DisableAllStatsWindows();
+                toolItemStatsWindow.SetActive(true);
+
+                inventoryDetailItemSkillDescriptionText.text = "";
+
+                QuickSlotItem quickSlotItem = (QuickSlotItem)item;
+
+                toolItemTypeText.text = quickSlotItem.itemType.ToString();
+                toolItemNumberHeldText.text = quickSlotItem.currentItemAmount.ToString() + "/" + quickSlotItem.maxItemAmount.ToString();
+                toolItemStoredText.text = "Placeholder";
+                toolItemFPCostText.text = quickSlotItem.FPCost.ToString();
+                toolItemEffectText.text = quickSlotItem.itemEffect;
+
+                toolItemSTRAttributeScalingText.text = quickSlotItem.strengthScaling.ToString();
+                toolItemDEXAttributeScalingText.text = quickSlotItem.dexterityScaling.ToString();
+                toolItemINTAttributeScalingText.text = quickSlotItem.intelligenceScaling.ToString();
+                toolItemFAIAttributeScalingText.text = quickSlotItem.faithScaling.ToString();
+            }
+            else if(item as CraftingMaterial)
+            {
+                DisableAllStatsWindows();
+                craftingItemStatsWindow.SetActive(true);
+
+                inventoryDetailItemSkillDescriptionText.text = "";
+
+                CraftingMaterial craftingMaterial = (CraftingMaterial)item;
+
+                craftingItemTypeText.text = craftingMaterial.itemType.ToString();
+                craftingItemNumberHeldText.text = craftingMaterial.currentItemAmount.ToString() + "/" + craftingMaterial.maxItemAmount.ToString();
+                craftingItemStoredText.text = "Placeholder";
+                craftingItemEffectText.text = craftingMaterial.itemEffect;
+                craftingItemObtainedText.text = craftingMaterial.itemObtained;
+            }
+            else
+            {
+                inventoryDetailItemSkillDescriptionText.text = "";
             }
         }
 

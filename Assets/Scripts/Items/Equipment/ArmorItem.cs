@@ -6,6 +6,9 @@ namespace TraverserProject
     {
         [Header("Equipment Damage Absorption")]
         public float physicalDamageAbsorption;
+        public float bluntDamageAbsorption;
+        public float pierceDamageAbsorption;
+        public float slashDamageAbsorption;
         public float magicDamageAbsorption;
         public float fireDamageAbsorption;
         public float lightningDamageAbsorption;

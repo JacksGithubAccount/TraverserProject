@@ -4,7 +4,7 @@ namespace TraverserProject
 {
     public class EquipmentItem : Item
     {
-        [Header("tem Weight")]
+        [Header("Item Weight")]
         public float itemWeight;
 
     }

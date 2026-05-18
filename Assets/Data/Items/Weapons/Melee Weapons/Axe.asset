@@ -19,22 +19,33 @@ MonoBehaviour:
   itemDescription: A straight sword Axe
   itemID: 3
   itemType: 9
-  itemWeight: 0
+  itemWeight: 5.5
   weaponAnimator: {fileID: 22100000, guid: a2a99843e225c9c4fb64d0899e3b0bda, type: 2}
   weaponModelType: 0
   weaponSwingVFX: {fileID: 0}
   weaponClass: 4
   upgradeLevel: 0
   weaponModel: {fileID: 8022622577303723999, guid: f76fb6f414da03c43a2cfd5fbfb6cdca, type: 3}
-  strengthREQ: 10
-  dexterityREQ: 10
-  intelligenceREQ: 0
-  faithREQ: 0
-  physicalDamage: 50
-  magicDamage: 0
-  fireDamage: 0
-  lightningDamage: 0
-  holyDamage: 0
+  strengthREQ: 15
+  dexterityREQ: 3
+  intelligenceREQ: 1
+  faithREQ: 2
+  strengthScaling: 0
+  dexterityScaling: 0
+  intelligenceScaling: 0
+  faithScaling: 0
+  physicalDamage: 150
+  magicDamage: 10
+  fireDamage: 3
+  lightningDamage: 2
+  holyDamage: 3
+  CriticalModifier: 1.1
+  physicalBaseDamageAbsorption: 10
+  magicBaseDamageAbsorption: 20
+  fireBaseDamageAbsorption: 23
+  lightningBaseDamageAbsorption: 17
+  holyBaseDamageAbsorption: 15
+  stability: 11
   poiseDamage: 10
   light_Attack_01_Modifier: 1.1
   light_Attack_02_Modifier: 1.1
@@ -76,16 +87,10 @@ MonoBehaviour:
   backstepHeavyAttackStaminaCostMultiplier: 1.3
   jumpingLightAttackStaminaCostMultiplier: 1
   jumpingHeavyAttackStaminaCostMultiplier: 2
-  physicalBaseDamageAbsorption: 50
-  magicBaseDamageAbsorption: 50
-  fireBaseDamageAbsorption: 50
-  lightningBaseDamageAbsorption: 50
-  holyBaseDamageAbsorption: 50
-  stability: 50
   oh_RB_Action: {fileID: 11400000, guid: be57d178e77a15549ae43da20eb6d228, type: 2}
   oh_RT_Action: {fileID: 11400000, guid: 20531202c3730b9468689c7c112b159c, type: 2}
   oh_LB_Action: {fileID: 11400000, guid: 79096931ddd6fbb48b35417a10d199ce, type: 2}
-  ashOfWarAction: {fileID: 0}
+  ashOfWarAction: {fileID: 11400000, guid: 648b3dd4ab5d8984ea0a5d7dc1790b5e, type: 2}
   whooshes:
   - {fileID: 8300000, guid: f444c045e25f5964b97a4fca35e2cf9c, type: 3}
   - {fileID: 8300000, guid: 9289b3a7fefc725459b47812d94fd4e5, type: 3}

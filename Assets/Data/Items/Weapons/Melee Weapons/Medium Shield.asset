@@ -19,7 +19,7 @@ MonoBehaviour:
   itemDescription: A straight shield
   itemID: 4
   itemType: 12
-  itemWeight: 0
+  itemWeight: 7.3
   weaponAnimator: {fileID: 22100000, guid: 7f27c68c764b54744ac33791d6f1b113, type: 2}
   weaponModelType: 1
   weaponSwingVFX: {fileID: 0}
@@ -30,11 +30,22 @@ MonoBehaviour:
   dexterityREQ: 10
   intelligenceREQ: 0
   faithREQ: 0
+  strengthScaling: 0
+  dexterityScaling: 0
+  intelligenceScaling: 0
+  faithScaling: 0
   physicalDamage: 50
   magicDamage: 0
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
+  CriticalModifier: 1
+  physicalBaseDamageAbsorption: 50
+  magicBaseDamageAbsorption: 50
+  fireBaseDamageAbsorption: 50
+  lightningBaseDamageAbsorption: 50
+  holyBaseDamageAbsorption: 50
+  stability: 50
   poiseDamage: 10
   light_Attack_01_Modifier: 1.1
   light_Attack_02_Modifier: 1.1
@@ -76,12 +87,6 @@ MonoBehaviour:
   backstepHeavyAttackStaminaCostMultiplier: 1.3
   jumpingLightAttackStaminaCostMultiplier: 1
   jumpingHeavyAttackStaminaCostMultiplier: 2
-  physicalBaseDamageAbsorption: 50
-  magicBaseDamageAbsorption: 50
-  fireBaseDamageAbsorption: 50
-  lightningBaseDamageAbsorption: 50
-  holyBaseDamageAbsorption: 50
-  stability: 50
   oh_RB_Action: {fileID: 11400000, guid: be57d178e77a15549ae43da20eb6d228, type: 2}
   oh_RT_Action: {fileID: 11400000, guid: 20531202c3730b9468689c7c112b159c, type: 2}
   oh_LB_Action: {fileID: 11400000, guid: 79096931ddd6fbb48b35417a10d199ce, type: 2}
