@@ -8,6 +8,9 @@ namespace TraverserProject
         [Header("Spell Class")]
         public SpellClass spellClass;
 
+        [Header("Description")]
+        [TextArea] public string itemEffect;
+
         [Header("Spell Modifiers")]
         public float fullChargeEffectMultiplier = 2;
 
@@ -15,6 +18,12 @@ namespace TraverserProject
         public int spellSlotsUsed = 1;
         public int staminaCost = 22;
         public int focusPointCost = 11;
+
+        [Header("Spell Requirement")]
+        public int strengthREQ = 0;
+        public int dexterityREQ = 0;
+        public int intelligenceREQ = 0;
+        public int faithREQ = 0;
 
         [Header("Spell FX")]
         [SerializeField] protected GameObject spellCastWarmUpFX;

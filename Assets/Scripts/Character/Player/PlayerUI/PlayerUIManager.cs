@@ -97,6 +97,7 @@ namespace TraverserProject
             playerUIAnvilMenuManager.CloseMenuAfterFixedFrame();
             playerUIBlacksmithMenuManager.CloseMenuAfterFixedFrame();
             playerUICraftingManager.CloseMenuAfterFixedFrame();
+            playerUIShopManager.CloseMenuAfterFixedFrame();
             CloseAllSubMenuWindows();
             openMenus.Clear();
         }

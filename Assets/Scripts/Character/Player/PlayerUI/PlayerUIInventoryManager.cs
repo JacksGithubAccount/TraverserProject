@@ -113,6 +113,50 @@ namespace TraverserProject
         [SerializeField] TextMeshProUGUI craftingItemEffectText;
         [SerializeField] TextMeshProUGUI craftingItemObtainedText;
 
+        [Header("Inventory UpgradeItem Stats Menu")]
+        [SerializeField] GameObject upgradeItemStatsWindow;
+        [SerializeField] TextMeshProUGUI upgradeItemTypeText;
+        [SerializeField] TextMeshProUGUI upgradeItemNumberHeldText;
+        [SerializeField] TextMeshProUGUI upgradeItemStoredText;
+        [SerializeField] TextMeshProUGUI upgradeItemEffectText;
+
+        [Header("Inventory SpellItem Stats Menu")]
+        [SerializeField] GameObject spellItemStatsWindow;
+        [SerializeField] TextMeshProUGUI spellItemTypeText;
+        [SerializeField] TextMeshProUGUI spellItemNumberHeldText;
+        [SerializeField] TextMeshProUGUI spellItemStoredText;
+        [SerializeField] TextMeshProUGUI spellItemFPCostText;
+        [SerializeField] TextMeshProUGUI spellItemSlotsUsedText;
+        [SerializeField] TextMeshProUGUI spellItemEffectText;
+        [SerializeField] TextMeshProUGUI spellItemSTRAttributeREQText;
+        [SerializeField] TextMeshProUGUI spellItemDEXAttributeREQText;
+        [SerializeField] TextMeshProUGUI spellItemINTAttributeREQText;
+        [SerializeField] TextMeshProUGUI spellItemFAIAttributeREQText;
+
+        [Header("Inventory AshOfWarItem Stats Menu")]
+        [SerializeField] GameObject ashOfWarItemStatsWindow;
+        [SerializeField] TextMeshProUGUI ashOfWarItemTypeText;
+        [SerializeField] TextMeshProUGUI ashOfWarItemFPCostText;
+        [SerializeField] TextMeshProUGUI ashOfWarItemEffectText;
+        [SerializeField] TextMeshProUGUI ashOfWarItemUsableOnText;
+
+        [Header("Inventory RangedProjectileItem Stats Menu")]
+        [SerializeField] GameObject rangedProjectileItemStatsWindow;
+        [SerializeField] TextMeshProUGUI rangedProjectileItemClassText;
+        [SerializeField] TextMeshProUGUI rangedProjectileItemPhysicalDamageTypeText;
+        [SerializeField] TextMeshProUGUI rangedProjectileItemNumberHeldText;
+        [SerializeField] TextMeshProUGUI rangedProjectileItemStoredText;
+        [SerializeField] TextMeshProUGUI rangedProjectileItemPhysicalAttackPowerText;
+        [SerializeField] TextMeshProUGUI rangedProjectileItemMagicAttackPowerText;
+        [SerializeField] TextMeshProUGUI rangedProjectileItemFireAttackPowerText;
+        [SerializeField] TextMeshProUGUI rangedProjectileItemLightningAttackPowerText;
+        [SerializeField] TextMeshProUGUI rangedProjectileItemHolyAttackPowerText;
+        [SerializeField] TextMeshProUGUI rangedProjectileItemCriticalAttackPowerText;
+        [SerializeField] TextMeshProUGUI rangedProjectileItemPassive1Text;
+        [SerializeField] TextMeshProUGUI rangedProjectileItemPassive2Text;
+        [SerializeField] TextMeshProUGUI rangedProjectileItemPassive3Text;
+
+
         public override void OpenMenu()
         {
             base.OpenMenu();
@@ -147,6 +191,10 @@ namespace TraverserProject
             accessoryItemStatsWindow.SetActive(false);
             toolItemStatsWindow.SetActive(false);
             craftingItemStatsWindow.SetActive(false);
+            upgradeItemStatsWindow.SetActive(false);
+            spellItemStatsWindow.SetActive(false) ;
+            ashOfWarItemStatsWindow.SetActive(false);
+            rangedProjectileItemStatsWindow.SetActive(false);
         }
         public void DispayItemDetail(Item item)
         {
@@ -261,6 +309,115 @@ namespace TraverserProject
                 craftingItemStoredText.text = "Placeholder";
                 craftingItemEffectText.text = craftingMaterial.itemEffect;
                 craftingItemObtainedText.text = craftingMaterial.itemObtained;
+            }
+            else if (item as UpgradeMaterial)
+            {
+                DisableAllStatsWindows();
+                upgradeItemStatsWindow.SetActive(true);
+
+                inventoryDetailItemSkillDescriptionText.text = "";
+
+                UpgradeMaterial upgradeMaterial = (UpgradeMaterial)item;
+
+                upgradeItemTypeText.text = upgradeMaterial.itemType.ToString();
+                upgradeItemNumberHeldText.text = upgradeMaterial.currentItemAmount.ToString() + "/" + upgradeMaterial.maxItemAmount.ToString();
+                upgradeItemStoredText.text = "Placeholder";
+                upgradeItemEffectText.text = upgradeMaterial.itemEffect;
+            }
+            else if (item as UpgradeMaterial)
+            {
+                DisableAllStatsWindows();
+                upgradeItemStatsWindow.SetActive(true);
+
+                inventoryDetailItemSkillDescriptionText.text = "";
+
+                UpgradeMaterial upgradeMaterial = (UpgradeMaterial)item;
+
+                upgradeItemTypeText.text = upgradeMaterial.itemType.ToString();
+                upgradeItemNumberHeldText.text = upgradeMaterial.currentItemAmount.ToString() + "/" + upgradeMaterial.maxItemAmount.ToString();
+                upgradeItemStoredText.text = "Placeholder";
+                upgradeItemEffectText.text = upgradeMaterial.itemEffect;
+            }
+            else if (item as KeyItem)
+            {
+                DisableAllStatsWindows();
+                upgradeItemStatsWindow.SetActive(true);
+
+                inventoryDetailItemSkillDescriptionText.text = "";
+
+                KeyItem KeyItem = (KeyItem)item;
+
+                upgradeItemTypeText.text = KeyItem.itemType.ToString();
+                upgradeItemNumberHeldText.text = KeyItem.currentItemAmount.ToString() + "/" + KeyItem.maxItemAmount.ToString();
+                upgradeItemStoredText.text = "Placeholder";
+                upgradeItemEffectText.text = KeyItem.itemEffect;
+            }
+            else if (item as SpellItem)
+            {
+                DisableAllStatsWindows();
+                spellItemStatsWindow.SetActive(true);
+
+                inventoryDetailItemSkillDescriptionText.text = "";
+
+                SpellItem spellItem = (SpellItem)item;
+
+                spellItemTypeText.text = spellItem.spellClass.ToString();
+                spellItemNumberHeldText.text = spellItem.currentItemAmount.ToString() + "/" + spellItem.maxItemAmount.ToString();
+                spellItemStoredText.text = "Placeholder";
+                spellItemFPCostText.text = spellItem.focusPointCost.ToString();
+                spellItemSlotsUsedText.text = spellItem.spellSlotsUsed.ToString();
+                spellItemEffectText.text = spellItem.itemEffect;
+
+                spellItemSTRAttributeREQText.text = spellItem.strengthREQ.ToString();
+                spellItemDEXAttributeREQText.text = spellItem.dexterityREQ.ToString();
+                spellItemINTAttributeREQText.text = spellItem.intelligenceREQ.ToString();
+                spellItemFAIAttributeREQText.text = spellItem.faithREQ.ToString();
+            }
+            else if (item as AshOfWar)
+            {
+                DisableAllStatsWindows();
+                ashOfWarItemStatsWindow.SetActive(true);
+
+                inventoryDetailItemSkillDescriptionText.text = "";
+
+                AshOfWar aowItem = (AshOfWar)item;
+
+                ashOfWarItemTypeText.text = aowItem.itemType.ToString();
+                ashOfWarItemFPCostText.text = aowItem.focusPointCost.ToString();
+                ashOfWarItemEffectText.text = aowItem.itemEffect;
+
+                ashOfWarItemUsableOnText.text = "";
+                for(int i = 0; i < aowItem.usableWeaponClasses.Length; i++)
+                {
+                    ashOfWarItemUsableOnText.text += aowItem.usableWeaponClasses[i].ToString();
+
+                    if(i <  aowItem.usableWeaponClasses.Length - 1)
+                    {
+                        ashOfWarItemUsableOnText.text += ", ";
+                    }
+
+                }
+            }
+            if (item as RangedProjectileItem)
+            {
+                DisableAllStatsWindows();
+                rangedProjectileItemStatsWindow.SetActive(true);
+
+                inventoryDetailItemSkillDescriptionText.text = "";
+
+                RangedProjectileItem rangedProjectileItem = (RangedProjectileItem)item;
+
+                rangedProjectileItemClassText.text = rangedProjectileItem.itemType.ToString();
+                rangedProjectileItemPhysicalDamageTypeText.text = "Placeholder";
+                rangedProjectileItemNumberHeldText.text = rangedProjectileItem.currentAmmoAmount.ToString() + "/" + rangedProjectileItem.maxAmmoAmount.ToString();
+                rangedProjectileItemStoredText.text = "Placeholder";
+
+                rangedProjectileItemPhysicalAttackPowerText.text = rangedProjectileItem.physicalDamage.ToString();
+                rangedProjectileItemMagicAttackPowerText.text = rangedProjectileItem.magicDamage.ToString();
+                rangedProjectileItemFireAttackPowerText.text = rangedProjectileItem.fireDamage.ToString();
+                rangedProjectileItemLightningAttackPowerText.text = rangedProjectileItem.lightningDamage.ToString();
+                rangedProjectileItemHolyAttackPowerText.text = rangedProjectileItem.holyDamage.ToString();
+                rangedProjectileItemCriticalAttackPowerText.text = rangedProjectileItem.CriticalModifier.ToString();
             }
             else
             {

@@ -22,6 +22,7 @@ namespace TraverserProject
         public int fireDamage = 0;
         public int lightningDamage = 0;
         public int holyDamage = 0;
+        public float CriticalModifier = 1;
 
         [Header("Model")]
         public GameObject drawProjectileModel;

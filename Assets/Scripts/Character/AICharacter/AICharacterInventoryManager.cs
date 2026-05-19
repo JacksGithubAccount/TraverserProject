@@ -13,6 +13,8 @@ namespace TraverserProject
 
         [Header("Shop")]
         public Shops characterShopID;
+        [SerializeField] CharacterShop characterShop;
+        private bool shopHasBeenGenerated = false;
 
         protected override void Awake()
         {
@@ -50,6 +52,17 @@ namespace TraverserProject
                 pickUpInteractable.networkPosition.Value = transform.position;
                 pickUpInteractable.droppingCreatureID.Value = aiCharacter.NetworkObjectId;
             }
+        }
+
+        public void GenerateShop()
+        {
+            //if shop has been generated once, load old shop from saved character info to retain previous purchased item values
+            //otherwise, generate shop for first time then save it
+            if (shopHasBeenGenerated)
+                return;
+
+            shopHasBeenGenerated = true;
+            characterShop.GenerateCharacterInventoryFromShopItems(aiCharacter);
         }
 
     }

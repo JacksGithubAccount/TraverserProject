@@ -9,6 +9,7 @@ namespace TraverserProject
 
         [Header("Description")]
         [TextArea] public string ashOfWarDescription = "";
+        [TextArea] public string itemEffect;
 
         [Header("Costs")]
         public int focusPointCost = 20;

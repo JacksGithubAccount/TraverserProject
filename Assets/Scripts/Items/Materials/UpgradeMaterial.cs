@@ -7,7 +7,7 @@ namespace TraverserProject
     public class UpgradeMaterial : Item
     {
         [Header("Description")]
-        [TextArea] public string itemUsage;
+        [TextArea] public string itemEffect;
 
         public UpgradeStone upgradeStone;
 

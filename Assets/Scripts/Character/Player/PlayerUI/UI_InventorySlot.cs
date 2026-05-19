@@ -32,12 +32,12 @@ namespace TraverserProject
             itemIcon.enabled = false;
         }
 
-        public void SelectSlot()
+        public virtual void SelectSlot()
         {
             highlightIcon.enabled = true;
         }
 
-        public void DeselectSlot()
+        public virtual void DeselectSlot()
         {
             highlightIcon.enabled = false;
         }

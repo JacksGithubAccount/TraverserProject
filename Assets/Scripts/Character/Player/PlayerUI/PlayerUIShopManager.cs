@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 namespace TraverserProject
 {
@@ -8,6 +10,12 @@ namespace TraverserProject
         UI_InventorySlot[] shopInventory;
         [SerializeField] GameObject shopInventorySlotPrefab;
         [SerializeField] Transform inventoryInstantiationParent;
+
+        [Header("Current Highlighted Item")]
+        public TextMeshProUGUI currentHighlightedItem;
+        public TextMeshProUGUI currentItemPrice;
+
+
 
         public override void OpenMenu()
         {
@@ -35,6 +43,8 @@ namespace TraverserProject
                 CloseMenu();
                 return;
             }
+
+            shopKeeper.aiCharacterInventoryManager.GenerateShop();
 
             // if shopkeeper has no inventory, return
             if (shopKeeper.aiCharacterInventoryManager.itemsInInventory.Count <= 0)
@@ -71,6 +81,8 @@ namespace TraverserProject
                 shopInventory[i].gameObject.SetActive(true);
             }
 
+
+
             for (int i = 0; i < shopKeeper.aiCharacterInventoryManager.itemsInInventory.Count; i++)
             {
                 if (shopKeeper.aiCharacterInventoryManager.itemsInInventory[i] == null)
@@ -87,6 +99,19 @@ namespace TraverserProject
 
                 if (shopInventory[i].currentItem == null)
                     shopInventory[i].gameObject.SetActive(false);
+            }
+
+            for (int i = 0; i < shopInventory.Length; i++)
+            {
+                if (shopInventory[i] == null)
+                    continue;
+
+                if (!shopInventory[i].gameObject.activeInHierarchy)
+                    continue;
+
+                Button firstSelectedButton = shopInventory[i].GetComponent<Button>();
+                firstSelectedButton.Select();
+                break;
             }
 
         }

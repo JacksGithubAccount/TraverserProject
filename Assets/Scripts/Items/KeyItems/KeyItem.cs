@@ -6,6 +6,6 @@ namespace TraverserProject
     public class KeyItem : Item
     {
         [Header("Description")]
-        [TextArea] public string itemUsage;
+        [TextArea] public string itemEffect;
     }
 }

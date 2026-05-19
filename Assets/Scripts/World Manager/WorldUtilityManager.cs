@@ -19,6 +19,10 @@ namespace TraverserProject
         [SerializeField] Color regularColor;
         [SerializeField] Color poisonedColor;
 
+        [Header("UI Text Colors")]
+        public Color regularTextColor;
+        public Color negativeTextColor;
+
         [Header("Materials")]
         [SerializeField] Material frozenMaterial;
         [SerializeField] List<Material> rainbowMats;
