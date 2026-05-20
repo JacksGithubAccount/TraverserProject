@@ -16,6 +16,8 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 8fc9fbe16e16390468aa6d028cca21ec, type: 3}
   maxItemAmount: 1
   currentItemAmount: 1
+  isInfinite: 0
+  itemValue: 1
   itemDescription: A straight sword
   itemID: 1
   itemType: 9
@@ -39,6 +41,7 @@ MonoBehaviour:
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
+  CriticalModifier: 1
   physicalBaseDamageAbsorption: 50
   magicBaseDamageAbsorption: 50
   fireBaseDamageAbsorption: 50
@@ -47,9 +50,13 @@ MonoBehaviour:
   stability: 50
   poiseDamage: 10
   light_Attack_01_Modifier: 1.1
+  light_Attack_01_PhysicalDamageType: 1
   light_Attack_02_Modifier: 1.1
+  light_Attack_02_PhysicalDamageType: 2
   heavy_Attack_01_Modifier: 1.4
+  heavy_Attack_01_PhysicalDamageType: 0
   heavy_Attack_02_Modifier: 1.5
+  heavy_Attack_02_PhysicalDamageType: 0
   charge_Attack_01_Modifier: 2
   charge_Attack_02_Modifier: 2.1
   running_Light_Attack_01_Modifier: 1.1

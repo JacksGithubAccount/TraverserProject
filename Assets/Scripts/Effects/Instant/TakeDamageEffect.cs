@@ -17,7 +17,7 @@ namespace TraverserProject
         public float fireDamage = 0;
         public float lightningDamage = 0;
         public float holyDamage = 0;
-
+        public PhysicalDamageType physicalDamageType = PhysicalDamageType.Regular;
 
 
         [Header("Final Damage")]
@@ -71,8 +71,34 @@ namespace TraverserProject
             {
 
             }
-            finalDamageDealt = Mathf.RoundToInt(physicalDamage + magicDamage + fireDamage + lightningDamage + holyDamage);
+            Debug.Log("Original Phys Damage: " + physicalDamage);
 
+            switch(physicalDamageType)
+            {
+                case PhysicalDamageType.Regular:
+                    physicalDamage -= (physicalDamage * (character.characterStatsManager.armorPhysicalDamageAbsorption / 100));
+                    break;
+                case PhysicalDamageType.Blunt:
+                    physicalDamage -= (physicalDamage * (character.characterStatsManager.armorBluntDamageAbsorption / 100));
+                    break;
+                case PhysicalDamageType.Pierce:
+                    physicalDamage -= (physicalDamage * (character.characterStatsManager.armorPierceDamageAbsorption / 100));
+                    break;
+                case PhysicalDamageType.Slash:
+                    physicalDamage -= (physicalDamage * (character.characterStatsManager.armorSlashDamageAbsorption / 100));
+                    break;
+                default:
+                    physicalDamage -= (physicalDamage * (character.characterStatsManager.armorPhysicalDamageAbsorption / 100));
+                    break;
+            }
+            
+            fireDamage -= (fireDamage * (character.characterStatsManager.armorFireDamageAbsorption / 100));
+            magicDamage -= (magicDamage * (character.characterStatsManager.armorMagicDamageAbsorption / 100));
+            lightningDamage -= (lightningDamage * (character.characterStatsManager.armorLightningDamageAbsorption / 100));
+            holyDamage -= (holyDamage * (character.characterStatsManager.armorHolyDamageAbsorption / 100));
+
+            finalDamageDealt = Mathf.RoundToInt(physicalDamage + magicDamage + fireDamage + lightningDamage + holyDamage);
+            Debug.Log("After Calculations Phys Damage: " + physicalDamage);
             if (finalDamageDealt <= 0)
             {
                 finalDamageDealt = 1;

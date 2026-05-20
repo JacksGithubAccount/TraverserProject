@@ -56,19 +56,33 @@ namespace TraverserProject
 
         [Header("Attack Modifiers")]
         public float light_Attack_01_Modifier = 1.0f;
+        public PhysicalDamageType light_Attack_01_PhysicalDamageType;
         public float light_Attack_02_Modifier = 1.1f;
+        public PhysicalDamageType light_Attack_02_PhysicalDamageType;
         public float heavy_Attack_01_Modifier = 1.4f;
+        public PhysicalDamageType heavy_Attack_01_PhysicalDamageType;
         public float heavy_Attack_02_Modifier = 1.5f;
+        public PhysicalDamageType heavy_Attack_02_PhysicalDamageType;
         public float charge_Attack_01_Modifier = 2.0f;
+        public PhysicalDamageType charge_Attack_01_PhysicalDamageType;
         public float charge_Attack_02_Modifier = 2.1f;
+        public PhysicalDamageType charge_Attack_02_PhysicalDamageType;
         public float running_Light_Attack_01_Modifier = 1.1f;
+        public PhysicalDamageType running_Light_Attack_01_PhysicalDamageType;
         public float running_Heavy_Attack_01_Modifier = 1.5f;
+        public PhysicalDamageType running_Heavy_Attack_01_PhysicalDamageType;
         public float rolling_Light_Attack_01_Modifier = 0.9f;
+        public PhysicalDamageType rolling_Light_Attack_01_PhysicalDamageType;
         public float rolling_Heavy_Attack_01_Modifier = 1.3f;
+        public PhysicalDamageType rolling_Heavy_Attack_01_PhysicalDamageType;
         public float backstep_Light_Attack_01_Modifier = 1.0f;
+        public PhysicalDamageType backstep_Light_Attack_01_PhysicalDamageType;
         public float backstep_Heavy_Attack_01_Modifier = 1.4f;
+        public PhysicalDamageType backstep_Heavy_Attack_01_PhysicalDamageType;
         public float jumping_Light_Attack_01_Modifier = 1.0f;
+        public PhysicalDamageType jumping_Light_Attack_01_PhysicalDamageType;
         public float jumping_Heavy_Attack_01_Modifier = 1.5f;
+        public PhysicalDamageType jumping_Heavy_Attack_01_PhysicalDamageType;
 
         [Header("Dual Attack Modifiers")]
         public float dual_Light_Attack_01_Modifier = 0.77f;

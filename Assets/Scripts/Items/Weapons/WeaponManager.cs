@@ -65,7 +65,9 @@ namespace TraverserProject
             meleeDamageCollider.poiseDamage = weapon.poiseDamage;
 
             meleeDamageCollider.light_Attack_01_Modifier = weapon.light_Attack_01_Modifier;
+            meleeDamageCollider.light_Attack_01_PhysicalDamageType = weapon.light_Attack_01_PhysicalDamageType;
             meleeDamageCollider.light_Attack_02_Modifier = weapon.light_Attack_02_Modifier;
+            meleeDamageCollider.light_Attack_02_PhysicalDamageType = weapon.light_Attack_02_PhysicalDamageType;
             meleeDamageCollider.heavy_Attack_01_Modifier = weapon.heavy_Attack_01_Modifier;
             meleeDamageCollider.heavy_Attack_02_Modifier = weapon.heavy_Attack_02_Modifier;
             meleeDamageCollider.charge_Attack_01_Modifier = weapon.charge_Attack_01_Modifier;

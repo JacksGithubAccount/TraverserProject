@@ -85,6 +85,9 @@ namespace TraverserProject
         public NetworkVariable<int> strengthModifier = new NetworkVariable<int>(1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<float> staminaRegenerationModifier = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<float> armorPhysicalDamageAbsorptionModifer = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<float> armorBluntDamageAbsorptionModifer = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<float> armorPierceDamageAbsorptionModifer = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<float> armorSlashDamageAbsorptionModifer = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<float> armorMagicDamageAbsorptionModifer = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<float> armorFireDamageAbsorptionModifer = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<float> armorLightningDamageAbsorptionModifer = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -451,11 +454,11 @@ namespace TraverserProject
         [ServerRpc(RequireOwnership = false)]
         public void NofityTheServerOfCharacterDamageServerRpc(ulong damagedCharacterID, ulong characterCausingDamageID,
             float physicalDamage, float magicDamage, float fireDamage, float lightningDamage, float holyDamage, float poiseDamage,
-            float angleHitFrom, float contactPointX, float contactPointY, float contactPointZ)
+            float angleHitFrom, float contactPointX, float contactPointY, float contactPointZ, PhysicalDamageType physicalDamageType = PhysicalDamageType.Regular)
         {
             if (IsServer)
             {
-                NofityTheServerOfCharacterDamageClientRpc(damagedCharacterID, characterCausingDamageID, physicalDamage, magicDamage, fireDamage, lightningDamage, holyDamage, poiseDamage, angleHitFrom, contactPointX, contactPointY, contactPointZ);
+                NofityTheServerOfCharacterDamageClientRpc(damagedCharacterID, characterCausingDamageID, physicalDamage, magicDamage, fireDamage, lightningDamage, holyDamage, poiseDamage, angleHitFrom, contactPointX, contactPointY, contactPointZ, physicalDamageType);
 
             }
         }
@@ -463,15 +466,15 @@ namespace TraverserProject
         [ClientRpc]
         public void NofityTheServerOfCharacterDamageClientRpc(ulong damagedCharacterID, ulong characterCausingDamageID,
             float physicalDamage, float magicDamage, float fireDamage, float lightningDamage, float holyDamage, float poiseDamage,
-            float angleHitFrom, float contactPointX, float contactPointY, float contactPointZ)
+            float angleHitFrom, float contactPointX, float contactPointY, float contactPointZ, PhysicalDamageType physicalDamageType)
         {
-            ProcessCharacterDamageFromServer(damagedCharacterID, characterCausingDamageID, physicalDamage, magicDamage, fireDamage, lightningDamage, holyDamage, poiseDamage, angleHitFrom, contactPointX, contactPointY, contactPointZ);
+            ProcessCharacterDamageFromServer(damagedCharacterID, characterCausingDamageID, physicalDamage, magicDamage, fireDamage, lightningDamage, holyDamage, poiseDamage, angleHitFrom, contactPointX, contactPointY, contactPointZ, physicalDamageType);
 
         }
 
         public void ProcessCharacterDamageFromServer(ulong damagedCharacterID, ulong characterCausingDamageID,
             float physicalDamage, float magicDamage, float fireDamage, float lightningDamage, float holyDamage, float poiseDamage,
-            float angleHitFrom, float contactPointX, float contactPointY, float contactPointZ)
+            float angleHitFrom, float contactPointX, float contactPointY, float contactPointZ, PhysicalDamageType physicalDamageType)
         {
             CharacterManager damagedCharacter = NetworkManager.Singleton.SpawnManager.SpawnedObjects[damagedCharacterID].GetComponent<CharacterManager>();
             CharacterManager characterCausingDamage = NetworkManager.Singleton.SpawnManager.SpawnedObjects[characterCausingDamageID].GetComponent<CharacterManager>();
@@ -487,6 +490,7 @@ namespace TraverserProject
             damageEffect.angleHitFrom = angleHitFrom;
             damageEffect.contactPoint = new Vector3(contactPointX, contactPointY, contactPointZ);
             damageEffect.characterCausingDamage = characterCausingDamage;
+            damageEffect.physicalDamageType = physicalDamageType;
 
             damagedCharacter.characterEffectsManager.ProcessInstantEffect(damageEffect);
         }

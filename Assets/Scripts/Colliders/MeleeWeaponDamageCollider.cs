@@ -10,7 +10,9 @@ namespace TraverserProject
 
         [Header("Weapon Attack Modifier")]
         public float light_Attack_01_Modifier;
+        public PhysicalDamageType light_Attack_01_PhysicalDamageType;
         public float light_Attack_02_Modifier;
+        public PhysicalDamageType light_Attack_02_PhysicalDamageType;
         public float heavy_Attack_01_Modifier;
         public float heavy_Attack_02_Modifier;
         public float charge_Attack_01_Modifier;
@@ -120,10 +122,10 @@ namespace TraverserProject
             switch (characterCausingDamage.characterCombatManager.currentAttackType)
             {
                 case AttackType.LightAttack01:
-                    ApplyAttackDamageModifiers(light_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(light_Attack_01_Modifier, damageEffect, light_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.LightAttack02:
-                    ApplyAttackDamageModifiers(light_Attack_02_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(light_Attack_02_Modifier, damageEffect, light_Attack_02_PhysicalDamageType);
                     break;
                 case AttackType.HeavyAttack01:
                     ApplyAttackDamageModifiers(heavy_Attack_01_Modifier, damageEffect);
@@ -213,7 +215,7 @@ namespace TraverserProject
             {
                 damageTarget.characterNetworkManager.NofityTheServerOfCharacterDamageServerRpc(damageTarget.NetworkObjectId, characterCausingDamage.NetworkObjectId,
                     damageEffect.physicalDamage, damageEffect.magicDamage, damageEffect.fireDamage, damageEffect.lightningDamage, damageEffect.holyDamage, damageEffect.poiseDamage,
-                    damageEffect.angleHitFrom, damageEffect.contactPoint.x, damageEffect.contactPoint.y, damageEffect.contactPoint.z);
+                    damageEffect.angleHitFrom, damageEffect.contactPoint.x, damageEffect.contactPoint.y, damageEffect.contactPoint.z, damageEffect.physicalDamageType);
             }
         }
 
@@ -225,6 +227,19 @@ namespace TraverserProject
             damage.lightningDamage *= modifier;
             damage.holyDamage *= modifier;
             damage.poiseDamage *= modifier;
+            damage.physicalDamageType = PhysicalDamageType.Regular;
+
+
+        }
+        private void ApplyAttackDamageModifiers(float modifier, TakeDamageEffect damage, PhysicalDamageType physicalDamageType)
+        {
+            damage.physicalDamage *= modifier;
+            damage.magicDamage *= modifier;
+            damage.fireDamage *= modifier;
+            damage.lightningDamage *= modifier;
+            damage.holyDamage *= modifier;
+            damage.poiseDamage *= modifier;
+            damage.physicalDamageType = physicalDamageType;
 
 
         }

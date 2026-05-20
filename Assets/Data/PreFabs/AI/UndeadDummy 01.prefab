@@ -1075,12 +1075,18 @@ MonoBehaviour:
   staminaRegenerationDelay: 2
   blockingStaminaRegenerationReduction: 0.2
   blockingPhysicalAbsorption: 0
+  blockingBluntAbsorption: 0
+  blockingPierceAbsorption: 0
+  blockingSlashAbsorption: 0
   blockingFireAbsorption: 0
   blockingMagicAbsorption: 0
   blockingLightningAbsorption: 0
   blockingHolyAbsorption: 0
   blockingStability: 0
   armorPhysicalDamageAbsorption: 0
+  armorBluntDamageAbsorption: 50
+  armorPierceDamageAbsorption: 90
+  armorSlashDamageAbsorption: 0
   armorMagicDamageAbsorption: 0
   armorFireDamageAbsorption: 0
   armorLightningDamageAbsorption: 0
@@ -1144,6 +1150,7 @@ MonoBehaviour:
   characterLocomotionManager: {fileID: 0}
   characterUIManager: {fileID: 0}
   characterStatsManager: {fileID: 0}
+  characterEquipmentManager: {fileID: 0}
   characterGroup: 1
   isPerformingAction: 0
   characterName: 
@@ -1154,12 +1161,15 @@ MonoBehaviour:
   aiCharacterLocomotionManager: {fileID: 0}
   aiCharacterInventoryManager: {fileID: 0}
   currentState: {fileID: 11400000, guid: b0db1e40aa2911148b99441ce4fc171d, type: 2}
+  hasManuallySwitchedState: 0
   navMeshAgent: {fileID: 0}
   idle: {fileID: 11400000, guid: b0db1e40aa2911148b99441ce4fc171d, type: 2}
   pursueTarget: {fileID: 11400000, guid: ea2f3ac0c9d15d346a5e6cb562485c4c, type: 2}
   combatStance: {fileID: 11400000, guid: 363baeac99f754a4ead941af1c5588ed, type: 2}
   attack: {fileID: 11400000, guid: d41da1dae9eb1b64da35fe50663dc62e, type: 2}
   investigateSound: {fileID: 11400000, guid: 2f1dd0123d1346c4bb2a370242750b99, type: 2}
+  isShop: 0
+  isBlacksmith: 0
 --- !u!114 &2234922532394401906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1180,6 +1190,7 @@ MonoBehaviour:
   yVelocity: {x: 0, y: 0, z: 0}
   groundedYVelocity: -20
   fallStartYVelocity: -5
+  ignoreGravity: 0
   isRolling: 0
   isGrounded: 1
   canRotate: 1
@@ -1188,14 +1199,19 @@ MonoBehaviour:
   canRoll: 1
   isRidingLift: 0
   isOpeningDoor: 0
-  isOnLadder: 0
-  isSliding: 0
-  isSlidingOffCharacter: 0
+  isExitingLadder: 0
+  canBeKnockedOffLadder: 0
+  canExitTopOfLadder: 0
+  canExitLadderWithRightHand: 0
+  canExitLadderWithLeftHand: 0
+  knockOffLadderWindow: 10
   slopeSlideStartPositionYOffset: 1
   slopeSlideSphereCastMaxDistance: 2
   slopeSlideSpeed: -11
   slopeSlideSpeedMultiplier: -3
   slipperySurfaceMaxAngle: 15
+  isSliding: 0
+  isSlidingOffCharacter: 0
   characterSlideOffHeadCollisionMaxDistanceCheck: 5
   characterCollisionCheckSphereMultiplier: 1.5
   interactedLadderClimbPositions: []
@@ -1257,6 +1273,7 @@ MonoBehaviour:
   criticalAttackDistanceCheck: 0.7
   pendingCriticalDamage: 0
   charactersTargetingMe: []
+  stealthObjectsCurrentlyStandingIn: []
   baseDamage: 25
   basePoiseDamage: 25
   actionRecoveryTimer: 0
@@ -1365,6 +1382,10 @@ MonoBehaviour:
     m_InternalValue: 0
   isExitingLadder:
     m_InternalValue: 0
+  isClimbingLadder:
+    m_InternalValue: 0
+  isSlidingDownLadder:
+    m_InternalValue: 0
   currentStamina:
     m_InternalValue: 100
   maxStamina:
@@ -1410,6 +1431,12 @@ MonoBehaviour:
   staminaRegenerationModifier:
     m_InternalValue: 0
   armorPhysicalDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorBluntDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorPierceDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorSlashDamageAbsorptionModifer:
     m_InternalValue: 0
   armorMagicDamageAbsorptionModifer:
     m_InternalValue: 0
@@ -1571,9 +1598,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af101b79c803fa74d9765bb9c95c302a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemsInInventory: []
   dropItemChance: 10
   droppableItems:
   - {fileID: 11400000, guid: 64a3dcab51c176e409334284777e2c9a, type: 2}
+  characterShopID: 0
+  characterShop: {fileID: 0}
 --- !u!1 &4052779361683456650 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -9211815070973405100, guid: e90d2635acace004890485c7a82d2ab3, type: 3}

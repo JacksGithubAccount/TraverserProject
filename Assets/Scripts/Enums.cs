@@ -78,6 +78,14 @@ public enum BuildUp
     Frost
 }
 
+public enum PhysicalDamageType
+{
+    Regular,
+    Blunt,
+    Pierce,
+    Slash
+}
+
 public enum DoorState
 {
     Open,
