@@ -997,7 +997,9 @@ namespace TraverserProject
                 rightHandWeaponModel = Instantiate(player.playerInventoryManager.currentRightHandWeapon.weaponModel);
                 rightHandWeaponSlot.PlaceWeaponModelIntoSlot(rightHandWeaponModel);
                 rightWeaponManager = rightHandWeaponModel.GetComponent<WeaponManager>();
+                rightWeaponManager.isMainHand = true;
                 rightWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
+                
 
                 player.playerAnimatorManager.UpdateAnimatorController(player.playerInventoryManager.currentRightHandWeapon.weaponAnimator);
             }
@@ -1100,8 +1102,9 @@ namespace TraverserProject
                 }
 
                 leftWeaponManager = leftHandWeaponModel.GetComponent<WeaponManager>();
-
+                leftWeaponManager.isMainHand = false;
                 leftWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
+                
             }
         }
 

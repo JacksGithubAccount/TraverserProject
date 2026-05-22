@@ -32,6 +32,9 @@ namespace TravserserProject
         public override void CalculateTotalArmorAbsorption()
         {
             armorPhysicalDamageAbsorption = 0;
+            armorBluntDamageAbsorption = 0;
+            armorPierceDamageAbsorption = 0;
+            armorSlashDamageAbsorption = 0;
             armorMagicDamageAbsorption = 0;
             armorFireDamageAbsorption = 0;
             armorLightningDamageAbsorption = 0;
@@ -48,6 +51,9 @@ namespace TravserserProject
             if (player.playerInventoryManager.headEquipment != null)
             {
                 armorPhysicalDamageAbsorption += player.playerInventoryManager.headEquipment.physicalDamageAbsorption;
+                armorBluntDamageAbsorption += player.playerInventoryManager.headEquipment.bluntDamageAbsorption;
+                armorPierceDamageAbsorption += player.playerInventoryManager.headEquipment.pierceDamageAbsorption;
+                armorSlashDamageAbsorption += player.playerInventoryManager.headEquipment.slashDamageAbsorption;
                 armorMagicDamageAbsorption += player.playerInventoryManager.headEquipment.magicDamageAbsorption;
                 armorFireDamageAbsorption += player.playerInventoryManager.headEquipment.fireDamageAbsorption;
                 armorLightningDamageAbsorption += player.playerInventoryManager.headEquipment.lightningDamageAbsorption;
@@ -65,6 +71,9 @@ namespace TravserserProject
             if (player.playerInventoryManager.bodyEquipment != null)
             {
                 armorPhysicalDamageAbsorption += player.playerInventoryManager.bodyEquipment.physicalDamageAbsorption;
+                armorBluntDamageAbsorption += player.playerInventoryManager.bodyEquipment.bluntDamageAbsorption;
+                armorPierceDamageAbsorption += player.playerInventoryManager.bodyEquipment.pierceDamageAbsorption;
+                armorSlashDamageAbsorption += player.playerInventoryManager.bodyEquipment.slashDamageAbsorption;
                 armorMagicDamageAbsorption += player.playerInventoryManager.bodyEquipment.magicDamageAbsorption;
                 armorFireDamageAbsorption += player.playerInventoryManager.bodyEquipment.fireDamageAbsorption;
                 armorLightningDamageAbsorption += player.playerInventoryManager.bodyEquipment.lightningDamageAbsorption;
@@ -82,6 +91,9 @@ namespace TravserserProject
             if (player.playerInventoryManager.handEquipment != null)
             {
                 armorPhysicalDamageAbsorption += player.playerInventoryManager.handEquipment.physicalDamageAbsorption;
+                armorBluntDamageAbsorption += player.playerInventoryManager.handEquipment.bluntDamageAbsorption;
+                armorPierceDamageAbsorption += player.playerInventoryManager.handEquipment.pierceDamageAbsorption;
+                armorSlashDamageAbsorption += player.playerInventoryManager.handEquipment.slashDamageAbsorption;
                 armorMagicDamageAbsorption += player.playerInventoryManager.handEquipment.magicDamageAbsorption;
                 armorFireDamageAbsorption += player.playerInventoryManager.handEquipment.fireDamageAbsorption;
                 armorLightningDamageAbsorption += player.playerInventoryManager.handEquipment.lightningDamageAbsorption;
@@ -99,6 +111,9 @@ namespace TravserserProject
             if (player.playerInventoryManager.legEquipment != null)
             {
                 armorPhysicalDamageAbsorption += player.playerInventoryManager.legEquipment.physicalDamageAbsorption;
+                armorBluntDamageAbsorption += player.playerInventoryManager.legEquipment.bluntDamageAbsorption;
+                armorPierceDamageAbsorption += player.playerInventoryManager.legEquipment.pierceDamageAbsorption;
+                armorSlashDamageAbsorption += player.playerInventoryManager.legEquipment.slashDamageAbsorption;
                 armorMagicDamageAbsorption += player.playerInventoryManager.legEquipment.magicDamageAbsorption;
                 armorFireDamageAbsorption += player.playerInventoryManager.legEquipment.fireDamageAbsorption;
                 armorLightningDamageAbsorption += player.playerInventoryManager.legEquipment.lightningDamageAbsorption;
@@ -115,10 +130,13 @@ namespace TravserserProject
 
             //totals
             armorPhysicalDamageAbsorption += armorPhysicalDamageAbsorption * (player.playerNetworkManager.armorPhysicalDamageAbsorptionModifer.Value / 100);
-            armorMagicDamageAbsorption += armorPhysicalDamageAbsorption * (player.playerNetworkManager.armorMagicDamageAbsorptionModifer.Value / 100);
-            armorFireDamageAbsorption += armorPhysicalDamageAbsorption * (player.playerNetworkManager.armorFireDamageAbsorptionModifer.Value / 100);
-            armorLightningDamageAbsorption += armorPhysicalDamageAbsorption * (player.playerNetworkManager.armorLightningDamageAbsorptionModifer.Value / 100);
-            armorHolyDamageAbsorption += armorPhysicalDamageAbsorption * (player.playerNetworkManager.armorHolyDamageAbsorptionModifer.Value / 100);
+            armorBluntDamageAbsorption += armorBluntDamageAbsorption * (player.playerNetworkManager.armorBluntDamageAbsorptionModifer.Value / 100);
+            armorPierceDamageAbsorption += armorPierceDamageAbsorption * (player.playerNetworkManager.armorPierceDamageAbsorptionModifer.Value / 100);
+            armorSlashDamageAbsorption += armorSlashDamageAbsorption * (player.playerNetworkManager.armorSlashDamageAbsorptionModifer.Value / 100);
+            armorMagicDamageAbsorption += armorMagicDamageAbsorption * (player.playerNetworkManager.armorMagicDamageAbsorptionModifer.Value / 100);
+            armorFireDamageAbsorption += armorFireDamageAbsorption * (player.playerNetworkManager.armorFireDamageAbsorptionModifer.Value / 100);
+            armorLightningDamageAbsorption += armorLightningDamageAbsorption * (player.playerNetworkManager.armorLightningDamageAbsorptionModifer.Value / 100);
+            armorHolyDamageAbsorption += armorHolyDamageAbsorption * (player.playerNetworkManager.armorHolyDamageAbsorptionModifer.Value / 100);
 
         }
 

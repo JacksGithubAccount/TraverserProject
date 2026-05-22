@@ -71,7 +71,7 @@ namespace TraverserProject
             {
 
             }
-            Debug.Log("Original Phys Damage: " + physicalDamage);
+            Debug.Log("Original Phys Damage: " + physicalDamage + " Type: " + physicalDamageType.ToString());
 
             switch(physicalDamageType)
             {
@@ -98,7 +98,7 @@ namespace TraverserProject
             holyDamage -= (holyDamage * (character.characterStatsManager.armorHolyDamageAbsorption / 100));
 
             finalDamageDealt = Mathf.RoundToInt(physicalDamage + magicDamage + fireDamage + lightningDamage + holyDamage);
-            Debug.Log("After Calculations Phys Damage: " + physicalDamage);
+            Debug.Log("After Calculations Phys Damage: " + physicalDamage + " Type: " + physicalDamageType.ToString());
             if (finalDamageDealt <= 0)
             {
                 finalDamageDealt = 1;

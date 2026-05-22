@@ -13,6 +13,9 @@ namespace TraverserProject
         [Header("Collider")]
         public MeleeWeaponDamageCollider meleeDamageCollider;
 
+        [Header("Flags")]
+        public bool isMainHand = true; //used to power stance check physical damage types
+
 
         private void Awake()
         {
@@ -69,32 +72,92 @@ namespace TraverserProject
             meleeDamageCollider.light_Attack_02_Modifier = weapon.light_Attack_02_Modifier;
             meleeDamageCollider.light_Attack_02_PhysicalDamageType = weapon.light_Attack_02_PhysicalDamageType;
             meleeDamageCollider.heavy_Attack_01_Modifier = weapon.heavy_Attack_01_Modifier;
+            meleeDamageCollider.heavy_Attack_01_PhysicalDamageType = weapon.heavy_Attack_01_PhysicalDamageType;
             meleeDamageCollider.heavy_Attack_02_Modifier = weapon.heavy_Attack_02_Modifier;
+            meleeDamageCollider.heavy_Attack_02_PhysicalDamageType = weapon.heavy_Attack_02_PhysicalDamageType;
             meleeDamageCollider.charge_Attack_01_Modifier = weapon.charge_Attack_01_Modifier;
+            meleeDamageCollider.charge_Attack_01_PhysicalDamageType = weapon.charge_Attack_01_PhysicalDamageType;
             meleeDamageCollider.charge_Attack_02_Modifier = weapon.charge_Attack_02_Modifier;
+            meleeDamageCollider.charge_Attack_02_PhysicalDamageType = weapon.charge_Attack_02_PhysicalDamageType;
             meleeDamageCollider.rolling_Light_Attack_01_Modifier = weapon.rolling_Light_Attack_01_Modifier;
+            meleeDamageCollider.rolling_Light_Attack_01_PhysicalDamageType = weapon.rolling_Light_Attack_01_PhysicalDamageType;
             meleeDamageCollider.rolling_Heavy_Attack_01_Modifier = weapon.rolling_Heavy_Attack_01_Modifier;
+            meleeDamageCollider.rolling_Heavy_Attack_01_PhysicalDamageType = weapon.rolling_Heavy_Attack_01_PhysicalDamageType;
             meleeDamageCollider.running_Light_Attack_01_Modifier = weapon.running_Light_Attack_01_Modifier;
+            meleeDamageCollider.running_Light_Attack_01_PhysicalDamageType = weapon.running_Light_Attack_01_PhysicalDamageType;
             meleeDamageCollider.running_Heavy_Attack_01_Modifier = weapon.running_Heavy_Attack_01_Modifier;
+            meleeDamageCollider.running_Heavy_Attack_01_PhysicalDamageType = weapon.running_Heavy_Attack_01_PhysicalDamageType;
             meleeDamageCollider.backstep_Light_Attack_01_Modifier = weapon.backstep_Light_Attack_01_Modifier;
+            meleeDamageCollider.backstep_Light_Attack_01_PhysicalDamageType = weapon.backstep_Light_Attack_01_PhysicalDamageType;
             meleeDamageCollider.backstep_Heavy_Attack_01_Modifier = weapon.backstep_Heavy_Attack_01_Modifier;
+            meleeDamageCollider.backstep_Heavy_Attack_01_PhysicalDamageType = weapon.backstep_Heavy_Attack_01_PhysicalDamageType;
             meleeDamageCollider.jumping_Light_Attack_01_Modifier = weapon.jumping_Light_Attack_01_Modifier;
+            meleeDamageCollider.jumping_Light_Attack_01_PhysicalDamageType = weapon.jumping_Light_Attack_01_PhysicalDamageType;
             meleeDamageCollider.jumping_Heavy_Attack_01_Modifier = weapon.jumping_Heavy_Attack_01_Modifier;
+            meleeDamageCollider.jumping_Heavy_Attack_01_PhysicalDamageType = weapon.jumping_Heavy_Attack_01_PhysicalDamageType;
 
-            meleeDamageCollider.dual_Light_Attack_01_Modifier = weapon.dual_Light_Attack_01_Modifier;
-            meleeDamageCollider.dual_Light_Attack_02_Modifier = weapon.dual_Light_Attack_02_Modifier;
-            meleeDamageCollider.dual_Heavy_Attack_01_Modifier = weapon.dual_Heavy_Attack_01_Modifier;
-            meleeDamageCollider.dual_Heavy_Attack_02_Modifier = weapon.dual_Heavy_Attack_02_Modifier;
-            meleeDamageCollider.dual_Charge_Attack_01_Modifier = weapon.dual_Charge_Attack_01_Modifier;
-            meleeDamageCollider.dual_Charge_Attack_02_Modifier = weapon.dual_Charge_Attack_02_Modifier;
-            meleeDamageCollider.dual_Rolling_Light_Attack_01_Modifier = weapon.dual_Rolling_Light_Attack_01_Modifier;
-            meleeDamageCollider.dual_Rolling_Heavy_Attack_01_Modifier = weapon.dual_Rolling_Heavy_Attack_01_Modifier;
-            meleeDamageCollider.dual_Running_Light_Attack_01_Modifier = weapon.dual_Running_Light_Attack_01_Modifier;
-            meleeDamageCollider.dual_Running_Heavy_Attack_01_Modifier = weapon.dual_Running_Heavy_Attack_01_Modifier;
-            meleeDamageCollider.dual_Backstep_Light_Attack_01_Modifier = weapon.dual_Backstep_Light_Attack_01_Modifier;
-            meleeDamageCollider.dual_Backstep_Heavy_Attack_01_Modifier = weapon.dual_Backstep_Heavy_Attack_01_Modifier;
-            meleeDamageCollider.dual_Jumping_Light_Attack_01_Modifier = weapon.dual_Jumping_Light_Attack_01_Modifier;
-            meleeDamageCollider.dual_Jumping_Heavy_Attack_01_Modifier = weapon.dual_Jumping_Heavy_Attack_01_Modifier;
+            if (isMainHand)
+            {
+                meleeDamageCollider.dual_Light_Attack_01_Modifier = weapon.dual_Light_Attack_01_Modifier;
+                meleeDamageCollider.dual_Light_Attack_01_PhysicalDamageType = weapon.dual_Light_Attack_Main_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Light_Attack_02_Modifier = weapon.dual_Light_Attack_02_Modifier;
+                meleeDamageCollider.dual_Light_Attack_02_PhysicalDamageType = weapon.dual_Light_Attack_Main_02_PhysicalDamageType;
+                meleeDamageCollider.dual_Heavy_Attack_01_Modifier = weapon.dual_Heavy_Attack_01_Modifier;
+                meleeDamageCollider.dual_Heavy_Attack_01_PhysicalDamageType = weapon.dual_Heavy_Attack_Main_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Heavy_Attack_02_Modifier = weapon.dual_Heavy_Attack_02_Modifier;
+                meleeDamageCollider.dual_Heavy_Attack_02_PhysicalDamageType = weapon.dual_Heavy_Attack_Main_02_PhysicalDamageType;
+                meleeDamageCollider.dual_Charge_Attack_01_Modifier = weapon.dual_Charge_Attack_01_Modifier;
+                meleeDamageCollider.dual_Charge_Attack_01_PhysicalDamageType = weapon.dual_Charge_Attack_Main_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Charge_Attack_02_Modifier = weapon.dual_Charge_Attack_02_Modifier;
+                meleeDamageCollider.dual_Charge_Attack_02_PhysicalDamageType = weapon.dual_Charge_Attack_Main_02_PhysicalDamageType;
+                meleeDamageCollider.dual_Rolling_Light_Attack_01_Modifier = weapon.dual_Rolling_Light_Attack_01_Modifier;
+                meleeDamageCollider.dual_Rolling_Light_Attack_01_PhysicalDamageType = weapon.dual_Rolling_Light_Attack_Main_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Rolling_Heavy_Attack_01_Modifier = weapon.dual_Rolling_Heavy_Attack_01_Modifier;
+                meleeDamageCollider.dual_Rolling_Heavy_Attack_01_PhysicalDamageType = weapon.dual_Rolling_Heavy_Attack_Main_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Running_Light_Attack_01_Modifier = weapon.dual_Running_Light_Attack_01_Modifier;
+                meleeDamageCollider.dual_Running_Light_Attack_01_PhysicalDamageType = weapon.dual_Running_Light_Attack_Main_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Running_Heavy_Attack_01_Modifier = weapon.dual_Running_Heavy_Attack_01_Modifier;
+                meleeDamageCollider.dual_Running_Heavy_Attack_01_PhysicalDamageType = weapon.dual_Running_Heavy_Attack_Main_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Backstep_Light_Attack_01_Modifier = weapon.dual_Backstep_Light_Attack_01_Modifier;
+                meleeDamageCollider.dual_Backstep_Light_Attack_01_PhysicalDamageType = weapon.dual_Backstep_Light_Attack_Main_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Backstep_Heavy_Attack_01_Modifier = weapon.dual_Backstep_Heavy_Attack_01_Modifier;
+                meleeDamageCollider.dual_Backstep_Heavy_Attack_01_PhysicalDamageType = weapon.dual_Backstep_Heavy_Attack_Main_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Jumping_Light_Attack_01_Modifier = weapon.dual_Jumping_Light_Attack_01_Modifier;
+                meleeDamageCollider.dual_Jumping_Light_Attack_01_PhysicalDamageType = weapon.dual_Jumping_Light_Attack_Main_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Jumping_Heavy_Attack_01_Modifier = weapon.dual_Jumping_Heavy_Attack_01_Modifier;
+                meleeDamageCollider.dual_Jumping_Heavy_Attack_01_PhysicalDamageType = weapon.dual_Jumping_Heavy_Attack_Main_01_PhysicalDamageType;
+            }
+            else
+            {
+                meleeDamageCollider.dual_Light_Attack_01_Modifier = weapon.dual_Light_Attack_01_Modifier;
+                meleeDamageCollider.dual_Light_Attack_01_PhysicalDamageType = weapon.dual_Light_Attack_Off_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Light_Attack_02_Modifier = weapon.dual_Light_Attack_02_Modifier;
+                meleeDamageCollider.dual_Light_Attack_02_PhysicalDamageType = weapon.dual_Light_Attack_Off_02_PhysicalDamageType;
+                meleeDamageCollider.dual_Heavy_Attack_01_Modifier = weapon.dual_Heavy_Attack_01_Modifier;
+                meleeDamageCollider.dual_Heavy_Attack_01_PhysicalDamageType = weapon.dual_Heavy_Attack_Off_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Heavy_Attack_02_Modifier = weapon.dual_Heavy_Attack_02_Modifier;
+                meleeDamageCollider.dual_Heavy_Attack_02_PhysicalDamageType = weapon.dual_Heavy_Attack_Off_02_PhysicalDamageType;
+                meleeDamageCollider.dual_Charge_Attack_01_Modifier = weapon.dual_Charge_Attack_01_Modifier;
+                meleeDamageCollider.dual_Charge_Attack_01_PhysicalDamageType = weapon.dual_Charge_Attack_Off_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Charge_Attack_02_Modifier = weapon.dual_Charge_Attack_02_Modifier;
+                meleeDamageCollider.dual_Charge_Attack_02_PhysicalDamageType = weapon.dual_Charge_Attack_Off_02_PhysicalDamageType;
+                meleeDamageCollider.dual_Rolling_Light_Attack_01_Modifier = weapon.dual_Rolling_Light_Attack_01_Modifier;
+                meleeDamageCollider.dual_Rolling_Light_Attack_01_PhysicalDamageType = weapon.dual_Rolling_Light_Attack_Off_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Rolling_Heavy_Attack_01_Modifier = weapon.dual_Rolling_Heavy_Attack_01_Modifier;
+                meleeDamageCollider.dual_Rolling_Heavy_Attack_01_PhysicalDamageType = weapon.dual_Rolling_Heavy_Attack_Off_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Running_Light_Attack_01_Modifier = weapon.dual_Running_Light_Attack_01_Modifier;
+                meleeDamageCollider.dual_Running_Light_Attack_01_PhysicalDamageType = weapon.dual_Running_Light_Attack_Off_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Running_Heavy_Attack_01_Modifier = weapon.dual_Running_Heavy_Attack_01_Modifier;
+                meleeDamageCollider.dual_Running_Heavy_Attack_01_PhysicalDamageType = weapon.dual_Running_Heavy_Attack_Off_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Backstep_Light_Attack_01_Modifier = weapon.dual_Backstep_Light_Attack_01_Modifier;
+                meleeDamageCollider.dual_Backstep_Light_Attack_01_PhysicalDamageType = weapon.dual_Backstep_Light_Attack_Off_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Backstep_Heavy_Attack_01_Modifier = weapon.dual_Backstep_Heavy_Attack_01_Modifier;
+                meleeDamageCollider.dual_Backstep_Heavy_Attack_01_PhysicalDamageType = weapon.dual_Backstep_Heavy_Attack_Off_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Jumping_Light_Attack_01_Modifier = weapon.dual_Jumping_Light_Attack_01_Modifier;
+                meleeDamageCollider.dual_Jumping_Light_Attack_01_PhysicalDamageType = weapon.dual_Jumping_Light_Attack_Off_01_PhysicalDamageType;
+                meleeDamageCollider.dual_Jumping_Heavy_Attack_01_Modifier = weapon.dual_Jumping_Heavy_Attack_01_Modifier;
+                meleeDamageCollider.dual_Jumping_Heavy_Attack_01_PhysicalDamageType = weapon.dual_Jumping_Heavy_Attack_Off_01_PhysicalDamageType;
+            }
         }
 
         public void ToggleWeaponTrail(bool status)

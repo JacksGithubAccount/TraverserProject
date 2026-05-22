@@ -86,19 +86,47 @@ namespace TraverserProject
 
         [Header("Dual Attack Modifiers")]
         public float dual_Light_Attack_01_Modifier = 0.77f;
+        public PhysicalDamageType dual_Light_Attack_Main_01_PhysicalDamageType;
+        public PhysicalDamageType dual_Light_Attack_Off_01_PhysicalDamageType;
         public float dual_Light_Attack_02_Modifier = 0.87f;
+        public PhysicalDamageType dual_Light_Attack_Main_02_PhysicalDamageType;
+        public PhysicalDamageType dual_Light_Attack_Off_02_PhysicalDamageType;
         public float dual_Heavy_Attack_01_Modifier = 0.94f;
+        public PhysicalDamageType dual_Heavy_Attack_Main_01_PhysicalDamageType;
+        public PhysicalDamageType dual_Heavy_Attack_Off_01_PhysicalDamageType;
         public float dual_Heavy_Attack_02_Modifier = 1.0f;
+        public PhysicalDamageType dual_Heavy_Attack_Main_02_PhysicalDamageType;
+        public PhysicalDamageType dual_Heavy_Attack_Off_02_PhysicalDamageType;
         public float dual_Charge_Attack_01_Modifier = 1.3f;
+        public PhysicalDamageType dual_Charge_Attack_Main_01_PhysicalDamageType;
+        public PhysicalDamageType dual_Charge_Attack_Off_01_PhysicalDamageType;
         public float dual_Charge_Attack_02_Modifier = 1.4f;
+        public PhysicalDamageType dual_Charge_Attack_Main_02_PhysicalDamageType;
+        public PhysicalDamageType dual_Charge_Attack_Off_02_PhysicalDamageType;
         public float dual_Running_Light_Attack_01_Modifier = 0.77f;
+        public PhysicalDamageType dual_Running_Light_Attack_Main_01_PhysicalDamageType;
+        public PhysicalDamageType dual_Running_Light_Attack_Off_01_PhysicalDamageType;
         public float dual_Running_Heavy_Attack_01_Modifier = 0.94f;
+        public PhysicalDamageType dual_Running_Heavy_Attack_Main_01_PhysicalDamageType;
+        public PhysicalDamageType dual_Running_Heavy_Attack_Off_01_PhysicalDamageType;
         public float dual_Rolling_Light_Attack_01_Modifier = 0.68f;
+        public PhysicalDamageType dual_Rolling_Light_Attack_Main_01_PhysicalDamageType;
+        public PhysicalDamageType dual_Rolling_Light_Attack_Off_01_PhysicalDamageType;
         public float dual_Rolling_Heavy_Attack_01_Modifier = 0.81f;
+        public PhysicalDamageType dual_Rolling_Heavy_Attack_Main_01_PhysicalDamageType;
+        public PhysicalDamageType dual_Rolling_Heavy_Attack_Off_01_PhysicalDamageType;
         public float dual_Backstep_Light_Attack_01_Modifier = 0.77f;
+        public PhysicalDamageType dual_Backstep_Light_Attack_Main_01_PhysicalDamageType;
+        public PhysicalDamageType dual_Backstep_Light_Attack_Off_01_PhysicalDamageType;
         public float dual_Backstep_Heavy_Attack_01_Modifier = 0.9f;
+        public PhysicalDamageType dual_Backstep_Heavy_Attack_Main_01_PhysicalDamageType;
+        public PhysicalDamageType dual_Backstep_Heavy_Attack_Off_01_PhysicalDamageType;
         public float dual_Jumping_Light_Attack_01_Modifier = 0.77f;
+        public PhysicalDamageType dual_Jumping_Light_Attack_Main_01_PhysicalDamageType;
+        public PhysicalDamageType dual_Jumping_Light_Attack_Off_01_PhysicalDamageType;
         public float dual_Jumping_Heavy_Attack_01_Modifier = 0.98f;
+        public PhysicalDamageType dual_Jumping_Heavy_Attack_Main_01_PhysicalDamageType;
+        public PhysicalDamageType dual_Jumping_Heavy_Attack_Off_01_PhysicalDamageType;
 
         [Header("Stamina Cost Modifiers")]
         public int baseStaminaCost = 20;

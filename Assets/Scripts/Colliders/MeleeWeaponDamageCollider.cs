@@ -14,33 +14,59 @@ namespace TraverserProject
         public float light_Attack_02_Modifier;
         public PhysicalDamageType light_Attack_02_PhysicalDamageType;
         public float heavy_Attack_01_Modifier;
+        public PhysicalDamageType heavy_Attack_01_PhysicalDamageType;
         public float heavy_Attack_02_Modifier;
+        public PhysicalDamageType heavy_Attack_02_PhysicalDamageType;
         public float charge_Attack_01_Modifier;
+        public PhysicalDamageType charge_Attack_01_PhysicalDamageType;
         public float charge_Attack_02_Modifier;
+        public PhysicalDamageType charge_Attack_02_PhysicalDamageType;
         public float running_Light_Attack_01_Modifier;
+        public PhysicalDamageType running_Light_Attack_01_PhysicalDamageType;
         public float running_Heavy_Attack_01_Modifier;
+        public PhysicalDamageType running_Heavy_Attack_01_PhysicalDamageType;
         public float rolling_Light_Attack_01_Modifier;
+        public PhysicalDamageType rolling_Light_Attack_01_PhysicalDamageType;
         public float rolling_Heavy_Attack_01_Modifier;
+        public PhysicalDamageType rolling_Heavy_Attack_01_PhysicalDamageType;
         public float backstep_Light_Attack_01_Modifier;
+        public PhysicalDamageType backstep_Light_Attack_01_PhysicalDamageType;
         public float backstep_Heavy_Attack_01_Modifier;
+        public PhysicalDamageType backstep_Heavy_Attack_01_PhysicalDamageType;
         public float jumping_Light_Attack_01_Modifier;
+        public PhysicalDamageType jumping_Light_Attack_01_PhysicalDamageType;
         public float jumping_Heavy_Attack_01_Modifier;
+        public PhysicalDamageType jumping_Heavy_Attack_01_PhysicalDamageType;
 
         [Header("Dual Attack Modifiers")]
         public float dual_Light_Attack_01_Modifier;
+        public PhysicalDamageType dual_Light_Attack_01_PhysicalDamageType;
         public float dual_Light_Attack_02_Modifier;
+        public PhysicalDamageType dual_Light_Attack_02_PhysicalDamageType;
         public float dual_Heavy_Attack_01_Modifier;
+        public PhysicalDamageType dual_Heavy_Attack_01_PhysicalDamageType;
         public float dual_Heavy_Attack_02_Modifier;
+        public PhysicalDamageType dual_Heavy_Attack_02_PhysicalDamageType;
         public float dual_Charge_Attack_01_Modifier;
+        public PhysicalDamageType dual_Charge_Attack_01_PhysicalDamageType;
         public float dual_Charge_Attack_02_Modifier;
+        public PhysicalDamageType dual_Charge_Attack_02_PhysicalDamageType;
         public float dual_Running_Light_Attack_01_Modifier;
+        public PhysicalDamageType dual_Running_Light_Attack_01_PhysicalDamageType;
         public float dual_Running_Heavy_Attack_01_Modifier;
+        public PhysicalDamageType dual_Running_Heavy_Attack_01_PhysicalDamageType;
         public float dual_Rolling_Light_Attack_01_Modifier;
+        public PhysicalDamageType dual_Rolling_Light_Attack_01_PhysicalDamageType;
         public float dual_Rolling_Heavy_Attack_01_Modifier;
+        public PhysicalDamageType dual_Rolling_Heavy_Attack_01_PhysicalDamageType;
         public float dual_Backstep_Light_Attack_01_Modifier;
+        public PhysicalDamageType dual_Backstep_Light_Attack_01_PhysicalDamageType;
         public float dual_Backstep_Heavy_Attack_01_Modifier;
+        public PhysicalDamageType dual_Backstep_Heavy_Attack_01_PhysicalDamageType;
         public float dual_Jumping_Light_Attack_01_Modifier;
+        public PhysicalDamageType dual_Jumping_Light_Attack_01_PhysicalDamageType;
         public float dual_Jumping_Heavy_Attack_01_Modifier;
+        public PhysicalDamageType dual_Jumping_Heavy_Attack_01_PhysicalDamageType;
 
         protected override void Awake()
         {
@@ -128,82 +154,82 @@ namespace TraverserProject
                     ApplyAttackDamageModifiers(light_Attack_02_Modifier, damageEffect, light_Attack_02_PhysicalDamageType);
                     break;
                 case AttackType.HeavyAttack01:
-                    ApplyAttackDamageModifiers(heavy_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(heavy_Attack_01_Modifier, damageEffect, heavy_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.HeavyAttack02:
-                    ApplyAttackDamageModifiers(heavy_Attack_02_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(heavy_Attack_02_Modifier, damageEffect, heavy_Attack_02_PhysicalDamageType);
                     break;
                 case AttackType.LightJumpingAttack01:
-                    ApplyAttackDamageModifiers(jumping_Light_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(jumping_Light_Attack_01_Modifier, damageEffect, jumping_Light_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.HeavyJumpingAttack01:
-                    ApplyAttackDamageModifiers(jumping_Heavy_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(jumping_Heavy_Attack_01_Modifier, damageEffect, jumping_Heavy_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.ChargedAttack01:
-                    ApplyAttackDamageModifiers(charge_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(charge_Attack_01_Modifier, damageEffect, charge_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.ChargedAttack02:
-                    ApplyAttackDamageModifiers(charge_Attack_02_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(charge_Attack_02_Modifier, damageEffect, charge_Attack_02_PhysicalDamageType);
                     break;
                 case AttackType.RunningLightAttack01:
-                    ApplyAttackDamageModifiers(running_Light_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(running_Light_Attack_01_Modifier, damageEffect, running_Light_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.RunningHeavyAttack01:
-                    ApplyAttackDamageModifiers(running_Heavy_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(running_Heavy_Attack_01_Modifier, damageEffect, running_Heavy_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.RollingLightAttack01:
-                    ApplyAttackDamageModifiers(rolling_Light_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(rolling_Light_Attack_01_Modifier, damageEffect, rolling_Light_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.RollingHeavyAttack01:
-                    ApplyAttackDamageModifiers(rolling_Heavy_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(rolling_Heavy_Attack_01_Modifier, damageEffect, rolling_Heavy_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.BackstepLightAttack01:
-                    ApplyAttackDamageModifiers(backstep_Light_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(backstep_Light_Attack_01_Modifier, damageEffect, backstep_Light_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.BackstepHeavyAttack01:
-                    ApplyAttackDamageModifiers(backstep_Heavy_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(backstep_Heavy_Attack_01_Modifier, damageEffect, backstep_Heavy_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.DualLightAttack01:
-                    ApplyAttackDamageModifiers(dual_Light_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(dual_Light_Attack_01_Modifier, damageEffect, dual_Light_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.DualLightAttack02:
-                    ApplyAttackDamageModifiers(dual_Light_Attack_02_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(dual_Light_Attack_02_Modifier, damageEffect, dual_Light_Attack_02_PhysicalDamageType);
                     break;
                 case AttackType.DualHeavyAttack01:
-                    ApplyAttackDamageModifiers(dual_Heavy_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(dual_Heavy_Attack_01_Modifier, damageEffect, dual_Heavy_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.DualHeavyAttack02:
-                    ApplyAttackDamageModifiers(dual_Heavy_Attack_02_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(dual_Heavy_Attack_02_Modifier, damageEffect,dual_Heavy_Attack_02_PhysicalDamageType);
                     break;
                 case AttackType.DualChargedAttack01:
-                    ApplyAttackDamageModifiers(dual_Charge_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(dual_Charge_Attack_01_Modifier, damageEffect,dual_Charge_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.DualChargedAttack02:
-                    ApplyAttackDamageModifiers(dual_Charge_Attack_02_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(dual_Charge_Attack_02_Modifier, damageEffect, dual_Charge_Attack_02_PhysicalDamageType);
                     break;
                 case AttackType.DualRunningLightAttack01:
-                    ApplyAttackDamageModifiers(dual_Running_Light_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(dual_Running_Light_Attack_01_Modifier, damageEffect, dual_Running_Light_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.DualRunningHeavyAttack01:
-                    ApplyAttackDamageModifiers(dual_Running_Heavy_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(dual_Running_Heavy_Attack_01_Modifier, damageEffect, dual_Running_Heavy_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.DualRollingLightAttack01:
-                    ApplyAttackDamageModifiers(dual_Rolling_Light_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(dual_Rolling_Light_Attack_01_Modifier, damageEffect, dual_Rolling_Light_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.DualRollingHeavyAttack01:
-                    ApplyAttackDamageModifiers(dual_Rolling_Heavy_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(dual_Rolling_Heavy_Attack_01_Modifier, damageEffect, dual_Rolling_Heavy_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.DualBackstepLightAttack01:
-                    ApplyAttackDamageModifiers(dual_Backstep_Light_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(dual_Backstep_Light_Attack_01_Modifier, damageEffect, dual_Backstep_Light_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.DualBackstepHeavyAttack01:
-                    ApplyAttackDamageModifiers(dual_Backstep_Heavy_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(dual_Backstep_Heavy_Attack_01_Modifier, damageEffect, dual_Backstep_Heavy_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.DualJumpingLightAttack01:
-                    ApplyAttackDamageModifiers(dual_Jumping_Light_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(dual_Jumping_Light_Attack_01_Modifier, damageEffect, dual_Jumping_Light_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.DualJumpingHeavyAttack01:
-                    ApplyAttackDamageModifiers(dual_Jumping_Heavy_Attack_01_Modifier, damageEffect);
+                    ApplyAttackDamageModifiers(dual_Jumping_Heavy_Attack_01_Modifier, damageEffect, dual_Jumping_Heavy_Attack_01_PhysicalDamageType);
                     break;
                 default:
                     break;
@@ -219,18 +245,6 @@ namespace TraverserProject
             }
         }
 
-        private void ApplyAttackDamageModifiers(float modifier, TakeDamageEffect damage)
-        {
-            damage.physicalDamage *= modifier;
-            damage.magicDamage *= modifier;
-            damage.fireDamage *= modifier;
-            damage.lightningDamage *= modifier;
-            damage.holyDamage *= modifier;
-            damage.poiseDamage *= modifier;
-            damage.physicalDamageType = PhysicalDamageType.Regular;
-
-
-        }
         private void ApplyAttackDamageModifiers(float modifier, TakeDamageEffect damage, PhysicalDamageType physicalDamageType)
         {
             damage.physicalDamage *= modifier;

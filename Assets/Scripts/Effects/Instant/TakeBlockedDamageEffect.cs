@@ -82,7 +82,7 @@ namespace TraverserProject
 
             if (finalDamageDealt <= 0)
             {
-                finalDamageDealt = 1;
+                finalDamageDealt = 0;
             }
 
             Debug.Log("Blocked Phys Damage: " + physicalDamage);
