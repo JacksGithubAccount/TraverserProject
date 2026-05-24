@@ -14,8 +14,11 @@ namespace TraverserProject
 
         [Header("Damage")]
         [SerializeField] float attack01DamageModifier = 1.0f;
+        [SerializeField] PhysicalDamageType attack01PhysicalDamageType = PhysicalDamageType.Regular;
         [SerializeField] float attack02DamageModifier = 1.2f;
+        [SerializeField] PhysicalDamageType attack02PhysicalDamageType = PhysicalDamageType.Regular;
         [SerializeField] float attack03DamageModifier = 1.4f;
+        [SerializeField] PhysicalDamageType attack03PhysicalDamageType = PhysicalDamageType.Regular;
         public float stompDamage = 25;
 
         [Header("VFX")]
@@ -31,18 +34,21 @@ namespace TraverserProject
         {
             aiCharacter.characterSoundFXManager.PlayAttackGruntFX();
             clubDamageCollider.physicalDamage = baseDamage * attack01DamageModifier;
+            clubDamageCollider.physicalDamageType = attack01PhysicalDamageType;
         }
 
         public void SetAttack02Damage()
         {
             aiCharacter.characterSoundFXManager.PlayAttackGruntFX();
             clubDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
+            clubDamageCollider.physicalDamageType = attack02PhysicalDamageType;
         }
 
         public void SetAttack03Damage()
         {
             aiCharacter.characterSoundFXManager.PlayAttackGruntFX();
             clubDamageCollider.physicalDamage = baseDamage * attack03DamageModifier;
+            clubDamageCollider.physicalDamageType = attack03PhysicalDamageType;
         }
 
         public void OpenClubDamageCollider()

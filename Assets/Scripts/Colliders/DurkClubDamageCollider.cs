@@ -7,6 +7,9 @@ namespace TraverserProject
     {
         [SerializeField] AIBossCharacterManager bossCharacter;
 
+        [Header("Damage")]
+        public PhysicalDamageType physicalDamageType = PhysicalDamageType.Regular;
+
 
         protected override void Awake()
         {
@@ -30,6 +33,7 @@ namespace TraverserProject
             damageEffect.holyDamage = holyDamage;
             damageEffect.poiseDamage = poiseDamage;
             damageEffect.contactPoint = contactPoint;
+            damageEffect.physicalDamageType = physicalDamageType;
             damageEffect.angleHitFrom = Vector3.SignedAngle(bossCharacter.transform.forward, damageTarget.transform.forward, Vector3.up);
 
 
@@ -40,7 +44,7 @@ namespace TraverserProject
             {
                 damageTarget.characterNetworkManager.NofityTheServerOfCharacterDamageServerRpc(damageTarget.NetworkObjectId, bossCharacter.NetworkObjectId,
                     damageEffect.physicalDamage, damageEffect.magicDamage, damageEffect.fireDamage, damageEffect.lightningDamage, damageEffect.holyDamage, damageEffect.poiseDamage,
-                    damageEffect.angleHitFrom, damageEffect.contactPoint.x, damageEffect.contactPoint.y, damageEffect.contactPoint.z);
+                    damageEffect.angleHitFrom, damageEffect.contactPoint.x, damageEffect.contactPoint.y, damageEffect.contactPoint.z, damageEffect.physicalDamageType);
             }
         }
 
