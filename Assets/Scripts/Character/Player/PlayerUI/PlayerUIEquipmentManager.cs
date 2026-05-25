@@ -33,6 +33,16 @@ namespace TraverserProject
         [SerializeField] Image legEquipmentSlot;
         private Button legEquipmentSlotButton;
 
+        [Header("Accessory Slots")]
+        [SerializeField] Image accessoryEquipmentSlot01;
+        private Button accessoryEquipmentSlot01Button;
+        [SerializeField] Image accessoryEquipmentSlot02;
+        private Button accessoryEquipmentSlot02Button;
+        [SerializeField] Image accessoryEquipmentSlot03;
+        private Button accessoryEquipmentSlot03Button;
+        [SerializeField] Image accessoryEquipmentSlot04;
+        private Button accessoryEquipmentSlot04Button;
+
         [Header("Projectile Slots")]
         [SerializeField] Image mainProjectileEquipmentSlot;
         [SerializeField] TextMeshProUGUI mainProjectileCount;
@@ -75,6 +85,12 @@ namespace TraverserProject
             handEquipmentSlotButton = handEquipmentSlot.GetComponentInParent<Button>(true);
             legEquipmentSlotButton = legEquipmentSlot.GetComponentInParent<Button>(true);
 
+            
+            accessoryEquipmentSlot01Button = accessoryEquipmentSlot01.GetComponentInParent<Button>(true);
+            accessoryEquipmentSlot02Button = accessoryEquipmentSlot02.GetComponentInParent<Button>(true);
+            accessoryEquipmentSlot03Button = accessoryEquipmentSlot03.GetComponentInParent<Button>(true);
+            accessoryEquipmentSlot04Button = accessoryEquipmentSlot04.GetComponentInParent<Button>(true);
+
             mainProjectileEquipmentSlotButton = mainProjectileEquipmentSlot.GetComponentInParent<Button>(true);
             secondaryProjectileEquipmentSlotButton = secondaryProjectileEquipmentSlot.GetComponentInParent<Button>(true);
 
@@ -115,6 +131,11 @@ namespace TraverserProject
             bodyEquipmentSlotButton.enabled = isEnabled;
             handEquipmentSlotButton.enabled = isEnabled;
             legEquipmentSlotButton.enabled = isEnabled;
+
+            accessoryEquipmentSlot01Button.enabled = isEnabled;
+            accessoryEquipmentSlot02Button.enabled = isEnabled;
+            accessoryEquipmentSlot03Button.enabled = isEnabled;
+            accessoryEquipmentSlot04Button.enabled = isEnabled;
 
             mainProjectileEquipmentSlotButton.enabled = isEnabled;
             secondaryProjectileEquipmentSlotButton.enabled = isEnabled;
@@ -174,6 +195,18 @@ namespace TraverserProject
                     break;
                 case EquipmentType.QuickSlot03:
                     lastSelectedButton = quickSlot03Button;
+                    break;
+                case EquipmentType.Accessory01:
+                    lastSelectedButton = accessoryEquipmentSlot01Button;
+                    break;
+                case EquipmentType.Accessory02:
+                    lastSelectedButton = accessoryEquipmentSlot02Button;
+                    break;
+                case EquipmentType.Accessory03:
+                    lastSelectedButton = accessoryEquipmentSlot03Button;
+                    break;
+                case EquipmentType.Accessory04:
+                    lastSelectedButton = accessoryEquipmentSlot04Button;
                     break;
                 default:
                     break;
@@ -301,6 +334,50 @@ namespace TraverserProject
             else
             {
                 legEquipmentSlot.enabled = false;
+            }
+
+            AccessoryEquipmentItem accessory01 = player.playerInventoryManager.accessoryEquipment[0];
+            if (accessory01.itemIcon != null)
+            {
+                accessoryEquipmentSlot01.enabled = true;
+                accessoryEquipmentSlot01.sprite = accessory01.itemIcon;
+            }
+            else
+            {
+                accessoryEquipmentSlot01.enabled = false;
+            }
+
+            AccessoryEquipmentItem accessory02 = player.playerInventoryManager.accessoryEquipment[0];
+            if (accessory02.itemIcon != null)
+            {
+                accessoryEquipmentSlot02.enabled = true;
+                accessoryEquipmentSlot02.sprite = accessory02.itemIcon;
+            }
+            else
+            {
+                accessoryEquipmentSlot02.enabled = false;
+            }
+
+            AccessoryEquipmentItem accessory03 = player.playerInventoryManager.accessoryEquipment[0];
+            if (accessory03.itemIcon != null)
+            {
+                accessoryEquipmentSlot03.enabled = true;
+                accessoryEquipmentSlot03.sprite = accessory03.itemIcon;
+            }
+            else
+            {
+                accessoryEquipmentSlot03.enabled = false;
+            }
+
+            AccessoryEquipmentItem accessory04 = player.playerInventoryManager.accessoryEquipment[0];
+            if (accessory04.itemIcon != null)
+            {
+                accessoryEquipmentSlot04.enabled = true;
+                accessoryEquipmentSlot04.sprite = accessory04.itemIcon;
+            }
+            else
+            {
+                accessoryEquipmentSlot04.enabled = false;
             }
 
             RangedProjectileItem mainProjectileEquipment = player.playerInventoryManager.mainProjectile;
@@ -458,6 +535,18 @@ namespace TraverserProject
                     break;
                 case EquipmentType.QuickSlot03:
                     LoadQuickSlotInventory();
+                    break;
+                case EquipmentType.Accessory01:
+                    LoadAccessoryInventory();
+                    break;
+                case EquipmentType.Accessory02:
+                    LoadAccessoryInventory();
+                    break;
+                case EquipmentType.Accessory03:
+                    LoadAccessoryInventory();
+                    break;
+                case EquipmentType.Accessory04:
+                    LoadAccessoryInventory();
                     break;
                 default:
                     break;
@@ -662,6 +751,48 @@ namespace TraverserProject
                 GameObject inventorySlotGameObject = Instantiate(equipmentInventorySlotPrefab, equipmentInventoryContentWindow);
                 UI_EquipmentInventorySlot equipmentInventorySlot = inventorySlotGameObject.GetComponent<UI_EquipmentInventorySlot>();
                 equipmentInventorySlot.AddItem(legEquipmentInInventory[i]);
+                equipmentInventorySlotPrefabs.Add(equipmentInventorySlot.gameObject);
+
+                if (!hasSelectedFirstInventorySlot)
+                {
+                    hasSelectedFirstInventorySlot = true;
+                    Button inventorySlotButton = inventorySlotGameObject.GetComponent<Button>();
+                    inventorySlotButton.Select();
+                    inventorySlotButton.OnSelect(null);
+
+                }
+            }
+        }
+
+        private void LoadAccessoryInventory()
+        {
+            ClearEquipmentInventorySlotPrefabs();
+            PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+            List<AccessoryEquipmentItem> accessoriesInInventory = new List<AccessoryEquipmentItem>();
+
+            for (int i = 0; i < player.playerInventoryManager.itemsInInventory.Count; i++)
+            {
+                AccessoryEquipmentItem equipment = player.playerInventoryManager.itemsInInventory[i] as AccessoryEquipmentItem;
+
+                if (equipment != null)
+                    accessoriesInInventory.Add(equipment);
+            }
+
+            if (accessoriesInInventory.Count <= 0)
+            {
+                equipmentInventoryWindow.SetActive(false);
+                ToggleEquipmentButtons(true);
+                RefreshMenu();
+                return;
+            }
+
+            bool hasSelectedFirstInventorySlot = false;
+
+            for (int i = 0; i < accessoriesInInventory.Count; i++)
+            {
+                GameObject inventorySlotGameObject = Instantiate(equipmentInventorySlotPrefab, equipmentInventoryContentWindow);
+                UI_EquipmentInventorySlot equipmentInventorySlot = inventorySlotGameObject.GetComponent<UI_EquipmentInventorySlot>();
+                equipmentInventorySlot.AddItem(accessoriesInInventory[i]);
                 equipmentInventorySlotPrefabs.Add(equipmentInventorySlot.gameObject);
 
                 if (!hasSelectedFirstInventorySlot)
@@ -883,6 +1014,34 @@ namespace TraverserProject
 
                     player.playerInventoryManager.legEquipment = null;
                     player.playerEquipmentManager.LoadLegEquipment(player.playerInventoryManager.legEquipment);
+                    break;
+                case EquipmentType.Accessory01:
+                    unequippedItem = player.playerInventoryManager.accessoryEquipment[0];
+                    if (unequippedItem != null)
+                        player.playerInventoryManager.AddItemToInventory(unequippedItem);
+
+                    player.playerInventoryManager.accessoryEquipment[0] = null;
+                    break;
+                case EquipmentType.Accessory02:
+                    unequippedItem = player.playerInventoryManager.accessoryEquipment[1];
+                    if (unequippedItem != null)
+                        player.playerInventoryManager.AddItemToInventory(unequippedItem);
+
+                    player.playerInventoryManager.accessoryEquipment[1] = null;
+                    break;
+                case EquipmentType.Accessory03:
+                    unequippedItem = player.playerInventoryManager.accessoryEquipment[2];
+                    if (unequippedItem != null)
+                        player.playerInventoryManager.AddItemToInventory(unequippedItem);
+
+                    player.playerInventoryManager.accessoryEquipment[2] = null;
+                    break;
+                case EquipmentType.Accessory04:
+                    unequippedItem = player.playerInventoryManager.accessoryEquipment[3];
+                    if (unequippedItem != null)
+                        player.playerInventoryManager.AddItemToInventory(unequippedItem);
+
+                    player.playerInventoryManager.accessoryEquipment[3] = null;
                     break;
                 case EquipmentType.MainProjectile:
                     unequippedItem = player.playerInventoryManager.mainProjectile;

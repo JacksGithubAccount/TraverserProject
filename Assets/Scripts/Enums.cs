@@ -210,8 +210,11 @@ public enum EquipmentType
     SecondaryProjectile,
     QuickSlot01,
     QuickSlot02,
-    QuickSlot03
-
+    QuickSlot03,
+    Accessory01,
+    Accessory02,
+    Accessory03,
+    Accessory04
 }
 // tags helmetsfor specific head portions to cover
 public enum HeadEquipmentType

@@ -237,6 +237,46 @@ namespace TraverserProject
 
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
                     break;
+                case EquipmentType.Accessory01:
+                    equippedItem = player.playerInventoryManager.accessoryEquipment[0];
+                    if (equippedItem != null)
+                    {
+                        player.playerInventoryManager.AddItemToInventory(equippedItem);
+                    }
+                    player.playerInventoryManager.accessoryEquipment[0] = currentItem as AccessoryEquipmentItem;
+                    player.playerInventoryManager.RemoveItemFromInventory(currentItem);
+                    PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
+                    break;
+                case EquipmentType.Accessory02:
+                    equippedItem = player.playerInventoryManager.accessoryEquipment[1];
+                    if (equippedItem != null)
+                    {
+                        player.playerInventoryManager.AddItemToInventory(equippedItem);
+                    }
+                    player.playerInventoryManager.accessoryEquipment[1] = currentItem as AccessoryEquipmentItem;
+                    player.playerInventoryManager.RemoveItemFromInventory(currentItem);
+                    PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
+                    break;
+                case EquipmentType.Accessory03:
+                    equippedItem = player.playerInventoryManager.accessoryEquipment[2];
+                    if (equippedItem != null)
+                    {
+                        player.playerInventoryManager.AddItemToInventory(equippedItem);
+                    }
+                    player.playerInventoryManager.accessoryEquipment[2] = currentItem as AccessoryEquipmentItem;
+                    player.playerInventoryManager.RemoveItemFromInventory(currentItem);
+                    PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
+                    break;
+                case EquipmentType.Accessory04:
+                    equippedItem = player.playerInventoryManager.accessoryEquipment[3];
+                    if (equippedItem != null)
+                    {
+                        player.playerInventoryManager.AddItemToInventory(equippedItem);
+                    }
+                    player.playerInventoryManager.accessoryEquipment[3] = currentItem as AccessoryEquipmentItem;
+                    player.playerInventoryManager.RemoveItemFromInventory(currentItem);
+                    PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
+                    break;
                 default:
                     break;
             }

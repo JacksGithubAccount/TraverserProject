@@ -34,6 +34,9 @@ namespace TraverserProject
         public HandEquipmentItem handEquipment;
         public LegEquipmentItem legEquipment;
 
+        [Header("Accessory")]
+        public AccessoryEquipmentItem[] accessoryEquipment = new AccessoryEquipmentItem[4];
+
         [Header("Projectiles")]
         public RangedProjectileItem mainProjectile;
         public RangedProjectileItem secondaryProjectile;

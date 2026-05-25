@@ -16,6 +16,8 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 1c7f026f2d89bfc4fb10ae7d5d0982aa, type: 3}
   maxItemAmount: 1
   currentItemAmount: 1
+  isInfinite: 0
+  itemValue: 1
   itemDescription: A straight sword Axe
   itemID: 3
   itemType: 9
@@ -48,33 +50,75 @@ MonoBehaviour:
   stability: 11
   poiseDamage: 10
   light_Attack_01_Modifier: 1.1
+  light_Attack_01_PhysicalDamageType: 3
   light_Attack_02_Modifier: 1.1
+  light_Attack_02_PhysicalDamageType: 3
   heavy_Attack_01_Modifier: 1.4
+  heavy_Attack_01_PhysicalDamageType: 3
   heavy_Attack_02_Modifier: 1.5
+  heavy_Attack_02_PhysicalDamageType: 3
   charge_Attack_01_Modifier: 2
+  charge_Attack_01_PhysicalDamageType: 3
   charge_Attack_02_Modifier: 2.1
+  charge_Attack_02_PhysicalDamageType: 3
   running_Light_Attack_01_Modifier: 1.1
+  running_Light_Attack_01_PhysicalDamageType: 3
   running_Heavy_Attack_01_Modifier: 1.5
+  running_Heavy_Attack_01_PhysicalDamageType: 3
   rolling_Light_Attack_01_Modifier: 0.9
+  rolling_Light_Attack_01_PhysicalDamageType: 3
   rolling_Heavy_Attack_01_Modifier: 1.3
+  rolling_Heavy_Attack_01_PhysicalDamageType: 3
   backstep_Light_Attack_01_Modifier: 1
+  backstep_Light_Attack_01_PhysicalDamageType: 3
   backstep_Heavy_Attack_01_Modifier: 1.4
+  backstep_Heavy_Attack_01_PhysicalDamageType: 3
   jumping_Light_Attack_01_Modifier: 1
+  jumping_Light_Attack_01_PhysicalDamageType: 3
   jumping_Heavy_Attack_01_Modifier: 1.5
+  jumping_Heavy_Attack_01_PhysicalDamageType: 3
   dual_Light_Attack_01_Modifier: 0.77
+  dual_Light_Attack_Main_01_PhysicalDamageType: 0
+  dual_Light_Attack_Off_01_PhysicalDamageType: 0
   dual_Light_Attack_02_Modifier: 0.87
+  dual_Light_Attack_Main_02_PhysicalDamageType: 0
+  dual_Light_Attack_Off_02_PhysicalDamageType: 0
   dual_Heavy_Attack_01_Modifier: 0.94
+  dual_Heavy_Attack_Main_01_PhysicalDamageType: 0
+  dual_Heavy_Attack_Off_01_PhysicalDamageType: 0
   dual_Heavy_Attack_02_Modifier: 1
+  dual_Heavy_Attack_Main_02_PhysicalDamageType: 0
+  dual_Heavy_Attack_Off_02_PhysicalDamageType: 0
   dual_Charge_Attack_01_Modifier: 1.3
+  dual_Charge_Attack_Main_01_PhysicalDamageType: 0
+  dual_Charge_Attack_Off_01_PhysicalDamageType: 0
   dual_Charge_Attack_02_Modifier: 1.4
+  dual_Charge_Attack_Main_02_PhysicalDamageType: 0
+  dual_Charge_Attack_Off_02_PhysicalDamageType: 0
   dual_Running_Light_Attack_01_Modifier: 0.77
+  dual_Running_Light_Attack_Main_01_PhysicalDamageType: 0
+  dual_Running_Light_Attack_Off_01_PhysicalDamageType: 0
   dual_Running_Heavy_Attack_01_Modifier: 0.94
+  dual_Running_Heavy_Attack_Main_01_PhysicalDamageType: 0
+  dual_Running_Heavy_Attack_Off_01_PhysicalDamageType: 0
   dual_Rolling_Light_Attack_01_Modifier: 0.68
+  dual_Rolling_Light_Attack_Main_01_PhysicalDamageType: 0
+  dual_Rolling_Light_Attack_Off_01_PhysicalDamageType: 0
   dual_Rolling_Heavy_Attack_01_Modifier: 0.81
+  dual_Rolling_Heavy_Attack_Main_01_PhysicalDamageType: 0
+  dual_Rolling_Heavy_Attack_Off_01_PhysicalDamageType: 0
   dual_Backstep_Light_Attack_01_Modifier: 0.77
+  dual_Backstep_Light_Attack_Main_01_PhysicalDamageType: 0
+  dual_Backstep_Light_Attack_Off_01_PhysicalDamageType: 0
   dual_Backstep_Heavy_Attack_01_Modifier: 0.9
+  dual_Backstep_Heavy_Attack_Main_01_PhysicalDamageType: 0
+  dual_Backstep_Heavy_Attack_Off_01_PhysicalDamageType: 0
   dual_Jumping_Light_Attack_01_Modifier: 0.77
+  dual_Jumping_Light_Attack_Main_01_PhysicalDamageType: 0
+  dual_Jumping_Light_Attack_Off_01_PhysicalDamageType: 0
   dual_Jumping_Heavy_Attack_01_Modifier: 0.98
+  dual_Jumping_Heavy_Attack_Main_01_PhysicalDamageType: 0
+  dual_Jumping_Heavy_Attack_Off_01_PhysicalDamageType: 0
   baseStaminaCost: 20
   lightAttackStaminaCostMultiplier: 0.9
   heavyAttackStaminaCostMultiplier: 1.3

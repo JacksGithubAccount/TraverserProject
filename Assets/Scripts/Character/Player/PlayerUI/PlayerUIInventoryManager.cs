@@ -210,7 +210,42 @@ namespace TraverserProject
                 inventoryDetailItemSkillDescriptionText.text = weaponItem.ashOfWarAction.ashOfWarDescription;
 
                 weaponItemClassText.text = weaponItem.weaponClass.ToString();
-                weaponItemPhysicalDamageTypeText.text = "Placeholder";
+                List<PhysicalDamageType> physicalDamageTypes = new List<PhysicalDamageType>();
+                physicalDamageTypes.Add(weaponItem.light_Attack_01_PhysicalDamageType);
+                physicalDamageTypes.Add(weaponItem.light_Attack_02_PhysicalDamageType);
+                physicalDamageTypes.Add(weaponItem.heavy_Attack_01_PhysicalDamageType);
+                physicalDamageTypes.Add(weaponItem.heavy_Attack_02_PhysicalDamageType);
+                physicalDamageTypes.Add(weaponItem.charge_Attack_01_PhysicalDamageType);
+                physicalDamageTypes.Add(weaponItem.charge_Attack_02_PhysicalDamageType);
+                physicalDamageTypes.Add(weaponItem.running_Light_Attack_01_PhysicalDamageType);
+                physicalDamageTypes.Add(weaponItem.running_Heavy_Attack_01_PhysicalDamageType);
+                physicalDamageTypes.Add(weaponItem.rolling_Light_Attack_01_PhysicalDamageType);
+                physicalDamageTypes.Add(weaponItem.rolling_Heavy_Attack_01_PhysicalDamageType);
+                physicalDamageTypes.Add(weaponItem.backstep_Light_Attack_01_PhysicalDamageType);
+                physicalDamageTypes.Add(weaponItem.backstep_Heavy_Attack_01_PhysicalDamageType);
+                physicalDamageTypes.Add(weaponItem.jumping_Light_Attack_01_PhysicalDamageType);
+                physicalDamageTypes.Add(weaponItem.jumping_Heavy_Attack_01_PhysicalDamageType);
+
+                List<PhysicalDamageType> exclusivePDT = new List<PhysicalDamageType>();
+
+                foreach(var physicalDamageType in physicalDamageTypes)
+                {
+                    if(!exclusivePDT.Contains(physicalDamageType))
+                    {
+                        exclusivePDT.Add(physicalDamageType);
+                    }
+                }
+                string pdtString = "";
+                for(int i = 0; i < exclusivePDT.Count; i++)
+                {
+                    pdtString += exclusivePDT[i].ToString();
+                    if(i != exclusivePDT.Count -1)
+                    {
+                        pdtString += "\\";
+                    }
+                }
+
+                weaponItemPhysicalDamageTypeText.text = pdtString;
                 weaponItemAshOfWarNameText.text = weaponItem.ashOfWarAction.itemName;
                 weaponItemAshOfWarFPCostText.text = weaponItem.ashOfWarAction.focusPointCost.ToString();
                 weaponItemWeightText.text = weaponItem.itemWeight.ToString();
@@ -264,14 +299,14 @@ namespace TraverserProject
                 armorItemVitalityResistanceText.text = armorItem.vitality.ToString();
                 armorItemPoiseText.text = armorItem.poise.ToString();
             }
-            else if(item as AccessoryItem)
+            else if(item as AccessoryEquipmentItem)
             {
                 DisableAllStatsWindows();
                 accessoryItemStatsWindow.SetActive(true);
                 
                 inventoryDetailItemSkillDescriptionText.text = "";
 
-                AccessoryItem accessoryItem = (AccessoryItem)item;
+                AccessoryEquipmentItem accessoryItem = (AccessoryEquipmentItem)item;
                 accessoryItemWeightText.text = accessoryItem.itemWeight.ToString();
                 accessoryItemEffectText.text = accessoryItem.itemEffect;
             }
@@ -408,7 +443,7 @@ namespace TraverserProject
                 RangedProjectileItem rangedProjectileItem = (RangedProjectileItem)item;
 
                 rangedProjectileItemClassText.text = rangedProjectileItem.itemType.ToString();
-                rangedProjectileItemPhysicalDamageTypeText.text = "Placeholder";
+                rangedProjectileItemPhysicalDamageTypeText.text = rangedProjectileItem.physicalDamageType.ToString();
                 rangedProjectileItemNumberHeldText.text = rangedProjectileItem.currentAmmoAmount.ToString() + "/" + rangedProjectileItem.maxAmmoAmount.ToString();
                 rangedProjectileItemStoredText.text = "Placeholder";
 

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace TraverserProject
 {
     [CreateAssetMenu(menuName = "Items/Accessory")]
-    public class AccessoryItem : EquipmentItem
+    public class AccessoryEquipmentItem : EquipmentItem
     {        
         [Header("Bar Modifier")]
         public float maxHealthModifier;

@@ -23,6 +23,7 @@ namespace TraverserProject
         public int lightningDamage = 0;
         public int holyDamage = 0;
         public float CriticalModifier = 1;
+        public PhysicalDamageType physicalDamageType = PhysicalDamageType.Pierce;
 
         [Header("Model")]
         public GameObject drawProjectileModel;
