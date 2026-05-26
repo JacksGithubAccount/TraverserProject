@@ -337,7 +337,7 @@ namespace TraverserProject
             }
 
             AccessoryEquipmentItem accessory01 = player.playerInventoryManager.accessoryEquipment[0];
-            if (accessory01.itemIcon != null)
+            if (accessory01 != null)
             {
                 accessoryEquipmentSlot01.enabled = true;
                 accessoryEquipmentSlot01.sprite = accessory01.itemIcon;
@@ -347,8 +347,8 @@ namespace TraverserProject
                 accessoryEquipmentSlot01.enabled = false;
             }
 
-            AccessoryEquipmentItem accessory02 = player.playerInventoryManager.accessoryEquipment[0];
-            if (accessory02.itemIcon != null)
+            AccessoryEquipmentItem accessory02 = player.playerInventoryManager.accessoryEquipment[1];
+            if (accessory02 != null)
             {
                 accessoryEquipmentSlot02.enabled = true;
                 accessoryEquipmentSlot02.sprite = accessory02.itemIcon;
@@ -358,8 +358,8 @@ namespace TraverserProject
                 accessoryEquipmentSlot02.enabled = false;
             }
 
-            AccessoryEquipmentItem accessory03 = player.playerInventoryManager.accessoryEquipment[0];
-            if (accessory03.itemIcon != null)
+            AccessoryEquipmentItem accessory03 = player.playerInventoryManager.accessoryEquipment[2];
+            if (accessory03 != null)
             {
                 accessoryEquipmentSlot03.enabled = true;
                 accessoryEquipmentSlot03.sprite = accessory03.itemIcon;
@@ -369,8 +369,8 @@ namespace TraverserProject
                 accessoryEquipmentSlot03.enabled = false;
             }
 
-            AccessoryEquipmentItem accessory04 = player.playerInventoryManager.accessoryEquipment[0];
-            if (accessory04.itemIcon != null)
+            AccessoryEquipmentItem accessory04 = player.playerInventoryManager.accessoryEquipment[3];
+            if (accessory04 != null)
             {
                 accessoryEquipmentSlot04.enabled = true;
                 accessoryEquipmentSlot04.sprite = accessory04.itemIcon;
@@ -1020,13 +1020,18 @@ namespace TraverserProject
                     if (unequippedItem != null)
                         player.playerInventoryManager.AddItemToInventory(unequippedItem);
 
+                    player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[0]).staticEffectID);
+                    PlayerUIManager.Singleton.playerUIHudManager.RemoveEffectIcon(player.playerInventoryManager.accessoryEquipment[0].effectIcon);
                     player.playerInventoryManager.accessoryEquipment[0] = null;
+
                     break;
                 case EquipmentType.Accessory02:
                     unequippedItem = player.playerInventoryManager.accessoryEquipment[1];
                     if (unequippedItem != null)
                         player.playerInventoryManager.AddItemToInventory(unequippedItem);
 
+                    player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[1]).staticEffectID);
+                    PlayerUIManager.Singleton.playerUIHudManager.RemoveEffectIcon(player.playerInventoryManager.accessoryEquipment[1].effectIcon);
                     player.playerInventoryManager.accessoryEquipment[1] = null;
                     break;
                 case EquipmentType.Accessory03:
@@ -1034,6 +1039,8 @@ namespace TraverserProject
                     if (unequippedItem != null)
                         player.playerInventoryManager.AddItemToInventory(unequippedItem);
 
+                    player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[2]).staticEffectID);
+                    PlayerUIManager.Singleton.playerUIHudManager.RemoveEffectIcon(player.playerInventoryManager.accessoryEquipment[2].effectIcon);
                     player.playerInventoryManager.accessoryEquipment[2] = null;
                     break;
                 case EquipmentType.Accessory04:
@@ -1041,6 +1048,8 @@ namespace TraverserProject
                     if (unequippedItem != null)
                         player.playerInventoryManager.AddItemToInventory(unequippedItem);
 
+                    player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[3]).staticEffectID);
+                    PlayerUIManager.Singleton.playerUIHudManager.RemoveEffectIcon(player.playerInventoryManager.accessoryEquipment[3].effectIcon);
                     player.playerInventoryManager.accessoryEquipment[3] = null;
                     break;
                 case EquipmentType.MainProjectile:

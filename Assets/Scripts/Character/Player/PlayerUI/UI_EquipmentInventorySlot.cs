@@ -246,6 +246,10 @@ namespace TraverserProject
                     player.playerInventoryManager.accessoryEquipment[0] = currentItem as AccessoryEquipmentItem;
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
+
+                    StaticCharacterEffect accessoryEffect = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[0]));
+                    player.playerEffectsManager.AddStaticEffect(accessoryEffect);
+                    PlayerUIManager.Singleton.playerUIHudManager.AddEffectIcon(player.playerInventoryManager.accessoryEquipment[0].effectIcon);
                     break;
                 case EquipmentType.Accessory02:
                     equippedItem = player.playerInventoryManager.accessoryEquipment[1];
@@ -256,6 +260,10 @@ namespace TraverserProject
                     player.playerInventoryManager.accessoryEquipment[1] = currentItem as AccessoryEquipmentItem;
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
+
+                    StaticCharacterEffect accessoryEffect2 = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[1]));
+                    player.playerEffectsManager.AddStaticEffect(accessoryEffect2);
+                    PlayerUIManager.Singleton.playerUIHudManager.AddEffectIcon(player.playerInventoryManager.accessoryEquipment[1].effectIcon);
                     break;
                 case EquipmentType.Accessory03:
                     equippedItem = player.playerInventoryManager.accessoryEquipment[2];
@@ -266,6 +274,10 @@ namespace TraverserProject
                     player.playerInventoryManager.accessoryEquipment[2] = currentItem as AccessoryEquipmentItem;
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
+
+                    StaticCharacterEffect accessoryEffect3 = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[2]));
+                    player.playerEffectsManager.AddStaticEffect(accessoryEffect3);
+                    PlayerUIManager.Singleton.playerUIHudManager.AddEffectIcon(player.playerInventoryManager.accessoryEquipment[2].effectIcon);
                     break;
                 case EquipmentType.Accessory04:
                     equippedItem = player.playerInventoryManager.accessoryEquipment[3];
@@ -276,6 +288,10 @@ namespace TraverserProject
                     player.playerInventoryManager.accessoryEquipment[3] = currentItem as AccessoryEquipmentItem;
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
+
+                    StaticCharacterEffect accessoryEffect4 = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[3]));
+                    player.playerEffectsManager.AddStaticEffect(accessoryEffect4);
+                    PlayerUIManager.Singleton.playerUIHudManager.AddEffectIcon(player.playerInventoryManager.accessoryEquipment[3].effectIcon);
                     break;
                 default:
                     break;

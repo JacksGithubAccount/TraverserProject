@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using Unity.Netcode;
 using TMPro;
 using System.Collections;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace TravserserProject
 {
@@ -21,6 +23,11 @@ namespace TravserserProject
         [SerializeField] UI_BuildUpBar poisonBuildUpBar;
         [SerializeField] UI_BuildUpBar bleedBuildUpBar;
         [SerializeField] UI_BuildUpBar frostBuildUpBar;
+
+        [Header("Effect Bar")]
+        [SerializeField] Transform effectIconContentWindow;
+        [SerializeField] GameObject effectIconPrefab;
+        public List<GameObject> effectIconPrefabs = new List<GameObject>();
 
         [Header("Runes")]
         [SerializeField] float bubbleUpdateCountDelayTimer = 2.5f;
@@ -88,6 +95,8 @@ namespace TravserserProject
             staminaBar.gameObject.SetActive(true);
             focusPointBar.gameObject.SetActive(false);
             focusPointBar.gameObject.SetActive(true);
+            effectIconContentWindow.gameObject.SetActive(false);
+            effectIconContentWindow.gameObject.SetActive(true);
         }
 
         public void SetBubblesCount(int bubblesToAdd)
@@ -368,6 +377,37 @@ namespace TravserserProject
             secondaryProjectileCount.text = projectileItem.currentAmmoAmount.ToString();
             secondaryProjectileQuickSlotIcon.enabled = true;
             secondaryProjectileCount.enabled = false;
+        }
+
+        public void AddEffectIcon(Sprite icon)
+        {
+            if (icon == null)
+                return; 
+
+            GameObject effectIconGameObject = Instantiate(effectIconPrefab, effectIconContentWindow);
+            Image effectIconImage = effectIconGameObject.GetComponent<Image>();
+            effectIconImage.sprite = icon;
+            effectIconPrefabs.Add(effectIconImage.gameObject);
+            RefreshHUD();
+        }
+
+        public void RemoveEffectIcon(Sprite icon)
+        {
+            if (icon == null)
+                return;
+
+            GameObject effectIconGameObject = null;
+            foreach (var gameObject in effectIconPrefabs)
+            {
+                if (gameObject.GetComponent<Image>().sprite == icon)
+                {
+                    effectIconGameObject = gameObject;
+                    break;
+                }
+            }
+            effectIconPrefabs.Remove(effectIconGameObject);
+            Destroy(effectIconGameObject);
+            RefreshHUD();
         }
 
     }

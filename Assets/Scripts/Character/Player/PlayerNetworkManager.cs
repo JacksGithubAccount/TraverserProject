@@ -249,6 +249,24 @@ namespace TraverserProject
             currentFocusPoints.Value = maxFocusPoints.Value;
         }
 
+        public void ChangeMaxHealthValue(int oldMaxHealth, int newMaxHealth)
+        {
+            maxHealth.Value = newMaxHealth;
+            PlayerUIManager.Singleton.playerUIHudManager.SetMaxHealthValue(maxHealth.Value);
+        }
+
+        public void ChangeMaxStaminaValue(int oldMaxStamina, int newMaxStamina)
+        {
+            maxStamina.Value = newMaxStamina;
+            PlayerUIManager.Singleton.playerUIHudManager.SetMaxStaminaValue(maxStamina.Value);
+        }
+
+        public void ChangeMaxFocusPointValue(int oldMaxFocusPoint, int newMaxFocusPoint)
+        {
+            maxFocusPoints.Value = newMaxFocusPoint;
+            PlayerUIManager.Singleton.playerUIHudManager.SetMaxFocusPointsValue(maxFocusPoints.Value);
+        }
+
         public void SetNewMaxImmunityBuildUpCapacityValue(int oldVitality, int newVitality)
         {
             immunityBuildUpCapacity.Value = player.playerStatsManager.CalculateBuildUpCapacityBasedOnVigorLevelAndEquipment(newVitality);

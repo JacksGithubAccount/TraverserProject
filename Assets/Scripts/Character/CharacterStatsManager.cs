@@ -18,7 +18,7 @@ namespace TravserserProject
         private float staminaTickTimer = 0;
         [SerializeField] float baseStaminaRegenerationAmount = 50;
         private float staminaRegenerationAmount = 0;
-        [SerializeField] float staminaRegenerationDelay = 2;
+        [SerializeField] float staminaRegenerationDelay = 1;
         [SerializeField] float blockingStaminaRegenerationReduction = 0.2f;
 
         [Header("Blocking Absorptions")]

@@ -58,6 +58,9 @@ namespace TraverserProject
         [Header("Two Hand")]
         public TwoHandingEffect twoHandingEffect;
 
+        [Header("Accessory")]
+        public LifeRingEffect lifeRingEffect;
+
         [Header("Instant Effects")]
         [SerializeField] List<InstantCharacterEffect> instantEffects;
 
@@ -96,6 +99,16 @@ namespace TraverserProject
             {
                 timedEffects[i].effectID = i;
             }
+        }
+
+        public StaticCharacterEffect RetrieveAccessoryStaticEffect(AccessoryEquipmentItem item)
+        {
+            if (item.itemName == "Life Ring")
+            {
+                return lifeRingEffect;
+            }
+
+            return null;
         }
 
     }

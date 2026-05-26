@@ -73,6 +73,7 @@ namespace TraverserProject
 
         [Header("Inventory ArmorItem Stats Menu")]
         [SerializeField] GameObject armorItemStatsWindow;
+        [SerializeField] TextMeshProUGUI armorItemClassText;
         [SerializeField] TextMeshProUGUI armorItemWeightText;
         [SerializeField] TextMeshProUGUI armorItemPhysicalDamageNegationText;
         [SerializeField] TextMeshProUGUI armorItemBluntDamageNegationText;
@@ -90,6 +91,7 @@ namespace TraverserProject
 
         [Header("Inventory AccessoryItem Stats Menu")]
         [SerializeField] GameObject accessoryItemStatsWindow;
+        [SerializeField] TextMeshProUGUI accessoryItemTypeText;
         [SerializeField] TextMeshProUGUI accessoryItemWeightText;
         [SerializeField] TextMeshProUGUI accessoryItemEffectText;
 
@@ -282,6 +284,7 @@ namespace TraverserProject
                 inventoryDetailItemSkillDescriptionText.text = "";
 
                 ArmorItem armorItem = (ArmorItem)item;
+                armorItemClassText.text = armorItem.itemType.ToString();
                 armorItemWeightText.text = armorItem.itemWeight.ToString();
 
                 armorItemPhysicalDamageNegationText.text = armorItem.physicalDamageAbsorption.ToString();
@@ -305,8 +308,9 @@ namespace TraverserProject
                 accessoryItemStatsWindow.SetActive(true);
                 
                 inventoryDetailItemSkillDescriptionText.text = "";
-
+                
                 AccessoryEquipmentItem accessoryItem = (AccessoryEquipmentItem)item;
+                accessoryItemTypeText.text = accessoryItem.itemType.ToString();
                 accessoryItemWeightText.text = accessoryItem.itemWeight.ToString();
                 accessoryItemEffectText.text = accessoryItem.itemEffect;
             }
@@ -344,20 +348,6 @@ namespace TraverserProject
                 craftingItemStoredText.text = "Placeholder";
                 craftingItemEffectText.text = craftingMaterial.itemEffect;
                 craftingItemObtainedText.text = craftingMaterial.itemObtained;
-            }
-            else if (item as UpgradeMaterial)
-            {
-                DisableAllStatsWindows();
-                upgradeItemStatsWindow.SetActive(true);
-
-                inventoryDetailItemSkillDescriptionText.text = "";
-
-                UpgradeMaterial upgradeMaterial = (UpgradeMaterial)item;
-
-                upgradeItemTypeText.text = upgradeMaterial.itemType.ToString();
-                upgradeItemNumberHeldText.text = upgradeMaterial.currentItemAmount.ToString() + "/" + upgradeMaterial.maxItemAmount.ToString();
-                upgradeItemStoredText.text = "Placeholder";
-                upgradeItemEffectText.text = upgradeMaterial.itemEffect;
             }
             else if (item as UpgradeMaterial)
             {

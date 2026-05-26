@@ -102,6 +102,11 @@ namespace TraverserProject
                 playerNetworkManager.endurance.OnValueChanged += playerNetworkManager.SetNewMaxStaminaValue;
                 playerNetworkManager.mind.OnValueChanged += playerNetworkManager.SetNewMaxFocusPointValue;
 
+                //updates health/stam/fp when the max is changed ie through equipment/buffs or otherwise
+                playerNetworkManager.maxHealth.OnValueChanged += playerNetworkManager.ChangeMaxHealthValue;
+                playerNetworkManager.maxStamina.OnValueChanged += playerNetworkManager.ChangeMaxStaminaValue;
+                playerNetworkManager.maxFocusPoints.OnValueChanged += playerNetworkManager.ChangeMaxFocusPointValue;
+
                 //updates build up capacity when certain stats change
                 playerNetworkManager.vigor.OnValueChanged += playerNetworkManager.SetNewMaxImmunityBuildUpCapacityValue;
                 playerNetworkManager.endurance.OnValueChanged += playerNetworkManager.SetNewMaxRobustnessBuildUpCapacityValue;
@@ -200,6 +205,10 @@ namespace TraverserProject
                 playerNetworkManager.vigor.OnValueChanged -= playerNetworkManager.SetNewMaxHealthValue;
                 playerNetworkManager.endurance.OnValueChanged -= playerNetworkManager.SetNewMaxStaminaValue;
                 playerNetworkManager.mind.OnValueChanged -= playerNetworkManager.SetNewMaxFocusPointValue;
+
+                playerNetworkManager.maxHealth.OnValueChanged -= playerNetworkManager.ChangeMaxHealthValue;
+                playerNetworkManager.maxStamina.OnValueChanged -= playerNetworkManager.ChangeMaxStaminaValue;
+                playerNetworkManager.maxFocusPoints.OnValueChanged -= playerNetworkManager.ChangeMaxFocusPointValue;
 
                 playerNetworkManager.vigor.OnValueChanged -= playerNetworkManager.SetNewMaxImmunityBuildUpCapacityValue;
                 playerNetworkManager.endurance.OnValueChanged -= playerNetworkManager.SetNewMaxRobustnessBuildUpCapacityValue;
