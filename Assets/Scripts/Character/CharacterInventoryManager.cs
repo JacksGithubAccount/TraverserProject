@@ -44,6 +44,9 @@ namespace TraverserProject
 
         public virtual void RemoveItemFromInventory(Item item)
         {
+            if (item == null)
+                return;
+
             bool isStackable = false;
 
             if (item.maxItemAmount > 1)

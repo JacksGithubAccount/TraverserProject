@@ -63,5 +63,11 @@ namespace TraverserProject
             CloseMenu();
             PlayerUIManager.Singleton.playerUIShopManager.OpenBuyMenu();
         }
+
+        public void OpenSellToShopMenu()
+        {
+            CloseMenu();
+            PlayerUIManager.Singleton.playerUIShopManager.OpenSellMenu();
+        }
     }
 }

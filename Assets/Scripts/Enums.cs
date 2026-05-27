@@ -70,6 +70,12 @@ public enum Shops
     TutorialShop
 }
 
+public enum ShopBuyOrSell
+{
+    Buying,
+    Selling
+}
+
 //determines build up status effect type
 public enum BuildUp
 {
@@ -333,4 +339,3 @@ public enum WorldSceneLocation
     Area01_Subarea04,
     Area01_Subarea05
 }
-

@@ -33,6 +33,9 @@ namespace TraverserProject
         [Header("Detection")]
         public float hiddenTargetDetectionRadiusPenalty = 0.5f; //modifier of distance an AI can detect their target if they are sneaking and hidden
 
+        [Header("Shops")]
+        public float itemSellDivisionValue = 2;
+
         private void Awake()
         {
             if (Singleton == null)
