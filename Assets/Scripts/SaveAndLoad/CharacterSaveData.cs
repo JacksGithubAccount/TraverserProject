@@ -76,6 +76,10 @@ namespace TraverserProject
         public int bodyEquipment;
         public int handEquipment;
         public int legEquipment;
+        public int accessory01;
+        public int accessory02;
+        public int accessory03;
+        public int accessory04;
 
         public int rightWeaponIndex;
         public SerializableWeapon rightWeapon01;

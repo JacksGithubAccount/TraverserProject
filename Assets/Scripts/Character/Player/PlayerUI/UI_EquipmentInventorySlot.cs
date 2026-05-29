@@ -247,6 +247,8 @@ namespace TraverserProject
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
 
+                    player.playerEquipmentManager.LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[0], 1);
+
                     StaticCharacterEffect accessoryEffect = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[0]));
                     player.playerEffectsManager.AddStaticEffect(accessoryEffect);
                     PlayerUIManager.Singleton.playerUIHudManager.AddEffectIcon(player.playerInventoryManager.accessoryEquipment[0].effectIcon);
@@ -260,6 +262,8 @@ namespace TraverserProject
                     player.playerInventoryManager.accessoryEquipment[1] = currentItem as AccessoryEquipmentItem;
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
+
+                    player.playerEquipmentManager.LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[1], 2);
 
                     StaticCharacterEffect accessoryEffect2 = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[1]));
                     player.playerEffectsManager.AddStaticEffect(accessoryEffect2);
@@ -275,6 +279,8 @@ namespace TraverserProject
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
 
+                    player.playerEquipmentManager.LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[2], 3);
+
                     StaticCharacterEffect accessoryEffect3 = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[2]));
                     player.playerEffectsManager.AddStaticEffect(accessoryEffect3);
                     PlayerUIManager.Singleton.playerUIHudManager.AddEffectIcon(player.playerInventoryManager.accessoryEquipment[2].effectIcon);
@@ -288,6 +294,8 @@ namespace TraverserProject
                     player.playerInventoryManager.accessoryEquipment[3] = currentItem as AccessoryEquipmentItem;
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
+
+                    player.playerEquipmentManager.LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[3], 4);
 
                     StaticCharacterEffect accessoryEffect4 = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[3]));
                     player.playerEffectsManager.AddStaticEffect(accessoryEffect4);

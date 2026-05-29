@@ -2,6 +2,8 @@ using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.UI;
 using TMPro;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace TraverserProject
 {
@@ -350,7 +352,7 @@ namespace TraverserProject
 
         public void SetCharacterClass(PlayerManager player, int vitality, int endurance, int mind, int strength, int dexterity, int intelligence, int faith, int luck
             , WeaponItem[] mainHandWeapons, WeaponItem[] offHandWeapons, HeadEquipmentItem headEquipment, BodyEquipmentItem bodyEquipment
-            , LegEquipmentItem legEquipment, HandEquipmentItem handEquipment, QuickSlotItem[] quickSlotItems, SpellItem[] spells)
+            , LegEquipmentItem legEquipment, HandEquipmentItem handEquipment, QuickSlotItem[] quickSlotItems, SpellItem[] spells, AccessoryEquipmentItem[] accessories, List<Item> inventory)
         {
             hiddenHelmet = null;
 
@@ -416,6 +418,15 @@ namespace TraverserProject
             }
             player.playerEquipmentManager.EquipArmor();
 
+            if (accessories[0] != null)
+                player.playerInventoryManager.accessoryEquipment[0] = Instantiate(accessories[0]);
+            if (accessories[1] != null)
+                player.playerInventoryManager.accessoryEquipment[1] = Instantiate(accessories[1]);
+            if (accessories[2] != null)
+                player.playerInventoryManager.accessoryEquipment[2] = Instantiate(accessories[2]);
+            if (accessories[3] != null)
+                player.playerInventoryManager.accessoryEquipment[3] = Instantiate(accessories[3]);
+
             player.playerInventoryManager.quickSlotItemIndex = 0;
 
             if (quickSlotItems[0] != null)
@@ -435,6 +446,12 @@ namespace TraverserProject
             if (spells[2] != null)
                 player.playerInventoryManager.spellItemsInQuickSlots[2] = Instantiate(spells[2]);
             player.playerEquipmentManager.LoadSpellItemEquipment(player.playerInventoryManager.spellItemsInQuickSlots[player.playerInventoryManager.quickSlotSpellIndex]);
+
+            player.playerInventoryManager.itemsInInventory.Clear();
+            foreach(var item in inventory)
+            {
+                player.playerInventoryManager.itemsInInventory.Add(item);
+            }
 
         }
 

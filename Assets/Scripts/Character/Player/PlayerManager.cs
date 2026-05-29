@@ -392,6 +392,10 @@ namespace TraverserProject
             currentCharacterData.bodyEquipment = playerNetworkManager.bodyEquipmentID.Value;
             currentCharacterData.handEquipment = playerNetworkManager.handEquipmentID.Value;
             currentCharacterData.legEquipment = playerNetworkManager.legEquipmentID.Value;
+            currentCharacterData.accessory01 = playerNetworkManager.accessoryEquipment01ID.Value;
+            currentCharacterData.accessory02 = playerNetworkManager.accessoryEquipment02ID.Value;
+            currentCharacterData.accessory03 = playerNetworkManager.accessoryEquipment03ID.Value;
+            currentCharacterData.accessory04 = playerNetworkManager.accessoryEquipment04ID.Value;
 
             currentCharacterData.rightWeaponIndex = playerInventoryManager.rightHandWeaponIndex;
             currentCharacterData.rightWeapon01 = WorldSaveGameManager.Singleton.GetSerializableWeaponFromWeaponItem(playerInventoryManager.weaponsInRightHandSlots[0]);
@@ -553,6 +557,45 @@ namespace TraverserProject
                 playerInventoryManager.legEquipment = null;
             }
 
+            if (WorldItemDatabase.Singleton.GetAccessoryByID(currentCharacterData.accessory01))
+            {
+                AccessoryEquipmentItem accessory = Instantiate(WorldItemDatabase.Singleton.GetAccessoryByID(currentCharacterData.accessory01));
+                playerInventoryManager.accessoryEquipment[0] = accessory;
+            }
+            else
+            {
+                playerInventoryManager.accessoryEquipment[0] = null;
+            }
+
+            if (WorldItemDatabase.Singleton.GetAccessoryByID(currentCharacterData.accessory02))
+            {
+                AccessoryEquipmentItem accessory = Instantiate(WorldItemDatabase.Singleton.GetAccessoryByID(currentCharacterData.accessory02));
+                playerInventoryManager.accessoryEquipment[1] = accessory;
+            }
+            else
+            {
+                playerInventoryManager.accessoryEquipment[1] = null;
+            }
+
+            if (WorldItemDatabase.Singleton.GetAccessoryByID(currentCharacterData.accessory03))
+            {
+                AccessoryEquipmentItem accessory = Instantiate(WorldItemDatabase.Singleton.GetAccessoryByID(currentCharacterData.accessory03));
+                playerInventoryManager.accessoryEquipment[2] = accessory;
+            }
+            else
+            {
+                playerInventoryManager.accessoryEquipment[2] = null;
+            }
+
+            if (WorldItemDatabase.Singleton.GetAccessoryByID(currentCharacterData.accessory04))
+            {
+                AccessoryEquipmentItem accessory = Instantiate(WorldItemDatabase.Singleton.GetAccessoryByID(currentCharacterData.accessory04));
+                playerInventoryManager.accessoryEquipment[3] = accessory;
+            }
+            else
+            {
+                playerInventoryManager.accessoryEquipment[3] = null;
+            }
 
             //weapons
             playerInventoryManager.weaponsInRightHandSlots[0] = currentCharacterData.rightWeapon01.GetWeapon();

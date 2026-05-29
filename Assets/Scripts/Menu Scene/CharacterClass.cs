@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace TraverserProject
 {
@@ -27,6 +29,7 @@ namespace TraverserProject
         public BodyEquipmentItem bodyEquipment;
         public LegEquipmentItem legEquipment;
         public HandEquipmentItem handEquipment;
+        public AccessoryEquipmentItem[] accessories = new AccessoryEquipmentItem[4];
 
         [Header("QuickSlotItems")]
         public QuickSlotItem[] quickSlotItems = new QuickSlotItem[3];
@@ -34,10 +37,13 @@ namespace TraverserProject
         [Header("Spells")]
         public  SpellItem[] spellItems = new SpellItem[3];
 
+        [Header("Inventory")]
+        public List<Item> inventory = new List<Item>();
+
         public void SetClass(PlayerManager player)
         {
             TitleScreenManager.Singleton.SetCharacterClass(player, vitality, endurance, mind, strength, dexterity, intelligence, faith, luck,
-                mainHandWeapons, offHandWeapons, headEquipment, bodyEquipment, legEquipment, handEquipment, quickSlotItems, spellItems);
+                mainHandWeapons, offHandWeapons, headEquipment, bodyEquipment, legEquipment, handEquipment, quickSlotItems, spellItems, accessories, inventory);
     
         }
 

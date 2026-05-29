@@ -546,6 +546,8 @@ namespace TraverserProject
         }
 
 
+
+
         private void UnloadHeadEquipmentModels()
         {
             foreach (var model in maleHeadFullHelmets)
@@ -805,6 +807,51 @@ namespace TraverserProject
             }
 
             player.playerBodyManager.EnableLowerBody();
+        }
+
+        public void LoadAccessoryEquipment(AccessoryEquipmentItem equipment, int slot)
+        {
+            if (equipment == null)
+            {
+                if (player.IsOwner)
+                { 
+                    if(slot == 1)
+                        player.playerNetworkManager.accessoryEquipment01ID.Value = -1; //-1 will never be ID so it will always be null
+                    if (slot == 2)
+                        player.playerNetworkManager.accessoryEquipment02ID.Value = -1;
+                    if (slot == 3)
+                        player.playerNetworkManager.accessoryEquipment03ID.Value = -1;
+                    if (slot == 4)
+                        player.playerNetworkManager.accessoryEquipment04ID.Value = -1;
+
+                }
+
+                player.playerInventoryManager.headEquipment = null;
+                return;
+            }
+
+            if (slot == 1)
+                player.playerInventoryManager.accessoryEquipment[0] = equipment;
+            if (slot == 2)
+                player.playerInventoryManager.accessoryEquipment[1] = equipment;
+            if (slot == 3)
+                player.playerInventoryManager.accessoryEquipment[2] = equipment;
+            if (slot == 4)
+                player.playerInventoryManager.accessoryEquipment[3] = equipment;
+
+
+
+            if (player.IsOwner)
+            {
+                if (slot == 1)
+                    player.playerNetworkManager.accessoryEquipment01ID.Value = equipment.itemID; //-1 will never be ID so it will always be null
+                if (slot == 2)
+                    player.playerNetworkManager.accessoryEquipment02ID.Value = equipment.itemID;
+                if (slot == 3)
+                    player.playerNetworkManager.accessoryEquipment03ID.Value = equipment.itemID;
+                if (slot == 4)
+                    player.playerNetworkManager.accessoryEquipment04ID.Value = equipment.itemID;
+            }
         }
 
         public void LoadMainProjectileEquipment(RangedProjectileItem equipment)

@@ -36,6 +36,9 @@ namespace TraverserProject
         [Header("Leg equipment")]
         [SerializeField] List<LegEquipmentItem> legEquipment = new List<LegEquipmentItem>();
 
+        [Header("Accessories")]
+        [SerializeField] List<AccessoryEquipmentItem> accessories = new List<AccessoryEquipmentItem>();
+
         [Header("Ashes of War")]
         [SerializeField] List<AshOfWar> ashesOfWar = new List<AshOfWar>();
 
@@ -78,6 +81,7 @@ namespace TraverserProject
         [SerializeField] int upgradeMaterialItemKey = 10000;
         [SerializeField] int craftingMaterialItemKey = 11000;
         [SerializeField] int keyItemKey = 12000;
+        [SerializeField] int accessoryItemKey = 13000;
 
         private void Awake()
         {
@@ -150,6 +154,11 @@ namespace TraverserProject
                 items.Add(item);
             }
 
+            foreach (var item in accessories)
+            {
+                items.Add(item);
+            }
+
             for (int i = 0; i < items.Count; i++)
             {
                 int prefixKey = 0;
@@ -178,6 +187,8 @@ namespace TraverserProject
                     prefixKey = quickSlotItemKey;
                 else if (items[i].GetType() == typeof(KeyItem))
                     prefixKey = keyItemKey;
+                else if (items[i].GetType() == typeof(AccessoryEquipmentItem))
+                    prefixKey = accessoryItemKey;
 
                 items[i].itemID = prefixKey + i;
             }
@@ -213,6 +224,11 @@ namespace TraverserProject
         public LegEquipmentItem GetLegEquipmentByID(int ID)
         {
             return legEquipment.FirstOrDefault(equipment => equipment.itemID == ID);
+        }
+
+        public AccessoryEquipmentItem GetAccessoryByID(int ID)
+        {
+            return accessories.FirstOrDefault(equipment => equipment.itemID == ID);
         }
 
         public AshOfWar GetAshOfWarByID(int ID)
