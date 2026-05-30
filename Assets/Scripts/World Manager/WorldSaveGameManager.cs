@@ -446,6 +446,51 @@ namespace TraverserProject
             return serializedQuickSlotItem;
         }
 
+        public SerializableUpgradeMaterial GetSerializableUpgradeMaterialFromUpgradeMaterial(UpgradeMaterial upgradeMaterial)
+        {
+            SerializableUpgradeMaterial serializedUpgradeMaterial = new SerializableUpgradeMaterial();
+            if (upgradeMaterial != null)
+            {
+                serializedUpgradeMaterial.itemID = upgradeMaterial.itemID;
+                serializedUpgradeMaterial.itemAmount = upgradeMaterial.currentItemAmount;
+            }
+            else
+            {
+                serializedUpgradeMaterial.itemID = -1;
+            }
+            return serializedUpgradeMaterial;
+        }
+
+        public SerializableCraftingMaterial GetSerializableCraftingMaterialFromCraftingMaterial(CraftingMaterial CraftingMaterial)
+        {
+            SerializableCraftingMaterial serializedCraftingMaterial = new SerializableCraftingMaterial();
+            if (CraftingMaterial != null)
+            {
+                serializedCraftingMaterial.itemID = CraftingMaterial.itemID;
+                serializedCraftingMaterial.itemAmount = CraftingMaterial.currentItemAmount;
+            }
+            else
+            {
+                serializedCraftingMaterial.itemID = -1;
+            }
+            return serializedCraftingMaterial;
+        }
+
+        public SerializableKeyItem GetSerializableKeyItemFromKeyItem(KeyItem KeyItem)
+        {
+            SerializableKeyItem serializedKeyItem = new SerializableKeyItem();
+            if (KeyItem != null)
+            {
+                serializedKeyItem.itemID = KeyItem.itemID;
+                serializedKeyItem.itemAmount = KeyItem.currentItemAmount;
+            }
+            else
+            {
+                serializedKeyItem.itemID = -1;
+            }
+            return serializedKeyItem;
+        }
+
         // load dialogue
         public CharacterDialogue GetCharacterDialogueByEnum(CharacterDialogueID characterDialogueID)
         {

@@ -442,30 +442,53 @@ namespace TraverserProject
                 BodyEquipmentItem bodyEquipmentInInventory = playerInventoryManager.itemsInInventory[i] as BodyEquipmentItem;
                 HandEquipmentItem handEquipmentInInventory = playerInventoryManager.itemsInInventory[i] as HandEquipmentItem;
                 LegEquipmentItem legEquipmentInInventory = playerInventoryManager.itemsInInventory[i] as LegEquipmentItem;
+                AccessoryEquipmentItem accessoryInInventory = playerInventoryManager.itemsInInventory[i] as AccessoryEquipmentItem;
+                SpellItem spellInInventory = playerInventoryManager.itemsInInventory[i] as SpellItem;
+                AshOfWar ashOfWarInInventory = playerInventoryManager.itemsInInventory[i] as AshOfWar;
 
                 QuickSlotItem quickSlotItemInInventory = playerInventoryManager.itemsInInventory[i] as QuickSlotItem;
                 RangedProjectileItem projectileInInventory = playerInventoryManager.itemsInInventory[i] as RangedProjectileItem;
+
+                UpgradeMaterial upgradeMaterial = playerInventoryManager.itemsInInventory[i] as UpgradeMaterial;
+                CraftingMaterial craftingMaterial = playerInventoryManager.itemsInInventory[i] as CraftingMaterial;
+                KeyItem keyItem = playerInventoryManager.itemsInInventory[i] as KeyItem;
+
+
 
                 if (weaponInInventory != null)
                     currentCharacterData.weaponsInInventory.Add(WorldSaveGameManager.Singleton.GetSerializableWeaponFromWeaponItem(weaponInInventory));
 
                 if (headEquipmentInInventory != null)
                     currentCharacterData.headEquipmentInInventory.Add(headEquipmentInInventory.itemID);
-
                 if (bodyEquipmentInInventory != null)
                     currentCharacterData.bodyEquipmentInInventory.Add(bodyEquipmentInInventory.itemID);
-
                 if (handEquipmentInInventory != null)
-                    currentCharacterData.handEquipmentInInventory.Add(handEquipmentInInventory.itemID);
-
+                   currentCharacterData.handEquipmentInInventory.Add(handEquipmentInInventory.itemID);
                 if (legEquipmentInInventory != null)
                     currentCharacterData.legEquipmentInInventory.Add(legEquipmentInInventory.itemID);
+                if (accessoryInInventory != null)
+                    currentCharacterData.accessoryEquipmentInInventory.Add(accessoryInInventory.itemID);
+                if (spellInInventory != null)
+                    currentCharacterData.spellItemInInventory.Add(spellInInventory.itemID);
+                if (ashOfWarInInventory != null)
+                    currentCharacterData.ashesOfWarItemInInventory.Add(ashOfWarInInventory.itemID);
 
                 if (projectileInInventory != null)
                     currentCharacterData.projectilesInInventory.Add(WorldSaveGameManager.Singleton.GetSerializableRangedProjectileFromRangedProjectileItem(projectileInInventory));
-
                 if (quickSlotItemInInventory != null)
                     currentCharacterData.quickSlotItemsInInventory.Add(WorldSaveGameManager.Singleton.GetSerializableQuickSlotItemFromQuickSlotItem(quickSlotItemInInventory));
+
+                if (upgradeMaterial != null)
+                    currentCharacterData.upgradeMaterialInInventory.Add(WorldSaveGameManager.Singleton.GetSerializableUpgradeMaterialFromUpgradeMaterial(upgradeMaterial));
+                if (craftingMaterial != null)
+                    currentCharacterData.craftingMaterialInInventory.Add(WorldSaveGameManager.Singleton.GetSerializableCraftingMaterialFromCraftingMaterial(craftingMaterial));
+                if (keyItem != null)
+                    currentCharacterData.keyItemsInInventory.Add(WorldSaveGameManager.Singleton.GetSerializableKeyItemFromKeyItem(keyItem));
+
+
+
+
+
             }
 
         }
@@ -694,6 +717,42 @@ namespace TraverserProject
             {
                 QuickSlotItem quickSlotItem = currentCharacterData.quickSlotItemsInInventory[i].GetQuickSlotItem();
                 playerInventoryManager.AddItemToInventory(quickSlotItem);
+            }
+
+            for (int i = 0; i < currentCharacterData.accessoryEquipmentInInventory.Count; i++)
+            {
+                AccessoryEquipmentItem accessoryItem = WorldItemDatabase.Singleton.GetAccessoryByID(currentCharacterData.accessoryEquipmentInInventory[i]);
+                playerInventoryManager.AddItemToInventory(accessoryItem);
+            }
+
+            for (int i = 0; i < currentCharacterData.spellItemInInventory.Count; i++)
+            {
+                SpellItem spellItem = WorldItemDatabase.Singleton.GetSpellByID(currentCharacterData.spellItemInInventory[i]);
+                playerInventoryManager.AddItemToInventory(spellItem);
+            }
+
+            for (int i = 0; i < currentCharacterData.ashesOfWarItemInInventory.Count; i++)
+            {
+                AshOfWar ashesOfWarItem = WorldItemDatabase.Singleton.GetAshOfWarByID(currentCharacterData.ashesOfWarItemInInventory[i]);
+                playerInventoryManager.AddItemToInventory(ashesOfWarItem);
+            }
+
+            for (int i = 0; i < currentCharacterData.upgradeMaterialInInventory.Count; i++)
+            {
+                UpgradeMaterial upgradeMaterial = currentCharacterData.upgradeMaterialInInventory[i].GetUpgradeMaterialItem();
+                playerInventoryManager.AddItemToInventory(upgradeMaterial);
+            }
+
+            for (int i = 0; i < currentCharacterData.craftingMaterialInInventory.Count; i++)
+            {
+                CraftingMaterial CraftingMaterial = currentCharacterData.craftingMaterialInInventory[i].GetCraftingMaterialItem();
+                playerInventoryManager.AddItemToInventory(CraftingMaterial);
+            }
+
+            for (int i = 0; i < currentCharacterData.keyItemsInInventory.Count; i++)
+            {
+                KeyItem KeyItem = currentCharacterData.keyItemsInInventory[i].GetKeyItem();
+                playerInventoryManager.AddItemToInventory(KeyItem);
             }
 
             playerEquipmentManager.EquipArmor();

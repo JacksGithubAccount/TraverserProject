@@ -116,6 +116,12 @@ namespace TraverserProject
         public List<int> bodyEquipmentInInventory;
         public List<int> handEquipmentInInventory;
         public List<int> legEquipmentInInventory;
+        public List<int> accessoryEquipmentInInventory;
+        public List<int> ashesOfWarItemInInventory;
+        public List<int> spellItemInInventory;
+        public List<SerializableKeyItem> keyItemsInInventory;
+        public List<SerializableUpgradeMaterial> upgradeMaterialInInventory;
+        public List<SerializableCraftingMaterial> craftingMaterialInInventory;
 
         [Header("Dialogue")]
         public int namelessKnightStageID = 0;
@@ -143,6 +149,12 @@ namespace TraverserProject
             bodyEquipmentInInventory = new List<int>();
             handEquipmentInInventory = new List<int>();
             legEquipmentInInventory = new List<int>();
+            accessoryEquipmentInInventory = new List<int>();
+            spellItemInInventory = new List<int>();
+            ashesOfWarItemInInventory = new List<int>();
+            keyItemsInInventory = new List<SerializableKeyItem>();
+            upgradeMaterialInInventory = new List<SerializableUpgradeMaterial>();
+            craftingMaterialInInventory = new List<SerializableCraftingMaterial>();
             recipesLearnt = new List<Recipe>();
 
         }

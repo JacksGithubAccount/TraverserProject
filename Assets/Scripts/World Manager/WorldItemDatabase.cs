@@ -337,13 +337,37 @@ namespace TraverserProject
         public KeyItem GetKeyItemFromSerializedData(SerializableKeyItem serializableKeyItem)
         {
             KeyItem keyItem = null;
-            if (GetQuickSlotItemByID(serializableKeyItem.itemID))
+            if (GetKeyItemByID(serializableKeyItem.itemID))
             {
                 keyItem = Instantiate(GetKeyItemByID(serializableKeyItem.itemID));
                 keyItem.currentItemAmount = serializableKeyItem.itemAmount;
             }
 
             return keyItem;
+        }
+
+        public UpgradeMaterial GetUpgradeMaterialFromSerializedData(SerializableUpgradeMaterial serializableUpgradeMaterial)
+        {
+            UpgradeMaterial upgradeMaterialItem = null;
+            if (GetUpgradeMaterialByID(serializableUpgradeMaterial.itemID))
+            {
+                upgradeMaterialItem = Instantiate(GetUpgradeMaterialByID(serializableUpgradeMaterial.itemID));
+                upgradeMaterialItem.currentItemAmount = serializableUpgradeMaterial.itemAmount;
+            }
+
+            return upgradeMaterialItem;
+        }
+
+        public CraftingMaterial GetCraftingMaterialFromSerializedData(SerializableCraftingMaterial serializableCraftingMaterial)
+        {
+            CraftingMaterial craftingMaterialItem = null;
+            if (GetCraftingMaterialByID(serializableCraftingMaterial.itemID))
+            {
+                craftingMaterialItem = Instantiate(GetCraftingMaterialByID(serializableCraftingMaterial.itemID));
+                craftingMaterialItem.currentItemAmount = serializableCraftingMaterial.itemAmount;
+            }
+
+            return craftingMaterialItem;
         }
 
     }
