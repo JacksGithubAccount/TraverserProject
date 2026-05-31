@@ -1021,7 +1021,6 @@ namespace TraverserProject
                         player.playerInventoryManager.AddItemToInventory(unequippedItem);
 
                     player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[0]).staticEffectID);
-                    PlayerUIManager.Singleton.playerUIHudManager.RemoveEffectIcon(player.playerInventoryManager.accessoryEquipment[0].effectIcon);
                     player.playerInventoryManager.accessoryEquipment[0] = null;
 
                     break;
@@ -1031,7 +1030,6 @@ namespace TraverserProject
                         player.playerInventoryManager.AddItemToInventory(unequippedItem);
 
                     player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[1]).staticEffectID);
-                    PlayerUIManager.Singleton.playerUIHudManager.RemoveEffectIcon(player.playerInventoryManager.accessoryEquipment[1].effectIcon);
                     player.playerInventoryManager.accessoryEquipment[1] = null;
                     break;
                 case EquipmentType.Accessory03:
@@ -1040,7 +1038,6 @@ namespace TraverserProject
                         player.playerInventoryManager.AddItemToInventory(unequippedItem);
 
                     player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[2]).staticEffectID);
-                    PlayerUIManager.Singleton.playerUIHudManager.RemoveEffectIcon(player.playerInventoryManager.accessoryEquipment[2].effectIcon);
                     player.playerInventoryManager.accessoryEquipment[2] = null;
                     break;
                 case EquipmentType.Accessory04:
@@ -1049,7 +1046,6 @@ namespace TraverserProject
                         player.playerInventoryManager.AddItemToInventory(unequippedItem);
 
                     player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[3]).staticEffectID);
-                    PlayerUIManager.Singleton.playerUIHudManager.RemoveEffectIcon(player.playerInventoryManager.accessoryEquipment[3].effectIcon);
                     player.playerInventoryManager.accessoryEquipment[3] = null;
                     break;
                 case EquipmentType.MainProjectile:

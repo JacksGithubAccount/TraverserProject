@@ -130,6 +130,9 @@ namespace TraverserProject
             staticEffects.Add(effect);
             effect.ProcessStaticEffect(character);
 
+            if (effect.effectIcon != null)
+                PlayerUIManager.Singleton.playerUIHudManager.AddEffectIcon(effect.effectIcon);
+
             for (int i = staticEffects.Count - 1; i > -1; i--)
             {
                 if (staticEffects[i] == null)
@@ -150,6 +153,9 @@ namespace TraverserProject
                         effect = staticEffects[i];
                         effect.RemoveStaticEffect(character);
                         staticEffects.Remove(effect);
+
+                        if(effect.effectIcon != null)
+                            PlayerUIManager.Singleton.playerUIHudManager.RemoveEffectIcon(effect.effectIcon);
                     }
                 }
             }

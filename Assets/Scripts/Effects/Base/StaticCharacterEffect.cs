@@ -6,6 +6,9 @@ namespace TraverserProject {
         [Header("Effect ID")]
         public int staticEffectID;
 
+        [Header("Icon")]
+        public Sprite effectIcon;
+
         public virtual void ProcessStaticEffect(CharacterManager character)
         {
 

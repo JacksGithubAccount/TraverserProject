@@ -616,6 +616,74 @@ namespace TraverserProject
             }
         }
 
+        public void OnAccessory01Changed(int oldValue, int newValue)
+        {
+            if (IsOwner)
+                return;
+
+            AccessoryEquipmentItem equipment = WorldItemDatabase.Singleton.GetAccessoryByID(accessoryEquipment01ID.Value);
+
+            if (equipment != null)
+            {
+                player.playerEquipmentManager.LoadAccessoryEquipment(Instantiate(equipment), 1);
+            }
+            else
+            {
+                player.playerEquipmentManager.LoadAccessoryEquipment(null, 1);
+            }
+        }
+
+        public void OnAccessory02Changed(int oldValue, int newValue)
+        {
+            if (IsOwner)
+                return;
+
+            AccessoryEquipmentItem equipment = WorldItemDatabase.Singleton.GetAccessoryByID(accessoryEquipment02ID.Value);
+
+            if (equipment != null)
+            {
+                player.playerEquipmentManager.LoadAccessoryEquipment(Instantiate(equipment), 2);
+            }
+            else
+            {
+                player.playerEquipmentManager.LoadAccessoryEquipment(null, 2);
+            }
+        }
+
+        public void OnAccessory03Changed(int oldValue, int newValue)
+        {
+            if (IsOwner)
+                return;
+
+            AccessoryEquipmentItem equipment = WorldItemDatabase.Singleton.GetAccessoryByID(accessoryEquipment03ID.Value);
+
+            if (equipment != null)
+            {
+                player.playerEquipmentManager.LoadAccessoryEquipment(Instantiate(equipment), 3);
+            }
+            else
+            {
+                player.playerEquipmentManager.LoadAccessoryEquipment(null, 3);
+            }
+        }
+
+        public void OnAccessory04Changed(int oldValue, int newValue)
+        {
+            if (IsOwner)
+                return;
+
+            AccessoryEquipmentItem equipment = WorldItemDatabase.Singleton.GetAccessoryByID(accessoryEquipment04ID.Value);
+
+            if (equipment != null)
+            {
+                player.playerEquipmentManager.LoadAccessoryEquipment(Instantiate(equipment), 4);
+            }
+            else
+            {
+                player.playerEquipmentManager.LoadAccessoryEquipment(null, 4);
+            }
+        }
+
         public void OnIsMaleChanged(bool oldStatus, bool newStatus)
         {
             player.playerBodyManager.ToggleBodyType(isMale.Value);

@@ -5,9 +5,6 @@ namespace TraverserProject
     [CreateAssetMenu(menuName = "Items/Accessory")]
     public class AccessoryEquipmentItem : EquipmentItem
     {
-        [Header("Icon")]
-        public Sprite effectIcon;
-
         [Header("Bar Modifier")]
         public float maxHealthModifier;
         public float maxFocusPointModifier;

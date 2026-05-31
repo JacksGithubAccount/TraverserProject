@@ -111,5 +111,26 @@ namespace TraverserProject
             return null;
         }
 
+        public TimedCharacterEffect GetTimedEffectFromSerializedData(SerializableTimedEffect serializedTimeEffect)
+        {
+            TimedCharacterEffect timedCharacterEffect = null;
+            if (GetTimedEffectByID(serializedTimeEffect.effectID))
+            {
+                timedCharacterEffect = Instantiate(GetTimedEffectByID(serializedTimeEffect.effectID));
+                timedCharacterEffect.timeRemainingOnEffect = serializedTimeEffect.timeRemainingOnEffect;
+            }
+
+            return timedCharacterEffect;
+        }
+
+        public StaticCharacterEffect GetStaticEffectByID(int ID)
+        {
+            return staticEffects.Find(effect => effect.staticEffectID == ID);
+        }
+        public TimedCharacterEffect GetTimedEffectByID(int ID)
+        {
+            return timedEffects.Find(effect => effect.effectID == ID);
+        }
+
     }
 }

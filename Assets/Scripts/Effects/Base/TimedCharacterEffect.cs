@@ -9,6 +9,9 @@ namespace TraverserProject
         [Header("Effect ID")]
         public int effectID;
 
+        [Header("Icon")]
+        public Sprite effectIcon;
+
         [Header("Time")]
         public float defaultLengthOfEffect;
         public float timeRemainingOnEffect;

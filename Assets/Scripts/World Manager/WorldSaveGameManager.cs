@@ -491,6 +491,21 @@ namespace TraverserProject
             return serializedKeyItem;
         }
 
+        public SerializableTimedEffect GetSerializableTimedEffectFromTimedEffect(TimedCharacterEffect timedEffect)
+        {
+            SerializableTimedEffect serializedTimeEffect = new SerializableTimedEffect();
+            if(timedEffect != null)
+            {
+                serializedTimeEffect.effectID = timedEffect.effectID;
+                serializedTimeEffect.timeRemainingOnEffect = timedEffect.timeRemainingOnEffect;
+            }
+            else
+            {
+                serializedTimeEffect.effectID = -1;
+            }
+            return serializedTimeEffect;
+        }
+
         // load dialogue
         public CharacterDialogue GetCharacterDialogueByEnum(CharacterDialogueID characterDialogueID)
         {

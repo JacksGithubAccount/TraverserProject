@@ -132,6 +132,10 @@ namespace TraverserProject
         [Header("Crafting")]
         public List<Recipe> recipesLearnt;
 
+        [Header("Effects")]
+        public List<int> staticEffects;
+        public List<SerializableTimedEffect> timedEffects;
+
         public CharacterSaveData()
         {
             sitesOfGrace = new SerializableDictionary<int, bool>();
@@ -156,6 +160,8 @@ namespace TraverserProject
             upgradeMaterialInInventory = new List<SerializableUpgradeMaterial>();
             craftingMaterialInInventory = new List<SerializableCraftingMaterial>();
             recipesLearnt = new List<Recipe>();
+            staticEffects = new List<int>();
+            timedEffects = new List<SerializableTimedEffect>();
 
         }
     }

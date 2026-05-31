@@ -169,6 +169,10 @@ namespace TraverserProject
             playerNetworkManager.bodyEquipmentID.OnValueChanged += playerNetworkManager.OnBodyEquipmentChanged;
             playerNetworkManager.handEquipmentID.OnValueChanged += playerNetworkManager.OnHandEquipmentChanged;
             playerNetworkManager.legEquipmentID.OnValueChanged += playerNetworkManager.OnLegEquipmentChanged;
+            playerNetworkManager.accessoryEquipment01ID.OnValueChanged += playerNetworkManager.OnAccessory01Changed;
+            playerNetworkManager.accessoryEquipment02ID.OnValueChanged += playerNetworkManager.OnAccessory02Changed;
+            playerNetworkManager.accessoryEquipment03ID.OnValueChanged += playerNetworkManager.OnAccessory03Changed;
+            playerNetworkManager.accessoryEquipment04ID.OnValueChanged += playerNetworkManager.OnAccessory04Changed;
             playerNetworkManager.mainProjectileID.OnValueChanged += playerNetworkManager.OnMainProjectileIDChange;
             playerNetworkManager.secondaryProjectileID.OnValueChanged += playerNetworkManager.OnSecondaryProjectileIDChange;
             playerNetworkManager.isHoldingArrow.OnValueChanged += playerNetworkManager.OnIsHoldingArrowChanged;
@@ -265,6 +269,10 @@ namespace TraverserProject
             playerNetworkManager.bodyEquipmentID.OnValueChanged -= playerNetworkManager.OnBodyEquipmentChanged;
             playerNetworkManager.handEquipmentID.OnValueChanged -= playerNetworkManager.OnHandEquipmentChanged;
             playerNetworkManager.legEquipmentID.OnValueChanged -= playerNetworkManager.OnLegEquipmentChanged;
+            playerNetworkManager.accessoryEquipment01ID.OnValueChanged -= playerNetworkManager.OnAccessory01Changed;
+            playerNetworkManager.accessoryEquipment02ID.OnValueChanged -= playerNetworkManager.OnAccessory02Changed;
+            playerNetworkManager.accessoryEquipment03ID.OnValueChanged -= playerNetworkManager.OnAccessory03Changed;
+            playerNetworkManager.accessoryEquipment04ID.OnValueChanged -= playerNetworkManager.OnAccessory04Changed;
             playerNetworkManager.mainProjectileID.OnValueChanged -= playerNetworkManager.OnMainProjectileIDChange;
             playerNetworkManager.secondaryProjectileID.OnValueChanged -= playerNetworkManager.OnSecondaryProjectileIDChange;
             playerNetworkManager.isHoldingArrow.OnValueChanged -= playerNetworkManager.OnIsHoldingArrowChanged;
@@ -485,10 +493,16 @@ namespace TraverserProject
                 if (keyItem != null)
                     currentCharacterData.keyItemsInInventory.Add(WorldSaveGameManager.Singleton.GetSerializableKeyItemFromKeyItem(keyItem));
 
+            }
 
-
-
-
+            //effects
+            foreach (var staticEffect in playerEffectsManager.staticEffects)
+            {
+                currentCharacterData.staticEffects.Add(staticEffect.staticEffectID);
+            }
+            foreach (var timedEffect in playerEffectsManager.timedEffects)
+            {
+                currentCharacterData.timedEffects.Add(WorldSaveGameManager.Singleton.GetSerializableTimedEffectFromTimedEffect(timedEffect));
             }
 
         }
@@ -760,6 +774,25 @@ namespace TraverserProject
             playerEquipmentManager.LoadMainProjectileEquipment(currentCharacterData.mainProjectile.GetProjectile());
             playerEquipmentManager.LoadSecondaryProjectileEquipment(currentCharacterData.secondaryProjectile.GetProjectile());
 
+
+            //effects
+            foreach (var staticEffect in currentCharacterData.staticEffects)
+            {
+                if (WorldCharacterEffectsManager.Singleton.GetStaticEffectByID(staticEffect))
+                {
+                    StaticCharacterEffect staticEffectCopy = Instantiate(WorldCharacterEffectsManager.Singleton.GetStaticEffectByID(staticEffect));
+                    playerEffectsManager.AddStaticEffect(staticEffectCopy);
+                }                
+            }
+
+            foreach (var timedEffect in currentCharacterData.timedEffects)
+            {
+                if (WorldCharacterEffectsManager.Singleton.GetTimedEffectByID(timedEffect.effectID))
+                {
+                    TimedCharacterEffect timedEffectCopy = timedEffect.GetTimedEffect();
+                    playerEffectsManager.AddTimedEffect(timedEffectCopy);
+                }
+            }
         }
 
         private void LoadOtherPlayerCharacterWhenJoiningServer()
@@ -781,6 +814,10 @@ namespace TraverserProject
             playerNetworkManager.OnBodyEquipmentChanged(0, playerNetworkManager.bodyEquipmentID.Value);
             playerNetworkManager.OnHandEquipmentChanged(0, playerNetworkManager.handEquipmentID.Value);
             playerNetworkManager.OnLegEquipmentChanged(0, playerNetworkManager.legEquipmentID.Value);
+            playerNetworkManager.OnAccessory01Changed(0, playerNetworkManager.accessoryEquipment01ID.Value);
+            playerNetworkManager.OnAccessory02Changed(0, playerNetworkManager.accessoryEquipment02ID.Value);
+            playerNetworkManager.OnAccessory03Changed(0, playerNetworkManager.accessoryEquipment03ID.Value);
+            playerNetworkManager.OnAccessory04Changed(0, playerNetworkManager.accessoryEquipment04ID.Value);
 
             //sync projectiles
             playerNetworkManager.OnMainProjectileIDChange(0, playerNetworkManager.mainProjectileID.Value);

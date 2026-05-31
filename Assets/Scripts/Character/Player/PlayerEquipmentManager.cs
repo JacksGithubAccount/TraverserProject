@@ -359,6 +359,10 @@ namespace TraverserProject
             LoadBodyEquipment(player.playerInventoryManager.bodyEquipment);
             LoadHandEquipment(player.playerInventoryManager.handEquipment);
             LoadLegEquipment(player.playerInventoryManager.legEquipment);
+            LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[0], 1);
+            LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[1], 2);
+            LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[2], 3);
+            LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[3], 4);
         }
 
         public void SwitchQuickSlotItem()
@@ -850,7 +854,7 @@ namespace TraverserProject
                 if (slot == 3)
                     player.playerNetworkManager.accessoryEquipment03ID.Value = equipment.itemID;
                 if (slot == 4)
-                    player.playerNetworkManager.accessoryEquipment04ID.Value = equipment.itemID;
+                    player.playerNetworkManager.accessoryEquipment04ID.Value = equipment.itemID;                
             }
         }
 
