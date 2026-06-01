@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace TraverserProject
 {
-
+    [System.Serializable]
     public class SerializableTimedEffect : ISerializationCallbackReceiver
     {
         [SerializeField] public int effectID;

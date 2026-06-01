@@ -1,4 +1,3 @@
-using TraverserProject;
 using UnityEngine;
 
 namespace TraverserProject

@@ -7,11 +7,25 @@ namespace TraverserProject
 
     public class UI_EquipmentInventorySlot : UI_InventorySlot
     {
+        public Image greyedOutIcon;
+        public bool incompatableEquipment = false;
 
+        private void Awake()
+        {
+            highlightIcon.enabled = false;
+            greyedOutIcon.enabled = false;
+        }
+        
         public void EquipItem()
         {
             PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
             Item equippedItem;
+
+            if(incompatableEquipment)
+            {
+                PlayerUIManager.Singleton.playerUIEquipmentManager.OpenSubMenu(PlayerUIManager.Singleton.playerUIEquipmentManager.IncompatableEquipmentWindow);
+                return;
+            }
 
             switch (PlayerUIManager.Singleton.playerUIEquipmentManager.currentSelectedEquipmentSlot)
             {
@@ -237,11 +251,13 @@ namespace TraverserProject
 
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
                     break;
-                case EquipmentType.Accessory01:
+                case EquipmentType.Accessory01:                  
                     equippedItem = player.playerInventoryManager.accessoryEquipment[0];
                     if (equippedItem != null)
                     {
                         player.playerInventoryManager.AddItemToInventory(equippedItem);
+                        StaticCharacterEffect equippedAccessoryEffect = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(equippedItem as AccessoryEquipmentItem));
+                        player.playerEffectsManager.RemoveStaticEffect(equippedAccessoryEffect.staticEffectID);
                     }
                     player.playerInventoryManager.accessoryEquipment[0] = currentItem as AccessoryEquipmentItem;
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
@@ -257,6 +273,8 @@ namespace TraverserProject
                     if (equippedItem != null)
                     {
                         player.playerInventoryManager.AddItemToInventory(equippedItem);
+                        StaticCharacterEffect equippedAccessoryEffect = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(equippedItem as AccessoryEquipmentItem));
+                        player.playerEffectsManager.RemoveStaticEffect(equippedAccessoryEffect.staticEffectID);
                     }
                     player.playerInventoryManager.accessoryEquipment[1] = currentItem as AccessoryEquipmentItem;
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
@@ -272,6 +290,8 @@ namespace TraverserProject
                     if (equippedItem != null)
                     {
                         player.playerInventoryManager.AddItemToInventory(equippedItem);
+                        StaticCharacterEffect equippedAccessoryEffect = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(equippedItem as AccessoryEquipmentItem));
+                        player.playerEffectsManager.RemoveStaticEffect(equippedAccessoryEffect.staticEffectID);
                     }
                     player.playerInventoryManager.accessoryEquipment[2] = currentItem as AccessoryEquipmentItem;
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
@@ -287,6 +307,8 @@ namespace TraverserProject
                     if (equippedItem != null)
                     {
                         player.playerInventoryManager.AddItemToInventory(equippedItem);
+                        StaticCharacterEffect equippedAccessoryEffect = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(equippedItem as AccessoryEquipmentItem));
+                        player.playerEffectsManager.RemoveStaticEffect(equippedAccessoryEffect.staticEffectID);
                     }
                     player.playerInventoryManager.accessoryEquipment[3] = currentItem as AccessoryEquipmentItem;
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);

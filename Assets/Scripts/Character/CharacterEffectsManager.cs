@@ -202,6 +202,9 @@ namespace TraverserProject
                 effect.timeRemainingOnEffect = effect.defaultLengthOfEffect;
 
                 effect.ProcessEffect(character);
+
+                if (effect.effectIcon != null)
+                    PlayerUIManager.Singleton.playerUIHudManager.AddEffectIcon(effect.effectIcon);
             }
         }
 
@@ -218,6 +221,9 @@ namespace TraverserProject
                     TimedCharacterEffect effect = timedEffects[i];
                     effect.RemoveEffect(character);
                     timedEffects.RemoveAt(i);
+
+                    if (effect.effectIcon != null)
+                        PlayerUIManager.Singleton.playerUIHudManager.RemoveEffectIcon(effect.effectIcon);
                 }
             }
         }

@@ -439,6 +439,15 @@ namespace TraverserProject
             currentCharacterData.bodyEquipmentInInventory = new List<int>();
             currentCharacterData.handEquipmentInInventory = new List<int>();
             currentCharacterData.legEquipmentInInventory = new List<int>();
+            currentCharacterData.accessoryEquipmentInInventory = new List<int>();
+            currentCharacterData.spellItemInInventory = new List<int>();
+            currentCharacterData.ashesOfWarItemInInventory = new List<int>();
+            currentCharacterData.keyItemsInInventory = new List<SerializableKeyItem>();
+            currentCharacterData.upgradeMaterialInInventory = new List<SerializableUpgradeMaterial>();
+            currentCharacterData.craftingMaterialInInventory = new List<SerializableCraftingMaterial>();
+            currentCharacterData.recipesLearnt = new List<Recipe>();
+            currentCharacterData.staticEffects = new List<int>();
+            currentCharacterData.timedEffects = new List<SerializableTimedEffect>();
 
             for (int i = 0; i < playerInventoryManager.itemsInInventory.Count; i++)
             {
@@ -504,7 +513,6 @@ namespace TraverserProject
             {
                 currentCharacterData.timedEffects.Add(WorldSaveGameManager.Singleton.GetSerializableTimedEffectFromTimedEffect(timedEffect));
             }
-
         }
         public void LoadGameDataFromCurrentCharacterData(ref CharacterSaveData currentCharacterData)
         {

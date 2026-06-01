@@ -69,6 +69,8 @@ namespace TraverserProject
         [SerializeField] Transform equipmentInventoryContentWindow;
         [SerializeField] Item currentlySelectedItem;
         [HideInInspector] List<GameObject> equipmentInventorySlotPrefabs = new List<GameObject>();
+        [SerializeField] GameObject closeSubmenuWindow;
+        [SerializeField] public GameObject IncompatableEquipmentWindow;
 
         private void Awake()
         {
@@ -111,6 +113,13 @@ namespace TraverserProject
             RefreshEquipmentSlotIcons();
         }
 
+        public override void CloseSubMenu()
+        {
+            base.CloseSubMenu();
+            closeSubmenuWindow.SetActive(false);
+            ToggleGameObjectPrefabs(equipmentInventorySlotPrefabs, true);
+            ToggleEquipmentButtons(true);
+        }
         public void RefreshMenu()
         {
             ClearEquipmentInventory();
@@ -794,6 +803,19 @@ namespace TraverserProject
                 UI_EquipmentInventorySlot equipmentInventorySlot = inventorySlotGameObject.GetComponent<UI_EquipmentInventorySlot>();
                 equipmentInventorySlot.AddItem(accessoriesInInventory[i]);
                 equipmentInventorySlotPrefabs.Add(equipmentInventorySlot.gameObject);
+
+                //checks for incompatable equipment already equipped
+                foreach(var item in player.playerInventoryManager.accessoryEquipment)
+                {
+                    if (item == null)
+                        continue;
+
+                    if(equipmentInventorySlot.currentItem.itemID == item.itemID)
+                    {
+                        equipmentInventorySlot.greyedOutIcon.enabled = true;
+                        equipmentInventorySlot.incompatableEquipment = true;
+                    }
+                }
 
                 if (!hasSelectedFirstInventorySlot)
                 {
