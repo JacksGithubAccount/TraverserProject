@@ -67,8 +67,6 @@ namespace TraverserProject
                     currentItemAmount -= numberOfItemsToUse;
                     if (qsItem != null)
                         qsItem.currentItemAmount -= numberOfItemsToUse;
-
-                    numberOfItemsToUse = 1;
                 }
 
                 PlayerUIManager.Singleton.playerUIHudManager.SetQuickSlotItemQuickSlotIcon(player.playerInventoryManager.currentQuickSlotItem);

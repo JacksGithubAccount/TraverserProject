@@ -97,7 +97,12 @@ namespace TraverserProject
             }
 
             if (PlayerUIManager.Singleton.localPlayer.playerInteractionManager.dialogueCharacter == aiCharacter)
+            {
+                //If you leave interaction radius and this is a shop, close the shop menu
                 PlayerUIManager.Singleton.localPlayer.playerInteractionManager.dialogueCharacter = null;
+                if (aiCharacter.aiCharacterInventoryManager.characterShopID != Shops.None)
+                    PlayerUIManager.Singleton.playerUIShopManager.CloseMenu();
+            }
         }
 
         public void OnCurrentDialogueEnded()

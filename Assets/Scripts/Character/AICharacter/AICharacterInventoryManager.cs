@@ -1,5 +1,5 @@
-using UnityEngine;
 using Unity.Netcode;
+using UnityEngine;
 
 namespace TraverserProject
 {
@@ -54,15 +54,42 @@ namespace TraverserProject
             }
         }
 
+        public override void RemoveItemFromInventory(Item item)
+        {
+            base.RemoveItemFromInventory(item);
+            SaveShopData();
+        }
+
         public void GenerateShop()
         {
-            //if shop has been generated once, load old shop from saved character info to retain previous purchased item values
-            //otherwise, generate shop for first time then save it
             if (shopHasBeenGenerated)
                 return;
 
             shopHasBeenGenerated = true;
+
+            //if shop has been generated once, load old shop from saved character info to retain previous purchased item values
+            if (WorldSaveGameManager.Singleton.currentCharacterData.shopsGenerated.Contains((int)characterShopID))
+            {
+                itemsInInventory = WorldItemDatabase.Singleton.GetShopItemsFromSerializedData(WorldSaveGameManager.Singleton.currentCharacterData.shopsGeneratedData[(int)characterShopID]);
+                return;
+            }
+
+
+            //otherwise, generate shop for first time then save it
             characterShop.GenerateCharacterInventoryFromShopItems(aiCharacter);
+
+            SaveShopData();
+        }
+
+        public void SaveShopData()
+        {
+            WorldSaveGameManager.Singleton.currentCharacterData.shopsGenerated.Add((int)characterShopID);
+
+            if (WorldSaveGameManager.Singleton.currentCharacterData.shopsGeneratedData.ContainsKey((int)characterShopID))
+                WorldSaveGameManager.Singleton.currentCharacterData.shopsGeneratedData.Remove((int)characterShopID);
+
+            WorldSaveGameManager.Singleton.currentCharacterData.shopsGeneratedData.Add((int)characterShopID, WorldSaveGameManager.Singleton.GetSerializableShopItemsFromItemList(itemsInInventory));
+
         }
 
     }

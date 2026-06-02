@@ -619,6 +619,7 @@ namespace TraverserProject
             RectTransform menuWindowRectTransform = inventorySelectionAmountMenuWindow.GetComponent<RectTransform>();
             inventorySelectionAmountMenuWindow.transform.position = new Vector3(inventorySelectionMenuWindow.transform.position.x + imageRectTransform.rect.width, imageRectTransform.transform.position.y, inventorySelectionAmountMenuWindow.transform.position.z);
 
+            inventorySelectionAmountSlider.value = 1;
             inventorySelectionAmountSlider.maxValue = currentlySelectedItem.currentItemAmount;
         }
 

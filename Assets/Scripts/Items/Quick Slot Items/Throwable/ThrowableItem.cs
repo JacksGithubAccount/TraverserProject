@@ -51,7 +51,7 @@ namespace TraverserProject
 
         public override void SuccessfullyUseItem(PlayerManager player)
         {
-            base.SuccessfullyUseItem(player);
+            //base.SuccessfullyUseItem(player);
 
             if (player.IsOwner)
             {

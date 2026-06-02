@@ -11,7 +11,7 @@ namespace TraverserProject
 
         public WeaponItem unarmedWeapon;
 
-        [Header("Item Drop")]        
+        [Header("Item Drop")]
         public GameObject creatureDropPickUpItemPrefab;
         public GameObject inventoryDropItemPickUpInteractable;
 
@@ -66,7 +66,7 @@ namespace TraverserProject
         [Header("Items")]
         private List<Item> items = new List<Item>();
 
-        
+
 
         [Header("Item ID Prefix Keys")]
         [SerializeField] int weaponItemKey = 1000;
@@ -149,7 +149,7 @@ namespace TraverserProject
                 items.Add(item);
             }
 
-            foreach(var item in keyItems)
+            foreach (var item in keyItems)
             {
                 items.Add(item);
             }
@@ -368,6 +368,29 @@ namespace TraverserProject
             }
 
             return craftingMaterialItem;
+        }
+
+        //Shops
+        public List<Item> GetShopItemsFromSerializedData(SerializableShopInventory serializableShopItems)
+        {
+            List<Item> items = new List<Item>();
+
+            for (int i = 0; i < serializableShopItems.itemIDs.Count; i++)
+            {
+                Item newItem = null;
+                if (GetItemByID(serializableShopItems.itemIDs[i]))
+                {
+                    newItem = Instantiate(GetItemByID(serializableShopItems.itemIDs[i]));
+                    newItem.currentItemAmount = serializableShopItems.itemAmounts[i];
+                    newItem.isInfinite = serializableShopItems.itemInfinites[i];
+                    items.Add(newItem);
+                }
+
+            }
+
+
+
+            return items;
         }
 
     }

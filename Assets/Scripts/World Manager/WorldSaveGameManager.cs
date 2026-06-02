@@ -369,6 +369,33 @@ namespace TraverserProject
             return worldSceneIndex;
         }
 
+        public SerializableShopInventory GetSerializableShopItemsFromItemList(List<Item> items)
+        {
+            SerializableShopInventory serializedItems = new SerializableShopInventory();
+
+            List<int> itemIDs = new List<int>();
+            List<int> itemAmounts = new List<int>();
+            List<bool> itemInfinites = new List<bool>();
+
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i] == null)
+                    continue;
+
+                itemIDs.Add(items[i].itemID);
+                itemAmounts.Add(items[i].currentItemAmount);
+                itemInfinites.Add(items[i].isInfinite);
+            }
+
+            serializedItems.itemIDs = itemIDs;
+            serializedItems.itemAmounts = itemAmounts;
+            serializedItems.itemInfinites = itemInfinites;
+
+
+
+            return serializedItems;
+        }
+
         public SerializableWeapon GetSerializableWeaponFromWeaponItem(WeaponItem weapon)
         {
             SerializableWeapon serializedWeapon = new SerializableWeapon();
@@ -494,7 +521,7 @@ namespace TraverserProject
         public SerializableTimedEffect GetSerializableTimedEffectFromTimedEffect(TimedCharacterEffect timedEffect)
         {
             SerializableTimedEffect serializedTimeEffect = new SerializableTimedEffect();
-            if(timedEffect != null)
+            if (timedEffect != null)
             {
                 serializedTimeEffect.effectID = timedEffect.effectID;
                 serializedTimeEffect.timeRemainingOnEffect = timedEffect.timeRemainingOnEffect;
