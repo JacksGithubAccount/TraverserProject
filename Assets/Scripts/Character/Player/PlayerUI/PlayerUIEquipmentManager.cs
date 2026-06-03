@@ -810,6 +810,16 @@ namespace TraverserProject
                     if (item == null)
                         continue;
 
+                    switch(currentSelectedEquipmentSlot)
+                    {
+                        case EquipmentType.Accessory01:
+                            if (item.itemID == player.playerInventoryManager.accessoryEquipment[0].itemID)
+                                continue;
+                            break;
+                        default:
+                            break;
+                    }                    
+
                     if(equipmentInventorySlot.currentItem.itemID == item.itemID)
                     {
                         equipmentInventorySlot.greyedOutIcon.enabled = true;
