@@ -100,6 +100,11 @@ namespace TravserserProject
             return Mathf.RoundToInt(focusPoints);
         }
 
+        public virtual void CalculateWeaponAttackPower()
+        {
+            
+        }
+
         public virtual void CalculateTotalArmorAbsorption()
         {
             armorPhysicalDamageAbsorption += armorPhysicalDamageAbsorption * (character.characterNetworkManager.armorPhysicalDamageAbsorptionModifer.Value / 100);

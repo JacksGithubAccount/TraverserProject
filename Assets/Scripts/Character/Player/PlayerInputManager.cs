@@ -793,18 +793,19 @@ namespace TraverserProject
                 }
                 else
                 {
-                    var currentMenu = PlayerUIManager.Singleton.openMenus.Peek();
-                    currentMenu.CloseMenu();
-                    if (PlayerUIManager.Singleton.openMenus.Count > 0)
-                    {
-                        var nextMenu = PlayerUIManager.Singleton.openMenus.Peek();
-                        nextMenu.OpenMenu();
-                    }
-                    else
-                    {
-                        PlayerUIManager.Singleton.playerUIPopUpManager.CloseAllPopUpWindows();
-                        PlayerUIManager.Singleton.CloseAllMenuWindows();
-                    }
+                        var currentMenu = PlayerUIManager.Singleton.openMenus.Peek();
+                        currentMenu.CloseMenu();
+                        if (PlayerUIManager.Singleton.openMenus.Count > 0)
+                        {
+                            var nextMenu = PlayerUIManager.Singleton.openMenus.Peek();
+                            nextMenu.OpenMenu();
+                        }
+                        else
+                        {
+                            PlayerUIManager.Singleton.playerUIPopUpManager.CloseAllPopUpWindows();
+                            PlayerUIManager.Singleton.CloseAllMenuWindows();
+                        }
+                    
                 }
 
             }

@@ -148,7 +148,18 @@ namespace TraverserProject
                     break;
             }
             //passes current and projected level to set up level up costs
-            CalculateLevelCost(PlayerUIManager.Singleton.localPlayer.characterStatsManager.CalculateCharacterLevelBasedOnAttributes(), PlayerUIManager.Singleton.localPlayer.characterStatsManager.CalculateCharacterLevelBasedOnAttributes(true));
+            int totalCost = CalculateLevelCost(PlayerUIManager.Singleton.localPlayer.characterStatsManager.CalculateCharacterLevelBasedOnAttributes(), PlayerUIManager.Singleton.localPlayer.characterStatsManager.CalculateCharacterLevelBasedOnAttributes(true));
+
+            projectedBubblesHeldText.text = (PlayerUIManager.Singleton.localPlayer.playerStatsManager.bubbles - totalCost).ToString();
+
+            if (totalCost > PlayerUIManager.Singleton.localPlayer.playerStatsManager.bubbles)
+            {
+                projectedBubblesHeldText.color = negativeColor;
+            }
+            else
+            {
+                projectedBubblesHeldText.color = standardColor;
+            }
 
             projectedCharacterLevelText.text = player.characterStatsManager.CalculateCharacterLevelBasedOnAttributes(true).ToString();
             bubblesCostText.text = totalLevelUpCost.ToString();
@@ -197,7 +208,7 @@ namespace TraverserProject
             }
         }
 
-        private void CalculateLevelCost(int currentLevel, int projectedLevel)
+        public int CalculateLevelCost(int currentLevel, int projectedLevel)
         {
             int totalCost = 0;
 
@@ -210,17 +221,8 @@ namespace TraverserProject
             }
             totalLevelUpCost = totalCost;
 
-
-            projectedBubblesHeldText.text = (PlayerUIManager.Singleton.localPlayer.playerStatsManager.bubbles - totalCost).ToString();
-
-            if (totalCost > PlayerUIManager.Singleton.localPlayer.playerStatsManager.bubbles)
-            {
-                projectedBubblesHeldText.color = negativeColor;
-            }
-            else
-            {
-                projectedBubblesHeldText.color = standardColor;
-            }
+            return totalCost;
+            
         }
 
         private void ChangeTextColorsDependingOnCosts()
