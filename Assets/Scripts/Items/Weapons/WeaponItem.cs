@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace TraverserProject
@@ -36,7 +38,16 @@ namespace TraverserProject
         public int faithScaling = 0;
 
         [Header("Weapon Base Damage")]
+        public int physicalBaseDamage = 0;
+        public int magicBaseDamage = 0;
+        public int fireBaseDamage = 0;
+        public int lightningBaseDamage = 0;
+        public int holyBaseDamage = 0;
+
+        [Header("Weapon Total Damage")]
+        public int attackPower = 0;
         public int physicalDamage = 0;
+        public List<CharacterAttribute> physicalDamageScaling = new List<CharacterAttribute> { CharacterAttribute.Strength, CharacterAttribute.Dexterity };
         public int magicDamage = 0;
         public int fireDamage = 0;
         public int lightningDamage = 0;

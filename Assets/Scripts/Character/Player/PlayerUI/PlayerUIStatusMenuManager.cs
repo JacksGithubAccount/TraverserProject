@@ -96,12 +96,12 @@ namespace TraverserProject
             itemDiscoveryText.text = "Placeholder";
             spellSlotsText.text = "Placeholder";
 
-            rWeapon1Text.text = "Placeholder";
-            rWeapon2Text.text = "Placeholder";
-            rWeapon3Text.text = "Placeholder";
-            lWeapon1Text.text = "Placeholder";
-            lWeapon2Text.text = "Placeholder";
-            lWeapon3Text.text = "Placeholder";
+            rWeapon1Text.text = player.playerInventoryManager.weaponsInRightHandSlots[0].attackPower.ToString();
+            rWeapon2Text.text = player.playerInventoryManager.weaponsInRightHandSlots[1].attackPower.ToString();
+            rWeapon3Text.text = player.playerInventoryManager.weaponsInRightHandSlots[2].attackPower.ToString();
+            lWeapon1Text.text = player.playerInventoryManager.weaponsInLeftHandSlots[0].attackPower.ToString();
+            lWeapon2Text.text = player.playerInventoryManager.weaponsInLeftHandSlots[1].attackPower.ToString();
+            lWeapon3Text.text = player.playerInventoryManager.weaponsInLeftHandSlots[2].attackPower.ToString();
 
             physicalText.text = player.playerStatsManager.armorPhysicalDamageAbsorption.ToString();
             bluntText.text = player.playerStatsManager.armorBluntDamageAbsorption.ToString();

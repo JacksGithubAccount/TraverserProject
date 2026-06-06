@@ -41,6 +41,7 @@ namespace TraverserProject
                     if (player.playerInventoryManager.rightHandWeaponIndex == 0)
                         player.playerNetworkManager.currentRightHandWeaponID.Value = currentItem.itemID;
 
+                    player.playerStatsManager.CalculateWeaponAttackPower(player.playerInventoryManager.weaponsInRightHandSlots[0]);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
                     break;
                 case EquipmentType.RightWeapon02:
@@ -55,6 +56,7 @@ namespace TraverserProject
                     if (player.playerInventoryManager.rightHandWeaponIndex == 1)
                         player.playerNetworkManager.currentRightHandWeaponID.Value = currentItem.itemID;
 
+                    player.playerStatsManager.CalculateWeaponAttackPower(player.playerInventoryManager.weaponsInRightHandSlots[1]);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
                     break;
                 case EquipmentType.RightWeapon03:
@@ -69,6 +71,7 @@ namespace TraverserProject
                     if (player.playerInventoryManager.rightHandWeaponIndex == 2)
                         player.playerNetworkManager.currentRightHandWeaponID.Value = currentItem.itemID;
 
+                    player.playerStatsManager.CalculateWeaponAttackPower(player.playerInventoryManager.weaponsInRightHandSlots[2]);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
                     break;
                 case EquipmentType.LeftWeapon01:
@@ -83,6 +86,7 @@ namespace TraverserProject
                     if (player.playerInventoryManager.leftHandWeaponIndex == 0)
                         player.playerNetworkManager.currentLeftHandWeaponID.Value = currentItem.itemID;
 
+                    player.playerStatsManager.CalculateWeaponAttackPower(player.playerInventoryManager.weaponsInLeftHandSlots[0]);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
                     break;
                 case EquipmentType.LeftWeapon02:
@@ -97,6 +101,7 @@ namespace TraverserProject
                     if (player.playerInventoryManager.leftHandWeaponIndex == 1)
                         player.playerNetworkManager.currentLeftHandWeaponID.Value = currentItem.itemID;
 
+                    player.playerStatsManager.CalculateWeaponAttackPower(player.playerInventoryManager.weaponsInLeftHandSlots[1]);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
                     break;
                 case EquipmentType.LeftWeapon03:
@@ -111,6 +116,7 @@ namespace TraverserProject
                     if (player.playerInventoryManager.leftHandWeaponIndex == 2)
                         player.playerNetworkManager.currentLeftHandWeaponID.Value = currentItem.itemID;
 
+                    player.playerStatsManager.CalculateWeaponAttackPower(player.playerInventoryManager.weaponsInLeftHandSlots[2]);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
                     break;
                 case EquipmentType.Head:

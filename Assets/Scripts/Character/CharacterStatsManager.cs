@@ -100,7 +100,7 @@ namespace TravserserProject
             return Mathf.RoundToInt(focusPoints);
         }
 
-        public virtual void CalculateWeaponAttackPower()
+        public virtual void CalculateWeaponAttackPower(WeaponItem weapon)
         {
             
         }

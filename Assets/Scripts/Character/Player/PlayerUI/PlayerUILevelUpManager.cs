@@ -189,6 +189,7 @@ namespace TraverserProject
             player.playerNetworkManager.faith.Value = Mathf.RoundToInt(faithSlider.value);
             player.playerNetworkManager.luck.Value = Mathf.RoundToInt(luckSlider.value);
 
+            player.playerStatsManager.CalculateAllWeaponAttackPower();
             SetCurrentStats();
             ChangeTextColorsDependingOnCosts();
             WorldSaveGameManager.Singleton.SaveGame();

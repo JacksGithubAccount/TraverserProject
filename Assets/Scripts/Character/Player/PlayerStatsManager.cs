@@ -1,3 +1,6 @@
+using NUnit.Framework;
+using Steamworks.Ugc;
+using System.Collections.Generic;
 using TraverserProject;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
@@ -27,6 +30,71 @@ namespace TravserserProject
             CalculateHealthBasedOnVitalityLevel(player.playerNetworkManager.vigor.Value);
             CalculateStaminaBasedOnEnduranceLevel(player.playerNetworkManager.endurance.Value);
             CalculateFocusPointsBasedOnMindLevel(player.playerNetworkManager.mind.Value);
+            CalculateAllWeaponAttackPower();
+        }
+
+        public void CalculateAllWeaponAttackPower()
+        {
+            foreach (var item in player.playerInventoryManager.weaponsInRightHandSlots)
+            {
+                CalculateWeaponAttackPower(item);
+            }
+            foreach (var item in player.playerInventoryManager.weaponsInLeftHandSlots)
+            {
+                CalculateWeaponAttackPower(item);
+            }
+        }
+        public override void CalculateWeaponAttackPower(WeaponItem weapon)
+        {
+
+            if (weapon == null)
+                return;
+
+            weapon.physicalDamage = CalculateDamageBasedOnScaling(weapon.physicalDamage, weapon.physicalDamageScaling, weapon.strengthScaling, weapon.dexterityScaling, weapon.intelligenceScaling, weapon.faithScaling);
+            //item.magicDamage = CalculateDamageBasedOnScaling(item.magicDamage, item.physicalDamageScaling, item.strengthScaling, item.dexterityScaling, item.intelligenceScaling, item.faithScaling);
+
+            weapon.attackPower = weapon.physicalDamage + weapon.magicDamage + weapon.fireDamage + weapon.lightningDamage + weapon.holyDamage;
+        }
+
+        private int CalculateDamageBasedOnScaling(int damage, List<CharacterAttribute> scalings, int strScaling, int dexScaling, int intScaling, int faiScaling)
+        {
+            int totalDamage = damage;
+
+            foreach (var scaling in scalings)
+            {
+                switch (scaling)
+                {
+                    case CharacterAttribute.Vigor:
+                        totalDamage += player.playerNetworkManager.vigor.Value;
+                        break;
+                    case CharacterAttribute.Mind:
+                        totalDamage += player.playerNetworkManager.mind.Value;
+                        break;
+                    case CharacterAttribute.Endurance:
+                        totalDamage += player.playerNetworkManager.endurance.Value;
+                        break;
+                    case CharacterAttribute.Strength:
+                        totalDamage += ((strScaling / 100) * player.playerNetworkManager.strength.Value);
+                        break;
+                    case CharacterAttribute.Dexterity:
+                        totalDamage += ((dexScaling / 100) * player.playerNetworkManager.dexterity.Value);
+                        break;
+                    case CharacterAttribute.Intelligence:
+                        totalDamage += ((intScaling / 100) * player.playerNetworkManager.intelligence.Value);
+                        break;
+                    case CharacterAttribute.Faith:
+                        totalDamage += ((faiScaling / 100) * player.playerNetworkManager.faith.Value);
+                        break;
+                    case CharacterAttribute.Luck:
+                        totalDamage += player.playerNetworkManager.luck.Value;
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+            return totalDamage;
         }
 
         public override void CalculateTotalArmorAbsorption()
