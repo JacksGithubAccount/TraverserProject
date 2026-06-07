@@ -669,8 +669,8 @@ namespace TraverserProject
             playerInventoryManager.rightHandWeaponIndex = currentCharacterData.rightWeaponIndex;
             if (currentCharacterData.rightWeaponIndex >= 0)
             {
-                playerInventoryManager.currentRightHandWeapon = playerInventoryManager.weaponsInRightHandSlots[currentCharacterData.rightWeaponIndex];
                 playerNetworkManager.currentRightHandWeaponID.Value = playerInventoryManager.weaponsInRightHandSlots[currentCharacterData.rightWeaponIndex].itemID;
+                playerInventoryManager.currentRightHandWeapon = playerInventoryManager.weaponsInRightHandSlots[currentCharacterData.rightWeaponIndex];                
             }
             else
             {
@@ -680,8 +680,8 @@ namespace TraverserProject
             playerInventoryManager.leftHandWeaponIndex = currentCharacterData.leftWeaponIndex;
             if (currentCharacterData.leftWeaponIndex >= 0)
             {
-                playerInventoryManager.currentLeftHandWeapon = playerInventoryManager.weaponsInLeftHandSlots[currentCharacterData.leftWeaponIndex];
                 playerNetworkManager.currentLeftHandWeaponID.Value = playerInventoryManager.weaponsInLeftHandSlots[currentCharacterData.leftWeaponIndex].itemID;
+                playerInventoryManager.currentLeftHandWeapon = playerInventoryManager.weaponsInLeftHandSlots[currentCharacterData.leftWeaponIndex];                
             }
             else
             {

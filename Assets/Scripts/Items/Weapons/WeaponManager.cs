@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace TraverserProject
@@ -29,14 +30,19 @@ namespace TraverserProject
             if (meleeDamageCollider == null)
                 return;
 
+            //upgrade damage
             int upgradeLevel = (int)weapon.upgradeLevel;
             int upgradeDamage = 0;
-
-            for (int i = 0; i < upgradeLevel; i++)
+            for (int i = 0; i <= upgradeLevel; i++)
             {
                 if (i >= 1)
                     upgradeDamage += 11;
             }
+
+            //scaling damage
+            //int scalingDamage = 0;
+            //weapon.physicalDamage = CalculateDamageBasedOnScaling(weapon.physicalBaseDamage, weapon.physicalDamageScaling, weapon.strengthScaling, weapon.dexterityScaling, weapon.intelligenceScaling, weapon.faithScaling);
+
 
             meleeDamageCollider.characterCausingDamage = characterWieldingWeapon;
 
@@ -158,6 +164,48 @@ namespace TraverserProject
                 meleeDamageCollider.dual_Jumping_Heavy_Attack_01_Modifier = weapon.dual_Jumping_Heavy_Attack_01_Modifier;
                 meleeDamageCollider.dual_Jumping_Heavy_Attack_01_PhysicalDamageType = weapon.dual_Jumping_Heavy_Attack_Off_01_PhysicalDamageType;
             }
+        }
+
+        private int CalculateDamageBasedOnScaling(int damage, List<CharacterAttribute> scalings, int strScaling, int dexScaling, int intScaling, int faiScaling)
+        {
+            int totalDamage = damage;
+            PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+
+            foreach (var scaling in scalings)
+            {
+                switch (scaling)
+                {
+                    case CharacterAttribute.Vigor:
+                        totalDamage += player.playerNetworkManager.vigor.Value;
+                        break;
+                    case CharacterAttribute.Mind:
+                        totalDamage += player.playerNetworkManager.mind.Value;
+                        break;
+                    case CharacterAttribute.Endurance:
+                        totalDamage += player.playerNetworkManager.endurance.Value;
+                        break;
+                    case CharacterAttribute.Strength:
+                        totalDamage += ((strScaling / 100) * player.playerNetworkManager.strength.Value);
+                        break;
+                    case CharacterAttribute.Dexterity:
+                        totalDamage += ((dexScaling / 100) * player.playerNetworkManager.dexterity.Value);
+                        break;
+                    case CharacterAttribute.Intelligence:
+                        totalDamage += ((intScaling / 100) * player.playerNetworkManager.intelligence.Value);
+                        break;
+                    case CharacterAttribute.Faith:
+                        totalDamage += ((faiScaling / 100) * player.playerNetworkManager.faith.Value);
+                        break;
+                    case CharacterAttribute.Luck:
+                        totalDamage += player.playerNetworkManager.luck.Value;
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+            return totalDamage;
         }
 
         public void ToggleWeaponTrail(bool status)

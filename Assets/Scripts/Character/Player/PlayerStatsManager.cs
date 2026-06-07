@@ -50,7 +50,17 @@ namespace TravserserProject
             if (weapon == null)
                 return;
 
-            weapon.physicalDamage = CalculateDamageBasedOnScaling(weapon.physicalDamage, weapon.physicalDamageScaling, weapon.strengthScaling, weapon.dexterityScaling, weapon.intelligenceScaling, weapon.faithScaling);
+            //upgrade power
+            int upgradeLevel = (int)weapon.upgradeLevel;
+            int upgradePower = 0;
+            for (int i = 0; i <= upgradeLevel; i++)
+            {
+                if (i >= 1)
+                    upgradePower += 11;
+            }
+
+            //scaling power
+            int physicalScalingPower = CalculateDamageBasedOnScaling(weapon.physicalBaseDamage, weapon.physicalDamageScaling, weapon.strengthScaling, weapon.dexterityScaling, weapon.intelligenceScaling, weapon.faithScaling);
             //item.magicDamage = CalculateDamageBasedOnScaling(item.magicDamage, item.physicalDamageScaling, item.strengthScaling, item.dexterityScaling, item.intelligenceScaling, item.faithScaling);
 
             weapon.attackPower = weapon.physicalDamage + weapon.magicDamage + weapon.fireDamage + weapon.lightningDamage + weapon.holyDamage;

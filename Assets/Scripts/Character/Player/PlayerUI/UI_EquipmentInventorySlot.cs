@@ -39,7 +39,10 @@ namespace TraverserProject
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
 
                     if (player.playerInventoryManager.rightHandWeaponIndex == 0)
+                    {
                         player.playerNetworkManager.currentRightHandWeaponID.Value = currentItem.itemID;
+                        player.playerInventoryManager.currentRightHandWeapon = currentItem as WeaponItem;
+                    }
 
                     player.playerStatsManager.CalculateWeaponAttackPower(player.playerInventoryManager.weaponsInRightHandSlots[0]);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
@@ -54,7 +57,10 @@ namespace TraverserProject
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
 
                     if (player.playerInventoryManager.rightHandWeaponIndex == 1)
+                    {
                         player.playerNetworkManager.currentRightHandWeaponID.Value = currentItem.itemID;
+                        player.playerInventoryManager.currentRightHandWeapon = currentItem as WeaponItem;
+                    }
 
                     player.playerStatsManager.CalculateWeaponAttackPower(player.playerInventoryManager.weaponsInRightHandSlots[1]);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
@@ -69,7 +75,10 @@ namespace TraverserProject
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
 
                     if (player.playerInventoryManager.rightHandWeaponIndex == 2)
+                    {
                         player.playerNetworkManager.currentRightHandWeaponID.Value = currentItem.itemID;
+                        player.playerInventoryManager.currentRightHandWeapon = currentItem as WeaponItem;
+                    }
 
                     player.playerStatsManager.CalculateWeaponAttackPower(player.playerInventoryManager.weaponsInRightHandSlots[2]);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
@@ -84,7 +93,10 @@ namespace TraverserProject
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
 
                     if (player.playerInventoryManager.leftHandWeaponIndex == 0)
+                    {
                         player.playerNetworkManager.currentLeftHandWeaponID.Value = currentItem.itemID;
+                        player.playerInventoryManager.currentLeftHandWeapon = currentItem as WeaponItem;
+                    }
 
                     player.playerStatsManager.CalculateWeaponAttackPower(player.playerInventoryManager.weaponsInLeftHandSlots[0]);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
@@ -99,7 +111,10 @@ namespace TraverserProject
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
 
                     if (player.playerInventoryManager.leftHandWeaponIndex == 1)
+                    {
                         player.playerNetworkManager.currentLeftHandWeaponID.Value = currentItem.itemID;
+                        player.playerInventoryManager.currentLeftHandWeapon = currentItem as WeaponItem;
+                    }
 
                     player.playerStatsManager.CalculateWeaponAttackPower(player.playerInventoryManager.weaponsInLeftHandSlots[1]);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
@@ -114,7 +129,10 @@ namespace TraverserProject
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
 
                     if (player.playerInventoryManager.leftHandWeaponIndex == 2)
+                    {
                         player.playerNetworkManager.currentLeftHandWeaponID.Value = currentItem.itemID;
+                        player.playerInventoryManager.currentLeftHandWeapon = currentItem as WeaponItem;
+                    }
 
                     player.playerStatsManager.CalculateWeaponAttackPower(player.playerInventoryManager.weaponsInLeftHandSlots[2]);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();

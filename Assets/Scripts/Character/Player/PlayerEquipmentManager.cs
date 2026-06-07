@@ -1008,14 +1008,16 @@ namespace TraverserProject
                 {
                     player.playerInventoryManager.rightHandWeaponIndex = -1;
                     selectedWeapon = WorldItemDatabase.Singleton.unarmedWeapon;
-                    player.playerInventoryManager.currentRightHandWeapon = selectedWeapon;
                     player.playerNetworkManager.currentRightHandWeaponID.Value = selectedWeapon.itemID;
+                    player.playerInventoryManager.currentRightHandWeapon = selectedWeapon;
+                    
                 }
                 else
                 {
                     player.playerInventoryManager.rightHandWeaponIndex = firstWeaponPosition;
-                    player.playerInventoryManager.currentRightHandWeapon = firstWeapon;
                     player.playerNetworkManager.currentRightHandWeaponID.Value = firstWeapon.itemID;
+                    player.playerInventoryManager.currentRightHandWeapon = firstWeapon;
+                    
                 }
                 return;
             }
@@ -1027,8 +1029,8 @@ namespace TraverserProject
                 if (player.playerInventoryManager.weaponsInRightHandSlots[player.playerInventoryManager.rightHandWeaponIndex].itemID != WorldItemDatabase.Singleton.unarmedWeapon.itemID)
                 {
                     selectedWeapon = player.playerInventoryManager.weaponsInRightHandSlots[player.playerInventoryManager.rightHandWeaponIndex];
-                    player.playerInventoryManager.currentRightHandWeapon = selectedWeapon;
                     player.playerNetworkManager.currentRightHandWeaponID.Value = selectedWeapon.itemID;
+                    player.playerInventoryManager.currentRightHandWeapon = selectedWeapon;                    
                     return;
                 }
             }

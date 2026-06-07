@@ -209,6 +209,9 @@ namespace TraverserProject
                 weaponItemStatsWindow.SetActive(true);
                 
                 WeaponItem weaponItem = (WeaponItem)item;
+                if (weaponItem.upgradeLevel != UpgradeLevel.Zero)
+                    inventoryDetailItemNameText.text = item.itemName + " +" + (int)weaponItem.upgradeLevel;
+
                 inventoryDetailItemSkillDescriptionText.text = weaponItem.ashOfWarAction.ashOfWarDescription;
 
                 weaponItemClassText.text = weaponItem.weaponClass.ToString();
