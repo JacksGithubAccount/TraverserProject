@@ -22,6 +22,13 @@ namespace TraverserProject
         [Header("Upgrade Level")]
         public UpgradeLevel upgradeLevel;
 
+        [Header("Weapon Upgrade Amount")]
+        public float physicalUpgradeAmount = 1.1f;
+        public float magicUpgradeAmount = 1.1f;
+        public float fireUpgradeAmount = 1.1f;
+        public float lightningUpgradeAmount = 1.1f;
+        public float holyUpgradeAmount = 1.1f;
+
         [Header("Weapon Model")]
         public GameObject weaponModel;
 
@@ -44,14 +51,32 @@ namespace TraverserProject
         public int lightningBaseDamage = 0;
         public int holyBaseDamage = 0;
 
+        [Header("Weapon Upgrade Damage")]
+        public int physicalUpgradeDamage = 0;
+        public int magicUpgradeDamage = 0;
+        public int fireUpgradeDamage = 0;
+        public int lightningUpgradeDamage = 0;
+        public int holyUpgradeDamage = 0;
+
+        [Header("Weapon Scaling Damage")]
+        public int physicalScalingDamage = 0;
+        public int magicScalingDamage = 0;
+        public int fireScalingDamage = 0;
+        public int lightningScalingDamage = 0;
+        public int holyScalingDamage = 0;
+
         [Header("Weapon Total Damage")]
         public int attackPower = 0;
         public int physicalDamage = 0;
         public List<CharacterAttribute> physicalDamageScaling = new List<CharacterAttribute> { CharacterAttribute.Strength, CharacterAttribute.Dexterity };
         public int magicDamage = 0;
+        public List<CharacterAttribute> magicDamageScaling = new List<CharacterAttribute> { CharacterAttribute.Intelligence};
         public int fireDamage = 0;
+        public List<CharacterAttribute> fireDamageScaling = new List<CharacterAttribute> { };
         public int lightningDamage = 0;
+        public List<CharacterAttribute> lightningDamageScaling = new List<CharacterAttribute> { CharacterAttribute.Faith };
         public int holyDamage = 0;
+        public List<CharacterAttribute> holyDamageScaling = new List<CharacterAttribute> { CharacterAttribute.Faith };
         public float CriticalModifier = 1.00f;
 
         [Header("Weapon Blocking Absorption")]

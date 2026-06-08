@@ -52,6 +52,11 @@ namespace TraverserProject
         [SerializeField] TextMeshProUGUI weaponItemFireAttackPowerText;
         [SerializeField] TextMeshProUGUI weaponItemLightningAttackPowerText;
         [SerializeField] TextMeshProUGUI weaponItemHolyAttackPowerText;
+        [SerializeField] TextMeshProUGUI weaponItemPhysicalScalingAttackPowerText;
+        [SerializeField] TextMeshProUGUI weaponItemMagicScalingAttackPowerText;
+        [SerializeField] TextMeshProUGUI weaponItemFireScalingAttackPowerText;
+        [SerializeField] TextMeshProUGUI weaponItemLightningScalingAttackPowerText;
+        [SerializeField] TextMeshProUGUI weaponItemHolyScalingAttackPowerText;
         [SerializeField] TextMeshProUGUI weaponItemCriticalAttackPowerText;
         [SerializeField] TextMeshProUGUI weaponItemPhysicalGuardNegationText;
         [SerializeField] TextMeshProUGUI weaponItemMagicGuardNegationText;
@@ -255,12 +260,52 @@ namespace TraverserProject
                 weaponItemAshOfWarFPCostText.text = weaponItem.ashOfWarAction.focusPointCost.ToString();
                 weaponItemWeightText.text = weaponItem.itemWeight.ToString();
 
-                weaponItemPhysicalAttackPowerText.text = weaponItem.physicalDamage.ToString();
-                weaponItemMagicAttackPowerText.text = weaponItem.magicDamage.ToString();
-                weaponItemFireAttackPowerText.text = weaponItem.fireDamage.ToString();
-                weaponItemLightningAttackPowerText.text = weaponItem.lightningDamage.ToString();
-                weaponItemHolyAttackPowerText.text = weaponItem.holyDamage.ToString();
+                weaponItemPhysicalAttackPowerText.text = (weaponItem.physicalBaseDamage + weaponItem.physicalUpgradeDamage).ToString();
+                weaponItemMagicAttackPowerText.text = (weaponItem.magicBaseDamage + weaponItem.magicUpgradeDamage).ToString();
+                weaponItemFireAttackPowerText.text = (weaponItem.fireBaseDamage + weaponItem.fireUpgradeDamage).ToString();
+                weaponItemLightningAttackPowerText.text = (weaponItem.lightningBaseDamage + weaponItem.lightningUpgradeDamage).ToString();
+                weaponItemHolyAttackPowerText.text = (weaponItem.holyBaseDamage + weaponItem.holyUpgradeDamage).ToString();
                 weaponItemCriticalAttackPowerText.text = weaponItem.CriticalModifier.ToString();
+
+                if (weaponItem.physicalBaseDamage > 0)
+                {
+                    weaponItemPhysicalScalingAttackPowerText.text = "+" + weaponItem.physicalScalingDamage.ToString();
+                }else
+                {
+                    weaponItemPhysicalScalingAttackPowerText.text = "";
+                }
+                if (weaponItem.magicBaseDamage > 0)
+                {
+                    weaponItemMagicScalingAttackPowerText.text = "+" + weaponItem.magicScalingDamage.ToString();
+                }
+                else
+                {
+                    weaponItemMagicScalingAttackPowerText.text = "";
+                }
+                if (weaponItem.fireBaseDamage > 0)
+                {
+                    weaponItemFireScalingAttackPowerText.text = "+" + weaponItem.fireScalingDamage.ToString();
+                }
+                else
+                {
+                    weaponItemFireScalingAttackPowerText.text = "";
+                }
+                if (weaponItem.lightningBaseDamage > 0)
+                {
+                    weaponItemLightningScalingAttackPowerText.text = "+" + weaponItem.lightningScalingDamage.ToString();
+                }
+                else
+                {
+                    weaponItemLightningScalingAttackPowerText.text = "";
+                }
+                if (weaponItem.holyBaseDamage > 0)
+                {
+                    weaponItemHolyScalingAttackPowerText.text = "+" + weaponItem.holyScalingDamage.ToString();
+                }
+                else
+                {
+                    weaponItemHolyScalingAttackPowerText.text = "";
+                }
 
                 weaponItemPhysicalGuardNegationText.text = weaponItem.physicalBaseDamageAbsorption.ToString();
                 weaponItemMagicGuardNegationText.text = weaponItem.magicBaseDamageAbsorption.ToString(); 

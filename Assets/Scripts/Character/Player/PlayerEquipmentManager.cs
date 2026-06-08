@@ -1017,8 +1017,8 @@ namespace TraverserProject
                     player.playerInventoryManager.rightHandWeaponIndex = firstWeaponPosition;
                     player.playerNetworkManager.currentRightHandWeaponID.Value = firstWeapon.itemID;
                     player.playerInventoryManager.currentRightHandWeapon = firstWeapon;
-                    
                 }
+                rightWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
                 return;
             }
 
@@ -1107,6 +1107,7 @@ namespace TraverserProject
                     player.playerInventoryManager.currentLeftHandWeapon = firstWeapon;
                     player.playerNetworkManager.currentLeftHandWeaponID.Value = firstWeapon.itemID;
                 }
+                leftWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
                 return;
             }
 

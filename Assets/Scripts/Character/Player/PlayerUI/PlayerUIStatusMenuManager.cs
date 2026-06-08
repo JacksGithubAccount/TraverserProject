@@ -97,8 +97,7 @@ namespace TraverserProject
             spellSlotsText.text = "Placeholder";
 
             rWeapon1Text.text = player.playerInventoryManager.weaponsInRightHandSlots[0].attackPower.ToString();
-            rWeapon2Text.text = player.playerEquipmentManager.rightWeaponManager.meleeDamageCollider.physicalDamage.ToString();
-            //rWeapon2Text.text = player.playerInventoryManager.weaponsInRightHandSlots[1].attackPower.ToString();
+            rWeapon2Text.text = player.playerInventoryManager.weaponsInRightHandSlots[1].attackPower.ToString();
             rWeapon3Text.text = player.playerInventoryManager.weaponsInRightHandSlots[2].attackPower.ToString();
             lWeapon1Text.text = player.playerInventoryManager.weaponsInLeftHandSlots[0].attackPower.ToString();
             lWeapon2Text.text = player.playerInventoryManager.weaponsInLeftHandSlots[1].attackPower.ToString();

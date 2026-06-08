@@ -24,30 +24,49 @@ MonoBehaviour:
   itemWeight: 0
   weaponAnimator: {fileID: 22100000, guid: be65e939cf281a842bcbc0c517560755, type: 2}
   weaponModelType: 0
-  weaponSwingVFX: {fileID: 6094051591165138517, guid: 0326f6383bb54074ea09cb7a6e1b4a12, type: 3}
+  weaponSwingVFX: {fileID: 0}
   weaponClass: 0
   upgradeLevel: 0
+  physicalUpgradeAmount: 1.1
+  magicUpgradeAmount: 1.1
+  fireUpgradeAmount: 1.1
+  lightningUpgradeAmount: 1.1
+  holyUpgradeAmount: 1.1
   weaponModel: {fileID: 804672481472311766, guid: 770aea3b2f746004b9e92a12a1669c2a, type: 3}
   strengthREQ: 10
   dexterityREQ: 10
   intelligenceREQ: 0
   faithREQ: 0
   strengthScaling: 100
-  dexterityScaling: 0
-  intelligenceScaling: 0
-  faithScaling: 0
-  physicalBaseDamage: 50
-  magicBaseDamage: 0
-  fireBaseDamage: 0
-  lightningBaseDamage: 0
-  holyBaseDamage: 0
-  attackPower: 51
-  physicalDamage: 51
+  dexterityScaling: 150
+  intelligenceScaling: 200
+  faithScaling: 300
+  physicalBaseDamage: 10
+  magicBaseDamage: 10
+  fireBaseDamage: 10
+  lightningBaseDamage: 10
+  holyBaseDamage: 10
+  physicalUpgradeDamage: 0
+  magicUpgradeDamage: 0
+  fireUpgradeDamage: 0
+  lightningUpgradeDamage: 0
+  holyUpgradeDamage: 0
+  physicalScalingDamage: 2
+  magicScalingDamage: 2
+  fireScalingDamage: 0
+  lightningScalingDamage: 3
+  holyScalingDamage: 3
+  attackPower: 60
+  physicalDamage: 12
   physicalDamageScaling: 0300000004000000
-  magicDamage: 0
-  fireDamage: 0
-  lightningDamage: 0
-  holyDamage: 0
+  magicDamage: 12
+  magicDamageScaling: 05000000
+  fireDamage: 10
+  fireDamageScaling: 
+  lightningDamage: 13
+  lightningDamageScaling: 06000000
+  holyDamage: 13
+  holyDamageScaling: 06000000
   CriticalModifier: 1
   physicalBaseDamageAbsorption: 50
   magicBaseDamageAbsorption: 50

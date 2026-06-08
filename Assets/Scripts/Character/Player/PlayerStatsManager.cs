@@ -52,51 +52,114 @@ namespace TravserserProject
 
             //upgrade power
             int upgradeLevel = (int)weapon.upgradeLevel;
-            int upgradePower = 0;
+            if(upgradeLevel == 0)
+            {
+                weapon.physicalUpgradeDamage = 0;
+                weapon.magicUpgradeDamage = 0;
+                weapon.fireUpgradeDamage = 0;
+                weapon.lightningUpgradeDamage = 0;
+                weapon.holyUpgradeDamage = 0;
+            }
             for (int i = 0; i <= upgradeLevel; i++)
             {
                 if (i >= 1)
-                    upgradePower += 11;
+                {
+                    if (weapon.physicalBaseDamage > 0)
+                        weapon.physicalUpgradeDamage += Mathf.RoundToInt((weapon.physicalBaseDamage * weapon.physicalUpgradeAmount) - weapon.physicalBaseDamage);
+                    if (weapon.magicBaseDamage > 0)
+                        weapon.magicUpgradeDamage += Mathf.RoundToInt((weapon.magicBaseDamage * weapon.magicUpgradeAmount) - weapon.magicBaseDamage);
+                    if (weapon.fireBaseDamage > 0)
+                        weapon.fireUpgradeDamage += Mathf.RoundToInt((weapon.fireBaseDamage * weapon.fireUpgradeAmount) - weapon.fireBaseDamage);
+                    if (weapon.lightningBaseDamage > 0)
+                        weapon.lightningUpgradeDamage += Mathf.RoundToInt((weapon.lightningBaseDamage * weapon.lightningUpgradeAmount) - weapon.lightningBaseDamage);
+                    if (weapon.holyBaseDamage > 0)
+                        weapon.holyUpgradeDamage += Mathf.RoundToInt((weapon.holyBaseDamage * weapon.holyUpgradeAmount) - weapon.holyBaseDamage);
+                }
             }
 
             //scaling power
-            int physicalScalingPower = CalculateDamageBasedOnScaling(weapon.physicalBaseDamage, weapon.physicalDamageScaling, weapon.strengthScaling, weapon.dexterityScaling, weapon.intelligenceScaling, weapon.faithScaling);
-            //item.magicDamage = CalculateDamageBasedOnScaling(item.magicDamage, item.physicalDamageScaling, item.strengthScaling, item.dexterityScaling, item.intelligenceScaling, item.faithScaling);
+            weapon.physicalScalingDamage = CalculateDamageBasedOnScaling(weapon.physicalDamageScaling, weapon.strengthScaling, weapon.dexterityScaling, weapon.intelligenceScaling, weapon.faithScaling);
+            weapon.magicScalingDamage = CalculateDamageBasedOnScaling(weapon.magicDamageScaling, weapon.strengthScaling, weapon.dexterityScaling, weapon.intelligenceScaling, weapon.faithScaling);
+            weapon.fireScalingDamage = CalculateDamageBasedOnScaling(weapon.fireDamageScaling, weapon.strengthScaling, weapon.dexterityScaling, weapon.intelligenceScaling, weapon.faithScaling);
+            weapon.lightningScalingDamage = CalculateDamageBasedOnScaling(weapon.lightningDamageScaling, weapon.strengthScaling, weapon.dexterityScaling, weapon.intelligenceScaling, weapon.faithScaling);
+            weapon.holyScalingDamage = CalculateDamageBasedOnScaling(weapon.holyDamageScaling, weapon.strengthScaling, weapon.dexterityScaling, weapon.intelligenceScaling, weapon.faithScaling);
+
+
+
+            int physicalPower = weapon.physicalBaseDamage;
+            if (physicalPower > 0)
+                physicalPower += weapon.physicalUpgradeDamage + weapon.physicalScalingDamage;
+            weapon.physicalDamage = physicalPower;
+
+            int magicDamage = weapon.magicBaseDamage;
+            if (magicDamage > 0)
+                magicDamage += weapon.magicUpgradeDamage + weapon.magicScalingDamage;
+            weapon.magicDamage = magicDamage;
+
+            int fireDamage = weapon.fireBaseDamage;
+            if (fireDamage > 0)
+                fireDamage += weapon.fireUpgradeDamage + weapon.fireScalingDamage;
+            weapon.fireDamage = fireDamage;
+
+            int lightningDamage = weapon.lightningBaseDamage;
+            if (lightningDamage > 0)
+                lightningDamage += weapon.lightningUpgradeDamage + weapon.lightningScalingDamage;
+            weapon.lightningDamage = lightningDamage;
+
+            int holyDamage = weapon.holyBaseDamage;
+            if (holyDamage > 0)
+                holyDamage += weapon.holyUpgradeDamage + weapon.holyScalingDamage;
+            weapon.holyDamage = holyDamage;
 
             weapon.attackPower = weapon.physicalDamage + weapon.magicDamage + weapon.fireDamage + weapon.lightningDamage + weapon.holyDamage;
+
+            if(weapon == player.playerInventoryManager.currentRightHandWeapon)
+            {
+                if (player.playerEquipmentManager.rightWeaponManager == null)
+                    return;
+
+                player.playerEquipmentManager.rightWeaponManager.SetWeaponDamage(player, weapon);
+            }
+            else if (weapon == player.playerInventoryManager.currentLeftHandWeapon)
+            {
+                if (player.playerEquipmentManager.leftWeaponManager == null)
+                    return;
+
+                player.playerEquipmentManager.leftWeaponManager.SetWeaponDamage(player, weapon);
+            }
         }
 
-        private int CalculateDamageBasedOnScaling(int damage, List<CharacterAttribute> scalings, int strScaling, int dexScaling, int intScaling, int faiScaling)
+        private int CalculateDamageBasedOnScaling(List<CharacterAttribute> scalings, int strScaling, int dexScaling, int intScaling, int faiScaling)
         {
-            int totalDamage = damage;
+            int scalingDamage = 0;
 
             foreach (var scaling in scalings)
             {
                 switch (scaling)
                 {
                     case CharacterAttribute.Vigor:
-                        totalDamage += player.playerNetworkManager.vigor.Value;
+                        scalingDamage += player.playerNetworkManager.vigor.Value;
                         break;
                     case CharacterAttribute.Mind:
-                        totalDamage += player.playerNetworkManager.mind.Value;
+                        scalingDamage += player.playerNetworkManager.mind.Value;
                         break;
                     case CharacterAttribute.Endurance:
-                        totalDamage += player.playerNetworkManager.endurance.Value;
+                        scalingDamage += player.playerNetworkManager.endurance.Value;
                         break;
                     case CharacterAttribute.Strength:
-                        totalDamage += ((strScaling / 100) * player.playerNetworkManager.strength.Value);
+                        scalingDamage += ((strScaling / 100) * player.playerNetworkManager.strength.Value);
                         break;
                     case CharacterAttribute.Dexterity:
-                        totalDamage += ((dexScaling / 100) * player.playerNetworkManager.dexterity.Value);
+                        scalingDamage += ((dexScaling / 100) * player.playerNetworkManager.dexterity.Value);
                         break;
                     case CharacterAttribute.Intelligence:
-                        totalDamage += ((intScaling / 100) * player.playerNetworkManager.intelligence.Value);
+                        scalingDamage += ((intScaling / 100) * player.playerNetworkManager.intelligence.Value);
                         break;
                     case CharacterAttribute.Faith:
-                        totalDamage += ((faiScaling / 100) * player.playerNetworkManager.faith.Value);
+                        scalingDamage += ((faiScaling / 100) * player.playerNetworkManager.faith.Value);
                         break;
                     case CharacterAttribute.Luck:
-                        totalDamage += player.playerNetworkManager.luck.Value;
+                        scalingDamage += player.playerNetworkManager.luck.Value;
                         break;
                     default:
                         break;
@@ -104,7 +167,7 @@ namespace TravserserProject
 
             }
 
-            return totalDamage;
+            return scalingDamage;
         }
 
         public override void CalculateTotalArmorAbsorption()

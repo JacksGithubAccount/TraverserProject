@@ -52,6 +52,9 @@ namespace TraverserProject
         {
             foreach (GameObject item in listOfGameObjectPrefabs)
             {
+                if (item == null)
+                    continue;
+
                 Button button = item.GetComponent<Button>();
                 EventTrigger et = item.GetComponent<EventTrigger>();
                 if (button != null)

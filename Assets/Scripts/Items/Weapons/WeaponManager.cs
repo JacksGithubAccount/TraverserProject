@@ -47,28 +47,18 @@ namespace TraverserProject
             meleeDamageCollider.characterCausingDamage = characterWieldingWeapon;
 
             int physicalDamage = weapon.physicalDamage;
-            if (physicalDamage > 0)
-                physicalDamage += upgradeDamage;
             meleeDamageCollider.physicalDamage = physicalDamage;
 
             int magicDamage = weapon.magicDamage;
-            if (magicDamage > 0)
-                magicDamage += upgradeDamage;
             meleeDamageCollider.magicDamage = magicDamage;
 
             int fireDamage = weapon.fireDamage;
-            if (fireDamage > 0)
-                fireDamage += upgradeDamage;
             meleeDamageCollider.fireDamage = fireDamage;
 
             int lightningDamage = weapon.lightningDamage;
-            if (lightningDamage > 0)
-                lightningDamage += upgradeDamage;
             meleeDamageCollider.lightningDamage = lightningDamage;
 
             int holyDamage = weapon.holyDamage;
-            if (holyDamage > 0)
-                holyDamage += upgradeDamage;
             meleeDamageCollider.holyDamage = holyDamage;
 
             meleeDamageCollider.poiseDamage = weapon.poiseDamage;

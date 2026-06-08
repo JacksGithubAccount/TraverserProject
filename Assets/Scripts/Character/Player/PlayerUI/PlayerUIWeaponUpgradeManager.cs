@@ -185,9 +185,11 @@ namespace TraverserProject
             int currentUpgradeLevel = (int)currentSelectedWeapon.upgradeLevel;
             currentUpgradeLevel += 1;
             currentSelectedWeapon.upgradeLevel = (UpgradeLevel)currentUpgradeLevel;
+
             ToggleEquipmentButtons(true);
             confirmUpgradePopUp.SetActive(false);
             PlayerUIManager.Singleton.localPlayer.playerInventoryManager.RemoveItemFromInventory(upgradeCost);
+            PlayerUIManager.Singleton.localPlayer.playerStatsManager.CalculateWeaponAttackPower(currentSelectedWeapon);
             SelectLastSelectedEquipmentSlot();
 
 
