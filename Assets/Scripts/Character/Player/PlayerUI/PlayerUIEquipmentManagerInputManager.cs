@@ -25,6 +25,8 @@ namespace TraverserProject
 
                 playerControls.PlayerActions.X.performed += i => unequipItemInput = true;
             }
+
+            playerControls.Enable();
         }
 
         private void OnDisable()

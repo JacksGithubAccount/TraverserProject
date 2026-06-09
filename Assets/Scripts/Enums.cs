@@ -76,6 +76,22 @@ public enum ShopBuyOrSell
     Selling
 }
 
+public enum ShopCategory
+{
+    AllItems,
+    Tool,
+    CraftingMaterial,
+    UpgradeMaterial,
+    KeyItem,
+    Spells,
+    AshesOfWar,
+    Weapons,
+    ArrowAndBolt,
+    Armor,
+    Accessory,
+    Info
+}
+
 //determines build up status effect type
 public enum BuildUp
 {

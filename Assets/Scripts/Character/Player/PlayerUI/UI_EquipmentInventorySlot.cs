@@ -15,6 +15,12 @@ namespace TraverserProject
             highlightIcon.enabled = false;
             greyedOutIcon.enabled = false;
         }
+
+        public override void SelectSlot()
+        {
+            base.SelectSlot();
+            PlayerUIManager.Singleton.playerUIInventoryManager.DispayItemDetail(currentItem);
+        }
         
         public void EquipItem()
         {

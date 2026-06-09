@@ -557,6 +557,9 @@ namespace TraverserProject
             {
                 LB_Input = false;
 
+                if (PlayerUIManager.Singleton.menuWindowIsOpen)
+                    return;
+
                 player.playerNetworkManager.SetCharacterActionHand(false);
 
                 if (player.playerNetworkManager.isTwoHandingRightWeapon.Value)

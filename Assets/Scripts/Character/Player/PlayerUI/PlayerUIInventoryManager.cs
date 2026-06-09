@@ -35,6 +35,7 @@ namespace TraverserProject
 
         [Header("Inventory Detail Menu")]
         [SerializeField] GameObject inventoryDetailWindow;
+        private Vector3 inventoryDetailWindowPosition = new Vector3(1000, 540, 0);
         [SerializeField] TextMeshProUGUI inventoryDetailItemNameText;
         [SerializeField] Image inventoryDetailImage;
         [SerializeField] TextMeshProUGUI inventoryDetailItemDescriptionText;
@@ -164,14 +165,26 @@ namespace TraverserProject
         [SerializeField] TextMeshProUGUI rangedProjectileItemPassive3Text;
 
 
+        private void Awake()
+        {
+            inventoryDetailWindow.SetActive(false);
+        }
         public override void OpenMenu()
         {
             base.OpenMenu();
 
             ToggleInventoryButtons(true);
             PlayerUIManager.Singleton.CloseAllSubMenuWindows();
-            //RefreshMenu();
+            //RefreshMenu();      
+            inventoryDetailWindow.SetActive(true);
+            inventoryDetailWindow.transform.position = inventoryDetailWindowPosition;
             LoadRecentItemsInventory();
+        }
+
+        public override void CloseMenu()
+        {
+            base.CloseMenu();
+            inventoryDetailWindow.SetActive(false);
         }
 
         public override void CloseSubMenu()
@@ -179,7 +192,7 @@ namespace TraverserProject
             base.CloseSubMenu();
             closeSubmenuWindow.SetActive(false);
             ToggleGameObjectPrefabs(inventorySlotPrefabs, true);
-            ToggleGameObjectPrefabs(inventoryCategorySelectSlotPrefabs, true);
+            ToggleGameObjectPrefabs(inventoryCategorySelectSlotPrefabs, true);            
         }
 
         public void ToggleInventoryButtons(bool isEnabled)

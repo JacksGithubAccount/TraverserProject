@@ -72,6 +72,10 @@ namespace TraverserProject
         [SerializeField] GameObject closeSubmenuWindow;
         [SerializeField] public GameObject IncompatableEquipmentWindow;
 
+        [Header("Inventory Detail Menu")]
+        [SerializeField] GameObject inventoryDetailWindow;
+        private Vector3 inventoryDetailWindowPosition = new Vector3(1575, 540, 0);
+
         private void Awake()
         {
             rightHandSlot01Button = rightHandSlot01.GetComponentInParent<Button>(true);
@@ -111,6 +115,14 @@ namespace TraverserProject
             PlayerUIManager.Singleton.CloseAllSubMenuWindows();
             RefreshMenu();
             RefreshEquipmentSlotIcons();
+            inventoryDetailWindow.SetActive(true);
+            inventoryDetailWindow.transform.position = inventoryDetailWindowPosition;
+        }
+
+        public override void CloseMenu()
+        {
+            base.CloseMenu();
+            inventoryDetailWindow.SetActive(false);
         }
 
         public override void CloseSubMenu()
