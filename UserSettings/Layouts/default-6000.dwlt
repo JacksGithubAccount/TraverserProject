@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2331
     height: 1277
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Scene
   m_RootView: {fileID: 10}
   m_MinSize: {x: 875, y: 482}
   m_MaxSize: {x: 10000, y: 10000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 170
+  controlID: 175
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -772,7 +772,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Data/PreFabs/UI/ShopMenu
+    - Assets/Scripts/Character/Player/PlayerUI
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -782,16 +782,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Data/PreFabs/UI/ShopMenu
+  - Assets/Scripts/Character/Player/PlayerUI
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\jckzh\source\repos\TraverserProject
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 174}
-    m_SelectedIDs: 82df0200
-    m_LastClickedID: 188290
-    m_ExpandedIDs: 000000006021010096240100282a0100462a010000ca9a3b
+    scrollPos: {x: 0, y: 462}
+    m_SelectedIDs: 0c260100
+    m_LastClickedID: 75276
+    m_ExpandedIDs: 00000000482201007e2501008c250100982501009a2501006e6001008a60010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -820,7 +820,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000060210100
+    m_ExpandedIDs: 0000000048220100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -852,18 +852,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: b4060100bc060100c4060100d4060100cc06010044c50000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: UI_EquipmentWeaponSlot
+      m_OriginalName: UI_EquipmentWeaponSlot
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 90258
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
       m_ClientGUIView: {fileID: 4}
@@ -874,7 +874,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 360}
     m_GridSize: 16
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 199
@@ -925,7 +925,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Art/UISprites/Icons/Items/ItemType
+    - Assets/Data/PreFabs/UI/EquipmentMenu
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -935,16 +935,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Art/UISprites/Icons/Items/ItemType
+  - Assets/Data/PreFabs/UI/EquipmentMenu
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\jckzh\source\repos\TraverserProject
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 0adf0200
-    m_LastClickedID: 188170
-    m_ExpandedIDs: 00000000602101009424010096240100a4240100282a0100fe4b01001a4c01001edf02002cdf020032df020000ca9a3b
+    scrollPos: {x: 0, y: 494}
+    m_SelectedIDs: be250100
+    m_LastClickedID: 75198
+    m_ExpandedIDs: 00000000482201007c2501007e250100982501009a250100d6250100d8250100da25010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -973,7 +973,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: dc73ffff
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000060210100
+    m_ExpandedIDs: 0000000048220100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1069,10 +1069,10 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: ccf6ffff
-      m_LastClickedID: -2356
-      m_ExpandedIDs: 48aaf5ff58daffff5edaffffbae7ffffd8e7fffff6e7ffff14e8ffff32e8ffff50e8ffff6ee8ffff8ce8ffffaae8ffffc8e8ffffe6e8ffff04e9ffff22e9ffff40e9ffff5ee9ffff7ce9ffff9ae9ffffb8e9ffffd6e9ffffdce9ffffe2e9ffffece9fffff0e9ffff1aeaffff2aeaffff34eaffff44f4ffff4cf4ffffd2f6ffffdcfafffff2fafffff4ffffff
+      scrollPos: {x: 0, y: 120}
+      m_SelectedIDs: eaf2ffff
+      m_LastClickedID: -3350
+      m_ExpandedIDs: ccf1ffffbaf2ffffc0f2ffffcef2ffffd6f2ffffdaf2ffffe4f2ffffeaf2fffff4f6fffff2faffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
