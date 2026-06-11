@@ -10,55 +10,55 @@ namespace TraverserProject
     public class PlayerUIEquipmentManager : PlayerUIMenu
     {        
         [Header("Weapon Slots")]
-        [SerializeField] Image rightHandSlot01;
+        [SerializeField] UI_EquipmentSlot rightHandSlot01;
         private Button rightHandSlot01Button;
-        [SerializeField] Image rightHandSlot02;
+        [SerializeField] UI_EquipmentSlot rightHandSlot02;
         private Button rightHandSlot02Button;
-        [SerializeField] Image rightHandSlot03;
+        [SerializeField] UI_EquipmentSlot rightHandSlot03;
         private Button rightHandSlot03Button;
-        [SerializeField] Image leftHandSlot01;
+        [SerializeField] UI_EquipmentSlot leftHandSlot01;
         private Button leftHandSlot01Button;
-        [SerializeField] Image leftHandSlot02;
+        [SerializeField] UI_EquipmentSlot leftHandSlot02;
         private Button leftHandSlot02Button;
-        [SerializeField] Image leftHandSlot03;
+        [SerializeField] UI_EquipmentSlot leftHandSlot03;
         private Button leftHandSlot03Button;
 
         [Header("Armor Slots")]
-        [SerializeField] Image headEquipmentSlot;
+        [SerializeField] UI_EquipmentSlot headEquipmentSlot;
         private Button headEquipmentSlotButton;
-        [SerializeField] Image bodyEquipmentSlot;
+        [SerializeField] UI_EquipmentSlot bodyEquipmentSlot;
         private Button bodyEquipmentSlotButton;
-        [SerializeField] Image handEquipmentSlot;
+        [SerializeField] UI_EquipmentSlot handEquipmentSlot;
         private Button handEquipmentSlotButton;
-        [SerializeField] Image legEquipmentSlot;
+        [SerializeField] UI_EquipmentSlot legEquipmentSlot;
         private Button legEquipmentSlotButton;
 
         [Header("Accessory Slots")]
-        [SerializeField] Image accessoryEquipmentSlot01;
+        [SerializeField] UI_EquipmentSlot accessoryEquipmentSlot01;
         private Button accessoryEquipmentSlot01Button;
-        [SerializeField] Image accessoryEquipmentSlot02;
+        [SerializeField] UI_EquipmentSlot accessoryEquipmentSlot02;
         private Button accessoryEquipmentSlot02Button;
-        [SerializeField] Image accessoryEquipmentSlot03;
+        [SerializeField] UI_EquipmentSlot accessoryEquipmentSlot03;
         private Button accessoryEquipmentSlot03Button;
-        [SerializeField] Image accessoryEquipmentSlot04;
+        [SerializeField] UI_EquipmentSlot accessoryEquipmentSlot04;
         private Button accessoryEquipmentSlot04Button;
 
         [Header("Projectile Slots")]
-        [SerializeField] Image mainProjectileEquipmentSlot;
+        [SerializeField] UI_EquipmentSlot mainProjectileEquipmentSlot;
         [SerializeField] TextMeshProUGUI mainProjectileCount;
         private Button mainProjectileEquipmentSlotButton;
-        [SerializeField] Image secondaryProjectileEquipmentSlot;
+        [SerializeField] UI_EquipmentSlot secondaryProjectileEquipmentSlot;
         [SerializeField] TextMeshProUGUI secondaryProjectileCount;
         private Button secondaryProjectileEquipmentSlotButton;
 
         [Header("Quick Slots")]
-        [SerializeField] Image quickSlot01EquipmentSlot;
+        [SerializeField] UI_EquipmentSlot quickSlot01EquipmentSlot;
         [SerializeField] TextMeshProUGUI quickSlot01Count;
         private Button quickSlot01Button;
-        [SerializeField] Image quickSlot02EquipmentSlot;
+        [SerializeField] UI_EquipmentSlot quickSlot02EquipmentSlot;
         [SerializeField] TextMeshProUGUI quickSlot02Count;
         private Button quickSlot02Button;
-        [SerializeField] Image quickSlot03EquipmentSlot;
+        [SerializeField] UI_EquipmentSlot quickSlot03EquipmentSlot;
         [SerializeField] TextMeshProUGUI quickSlot03Count;
         private Button quickSlot03Button;
 
@@ -250,8 +250,9 @@ namespace TraverserProject
             WeaponItem rightHandWeapon01 = player.playerInventoryManager.weaponsInRightHandSlots[0];
             if (rightHandWeapon01.itemIcon != null)
             {
-                rightHandSlot01.enabled = true;
-                rightHandSlot01.sprite = rightHandWeapon01.itemIcon;
+                rightHandSlot01.AddItem(rightHandWeapon01);
+                rightHandSlot01.itemIcon.enabled = true;
+                rightHandSlot01.itemIcon.sprite = rightHandWeapon01.itemIcon;
             }
             else
             {
@@ -261,8 +262,9 @@ namespace TraverserProject
             WeaponItem rightHandWeapon02 = player.playerInventoryManager.weaponsInRightHandSlots[1];
             if (rightHandWeapon02.itemIcon != null)
             {
-                rightHandSlot02.enabled = true;
-                rightHandSlot02.sprite = rightHandWeapon02.itemIcon;
+                rightHandSlot02.AddItem(rightHandWeapon02);
+                rightHandSlot02.itemIcon.enabled = true;
+                rightHandSlot02.itemIcon.sprite = rightHandWeapon02.itemIcon;
             }
             else
             {
@@ -272,8 +274,9 @@ namespace TraverserProject
             WeaponItem rightHandWeapon03 = player.playerInventoryManager.weaponsInRightHandSlots[2];
             if (rightHandWeapon03.itemIcon != null)
             {
-                rightHandSlot03.enabled = true;
-                rightHandSlot03.sprite = rightHandWeapon03.itemIcon;
+                rightHandSlot03.AddItem(rightHandWeapon03);
+                rightHandSlot03.itemIcon.enabled = true;
+                rightHandSlot03.itemIcon.sprite = rightHandWeapon03.itemIcon;
             }
             else
             {
@@ -283,8 +286,9 @@ namespace TraverserProject
             WeaponItem leftHandWeapon01 = player.playerInventoryManager.weaponsInLeftHandSlots[0];
             if (leftHandWeapon01.itemIcon != null)
             {
-                leftHandSlot01.enabled = true;
-                leftHandSlot01.sprite = leftHandWeapon01.itemIcon;
+                leftHandSlot01.AddItem(leftHandWeapon01);
+                leftHandSlot01.itemIcon.enabled = true;
+                leftHandSlot01.itemIcon.sprite = leftHandWeapon01.itemIcon;
             }
             else
             {
@@ -294,8 +298,9 @@ namespace TraverserProject
             WeaponItem leftHandWeapon02 = player.playerInventoryManager.weaponsInLeftHandSlots[1];
             if (leftHandWeapon02.itemIcon != null)
             {
-                leftHandSlot02.enabled = true;
-                leftHandSlot02.sprite = leftHandWeapon02.itemIcon;
+                leftHandSlot02.AddItem(leftHandWeapon02);
+                leftHandSlot02.itemIcon.enabled = true;
+                leftHandSlot02.itemIcon.sprite = leftHandWeapon02.itemIcon;
             }
             else
             {
@@ -305,8 +310,9 @@ namespace TraverserProject
             WeaponItem leftHandWeapon03 = player.playerInventoryManager.weaponsInLeftHandSlots[2];
             if (leftHandWeapon03.itemIcon != null)
             {
-                leftHandSlot03.enabled = true;
-                leftHandSlot03.sprite = leftHandWeapon03.itemIcon;
+                leftHandSlot03.AddItem(leftHandWeapon03);
+                leftHandSlot03.itemIcon.enabled = true;
+                leftHandSlot03.itemIcon.sprite = leftHandWeapon03.itemIcon;
             }
             else
             {
@@ -316,8 +322,9 @@ namespace TraverserProject
             HeadEquipmentItem headEquipment = player.playerInventoryManager.headEquipment;
             if (headEquipment != null)
             {
-                headEquipmentSlot.enabled = true;
-                headEquipmentSlot.sprite = headEquipment.itemIcon;
+                headEquipmentSlot.AddItem(headEquipment);
+                headEquipmentSlot.itemIcon.enabled = true;
+                headEquipmentSlot.itemIcon.sprite = headEquipment.itemIcon;
             }
             else
             {
@@ -327,8 +334,9 @@ namespace TraverserProject
             BodyEquipmentItem bodyEquipment = player.playerInventoryManager.bodyEquipment;
             if (bodyEquipment != null)
             {
-                bodyEquipmentSlot.enabled = true;
-                bodyEquipmentSlot.sprite = bodyEquipment.itemIcon;
+                bodyEquipmentSlot.AddItem(bodyEquipment);
+                bodyEquipmentSlot.itemIcon.enabled = true;
+                bodyEquipmentSlot.itemIcon.sprite = bodyEquipment.itemIcon;
             }
             else
             {
@@ -338,8 +346,9 @@ namespace TraverserProject
             HandEquipmentItem handEquipment = player.playerInventoryManager.handEquipment;
             if (handEquipment != null)
             {
-                handEquipmentSlot.enabled = true;
-                handEquipmentSlot.sprite = handEquipment.itemIcon;
+                handEquipmentSlot.AddItem(handEquipment);
+                handEquipmentSlot.itemIcon.enabled = true;
+                handEquipmentSlot.itemIcon.sprite = handEquipment.itemIcon;
             }
             else
             {
@@ -349,8 +358,9 @@ namespace TraverserProject
             LegEquipmentItem legEquipment = player.playerInventoryManager.legEquipment;
             if (legEquipment != null)
             {
-                legEquipmentSlot.enabled = true;
-                legEquipmentSlot.sprite = legEquipment.itemIcon;
+                legEquipmentSlot.AddItem(legEquipment);
+                legEquipmentSlot.itemIcon.enabled = true;
+                legEquipmentSlot.itemIcon.sprite = legEquipment.itemIcon;
             }
             else
             {
@@ -360,8 +370,9 @@ namespace TraverserProject
             AccessoryEquipmentItem accessory01 = player.playerInventoryManager.accessoryEquipment[0];
             if (accessory01 != null)
             {
-                accessoryEquipmentSlot01.enabled = true;
-                accessoryEquipmentSlot01.sprite = accessory01.itemIcon;
+                accessoryEquipmentSlot01.AddItem(accessory01);
+                accessoryEquipmentSlot01.itemIcon.enabled = true;
+                accessoryEquipmentSlot01.itemIcon.sprite = accessory01.itemIcon;
             }
             else
             {
@@ -371,8 +382,9 @@ namespace TraverserProject
             AccessoryEquipmentItem accessory02 = player.playerInventoryManager.accessoryEquipment[1];
             if (accessory02 != null)
             {
-                accessoryEquipmentSlot02.enabled = true;
-                accessoryEquipmentSlot02.sprite = accessory02.itemIcon;
+                accessoryEquipmentSlot02.AddItem(accessory02);
+                accessoryEquipmentSlot02.itemIcon.enabled = true;
+                accessoryEquipmentSlot02.itemIcon.sprite = accessory02.itemIcon;
             }
             else
             {
@@ -382,8 +394,9 @@ namespace TraverserProject
             AccessoryEquipmentItem accessory03 = player.playerInventoryManager.accessoryEquipment[2];
             if (accessory03 != null)
             {
-                accessoryEquipmentSlot03.enabled = true;
-                accessoryEquipmentSlot03.sprite = accessory03.itemIcon;
+                accessoryEquipmentSlot03.AddItem(accessory03);
+                accessoryEquipmentSlot03.itemIcon.enabled = true;
+                accessoryEquipmentSlot03.itemIcon.sprite = accessory03.itemIcon;
             }
             else
             {
@@ -393,8 +406,9 @@ namespace TraverserProject
             AccessoryEquipmentItem accessory04 = player.playerInventoryManager.accessoryEquipment[3];
             if (accessory04 != null)
             {
-                accessoryEquipmentSlot04.enabled = true;
-                accessoryEquipmentSlot04.sprite = accessory04.itemIcon;
+                accessoryEquipmentSlot04.AddItem(accessory04);
+                accessoryEquipmentSlot04.itemIcon.enabled = true;
+                accessoryEquipmentSlot04.itemIcon.sprite = accessory04.itemIcon;
             }
             else
             {
@@ -404,8 +418,9 @@ namespace TraverserProject
             RangedProjectileItem mainProjectileEquipment = player.playerInventoryManager.mainProjectile;
             if (mainProjectileEquipment != null)
             {
-                mainProjectileEquipmentSlot.enabled = true;
-                mainProjectileEquipmentSlot.sprite = mainProjectileEquipment.itemIcon;
+                mainProjectileEquipmentSlot.AddItem(mainProjectileEquipment);
+                mainProjectileEquipmentSlot.itemIcon.enabled = true;
+                mainProjectileEquipmentSlot.itemIcon.sprite = mainProjectileEquipment.itemIcon;
                 mainProjectileCount.enabled = true;
                 mainProjectileCount.text = mainProjectileEquipment.currentAmmoAmount.ToString();
             }
@@ -418,8 +433,9 @@ namespace TraverserProject
             RangedProjectileItem secondaryProjectileEquipment = player.playerInventoryManager.secondaryProjectile;
             if (secondaryProjectileEquipment != null)
             {
-                secondaryProjectileEquipmentSlot.enabled = true;
-                secondaryProjectileEquipmentSlot.sprite = secondaryProjectileEquipment.itemIcon;
+                secondaryProjectileEquipmentSlot.AddItem(secondaryProjectileEquipment);
+                secondaryProjectileEquipmentSlot.itemIcon.enabled = true;
+                secondaryProjectileEquipmentSlot.itemIcon.sprite = secondaryProjectileEquipment.itemIcon;
                 secondaryProjectileCount.enabled = true;
                 secondaryProjectileCount.text = secondaryProjectileEquipment.currentAmmoAmount.ToString();
             }
@@ -432,8 +448,9 @@ namespace TraverserProject
             QuickSlotItem quickSlotEquipment01 = player.playerInventoryManager.quickSlotItemsInQuickSlots[0];
             if (quickSlotEquipment01 != null)
             {
-                quickSlot01EquipmentSlot.enabled = true;
-                quickSlot01EquipmentSlot.sprite = quickSlotEquipment01.itemIcon;
+                quickSlot01EquipmentSlot.AddItem(quickSlotEquipment01);
+                quickSlot01EquipmentSlot.itemIcon.enabled = true;
+                quickSlot01EquipmentSlot.itemIcon.sprite = quickSlotEquipment01.itemIcon;
 
                 if (quickSlotEquipment01.isConsumable)
                 {
@@ -454,8 +471,9 @@ namespace TraverserProject
             QuickSlotItem quickSlotEquipment02 = player.playerInventoryManager.quickSlotItemsInQuickSlots[1];
             if (quickSlotEquipment02 != null)
             {
-                quickSlot02EquipmentSlot.enabled = true;
-                quickSlot02EquipmentSlot.sprite = quickSlotEquipment02.itemIcon;
+                quickSlot02EquipmentSlot.AddItem(quickSlotEquipment02);
+                quickSlot02EquipmentSlot.itemIcon.enabled = true;
+                quickSlot02EquipmentSlot.itemIcon.sprite = quickSlotEquipment02.itemIcon;
 
                 if (quickSlotEquipment02.isConsumable)
                 {
@@ -476,8 +494,9 @@ namespace TraverserProject
             QuickSlotItem quickSlotEquipment03 = player.playerInventoryManager.quickSlotItemsInQuickSlots[2];
             if (quickSlotEquipment03 != null)
             {
-                quickSlot03EquipmentSlot.enabled = true;
-                quickSlot03EquipmentSlot.sprite = quickSlotEquipment03.itemIcon;
+                quickSlot03EquipmentSlot.AddItem(quickSlotEquipment03);
+                quickSlot03EquipmentSlot.itemIcon.enabled = true;
+                quickSlot03EquipmentSlot.itemIcon.sprite = quickSlotEquipment03.itemIcon;
 
                 if (quickSlotEquipment03.isConsumable)
                 {

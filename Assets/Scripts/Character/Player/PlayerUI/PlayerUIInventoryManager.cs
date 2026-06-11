@@ -218,6 +218,9 @@ namespace TraverserProject
         }
         public void DispayItemDetail(Item item)
         {
+            if (item == null)
+                return;
+
             inventoryDetailItemNameText.text = item.itemName;
             inventoryDetailImage.sprite = item.itemIcon;
             inventoryDetailItemDescriptionText.text = item.itemDescription;
