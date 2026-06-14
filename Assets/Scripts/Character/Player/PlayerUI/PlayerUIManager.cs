@@ -20,6 +20,7 @@ namespace TraverserProject
         [HideInInspector] public PlayerUICharacterMenuManager playerUICharacterMenuManager;
         [HideInInspector] public PlayerUIEquipmentManager playerUIEquipmentManager;
         [HideInInspector] public PlayerUIInventoryManager playerUIInventoryManager;
+        [HideInInspector] public PlayerUISettingsMenuManager playerUISettingsMenuManager;
         [HideInInspector] public PlayerUIStatusMenuManager playerUIStatusMenuManager;
         [HideInInspector] public PlayerUISiteOfGraceManager playerUISiteOfGraceManager;
         [HideInInspector] public PlayerUITeleportLocationManager playerUITeleportLocationManager;
@@ -60,6 +61,7 @@ namespace TraverserProject
             playerUICharacterMenuManager = GetComponentInChildren<PlayerUICharacterMenuManager>();
             playerUIEquipmentManager = GetComponentInChildren<PlayerUIEquipmentManager>();
             playerUIInventoryManager = GetComponentInChildren<PlayerUIInventoryManager>();
+            playerUISettingsMenuManager = GetComponentInChildren<PlayerUISettingsMenuManager>();
             playerUIStatusMenuManager = GetComponentInChildren<PlayerUIStatusMenuManager>();
             playerUISiteOfGraceManager = GetComponentInChildren<PlayerUISiteOfGraceManager>();
             playerUITeleportLocationManager = GetComponentInChildren<PlayerUITeleportLocationManager>();
@@ -92,6 +94,7 @@ namespace TraverserProject
             playerUICharacterMenuManager.CloseMenuAfterFixedFrame();
             playerUIEquipmentManager.CloseMenuAfterFixedFrame();
             playerUIInventoryManager.CloseMenuAfterFixedFrame();
+            playerUISettingsMenuManager.CloseMenuAfterFixedFrame();
             playerUIStatusMenuManager.CloseMenuAfterFixedFrame();
             playerUISiteOfGraceManager.CloseMenuAfterFixedFrame();
             playerUITeleportLocationManager.CloseMenuAfterFixedFrame();

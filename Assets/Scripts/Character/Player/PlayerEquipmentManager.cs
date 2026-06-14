@@ -830,7 +830,14 @@ namespace TraverserProject
 
                 }
 
-                player.playerInventoryManager.headEquipment = null;
+                if (slot == 1)
+                    player.playerInventoryManager.accessoryEquipment[0] = null;
+                if (slot == 2)
+                    player.playerInventoryManager.accessoryEquipment[1] = null;
+                if (slot == 3)
+                    player.playerInventoryManager.accessoryEquipment[2] = null;
+                if (slot == 4)
+                    player.playerInventoryManager.accessoryEquipment[3] = null;
                 return;
             }
 
