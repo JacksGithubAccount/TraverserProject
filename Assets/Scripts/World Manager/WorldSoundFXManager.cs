@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace TraverserProject
 {
@@ -35,6 +36,12 @@ namespace TraverserProject
 
         [Header("Wall Sounds")]
         public AudioClip illusoryWallSFX;
+
+        [Header("BGM")]
+        public AudioSource bgmAudioSource;
+
+        [Header("Audio Mixer")]
+        public AudioMixer masterAudioMixer;
 
 
         private void Awake()
