@@ -15,5 +15,11 @@ namespace TraverserProject
             CloseMenuForOpeningAnotherMenu();
             PlayerUIManager.Singleton.playerUILevelUpManager.OpenMenu();
         }
+
+        public void OpenStorageMenu()
+        {
+            CloseMenuForOpeningAnotherMenu();
+            PlayerUIManager.Singleton.playerUIStorageManager.OpenMenu();
+        }
     }
 }

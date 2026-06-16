@@ -32,6 +32,7 @@ namespace TraverserProject
         [HideInInspector] public PlayerUICraftingManager playerUICraftingManager;
         [HideInInspector] public PlayerUIDialogueWindowManager playerUIDialogueWindowManager;
         [HideInInspector] public PlayerUIShopManager playerUIShopManager;
+        [HideInInspector] public PlayerUIStorageManager playerUIStorageManager;
 
         [Header("UI Flags")]
         public bool menuWindowIsOpen = false;
@@ -73,6 +74,7 @@ namespace TraverserProject
             playerUICraftingManager = GetComponentInChildren<PlayerUICraftingManager>();
             playerUIDialogueWindowManager = GetComponentInChildren<PlayerUIDialogueWindowManager>();
             playerUIShopManager = GetComponentInChildren<PlayerUIShopManager>();
+            playerUIStorageManager = GetComponentInChildren<PlayerUIStorageManager>();
         }
         private void Start()
         {
@@ -104,6 +106,7 @@ namespace TraverserProject
             playerUIBlacksmithMenuManager.CloseMenuAfterFixedFrame();
             playerUICraftingManager.CloseMenuAfterFixedFrame();
             playerUIShopManager.CloseMenuAfterFixedFrame();
+            playerUIStorageManager.CloseMenuAfterFixedFrame();
             CloseAllSubMenuWindows();
             openMenus.Clear();
         }
