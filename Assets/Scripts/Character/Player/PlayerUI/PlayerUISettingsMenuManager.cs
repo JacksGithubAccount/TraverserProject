@@ -8,12 +8,17 @@ namespace TraverserProject
     public class PlayerUISettingsMenuManager : PlayerUIMenu
     {
         [Header("Display Settings")]
+        [SerializeField] GameObject displayWindow;
         public TMP_Dropdown resolutionDropDown;
 
         [Header("Sound Settings")]
+        [SerializeField] GameObject soundWindow;
         public Slider masterSlider;
         public Slider bgmSlider;
         public Slider sfxSlider;
+
+        [Header("Remap Settings")]
+        [SerializeField] GameObject remapWindow;
 
 
 
@@ -22,7 +27,7 @@ namespace TraverserProject
             base.OpenMenu();
 
             PlayerUIManager.Singleton.CloseAllSubMenuWindows();
-            //LoadStatusInformation();
+            LoadDisplayWindow();
         }
 
         public override void CloseSubMenu()
@@ -30,6 +35,28 @@ namespace TraverserProject
             base.CloseSubMenu();
         }
 
+        public void DisableAllSettingsWindow()
+        {
+            displayWindow.SetActive(false);
+            soundWindow.SetActive(false);
+            remapWindow.SetActive(false);
+        }
+
+        public void LoadDisplayWindow()
+        {
+            DisableAllSettingsWindow();
+            displayWindow.SetActive(true);
+        }
+        public void LoadSoundWindow()
+        {
+            DisableAllSettingsWindow();
+            soundWindow.SetActive(true);
+        }
+        public void LoadRemapWindow()
+        {
+            DisableAllSettingsWindow();
+            remapWindow.SetActive(true);
+        }
         public void ToggleFullscreen(bool toggle)
         {
             Screen.fullScreen = toggle;
