@@ -572,6 +572,9 @@ namespace TraverserProject
                 case CharacterMenuDialogueID.BlacksmithTalkDialogueID:
                     dialogue = FindDialogueByStageID(blacksmithMenuDialogueStageID, blacksmithMenuDialogues);
                     break;
+                case CharacterMenuDialogueID.ShopkeeperTalkDialogueID:
+                    dialogue = FindDialogueByStageID(shopkeeperDialogueStageID, shopkeeperDialogues);
+                    break;
                 default:
                     break;
             }

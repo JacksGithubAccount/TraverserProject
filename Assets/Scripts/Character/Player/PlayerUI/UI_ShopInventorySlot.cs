@@ -95,6 +95,7 @@ namespace TraverserProject
 
         public override void SelectSlot()
         {
+            PlayerUIManager.Singleton.playerUIInventoryManager.DispayItemDetail(currentItem);
             switch (PlayerUIManager.Singleton.playerUIShopManager.buyingOrSelling)
             {
                 case ShopBuyOrSell.Buying:

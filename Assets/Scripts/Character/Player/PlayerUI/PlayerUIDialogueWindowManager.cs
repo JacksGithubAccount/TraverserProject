@@ -58,6 +58,12 @@ namespace TraverserProject
             }
         }
 
+        public void StartMenuDialogue()
+        {
+            AICharacterManager dialogueCharacter = PlayerUIManager.Singleton.localPlayer.playerInteractionManager.dialogueCharacter;
+            dialogueCharacter.aiCharacterSoundFXManager.PlayCurrentMenuDialogueEvent();
+        }
+
         public void OpenBuyFromShopMenu()
         {
             CloseMenu();

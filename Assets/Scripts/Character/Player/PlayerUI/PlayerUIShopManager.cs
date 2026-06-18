@@ -21,11 +21,17 @@ namespace TraverserProject
         public UI_ShopItemCategory[] shopCategories;
         [HideInInspector] public int shopCategoriesIndex;
 
+        [Header("Inventory Detail Menu")]
+        [SerializeField] GameObject inventoryDetailWindow;
+        private Vector3 inventoryDetailWindowPosition = new Vector3(1000, 540, 0);
+
         public override void OpenMenu()
         {
             base.OpenMenu();
 
             shopCategoriesIndex = 0;
+            inventoryDetailWindow.SetActive(true);
+            inventoryDetailWindow.transform.position = inventoryDetailWindowPosition;
         }
 
         public override void OpenMenuAfterFixedFrame()
@@ -33,6 +39,14 @@ namespace TraverserProject
             base.OpenMenuAfterFixedFrame();
 
             shopCategoriesIndex = 0;
+            inventoryDetailWindow.SetActive(true);
+            inventoryDetailWindow.transform.position = inventoryDetailWindowPosition;
+        }
+
+        public override void CloseMenu()
+        {
+            base.CloseMenu();
+            inventoryDetailWindow.SetActive(false);
         }
 
         public void OpenBuyMenu()

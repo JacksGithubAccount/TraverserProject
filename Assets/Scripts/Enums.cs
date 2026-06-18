@@ -52,7 +52,8 @@ public enum CharacterDialogueID
 public enum CharacterMenuDialogueID
 {
     NoDialogueID,
-    BlacksmithTalkDialogueID
+    BlacksmithTalkDialogueID,
+    ShopkeeperTalkDialogueID
 }
 
 public enum DialogueEndEvents
