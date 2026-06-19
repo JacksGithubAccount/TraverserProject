@@ -45,6 +45,7 @@ namespace TraverserProject
         public int blacksmithDialogueStageID = 0;
         public int blacksmithMenuDialogueStageID = 0;
         public int shopkeeperDialogueStageID = 0;
+        public int shopkeeperMenuDialogueStageID = 0;
 
         [Header("Dialogues")]
         [SerializeField] List<CharacterDialogue> namelessKnightDialogues = new List<CharacterDialogue>();
@@ -53,6 +54,7 @@ namespace TraverserProject
 
         [Header("Menu Dialogues")]
         [SerializeField] List<CharacterDialogue> blacksmithMenuDialogues = new List<CharacterDialogue>();
+        [SerializeField] List<CharacterDialogue> shopkeeperMenuDialogues = new List<CharacterDialogue>();
 
         private void Awake()
         {
@@ -573,7 +575,7 @@ namespace TraverserProject
                     dialogue = FindDialogueByStageID(blacksmithMenuDialogueStageID, blacksmithMenuDialogues);
                     break;
                 case CharacterMenuDialogueID.ShopkeeperTalkDialogueID:
-                    dialogue = FindDialogueByStageID(shopkeeperDialogueStageID, shopkeeperDialogues);
+                    dialogue = FindDialogueByStageID(shopkeeperMenuDialogueStageID, shopkeeperMenuDialogues);
                     break;
                 default:
                     break;
@@ -638,6 +640,10 @@ namespace TraverserProject
                     blacksmithDialogueStageID = stageIndex;
                     currentCharacterData.blacksmithMenuStageID = blacksmithMenuDialogueStageID;
                     break;
+                case CharacterMenuDialogueID.ShopkeeperTalkDialogueID:
+                    shopkeeperDialogueStageID = stageIndex;
+                    currentCharacterData.shopkeeperMenuStageID = shopkeeperMenuDialogueStageID;
+                    break;
                 default:
                     break;
             }
@@ -649,6 +655,7 @@ namespace TraverserProject
             blacksmithDialogueStageID = currentCharacterData.blacksmithStageID;
             blacksmithMenuDialogueStageID = currentCharacterData.blacksmithMenuStageID;
             shopkeeperDialogueStageID = currentCharacterData.shopkeeperStageID;
+            shopkeeperMenuDialogueStageID = currentCharacterData.shopkeeperMenuStageID;
         }
     }
 }

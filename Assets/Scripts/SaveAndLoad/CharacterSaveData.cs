@@ -132,6 +132,7 @@ namespace TraverserProject
         public int blacksmithStageID = 0;
         public int blacksmithMenuStageID = 0;
         public int shopkeeperStageID = 0;
+        public int shopkeeperMenuStageID = 0;
 
         [Header("Crafting")]
         public List<Recipe> recipesLearnt;

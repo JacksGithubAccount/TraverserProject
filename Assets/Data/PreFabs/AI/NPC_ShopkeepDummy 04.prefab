@@ -240,6 +240,7 @@ MonoBehaviour:
   trueDamage: 0
   poiseDamage: 0
   characterCausingDamage: {fileID: 0}
+  physicalDamageType: 0
 --- !u!4 &8559675972268282694 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8704739715883739415, guid: 657579d186f7f8e45bd9ada60a0a95cf, type: 3}
@@ -1017,6 +1018,7 @@ MonoBehaviour:
   trueDamage: 0
   poiseDamage: 0
   characterCausingDamage: {fileID: 0}
+  physicalDamageType: 0
 --- !u!4 &3998856653136800086 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8298002316568741239, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
@@ -1301,12 +1303,18 @@ MonoBehaviour:
   staminaRegenerationDelay: 2
   blockingStaminaRegenerationReduction: 0.2
   blockingPhysicalAbsorption: 0
+  blockingBluntAbsorption: 0
+  blockingPierceAbsorption: 0
+  blockingSlashAbsorption: 0
   blockingFireAbsorption: 0
   blockingMagicAbsorption: 0
   blockingLightningAbsorption: 0
   blockingHolyAbsorption: 0
   blockingStability: 0
   armorPhysicalDamageAbsorption: 0
+  armorBluntDamageAbsorption: 0
+  armorPierceDamageAbsorption: 0
+  armorSlashDamageAbsorption: 0
   armorMagicDamageAbsorption: 0
   armorFireDamageAbsorption: 0
   armorLightningDamageAbsorption: 0
@@ -1602,6 +1610,12 @@ MonoBehaviour:
     m_InternalValue: 0
   armorPhysicalDamageAbsorptionModifer:
     m_InternalValue: 0
+  armorBluntDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorPierceDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorSlashDamageAbsorptionModifer:
+    m_InternalValue: 0
   armorMagicDamageAbsorptionModifer:
     m_InternalValue: 0
   armorFireDamageAbsorptionModifer:
@@ -1836,7 +1850,7 @@ MonoBehaviour:
   blockingSFX:
   - {fileID: 8300000, guid: 431857fa264f4fd4d8d608c59d3b93f3, type: 3}
   characterDialogueID: 3
-  characterMenuDialogueID: 0
+  characterMenuDialogueID: 2
   interactableDialogueCollider: {fileID: 0}
   currentDialogue: {fileID: 0}
   menuDialogue: {fileID: 0}
@@ -1946,6 +1960,7 @@ MonoBehaviour:
   trueDamage: 0
   poiseDamage: 0
   characterCausingDamage: {fileID: 0}
+  physicalDamageType: 0
 --- !u!4 &6522068272529108552 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2221872609835778665, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
