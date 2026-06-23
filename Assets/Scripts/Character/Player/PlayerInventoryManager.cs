@@ -41,6 +41,9 @@ namespace TraverserProject
         public RangedProjectileItem mainProjectile;
         public RangedProjectileItem secondaryProjectile;
 
+        [Header("Storage")]
+        public List<Item> itemsInStorage;
+
         [Header("Debug")]
         [SerializeField] bool dropItem = false;
 
@@ -163,7 +166,7 @@ namespace TraverserProject
                 {
                     Item itemInInventory = itemsInInventory.Find(x => x.itemID == item.itemID);
                     itemInInventory.currentItemAmount = itemInInventory.currentItemAmount + item.currentItemAmount;
-                    
+
                     if (itemInInventory.currentItemAmount > 99)
                         itemInInventory.currentItemAmount = 99;
                 }
@@ -224,11 +227,56 @@ namespace TraverserProject
 
             GameObject itemDrop = Instantiate(WorldItemDatabase.Singleton.inventoryDropItemPickUpInteractable);
             PickUpItemInteractable itemInteractable = itemDrop.GetComponent<PickUpItemInteractable>();
-            itemDrop.GetComponent<NetworkObject>().Spawn();            
+            itemDrop.GetComponent<NetworkObject>().Spawn();
             itemInteractable.itemID.Value = item.itemID;
             itemInteractable.networkPosition.Value = transform.position;
             itemInteractable.itemAmount = item.currentItemAmount;
             RemoveItemFromQuickSlotOrInventory(item);
+        }
+
+        public void AddItemToStorage(Item item)
+        {
+            itemsInStorage.Add(item);
+        }
+
+        public void RemoveItemFromStorage(Item item)
+        {
+            if (item == null)
+                return;
+
+            bool isStackable = false;
+
+            if (item.maxItemAmount > 1)
+                isStackable = true;
+
+            Item itemInStorage = itemsInStorage.Find(x => x.itemID == item.itemID);
+
+            if (isStackable)
+            {
+                for (int i = itemsInStorage.Count - 1; i > -1; i--)
+                {
+                    if (itemsInStorage[i].itemID == item.itemID)
+                    {
+                        itemsInStorage[i].currentItemAmount -= item.currentItemAmount;
+
+                        if (itemsInStorage[i].currentItemAmount <= 0)
+                            itemsInStorage.Remove(itemInStorage);
+                    }
+                }
+            }
+            else
+            {
+                itemsInStorage.Remove(itemInStorage);
+            }
+
+            //null checker
+            for (int i = itemsInStorage.Count - 1; i > -1; i--)
+            {
+                if (itemsInStorage[i] == null)
+                {
+                    itemsInStorage.RemoveAt(i);
+                }
+            }
         }
     }
 }

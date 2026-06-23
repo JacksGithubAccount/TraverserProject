@@ -5,9 +5,15 @@ namespace TraverserProject
 
     public class UI_StorageInventorySlot : UI_InventorySlot
     {
+        [Header("Inventory Slot Type")]
+        public bool isSelectingFromPlayerInventory;
+
         public override void SelectSlot()
         {
             base.SelectSlot();
+
+            PlayerUIManager.Singleton.playerUIStorageManager.isSelectingFromPlayerInventory = isSelectingFromPlayerInventory;
+
             if (PlayerUIManager.Singleton.playerUIStorageManager.isSelectingFromPlayerInventory)
             {
                 if (currentItem == null)
@@ -28,6 +34,25 @@ namespace TraverserProject
 
                 PlayerUIManager.Singleton.playerUIStorageManager.playerStorageCurrentItemSelectedText.text = currentItem.itemName;
             }
+        }
+
+        public void SwapItemLocation()
+        {
+            if (currentItem == null)
+                return;
+
+            if (isSelectingFromPlayerInventory)
+            {
+                PlayerUIManager.Singleton.localPlayer.playerInventoryManager.RemoveItemFromInventory(currentItem);
+                PlayerUIManager.Singleton.localPlayer.playerInventoryManager.AddItemToStorage(currentItem);
+            }
+            else
+            {
+                PlayerUIManager.Singleton.localPlayer.playerInventoryManager.RemoveItemFromStorage(currentItem);
+                PlayerUIManager.Singleton.localPlayer.playerInventoryManager.AddItemToInventory(currentItem);
+            }
+            PlayerUIManager.Singleton.playerUIStorageManager.RefreshStorage();
+            PlayerUIManager.Singleton.playerUIStorageManager.SelectFirstButton();
         }
 
     }

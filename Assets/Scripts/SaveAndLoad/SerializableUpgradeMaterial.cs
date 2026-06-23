@@ -1,25 +1,29 @@
 using TraverserProject;
 using UnityEngine;
 
-public class SerializableUpgradeMaterial : ISerializationCallbackReceiver
+namespace TraverserProject
 {
-    [SerializeField] public int itemID;
-    [SerializeField] public int itemAmount;
-
-
-    public UpgradeMaterial GetUpgradeMaterialItem()
+    [System.Serializable]
+    public class SerializableUpgradeMaterial : ISerializationCallbackReceiver
     {
-        UpgradeMaterial item = WorldItemDatabase.Singleton.GetUpgradeMaterialFromSerializedData(this);
-        return item;
-    }
+        [SerializeField] public int itemID;
+        [SerializeField] public int itemAmount;
 
-    public void OnAfterDeserialize()
-    {
 
-    }
+        public UpgradeMaterial GetUpgradeMaterialItem()
+        {
+            UpgradeMaterial item = WorldItemDatabase.Singleton.GetUpgradeMaterialFromSerializedData(this);
+            return item;
+        }
 
-    public void OnBeforeSerialize()
-    {
+        public void OnAfterDeserialize()
+        {
 
+        }
+
+        public void OnBeforeSerialize()
+        {
+
+        }
     }
 }

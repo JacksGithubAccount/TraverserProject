@@ -10,20 +10,36 @@ namespace TraverserProject
         public Button button;
         public Image buttonImage;
 
+        [Header("Storage or shop")]
+        public bool isShopCategory = true;
+
 
         public void SetCategory()
         {
             //Resets every other buttons "selected" color before "selecting"a new one
-            for (int i = 0; i < PlayerUIManager.Singleton.playerUIShopManager.shopCategories.Length; i++)
+            if (!isShopCategory)
             {
-                if (PlayerUIManager.Singleton.playerUIShopManager.shopCategories[i] == null)
+                ResetButtonColor(PlayerUIManager.Singleton.playerUIStorageManager.storageCategories);
+                PlayerUIManager.Singleton.playerUIStorageManager.shopCategory = shopCategory;
+                PlayerUIManager.Singleton.playerUIStorageManager.SortStorageByCategory();
+            }else
+            {
+                ResetButtonColor(PlayerUIManager.Singleton.playerUIShopManager.shopCategories);
+                PlayerUIManager.Singleton.playerUIShopManager.shopCategory = shopCategory;
+                PlayerUIManager.Singleton.playerUIShopManager.SortShopByCategory();
+            }
+                buttonImage.color = button.colors.selectedColor;
+        }
+
+        private void ResetButtonColor(UI_ShopItemCategory[] itemCatagories)
+        {
+            for (int i = 0; i < itemCatagories.Length; i++)
+            {
+                if (itemCatagories[i] == null)
                     continue;
 
-                PlayerUIManager.Singleton.playerUIShopManager.shopCategories[i].buttonImage.color = PlayerUIManager.Singleton.playerUIShopManager.shopCategories[i].button.colors.normalColor;
-            }
-            PlayerUIManager.Singleton.playerUIShopManager.shopCategory = shopCategory;
-            PlayerUIManager.Singleton.playerUIShopManager.SortShopByCategory();
-            buttonImage.color = button.colors.selectedColor;
+                itemCatagories[i].buttonImage.color = itemCatagories[i].button.colors.normalColor;
+            }            
         }
 
     }

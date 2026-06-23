@@ -127,6 +127,21 @@ namespace TraverserProject
         public List<SerializableUpgradeMaterial> upgradeMaterialInInventory;
         public List<SerializableCraftingMaterial> craftingMaterialInInventory;
 
+        [Header("Storage")]
+        public List<SerializableWeapon> weaponsInStorage;
+        public List<SerializableRangedProjectile> projectilesInStorage;
+        public List<SerializableQuickSlotItem> quickSlotItemsInStorage;
+        public List<int> headEquipmentInStorage;
+        public List<int> bodyEquipmentInStorage;
+        public List<int> handEquipmentInStorage;
+        public List<int> legEquipmentInStorage;
+        public List<int> accessoryEquipmentInStorage;
+        public List<int> ashesOfWarItemInStorage;
+        public List<int> spellItemInStorage;
+        public List<SerializableKeyItem> keyItemsInStorage;
+        public List<SerializableUpgradeMaterial> upgradeMaterialInStorage;
+        public List<SerializableCraftingMaterial> craftingMaterialInStorage;
+
         [Header("Dialogue")]
         public int namelessKnightStageID = 0;
         public int blacksmithStageID = 0;
@@ -166,6 +181,21 @@ namespace TraverserProject
             keyItemsInInventory = new List<SerializableKeyItem>();
             upgradeMaterialInInventory = new List<SerializableUpgradeMaterial>();
             craftingMaterialInInventory = new List<SerializableCraftingMaterial>();
+
+            weaponsInStorage = new List<SerializableWeapon>();
+            projectilesInStorage = new List<SerializableRangedProjectile>();
+            quickSlotItemsInStorage = new List<SerializableQuickSlotItem>();
+            headEquipmentInStorage = new List<int>();
+            bodyEquipmentInStorage = new List<int>();
+            handEquipmentInStorage = new List<int>();
+            legEquipmentInStorage = new List<int>();
+            accessoryEquipmentInStorage = new List<int>();
+            spellItemInStorage = new List<int>();
+            ashesOfWarItemInStorage = new List<int>();
+            keyItemsInStorage = new List<SerializableKeyItem>();
+            upgradeMaterialInStorage = new List<SerializableUpgradeMaterial>();
+            craftingMaterialInStorage = new List<SerializableCraftingMaterial>();
+
             recipesLearnt = new List<Recipe>();
             staticEffects = new List<int>();
             timedEffects = new List<SerializableTimedEffect>();

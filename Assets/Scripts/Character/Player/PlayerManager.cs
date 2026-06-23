@@ -445,6 +445,19 @@ namespace TraverserProject
             currentCharacterData.keyItemsInInventory = new List<SerializableKeyItem>();
             currentCharacterData.upgradeMaterialInInventory = new List<SerializableUpgradeMaterial>();
             currentCharacterData.craftingMaterialInInventory = new List<SerializableCraftingMaterial>();
+            currentCharacterData.weaponsInStorage = new List<SerializableWeapon>();
+            currentCharacterData.projectilesInStorage = new List<SerializableRangedProjectile>();
+            currentCharacterData.quickSlotItemsInStorage = new List<SerializableQuickSlotItem>();
+            currentCharacterData.headEquipmentInStorage = new List<int>();
+            currentCharacterData.bodyEquipmentInStorage = new List<int>();
+            currentCharacterData.handEquipmentInStorage = new List<int>();
+            currentCharacterData.legEquipmentInStorage = new List<int>();
+            currentCharacterData.accessoryEquipmentInStorage = new List<int>();
+            currentCharacterData.spellItemInStorage = new List<int>();
+            currentCharacterData.ashesOfWarItemInStorage = new List<int>();
+            currentCharacterData.keyItemsInStorage = new List<SerializableKeyItem>();
+            currentCharacterData.upgradeMaterialInStorage = new List<SerializableUpgradeMaterial>();
+            currentCharacterData.craftingMaterialInStorage = new List<SerializableCraftingMaterial>();
             currentCharacterData.recipesLearnt = new List<Recipe>();
             currentCharacterData.staticEffects = new List<int>();
             currentCharacterData.timedEffects = new List<SerializableTimedEffect>();
@@ -480,7 +493,7 @@ namespace TraverserProject
                 if (bodyEquipmentInInventory != null)
                     currentCharacterData.bodyEquipmentInInventory.Add(bodyEquipmentInInventory.itemID);
                 if (handEquipmentInInventory != null)
-                   currentCharacterData.handEquipmentInInventory.Add(handEquipmentInInventory.itemID);
+                    currentCharacterData.handEquipmentInInventory.Add(handEquipmentInInventory.itemID);
                 if (legEquipmentInInventory != null)
                     currentCharacterData.legEquipmentInInventory.Add(legEquipmentInInventory.itemID);
                 if (accessoryInInventory != null)
@@ -501,6 +514,61 @@ namespace TraverserProject
                     currentCharacterData.craftingMaterialInInventory.Add(WorldSaveGameManager.Singleton.GetSerializableCraftingMaterialFromCraftingMaterial(craftingMaterial));
                 if (keyItem != null)
                     currentCharacterData.keyItemsInInventory.Add(WorldSaveGameManager.Singleton.GetSerializableKeyItemFromKeyItem(keyItem));
+
+            }
+
+            for (int i = 0; i < playerInventoryManager.itemsInStorage.Count; i++)
+            {
+                if (playerInventoryManager.itemsInStorage[i] == null)
+                    continue;
+
+                WeaponItem weaponInStorage = playerInventoryManager.itemsInStorage[i] as WeaponItem;
+                HeadEquipmentItem headEquipmentInStorage = playerInventoryManager.itemsInStorage[i] as HeadEquipmentItem;
+                BodyEquipmentItem bodyEquipmentInStorage = playerInventoryManager.itemsInStorage[i] as BodyEquipmentItem;
+                HandEquipmentItem handEquipmentInStorage = playerInventoryManager.itemsInStorage[i] as HandEquipmentItem;
+                LegEquipmentItem legEquipmentInStorage = playerInventoryManager.itemsInStorage[i] as LegEquipmentItem;
+                AccessoryEquipmentItem accessoryInStorage = playerInventoryManager.itemsInStorage[i] as AccessoryEquipmentItem;
+                SpellItem spellInStorage = playerInventoryManager.itemsInStorage[i] as SpellItem;
+                AshOfWar ashOfWarInStorage = playerInventoryManager.itemsInStorage[i] as AshOfWar;
+
+                QuickSlotItem quickSlotItemInStorage = playerInventoryManager.itemsInStorage[i] as QuickSlotItem;
+                RangedProjectileItem projectileInStorage = playerInventoryManager.itemsInStorage[i] as RangedProjectileItem;
+
+                UpgradeMaterial upgradeMaterial = playerInventoryManager.itemsInStorage[i] as UpgradeMaterial;
+                CraftingMaterial craftingMaterial = playerInventoryManager.itemsInStorage[i] as CraftingMaterial;
+                KeyItem keyItem = playerInventoryManager.itemsInStorage[i] as KeyItem;
+
+
+
+                if (weaponInStorage != null)
+                    currentCharacterData.weaponsInStorage.Add(WorldSaveGameManager.Singleton.GetSerializableWeaponFromWeaponItem(weaponInStorage));
+
+                if (headEquipmentInStorage != null)
+                    currentCharacterData.headEquipmentInStorage.Add(headEquipmentInStorage.itemID);
+                if (bodyEquipmentInStorage != null)
+                    currentCharacterData.bodyEquipmentInStorage.Add(bodyEquipmentInStorage.itemID);
+                if (handEquipmentInStorage != null)
+                    currentCharacterData.handEquipmentInStorage.Add(handEquipmentInStorage.itemID);
+                if (legEquipmentInStorage != null)
+                    currentCharacterData.legEquipmentInStorage.Add(legEquipmentInStorage.itemID);
+                if (accessoryInStorage != null)
+                    currentCharacterData.accessoryEquipmentInStorage.Add(accessoryInStorage.itemID);
+                if (spellInStorage != null)
+                    currentCharacterData.spellItemInStorage.Add(spellInStorage.itemID);
+                if (ashOfWarInStorage != null)
+                    currentCharacterData.ashesOfWarItemInStorage.Add(ashOfWarInStorage.itemID);
+
+                if (projectileInStorage != null)
+                    currentCharacterData.projectilesInStorage.Add(WorldSaveGameManager.Singleton.GetSerializableRangedProjectileFromRangedProjectileItem(projectileInStorage));
+                if (quickSlotItemInStorage != null)
+                    currentCharacterData.quickSlotItemsInStorage.Add(WorldSaveGameManager.Singleton.GetSerializableQuickSlotItemFromQuickSlotItem(quickSlotItemInStorage));
+
+                if (upgradeMaterial != null)
+                    currentCharacterData.upgradeMaterialInStorage.Add(WorldSaveGameManager.Singleton.GetSerializableUpgradeMaterialFromUpgradeMaterial(upgradeMaterial));
+                if (craftingMaterial != null)
+                    currentCharacterData.craftingMaterialInStorage.Add(WorldSaveGameManager.Singleton.GetSerializableCraftingMaterialFromCraftingMaterial(craftingMaterial));
+                if (keyItem != null)
+                    currentCharacterData.keyItemsInStorage.Add(WorldSaveGameManager.Singleton.GetSerializableKeyItemFromKeyItem(keyItem));
 
             }
 
@@ -670,7 +738,7 @@ namespace TraverserProject
             if (currentCharacterData.rightWeaponIndex >= 0)
             {
                 playerNetworkManager.currentRightHandWeaponID.Value = playerInventoryManager.weaponsInRightHandSlots[currentCharacterData.rightWeaponIndex].itemID;
-                playerInventoryManager.currentRightHandWeapon = playerInventoryManager.weaponsInRightHandSlots[currentCharacterData.rightWeaponIndex];                
+                playerInventoryManager.currentRightHandWeapon = playerInventoryManager.weaponsInRightHandSlots[currentCharacterData.rightWeaponIndex];
             }
             else
             {
@@ -681,7 +749,7 @@ namespace TraverserProject
             if (currentCharacterData.leftWeaponIndex >= 0)
             {
                 playerNetworkManager.currentLeftHandWeaponID.Value = playerInventoryManager.weaponsInLeftHandSlots[currentCharacterData.leftWeaponIndex].itemID;
-                playerInventoryManager.currentLeftHandWeapon = playerInventoryManager.weaponsInLeftHandSlots[currentCharacterData.leftWeaponIndex];                
+                playerInventoryManager.currentLeftHandWeapon = playerInventoryManager.weaponsInLeftHandSlots[currentCharacterData.leftWeaponIndex];
             }
             else
             {
@@ -699,6 +767,7 @@ namespace TraverserProject
                 playerNetworkManager.currentSpellID.Value = -1;
             }
 
+            //Inventory
             for (int i = 0; i < currentCharacterData.weaponsInInventory.Count; i++)
             {
                 WeaponItem weapon = currentCharacterData.weaponsInInventory[i].GetWeapon();
@@ -777,6 +846,85 @@ namespace TraverserProject
                 playerInventoryManager.AddItemToInventory(KeyItem);
             }
 
+            //Storage
+            for (int i = 0; i < currentCharacterData.weaponsInStorage.Count; i++)
+            {
+                WeaponItem weapon = currentCharacterData.weaponsInStorage[i].GetWeapon();
+                playerInventoryManager.AddItemToStorage(weapon);
+            }
+
+            for (int i = 0; i < currentCharacterData.headEquipmentInStorage.Count; i++)
+            {
+                HeadEquipmentItem equipment = WorldItemDatabase.Singleton.GetHeadEquipmentByID(currentCharacterData.headEquipmentInStorage[i]);
+                playerInventoryManager.AddItemToStorage(equipment);
+            }
+
+            for (int i = 0; i < currentCharacterData.bodyEquipmentInStorage.Count; i++)
+            {
+                BodyEquipmentItem equipment = WorldItemDatabase.Singleton.GetBodyEquipmentByID(currentCharacterData.bodyEquipmentInStorage[i]);
+                playerInventoryManager.AddItemToStorage(equipment);
+            }
+
+            for (int i = 0; i < currentCharacterData.legEquipmentInStorage.Count; i++)
+            {
+                LegEquipmentItem equipment = WorldItemDatabase.Singleton.GetLegEquipmentByID(currentCharacterData.legEquipmentInStorage[i]);
+                playerInventoryManager.AddItemToStorage(equipment);
+            }
+
+            for (int i = 0; i < currentCharacterData.handEquipmentInStorage.Count; i++)
+            {
+                HandEquipmentItem equipment = WorldItemDatabase.Singleton.GetHandEquipmentByID(currentCharacterData.handEquipmentInStorage[i]);
+                playerInventoryManager.AddItemToStorage(equipment);
+            }
+
+            for (int i = 0; i < currentCharacterData.projectilesInStorage.Count; i++)
+            {
+                RangedProjectileItem projectile = currentCharacterData.projectilesInStorage[i].GetProjectile();
+                playerInventoryManager.AddItemToStorage(projectile);
+            }
+
+            for (int i = 0; i < currentCharacterData.quickSlotItemsInStorage.Count; i++)
+            {
+                QuickSlotItem quickSlotItem = currentCharacterData.quickSlotItemsInStorage[i].GetQuickSlotItem();
+                playerInventoryManager.AddItemToStorage(quickSlotItem);
+            }
+
+            for (int i = 0; i < currentCharacterData.accessoryEquipmentInStorage.Count; i++)
+            {
+                AccessoryEquipmentItem accessoryItem = WorldItemDatabase.Singleton.GetAccessoryByID(currentCharacterData.accessoryEquipmentInStorage[i]);
+                playerInventoryManager.AddItemToStorage(accessoryItem);
+            }
+
+            for (int i = 0; i < currentCharacterData.spellItemInStorage.Count; i++)
+            {
+                SpellItem spellItem = WorldItemDatabase.Singleton.GetSpellByID(currentCharacterData.spellItemInStorage[i]);
+                playerInventoryManager.AddItemToStorage(spellItem);
+            }
+
+            for (int i = 0; i < currentCharacterData.ashesOfWarItemInStorage.Count; i++)
+            {
+                AshOfWar ashesOfWarItem = WorldItemDatabase.Singleton.GetAshOfWarByID(currentCharacterData.ashesOfWarItemInStorage[i]);
+                playerInventoryManager.AddItemToStorage(ashesOfWarItem);
+            }
+
+            for (int i = 0; i < currentCharacterData.upgradeMaterialInStorage.Count; i++)
+            {
+                UpgradeMaterial upgradeMaterial = currentCharacterData.upgradeMaterialInStorage[i].GetUpgradeMaterialItem();
+                playerInventoryManager.AddItemToStorage(upgradeMaterial);
+            }
+
+            for (int i = 0; i < currentCharacterData.craftingMaterialInStorage.Count; i++)
+            {
+                CraftingMaterial CraftingMaterial = currentCharacterData.craftingMaterialInStorage[i].GetCraftingMaterialItem();
+                playerInventoryManager.AddItemToStorage(CraftingMaterial);
+            }
+
+            for (int i = 0; i < currentCharacterData.keyItemsInStorage.Count; i++)
+            {
+                KeyItem KeyItem = currentCharacterData.keyItemsInStorage[i].GetKeyItem();
+                playerInventoryManager.AddItemToStorage(KeyItem);
+            }
+
             playerEquipmentManager.EquipArmor();
 
             playerEquipmentManager.LoadMainProjectileEquipment(currentCharacterData.mainProjectile.GetProjectile());
@@ -790,7 +938,7 @@ namespace TraverserProject
                 {
                     StaticCharacterEffect staticEffectCopy = Instantiate(WorldCharacterEffectsManager.Singleton.GetStaticEffectByID(staticEffect));
                     playerEffectsManager.AddStaticEffect(staticEffectCopy);
-                }                
+                }
             }
 
             foreach (var timedEffect in currentCharacterData.timedEffects)
