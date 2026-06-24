@@ -25,6 +25,12 @@ namespace TraverserProject
             highlightIcon.enabled = false;
         }
 
+        public void SetStorageCategory()
+        {
+            PlayerUIManager.Singleton.playerUIStorageManager.itemCategory = itemType;
+            PlayerUIManager.Singleton.playerUIStorageManager.SortStorageByCategory();
+        }
+
         public void DisplayInventoryBasedOnItemType()
         {
             if (itemType == ItemType.None)

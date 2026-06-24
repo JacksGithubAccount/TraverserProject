@@ -19,9 +19,7 @@ namespace TraverserProject
             //Resets every other buttons "selected" color before "selecting"a new one
             if (!isShopCategory)
             {
-                ResetButtonColor(PlayerUIManager.Singleton.playerUIStorageManager.storageCategories);
-                PlayerUIManager.Singleton.playerUIStorageManager.shopCategory = shopCategory;
-                PlayerUIManager.Singleton.playerUIStorageManager.SortStorageByCategory();
+                
             }else
             {
                 ResetButtonColor(PlayerUIManager.Singleton.playerUIShopManager.shopCategories);

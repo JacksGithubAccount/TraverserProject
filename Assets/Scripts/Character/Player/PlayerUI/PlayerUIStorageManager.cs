@@ -23,7 +23,7 @@ namespace TraverserProject
         public TextMeshProUGUI playerStorageCurrentItemSelectedText;
 
         [Header("Categories")]
-        public ShopCategory shopCategory;
+        public ItemType itemCategory;
         public UI_ShopItemCategory[] storageCategories;
         [HideInInspector] public int storageCategoriesIndex;
 
@@ -229,9 +229,9 @@ namespace TraverserProject
                 playerStorage[i].gameObject.SetActive(false);
             }
 
-            switch (shopCategory)
+            switch (itemCategory)
             {
-                case ShopCategory.AllItems:
+                case ItemType.None:
                     for (int i = 0; i < playerInventory.Length; i++)
                     {
                         if (playerInventory[i].currentItem == null)
@@ -247,7 +247,7 @@ namespace TraverserProject
                         playerStorage[i].gameObject.SetActive(true);
                     }
                     break;
-                case ShopCategory.Tool:
+                case ItemType.Tool:
                     for (int i = 0; i < playerInventory.Length; i++)
                     {
                         if (playerInventory[i].currentItem == null)
@@ -265,7 +265,7 @@ namespace TraverserProject
                             playerStorage[i].gameObject.SetActive(true);
                     }
                     break;
-                case ShopCategory.CraftingMaterial:
+                case ItemType.CraftingMaterial:
                     for (int i = 0; i < playerInventory.Length; i++)
                     {
                         if (playerInventory[i].currentItem == null)
@@ -283,7 +283,7 @@ namespace TraverserProject
                             playerStorage[i].gameObject.SetActive(true);
                     }
                     break;
-                case ShopCategory.UpgradeMaterial:
+                case ItemType.UpgradeMaterial:
                     for (int i = 0; i < playerInventory.Length; i++)
                     {
                         if (playerInventory[i].currentItem == null)
@@ -301,7 +301,7 @@ namespace TraverserProject
                             playerStorage[i].gameObject.SetActive(true);
                     }
                     break;
-                case ShopCategory.KeyItem:
+                case ItemType.KeyItem:
                     for (int i = 0; i < playerInventory.Length; i++)
                     {
                         if (playerInventory[i].currentItem == null)
@@ -319,13 +319,13 @@ namespace TraverserProject
                             playerStorage[i].gameObject.SetActive(true);
                     }
                     break;
-                case ShopCategory.Spells:
+                case ItemType.Sorcery:
                     for (int i = 0; i < playerInventory.Length; i++)
                     {
                         if (playerInventory[i].currentItem == null)
                             continue;
 
-                        if (playerInventory[i].currentItem is SpellItem)
+                        if (playerInventory[i].currentItem is SpellItem && playerInventory[i].currentItem.itemType == ItemType.Sorcery)
                             playerInventory[i].gameObject.SetActive(true);
                     }
                     for (int i = 0; i < playerStorage.Length; i++)
@@ -333,11 +333,47 @@ namespace TraverserProject
                         if (playerStorage[i].currentItem == null)
                             continue;
 
-                        if (playerStorage[i].currentItem is SpellItem)
+                        if (playerStorage[i].currentItem is SpellItem && playerInventory[i].currentItem.itemType == ItemType.Sorcery)
                             playerStorage[i].gameObject.SetActive(true);
                     }
                     break;
-                case ShopCategory.AshesOfWar:
+                case ItemType.Incantation:
+                    for (int i = 0; i < playerInventory.Length; i++)
+                    {
+                        if (playerInventory[i].currentItem == null)
+                            continue;
+
+                        if (playerInventory[i].currentItem is SpellItem && playerInventory[i].currentItem.itemType == ItemType.Incantation)
+                            playerInventory[i].gameObject.SetActive(true);
+                    }
+                    for (int i = 0; i < playerStorage.Length; i++)
+                    {
+                        if (playerStorage[i].currentItem == null)
+                            continue;
+
+                        if (playerStorage[i].currentItem is SpellItem && playerInventory[i].currentItem.itemType == ItemType.Incantation)
+                            playerStorage[i].gameObject.SetActive(true);
+                    }
+                    break;
+                case ItemType.Pyromancy:
+                    for (int i = 0; i < playerInventory.Length; i++)
+                    {
+                        if (playerInventory[i].currentItem == null)
+                            continue;
+
+                        if (playerInventory[i].currentItem is SpellItem && playerInventory[i].currentItem.itemType == ItemType.Pyromancy)
+                            playerInventory[i].gameObject.SetActive(true);
+                    }
+                    for (int i = 0; i < playerStorage.Length; i++)
+                    {
+                        if (playerStorage[i].currentItem == null)
+                            continue;
+
+                        if (playerStorage[i].currentItem is SpellItem && playerInventory[i].currentItem.itemType == ItemType.Pyromancy)
+                            playerStorage[i].gameObject.SetActive(true);
+                    }
+                    break;
+                case ItemType.AshesOfWar:
                     for (int i = 0; i < playerInventory.Length; i++)
                     {
                         if (playerInventory[i].currentItem == null)
@@ -355,13 +391,13 @@ namespace TraverserProject
                             playerStorage[i].gameObject.SetActive(true);
                     }
                     break;
-                case ShopCategory.Weapons:
+                case ItemType.MeleeWeapon:
                     for (int i = 0; i < playerInventory.Length; i++)
                     {
                         if (playerInventory[i].currentItem == null)
                             continue;
 
-                        if (playerInventory[i].currentItem is WeaponItem)
+                        if (playerInventory[i].currentItem is MeleeWeaponItem && playerInventory[i].currentItem.itemType != ItemType.Shield)
                             playerInventory[i].gameObject.SetActive(true);
                     }
                     for (int i = 0; i < playerStorage.Length; i++)
@@ -369,11 +405,29 @@ namespace TraverserProject
                         if (playerStorage[i].currentItem == null)
                             continue;
 
-                        if (playerStorage[i].currentItem is WeaponItem)
+                        if (playerStorage[i].currentItem is MeleeWeaponItem && playerInventory[i].currentItem.itemType != ItemType.Shield)
                             playerStorage[i].gameObject.SetActive(true);
                     }
                     break;
-                case ShopCategory.ArrowAndBolt:
+                case ItemType.RangedWeaponAndCatalyst:
+                    for (int i = 0; i < playerInventory.Length; i++)
+                    {
+                        if (playerInventory[i].currentItem == null)
+                            continue;
+
+                        if (playerInventory[i].currentItem is RangedWeaponItem || playerInventory[i].currentItem is CasterWeaponItem)
+                            playerInventory[i].gameObject.SetActive(true);
+                    }
+                    for (int i = 0; i < playerStorage.Length; i++)
+                    {
+                        if (playerStorage[i].currentItem == null)
+                            continue;
+
+                        if (playerStorage[i].currentItem is RangedWeaponItem || playerInventory[i].currentItem is CasterWeaponItem)
+                            playerStorage[i].gameObject.SetActive(true);
+                    }
+                    break;
+                case ItemType.ArrowAndBolt:
                     for (int i = 0; i < playerInventory.Length; i++)
                     {
                         if (playerInventory[i].currentItem == null)
@@ -391,13 +445,13 @@ namespace TraverserProject
                             playerStorage[i].gameObject.SetActive(true);
                     }
                     break;
-                case ShopCategory.Armor:
+                case ItemType.Shield:
                     for (int i = 0; i < playerInventory.Length; i++)
                     {
                         if (playerInventory[i].currentItem == null)
                             continue;
 
-                        if (playerInventory[i].currentItem is ArmorItem)
+                        if (playerInventory[i].currentItem is MeleeWeaponItem && playerInventory[i].currentItem.itemType == ItemType.Shield)
                             playerInventory[i].gameObject.SetActive(true);
                     }
                     for (int i = 0; i < playerStorage.Length; i++)
@@ -405,11 +459,83 @@ namespace TraverserProject
                         if (playerStorage[i].currentItem == null)
                             continue;
 
-                        if (playerStorage[i].currentItem is ArmorItem)
+                        if (playerStorage[i].currentItem is MeleeWeaponItem && playerInventory[i].currentItem.itemType == ItemType.Shield)
                             playerStorage[i].gameObject.SetActive(true);
                     }
                     break;
-                case ShopCategory.Accessory:
+                case ItemType.HeadEquipment:
+                    for (int i = 0; i < playerInventory.Length; i++)
+                    {
+                        if (playerInventory[i].currentItem == null)
+                            continue;
+
+                        if (playerInventory[i].currentItem is HeadEquipmentItem)
+                            playerInventory[i].gameObject.SetActive(true);
+                    }
+                    for (int i = 0; i < playerStorage.Length; i++)
+                    {
+                        if (playerStorage[i].currentItem == null)
+                            continue;
+
+                        if (playerStorage[i].currentItem is HeadEquipmentItem)
+                            playerStorage[i].gameObject.SetActive(true);
+                    }
+                    break;
+                case ItemType.ChestEquipment:
+                    for (int i = 0; i < playerInventory.Length; i++)
+                    {
+                        if (playerInventory[i].currentItem == null)
+                            continue;
+
+                        if (playerInventory[i].currentItem is BodyEquipmentItem)
+                            playerInventory[i].gameObject.SetActive(true);
+                    }
+                    for (int i = 0; i < playerStorage.Length; i++)
+                    {
+                        if (playerStorage[i].currentItem == null)
+                            continue;
+
+                        if (playerStorage[i].currentItem is BodyEquipmentItem)
+                            playerStorage[i].gameObject.SetActive(true);
+                    }
+                    break;
+                case ItemType.ArmEquipment:
+                    for (int i = 0; i < playerInventory.Length; i++)
+                    {
+                        if (playerInventory[i].currentItem == null)
+                            continue;
+
+                        if (playerInventory[i].currentItem is HandEquipmentItem)
+                            playerInventory[i].gameObject.SetActive(true);
+                    }
+                    for (int i = 0; i < playerStorage.Length; i++)
+                    {
+                        if (playerStorage[i].currentItem == null)
+                            continue;
+
+                        if (playerStorage[i].currentItem is HandEquipmentItem)
+                            playerStorage[i].gameObject.SetActive(true);
+                    }
+                    break;
+                case ItemType.LegEquipment:
+                    for (int i = 0; i < playerInventory.Length; i++)
+                    {
+                        if (playerInventory[i].currentItem == null)
+                            continue;
+
+                        if (playerInventory[i].currentItem is LegEquipmentItem)
+                            playerInventory[i].gameObject.SetActive(true);
+                    }
+                    for (int i = 0; i < playerStorage.Length; i++)
+                    {
+                        if (playerStorage[i].currentItem == null)
+                            continue;
+
+                        if (playerStorage[i].currentItem is LegEquipmentItem)
+                            playerStorage[i].gameObject.SetActive(true);
+                    }
+                    break;
+                case ItemType.Accessory:
                     for (int i = 0; i < playerInventory.Length; i++)
                     {
                         if (playerInventory[i].currentItem == null)
@@ -427,7 +553,41 @@ namespace TraverserProject
                             playerStorage[i].gameObject.SetActive(true);
                     }
                     break;
-                case ShopCategory.Info:
+                case ItemType.Info:
+                    for (int i = 0; i < playerInventory.Length; i++)
+                    {
+                        if (playerInventory[i].currentItem == null)
+                            continue;
+
+                        if (playerInventory[i].currentItem.itemType == ItemType.Info)
+                            playerInventory[i].gameObject.SetActive(true);
+                    }
+                    for (int i = 0; i < playerStorage.Length; i++)
+                    {
+                        if (playerStorage[i].currentItem == null)
+                            continue;
+
+                        if (playerInventory[i].currentItem.itemType == ItemType.Info)
+                            playerStorage[i].gameObject.SetActive(true);
+                    }
+                    break;
+                case ItemType.Gestures:
+                    for (int i = 0; i < playerInventory.Length; i++)
+                    {
+                        if (playerInventory[i].currentItem == null)
+                            continue;
+
+                        if (playerInventory[i].currentItem.itemType == ItemType.Gestures)
+                            playerInventory[i].gameObject.SetActive(true);
+                    }
+                    for (int i = 0; i < playerStorage.Length; i++)
+                    {
+                        if (playerStorage[i].currentItem == null)
+                            continue;
+
+                        if (playerInventory[i].currentItem.itemType == ItemType.Gestures)
+                            playerStorage[i].gameObject.SetActive(true);
+                    }
                     break;
                 default: break;
             }

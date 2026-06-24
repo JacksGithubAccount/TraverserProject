@@ -15,6 +15,7 @@ namespace TraverserProject
         //decides if item is stackable or not
         public int maxItemAmount = 1;
         public int currentItemAmount = 1;
+        public int maxStorageAmount = 1;
         public bool isInfinite = false;
 
         [Header("Value")]

@@ -17,6 +17,9 @@ namespace TraverserProject
         public GameObject decreaseArrow;
         public GameObject increaseArrow;
 
+        [Header("Inventory or Storage")]
+        public bool isInventory = true;
+
         private void Awake()
         {
             scrollbar = GetComponent<Scrollbar>();
@@ -24,15 +27,17 @@ namespace TraverserProject
 
         public void IncrementSliderValue()
         {
-
-            int slotnumber = (int)PlayerUIManager.Singleton.playerUIInventoryManager.currentSelectedInventoryCategorySelectSlot + 1;
-            if (slotnumber > 19)
+            int slotnumber = 0;
+            if (isInventory)
             {
-                slotnumber = 0;
+                slotnumber = (int)PlayerUIManager.Singleton.playerUIInventoryManager.currentSelectedInventoryCategorySelectSlot + 1;
+                if (slotnumber > 19)
+                {
+                    slotnumber = 0;
+                }
+
+                PlayerUIManager.Singleton.playerUIInventoryManager.ChangeSelectedInventoryCategorySelectSlot(slotnumber);
             }
-
-            PlayerUIManager.Singleton.playerUIInventoryManager.ChangeSelectedInventoryCategorySelectSlot(slotnumber);
-
             if (!IsSelectedPrefabInViewOfViewport(slotnumber))
             {
                 if (slotnumber== 0)
