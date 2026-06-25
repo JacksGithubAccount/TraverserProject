@@ -38,9 +38,14 @@ namespace TraverserProject
 
                 PlayerUIManager.Singleton.playerUIInventoryManager.ChangeSelectedInventoryCategorySelectSlot(slotnumber);
             }
+            else
+            {                
+                PlayerUIManager.Singleton.playerUIStorageManager.UpdateStorageCategoryIndex(true);
+                slotnumber = (int)PlayerUIManager.Singleton.playerUIStorageManager.storageCategoriesIndex;
+            }
             if (!IsSelectedPrefabInViewOfViewport(slotnumber))
             {
-                if (slotnumber== 0)
+               if (slotnumber == 0)
                     scrollbar.value = 0;
                 else
                 {
@@ -54,17 +59,24 @@ namespace TraverserProject
 
         public void DecrementSliderValue()
         {
-            int slotnumber = (int)PlayerUIManager.Singleton.playerUIInventoryManager.currentSelectedInventoryCategorySelectSlot - 1;
-            if (slotnumber < 0)
+            int slotnumber = 0;
+            if (isInventory)
             {
-                slotnumber = 19;
+                slotnumber = (int)PlayerUIManager.Singleton.playerUIInventoryManager.currentSelectedInventoryCategorySelectSlot - 1;
+                if (slotnumber < 0)
+                {
+                    slotnumber = 19;
+                }
+                PlayerUIManager.Singleton.playerUIInventoryManager.ChangeSelectedInventoryCategorySelectSlot(slotnumber);
             }
-            PlayerUIManager.Singleton.playerUIInventoryManager.ChangeSelectedInventoryCategorySelectSlot(slotnumber);
-
-
+            else
+            {                
+                PlayerUIManager.Singleton.playerUIStorageManager.UpdateStorageCategoryIndex(false);
+                slotnumber = (int)PlayerUIManager.Singleton.playerUIStorageManager.storageCategoriesIndex;
+            }
             if (!IsSelectedPrefabInViewOfViewport(slotnumber))
             {
-                if (slotnumber == 19)
+                if (slotnumber >= 19)
                     scrollbar.value = 1;
                 else
                 {
@@ -78,7 +90,11 @@ namespace TraverserProject
 
         private bool IsSelectedPrefabInViewOfViewport(int slotNumber)
         {
-            RectTransform rect = PlayerUIManager.Singleton.playerUIInventoryManager.inventoryCategorySelectSlotPrefabs[slotNumber].GetComponent<RectTransform>();
+            RectTransform rect = null;
+            if(isInventory)
+                rect = PlayerUIManager.Singleton.playerUIInventoryManager.inventoryCategorySelectSlotPrefabs[slotNumber].GetComponent<RectTransform>();
+            else
+                rect = PlayerUIManager.Singleton.playerUIStorageManager.storageCategories[slotNumber].GetComponent<RectTransform>();
             Vector2 v = rect.position;
             bool inView = RectTransformUtility.RectangleContainsScreenPoint(viewport, v);
             return inView;

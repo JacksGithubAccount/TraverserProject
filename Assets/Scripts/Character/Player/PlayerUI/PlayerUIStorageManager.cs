@@ -23,8 +23,9 @@ namespace TraverserProject
         public TextMeshProUGUI playerStorageCurrentItemSelectedText;
 
         [Header("Categories")]
+        [SerializeField] TextMeshProUGUI categoryNameText;
         public ItemType itemCategory;
-        public UI_ShopItemCategory[] storageCategories;
+        public UI_InventoryCategorySelectSlot[] storageCategories;
         [HideInInspector] public int storageCategoriesIndex;
 
         public override void OpenMenu()
@@ -33,7 +34,7 @@ namespace TraverserProject
 
             RefreshStorage();
             SelectFirstButton();
-            storageCategories[storageCategoriesIndex].SetCategory();
+            storageCategories[storageCategoriesIndex].DisplayInventoryBasedOnItemType();
         }
 
         public override void OpenMenuAfterFixedFrame()
@@ -42,7 +43,7 @@ namespace TraverserProject
 
             RefreshStorage();
             SelectFirstButton();
-            storageCategories[storageCategoriesIndex].SetCategory();
+            storageCategories[storageCategoriesIndex].DisplayInventoryBasedOnItemType();
         }
 
         private void PopulateInventory()
@@ -590,9 +591,10 @@ namespace TraverserProject
                     }
                     break;
                 default: break;
-            }
+            }            
 
             SelectFirstButton();
+            categoryNameText.text = itemCategory.ToString();
         }
 
         public void UpdateStorageCategoryIndex(bool raiseIndex)
@@ -612,7 +614,7 @@ namespace TraverserProject
             if (storageCategoriesIndex < 0)
                 storageCategoriesIndex = storageCategories.Length - 1;
 
-            storageCategories[storageCategoriesIndex].SetCategory();
+            storageCategories[storageCategoriesIndex].DisplayInventoryBasedOnItemType();
         }
 
         private void DeselectAllButtons()
