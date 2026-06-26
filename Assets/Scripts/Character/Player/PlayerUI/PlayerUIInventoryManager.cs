@@ -389,7 +389,13 @@ namespace TraverserProject
 
                 toolItemTypeText.text = quickSlotItem.itemType.ToString();
                 toolItemNumberHeldText.text = quickSlotItem.currentItemAmount.ToString() + "/" + quickSlotItem.maxItemAmount.ToString();
-                toolItemStoredText.text = "Placeholder";
+                Item itemInStorage = PlayerUIManager.Singleton.localPlayer.playerInventoryManager.GetItemFromStorage(item.itemID);
+                int storageitemamount = 0;
+                if (itemInStorage != null)
+                {
+                    storageitemamount = itemInStorage.currentItemAmount;
+                }
+                toolItemStoredText.text = storageitemamount + "/" + quickSlotItem.maxStorageAmount;
                 toolItemFPCostText.text = quickSlotItem.FPCost.ToString();
                 toolItemEffectText.text = quickSlotItem.itemEffect;
 

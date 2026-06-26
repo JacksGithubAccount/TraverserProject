@@ -43,13 +43,13 @@ namespace TraverserProject
 
             if (isSelectingFromPlayerInventory)
             {
-                PlayerUIManager.Singleton.localPlayer.playerInventoryManager.RemoveItemFromInventory(currentItem);
-                PlayerUIManager.Singleton.localPlayer.playerInventoryManager.AddItemToStorage(currentItem);
+                PlayerUIManager.Singleton.localPlayer.playerInventoryManager.AddItemToStorage(Instantiate(currentItem));
+                PlayerUIManager.Singleton.localPlayer.playerInventoryManager.RemoveItemFromInventory(currentItem);                
             }
             else
             {
-                PlayerUIManager.Singleton.localPlayer.playerInventoryManager.RemoveItemFromStorage(currentItem);
                 PlayerUIManager.Singleton.localPlayer.playerInventoryManager.AddItemToInventory(currentItem);
+                PlayerUIManager.Singleton.localPlayer.playerInventoryManager.RemoveItemFromStorage(currentItem);                
             }
             PlayerUIManager.Singleton.playerUIStorageManager.RefreshStorage();
             PlayerUIManager.Singleton.playerUIStorageManager.SelectFirstButton();

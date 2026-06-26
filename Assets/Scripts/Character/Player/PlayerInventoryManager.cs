@@ -278,5 +278,11 @@ namespace TraverserProject
                 }
             }
         }
+
+        public Item GetItemFromStorage(int itemId)
+        {
+            Item item = itemsInStorage.Find(x =>  itemId == x.itemID);
+            return item;
+        }
     }
 }

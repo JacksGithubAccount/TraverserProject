@@ -25,7 +25,8 @@ namespace TraverserProject
             {
                 heldButtonCoroutine = StartCoroutine(IncreaseOrDecreaseValue());
             }
-            else
+
+            if(!isPressed)
             {
                 if (heldButtonCoroutine != null)
                 {
