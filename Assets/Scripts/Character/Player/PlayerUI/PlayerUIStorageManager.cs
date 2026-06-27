@@ -28,6 +28,11 @@ namespace TraverserProject
         public UI_InventoryCategorySelectSlot[] storageCategories;
         [HideInInspector] public int storageCategoriesIndex;
 
+        [Header("InventorySelectionAmountMenu")]
+        [SerializeField] GameObject inventorySelectionAmountMenuWindow;
+        [SerializeField] Slider inventorySelectionAmountSlider;
+        [SerializeField] TextMeshProUGUI inventorySelectionAmountText;
+
         public override void OpenMenu()
         {
             base.OpenMenu();
