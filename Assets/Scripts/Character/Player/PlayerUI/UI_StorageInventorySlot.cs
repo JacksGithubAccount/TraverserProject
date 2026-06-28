@@ -36,6 +36,21 @@ namespace TraverserProject
             }
         }
 
+        public void AttemptToOpenInventorySelectionMenu()
+        {
+            if (currentItem == null)
+                return;
+
+            if (currentItem.maxItemAmount == 1)
+            {
+                SwapItemLocation();
+            }
+            else
+            {
+                PlayerUIManager.Singleton.playerUIStorageManager.AttemptToOpenInventorySelectionAmountMenu(this, currentItem);
+            }
+        }
+
         public void SwapItemLocation()
         {
             if (currentItem == null)

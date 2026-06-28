@@ -14,6 +14,7 @@ namespace TraverserProject
         [SerializeField] Transform playerStorageInstantiationParent;
         private UI_StorageInventorySlot[] playerInventory;
         private UI_StorageInventorySlot[] playerStorage;
+        [SerializeField] Item currentlySelectedItem;
 
         [Header("Currently Selecting From")]
         public bool isSelectingFromPlayerInventory = true;
@@ -32,6 +33,7 @@ namespace TraverserProject
         [SerializeField] GameObject inventorySelectionAmountMenuWindow;
         [SerializeField] Slider inventorySelectionAmountSlider;
         [SerializeField] TextMeshProUGUI inventorySelectionAmountText;
+        [SerializeField] GameObject closeSubmenuWindow;
 
         public override void OpenMenu()
         {
@@ -40,6 +42,12 @@ namespace TraverserProject
             RefreshStorage();
             SelectFirstButton();
             storageCategories[storageCategoriesIndex].DisplayInventoryBasedOnItemType();
+        }
+
+        public override void CloseSubMenu()
+        {
+            base.CloseSubMenu();
+            closeSubmenuWindow.SetActive(false);
         }
 
         public override void OpenMenuAfterFixedFrame()
@@ -643,6 +651,71 @@ namespace TraverserProject
 
 
 
+        }
+
+        public void AttemptToOpenInventorySelectionAmountMenu(UI_StorageInventorySlot itemSlot, Item item)
+        {
+            PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+
+            currentlySelectedItem = item;
+            isSelectingFromPlayerInventory = itemSlot.isSelectingFromPlayerInventory;
+
+            closeSubmenuWindow.SetActive(true);
+            OpenSubMenu(inventorySelectionAmountMenuWindow);
+
+            RectTransform imageRectTransform = itemSlot.GetComponent<RectTransform>();
+            inventorySelectionAmountMenuWindow.transform.position = new Vector3(imageRectTransform.transform.position.x + imageRectTransform.rect.width * 2, imageRectTransform.transform.position.y, inventorySelectionAmountMenuWindow.transform.position.z);
+
+
+            inventorySelectionAmountSlider.value = 1;
+
+            if (isSelectingFromPlayerInventory)
+            {
+                Item itemInStorage = player.playerInventoryManager.itemsInStorage.Find(x => x.itemID == item.itemID);
+                if (itemInStorage == null)
+                {
+                    inventorySelectionAmountSlider.maxValue = item.currentItemAmount;
+                } else
+                {
+                    int storableAmountLeftInStorage = 0;
+                    storableAmountLeftInStorage = itemInStorage.maxStorageAmount - itemInStorage.currentItemAmount;
+                    if(storableAmountLeftInStorage > item.currentItemAmount)
+                    {
+                        inventorySelectionAmountSlider.maxValue = item.currentItemAmount;
+                    }else
+                    {
+                        inventorySelectionAmountSlider.maxValue = storableAmountLeftInStorage;
+                    }
+                }
+
+                
+            }
+            else
+            {
+
+            }
+        }
+
+        public void ConfirmInventorySelectionAmount()
+        {
+            Item item = Instantiate(currentlySelectedItem);
+            item.currentItemAmount = (int)inventorySelectionAmountSlider.value;
+
+            if (item == null)
+                return;
+
+            if (isSelectingFromPlayerInventory)
+            {
+                PlayerUIManager.Singleton.localPlayer.playerInventoryManager.AddItemToStorage(Instantiate(item));
+                PlayerUIManager.Singleton.localPlayer.playerInventoryManager.RemoveItemFromInventory(item);
+            }
+            else
+            {
+                PlayerUIManager.Singleton.localPlayer.playerInventoryManager.AddItemToInventory(item);
+                PlayerUIManager.Singleton.localPlayer.playerInventoryManager.RemoveItemFromStorage(item);
+            }
+            PlayerUIManager.Singleton.playerUIStorageManager.RefreshStorage();
+            PlayerUIManager.Singleton.playerUIStorageManager.SelectFirstButton();
         }
 
     }
