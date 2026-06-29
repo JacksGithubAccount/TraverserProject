@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 namespace TraverserProject
@@ -5,6 +6,7 @@ namespace TraverserProject
 
     public class UI_StorageInventorySlot : UI_InventorySlot
     {
+        public TextMeshProUGUI CurrentItemAmountText;
         [Header("Inventory Slot Type")]
         public bool isSelectingFromPlayerInventory;
 

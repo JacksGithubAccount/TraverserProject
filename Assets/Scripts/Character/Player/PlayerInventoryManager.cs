@@ -236,7 +236,33 @@ namespace TraverserProject
 
         public void AddItemToStorage(Item item)
         {
-            itemsInStorage.Add(item);
+            bool isStackable = false;
+
+
+            if (item.maxItemAmount > 1)
+                isStackable = true;
+
+            if (isStackable)
+            {
+
+
+                if (itemsInStorage.Find(x => x.itemID == item.itemID))
+                {
+                    Item itemInStorage = itemsInStorage.Find(x => x.itemID == item.itemID);
+                    itemInStorage.currentItemAmount = itemInStorage.currentItemAmount + item.currentItemAmount;
+
+                    if (itemInStorage.currentItemAmount > 99)
+                        itemInStorage.currentItemAmount = 99;
+                }
+                else
+                {
+                    itemsInStorage.Add(item);
+                }
+            }
+            else
+            {
+                itemsInStorage.Add(item);
+            }
         }
 
         public void RemoveItemFromStorage(Item item)

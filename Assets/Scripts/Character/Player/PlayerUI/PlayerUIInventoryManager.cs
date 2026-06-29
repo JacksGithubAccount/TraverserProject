@@ -554,7 +554,7 @@ namespace TraverserProject
                 inventorySlotPrefabs.Add(inventorySlot.gameObject);
 
                 inventorySlot.CurrentItemAmountText.enabled = false;
-                if (inventorySlot.currentItem.currentItemAmount > 1)
+                if (inventorySlot.currentItem.maxItemAmount > 1)
                 {
                     inventorySlot.CurrentItemAmountText.text = "x" + inventorySlot.currentItem.currentItemAmount;
                     inventorySlot.CurrentItemAmountText.enabled = true;

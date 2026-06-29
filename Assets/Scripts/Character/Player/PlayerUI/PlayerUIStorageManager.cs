@@ -102,6 +102,13 @@ namespace TraverserProject
                     continue;
 
                 playerInventory[i].AddItem(player.playerInventoryManager.itemsInInventory[i]);
+
+                playerInventory[i].CurrentItemAmountText.enabled = false;
+                if (playerInventory[i].currentItem.maxItemAmount > 1)
+                {
+                    playerInventory[i].CurrentItemAmountText.text = "x" + playerInventory[i].currentItem.currentItemAmount;
+                    playerInventory[i].CurrentItemAmountText.enabled = true;
+                }
             }
 
             //disables any empty shop slots
@@ -159,6 +166,13 @@ namespace TraverserProject
                     continue;
 
                 playerStorage[i].AddItem(player.playerInventoryManager.itemsInStorage[i]);
+
+                playerStorage[i].CurrentItemAmountText.enabled = false;
+                if (playerStorage[i].currentItem.maxItemAmount > 1)
+                {
+                    playerStorage[i].CurrentItemAmountText.text = "x" + playerStorage[i].currentItem.currentItemAmount;
+                    playerStorage[i].CurrentItemAmountText.enabled = true;
+                }
             }
 
             //disables any empty shop slots
@@ -686,13 +700,28 @@ namespace TraverserProject
                     {
                         inventorySelectionAmountSlider.maxValue = storableAmountLeftInStorage;
                     }
-                }
-
-                
+                }                
             }
             else
             {
-
+                Item itemInInventory = player.playerInventoryManager.itemsInInventory.Find(x => x.itemID == item.itemID);
+                if (itemInInventory == null)
+                {
+                    inventorySelectionAmountSlider.maxValue = item.currentItemAmount;
+                }
+                else
+                {
+                    int storableAmountLeftInInventory = 0;
+                    storableAmountLeftInInventory = itemInInventory.maxItemAmount - itemInInventory.currentItemAmount;
+                    if (storableAmountLeftInInventory > item.currentItemAmount)
+                    {
+                        inventorySelectionAmountSlider.maxValue = item.currentItemAmount;
+                    }
+                    else
+                    {
+                        inventorySelectionAmountSlider.maxValue = storableAmountLeftInInventory;
+                    }
+                }
             }
         }
 
@@ -716,6 +745,14 @@ namespace TraverserProject
             }
             PlayerUIManager.Singleton.playerUIStorageManager.RefreshStorage();
             PlayerUIManager.Singleton.playerUIStorageManager.SelectFirstButton();
+            PlayerUIManager.Singleton.playerUIStorageManager.CloseSubMenu();
+        }
+
+        public void UpdateSliderValue()
+        {
+            PlayerManager player = PlayerUIManager.Singleton.localPlayer;
+
+            inventorySelectionAmountText.text = "x" + inventorySelectionAmountSlider.value.ToString();
         }
 
     }
