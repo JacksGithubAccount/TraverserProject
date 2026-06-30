@@ -35,6 +35,10 @@ namespace TraverserProject
         [SerializeField] TextMeshProUGUI inventorySelectionAmountText;
         [SerializeField] GameObject closeSubmenuWindow;
 
+        [Header("Inventory Detail Menu")]
+        [SerializeField] GameObject inventoryDetailWindow;
+        private Vector3 inventoryDetailWindowPosition = new Vector3(1575, 540, 0);
+
         public override void OpenMenu()
         {
             base.OpenMenu();
@@ -42,6 +46,14 @@ namespace TraverserProject
             RefreshStorage();
             SelectFirstButton();
             storageCategories[storageCategoriesIndex].DisplayInventoryBasedOnItemType();
+            inventoryDetailWindow.SetActive(true);
+            inventoryDetailWindow.transform.position = inventoryDetailWindowPosition;
+        }
+
+        public override void CloseMenu()
+        {
+            base.CloseMenu();
+            inventoryDetailWindow.SetActive(false);
         }
 
         public override void CloseSubMenu()

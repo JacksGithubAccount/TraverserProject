@@ -36,6 +36,7 @@ namespace TraverserProject
 
                 PlayerUIManager.Singleton.playerUIStorageManager.playerStorageCurrentItemSelectedText.text = currentItem.itemName;
             }
+            PlayerUIManager.Singleton.playerUIInventoryManager.DispayItemDetail(currentItem);
         }
 
         public void AttemptToOpenInventorySelectionMenu()
