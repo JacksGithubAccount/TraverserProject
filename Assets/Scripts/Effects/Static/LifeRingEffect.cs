@@ -14,7 +14,6 @@ namespace TraverserProject
             if (character.IsOwner)
             {
                 maxHealthGainedFromEffect = Mathf.RoundToInt(character.characterNetworkManager.maxHealth.Value / 10);
-                Debug.Log("Max Health Gained: " + maxHealthGainedFromEffect);
                 character.characterNetworkManager.maxHealth.Value += maxHealthGainedFromEffect;
             }
         }

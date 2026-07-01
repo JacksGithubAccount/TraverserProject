@@ -53,10 +53,6 @@ namespace TraverserProject
             statusBuffVFX = Instantiate(WorldCharacterEffectsManager.Singleton.poisonCureVFX);
             statusBuffVFX.transform.position = player.playerEffectsManager.effectTransform.position;
             statusBuffVFX.transform.root.rotation = Quaternion.identity;
-
-
-
-
         }
     } 
 }
