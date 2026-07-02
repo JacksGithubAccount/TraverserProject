@@ -92,7 +92,7 @@ namespace TraverserProject
             staminaText.text = player.playerNetworkManager.currentStamina.Value.ToString() + "/" + player.playerNetworkManager.maxStamina.Value.ToString();
             equipLoadText.text = "Placeholder";
             equipLoadTypeText.text = "Placeholder";
-            poiseText.text = player.playerStatsManager.basePoiseDefense.ToString();
+            poiseText.text = player.playerNetworkManager.basePoiseDefense.Value.ToString();
             itemDiscoveryText.text = "Placeholder";
             spellSlotsText.text = "Placeholder";
 
@@ -103,14 +103,14 @@ namespace TraverserProject
             lWeapon2Text.text = player.playerInventoryManager.weaponsInLeftHandSlots[1].attackPower.ToString();
             lWeapon3Text.text = player.playerInventoryManager.weaponsInLeftHandSlots[2].attackPower.ToString();
 
-            physicalText.text = player.playerStatsManager.armorPhysicalDamageAbsorption.ToString();
-            bluntText.text = player.playerStatsManager.armorBluntDamageAbsorption.ToString();
-            pierceText.text = player.playerStatsManager.armorPierceDamageAbsorption.ToString();
-            slashText.text = player.playerStatsManager.armorSlashDamageAbsorption.ToString();
-            magicText.text = player.playerStatsManager.armorMagicDamageAbsorption.ToString();
-            fireText.text = player.playerStatsManager.armorFireDamageAbsorption.ToString();
-            lightningText.text = player.playerStatsManager.armorLightningDamageAbsorption.ToString();
-            holyText.text = player.playerStatsManager.armorHolyDamageAbsorption.ToString();
+            physicalText.text = player.playerNetworkManager.armorPhysicalDamageAbsorption.Value.ToString();
+            bluntText.text = player.playerNetworkManager.armorBluntDamageAbsorption.Value.ToString();
+            pierceText.text = player.playerNetworkManager.armorPierceDamageAbsorption.Value.ToString();
+            slashText.text = player.playerNetworkManager.armorSlashDamageAbsorption.Value.ToString();
+            magicText.text = player.playerNetworkManager.armorMagicDamageAbsorption.Value.ToString();
+            fireText.text = player.playerNetworkManager.armorFireDamageAbsorption.Value.ToString();
+            lightningText.text = player.playerNetworkManager.armorLightningDamageAbsorption.Value.ToString();
+            holyText.text = player.playerNetworkManager.armorHolyDamageAbsorption.Value.ToString();
 
             immunityText.text = player.playerStatsManager.armorImmunity.ToString();
             robustnessText.text = player.playerStatsManager.armorRobustness.ToString();

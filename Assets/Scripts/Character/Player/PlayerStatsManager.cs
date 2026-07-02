@@ -52,7 +52,7 @@ namespace TravserserProject
 
             //upgrade power
             int upgradeLevel = (int)weapon.upgradeLevel;
-            if(upgradeLevel == 0)
+            if (upgradeLevel == 0)
             {
                 weapon.physicalUpgradeDamage = 0;
                 weapon.magicUpgradeDamage = 0;
@@ -113,7 +113,7 @@ namespace TravserserProject
 
             weapon.attackPower = weapon.physicalDamage + weapon.magicDamage + weapon.fireDamage + weapon.lightningDamage + weapon.holyDamage;
 
-            if(weapon == player.playerInventoryManager.currentRightHandWeapon)
+            if (weapon == player.playerInventoryManager.currentRightHandWeapon)
             {
                 if (player.playerEquipmentManager.rightWeaponManager == null)
                     return;
@@ -172,112 +172,115 @@ namespace TravserserProject
 
         public override void CalculateTotalArmorAbsorption()
         {
-            armorPhysicalDamageAbsorption = 0;
-            armorBluntDamageAbsorption = 0;
-            armorPierceDamageAbsorption = 0;
-            armorSlashDamageAbsorption = 0;
-            armorMagicDamageAbsorption = 0;
-            armorFireDamageAbsorption = 0;
-            armorLightningDamageAbsorption = 0;
-            armorHolyDamageAbsorption = 0;
+            if (!player.IsOwner)
+                return;
+
+            player.playerNetworkManager.armorPhysicalDamageAbsorption.Value = 0;
+            player.playerNetworkManager.armorBluntDamageAbsorption.Value = 0;
+            player.playerNetworkManager.armorPierceDamageAbsorption.Value = 0;
+            player.playerNetworkManager.armorSlashDamageAbsorption.Value = 0;
+            player.playerNetworkManager.armorMagicDamageAbsorption.Value = 0;
+            player.playerNetworkManager.armorFireDamageAbsorption.Value = 0;
+            player.playerNetworkManager.armorLightningDamageAbsorption.Value = 0;
+            player.playerNetworkManager.armorHolyDamageAbsorption.Value = 0;
 
             armorImmunity = 0;
             armorRobustness = 0;
             armorFocus = 0;
             armorVitality = 0;
 
-            basePoiseDefense = 0;
+            player.playerNetworkManager.basePoiseDefense.Value = 0;
 
             //head
             if (player.playerInventoryManager.headEquipment != null)
             {
-                armorPhysicalDamageAbsorption += player.playerInventoryManager.headEquipment.physicalDamageAbsorption;
-                armorBluntDamageAbsorption += player.playerInventoryManager.headEquipment.bluntDamageAbsorption;
-                armorPierceDamageAbsorption += player.playerInventoryManager.headEquipment.pierceDamageAbsorption;
-                armorSlashDamageAbsorption += player.playerInventoryManager.headEquipment.slashDamageAbsorption;
-                armorMagicDamageAbsorption += player.playerInventoryManager.headEquipment.magicDamageAbsorption;
-                armorFireDamageAbsorption += player.playerInventoryManager.headEquipment.fireDamageAbsorption;
-                armorLightningDamageAbsorption += player.playerInventoryManager.headEquipment.lightningDamageAbsorption;
-                armorHolyDamageAbsorption += player.playerInventoryManager.headEquipment.holyDamageAbsorption;
+                player.playerNetworkManager.armorPhysicalDamageAbsorption.Value += player.playerInventoryManager.headEquipment.physicalDamageAbsorption;
+                player.playerNetworkManager.armorBluntDamageAbsorption.Value += player.playerInventoryManager.headEquipment.bluntDamageAbsorption;
+                player.playerNetworkManager.armorPierceDamageAbsorption.Value += player.playerInventoryManager.headEquipment.pierceDamageAbsorption;
+                player.playerNetworkManager.armorSlashDamageAbsorption.Value += player.playerInventoryManager.headEquipment.slashDamageAbsorption;
+                player.playerNetworkManager.armorMagicDamageAbsorption.Value += player.playerInventoryManager.headEquipment.magicDamageAbsorption;
+                player.playerNetworkManager.armorFireDamageAbsorption.Value += player.playerInventoryManager.headEquipment.fireDamageAbsorption;
+                player.playerNetworkManager.armorLightningDamageAbsorption.Value += player.playerInventoryManager.headEquipment.lightningDamageAbsorption;
+                player.playerNetworkManager.armorHolyDamageAbsorption.Value += player.playerInventoryManager.headEquipment.holyDamageAbsorption;
 
                 armorImmunity += player.playerInventoryManager.headEquipment.immunity;
                 armorRobustness += player.playerInventoryManager.headEquipment.robustness;
                 armorFocus += player.playerInventoryManager.headEquipment.focus;
                 armorVitality += player.playerInventoryManager.headEquipment.vitality;
 
-                basePoiseDefense += player.playerInventoryManager.headEquipment.poise;
+                player.playerNetworkManager.basePoiseDefense.Value += player.playerInventoryManager.headEquipment.poise;
 
             }
             //body
             if (player.playerInventoryManager.bodyEquipment != null)
             {
-                armorPhysicalDamageAbsorption += player.playerInventoryManager.bodyEquipment.physicalDamageAbsorption;
-                armorBluntDamageAbsorption += player.playerInventoryManager.bodyEquipment.bluntDamageAbsorption;
-                armorPierceDamageAbsorption += player.playerInventoryManager.bodyEquipment.pierceDamageAbsorption;
-                armorSlashDamageAbsorption += player.playerInventoryManager.bodyEquipment.slashDamageAbsorption;
-                armorMagicDamageAbsorption += player.playerInventoryManager.bodyEquipment.magicDamageAbsorption;
-                armorFireDamageAbsorption += player.playerInventoryManager.bodyEquipment.fireDamageAbsorption;
-                armorLightningDamageAbsorption += player.playerInventoryManager.bodyEquipment.lightningDamageAbsorption;
-                armorHolyDamageAbsorption += player.playerInventoryManager.bodyEquipment.holyDamageAbsorption;
+                player.playerNetworkManager.armorPhysicalDamageAbsorption.Value += player.playerInventoryManager.bodyEquipment.physicalDamageAbsorption;
+                player.playerNetworkManager.armorBluntDamageAbsorption.Value += player.playerInventoryManager.bodyEquipment.bluntDamageAbsorption;
+                player.playerNetworkManager.armorPierceDamageAbsorption.Value += player.playerInventoryManager.bodyEquipment.pierceDamageAbsorption;
+                player.playerNetworkManager.armorSlashDamageAbsorption.Value += player.playerInventoryManager.bodyEquipment.slashDamageAbsorption;
+                player.playerNetworkManager.armorMagicDamageAbsorption.Value += player.playerInventoryManager.bodyEquipment.magicDamageAbsorption;
+                player.playerNetworkManager.armorFireDamageAbsorption.Value += player.playerInventoryManager.bodyEquipment.fireDamageAbsorption;
+                player.playerNetworkManager.armorLightningDamageAbsorption.Value += player.playerInventoryManager.bodyEquipment.lightningDamageAbsorption;
+                player.playerNetworkManager.armorHolyDamageAbsorption.Value += player.playerInventoryManager.bodyEquipment.holyDamageAbsorption;
 
                 armorImmunity += player.playerInventoryManager.bodyEquipment.immunity;
                 armorRobustness += player.playerInventoryManager.bodyEquipment.robustness;
                 armorFocus += player.playerInventoryManager.bodyEquipment.focus;
                 armorVitality += player.playerInventoryManager.bodyEquipment.vitality;
 
-                basePoiseDefense += player.playerInventoryManager.bodyEquipment.poise;
+                player.playerNetworkManager.basePoiseDefense.Value += player.playerInventoryManager.bodyEquipment.poise;
 
             }
             //hand
             if (player.playerInventoryManager.handEquipment != null)
             {
-                armorPhysicalDamageAbsorption += player.playerInventoryManager.handEquipment.physicalDamageAbsorption;
-                armorBluntDamageAbsorption += player.playerInventoryManager.handEquipment.bluntDamageAbsorption;
-                armorPierceDamageAbsorption += player.playerInventoryManager.handEquipment.pierceDamageAbsorption;
-                armorSlashDamageAbsorption += player.playerInventoryManager.handEquipment.slashDamageAbsorption;
-                armorMagicDamageAbsorption += player.playerInventoryManager.handEquipment.magicDamageAbsorption;
-                armorFireDamageAbsorption += player.playerInventoryManager.handEquipment.fireDamageAbsorption;
-                armorLightningDamageAbsorption += player.playerInventoryManager.handEquipment.lightningDamageAbsorption;
-                armorHolyDamageAbsorption += player.playerInventoryManager.handEquipment.holyDamageAbsorption;
+                player.playerNetworkManager.armorPhysicalDamageAbsorption.Value += player.playerInventoryManager.handEquipment.physicalDamageAbsorption;
+                player.playerNetworkManager.armorBluntDamageAbsorption.Value += player.playerInventoryManager.handEquipment.bluntDamageAbsorption;
+                player.playerNetworkManager.armorPierceDamageAbsorption.Value += player.playerInventoryManager.handEquipment.pierceDamageAbsorption;
+                player.playerNetworkManager.armorSlashDamageAbsorption.Value += player.playerInventoryManager.handEquipment.slashDamageAbsorption;
+                player.playerNetworkManager.armorMagicDamageAbsorption.Value += player.playerInventoryManager.handEquipment.magicDamageAbsorption;
+                player.playerNetworkManager.armorFireDamageAbsorption.Value += player.playerInventoryManager.handEquipment.fireDamageAbsorption;
+                player.playerNetworkManager.armorLightningDamageAbsorption.Value += player.playerInventoryManager.handEquipment.lightningDamageAbsorption;
+                player.playerNetworkManager.armorHolyDamageAbsorption.Value += player.playerInventoryManager.handEquipment.holyDamageAbsorption;
 
                 armorImmunity += player.playerInventoryManager.handEquipment.immunity;
                 armorRobustness += player.playerInventoryManager.handEquipment.robustness;
                 armorFocus += player.playerInventoryManager.handEquipment.focus;
                 armorVitality += player.playerInventoryManager.handEquipment.vitality;
 
-                basePoiseDefense += player.playerInventoryManager.handEquipment.poise;
+                player.playerNetworkManager.basePoiseDefense.Value += player.playerInventoryManager.handEquipment.poise;
 
             }
             //leg
             if (player.playerInventoryManager.legEquipment != null)
             {
-                armorPhysicalDamageAbsorption += player.playerInventoryManager.legEquipment.physicalDamageAbsorption;
-                armorBluntDamageAbsorption += player.playerInventoryManager.legEquipment.bluntDamageAbsorption;
-                armorPierceDamageAbsorption += player.playerInventoryManager.legEquipment.pierceDamageAbsorption;
-                armorSlashDamageAbsorption += player.playerInventoryManager.legEquipment.slashDamageAbsorption;
-                armorMagicDamageAbsorption += player.playerInventoryManager.legEquipment.magicDamageAbsorption;
-                armorFireDamageAbsorption += player.playerInventoryManager.legEquipment.fireDamageAbsorption;
-                armorLightningDamageAbsorption += player.playerInventoryManager.legEquipment.lightningDamageAbsorption;
-                armorHolyDamageAbsorption += player.playerInventoryManager.legEquipment.holyDamageAbsorption;
+                player.playerNetworkManager.armorPhysicalDamageAbsorption.Value += player.playerInventoryManager.legEquipment.physicalDamageAbsorption;
+                player.playerNetworkManager.armorBluntDamageAbsorption.Value += player.playerInventoryManager.legEquipment.bluntDamageAbsorption;
+                player.playerNetworkManager.armorPierceDamageAbsorption.Value += player.playerInventoryManager.legEquipment.pierceDamageAbsorption;
+                player.playerNetworkManager.armorSlashDamageAbsorption.Value += player.playerInventoryManager.legEquipment.slashDamageAbsorption;
+                player.playerNetworkManager.armorMagicDamageAbsorption.Value += player.playerInventoryManager.legEquipment.magicDamageAbsorption;
+                player.playerNetworkManager.armorFireDamageAbsorption.Value += player.playerInventoryManager.legEquipment.fireDamageAbsorption;
+                player.playerNetworkManager.armorLightningDamageAbsorption.Value += player.playerInventoryManager.legEquipment.lightningDamageAbsorption;
+                player.playerNetworkManager.armorHolyDamageAbsorption.Value += player.playerInventoryManager.legEquipment.holyDamageAbsorption;
 
                 armorImmunity += player.playerInventoryManager.legEquipment.immunity;
                 armorRobustness += player.playerInventoryManager.legEquipment.robustness;
                 armorFocus += player.playerInventoryManager.legEquipment.focus;
                 armorVitality += player.playerInventoryManager.legEquipment.vitality;
 
-                basePoiseDefense += player.playerInventoryManager.legEquipment.poise;
+                player.playerNetworkManager.basePoiseDefense.Value += player.playerInventoryManager.legEquipment.poise;
 
             }
 
             //totals
-            armorPhysicalDamageAbsorption += armorPhysicalDamageAbsorption * (player.playerNetworkManager.armorPhysicalDamageAbsorptionModifer.Value / 100);
-            armorBluntDamageAbsorption += armorBluntDamageAbsorption * (player.playerNetworkManager.armorBluntDamageAbsorptionModifer.Value / 100);
-            armorPierceDamageAbsorption += armorPierceDamageAbsorption * (player.playerNetworkManager.armorPierceDamageAbsorptionModifer.Value / 100);
-            armorSlashDamageAbsorption += armorSlashDamageAbsorption * (player.playerNetworkManager.armorSlashDamageAbsorptionModifer.Value / 100);
-            armorMagicDamageAbsorption += armorMagicDamageAbsorption * (player.playerNetworkManager.armorMagicDamageAbsorptionModifer.Value / 100);
-            armorFireDamageAbsorption += armorFireDamageAbsorption * (player.playerNetworkManager.armorFireDamageAbsorptionModifer.Value / 100);
-            armorLightningDamageAbsorption += armorLightningDamageAbsorption * (player.playerNetworkManager.armorLightningDamageAbsorptionModifer.Value / 100);
-            armorHolyDamageAbsorption += armorHolyDamageAbsorption * (player.playerNetworkManager.armorHolyDamageAbsorptionModifer.Value / 100);
+            player.playerNetworkManager.armorPhysicalDamageAbsorption.Value += player.playerNetworkManager.armorPhysicalDamageAbsorption.Value * (player.playerNetworkManager.armorPhysicalDamageAbsorptionModifer.Value / 100);
+            player.playerNetworkManager.armorBluntDamageAbsorption.Value += player.playerNetworkManager.armorBluntDamageAbsorption.Value * (player.playerNetworkManager.armorBluntDamageAbsorptionModifer.Value / 100);
+            player.playerNetworkManager.armorPierceDamageAbsorption.Value += player.playerNetworkManager.armorPierceDamageAbsorption.Value * (player.playerNetworkManager.armorPierceDamageAbsorptionModifer.Value / 100);
+            player.playerNetworkManager.armorSlashDamageAbsorption.Value += player.playerNetworkManager.armorSlashDamageAbsorption.Value * (player.playerNetworkManager.armorSlashDamageAbsorptionModifer.Value / 100);
+            player.playerNetworkManager.armorMagicDamageAbsorption.Value += player.playerNetworkManager.armorMagicDamageAbsorption.Value * (player.playerNetworkManager.armorMagicDamageAbsorptionModifer.Value / 100);
+            player.playerNetworkManager.armorFireDamageAbsorption.Value += player.playerNetworkManager.armorFireDamageAbsorption.Value * (player.playerNetworkManager.armorFireDamageAbsorptionModifer.Value / 100);
+            player.playerNetworkManager.armorLightningDamageAbsorption.Value += player.playerNetworkManager.armorLightningDamageAbsorption.Value * (player.playerNetworkManager.armorLightningDamageAbsorptionModifer.Value / 100);
+            player.playerNetworkManager.armorHolyDamageAbsorption.Value += player.playerNetworkManager.armorHolyDamageAbsorption.Value * (player.playerNetworkManager.armorHolyDamageAbsorptionModifer.Value / 100);
 
         }
 

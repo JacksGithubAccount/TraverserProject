@@ -10,6 +10,7 @@ namespace TraverserProject
     {
         [Header("Status")]
         public NetworkVariable<bool> isDead = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public bool isDeadLocal = false;
 
         [HideInInspector] public CharacterController characterController;
         [HideInInspector] public Animator animator;

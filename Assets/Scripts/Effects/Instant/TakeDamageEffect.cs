@@ -65,37 +65,63 @@ namespace TraverserProject
 
         protected virtual void CalculateDamage(CharacterManager character)
         {
-            if (!character.IsOwner)
-                return;
+
             if (characterCausingDamage != null)
             {
-
+                //Check for damage modifiers and modify base damage(damage buffs)
             }
+
+            //Check for flat defenses here
+
+            //check for percent defenses here			
             Debug.Log("Original Phys Damage: " + physicalDamage + " Type: " + physicalDamageType.ToString());
 
-            switch(physicalDamageType)
+            switch (physicalDamageType)
             {
                 case PhysicalDamageType.Regular:
-                    physicalDamage -= (physicalDamage * (character.characterStatsManager.armorPhysicalDamageAbsorption / 100));
+                    float physicalAbsorption = character.characterNetworkManager.armorPhysicalDamageAbsorption.Value / 100;
+                    physicalDamage -= (physicalDamage * physicalAbsorption);
                     break;
                 case PhysicalDamageType.Blunt:
-                    physicalDamage -= (physicalDamage * (character.characterStatsManager.armorBluntDamageAbsorption / 100));
+                    float bluntAbsorption = character.characterNetworkManager.armorBluntDamageAbsorption.Value / 100;
+                    physicalDamage -= (physicalDamage * bluntAbsorption);
                     break;
                 case PhysicalDamageType.Pierce:
-                    physicalDamage -= (physicalDamage * (character.characterStatsManager.armorPierceDamageAbsorption / 100));
+                    float pierceAbsorption = character.characterNetworkManager.armorPierceDamageAbsorption.Value / 100;
+                    physicalDamage -= (physicalDamage * pierceAbsorption);
                     break;
                 case PhysicalDamageType.Slash:
-                    physicalDamage -= (physicalDamage * (character.characterStatsManager.armorSlashDamageAbsorption / 100));
+                    float slashAbsorption = character.characterNetworkManager.armorSlashDamageAbsorption.Value / 100;
+                    physicalDamage -= (physicalDamage * slashAbsorption);
                     break;
                 default:
-                    physicalDamage -= (physicalDamage * (character.characterStatsManager.armorPhysicalDamageAbsorption / 100));
+                    float physicalAbsorption2 = character.characterNetworkManager.armorPhysicalDamageAbsorption.Value / 100;
+                    physicalDamage -= (physicalDamage * physicalAbsorption2);
                     break;
             }
-            
-            fireDamage -= (fireDamage * (character.characterStatsManager.armorFireDamageAbsorption / 100));
-            magicDamage -= (magicDamage * (character.characterStatsManager.armorMagicDamageAbsorption / 100));
-            lightningDamage -= (lightningDamage * (character.characterStatsManager.armorLightningDamageAbsorption / 100));
-            holyDamage -= (holyDamage * (character.characterStatsManager.armorHolyDamageAbsorption / 100));
+            if (physicalDamage < 0)
+                physicalDamage = 0;
+
+            float fireAbsorption = character.characterNetworkManager.armorFireDamageAbsorption.Value / 100;
+            fireDamage -= (fireDamage * fireAbsorption);
+            if (fireDamage < 0)
+                fireDamage = 0;
+
+            float magicAbsorption = character.characterNetworkManager.armorMagicDamageAbsorption.Value / 100;
+            magicDamage -= (magicDamage * magicAbsorption);
+            if (magicDamage < 0)
+                magicDamage = 0;
+
+            float lightningAbsorption = character.characterNetworkManager.armorLightningDamageAbsorption.Value / 100;
+            lightningDamage -= (lightningDamage * lightningAbsorption);
+            if (lightningDamage < 0)
+                lightningDamage = 0;
+
+            float holyAbsorption = character.characterNetworkManager.armorHolyDamageAbsorption.Value / 100;
+            holyDamage -= (holyDamage * holyAbsorption);
+            if (holyDamage < 0)
+                holyDamage = 0;
+
 
             finalDamageDealt = Mathf.RoundToInt(physicalDamage + magicDamage + fireDamage + lightningDamage + holyDamage);
             Debug.Log("After Calculations Phys Damage: " + physicalDamage + " Type: " + physicalDamageType.ToString());
@@ -104,19 +130,46 @@ namespace TraverserProject
                 finalDamageDealt = 1;
             }
 
-            character.characterNetworkManager.currentHealth.Value -= finalDamageDealt;
+            //Apply damage and poise damage if server
+            if (character.IsOwner)
+            {
+                character.characterNetworkManager.currentHealth.Value -= finalDamageDealt;
 
-            character.characterStatsManager.totalPoiseDamage -= poiseDamage;
+                character.characterNetworkManager.totalPoiseDamage.Value -= poiseDamage;
 
-            //stores poise daamage taken for other interactions
-            character.characterCombatManager.previousPoiseDamageTaken = poiseDamage;
+                //stores poise daamage taken for other interactions
+                character.characterCombatManager.previousPoiseDamageTaken = poiseDamage;
 
-            float remainingPoise = character.characterStatsManager.basePoiseDefense + character.characterStatsManager.offensivePoiseBonus + character.characterStatsManager.totalPoiseDamage;
+                float remainingPoise = GetCurrentPoise(character);
 
-            if (remainingPoise <= 0)
-                poiseIsBroken = true;
+                if (remainingPoise <= 0)
+                    poiseIsBroken = true;
 
-            character.characterStatsManager.poiseResetTimer = character.characterStatsManager.defaultPoiseResetTime;
+                character.characterStatsManager.poiseResetTimer = character.characterStatsManager.defaultPoiseResetTime;
+            }
+            //predict damage and poise damage
+            else
+            {
+                character.characterNetworkManager.currentHealth.Value -= finalDamageDealt;
+                //update the HP bar to reflect projected health
+
+                if (character.characterNetworkManager.currentHealth.Value <= 0)
+                {
+                    character.isDeadLocal = true;
+                    character.animator.SetBool("isDead", true);
+                }
+
+                int projectedPoise = Mathf.RoundToInt(GetCurrentPoise(character) - poiseDamage);
+
+                if (projectedPoise <= 0)
+                {
+                    poiseIsBroken = true;
+                }
+                else
+                {
+                    poiseIsBroken = false;
+                }
+            }
         }
 
         protected void CalculateStanceDamage(CharacterManager character)
@@ -146,16 +199,13 @@ namespace TraverserProject
 
         protected void PlayDirectionalBasedDamageAnimation(CharacterManager character)
         {
-            if (!character.IsOwner)
-                return;
-
-            if (character.isDead.Value)
+            if (character.isDead.Value || character.isDeadLocal)
                 return;
 
             if (character.characterNetworkManager.isClimbingLadder.Value)
             {
                 //eldenring's method - if hit twice within x time, fall off
-                if (character.characterLocomotionManager.canBeKnockedOffLadder)
+                if (character.characterNetworkManager.canBeKnockedOffLadder.Value)
                 {
                     KnockCharacterOffLadder(character);
                     return;
@@ -236,12 +286,12 @@ namespace TraverserProject
 
             if (poiseIsBroken)
             {
-                character.characterAnimatorManager.PlayTargetActionAnimation(damageAnimation, true);
+                character.characterAnimatorManager.PlayTargetLocalAnimation(damageAnimation, true);
                 character.characterCombatManager.DestroyAllCurrentActionFX();
             }
             else
             {
-                character.characterAnimatorManager.PlayTargetActionAnimation(damageAnimation, false, false, true, true);
+                character.characterAnimatorManager.PlayTargetLocalAnimation(damageAnimation, false, false, true, true);
             }
 
 
@@ -249,11 +299,14 @@ namespace TraverserProject
 
         protected void KnockCharacterOffLadder(CharacterManager character)
         {
-            if (!character.IsOwner)
-                return;
-
-            character.characterAnimatorManager.PlayTargetActionAnimationInstantly("Ladder_Fall_Start_01", true);
+            character.characterAnimatorManager.PlayTargetLocalAnimationInstantly("Ladder_Fall_Start_01", true);
             character.characterLocomotionManager.isExitingLadder = false;
+        }
+
+        private float GetCurrentPoise(CharacterManager character)
+        {
+            float currentPoise = character.characterNetworkManager.basePoiseDefense.Value + character.characterNetworkManager.offensivePoiseBonus.Value + character.characterNetworkManager.totalPoiseDamage.Value;
+            return currentPoise;
         }
 
     }

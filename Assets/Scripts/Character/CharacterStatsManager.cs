@@ -32,16 +32,6 @@ namespace TravserserProject
         public float blockingHolyAbsorption;
         public float blockingStability;
 
-        [Header("Armor Absorptions")]
-        public float armorPhysicalDamageAbsorption;
-        public float armorBluntDamageAbsorption;
-        public float armorPierceDamageAbsorption;
-        public float armorSlashDamageAbsorption;
-        public float armorMagicDamageAbsorption;
-        public float armorFireDamageAbsorption;
-        public float armorLightningDamageAbsorption;
-        public float armorHolyDamageAbsorption;
-
         [Header("Armor Resistances")]
         public float armorImmunity;   //rot and poison
         public float armorRobustness; //bleed and frost
@@ -49,9 +39,6 @@ namespace TravserserProject
         public float armorVitality;   //deathblight
 
         [Header("Poise")]
-        public float totalPoiseDamage;
-        public float offensivePoiseBonus;
-        public float basePoiseDefense;
         public float defaultPoiseResetTime = 8;
         public float poiseResetTimer = 0;
 
@@ -102,19 +89,19 @@ namespace TravserserProject
 
         public virtual void CalculateWeaponAttackPower(WeaponItem weapon)
         {
-            
+
         }
 
         public virtual void CalculateTotalArmorAbsorption()
         {
-            armorPhysicalDamageAbsorption += armorPhysicalDamageAbsorption * (character.characterNetworkManager.armorPhysicalDamageAbsorptionModifer.Value / 100);
-            armorBluntDamageAbsorption += armorBluntDamageAbsorption * (character.characterNetworkManager.armorBluntDamageAbsorptionModifer.Value / 100);
-            armorPierceDamageAbsorption += armorPierceDamageAbsorption * (character.characterNetworkManager.armorPierceDamageAbsorptionModifer.Value / 100);
-            armorSlashDamageAbsorption += armorSlashDamageAbsorption * (character.characterNetworkManager.armorSlashDamageAbsorptionModifer.Value / 100);
-            armorMagicDamageAbsorption += armorMagicDamageAbsorption * (character.characterNetworkManager.armorMagicDamageAbsorptionModifer.Value / 100);
-            armorFireDamageAbsorption += armorFireDamageAbsorption * (character.characterNetworkManager.armorFireDamageAbsorptionModifer.Value / 100);
-            armorLightningDamageAbsorption += armorLightningDamageAbsorption * (character.characterNetworkManager.armorLightningDamageAbsorptionModifer.Value / 100);
-            armorHolyDamageAbsorption += armorHolyDamageAbsorption * (character.characterNetworkManager.armorHolyDamageAbsorptionModifer.Value / 100);
+            character.characterNetworkManager.armorPhysicalDamageAbsorptionModifer.Value += character.characterNetworkManager.armorPhysicalDamageAbsorptionModifer.Value * (character.characterNetworkManager.armorPhysicalDamageAbsorptionModifer.Value / 100);
+            character.characterNetworkManager.armorBluntDamageAbsorptionModifer.Value += character.characterNetworkManager.armorBluntDamageAbsorptionModifer.Value * (character.characterNetworkManager.armorBluntDamageAbsorptionModifer.Value / 100);
+            character.characterNetworkManager.armorPierceDamageAbsorptionModifer.Value += character.characterNetworkManager.armorPierceDamageAbsorptionModifer.Value * (character.characterNetworkManager.armorPierceDamageAbsorptionModifer.Value / 100);
+            character.characterNetworkManager.armorSlashDamageAbsorptionModifer.Value += character.characterNetworkManager.armorSlashDamageAbsorptionModifer.Value * (character.characterNetworkManager.armorSlashDamageAbsorptionModifer.Value / 100);
+            character.characterNetworkManager.armorMagicDamageAbsorptionModifer.Value += character.characterNetworkManager.armorMagicDamageAbsorptionModifer.Value * (character.characterNetworkManager.armorMagicDamageAbsorptionModifer.Value / 100);
+            character.characterNetworkManager.armorFireDamageAbsorptionModifer.Value += character.characterNetworkManager.armorFireDamageAbsorptionModifer.Value * (character.characterNetworkManager.armorFireDamageAbsorptionModifer.Value / 100);
+            character.characterNetworkManager.armorLightningDamageAbsorptionModifer.Value += character.characterNetworkManager.armorLightningDamageAbsorptionModifer.Value * (character.characterNetworkManager.armorLightningDamageAbsorptionModifer.Value / 100);
+            character.characterNetworkManager.armorHolyDamageAbsorptionModifer.Value += character.characterNetworkManager.armorHolyDamageAbsorptionModifer.Value * (character.characterNetworkManager.armorHolyDamageAbsorptionModifer.Value / 100);
         }
 
         public int CalculateCharacterLevelBasedOnAttributes(bool calculateProjectedLevel = false)
@@ -184,7 +171,7 @@ namespace TravserserProject
             float capacity = 0;
 
             //any equation for capacity
-            capacity =  endurance * 15;
+            capacity = endurance * 15;
 
             return Mathf.RoundToInt(capacity);
         }
@@ -245,7 +232,8 @@ namespace TravserserProject
             }
             else
             {
-                totalPoiseDamage = 0;
+                if (character.IsOwner)
+                    character.characterNetworkManager.totalPoiseDamage.Value = 0;
             }
         }
 

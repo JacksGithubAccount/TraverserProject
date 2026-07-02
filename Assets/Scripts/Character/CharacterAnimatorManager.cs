@@ -85,7 +85,7 @@ namespace TraverserProject
                 finalList.Add(item);
             }
 
-            if(finalList.Count > 1)
+            if (finalList.Count > 1)
                 finalList.Remove(lastDamageAnimationPlayed);
 
             for (int i = finalList.Count - 1; i > -1; i--)
@@ -212,6 +212,32 @@ namespace TraverserProject
             character.characterLocomotionManager.canRoll = canRoll;
 
             character.characterNetworkManager.NotifyTheServerOfAttackActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
+        }
+
+        public virtual void PlayTargetLocalAnimation(string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false, bool canRun = true, bool canRoll = false)
+        {
+            Debug.Log("Playing Animation: " + targetAnimation);
+            this.applyRootMotion = applyRootMotion;
+            character.animator.applyRootMotion = applyRootMotion;
+            character.animator.CrossFade(targetAnimation, 0.2f);
+            character.isPerformingAction = isPerformingAction;
+            character.characterLocomotionManager.canRotate = canRotate;
+            character.characterLocomotionManager.canMove = canMove;
+            character.characterLocomotionManager.canRun = canRun;
+            character.characterLocomotionManager.canRoll = canRoll;
+        }
+
+        public virtual void PlayTargetLocalAnimationInstantly(string targetAnimation, bool isPerformingAction, bool applyRootMotion = true, bool canRotate = false, bool canMove = false, bool canRun = true, bool canRoll = false)
+        {
+            Debug.Log("Playing Animation: " + targetAnimation);
+            this.applyRootMotion = applyRootMotion;
+            character.animator.applyRootMotion = applyRootMotion;
+            character.animator.Play(targetAnimation);
+            character.isPerformingAction = isPerformingAction;
+            character.characterLocomotionManager.canRotate = canRotate;
+            character.characterLocomotionManager.canMove = canMove;
+            character.characterLocomotionManager.canRun = canRun;
+            character.characterLocomotionManager.canRoll = canRoll;
         }
 
         public void UpdateAnimatorController(AnimatorOverrideController weaponController)

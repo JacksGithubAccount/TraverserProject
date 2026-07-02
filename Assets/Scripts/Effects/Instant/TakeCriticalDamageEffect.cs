@@ -37,12 +37,12 @@ namespace TraverserProject
             }
 
 
-            character.characterStatsManager.totalPoiseDamage -= poiseDamage;
+            character.characterNetworkManager.totalPoiseDamage.Value -= poiseDamage;
 
             //stores poise daamage taken for other interactions
             character.characterCombatManager.previousPoiseDamageTaken = poiseDamage;
 
-            float remainingPoise = character.characterStatsManager.basePoiseDefense + character.characterStatsManager.offensivePoiseBonus + character.characterStatsManager.totalPoiseDamage;
+            float remainingPoise = character.characterNetworkManager.basePoiseDefense.Value + character.characterNetworkManager.offensivePoiseBonus.Value + character.characterNetworkManager.totalPoiseDamage.Value;
 
             if (remainingPoise <= 0)
                 poiseIsBroken = true;

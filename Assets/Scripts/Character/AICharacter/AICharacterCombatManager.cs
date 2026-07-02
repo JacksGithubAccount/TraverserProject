@@ -43,7 +43,6 @@ namespace TraverserProject
 
         [Header("Stance Settings")]
         public float maxStance = 150;
-        public float currentStance;
         [SerializeField] float stanceRegeneratedPerSecond = 15;
         [SerializeField] bool ignoreStanceBreak = false;
 
@@ -133,32 +132,32 @@ namespace TraverserProject
             {
                 stanceRegenerationTimer = 0;
 
-                if (currentStance < maxStance)
+                if (aiCharacter.aiCharacterNetworkManager.currentStance.Value < maxStance)
                 {
                     stanceTickTimer += Time.deltaTime;
                     if (stanceTickTimer >= 1)
                     {
                         stanceTickTimer = 0;
-                        currentStance += stanceRegeneratedPerSecond;
+                        aiCharacter.aiCharacterNetworkManager.currentStance.Value += stanceRegeneratedPerSecond;
                     }
                 }
                 else
                 {
-                    currentStance = maxStance;
+                    aiCharacter.aiCharacterNetworkManager.currentStance.Value = maxStance;
                 }
             }
 
-            if (currentStance <= 0)
+            if (aiCharacter.aiCharacterNetworkManager.currentStance.Value <= 0)
             {
                 DamageIntensity previousDamageIntensity = WorldUtilityManager.Singleton.GetDamageIntensityBasedOnPoiseDamage(previousPoiseDamageTaken);
 
                 if (previousDamageIntensity == DamageIntensity.Colossal)
                 {
-                    currentStance = 1;
+                    aiCharacter.aiCharacterNetworkManager.currentStance.Value = 1;
                     return;
                 }
 
-                currentStance = maxStance;
+                aiCharacter.aiCharacterNetworkManager.currentStance.Value = maxStance;
 
                 if (ignoreStanceBreak)
                     return;
@@ -169,9 +168,51 @@ namespace TraverserProject
 
         public void DamageStance(int stanceDamage)
         {
+            //Don't allow stance break animations to play if they are being riposted/backstabbed
+            if (aiCharacter.aiCharacterNetworkManager.isBeingCriticallyDamaged.Value)
+            {
+                if (aiCharacter.IsOwner)
+                    aiCharacter.aiCharacterNetworkManager.currentStance.Value = maxStance;
+                return;
+            }
+
+            //timer is reset when stance is damaged
             stanceRegenerationTimer = defaultTimeUntilStanceRegenerationBegins;
 
-            currentStance -= stanceDamage;
+            float projectedStance = aiCharacter.aiCharacterNetworkManager.currentStance.Value - stanceDamage;
+
+            if (aiCharacter.IsOwner)
+                aiCharacter.aiCharacterNetworkManager.currentStance.Value -= stanceDamage;
+
+
+            if (projectedStance <= 0)
+            {
+                //Optional: if in a very high intensity damage animation(like launched in air), do not play stance break animation
+                DamageIntensity previousDamageIntensity = WorldUtilityManager.Singleton.GetDamageIntensityBasedOnPoiseDamage(previousPoiseDamageTaken);
+
+                if (previousDamageIntensity == DamageIntensity.Colossal)
+                {
+                    projectedStance = 1;
+                    aiCharacter.aiCharacterNetworkManager.currentStance.Value = projectedStance;
+                    return;
+                }
+
+                aiCharacter.aiCharacterNetworkManager.currentStance.Value = maxStance;
+
+
+                projectedStance = maxStance;
+
+                if (aiCharacter.IsOwner)
+                    aiCharacter.aiCharacterNetworkManager.currentStance.Value = projectedStance;
+
+                if (ignoreStanceBreak)
+                    return;
+
+                if (aiCharacter.isDead.Value || aiCharacter.isDeadLocal)
+                    return;
+
+                aiCharacter.characterAnimatorManager.PlayTargetLocalAnimationInstantly("Stance_Break_01", true);
+            }
         }
 
         public virtual void AlertCharacterToSound(Vector3 positionOfSound)

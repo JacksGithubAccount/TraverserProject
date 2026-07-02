@@ -28,7 +28,7 @@ namespace TraverserProject
         public bool isRidingLift = false;
         public bool isOpeningDoor = false;
         public bool isExitingLadder = false;
-        public bool canBeKnockedOffLadder = false;
+
         [HideInInspector] public bool canExitTopOfLadder = false;
         [HideInInspector] public bool canExitLadderWithRightHand = false;
         [HideInInspector] public bool canExitLadderWithLeftHand = false;
@@ -349,17 +349,20 @@ namespace TraverserProject
 
         public void EnableCanBeKnockedOffLadderForATime(float time)
         {
+            if (!character.IsOwner)
+                return;
+
             if (enableCanBeKnockedOffLadderCoroutine != null)
                 StopCoroutine(enableCanBeKnockedOffLadderCoroutine);
 
             enableCanBeKnockedOffLadderCoroutine = StartCoroutine(CanBeKnockedOffLadderCoroutine(time));
-            canBeKnockedOffLadder = true;
+            character.characterNetworkManager.canBeKnockedOffLadder.Value = true;
         }
 
         private IEnumerator CanBeKnockedOffLadderCoroutine(float time)
         {
             yield return new WaitForSeconds(time);
-            canBeKnockedOffLadder = false;
+            character.characterNetworkManager.canBeKnockedOffLadder.Value = false;
         }
 
         public void FallFromLadder()
