@@ -89,26 +89,31 @@ namespace TravserserProject
             int physicalPower = weapon.physicalBaseDamage;
             if (physicalPower > 0)
                 physicalPower += weapon.physicalUpgradeDamage + weapon.physicalScalingDamage;
+            physicalPower += weapon.physicalDamageModifier;
             weapon.physicalDamage = physicalPower;
 
             int magicDamage = weapon.magicBaseDamage;
             if (magicDamage > 0)
                 magicDamage += weapon.magicUpgradeDamage + weapon.magicScalingDamage;
+            magicDamage += weapon.magicDamageModifier;
             weapon.magicDamage = magicDamage;
 
             int fireDamage = weapon.fireBaseDamage;
             if (fireDamage > 0)
                 fireDamage += weapon.fireUpgradeDamage + weapon.fireScalingDamage;
+            fireDamage += weapon.fireDamageModifier;
             weapon.fireDamage = fireDamage;
 
             int lightningDamage = weapon.lightningBaseDamage;
             if (lightningDamage > 0)
                 lightningDamage += weapon.lightningUpgradeDamage + weapon.lightningScalingDamage;
+            lightningDamage += weapon.lightningDamageModifier;
             weapon.lightningDamage = lightningDamage;
 
             int holyDamage = weapon.holyBaseDamage;
             if (holyDamage > 0)
                 holyDamage += weapon.holyUpgradeDamage + weapon.holyScalingDamage;
+            holyDamage += weapon.holyDamageModifier;
             weapon.holyDamage = holyDamage;
 
             weapon.attackPower = weapon.physicalDamage + weapon.magicDamage + weapon.fireDamage + weapon.lightningDamage + weapon.holyDamage;

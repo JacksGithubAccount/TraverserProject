@@ -65,6 +65,13 @@ namespace TraverserProject
         public int lightningScalingDamage = 0;
         public int holyScalingDamage = 0;
 
+        [Header("Weapon Modifier Damage")]
+        public int physicalDamageModifier = 0;
+        public int magicDamageModifier = 0;
+        public int fireDamageModifier = 0;
+        public int lightningDamageModifier = 0;
+        public int holyDamageModifier = 0;
+
         [Header("Weapon Total Damage")]
         public int attackPower = 0;
         public int physicalDamage = 0;

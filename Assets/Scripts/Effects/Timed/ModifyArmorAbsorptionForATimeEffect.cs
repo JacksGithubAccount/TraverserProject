@@ -31,7 +31,7 @@ namespace TraverserProject
                 character.characterNetworkManager.armorFireDamageAbsorptionModifer.Value += armorFireDamageAbsorptionModifer;
                 character.characterNetworkManager.armorLightningDamageAbsorptionModifer.Value += armorLightningDamageAbsorptionModifer;
                 character.characterNetworkManager.armorHolyDamageAbsorptionModifer.Value += armorHolyDamageAbsorptionModifer;
-    }
+            }
         }
 
         public override void RemoveEffect(CharacterManager character)

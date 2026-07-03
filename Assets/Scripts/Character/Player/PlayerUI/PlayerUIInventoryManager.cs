@@ -285,14 +285,14 @@ namespace TraverserProject
 
                 if (weaponItem.physicalBaseDamage > 0)
                 {
-                    weaponItemPhysicalScalingAttackPowerText.text = "+" + weaponItem.physicalScalingDamage.ToString();
+                    weaponItemPhysicalScalingAttackPowerText.text = "+" + weaponItem.physicalScalingDamage + weaponItem.physicalDamageModifier;
                 }else
                 {
                     weaponItemPhysicalScalingAttackPowerText.text = "";
                 }
                 if (weaponItem.magicBaseDamage > 0)
                 {
-                    weaponItemMagicScalingAttackPowerText.text = "+" + weaponItem.magicScalingDamage.ToString();
+                    weaponItemMagicScalingAttackPowerText.text = "+" + weaponItem.magicScalingDamage + weaponItem.magicDamageModifier;
                 }
                 else
                 {
@@ -300,7 +300,7 @@ namespace TraverserProject
                 }
                 if (weaponItem.fireBaseDamage > 0)
                 {
-                    weaponItemFireScalingAttackPowerText.text = "+" + weaponItem.fireScalingDamage.ToString();
+                    weaponItemFireScalingAttackPowerText.text = "+" + weaponItem.fireScalingDamage + weaponItem.fireDamageModifier;
                 }
                 else
                 {
@@ -308,7 +308,7 @@ namespace TraverserProject
                 }
                 if (weaponItem.lightningBaseDamage > 0)
                 {
-                    weaponItemLightningScalingAttackPowerText.text = "+" + weaponItem.lightningScalingDamage.ToString();
+                    weaponItemLightningScalingAttackPowerText.text = "+" + weaponItem.lightningScalingDamage + weaponItem.lightningDamageModifier;
                 }
                 else
                 {
@@ -316,7 +316,7 @@ namespace TraverserProject
                 }
                 if (weaponItem.holyBaseDamage > 0)
                 {
-                    weaponItemHolyScalingAttackPowerText.text = "+" + weaponItem.holyScalingDamage.ToString();
+                    weaponItemHolyScalingAttackPowerText.text = "+" + weaponItem.holyScalingDamage + weaponItem.holyDamageModifier;
                 }
                 else
                 {
