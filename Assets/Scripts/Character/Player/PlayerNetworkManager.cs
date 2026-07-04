@@ -689,6 +689,7 @@ namespace TraverserProject
             player.playerBodyManager.ToggleBodyType(isMale.Value);
         }
 
+
         [ServerRpc]
         public void NotifyTheServerOfWeaponActionServerRpc(ulong clientID, int actionID, int weaponID)
         {

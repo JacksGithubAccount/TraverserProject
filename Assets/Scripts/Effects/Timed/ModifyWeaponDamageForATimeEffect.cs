@@ -6,11 +6,12 @@ namespace TraverserProject
     public class ModifyWeaponDamageForATimeEffect : TimedCharacterEffect
     {
         [Header("Weapon Damage")]
-        [SerializeField] public float weaponPhysicalDamageModifer = 0;
-        [SerializeField] public float weaponMagicDamageModifer = 0;
-        [SerializeField] public float weaponFireDamageModifer = 0;
-        [SerializeField] public float weaponLightningDamageModifer = 0;
-        [SerializeField] public float weaponHolyDamageModifer = 0;
+        [SerializeField] public WeaponItem weaponToBuff;
+        [SerializeField] public int weaponPhysicalDamageModifer = 0;
+        [SerializeField] public int weaponMagicDamageModifer = 0;
+        [SerializeField] public int weaponFireDamageModifer = 0;
+        [SerializeField] public int weaponLightningDamageModifer = 0;
+        [SerializeField] public int weaponHolyDamageModifer = 0;
 
         [Header("Effect Processed")]
         private bool effectHasBeenInitialized = false;
@@ -26,11 +27,11 @@ namespace TraverserProject
                     return;
 
                 effectHasBeenInitialized = true;
-                character.characterNetworkManager.weaponPhysicalDamageModifer.Value += weaponPhysicalDamageModifer;
-                character.characterNetworkManager.weaponMagicDamageModifer.Value += weaponMagicDamageModifer;
-                character.characterNetworkManager.weaponFireDamageModifer.Value += weaponFireDamageModifer;
-                character.characterNetworkManager.weaponLightningDamageModifer.Value += weaponLightningDamageModifer;
-                character.characterNetworkManager.weaponHolyDamageModifer.Value += weaponHolyDamageModifer;
+                weaponToBuff.physicalDamageModifier += weaponPhysicalDamageModifer;
+                weaponToBuff.magicDamageModifier += weaponMagicDamageModifer;
+                weaponToBuff.fireDamageModifier += weaponFireDamageModifer;
+                weaponToBuff.lightningDamageModifier += weaponLightningDamageModifer;
+                weaponToBuff.holyDamageModifier += weaponHolyDamageModifer;
             }
         }
 
@@ -41,11 +42,11 @@ namespace TraverserProject
             if (effectHasBeenInitialized)
             {
                 //remove ui icon if implemented
-                character.characterNetworkManager.weaponPhysicalDamageModifer.Value -= weaponPhysicalDamageModifer;
-                character.characterNetworkManager.weaponMagicDamageModifer.Value -= weaponMagicDamageModifer;
-                character.characterNetworkManager.weaponFireDamageModifer.Value -= weaponFireDamageModifer;
-                character.characterNetworkManager.weaponLightningDamageModifer.Value -= weaponLightningDamageModifer;
-                character.characterNetworkManager.weaponHolyDamageModifer.Value -= weaponHolyDamageModifer;
+                weaponToBuff.physicalDamageModifier -= weaponPhysicalDamageModifer;
+                weaponToBuff.magicDamageModifier -= weaponMagicDamageModifer;
+                weaponToBuff.fireDamageModifier -= weaponFireDamageModifer;
+                weaponToBuff.lightningDamageModifier -= weaponLightningDamageModifer;
+                weaponToBuff.holyDamageModifier -= weaponHolyDamageModifer;
             }
         }
     }

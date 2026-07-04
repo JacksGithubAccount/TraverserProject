@@ -6,11 +6,11 @@ namespace TraverserProject
     public class WeaponBuffItem : QuickSlotItem
     {
         [Header("Damage Modifier")]
-        public float physicalDamageWeaponModifier;
-        public float magicDamageWeaponModifier;
-        public float fireDamageWeaponModifier;
-        public float lightningDamageWeaponModifier;
-        public float holyDamageWeaponModifier;
+        public int physicalDamageWeaponModifier;
+        public int magicDamageWeaponModifier;
+        public int fireDamageWeaponModifier;
+        public int lightningDamageWeaponModifier;
+        public int holyDamageWeaponModifier;
 
         [Header("Buff Duration")]
         public int buffDuration = 180;
@@ -24,10 +24,23 @@ namespace TraverserProject
             if (physicalDamageWeaponModifier != 0 && magicDamageWeaponModifier != 0 && fireDamageWeaponModifier != 0 &&
                 lightningDamageWeaponModifier != 0 && holyDamageWeaponModifier != 0)
             {
-                ModifyArmorAbsorptionForATimeEffect absorptionBuff = Instantiate(WorldCharacterEffectsManager.Singleton.itemAbsorptionBuffEffect);
-                absorptionBuff.defaultLengthOfEffect = buffDuration;
+                ModifyWeaponDamageForATimeEffect weaponBuff = Instantiate(WorldCharacterEffectsManager.Singleton.weaponBuffEffect);
+                if (player.playerNetworkManager.isTwoHandingWeapon.Value)
+                {
+                    weaponBuff.weaponToBuff = player.playerInventoryManager.currentTwoHandWeapon;
+                }
+                else
+                {
+                    weaponBuff.weaponToBuff = player.playerInventoryManager.currentRightHandWeapon;
+                }
+                weaponBuff.weaponPhysicalDamageModifer = physicalDamageWeaponModifier;
+                weaponBuff.weaponMagicDamageModifer = magicDamageWeaponModifier;
+                weaponBuff.weaponFireDamageModifer = fireDamageWeaponModifier;
+                weaponBuff.weaponLightningDamageModifer = lightningDamageWeaponModifier;
+                weaponBuff.weaponHolyDamageModifer = holyDamageWeaponModifier;
+                weaponBuff.defaultLengthOfEffect = buffDuration;
 
-                player.playerEffectsManager.AddTimedEffect(absorptionBuff);
+                player.playerEffectsManager.AddTimedEffect(weaponBuff);
 
                 player.playerStatsManager.CalculateTotalArmorAbsorption();
             }
