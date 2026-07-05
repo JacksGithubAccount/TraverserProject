@@ -15,7 +15,7 @@ namespace TraverserProject
         [Header("Buff Duration")]
         public int buffDuration = 180;
 
-        protected GameObject weaponBuffVFX;
+        protected WeaponBuffVFXType weaponBuffVFX;
 
         public override void SuccessfullyUseItem(PlayerManager player)
         {
@@ -25,13 +25,16 @@ namespace TraverserProject
                 lightningDamageWeaponModifier != 0 && holyDamageWeaponModifier != 0)
             {
                 ModifyWeaponDamageForATimeEffect weaponBuff = Instantiate(WorldCharacterEffectsManager.Singleton.weaponBuffEffect);
-                if (player.playerNetworkManager.isTwoHandingWeapon.Value)
+                WeaponManager weaponManager = null;
+                if (player.playerNetworkManager.isTwoHandingLeftWeapon.Value)
                 {
                     weaponBuff.weaponToBuff = player.playerInventoryManager.currentTwoHandWeapon;
+                    weaponManager = player.playerEquipmentManager.leftWeaponManager;
                 }
                 else
                 {
                     weaponBuff.weaponToBuff = player.playerInventoryManager.currentRightHandWeapon;
+                    weaponManager = player.playerEquipmentManager.rightWeaponManager;
                 }
                 weaponBuff.weaponPhysicalDamageModifer = physicalDamageWeaponModifier;
                 weaponBuff.weaponMagicDamageModifer = magicDamageWeaponModifier;
@@ -40,15 +43,17 @@ namespace TraverserProject
                 weaponBuff.weaponHolyDamageModifer = holyDamageWeaponModifier;
                 weaponBuff.defaultLengthOfEffect = buffDuration;
 
+                weaponBuff.weaponBuffVFX = weaponManager.fireWeaponBuffVFX;
+
                 player.playerEffectsManager.AddTimedEffect(weaponBuff);
 
                 player.playerStatsManager.CalculateTotalArmorAbsorption();
             }
 
+            if (weaponBuffVFX == WeaponBuffVFXType.Fire)
+            {
 
-            weaponBuffVFX = Instantiate(WorldCharacterEffectsManager.Singleton.poisonCureVFX);
-            weaponBuffVFX.transform.position = player.playerEffectsManager.effectTransform.position;
-            weaponBuffVFX.transform.root.rotation = Quaternion.identity;
+            }
         }
     }
 }

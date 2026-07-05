@@ -11,6 +11,9 @@ namespace TraverserProject
         [SerializeField] TrailRenderer trailRenderer;
         [SerializeField] ParticleSystem WeaponTrailVFX;
 
+        [Header("Weapon Buff VFX")]
+        [SerializeField] public GameObject fireWeaponBuffVFX;
+
         [Header("Collider")]
         public MeleeWeaponDamageCollider meleeDamageCollider;
 

@@ -13,6 +13,9 @@ namespace TraverserProject
         [SerializeField] public int weaponLightningDamageModifer = 0;
         [SerializeField] public int weaponHolyDamageModifer = 0;
 
+        [Header("Weapon VFX")]
+        [SerializeField] public GameObject weaponBuffVFX;
+
         [Header("Effect Processed")]
         private bool effectHasBeenInitialized = false;
 
@@ -32,6 +35,7 @@ namespace TraverserProject
                 weaponToBuff.fireDamageModifier += weaponFireDamageModifer;
                 weaponToBuff.lightningDamageModifier += weaponLightningDamageModifer;
                 weaponToBuff.holyDamageModifier += weaponHolyDamageModifer;
+                weaponBuffVFX.SetActive(true);
             }
         }
 
@@ -47,6 +51,7 @@ namespace TraverserProject
                 weaponToBuff.fireDamageModifier -= weaponFireDamageModifer;
                 weaponToBuff.lightningDamageModifier -= weaponLightningDamageModifer;
                 weaponToBuff.holyDamageModifier -= weaponHolyDamageModifer;
+                weaponBuffVFX.SetActive(false);
             }
         }
     }

@@ -305,6 +305,15 @@ public enum ThrowableType
     Persistant
 }
 
+//determines VFX when a weapon buff is applied
+public enum WeaponBuffVFXType
+{
+    Magic,
+    Fire,
+    Lightning,
+    Holy
+}
+
 public enum ItemCategory
 {
     None,
