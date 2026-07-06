@@ -43,17 +43,28 @@ namespace TraverserProject
                 weaponBuff.weaponHolyDamageModifer = holyDamageWeaponModifier;
                 weaponBuff.defaultLengthOfEffect = buffDuration;
 
-                weaponBuff.weaponBuffVFX = weaponManager.fireWeaponBuffVFX;
+                switch (weaponBuffVFX)
+                {
+                    case WeaponBuffVFXType.Magic:
+
+                        break;
+                    case WeaponBuffVFXType.Fire:
+                        weaponBuff.weaponBuffVFX = weaponManager.fireWeaponBuffVFX;
+                        break;
+                    case WeaponBuffVFXType.Lightning:
+
+                        break;
+                    case WeaponBuffVFXType.Holy:
+
+                        break;
+                    default:
+                        break;
+                }
 
                 player.playerEffectsManager.AddTimedEffect(weaponBuff);
 
                 player.playerStatsManager.CalculateTotalArmorAbsorption();
-            }
-
-            if (weaponBuffVFX == WeaponBuffVFXType.Fire)
-            {
-
-            }
+            }            
         }
     }
 }
