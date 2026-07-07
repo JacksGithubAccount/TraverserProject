@@ -15,11 +15,14 @@ namespace TraverserProject
         [Header("Buff Duration")]
         public int buffDuration = 180;
 
-        protected WeaponBuffVFXType weaponBuffVFX;
+        [Header("VFX")]
+        public WeaponBuffVFXType weaponBuffVFX;
 
         public override void SuccessfullyUseItem(PlayerManager player)
         {
             base.SuccessfullyUseItem(player);
+
+            
 
             if (physicalDamageWeaponModifier != 0 && magicDamageWeaponModifier != 0 && fireDamageWeaponModifier != 0 &&
                 lightningDamageWeaponModifier != 0 && holyDamageWeaponModifier != 0)
@@ -46,22 +49,35 @@ namespace TraverserProject
                 switch (weaponBuffVFX)
                 {
                     case WeaponBuffVFXType.Magic:
-
+                        weaponBuff.weaponBuffVFX = weaponManager.magicWeaponBuffVFX;
                         break;
                     case WeaponBuffVFXType.Fire:
                         weaponBuff.weaponBuffVFX = weaponManager.fireWeaponBuffVFX;
                         break;
                     case WeaponBuffVFXType.Lightning:
-
+                        weaponBuff.weaponBuffVFX = weaponManager.lightningWeaponBuffVFX;
                         break;
                     case WeaponBuffVFXType.Holy:
-
+                        weaponBuff.weaponBuffVFX = weaponManager.holyWeaponBuffVFX;
                         break;
                     default:
                         break;
                 }
 
-                player.playerEffectsManager.AddTimedEffect(weaponBuff);
+                if (weaponBuff.weaponToBuff.weaponTimedEffect == null)
+                {
+                    player.playerEffectsManager.AddTimedEffect(weaponBuff, true);
+                    weaponBuff.weaponToBuff.weaponTimedEffect = weaponBuff;
+                }
+                else
+                {
+                    if (player.playerEffectsManager.timedEffects.Find(x => x.effectID == WorldCharacterEffectsManager.Singleton.weaponBuffEffect.effectID))
+                    {
+                        TimedCharacterEffect effect = player.playerEffectsManager.timedEffects.Find(x => x.effectID == WorldCharacterEffectsManager.Singleton.weaponBuffEffect.effectID);
+                        player.playerEffectsManager.RemoveTimedEffect(effect.effectID);
+                    }
+                    player.playerEffectsManager.AddTimedEffect(weaponBuff);
+                }
 
                 player.playerStatsManager.CalculateTotalArmorAbsorption();
             }            

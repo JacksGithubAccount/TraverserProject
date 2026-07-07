@@ -12,7 +12,10 @@ namespace TraverserProject
         [SerializeField] ParticleSystem WeaponTrailVFX;
 
         [Header("Weapon Buff VFX")]
-        [SerializeField] public GameObject fireWeaponBuffVFX;
+        [SerializeField] public GameObject magicWeaponBuffVFX;
+        [SerializeField] public GameObject fireWeaponBuffVFX;        
+        [SerializeField] public GameObject lightningWeaponBuffVFX;
+        [SerializeField] public GameObject holyWeaponBuffVFX;        
 
         [Header("Collider")]
         public MeleeWeaponDamageCollider meleeDamageCollider;

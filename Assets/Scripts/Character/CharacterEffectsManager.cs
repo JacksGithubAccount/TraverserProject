@@ -181,7 +181,7 @@ namespace TraverserProject
             }
         }
 
-        public void AddTimedEffect(TimedCharacterEffect effect)
+        public void AddTimedEffect(TimedCharacterEffect effect, bool isStackable = false)
         {
             bool effectIsAlreadyOnCharacter = false;
 
@@ -189,7 +189,7 @@ namespace TraverserProject
             {
                 if (timedEffects[i] == null)
                     continue;
-                if (timedEffects[i].effectID == effect.effectID)
+                if (timedEffects[i].effectID == effect.effectID && !isStackable)
                 {
                     effectIsAlreadyOnCharacter = true;
                     timedEffects[i].timeRemainingOnEffect = timedEffects[i].defaultLengthOfEffect;

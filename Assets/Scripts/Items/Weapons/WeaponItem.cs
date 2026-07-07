@@ -16,6 +16,9 @@ namespace TraverserProject
         [Header("VFX")]
         [HideInInspector] public GameObject weaponSwingVFX;
 
+        [Header("Weapon Timed Effect")]
+        public ModifyWeaponDamageForATimeEffect weaponTimedEffect;
+
         [Header("Weapon Class")]
         public WeaponClass weaponClass;
 

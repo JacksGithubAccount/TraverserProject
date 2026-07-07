@@ -12434,6 +12434,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   isDead:
     m_InternalValue: 0
+  isDeadLocal: 0
   characterController: {fileID: 0}
   animator: {fileID: 0}
   characterNetworkManager: {fileID: 0}
@@ -12492,7 +12493,6 @@ MonoBehaviour:
   isRidingLift: 0
   isOpeningDoor: 0
   isExitingLadder: 0
-  canBeKnockedOffLadder: 0
   canExitTopOfLadder: 0
   canExitLadderWithRightHand: 0
   canExitLadderWithLeftHand: 0
@@ -12601,6 +12601,8 @@ MonoBehaviour:
     m_InternalValue: 0
   isSlidingDownLadder:
     m_InternalValue: 0
+  canBeKnockedOffLadder:
+    m_InternalValue: 0
   currentStamina:
     m_InternalValue: 100
   maxStamina:
@@ -12628,6 +12630,28 @@ MonoBehaviour:
   faith:
     m_InternalValue: 1
   luck:
+    m_InternalValue: 1
+  armorPhysicalDamageAbsorption:
+    m_InternalValue: 1
+  armorBluntDamageAbsorption:
+    m_InternalValue: 1
+  armorPierceDamageAbsorption:
+    m_InternalValue: 1
+  armorSlashDamageAbsorption:
+    m_InternalValue: 1
+  armorMagicDamageAbsorption:
+    m_InternalValue: 1
+  armorFireDamageAbsorption:
+    m_InternalValue: 1
+  armorLightningDamageAbsorption:
+    m_InternalValue: 1
+  armorHolyDamageAbsorption:
+    m_InternalValue: 1
+  totalPoiseDamage:
+    m_InternalValue: 1
+  offensivePoiseBonus:
+    m_InternalValue: 1
+  basePoiseDefense:
     m_InternalValue: 1
   immunityBuildUpCapacity:
     m_InternalValue: 100
@@ -13018,21 +13042,10 @@ MonoBehaviour:
   blockingLightningAbsorption: 0
   blockingHolyAbsorption: 0
   blockingStability: 0
-  armorPhysicalDamageAbsorption: 0
-  armorBluntDamageAbsorption: 0
-  armorPierceDamageAbsorption: 0
-  armorSlashDamageAbsorption: 0
-  armorMagicDamageAbsorption: 0
-  armorFireDamageAbsorption: 0
-  armorLightningDamageAbsorption: 0
-  armorHolyDamageAbsorption: 0
   armorImmunity: 0
   armorRobustness: 0
   armorFocus: 0
   armorVitality: 0
-  totalPoiseDamage: 0
-  offensivePoiseBonus: 0
-  basePoiseDefense: 0
   defaultPoiseResetTime: 8
   poiseResetTimer: 0
   bubbles: 0
@@ -13107,8 +13120,8 @@ MonoBehaviour:
   currentSpell: {fileID: 11400000, guid: 1f24f521d7294aa4a8fc15067fe2914f, type: 2}
   quickSlotItemsInQuickSlots:
   - {fileID: 11400000, guid: 2f5b3455b88448146b0c60c2756dcaa6, type: 2}
-  - {fileID: 11400000, guid: d8fc43fd4b28b2d43bd70c57b173d99d, type: 2}
-  - {fileID: 11400000, guid: 91fa5aa3cd3bcfd40b51d8de1cd1e4b2, type: 2}
+  - {fileID: 11400000, guid: db4d74881dd4af542ab973a1087b740e, type: 2}
+  - {fileID: 11400000, guid: 59e9480eb2f3af34e8c10f39c34d4340, type: 2}
   quickSlotItemIndex: 0
   currentQuickSlotItem: {fileID: 11400000, guid: aedcc59cf0831af4eb8da47234130fb5, type: 2}
   menuSelectedQuickSlotItem: {fileID: 0}
@@ -13123,6 +13136,7 @@ MonoBehaviour:
   - {fileID: 0}
   mainProjectile: {fileID: 11400000, guid: c769f95361625fa4d98e2a4e4d9ac4b1, type: 2}
   secondaryProjectile: {fileID: 0}
+  itemsInStorage: []
   dropItem: 0
 --- !u!114 &2442665282701344435
 MonoBehaviour:
