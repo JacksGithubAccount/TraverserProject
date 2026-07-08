@@ -27,11 +27,12 @@ namespace TraverserProject
         [Header("Lock On Transform")]
         public Transform lockOnTransform;
 
-        [Header("Attack Flags")]
+        [Header("Combat Flags")]
         public bool canPerformRollingAttack = false;
         public bool canPerformBackstepAttack = false;
         public bool canBlock = true;
         public bool canBeBackstabbed = true;
+        public bool hasPlayedDeathAnimation = false;
 
         [Header("Critical Attack")]
         private Transform riposteReceiverTransform;
@@ -48,6 +49,28 @@ namespace TraverserProject
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();
+        }
+
+        //death animation
+        //if we kill the character locally before the death is verified on network, we want to play the death animation instantly
+        public virtual void CheckForDeathAnimation()
+        {
+            if (character.characterNetworkManager.isBeingCriticallyDamaged.Value)
+                return;
+
+            if (!character.isDead.Value && !character.isDeadLocal)
+                return;
+
+            if (hasPlayedDeathAnimation)
+                return;
+
+            hasPlayedDeathAnimation = true;
+            //if you have any heavy damage animation that leads into a death animation and are playing it, also return
+
+            //if you have any special death animations make your rules for them here and play them(ex: death in the air players falling anim)
+
+            character.characterAnimatorManager.PlayTargetLocalAnimation("Dead_01", true);
+
         }
 
         public virtual void SetTarget(CharacterManager newTarget)

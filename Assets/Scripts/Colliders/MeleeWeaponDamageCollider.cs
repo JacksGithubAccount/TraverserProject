@@ -73,33 +73,154 @@ namespace TraverserProject
             base.Awake();
 
             if (damageCollider == null)
-            {
                 damageCollider = GetComponent<Collider>();
-            }
+
             damageCollider.enabled = false;
         }
 
         protected override void OnTriggerEnter(Collider other)
         {
+            if (!characterCausingDamage.IsOwner)
+                return;
+
             CharacterManager damageTarget = other.GetComponentInParent<CharacterManager>();
 
-            if (damageTarget != null)
+            if (damageTarget == null)
+                return;
+
+            contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+
+            if (damageTarget == characterCausingDamage)
+                return;
+
+            if (!WorldUtilityManager.Singleton.CanIDamageThisTarget(characterCausingDamage.characterGroup, damageTarget.characterGroup))
+                return;
+
+            CheckForParry(damageTarget);
+
+            CheckForBlock(damageTarget);
+
+            if (!damageTarget.characterNetworkManager.isInvulnerable.Value)
+                DamageTarget(damageTarget);
+        }
+
+        protected override void CheckForBlock(CharacterManager damageTarget)
+        {
+            if (charactersDamaged.Contains(damageTarget))
+                return;
+
+            GetBlockingDotValues(damageTarget);
+
+            if (damageTarget.characterNetworkManager.isBlocking.Value && dotValueFromAttackToDamageTarget > 0.3f)
             {
-                contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
 
-                if (damageTarget == characterCausingDamage)
-                    return;
+                charactersDamaged.Add(damageTarget);
 
-                if (!WorldUtilityManager.Singleton.CanIDamageThisTarget(characterCausingDamage.characterGroup, damageTarget.characterGroup))
-                    return;
+                TakeBlockedDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.Singleton.takeBlockedDamageEffect);
+                damageEffect.physicalDamage = physicalDamage;
+                damageEffect.magicDamage = magicDamage;
+                damageEffect.fireDamage = fireDamage;
+                damageEffect.lightningDamage = lightningDamage;
+                damageEffect.holyDamage = holyDamage;
+                damageEffect.poiseDamage = poiseDamage;
+                damageEffect.contactPoint = contactPoint;
+                damageEffect.angleHitFrom = Vector3.SignedAngle(characterCausingDamage.transform.forward, damageTarget.transform.forward, Vector3.up);
 
-                CheckForParry(damageTarget);
+                switch (characterCausingDamage.characterCombatManager.currentAttackType)
+                {
+                    case AttackType.LightAttack01:
+                        ApplyAttackDamageModifiers(light_Attack_01_Modifier, damageEffect, light_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.LightAttack02:
+                        ApplyAttackDamageModifiers(light_Attack_02_Modifier, damageEffect, light_Attack_02_PhysicalDamageType);
+                        break;
+                    case AttackType.HeavyAttack01:
+                        ApplyAttackDamageModifiers(heavy_Attack_01_Modifier, damageEffect, heavy_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.HeavyAttack02:
+                        ApplyAttackDamageModifiers(heavy_Attack_02_Modifier, damageEffect, heavy_Attack_02_PhysicalDamageType);
+                        break;
+                    case AttackType.LightJumpingAttack01:
+                        ApplyAttackDamageModifiers(jumping_Light_Attack_01_Modifier, damageEffect, jumping_Light_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.HeavyJumpingAttack01:
+                        ApplyAttackDamageModifiers(jumping_Heavy_Attack_01_Modifier, damageEffect, jumping_Heavy_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.ChargedAttack01:
+                        ApplyAttackDamageModifiers(charge_Attack_01_Modifier, damageEffect, charge_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.ChargedAttack02:
+                        ApplyAttackDamageModifiers(charge_Attack_02_Modifier, damageEffect, charge_Attack_02_PhysicalDamageType);
+                        break;
+                    case AttackType.RunningLightAttack01:
+                        ApplyAttackDamageModifiers(running_Light_Attack_01_Modifier, damageEffect, running_Light_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.RunningHeavyAttack01:
+                        ApplyAttackDamageModifiers(running_Heavy_Attack_01_Modifier, damageEffect, running_Heavy_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.RollingLightAttack01:
+                        ApplyAttackDamageModifiers(rolling_Light_Attack_01_Modifier, damageEffect, rolling_Light_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.RollingHeavyAttack01:
+                        ApplyAttackDamageModifiers(rolling_Heavy_Attack_01_Modifier, damageEffect, rolling_Heavy_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.BackstepLightAttack01:
+                        ApplyAttackDamageModifiers(backstep_Light_Attack_01_Modifier, damageEffect, backstep_Light_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.BackstepHeavyAttack01:
+                        ApplyAttackDamageModifiers(backstep_Heavy_Attack_01_Modifier, damageEffect, backstep_Heavy_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.DualLightAttack01:
+                        ApplyAttackDamageModifiers(dual_Light_Attack_01_Modifier, damageEffect, dual_Light_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.DualLightAttack02:
+                        ApplyAttackDamageModifiers(dual_Light_Attack_02_Modifier, damageEffect, dual_Light_Attack_02_PhysicalDamageType);
+                        break;
+                    case AttackType.DualHeavyAttack01:
+                        ApplyAttackDamageModifiers(dual_Heavy_Attack_01_Modifier, damageEffect, dual_Heavy_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.DualHeavyAttack02:
+                        ApplyAttackDamageModifiers(dual_Heavy_Attack_02_Modifier, damageEffect, dual_Heavy_Attack_02_PhysicalDamageType);
+                        break;
+                    case AttackType.DualChargedAttack01:
+                        ApplyAttackDamageModifiers(dual_Charge_Attack_01_Modifier, damageEffect, dual_Charge_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.DualChargedAttack02:
+                        ApplyAttackDamageModifiers(dual_Charge_Attack_02_Modifier, damageEffect, dual_Charge_Attack_02_PhysicalDamageType);
+                        break;
+                    case AttackType.DualRunningLightAttack01:
+                        ApplyAttackDamageModifiers(dual_Running_Light_Attack_01_Modifier, damageEffect, dual_Running_Light_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.DualRunningHeavyAttack01:
+                        ApplyAttackDamageModifiers(dual_Running_Heavy_Attack_01_Modifier, damageEffect, dual_Running_Heavy_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.DualRollingLightAttack01:
+                        ApplyAttackDamageModifiers(dual_Rolling_Light_Attack_01_Modifier, damageEffect, dual_Rolling_Light_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.DualRollingHeavyAttack01:
+                        ApplyAttackDamageModifiers(dual_Rolling_Heavy_Attack_01_Modifier, damageEffect, dual_Rolling_Heavy_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.DualBackstepLightAttack01:
+                        ApplyAttackDamageModifiers(dual_Backstep_Light_Attack_01_Modifier, damageEffect, dual_Backstep_Light_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.DualBackstepHeavyAttack01:
+                        ApplyAttackDamageModifiers(dual_Backstep_Heavy_Attack_01_Modifier, damageEffect, dual_Backstep_Heavy_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.DualJumpingLightAttack01:
+                        ApplyAttackDamageModifiers(dual_Jumping_Light_Attack_01_Modifier, damageEffect, dual_Jumping_Light_Attack_01_PhysicalDamageType);
+                        break;
+                    case AttackType.DualJumpingHeavyAttack01:
+                        ApplyAttackDamageModifiers(dual_Jumping_Heavy_Attack_01_Modifier, damageEffect, dual_Jumping_Heavy_Attack_01_PhysicalDamageType);
+                        break;
+                    default:
+                        break;
+                }
 
-                CheckForBlock(damageTarget);
+                damageTarget.characterNetworkManager.NotifyTheServerOfCharacterBlockedDamageServerRpc(characterCausingDamage.OwnerClientId, damageTarget.NetworkObjectId, characterCausingDamage.NetworkObjectId,
+                    damageEffect.physicalDamage, damageEffect.magicDamage, damageEffect.fireDamage, damageEffect.lightningDamage, damageEffect.holyDamage, damageEffect.poiseDamage,
+                    damageEffect.angleHitFrom, damageEffect.contactPoint.x, damageEffect.contactPoint.y, damageEffect.contactPoint.z);
 
-                if (!damageTarget.characterNetworkManager.isInvulnerable.Value)
-                    DamageTarget(damageTarget);
-
+                damageTarget.characterEffectsManager.ProcessInstantEffect(damageEffect);
             }
         }
 
@@ -199,10 +320,10 @@ namespace TraverserProject
                     ApplyAttackDamageModifiers(dual_Heavy_Attack_01_Modifier, damageEffect, dual_Heavy_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.DualHeavyAttack02:
-                    ApplyAttackDamageModifiers(dual_Heavy_Attack_02_Modifier, damageEffect,dual_Heavy_Attack_02_PhysicalDamageType);
+                    ApplyAttackDamageModifiers(dual_Heavy_Attack_02_Modifier, damageEffect, dual_Heavy_Attack_02_PhysicalDamageType);
                     break;
                 case AttackType.DualChargedAttack01:
-                    ApplyAttackDamageModifiers(dual_Charge_Attack_01_Modifier, damageEffect,dual_Charge_Attack_01_PhysicalDamageType);
+                    ApplyAttackDamageModifiers(dual_Charge_Attack_01_Modifier, damageEffect, dual_Charge_Attack_01_PhysicalDamageType);
                     break;
                 case AttackType.DualChargedAttack02:
                     ApplyAttackDamageModifiers(dual_Charge_Attack_02_Modifier, damageEffect, dual_Charge_Attack_02_PhysicalDamageType);
@@ -235,17 +356,14 @@ namespace TraverserProject
                     break;
             }
 
-            //damageTarget.characterEffectsManager.ProcessInstantEffect(damageEffect);
+            damageTarget.characterNetworkManager.NotifyTheServerOfCharacterDamageServerRpc(characterCausingDamage.OwnerClientId, damageTarget.NetworkObjectId, characterCausingDamage.NetworkObjectId,
+                damageEffect.physicalDamage, damageEffect.magicDamage, damageEffect.fireDamage, damageEffect.lightningDamage, damageEffect.holyDamage, damageEffect.poiseDamage,
+                damageEffect.angleHitFrom, damageEffect.contactPoint.x, damageEffect.contactPoint.y, damageEffect.contactPoint.z);
 
-            if (characterCausingDamage.IsOwner)
-            {
-                damageTarget.characterNetworkManager.NofityTheServerOfCharacterDamageServerRpc(damageTarget.NetworkObjectId, characterCausingDamage.NetworkObjectId,
-                    damageEffect.physicalDamage, damageEffect.magicDamage, damageEffect.fireDamage, damageEffect.lightningDamage, damageEffect.holyDamage, damageEffect.poiseDamage,
-                    damageEffect.angleHitFrom, damageEffect.contactPoint.x, damageEffect.contactPoint.y, damageEffect.contactPoint.z, damageEffect.physicalDamageType);
-            }
+            damageTarget.characterEffectsManager.ProcessInstantEffect(damageEffect);
         }
 
-        private void ApplyAttackDamageModifiers(float modifier, TakeDamageEffect damage, PhysicalDamageType physicalDamageType)
+        private void ApplyAttackDamageModifiers(float modifier, DamageEffect damage, PhysicalDamageType physicalDamageType)
         {
             damage.physicalDamage *= modifier;
             damage.magicDamage *= modifier;

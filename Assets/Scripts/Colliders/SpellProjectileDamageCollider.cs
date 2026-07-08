@@ -41,7 +41,7 @@ namespace TraverserProject
 
             if (spellCaster.IsOwner)
             {
-                damageTarget.characterNetworkManager.NofityTheServerOfCharacterDamageServerRpc(damageTarget.NetworkObjectId, spellCaster.NetworkObjectId,
+                damageTarget.characterNetworkManager.NotifyTheServerOfCharacterDamageServerRpc(spellCaster.OwnerClientId, damageTarget.NetworkObjectId, spellCaster.NetworkObjectId,
                     damageEffect.physicalDamage, damageEffect.magicDamage, damageEffect.fireDamage, damageEffect.lightningDamage, damageEffect.holyDamage, damageEffect.poiseDamage,
                     damageEffect.angleHitFrom, damageEffect.contactPoint.x, damageEffect.contactPoint.y, damageEffect.contactPoint.z);
             }

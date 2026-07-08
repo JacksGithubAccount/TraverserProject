@@ -102,7 +102,7 @@ namespace TraverserProject
 
             if (itemThrower.IsOwner)
             {
-                damageTarget.characterNetworkManager.NofityTheServerOfCharacterDamageServerRpc(damageTarget.NetworkObjectId, itemThrower.NetworkObjectId,
+                damageTarget.characterNetworkManager.NotifyTheServerOfCharacterDamageServerRpc(itemThrower.OwnerClientId, damageTarget.NetworkObjectId, itemThrower.NetworkObjectId,
                     damageEffect.physicalDamage, damageEffect.magicDamage, damageEffect.fireDamage, damageEffect.lightningDamage, damageEffect.holyDamage, damageEffect.poiseDamage,
                     damageEffect.angleHitFrom, damageEffect.contactPoint.x, damageEffect.contactPoint.y, damageEffect.contactPoint.z);
             }

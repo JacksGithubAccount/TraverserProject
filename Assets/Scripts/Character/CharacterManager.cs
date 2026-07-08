@@ -109,6 +109,7 @@ namespace TraverserProject
             characterNetworkManager.isActive.OnValueChanged += characterNetworkManager.OnIsActiveChanged;
             characterNetworkManager.isExitingLadder.OnValueChanged += characterNetworkManager.OnIsExitingLadderChanged;
 
+            characterCombatManager.CheckForDeathAnimation();
         }
 
         public override void OnNetworkDespawn()

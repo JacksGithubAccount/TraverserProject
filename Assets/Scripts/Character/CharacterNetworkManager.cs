@@ -143,6 +143,9 @@ namespace TraverserProject
                 character.characterCombatManager.SetTarget(null);
 
             }
+
+            if (character.isDead.Value)
+                character.characterCombatManager.CheckForDeathAnimation();
         }
 
         public virtual void OnLockOnTargetIDChange(ulong oldID, ulong newID)
@@ -468,34 +471,91 @@ namespace TraverserProject
 
         //damage
         [ServerRpc(RequireOwnership = false)]
-        public void NofityTheServerOfCharacterDamageServerRpc(ulong damagedCharacterID, ulong characterCausingDamageID,
+        public void NotifyTheServerOfCharacterDamageServerRpc(ulong localClientSenderID, ulong damagedCharacterID, ulong characterCausingDamageID,
             float physicalDamage, float magicDamage, float fireDamage, float lightningDamage, float holyDamage, float poiseDamage,
-            float angleHitFrom, float contactPointX, float contactPointY, float contactPointZ, PhysicalDamageType physicalDamageType = PhysicalDamageType.Regular)
+            float angleHitFrom, float contactPointX, float contactPointY, float contactPointZ, PhysicalDamageType physicalDamageType = PhysicalDamageType.Regular, bool characterCausingDamageIsPresent = true)
         {
             if (IsServer)
             {
-                NofityTheServerOfCharacterDamageClientRpc(damagedCharacterID, characterCausingDamageID, physicalDamage, magicDamage, fireDamage, lightningDamage, holyDamage, poiseDamage, angleHitFrom, contactPointX, contactPointY, contactPointZ, physicalDamageType);
+                NofityTheServerOfCharacterDamageClientRpc(localClientSenderID, damagedCharacterID, characterCausingDamageID, physicalDamage, magicDamage, fireDamage, lightningDamage, holyDamage, poiseDamage, angleHitFrom, contactPointX, contactPointY, contactPointZ, physicalDamageType, characterCausingDamageIsPresent);
 
             }
         }
 
         [ClientRpc]
-        public void NofityTheServerOfCharacterDamageClientRpc(ulong damagedCharacterID, ulong characterCausingDamageID,
+        public void NofityTheServerOfCharacterDamageClientRpc(ulong localClientSenderID, ulong damagedCharacterID, ulong characterCausingDamageID,
             float physicalDamage, float magicDamage, float fireDamage, float lightningDamage, float holyDamage, float poiseDamage,
-            float angleHitFrom, float contactPointX, float contactPointY, float contactPointZ, PhysicalDamageType physicalDamageType)
+            float angleHitFrom, float contactPointX, float contactPointY, float contactPointZ, PhysicalDamageType physicalDamageType, bool characterCausingDamageIsPresent)
         {
-            ProcessCharacterDamageFromServer(damagedCharacterID, characterCausingDamageID, physicalDamage, magicDamage, fireDamage, lightningDamage, holyDamage, poiseDamage, angleHitFrom, contactPointX, contactPointY, contactPointZ, physicalDamageType);
+            //dont process this damage step again as we already did locally
+            if (NetworkManager.Singleton.LocalClientId == localClientSenderID)
+                return;
+
+            ProcessCharacterDamageFromServer(damagedCharacterID, characterCausingDamageID, physicalDamage, magicDamage, fireDamage, lightningDamage, holyDamage, poiseDamage, angleHitFrom, contactPointX, contactPointY, contactPointZ, physicalDamageType, characterCausingDamageIsPresent);
 
         }
 
         public void ProcessCharacterDamageFromServer(ulong damagedCharacterID, ulong characterCausingDamageID,
             float physicalDamage, float magicDamage, float fireDamage, float lightningDamage, float holyDamage, float poiseDamage,
-            float angleHitFrom, float contactPointX, float contactPointY, float contactPointZ, PhysicalDamageType physicalDamageType)
+            float angleHitFrom, float contactPointX, float contactPointY, float contactPointZ, PhysicalDamageType physicalDamageType, bool characterCausingDamageIsPresent)
         {
             CharacterManager damagedCharacter = NetworkManager.Singleton.SpawnManager.SpawnedObjects[damagedCharacterID].GetComponent<CharacterManager>();
-            CharacterManager characterCausingDamage = NetworkManager.Singleton.SpawnManager.SpawnedObjects[characterCausingDamageID].GetComponent<CharacterManager>();
+            CharacterManager characterCausingDamage = null;
+            if (characterCausingDamageIsPresent)
+                characterCausingDamage = NetworkManager.Singleton.SpawnManager.SpawnedObjects[characterCausingDamageID].GetComponent<CharacterManager>();
 
             TakeDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.Singleton.takeDamageEffect);
+
+            damageEffect.physicalDamage = physicalDamage;
+            damageEffect.magicDamage = magicDamage;
+            damageEffect.fireDamage = fireDamage;
+            damageEffect.lightningDamage = lightningDamage;
+            damageEffect.holyDamage = holyDamage;
+            damageEffect.poiseDamage = poiseDamage;
+            damageEffect.angleHitFrom = angleHitFrom;
+            damageEffect.contactPoint = new Vector3(contactPointX, contactPointY, contactPointZ);
+            damageEffect.characterCausingDamage = characterCausingDamage;
+            damageEffect.physicalDamageType = physicalDamageType;
+
+            damagedCharacter.characterEffectsManager.ProcessInstantEffect(damageEffect);
+        }
+
+        //blocked damage
+        [ServerRpc(RequireOwnership = false)]
+        public void NotifyTheServerOfCharacterBlockedDamageServerRpc(ulong localClientSenderID, ulong damagedCharacterID, ulong characterCausingDamageID,
+            float physicalDamage, float magicDamage, float fireDamage, float lightningDamage, float holyDamage, float poiseDamage,
+            float angleHitFrom, float contactPointX, float contactPointY, float contactPointZ, PhysicalDamageType physicalDamageType = PhysicalDamageType.Regular, bool characterCausingDamageIsPresent = true)
+        {
+            if (IsServer)
+            {
+                NotifyTheServerOfCharacterBlockedDamageClientRpc(localClientSenderID, damagedCharacterID, characterCausingDamageID, physicalDamage, magicDamage, fireDamage, lightningDamage, holyDamage, poiseDamage, angleHitFrom, contactPointX, contactPointY, contactPointZ, physicalDamageType, characterCausingDamageIsPresent);
+
+            }
+        }
+
+        [ClientRpc]
+        public void NotifyTheServerOfCharacterBlockedDamageClientRpc(ulong localClientSenderID, ulong damagedCharacterID, ulong characterCausingDamageID,
+            float physicalDamage, float magicDamage, float fireDamage, float lightningDamage, float holyDamage, float poiseDamage,
+            float angleHitFrom, float contactPointX, float contactPointY, float contactPointZ, PhysicalDamageType physicalDamageType, bool characterCausingDamageIsPresent)
+        {
+            //dont process this damage step again as we already did locally
+            if (NetworkManager.Singleton.LocalClientId == localClientSenderID)
+                return;
+
+            ProcessCharacterBlockedDamageFromServer(damagedCharacterID, characterCausingDamageID, physicalDamage, magicDamage, fireDamage, lightningDamage, holyDamage, poiseDamage, angleHitFrom, contactPointX, contactPointY, contactPointZ, physicalDamageType, characterCausingDamageIsPresent);
+
+        }
+
+        public void ProcessCharacterBlockedDamageFromServer(ulong damagedCharacterID, ulong characterCausingDamageID,
+            float physicalDamage, float magicDamage, float fireDamage, float lightningDamage, float holyDamage, float poiseDamage,
+            float angleHitFrom, float contactPointX, float contactPointY, float contactPointZ, PhysicalDamageType physicalDamageType, bool characterCausingDamageIsPresent)
+        {
+            CharacterManager damagedCharacter = NetworkManager.Singleton.SpawnManager.SpawnedObjects[damagedCharacterID].GetComponent<CharacterManager>();
+            CharacterManager characterCausingDamage = null;
+            if (characterCausingDamageIsPresent)
+                characterCausingDamage = NetworkManager.Singleton.SpawnManager.SpawnedObjects[characterCausingDamageID].GetComponent<CharacterManager>();
+
+            TakeBlockedDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.Singleton.takeBlockedDamageEffect);
 
             damageEffect.physicalDamage = physicalDamage;
             damageEffect.magicDamage = magicDamage;

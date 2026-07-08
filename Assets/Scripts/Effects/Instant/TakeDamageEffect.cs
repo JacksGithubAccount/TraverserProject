@@ -6,26 +6,10 @@ namespace TraverserProject
 
     [CreateAssetMenu(menuName = "Character Effects/Instant Effects/Take Damage")]
 
-    public class TakeDamageEffect : InstantCharacterEffect
+    public class TakeDamageEffect : DamageEffect
     {
         [Header("Character Causing Damage")]
         public CharacterManager characterCausingDamage;
-
-        [Header("Damage")]
-        public float physicalDamage = 0;
-        public float magicDamage = 0;
-        public float fireDamage = 0;
-        public float lightningDamage = 0;
-        public float holyDamage = 0;
-        public PhysicalDamageType physicalDamageType = PhysicalDamageType.Regular;
-
-
-        [Header("Final Damage")]
-        protected int finalDamageDealt = 0;
-
-        [Header("Poise")]
-        public float poiseDamage = 0;
-        public bool poiseIsBroken = false;
 
         [Header("Animations")]
         public bool playDamageAnimation = true;
@@ -59,7 +43,7 @@ namespace TraverserProject
             //run this after all other functions that would attempt to play an animation upon being damaged & after poise/stance is calculated
             CalculateStanceDamage(character);
 
-
+            CheckForDeathAnimation(character);
 
         }
 
@@ -74,8 +58,6 @@ namespace TraverserProject
             //Check for flat defenses here
 
             //check for percent defenses here			
-            Debug.Log("Original Phys Damage: " + physicalDamage + " Type: " + physicalDamageType.ToString());
-
             switch (physicalDamageType)
             {
                 case PhysicalDamageType.Regular:
@@ -124,7 +106,6 @@ namespace TraverserProject
 
 
             finalDamageDealt = Mathf.RoundToInt(physicalDamage + magicDamage + fireDamage + lightningDamage + holyDamage);
-            Debug.Log("After Calculations Phys Damage: " + physicalDamage + " Type: " + physicalDamageType.ToString());
             if (finalDamageDealt <= 0)
             {
                 finalDamageDealt = 1;
@@ -134,6 +115,12 @@ namespace TraverserProject
             if (character.IsOwner)
             {
                 character.characterNetworkManager.currentHealth.Value -= finalDamageDealt;
+
+                if (character.characterNetworkManager.currentHealth.Value <= 0)
+                {
+                    character.isDeadLocal = true;
+                    character.animator.SetBool("isDead", true);
+                }
 
                 character.characterNetworkManager.totalPoiseDamage.Value -= poiseDamage;
 
@@ -307,6 +294,14 @@ namespace TraverserProject
         {
             float currentPoise = character.characterNetworkManager.basePoiseDefense.Value + character.characterNetworkManager.offensivePoiseBonus.Value + character.characterNetworkManager.totalPoiseDamage.Value;
             return currentPoise;
+        }
+
+        private void CheckForDeathAnimation(CharacterManager character)
+        {
+            if (!character.isDead.Value && !character.isDeadLocal)
+                return;
+
+            character.characterCombatManager.CheckForDeathAnimation();
         }
 
     }

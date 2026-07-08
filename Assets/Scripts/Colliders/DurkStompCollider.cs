@@ -16,40 +16,33 @@ namespace TraverserProject
         }
         public void StompAttack()
         {
+            physicalDamage = durkManager.durkCombatManager.stompDamage;
+            poiseDamage = durkManager.durkCombatManager.stompDamage;
             GameObject stompVFX = Instantiate(durkManager.durkCombatManager.durkImpactVFX, transform);
 
             Collider[] colliders = Physics.OverlapSphere(transform.position, durkManager.durkCombatManager.stompAttackAOERadius, WorldUtilityManager.Singleton.GetCharacterLayers());
             List<CharacterManager> charactersDamaged = new List<CharacterManager>();
 
-            foreach (var collider in colliders)
+            for (int i = 0; i < colliders.Length; i++)
             {
-                CharacterManager character = collider.GetComponentInParent<CharacterManager>();
+                CharacterManager damageTarget = colliders[i].GetComponentInParent<CharacterManager>();
 
-                if (character != null)
-                {
-                    if (charactersDamaged.Contains(character))
-                        continue;
+                if (damageTarget == null)
+                    continue;
 
-                    if (character == durkManager)
-                        continue;
+                if (!damageTarget.IsOwner)
+                    continue;
 
-                    charactersDamaged.Add(character);
-
-
-                    if (character.IsOwner)
-                    {
+                if (charactersDamaged.Contains(damageTarget))
+                    continue;
 
 
-                        TakeDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.Singleton.takeDamageEffect);
-                        damageEffect.physicalDamage = durkManager.durkCombatManager.stompDamage;
-                        damageEffect.poiseDamage = durkManager.durkCombatManager.stompDamage;
+                CheckForBlock(damageTarget);
 
-                        character.characterEffectsManager.ProcessInstantEffect(damageEffect);
-                    }
-                }
-
-
+                if (!damageTarget.characterNetworkManager.isInvulnerable.Value)
+                    DamageTarget(damageTarget);
             }
+
         }
     }
 }
