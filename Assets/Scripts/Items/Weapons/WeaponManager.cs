@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 namespace TraverserProject
 {
@@ -23,6 +24,11 @@ namespace TraverserProject
         [Header("Flags")]
         public bool isMainHand = true; //used to power stance check physical damage types
 
+        [Header("Timed Effects")]
+        [SerializeField] protected float effectTickTimer = 0;
+        [SerializeField] protected float defaultEffectTickTime = 1;
+        public List<TimedWeaponEffect> timedEffects = new List<TimedWeaponEffect>();
+
 
         private void Awake()
         {
@@ -30,6 +36,16 @@ namespace TraverserProject
 
         }
 
+        protected virtual void Update()
+        {
+            effectTickTimer -= Time.deltaTime;
+
+            if (effectTickTimer <= 0)
+            {
+                effectTickTimer = defaultEffectTickTime;
+                ProcessTimedEffects();
+            }
+        }
 
         public void SetWeaponDamage(CharacterManager characterWieldingWeapon, WeaponItem weapon)
         {
@@ -220,6 +236,81 @@ namespace TraverserProject
             {
                 WeaponTrailVFX.Stop();
             }
+        }
+
+        public void ProcessTimedEffects()
+        {
+            for (int i = 0; i < timedEffects.Count; i++)
+            {
+                if (timedEffects[i] == null)
+                    continue;
+
+                timedEffects[i].ProcessEffect(this);
+            }
+        }
+
+        public void AddTimedEffect(TimedWeaponEffect effect)
+        {
+            bool effectIsAlreadyOnCharacter = false;
+
+            for (int i = 0; i < timedEffects.Count; i++)
+            {
+                if (timedEffects[i] == null)
+                    continue;
+                if (timedEffects[i].effectID == effect.effectID)
+                {
+                    effectIsAlreadyOnCharacter = true;
+                    timedEffects[i].timeRemainingOnEffect = timedEffects[i].defaultLengthOfEffect;
+                }
+            }
+
+            if (!effectIsAlreadyOnCharacter)
+            {
+                timedEffects.Add(effect);
+                effect.timeRemainingOnEffect = effect.defaultLengthOfEffect;
+
+                effect.ProcessEffect(this);
+
+                if (effect.effectIcon != null)
+                    PlayerUIManager.Singleton.playerUIHudManager.AddEffectIcon(effect.effectIcon);
+            }
+        }
+
+        public void RemoveTimedEffect(int effectID)
+        {
+
+            for (int i = 0; i < timedEffects.Count; i++)
+            {
+                if (timedEffects[i] == null)
+                    return;
+
+                if (timedEffects[i].effectID == effectID)
+                {
+                    TimedWeaponEffect effect = timedEffects[i];
+                    effect.RemoveEffect(this);
+                    timedEffects.RemoveAt(i);
+
+                    if (effect.effectIcon != null)
+                        PlayerUIManager.Singleton.playerUIHudManager.RemoveEffectIcon(effect.effectIcon);
+                }
+            }
+        }
+
+        public TimedWeaponEffect CheckForTimedEffect(int effectID)
+        {
+            TimedWeaponEffect timedEffect = null;
+
+
+
+            for (int i = 0; i < timedEffects.Count; i++)
+            {
+                if (timedEffects[i].effectID == effectID)
+                {
+                    timedEffect = timedEffects[i];
+                    break;
+                }
+            }
+            return timedEffect;
         }
 
     }

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace TraverserProject
 {
     [CreateAssetMenu(menuName = "Character Effects/Timed Effects/Modify Weapon/Weapon Buff")]
-    public class ModifyWeaponDamageForATimeEffect : TimedCharacterEffect
+    public class ModifyWeaponDamageForATimeEffect : TimedWeaponEffect
     {
         [Header("Weapon Damage")]
         [SerializeField] public WeaponItem weaponToBuff;
@@ -19,16 +19,12 @@ namespace TraverserProject
         [Header("Effect Processed")]
         private bool effectHasBeenInitialized = false;
 
-        public override void ProcessEffect(CharacterManager character)
+        public override void ProcessEffect(WeaponManager weapon)
         {
-            base.ProcessEffect(character);
+            base.ProcessEffect(weapon);
 
             if (!effectHasBeenInitialized)
             {
-                //toggle some UI icon on character HP bar or player hud if is owner
-                if (!character.IsOwner)
-                    return;
-
                 effectHasBeenInitialized = true;
                 weaponToBuff.physicalDamageModifier += weaponPhysicalDamageModifer;
                 weaponToBuff.magicDamageModifier += weaponMagicDamageModifer;
@@ -40,9 +36,9 @@ namespace TraverserProject
             }
         }
 
-        public override void RemoveEffect(CharacterManager character)
+        public override void RemoveEffect(WeaponManager weapon)
         {
-            base.RemoveEffect(character);
+            base.RemoveEffect(weapon);
 
             if (effectHasBeenInitialized)
             {

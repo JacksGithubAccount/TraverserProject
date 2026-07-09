@@ -66,20 +66,20 @@ namespace TraverserProject
 
                 if (weaponBuff.weaponToBuff.weaponTimedEffect == null)
                 {
-                    player.playerEffectsManager.AddTimedEffect(weaponBuff, true);
+                    weaponManager.AddTimedEffect(weaponBuff);
                     weaponBuff.weaponToBuff.weaponTimedEffect = weaponBuff;
                 }
                 else
                 {
-                    if (player.playerEffectsManager.timedEffects.Find(x => x.effectID == WorldCharacterEffectsManager.Singleton.weaponBuffEffect.effectID))
+                    if (weaponManager.timedEffects.Find(x => x.effectID == WorldCharacterEffectsManager.Singleton.weaponBuffEffect.effectID))
                     {
-                        TimedCharacterEffect effect = player.playerEffectsManager.timedEffects.Find(x => x.effectID == WorldCharacterEffectsManager.Singleton.weaponBuffEffect.effectID);
-                        player.playerEffectsManager.RemoveTimedEffect(effect.effectID);
+                        TimedWeaponEffect effect = weaponManager.timedEffects.Find(x => x.effectID == WorldCharacterEffectsManager.Singleton.weaponBuffEffect.effectID);
+                        weaponManager.RemoveTimedEffect(effect.effectID);
                     }
-                    player.playerEffectsManager.AddTimedEffect(weaponBuff);
+                    weaponManager.AddTimedEffect(weaponBuff);
                 }
 
-                player.playerStatsManager.CalculateTotalArmorAbsorption();
+                player.playerStatsManager.CalculateAllWeaponAttackPower();
             }            
         }
     }

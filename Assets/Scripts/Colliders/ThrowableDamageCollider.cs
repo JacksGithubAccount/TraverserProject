@@ -97,14 +97,41 @@ namespace TraverserProject
             damageEffect.angleHitFrom = Vector3.SignedAngle(itemThrower.transform.forward, damageTarget.transform.forward, Vector3.up);
 
 
+            damageTarget.characterNetworkManager.NotifyTheServerOfCharacterDamageServerRpc(itemThrower.OwnerClientId, damageTarget.NetworkObjectId, itemThrower.NetworkObjectId,
+                damageEffect.physicalDamage, damageEffect.magicDamage, damageEffect.fireDamage, damageEffect.lightningDamage, damageEffect.holyDamage, damageEffect.poiseDamage,
+                damageEffect.angleHitFrom, damageEffect.contactPoint.x, damageEffect.contactPoint.y, damageEffect.contactPoint.z);
 
-            //damageTarget.characterEffectsManager.ProcessInstantEffect(damageEffect);
+            damageTarget.characterEffectsManager.ProcessInstantEffect(damageEffect);
+        }
 
-            if (itemThrower.IsOwner)
+        protected override void CheckForBlock(CharacterManager damageTarget)
+        {
+            if (charactersDamaged.Contains(damageTarget))
+                return;
+
+            GetBlockingDotValues(damageTarget);
+
+            if (damageTarget.characterNetworkManager.isBlocking.Value && dotValueFromAttackToDamageTarget > 0.3f)
             {
-                damageTarget.characterNetworkManager.NotifyTheServerOfCharacterDamageServerRpc(itemThrower.OwnerClientId, damageTarget.NetworkObjectId, itemThrower.NetworkObjectId,
+
+                charactersDamaged.Add(damageTarget);
+
+                TakeBlockedDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.Singleton.takeBlockedDamageEffect);
+                damageEffect.physicalDamage = physicalDamage;
+                damageEffect.magicDamage = magicDamage;
+                damageEffect.fireDamage = fireDamage;
+                damageEffect.lightningDamage = lightningDamage;
+                damageEffect.holyDamage = holyDamage;
+                damageEffect.poiseDamage = poiseDamage;
+                damageEffect.contactPoint = contactPoint;
+                damageEffect.angleHitFrom = Vector3.SignedAngle(itemThrower.transform.forward, damageTarget.transform.forward, Vector3.up);
+
+
+                damageTarget.characterNetworkManager.NotifyTheServerOfCharacterBlockedDamageServerRpc(itemThrower.OwnerClientId, damageTarget.NetworkObjectId, itemThrower.NetworkObjectId,
                     damageEffect.physicalDamage, damageEffect.magicDamage, damageEffect.fireDamage, damageEffect.lightningDamage, damageEffect.holyDamage, damageEffect.poiseDamage,
                     damageEffect.angleHitFrom, damageEffect.contactPoint.x, damageEffect.contactPoint.y, damageEffect.contactPoint.z);
+
+                damageTarget.characterEffectsManager.ProcessInstantEffect(damageEffect);
             }
         }
     }
