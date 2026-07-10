@@ -31,7 +31,7 @@ namespace TraverserProject
                 WeaponManager weaponManager = null;
                 if (player.playerNetworkManager.isTwoHandingLeftWeapon.Value)
                 {
-                    weaponBuff.weaponToBuff = player.playerInventoryManager.currentTwoHandWeapon;
+                    weaponBuff.weaponToBuff = player.playerInventoryManager.currentLeftHandWeapon;
                     weaponManager = player.playerEquipmentManager.leftWeaponManager;
                 }
                 else

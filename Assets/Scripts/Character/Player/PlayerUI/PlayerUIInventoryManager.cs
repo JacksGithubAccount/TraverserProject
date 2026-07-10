@@ -285,14 +285,21 @@ namespace TraverserProject
 
                 if (weaponItem.physicalBaseDamage > 0)
                 {
-                    weaponItemPhysicalScalingAttackPowerText.text = "+" + weaponItem.physicalScalingDamage + weaponItem.physicalDamageModifier;
-                }else
+                    weaponItemPhysicalScalingAttackPowerText.text = "+" + (weaponItem.physicalScalingDamage + weaponItem.physicalDamageModifier);
+                }else if (weaponItem.physicalDamageModifier > 0)
+                {
+                    weaponItemPhysicalScalingAttackPowerText.text = "+" + weaponItem.physicalDamageModifier;
+                }
+                else
                 {
                     weaponItemPhysicalScalingAttackPowerText.text = "";
                 }
                 if (weaponItem.magicBaseDamage > 0)
                 {
-                    weaponItemMagicScalingAttackPowerText.text = "+" + weaponItem.magicScalingDamage + weaponItem.magicDamageModifier;
+                    weaponItemMagicScalingAttackPowerText.text = "+" + (weaponItem.magicScalingDamage + weaponItem.magicDamageModifier);
+                }else if (weaponItem.magicDamageModifier > 0)
+                {
+                    weaponItemMagicScalingAttackPowerText.text = "+" + weaponItem.magicDamageModifier;
                 }
                 else
                 {
@@ -300,7 +307,11 @@ namespace TraverserProject
                 }
                 if (weaponItem.fireBaseDamage > 0)
                 {
-                    weaponItemFireScalingAttackPowerText.text = "+" + weaponItem.fireScalingDamage + weaponItem.fireDamageModifier;
+                    weaponItemFireScalingAttackPowerText.text = "+" + (weaponItem.fireScalingDamage + weaponItem.fireDamageModifier);
+                }
+                else if (weaponItem.fireDamageModifier > 0)
+                {
+                    weaponItemFireScalingAttackPowerText.text = "+" + weaponItem.fireDamageModifier;
                 }
                 else
                 {
@@ -308,7 +319,11 @@ namespace TraverserProject
                 }
                 if (weaponItem.lightningBaseDamage > 0)
                 {
-                    weaponItemLightningScalingAttackPowerText.text = "+" + weaponItem.lightningScalingDamage + weaponItem.lightningDamageModifier;
+                    weaponItemLightningScalingAttackPowerText.text = "+" + (weaponItem.lightningScalingDamage + weaponItem.lightningDamageModifier);
+                }
+                else if (weaponItem.lightningDamageModifier > 0)
+                {
+                    weaponItemLightningScalingAttackPowerText.text = "+" + weaponItem.lightningDamageModifier;
                 }
                 else
                 {
@@ -316,7 +331,11 @@ namespace TraverserProject
                 }
                 if (weaponItem.holyBaseDamage > 0)
                 {
-                    weaponItemHolyScalingAttackPowerText.text = "+" + weaponItem.holyScalingDamage + weaponItem.holyDamageModifier;
+                    weaponItemHolyScalingAttackPowerText.text = "+" + (weaponItem.holyScalingDamage + weaponItem.holyDamageModifier);
+                }
+                else if (weaponItem.holyDamageModifier > 0)
+                {
+                    weaponItemHolyScalingAttackPowerText.text = "+" + weaponItem.holyDamageModifier;
                 }
                 else
                 {
