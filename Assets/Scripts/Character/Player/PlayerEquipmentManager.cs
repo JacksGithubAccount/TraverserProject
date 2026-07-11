@@ -1104,15 +1104,15 @@ namespace TraverserProject
                 if (weaponCount <= 1)
                 {
                     player.playerInventoryManager.leftHandWeaponIndex = -1;
-                    selectedWeapon = WorldItemDatabase.Singleton.unarmedWeapon;
-                    player.playerInventoryManager.currentLeftHandWeapon = selectedWeapon;
+                    selectedWeapon = WorldItemDatabase.Singleton.unarmedWeapon;                    
                     player.playerNetworkManager.currentLeftHandWeaponID.Value = selectedWeapon.itemID;
+                    player.playerInventoryManager.currentLeftHandWeapon = selectedWeapon;
                 }
                 else
                 {
-                    player.playerInventoryManager.leftHandWeaponIndex = firstWeaponPosition;
-                    player.playerInventoryManager.currentLeftHandWeapon = firstWeapon;
+                    player.playerInventoryManager.leftHandWeaponIndex = firstWeaponPosition;                    
                     player.playerNetworkManager.currentLeftHandWeaponID.Value = firstWeapon.itemID;
+                    player.playerInventoryManager.currentLeftHandWeapon = firstWeapon;
                 }
                 leftWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
                 return;
@@ -1124,9 +1124,9 @@ namespace TraverserProject
             {
                 if (player.playerInventoryManager.weaponsInLeftHandSlots[player.playerInventoryManager.leftHandWeaponIndex].itemID != WorldItemDatabase.Singleton.unarmedWeapon.itemID)
                 {
-                    selectedWeapon = player.playerInventoryManager.weaponsInLeftHandSlots[player.playerInventoryManager.leftHandWeaponIndex];
-                    player.playerInventoryManager.currentLeftHandWeapon = selectedWeapon;
+                    selectedWeapon = player.playerInventoryManager.weaponsInLeftHandSlots[player.playerInventoryManager.leftHandWeaponIndex];                   
                     player.playerNetworkManager.currentLeftHandWeaponID.Value = selectedWeapon.itemID;
+                    player.playerInventoryManager.currentLeftHandWeapon = selectedWeapon;
                     return;
                 }
             }

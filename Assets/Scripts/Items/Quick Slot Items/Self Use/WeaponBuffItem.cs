@@ -79,7 +79,10 @@ namespace TraverserProject
                     weaponManager.AddTimedEffect(weaponBuff);
                 }
 
-                player.playerStatsManager.CalculateAllWeaponAttackPower();
+                player.playerStatsManager.CalculateWeaponAttackPower(weaponBuff.weaponToBuff);
+                //weaponManager.SetWeaponDamage(player, weaponBuff.weaponToBuff);
+                player.playerEquipmentManager.rightWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
+                player.playerEquipmentManager.leftWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
             }            
         }
     }
