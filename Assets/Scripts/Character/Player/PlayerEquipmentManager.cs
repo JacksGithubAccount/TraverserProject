@@ -1301,6 +1301,37 @@ namespace TraverserProject
 
         }
 
+        public void OpenTwoHandDamageCollider()
+        {
+            if (player.playerNetworkManager.isTwoHandingRightWeapon.Value)
+            {
+                rightWeaponManager.ToggleWeaponTrail(true);
+                rightWeaponManager.meleeDamageCollider.EnableDamageCollider();
+
+                player.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(player.playerInventoryManager.currentRightHandWeapon.whooshes));
+            }
+            else if (player.playerNetworkManager.isTwoHandingLeftWeapon.Value)
+            {
+                leftWeaponManager.ToggleWeaponTrail(true);
+                leftWeaponManager.meleeDamageCollider.EnableDamageCollider();
+                player.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(player.playerInventoryManager.currentLeftHandWeapon.whooshes));
+            }
+        }
+
+        public void CloseTwoHandDamageCollider()
+        {
+            if (player.playerNetworkManager.isTwoHandingRightWeapon.Value)
+            {
+                rightWeaponManager.ToggleWeaponTrail(false);
+                rightWeaponManager.meleeDamageCollider.DisableDamageCollider();
+            }
+            else if (player.playerNetworkManager.isTwoHandingLeftWeapon.Value)
+            {
+                leftWeaponManager.ToggleWeaponTrail(false);
+                leftWeaponManager.meleeDamageCollider.DisableDamageCollider();
+            }
+        }
+
         public override void HideWeapons()
         {
             player.playerNetworkManager.HideWeaponsServerRpc();
