@@ -31,10 +31,10 @@ namespace TraverserProject
 
         [Header("On Break Settings")]
         [SerializeField] bool addForceOnBreak = false;
-        [SerializeField] float addedExplosionDebrisForce = 350;
+        [SerializeField] float addedExplosionDebrisForce = 150;
         [SerializeField] float addedForceDebrisRadius = 5;
-        [SerializeField] float addedTorqueDebrisForceMinimum = 250;
-        [SerializeField] float addedTorqueDebrisForceMaximum = 500;
+        [SerializeField] float addedTorqueDebrisForceMinimum = 150;
+        [SerializeField] float addedTorqueDebrisForceMaximum = 300;
 
         [Header("Instantiated Broken Object")]
         [SerializeField] private GameObject brokenObjectPrefab;
