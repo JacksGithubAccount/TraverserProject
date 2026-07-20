@@ -68,6 +68,7 @@ namespace TraverserProject
                     aiCharacter.aiCharacterNetworkManager.currentHealth.Value = health;
                     aiCharacter.aiCharacterNetworkManager.maxStamina.Value = stamina;
                     aiCharacter.aiCharacterNetworkManager.currentStamina.Value = stamina;
+                    aiCharacter.aiCharacterNetworkManager.currentStance.Value = aiCharacter.aiCharacterCombatManager.maxStance;
                 }
 
                 aiCharacter.aiCharacterNetworkManager.isActive.Value = false;

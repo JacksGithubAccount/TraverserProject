@@ -120,6 +120,8 @@ namespace TraverserProject
             {
                 case DoorState.Open:
                     StartCoroutine(MoveDoorCoroutine(isOpening));
+                    interactableCollider.enabled = false;
+                    backDoorInteractable.interactableCollider.enabled = false;
                     break;
                 case DoorState.Locked:
                     if (player == null)
@@ -133,6 +135,8 @@ namespace TraverserProject
                         PlayerUIManager.Singleton.playerUIPopUpManager.SendPlayerMessagePopUp(unlockMessage);
                         doorState = DoorState.Open;
                         StartCoroutine(MoveDoorCoroutine(isOpening));
+                        interactableCollider.enabled = false;
+                        backDoorInteractable.interactableCollider.enabled = false;
                     }
                     else
                     {
@@ -149,6 +153,8 @@ namespace TraverserProject
                     {                        
                         doorState = DoorState.Open;
                         StartCoroutine(MoveDoorCoroutine(isOpening));
+                        interactableCollider.enabled = false;
+                        backDoorInteractable.interactableCollider.enabled = false;
                     }
                     break;
             }
@@ -218,7 +224,7 @@ namespace TraverserProject
             //if animating elevator, stop animation here
 
             //re-enable interaction with elevator
-            interactableCollider.enabled = true;
+            //interactableCollider.enabled = true;
 
             yield return null;
         }
