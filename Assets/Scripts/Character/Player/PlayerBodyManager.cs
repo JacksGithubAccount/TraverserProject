@@ -30,7 +30,7 @@ namespace TraverserProject
         [SerializeField] public GameObject femaleEyebrows;
 
 
-        private void Awake()
+        protected virtual void Awake()
         {
             player = GetComponent<PlayerManager>();
         }

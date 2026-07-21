@@ -55,6 +55,9 @@ namespace TraverserProject
         [SerializeField] Slider greenSlider;
         [SerializeField] Slider blueSlider;
 
+        [Header("Character Profile Icons")]
+        public Image[] characterProfileIcons;
+
         [Header("Hidden Gear")]
         private HeadEquipmentItem hiddenHelmet;
 
@@ -369,13 +372,13 @@ namespace TraverserProject
             player.playerInventoryManager.weaponsInRightHandSlots[1] = Instantiate(mainHandWeapons[1]);
             player.playerInventoryManager.weaponsInRightHandSlots[2] = Instantiate(mainHandWeapons[2]);
             player.playerNetworkManager.currentRightHandWeaponID.Value = player.playerInventoryManager.weaponsInRightHandSlots[0].itemID;
-            player.playerInventoryManager.currentRightHandWeapon = player.playerInventoryManager.weaponsInRightHandSlots[0];            
+            player.playerInventoryManager.currentRightHandWeapon = player.playerInventoryManager.weaponsInRightHandSlots[0];
 
             player.playerInventoryManager.weaponsInLeftHandSlots[0] = Instantiate(offHandWeapons[0]);
             player.playerInventoryManager.weaponsInLeftHandSlots[1] = Instantiate(offHandWeapons[1]);
             player.playerInventoryManager.weaponsInLeftHandSlots[2] = Instantiate(offHandWeapons[2]);
             player.playerNetworkManager.currentLeftHandWeaponID.Value = player.playerInventoryManager.weaponsInLeftHandSlots[0].itemID;
-            player.playerInventoryManager.currentLeftHandWeapon = player.playerInventoryManager.weaponsInLeftHandSlots[0];            
+            player.playerInventoryManager.currentLeftHandWeapon = player.playerInventoryManager.weaponsInLeftHandSlots[0];
 
             if (headEquipment != null)
             {
@@ -448,7 +451,7 @@ namespace TraverserProject
             player.playerEquipmentManager.LoadSpellItemEquipment(player.playerInventoryManager.spellItemsInQuickSlots[player.playerInventoryManager.quickSlotSpellIndex]);
 
             player.playerInventoryManager.itemsInInventory.Clear();
-            foreach(var item in inventory)
+            foreach (var item in inventory)
             {
                 player.playerInventoryManager.itemsInInventory.Add(item);
             }
