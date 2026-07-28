@@ -16,6 +16,10 @@ namespace TraverserProject
         {
             base.SuccessfullyUseItem(player);
             player.playerStatsManager.AddBubbles(bubblesGainOnUse * numberOfItemsToUse);
+
+            onUseVFX = Instantiate(WorldCharacterEffectsManager.Singleton.poisonCureVFX);
+            onUseVFX.transform.position = player.playerEffectsManager.effectTransform.position;
+            onUseVFX.transform.root.rotation = Quaternion.identity;
         }
     }
 }

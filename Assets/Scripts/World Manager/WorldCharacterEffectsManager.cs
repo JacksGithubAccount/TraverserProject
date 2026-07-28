@@ -20,6 +20,7 @@ namespace TraverserProject
         public GameObject poisonCureVFX;
         public GameObject bloodLossCureVFX;
         public GameObject frostbiteCureVFX;
+        public GameObject messageVFX;
 
         [Header("Swings")]
         public GameObject weaponSwingVFX;
