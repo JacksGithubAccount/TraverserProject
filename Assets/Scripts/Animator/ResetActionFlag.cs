@@ -9,9 +9,11 @@ namespace TraverserProject
         override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             if (character == null)
-            {
                 character = animator.GetComponent<CharacterManager>();
-            }
+
+            if (character == null)
+                return;
+
             character.isPerformingAction = false;
             character.characterAnimatorManager.applyRootMotion = false;
             character.characterLocomotionManager.canMove = true;
@@ -20,7 +22,7 @@ namespace TraverserProject
             character.characterLocomotionManager.canRoll = true;
             character.characterLocomotionManager.isRolling = false;
             character.characterLocomotionManager.ignoreGravity = false; //if have flying enemies, make a check for this via thier locomotion manager
-            character.characterLocomotionManager.isExitingLadder = false;            
+            character.characterLocomotionManager.isExitingLadder = false;
             character.characterCombatManager.DisableCanDoCombo();
             character.characterCombatManager.DisableCanDoRollingAttack();
             character.characterCombatManager.DisableCanDoBackstepAttack();

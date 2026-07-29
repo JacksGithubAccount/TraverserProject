@@ -7,10 +7,27 @@ namespace TraverserProject
 
     public class CharacterProfileIconMaker : MonoBehaviour
     {
+        public static CharacterProfileIconMaker Singleton;
+
         [SerializeField] private RenderTexture renderTexture;
         [SerializeField] private Camera profileIconCamera;
+        [SerializeField] ProfileIconMakerManager profileIconMakerManager;
+
         private string spriteIconName;
         // reference to a 'dummy' to equip with armor/hair etc
+
+
+        private void Awake()
+        {
+            if (Singleton == null)
+            {
+                Singleton = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
 
         public void CreateAllProfileIcons()
         {
@@ -34,6 +51,21 @@ namespace TraverserProject
             if (characterSaveData == null)
                 return;
 
+            profileIconMakerManager.profileIconMakerBodyManager.ChangeSex(characterSaveData.isMale);
+
+            HeadEquipmentItem headEquipment = null;
+            if (WorldItemDatabase.Singleton.GetHeadEquipmentByID(characterSaveData.headEquipment) != null)
+                headEquipment = WorldItemDatabase.Singleton.GetHeadEquipmentByID(characterSaveData.headEquipment);
+            profileIconMakerManager.profileIconMakerEquipmentManager.LoadHeadEquipment(headEquipment);
+
+            BodyEquipmentItem bodyEquipment = null;
+            if (WorldItemDatabase.Singleton.GetBodyEquipmentByID(characterSaveData.bodyEquipment) != null)
+                bodyEquipment = WorldItemDatabase.Singleton.GetBodyEquipmentByID(characterSaveData.bodyEquipment);
+            profileIconMakerManager.profileIconMakerEquipmentManager.LoadBodyEquipment(bodyEquipment);
+
+            profileIconMakerManager.profileIconMakerBodyManager.ChangeHairOnDummy(characterSaveData.hairStyleID, characterSaveData.hairColorRed, characterSaveData.hairColorGreen, characterSaveData.hairColorBlue);
+
+
         }
 
         private string GetIconSaveLocation()
@@ -49,34 +81,32 @@ namespace TraverserProject
         }
 
         private void CreateCharacterProfileIcon(string iconName, Image characterLoadSlotIcon, CharacterSaveData characterSaveData)
-	{		
-		EquipDummy(characterSaveData);
-		
-		if(string.IsNullOrEmpty(spriteIconName))
-			spriteIconName = iconName;
-			
-		string savePath = GetIconSaveLocation();
-        savePath += spriteIconName;
-		
-		RenderTexture currentRenderTexture = new RenderTexture(renderTexture.width, renderTexture.height, renderTexture.depth, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB);
-        Texture2D imagePNG = new Texture2D(currentRenderTexture.width, currentRenderTexture.height, TextureFormat.ARGB32, true);
-        currentRenderTexture.antiAliasing = renderTexture.antiAliasing;
-		
-		profileIconCamera.targetTexture = currentRenderTexture;
-		profileIconCamera.Render();
-		RenderTexture.active = currentRenderTexture;
-		
-		imagePNG.ReadPixels(new Rect(0,0, currentRenderTexture.width, currentRenderTexture.height), 0,0);
-		imagePNG.Apply();
-		
-		RenderTexture.active = currentRenderTexture;
-		byte[] bytesPNG = imagePNG.EncodeToPNG();
-        System.IO.File.WriteAllBytes(savePath+".png", bytesPNG);
-		
-		Sprite newSprite = Sprite.Create(imagePNG, new Rect(0, 0, imagePNG.width, imagePNG.height), new Vector2(0, 0), 100f);
-        characterLoadSlotIcon.sprite = newSprite;
-	}
+        {
+            EquipDummy(characterSaveData);
+            spriteIconName = iconName;
+
+            string savePath = GetIconSaveLocation();
+            savePath += spriteIconName;
+
+            RenderTexture currentRenderTexture = new RenderTexture(renderTexture.width, renderTexture.height, renderTexture.depth, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB);
+            Texture2D imagePNG = new Texture2D(currentRenderTexture.width, currentRenderTexture.height, TextureFormat.ARGB32, true);
+            currentRenderTexture.antiAliasing = renderTexture.antiAliasing;
+
+            profileIconCamera.targetTexture = currentRenderTexture;
+            profileIconCamera.Render();
+            RenderTexture.active = currentRenderTexture;
+
+            imagePNG.ReadPixels(new Rect(0, 0, currentRenderTexture.width, currentRenderTexture.height), 0, 0);
+            imagePNG.Apply();
+
+            RenderTexture.active = currentRenderTexture;
+            byte[] bytesPNG = imagePNG.EncodeToPNG();
+            System.IO.File.WriteAllBytes(savePath + ".png", bytesPNG);
+
+            Sprite newSprite = Sprite.Create(imagePNG, new Rect(0, 0, imagePNG.width, imagePNG.height), new Vector2(0, 0), 100f);
+            characterLoadSlotIcon.sprite = newSprite;
+        }
 
 
-}
+    }
 }

@@ -9,7 +9,7 @@ namespace TraverserProject
 
         [Header("Hair")]
         [SerializeField] public GameObject hair;
-        [SerializeField] private GameObject[] hairObjects;
+        [SerializeField] protected GameObject[] hairObjects;
         [SerializeField] public GameObject facialHair;
 
         [Header("Male")]

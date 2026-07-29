@@ -83,6 +83,7 @@ namespace TraverserProject
         public void StartNetworkAsHost()
         {
             WorldGameSessionManager.Singleton.StartGameAsHost();
+            CharacterProfileIconMaker.Singleton.CreateAllProfileIcons();
         }
 
         public void AttemptToCreateNewCharacter()

@@ -103,7 +103,164 @@ namespace TraverserProject
             player = GetComponent<PlayerManager>();
 
             InitializeWeaponSlots();
+            InitializeArmorModels();
+        }
 
+        protected override void Start()
+        {
+            base.Start();
+
+            LoadWeaponsOnBothHands();
+        }
+
+        public void EquipArmor()
+        {
+            LoadHeadEquipment(player.playerInventoryManager.headEquipment);
+            LoadBodyEquipment(player.playerInventoryManager.bodyEquipment);
+            LoadHandEquipment(player.playerInventoryManager.handEquipment);
+            LoadLegEquipment(player.playerInventoryManager.legEquipment);
+            LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[0], 1);
+            LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[1], 2);
+            LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[2], 3);
+            LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[3], 4);
+        }
+
+        public void SwitchQuickSlotItem()
+        {
+            if (!player.IsOwner)
+                return;
+
+
+            QuickSlotItem selectedItem = null;
+
+            player.playerInventoryManager.quickSlotItemIndex += 1;
+
+            if (player.playerInventoryManager.quickSlotItemIndex < 0 || player.playerInventoryManager.quickSlotItemIndex > 2)
+            {
+                player.playerInventoryManager.quickSlotItemIndex = 0;
+
+                float itemCount = 0;
+                QuickSlotItem firstItem = null;
+                int firstItemPosition = 0;
+
+                //Checks if we are holding more than one weapon
+                for (int i = 0; i < player.playerInventoryManager.quickSlotItemsInQuickSlots.Length; i++)
+                {
+                    if (player.playerInventoryManager.quickSlotItemsInQuickSlots[i] != null)
+                    {
+                        itemCount += 1;
+
+                        if (firstItem == null)
+                        {
+                            firstItem = player.playerInventoryManager.quickSlotItemsInQuickSlots[i];
+                            firstItemPosition = i;
+                        }
+                    }
+                }
+
+                if (itemCount < 1)
+                {
+                    player.playerInventoryManager.quickSlotItemIndex = -1;
+                    selectedItem = null;
+                    player.playerNetworkManager.currentQuickSlotItemID.Value = -1;
+                }
+                else
+                {
+                    player.playerInventoryManager.quickSlotItemIndex = firstItemPosition;
+                    player.playerNetworkManager.currentQuickSlotItemID.Value = firstItem.itemID;
+                }
+                return;
+            }
+
+
+            if (player.playerInventoryManager.quickSlotItemsInQuickSlots[player.playerInventoryManager.quickSlotItemIndex] != null)
+            {
+                selectedItem = player.playerInventoryManager.quickSlotItemsInQuickSlots[player.playerInventoryManager.quickSlotItemIndex];
+                player.playerNetworkManager.currentQuickSlotItemID.Value = player.playerInventoryManager.quickSlotItemsInQuickSlots[player.playerInventoryManager.quickSlotItemIndex].itemID;
+                return;
+            }
+            else
+            {
+                player.playerNetworkManager.currentQuickSlotItemID.Value = -1;
+            }
+
+            if (selectedItem == null && player.playerInventoryManager.quickSlotItemIndex <= 2)
+            {
+                SwitchQuickSlotItem();
+            }
+
+
+        }
+
+        public void SwitchQuickSlotSpell()
+        {
+            if (!player.IsOwner)
+                return;
+
+
+            SpellItem selectedSpell = null;
+
+            player.playerInventoryManager.quickSlotSpellIndex += 1;
+
+            if (player.playerInventoryManager.quickSlotSpellIndex < 0 || player.playerInventoryManager.quickSlotSpellIndex > 2)
+            {
+                player.playerInventoryManager.quickSlotSpellIndex = 0;
+
+                float spellCount = 0;
+                SpellItem firstSpell = null;
+                int firstSpellPosition = 0;
+
+                //Checks if we are holding more than one weapon
+                for (int i = 0; i < player.playerInventoryManager.spellItemsInQuickSlots.Length; i++)
+                {
+                    if (player.playerInventoryManager.spellItemsInQuickSlots[i] != null)
+                    {
+                        spellCount += 1;
+
+                        if (firstSpell == null)
+                        {
+                            firstSpell = player.playerInventoryManager.spellItemsInQuickSlots[i];
+                            firstSpellPosition = i;
+                        }
+                    }
+                }
+
+                if (spellCount < 1)
+                {
+                    player.playerInventoryManager.quickSlotSpellIndex = -1;
+                    selectedSpell = null;
+                    player.playerNetworkManager.currentSpellID.Value = -1;
+                }
+                else
+                {
+                    player.playerInventoryManager.quickSlotSpellIndex = firstSpellPosition;
+                    player.playerNetworkManager.currentSpellID.Value = firstSpell.itemID;
+                }
+                return;
+            }
+
+
+            if (player.playerInventoryManager.spellItemsInQuickSlots[player.playerInventoryManager.quickSlotSpellIndex] != null)
+            {
+                selectedSpell = player.playerInventoryManager.spellItemsInQuickSlots[player.playerInventoryManager.quickSlotSpellIndex];
+                player.playerNetworkManager.currentSpellID.Value = player.playerInventoryManager.spellItemsInQuickSlots[player.playerInventoryManager.quickSlotSpellIndex].itemID;
+                return;
+            }
+            else
+            {
+                player.playerNetworkManager.currentSpellID.Value = -1;
+            }
+
+            if (selectedSpell == null && player.playerInventoryManager.quickSlotSpellIndex <= 2)
+            {
+                SwitchQuickSlotSpell();
+            }
+
+
+        }
+
+        private void InitializeArmorModels()
+        {
             //unisex equipment
             List<GameObject> hatsList = new List<GameObject>();
             foreach (Transform child in hatsObject.transform)
@@ -346,165 +503,7 @@ namespace TraverserProject
             femaleLeftLegs = femaleLeftLegsList.ToArray();
         }
 
-        protected override void Start()
-        {
-            base.Start();
-
-            LoadWeaponsOnBothHands();
-        }
-
-        public void EquipArmor()
-        {
-            LoadHeadEquipment(player.playerInventoryManager.headEquipment);
-            LoadBodyEquipment(player.playerInventoryManager.bodyEquipment);
-            LoadHandEquipment(player.playerInventoryManager.handEquipment);
-            LoadLegEquipment(player.playerInventoryManager.legEquipment);
-            LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[0], 1);
-            LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[1], 2);
-            LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[2], 3);
-            LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[3], 4);
-        }
-
-        public void SwitchQuickSlotItem()
-        {
-            if (!player.IsOwner)
-                return;
-
-
-            QuickSlotItem selectedItem = null;
-
-            player.playerInventoryManager.quickSlotItemIndex += 1;
-
-            if (player.playerInventoryManager.quickSlotItemIndex < 0 || player.playerInventoryManager.quickSlotItemIndex > 2)
-            {
-                player.playerInventoryManager.quickSlotItemIndex = 0;
-
-                float itemCount = 0;
-                QuickSlotItem firstItem = null;
-                int firstItemPosition = 0;
-
-                //Checks if we are holding more than one weapon
-                for (int i = 0; i < player.playerInventoryManager.quickSlotItemsInQuickSlots.Length; i++)
-                {
-                    if (player.playerInventoryManager.quickSlotItemsInQuickSlots[i] != null)
-                    {
-                        itemCount += 1;
-
-                        if (firstItem == null)
-                        {
-                            firstItem = player.playerInventoryManager.quickSlotItemsInQuickSlots[i];
-                            firstItemPosition = i;
-                        }
-                    }
-                }
-
-                if (itemCount < 1)
-                {
-                    player.playerInventoryManager.quickSlotItemIndex = -1;
-                    selectedItem = null;
-                    player.playerNetworkManager.currentQuickSlotItemID.Value = -1;
-                }
-                else
-                {
-                    player.playerInventoryManager.quickSlotItemIndex = firstItemPosition;
-                    player.playerNetworkManager.currentQuickSlotItemID.Value = firstItem.itemID;
-                }
-                return;
-            }
-
-
-            if (player.playerInventoryManager.quickSlotItemsInQuickSlots[player.playerInventoryManager.quickSlotItemIndex] != null)
-            {
-                selectedItem = player.playerInventoryManager.quickSlotItemsInQuickSlots[player.playerInventoryManager.quickSlotItemIndex];
-                player.playerNetworkManager.currentQuickSlotItemID.Value = player.playerInventoryManager.quickSlotItemsInQuickSlots[player.playerInventoryManager.quickSlotItemIndex].itemID;
-                return;
-            }
-            else
-            {
-                player.playerNetworkManager.currentQuickSlotItemID.Value = -1;
-            }
-
-            if (selectedItem == null && player.playerInventoryManager.quickSlotItemIndex <= 2)
-            {
-                SwitchQuickSlotItem();
-            }
-
-
-        }
-
-        public void SwitchQuickSlotSpell()
-        {
-            if (!player.IsOwner)
-                return;
-
-
-            SpellItem selectedSpell = null;
-
-            player.playerInventoryManager.quickSlotSpellIndex += 1;
-
-            if (player.playerInventoryManager.quickSlotSpellIndex < 0 || player.playerInventoryManager.quickSlotSpellIndex > 2)
-            {
-                player.playerInventoryManager.quickSlotSpellIndex = 0;
-
-                float spellCount = 0;
-                SpellItem firstSpell = null;
-                int firstSpellPosition = 0;
-
-                //Checks if we are holding more than one weapon
-                for (int i = 0; i < player.playerInventoryManager.spellItemsInQuickSlots.Length; i++)
-                {
-                    if (player.playerInventoryManager.spellItemsInQuickSlots[i] != null)
-                    {
-                        spellCount += 1;
-
-                        if (firstSpell == null)
-                        {
-                            firstSpell = player.playerInventoryManager.spellItemsInQuickSlots[i];
-                            firstSpellPosition = i;
-                        }
-                    }
-                }
-
-                if (spellCount < 1)
-                {
-                    player.playerInventoryManager.quickSlotSpellIndex = -1;
-                    selectedSpell = null;
-                    player.playerNetworkManager.currentSpellID.Value = -1;
-                }
-                else
-                {
-                    player.playerInventoryManager.quickSlotSpellIndex = firstSpellPosition;
-                    player.playerNetworkManager.currentSpellID.Value = firstSpell.itemID;
-                }
-                return;
-            }
-
-
-            if (player.playerInventoryManager.spellItemsInQuickSlots[player.playerInventoryManager.quickSlotSpellIndex] != null)
-            {
-                selectedSpell = player.playerInventoryManager.spellItemsInQuickSlots[player.playerInventoryManager.quickSlotSpellIndex];
-                player.playerNetworkManager.currentSpellID.Value = player.playerInventoryManager.spellItemsInQuickSlots[player.playerInventoryManager.quickSlotSpellIndex].itemID;
-                return;
-            }
-            else
-            {
-                player.playerNetworkManager.currentSpellID.Value = -1;
-            }
-
-            if (selectedSpell == null && player.playerInventoryManager.quickSlotSpellIndex <= 2)
-            {
-                SwitchQuickSlotSpell();
-            }
-
-
-        }
-
-        private void InitializeArmorModels()
-        {
-
-        }
-
-        public void LoadHeadEquipment(HeadEquipmentItem equipment)
+        public virtual void LoadHeadEquipment(HeadEquipmentItem equipment)
         {
             UnloadHeadEquipmentModels();
             if (equipment == null)
@@ -540,7 +539,7 @@ namespace TraverserProject
 
             foreach (var model in equipment.equipmentModels)
             {
-                model.LoadModel(player, player.playerNetworkManager.isMale.Value);
+                model.LoadModel(this, player.playerNetworkManager.isMale.Value);
             }
 
             player.playerStatsManager.CalculateTotalArmorAbsorption();
@@ -552,7 +551,7 @@ namespace TraverserProject
 
 
 
-        private void UnloadHeadEquipmentModels()
+        protected virtual void UnloadHeadEquipmentModels()
         {
             foreach (var model in maleHeadFullHelmets)
             {
@@ -584,11 +583,12 @@ namespace TraverserProject
                 model.SetActive(false);
             }
 
+
             player.playerBodyManager.EnableHead();
             player.playerBodyManager.EnableHair();
         }
 
-        public void LoadBodyEquipment(BodyEquipmentItem equipment)
+        public virtual void LoadBodyEquipment(BodyEquipmentItem equipment)
         {
             UnloadBodyEquipmentModels();
 
@@ -607,7 +607,7 @@ namespace TraverserProject
 
             foreach (var model in equipment.equipmentModels)
             {
-                model.LoadModel(player, player.playerNetworkManager.isMale.Value);
+                model.LoadModel(this, player.playerNetworkManager.isMale.Value);
             }
 
             player.playerStatsManager.CalculateTotalArmorAbsorption();
@@ -617,7 +617,7 @@ namespace TraverserProject
 
         }
 
-        private void UnloadBodyEquipmentModels()
+        protected virtual void UnloadBodyEquipmentModels()
         {
             //unisex
             foreach (var model in rightShoulder)
@@ -695,7 +695,7 @@ namespace TraverserProject
 
             foreach (var model in equipment.equipmentModels)
             {
-                model.LoadModel(player, player.playerNetworkManager.isMale.Value);
+                model.LoadModel(this, player.playerNetworkManager.isMale.Value);
             }
 
             player.playerStatsManager.CalculateTotalArmorAbsorption();
@@ -762,7 +762,7 @@ namespace TraverserProject
 
             foreach (var model in equipment.equipmentModels)
             {
-                model.LoadModel(player, player.playerNetworkManager.isMale.Value);
+                model.LoadModel(this, player.playerNetworkManager.isMale.Value);
             }
 
             player.playerStatsManager.CalculateTotalArmorAbsorption();
@@ -818,8 +818,8 @@ namespace TraverserProject
             if (equipment == null)
             {
                 if (player.IsOwner)
-                { 
-                    if(slot == 1)
+                {
+                    if (slot == 1)
                         player.playerNetworkManager.accessoryEquipment01ID.Value = -1; //-1 will never be ID so it will always be null
                     if (slot == 2)
                         player.playerNetworkManager.accessoryEquipment02ID.Value = -1;
@@ -861,7 +861,7 @@ namespace TraverserProject
                 if (slot == 3)
                     player.playerNetworkManager.accessoryEquipment03ID.Value = equipment.itemID;
                 if (slot == 4)
-                    player.playerNetworkManager.accessoryEquipment04ID.Value = equipment.itemID;                
+                    player.playerNetworkManager.accessoryEquipment04ID.Value = equipment.itemID;
             }
         }
 
@@ -1017,7 +1017,7 @@ namespace TraverserProject
                     selectedWeapon = WorldItemDatabase.Singleton.unarmedWeapon;
                     player.playerNetworkManager.currentRightHandWeaponID.Value = selectedWeapon.itemID;
                     player.playerInventoryManager.currentRightHandWeapon = selectedWeapon;
-                    
+
                 }
                 else
                 {
@@ -1037,7 +1037,7 @@ namespace TraverserProject
                 {
                     selectedWeapon = player.playerInventoryManager.weaponsInRightHandSlots[player.playerInventoryManager.rightHandWeaponIndex];
                     player.playerNetworkManager.currentRightHandWeaponID.Value = selectedWeapon.itemID;
-                    player.playerInventoryManager.currentRightHandWeapon = selectedWeapon;                    
+                    player.playerInventoryManager.currentRightHandWeapon = selectedWeapon;
                     return;
                 }
             }
@@ -1059,7 +1059,7 @@ namespace TraverserProject
                 rightWeaponManager = rightHandWeaponModel.GetComponent<WeaponManager>();
                 rightWeaponManager.isMainHand = true;
                 rightWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentRightHandWeapon);
-                
+
 
                 player.playerAnimatorManager.UpdateAnimatorController(player.playerInventoryManager.currentRightHandWeapon.weaponAnimator);
             }
@@ -1104,13 +1104,13 @@ namespace TraverserProject
                 if (weaponCount <= 1)
                 {
                     player.playerInventoryManager.leftHandWeaponIndex = -1;
-                    selectedWeapon = WorldItemDatabase.Singleton.unarmedWeapon;                    
+                    selectedWeapon = WorldItemDatabase.Singleton.unarmedWeapon;
                     player.playerNetworkManager.currentLeftHandWeaponID.Value = selectedWeapon.itemID;
                     player.playerInventoryManager.currentLeftHandWeapon = selectedWeapon;
                 }
                 else
                 {
-                    player.playerInventoryManager.leftHandWeaponIndex = firstWeaponPosition;                    
+                    player.playerInventoryManager.leftHandWeaponIndex = firstWeaponPosition;
                     player.playerNetworkManager.currentLeftHandWeaponID.Value = firstWeapon.itemID;
                     player.playerInventoryManager.currentLeftHandWeapon = firstWeapon;
                 }
@@ -1124,7 +1124,7 @@ namespace TraverserProject
             {
                 if (player.playerInventoryManager.weaponsInLeftHandSlots[player.playerInventoryManager.leftHandWeaponIndex].itemID != WorldItemDatabase.Singleton.unarmedWeapon.itemID)
                 {
-                    selectedWeapon = player.playerInventoryManager.weaponsInLeftHandSlots[player.playerInventoryManager.leftHandWeaponIndex];                   
+                    selectedWeapon = player.playerInventoryManager.weaponsInLeftHandSlots[player.playerInventoryManager.leftHandWeaponIndex];
                     player.playerNetworkManager.currentLeftHandWeaponID.Value = selectedWeapon.itemID;
                     player.playerInventoryManager.currentLeftHandWeapon = selectedWeapon;
                     return;
@@ -1165,7 +1165,7 @@ namespace TraverserProject
                 leftWeaponManager = leftHandWeaponModel.GetComponent<WeaponManager>();
                 leftWeaponManager.isMainHand = false;
                 leftWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
-                
+
             }
         }
 
