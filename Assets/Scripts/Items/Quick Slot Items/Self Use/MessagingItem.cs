@@ -14,6 +14,7 @@ namespace TraverserProject
 
             onUseVFX = Instantiate(WorldCharacterEffectsManager.Singleton.messageVFX);
             onUseVFX.transform.position = player.playerEffectsManager.effectTransform.position;
+            onUseVFX.transform.position += new Vector3(0, -1, 0);
             onUseVFX.transform.root.rotation = Quaternion.identity;
         }
     }

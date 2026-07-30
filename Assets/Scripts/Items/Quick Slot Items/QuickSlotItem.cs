@@ -56,18 +56,23 @@ namespace TraverserProject
             if (player.IsOwner)
             {
                 QuickSlotItem qsItem = player.playerInventoryManager.quickSlotItemsInQuickSlots.SingleOrDefault(x => x.itemID == this.itemID);
+
+                if (!isConsumable)
+                    return;
+
                 if (numberOfItemsToUse == 1)
                 {
                     currentItemAmount--;
                     if (qsItem != null)
                         qsItem.currentItemAmount--;
                 }
-                else if ( numberOfItemsToUse > 1)
+                else if (numberOfItemsToUse > 1)
                 {
                     currentItemAmount -= numberOfItemsToUse;
                     if (qsItem != null)
                         qsItem.currentItemAmount -= numberOfItemsToUse;
                 }
+
 
                 PlayerUIManager.Singleton.playerUIHudManager.SetQuickSlotItemQuickSlotIcon(player.playerInventoryManager.currentQuickSlotItem);
 
@@ -77,6 +82,7 @@ namespace TraverserProject
                     player.playerInventoryManager.quickSlotItemsInQuickSlots[player.playerInventoryManager.quickSlotItemIndex] = null;
                     player.playerNetworkManager.currentQuickSlotItemID.Value = -1;
                 }
+
             }
         }
 
