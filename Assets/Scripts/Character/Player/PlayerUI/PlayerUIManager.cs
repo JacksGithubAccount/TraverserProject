@@ -33,6 +33,7 @@ namespace TraverserProject
         [HideInInspector] public PlayerUIDialogueWindowManager playerUIDialogueWindowManager;
         [HideInInspector] public PlayerUIShopManager playerUIShopManager;
         [HideInInspector] public PlayerUIStorageManager playerUIStorageManager;
+        [HideInInspector] public PlayerUIMessageManager playerUIMessageManager;
 
         [Header("UI Flags")]
         public bool menuWindowIsOpen = false;
@@ -75,6 +76,7 @@ namespace TraverserProject
             playerUIDialogueWindowManager = GetComponentInChildren<PlayerUIDialogueWindowManager>();
             playerUIShopManager = GetComponentInChildren<PlayerUIShopManager>();
             playerUIStorageManager = GetComponentInChildren<PlayerUIStorageManager>();
+            playerUIMessageManager = GetComponentInChildren<PlayerUIMessageManager>();
         }
         private void Start()
         {

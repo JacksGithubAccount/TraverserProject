@@ -6,7 +6,8 @@ namespace TraverserProject
     public class MessageInteractable : Interactable
     {
         [Header("Message")]
-        [SerializeField] string messagePopUp;
+        [SerializeField] public string messagePopUp;
+
 
         public override void Interact(PlayerManager player)
         {

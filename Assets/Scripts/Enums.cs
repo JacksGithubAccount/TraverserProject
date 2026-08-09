@@ -347,6 +347,14 @@ public enum ItemType
     Info,
     Gestures
 }
+
+//used in messaging system
+public enum WordCategory
+{
+    Beings,
+    Directions,
+    Phrases
+}
 //AI States
 public enum IdleStateMode
 {
