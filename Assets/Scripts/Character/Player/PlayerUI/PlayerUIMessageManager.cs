@@ -33,10 +33,17 @@ namespace TraverserProject
         [HideInInspector] List<GameObject> wordsCategorySlotPrefabs = new List<GameObject>();
         [HideInInspector] List<GameObject> wordsListSlotPrefabs = new List<GameObject>();
 
+        [Header("Conjunctions")]
+        [SerializeField] GameObject conjunctionsMenuWindow;
+        [SerializeField] Transform conjunctionsContentWindow;
+        [SerializeField] TextMeshProUGUI conjunctionsDisplayButtonText;
+        [HideInInspector] List<GameObject> conjunctionsSlotPrefabs = new List<GameObject>();
+
         public List<string> templatesTexts;
         public List<string> beingsWordTexts;
         public List<string> directionsWordTexts;
         public List<string> phrasesWordTexts;
+        public List<string> conjunctionsTexts;
 
         public override void OpenMenu()
         {
@@ -138,6 +145,32 @@ namespace TraverserProject
                 }
             }
             OpenSubMenu(wordsMenuWindow);
+
+        }
+
+        public void OpenConjunctionsMenu()
+        {
+            ClearAllPrefabsInList(conjunctionsSlotPrefabs);
+            bool hasSelectedFirstInventorySlot = false;
+
+            for (int i = 0; i < conjunctionsTexts.Count; i++)
+            {
+                GameObject messageSlotGameObject = Instantiate(messageSlotPrefab, conjunctionsContentWindow);
+                UI_MessageSlot messageSlot = messageSlotGameObject.GetComponent<UI_MessageSlot>();
+                messageSlot.SetTextOfMessageSlot(conjunctionsTexts[i]);
+                messageSlot.isTemplate = true;
+                conjunctionsSlotPrefabs.Add(messageSlot.gameObject);
+
+                if (!hasSelectedFirstInventorySlot)
+                {
+                    hasSelectedFirstInventorySlot = true;
+                    Button messageSlotButton = messageSlotGameObject.GetComponent<Button>();
+                    messageSlotButton.Select();
+                    messageSlotButton.OnSelect(null);
+
+                }
+            }
+            OpenSubMenu(conjunctionsMenuWindow);
 
         }
 
