@@ -10,7 +10,7 @@ namespace TraverserProject
         public Image greyedOutIcon;
         public Image GlowIcon;
         public TextMeshProUGUI messageText;
-        public bool isTemplate = false;
+        public MessageType messageType;
 
         
 
@@ -38,11 +38,23 @@ namespace TraverserProject
 
         public void AddTextToMessage()
         {
-            if (isTemplate)
+            if (messageType == MessageType.Template1)
             {
                 AddTextToMessageTemplate();
             }
-            else
+            else if (messageType == MessageType.Word1)
+            {
+                AddTextToMessageWord();
+            }
+            else if (messageType == MessageType.Conjunction)
+            {
+                AddTextToMessageWord();
+            }
+            else if (messageType == MessageType.Template2)
+            {
+                AddTextToMessageWord();
+            }
+            else if (messageType == MessageType.Word2)
             {
                 AddTextToMessageWord();
             }

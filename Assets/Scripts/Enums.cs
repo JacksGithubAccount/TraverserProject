@@ -355,6 +355,14 @@ public enum WordCategory
     Directions,
     Phrases
 }
+public enum MessageType
+{
+    Template1,
+    Word1,
+    Conjunction,
+    Template2,
+    Word2
+}
 //AI States
 public enum IdleStateMode
 {

@@ -95,7 +95,7 @@ namespace TraverserProject
             messageDisplayText.text = currentMessage;
         }
 
-        public void OpenTemplatesMenu()
+        public void OpenTemplatesMenu(bool isFirstPart)
         {
             ClearAllPrefabsInList(templatesSlotPrefabs);
             bool hasSelectedFirstInventorySlot = false;
@@ -105,7 +105,7 @@ namespace TraverserProject
                 GameObject messageSlotGameObject = Instantiate(messageSlotPrefab, templatesContentWindow);
                 UI_MessageSlot messageSlot = messageSlotGameObject.GetComponent<UI_MessageSlot>();
                 messageSlot.SetTextOfMessageSlot(templatesTexts[i]);
-                messageSlot.isTemplate = true;
+                messageSlot.messageType = MessageType.Template1;
                 templatesSlotPrefabs.Add(messageSlot.gameObject);
 
                 if (!hasSelectedFirstInventorySlot)
@@ -121,7 +121,7 @@ namespace TraverserProject
             
         }
 
-        public void OpenWordsMenu()
+        public void OpenWordsMenu(bool isFirstPart)
         {
             ClearAllPrefabsInList(wordsCategorySlotPrefabs);
             
@@ -132,7 +132,7 @@ namespace TraverserProject
                 GameObject messageCategorySlotGameObject = Instantiate(messageCategorySlotPrefab, wordsCategoryContentWindow);
                 UI_MessageWordCategorySelectSlot messageCategorySlot = messageCategorySlotGameObject.GetComponent<UI_MessageWordCategorySelectSlot>();
                 messageCategorySlot.wordCategory = (WordCategory)i;
-                messageCategorySlot.SetTextOfMessageCategorySlot(messageCategorySlot.wordCategory.ToString());
+                messageCategorySlot.SetTextOfMessageCategorySlot(messageCategorySlot.wordCategory.ToString());                
                 wordsCategorySlotPrefabs.Add(messageCategorySlot.gameObject);
 
                 if (!hasSelectedFirstInventorySlot)
@@ -158,7 +158,7 @@ namespace TraverserProject
                 GameObject messageSlotGameObject = Instantiate(messageSlotPrefab, conjunctionsContentWindow);
                 UI_MessageSlot messageSlot = messageSlotGameObject.GetComponent<UI_MessageSlot>();
                 messageSlot.SetTextOfMessageSlot(conjunctionsTexts[i]);
-                messageSlot.isTemplate = true;
+                messageSlot.messageType = MessageType.Conjunction;
                 conjunctionsSlotPrefabs.Add(messageSlot.gameObject);
 
                 if (!hasSelectedFirstInventorySlot)
@@ -203,6 +203,7 @@ namespace TraverserProject
                 GameObject messageSlotGameObject = Instantiate(messageSlotPrefab, wordsListContentWindow);
                 UI_MessageSlot messageListSlot = messageSlotGameObject.GetComponent<UI_MessageSlot>();
                 messageListSlot.SetTextOfMessageSlot(wordsList[i]);
+                messageListSlot.messageType = MessageType.Word1;
                 wordsListSlotPrefabs.Add(messageListSlot.gameObject);
 
                 if (!hasSelectedFirstInventorySlot)
