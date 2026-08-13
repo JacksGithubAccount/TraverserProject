@@ -473,5 +473,11 @@ namespace TraverserProject
 
 
         }
+
+        //Ranged Combat
+        public virtual void DrawProjectile()
+        {
+
+        }
     }
 }

@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1942
     height: 1024
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Scene
   m_RootView: {fileID: 10}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 74
+  controlID: 20
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -328,7 +328,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 150}
   m_MaxSize: {x: 24288, y: 24288}
   vertical: 0
-  controlID: 219
+  controlID: 97
   draggingID: 0
 --- !u!114 &14
 MonoBehaviour:
@@ -658,7 +658,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Character/Player/PlayerUI
+    - Assets/Scripts/Character/AICharacter/ArcherCharacter
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -668,16 +668,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scripts/Character/Player/PlayerUI
+  - Assets/Scripts/Character/AICharacter/ArcherCharacter
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\jckzh\source\repos\TraverserProject
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 45}
-    m_SelectedIDs: dc380100
-    m_LastClickedID: 80092
-    m_ExpandedIDs: 0000000084350100d0380100de380100e038010000ca9a3b
+    scrollPos: {x: 0, y: 61}
+    m_SelectedIDs: 18740100
+    m_LastClickedID: 95256
+    m_ExpandedIDs: 0000000084350100d0380100de380100e0380100e638010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -734,7 +734,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: b4060100bc060100c4060100d4060100cc06010044c50000264701002a020200
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -752,7 +752,7 @@ MonoBehaviour:
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
-      m_ClientGUIView: {fileID: 4}
+      m_ClientGUIView: {fileID: 14}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -760,7 +760,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 120}
+    m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 16
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 199
@@ -811,7 +811,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Data/PreFabs/WorldManagers
+    - Assets/Data/PreFabs/AI
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -821,16 +821,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Data/PreFabs/WorldManagers
+  - Assets/Data/PreFabs/AI
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\jckzh\source\repos\TraverserProject
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 157}
-    m_SelectedIDs: fe380100
-    m_LastClickedID: 80126
-    m_ExpandedIDs: 0000000084350100c03801000039010000ca9a3b
+    scrollPos: {x: 0, y: 349}
+    m_SelectedIDs: 10390100
+    m_LastClickedID: 80144
+    m_ExpandedIDs: 0000000084350100be380100c0380100003901000e390100183901001242010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -955,10 +955,10 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 420}
-      m_SelectedIDs: e6580100
-      m_LastClickedID: 88294
-      m_ExpandedIDs: 76bfffff583a0100843b0100be3b01006c3f01008840010046410100be420100b0470100b847010048490100e4590100ee5d0100145f010070610100ea610100
+      scrollPos: {x: 0, y: 120}
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: f069fffff469ffff066affff146affff346affff386affff446affff486affff4c6affff546affff586affff606affff6c6affff706affff806affff846affff886affff906affff946affff9e6affffaa6affffb26affffcc6affffd06affff266bffff366bffffee760100007701000277010004770100187701001a7701001e77010020770100227701002a7701003c770100407701004a770100547701005877010060770100687701007a7701007c77010088770100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1522,15 +1522,15 @@ MonoBehaviour:
   m_OverrideSceneCullingMask: 0
   m_SceneIsLit: 0
   m_SceneLighting: 1
-  m_2DMode: 1
+  m_2DMode: 0
   m_isRotationLocked: 0
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 982.6545, y: 491.55222, z: 5.7400265}
+    m_Target: {x: -3.1366043, y: 0.6061517, z: -0.13645571}
     speed: 2
-    m_Value: {x: 982.6545, y: 491.55222, z: 5.7400265}
+    m_Value: {x: -3.1366043, y: 0.6061517, z: -0.13645571}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1576,17 +1576,17 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0, y: 0, z: 0, w: 1}
+    m_Target: {x: -0.09432339, y: 0.8820648, z: -0.20106603, w: -0.4171082}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0, w: 1}
+    m_Value: {x: -0.095490254, y: 0.8799169, z: -0.20196831, w: -0.4193287}
   m_Size:
-    m_Target: 620.21936
+    m_Target: 1.6498429
     speed: 2
-    m_Value: 620.21936
+    m_Value: 1.6498429
   m_Ortho:
-    m_Target: 1
+    m_Target: 0
     speed: 2
-    m_Value: 1
+    m_Value: 0
   m_CameraSettings:
     m_Speed: 1.06047
     m_SpeedNormalized: 0.53
@@ -1600,7 +1600,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: 0.14091682, y: -0.007904813, z: 0.0021290171, w: 0.9906624}
+  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_LastSceneViewOrtho: 0
   m_Viewpoint:
     m_SceneView: {fileID: 22}
@@ -2149,9 +2149,9 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: b3bc0ea26661166488f07b812c1bd851, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: a6063eca0222ec2439895841b2143cee, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 8228390695905638228, guid: b3bc0ea26661166488f07b812c1bd851, type: 2}
+  - m_Target: {fileID: 1240478378372897851, guid: a6063eca0222ec2439895841b2143cee, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -2207,7 +2207,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 487
+  m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:

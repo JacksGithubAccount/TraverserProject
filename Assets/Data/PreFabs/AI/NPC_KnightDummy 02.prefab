@@ -237,8 +237,10 @@ MonoBehaviour:
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
+  trueDamage: 0
   poiseDamage: 0
   characterCausingDamage: {fileID: 0}
+  physicalDamageType: 0
 --- !u!4 &8559675972268282694 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8704739715883739415, guid: 657579d186f7f8e45bd9ada60a0a95cf, type: 3}
@@ -1013,8 +1015,10 @@ MonoBehaviour:
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
+  trueDamage: 0
   poiseDamage: 0
   characterCausingDamage: {fileID: 0}
+  physicalDamageType: 0
 --- !u!4 &3998856653136800086 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8298002316568741239, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
@@ -1120,7 +1124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3544967409
+  GlobalObjectIdHash: 631945539
   InScenePlacedSourceGlobalObjectIdHash: 631945539
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1295,26 +1299,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runesDroppedOnDeath: 50
-  staminaRegenerationAmount: 2
+  baseStaminaRegenerationAmount: 50
   staminaRegenerationDelay: 2
+  blockingStaminaRegenerationReduction: 0.2
   blockingPhysicalAbsorption: 0
+  blockingBluntAbsorption: 0
+  blockingPierceAbsorption: 0
+  blockingSlashAbsorption: 0
   blockingFireAbsorption: 0
   blockingMagicAbsorption: 0
   blockingLightningAbsorption: 0
   blockingHolyAbsorption: 0
   blockingStability: 0
-  armorPhysicalDamageAbsorption: 0
-  armorMagicDamageAbsorption: 0
-  armorFireDamageAbsorption: 0
-  armorLightningDamageAbsorption: 0
-  armorHolyDamageAbsorption: 0
   armorImmunity: 0
   armorRobustness: 0
   armorFocus: 0
   armorVitality: 0
-  totalPoiseDamage: 0
-  offensivePoiseBonus: 0
-  basePoiseDefense: 0
   defaultPoiseResetTime: 8
   poiseResetTimer: 0
 --- !u!114 &5366753026280386691
@@ -1334,7 +1334,14 @@ MonoBehaviour:
   activeDrawnProjectileFX: {fileID: 0}
   bloodSplatterVFX: {fileID: 1972549086604712929, guid: c90de004b46c5404387de1354ec6a546, type: 3}
   criticalBloodSplatterVFX: {fileID: 0}
+  healedVFX: {fileID: 0}
+  effectTransform: {fileID: 0}
+  poisonedVFX: {fileID: 0}
+  frostbiteVFX: {fileID: 0}
   staticEffects: []
+  effectTickTimer: 0
+  defaultEffectTickTime: 1
+  timedEffects: []
 --- !u!114 &8883432730431339116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1350,6 +1357,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   isDead:
     m_InternalValue: 0
+  isDeadLocal: 0
   characterController: {fileID: 0}
   animator: {fileID: 0}
   characterNetworkManager: {fileID: 0}
@@ -1360,21 +1368,26 @@ MonoBehaviour:
   characterLocomotionManager: {fileID: 0}
   characterUIManager: {fileID: 0}
   characterStatsManager: {fileID: 0}
+  characterEquipmentManager: {fileID: 0}
   characterGroup: 0
   isPerformingAction: 0
   characterName: 
+  spawnerID: 0
   aiCharacterSoundFXManager: {fileID: 0}
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterCombatManager: {fileID: 0}
   aiCharacterLocomotionManager: {fileID: 0}
   aiCharacterInventoryManager: {fileID: 0}
   currentState: {fileID: 11400000, guid: 1253f4c67aebd3f49ae51e0d99fea946, type: 2}
+  hasManuallySwitchedState: 0
   navMeshAgent: {fileID: 0}
   idle: {fileID: 11400000, guid: 1253f4c67aebd3f49ae51e0d99fea946, type: 2}
   pursueTarget: {fileID: 11400000, guid: ce2ee9b649ab0134889f8d7efe16d53a, type: 2}
   combatStance: {fileID: 11400000, guid: 53ff37f0db8a7b94cb9a50992870c975, type: 2}
   attack: {fileID: 11400000, guid: ce0c8eb25f3b9344ab2a45643eaae533, type: 2}
   investigateSound: {fileID: 11400000, guid: ec903751695cbe046a23c20613f425ef, type: 2}
+  isShop: 0
+  isBlacksmith: 0
 --- !u!114 &7304563110396155058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1395,21 +1408,31 @@ MonoBehaviour:
   yVelocity: {x: 0, y: 0, z: 0}
   groundedYVelocity: -20
   fallStartYVelocity: -5
+  ignoreGravity: 0
   isRolling: 0
   isGrounded: 1
   canRotate: 1
   canRun: 1
   canMove: 1
   canRoll: 1
-  isSliding: 0
-  isSlidingOffCharacter: 0
+  isRidingLift: 0
+  isOpeningDoor: 0
+  isExitingLadder: 0
+  canExitTopOfLadder: 0
+  canExitLadderWithRightHand: 0
+  canExitLadderWithLeftHand: 0
+  knockOffLadderWindow: 10
   slopeSlideStartPositionYOffset: 1
   slopeSlideSphereCastMaxDistance: 2
   slopeSlideSpeed: -11
   slopeSlideSpeedMultiplier: -3
   slipperySurfaceMaxAngle: 15
+  isSliding: 0
+  isSlidingOffCharacter: 0
   characterSlideOffHeadCollisionMaxDistanceCheck: 5
   characterCollisionCheckSphereMultiplier: 1.5
+  interactedLadderClimbPositions: []
+  currentLadderClimbPosition: 0
 --- !u!114 &2575105346710630890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1504,6 +1527,10 @@ MonoBehaviour:
     m_InternalValue: 0
   isJumping:
     m_InternalValue: 0
+  isSneaking:
+    m_InternalValue: 0
+  isHidden:
+    m_InternalValue: 0
   isChargingAttack:
     m_InternalValue: 0
   isRipostable:
@@ -1511,6 +1538,26 @@ MonoBehaviour:
   isBeingCriticallyDamaged:
     m_InternalValue: 0
   isRolling:
+    m_InternalValue: 0
+  isPoisoned:
+    m_InternalValue: 0
+  isBloodLoss:
+    m_InternalValue: 0
+  isFrostbite:
+    m_InternalValue: 0
+  isFrozen:
+    m_InternalValue: 0
+  isExitingLadder:
+    m_InternalValue: 0
+  isClimbingLadder:
+    m_InternalValue: 0
+  isSlidingDownLadder:
+    m_InternalValue: 0
+  canBeKnockedOffLadder:
+    m_InternalValue: 0
+  hasArrowNotched:
+    m_InternalValue: 0
+  isHoldingArrow:
     m_InternalValue: 0
   currentStamina:
     m_InternalValue: 100
@@ -1540,8 +1587,60 @@ MonoBehaviour:
     m_InternalValue: 1
   luck:
     m_InternalValue: 1
+  armorPhysicalDamageAbsorption:
+    m_InternalValue: 1
+  armorBluntDamageAbsorption:
+    m_InternalValue: 1
+  armorPierceDamageAbsorption:
+    m_InternalValue: 1
+  armorSlashDamageAbsorption:
+    m_InternalValue: 1
+  armorMagicDamageAbsorption:
+    m_InternalValue: 1
+  armorFireDamageAbsorption:
+    m_InternalValue: 1
+  armorLightningDamageAbsorption:
+    m_InternalValue: 1
+  armorHolyDamageAbsorption:
+    m_InternalValue: 1
+  totalPoiseDamage:
+    m_InternalValue: 1
+  offensivePoiseBonus:
+    m_InternalValue: 1
+  basePoiseDefense:
+    m_InternalValue: 1
+  immunityBuildUpCapacity:
+    m_InternalValue: 100
+  robustnessBuildUpCapacity:
+    m_InternalValue: 100
+  focusBuildUpCapacity:
+    m_InternalValue: 100
+  poisonBuildUp:
+    m_InternalValue: 0
+  bleedBuildUp:
+    m_InternalValue: 0
+  frostBuildUp:
+    m_InternalValue: 0
   strengthModifier:
     m_InternalValue: 1
+  staminaRegenerationModifier:
+    m_InternalValue: 0
+  armorPhysicalDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorBluntDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorPierceDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorSlashDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorMagicDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorFireDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorLightningDamageAbsorptionModifer:
+    m_InternalValue: 0
+  armorHolyDamageAbsorptionModifer:
+    m_InternalValue: 0
   isAwake:
     m_InternalValue: 1
   sleepingAnimation:
@@ -1682,6 +1781,8 @@ MonoBehaviour:
         byte0059: 0
         byte0060: 0
         byte0061: 0
+  currentStance:
+    m_InternalValue: 100
 --- !u!114 &6254681843119909382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1694,9 +1795,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af101b79c803fa74d9765bb9c95c302a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemsInInventory: []
   dropItemChance: 10
   droppableItems:
   - {fileID: 11400000, guid: 64a3dcab51c176e409334284777e2c9a, type: 2}
+  characterShopID: 0
+  characterShop: {fileID: 0}
 --- !u!114 &112469802660158516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1719,8 +1823,11 @@ MonoBehaviour:
   canPerformBackstepAttack: 0
   canBlock: 1
   canBeBackstabbed: 1
+  hasPlayedDeathAnimation: 0
   criticalAttackDistanceCheck: 0.7
   pendingCriticalDamage: 0
+  charactersTargetingMe: []
+  stealthObjectsCurrentlyStandingIn: []
   baseDamage: 25
   basePoiseDamage: 25
   actionRecoveryTimer: 0
@@ -1735,7 +1842,6 @@ MonoBehaviour:
   maximumFOV: 35
   attackRotationSpeed: 25
   maxStance: 150
-  currentStance: 150
   stanceRegeneratedPerSecond: 15
   ignoreStanceBreak: 0
   stanceRegenerationTimer: 0
@@ -1763,10 +1869,13 @@ MonoBehaviour:
   blockingSFX:
   - {fileID: 8300000, guid: 431857fa264f4fd4d8d608c59d3b93f3, type: 3}
   characterDialogueID: 1
+  characterMenuDialogueID: 0
   interactableDialogueCollider: {fileID: 0}
   currentDialogue: {fileID: 0}
+  menuDialogue: {fileID: 0}
   interactableDialogueObject: {fileID: 0}
   dialogueIsPlaying: 0
+  menuDialogueIsPlaying: 0
 --- !u!1 &5914042613956171416 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7618892409413387591, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
@@ -1867,8 +1976,10 @@ MonoBehaviour:
   fireDamage: 0
   lightningDamage: 0
   holyDamage: 0
+  trueDamage: 0
   poiseDamage: 0
   characterCausingDamage: {fileID: 0}
+  physicalDamageType: 0
 --- !u!4 &6522068272529108552 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2221872609835778665, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
