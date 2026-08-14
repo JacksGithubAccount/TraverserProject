@@ -1376,7 +1376,7 @@ Animator:
   m_GameObject: {fileID: 8298649895606373992}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e90d2635acace004890485c7a82d2ab3, type: 3}
-  m_Controller: {fileID: 9100000, guid: a6063eca0222ec2439895841b2143cee, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4d881eea1e78d6c4f93bd58b72db451c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2049,7 +2049,7 @@ MonoBehaviour:
   footSteps: []
   blockingSFX:
   - {fileID: 8300000, guid: 431857fa264f4fd4d8d608c59d3b93f3, type: 3}
-  characterDialogueID: 1
+  characterDialogueID: 0
   characterMenuDialogueID: 0
   interactableDialogueCollider: {fileID: 0}
   currentDialogue: {fileID: 0}
@@ -2084,9 +2084,9 @@ MonoBehaviour:
   characterUIManager: {fileID: 0}
   characterStatsManager: {fileID: 0}
   characterEquipmentManager: {fileID: 0}
-  characterGroup: 0
+  characterGroup: 1
   isPerformingAction: 0
-  characterName: 
+  characterName: Archer
   spawnerID: 0
   aiCharacterSoundFXManager: {fileID: 0}
   aiCharacterNetworkManager: {fileID: 0}
@@ -2096,11 +2096,11 @@ MonoBehaviour:
   currentState: {fileID: 0}
   hasManuallySwitchedState: 0
   navMeshAgent: {fileID: 0}
-  idle: {fileID: 0}
-  pursueTarget: {fileID: 0}
-  combatStance: {fileID: 0}
-  attack: {fileID: 0}
-  investigateSound: {fileID: 0}
+  idle: {fileID: 11400000, guid: 4eb0140ce7761c245ae6361587d64d8a, type: 2}
+  pursueTarget: {fileID: 11400000, guid: 08953900a5710fb4db6c3e31d564226a, type: 2}
+  combatStance: {fileID: 11400000, guid: b99c1e19b3c3dbc43a9ef2ed47024a9f, type: 2}
+  attack: {fileID: 11400000, guid: 53d21f19b1c985945b2aaf98a6e08429, type: 2}
+  investigateSound: {fileID: 11400000, guid: 09436b0a261de574181d5d2201f584fa, type: 2}
   isShop: 0
   isBlacksmith: 0
   aiRangerCombatManager: {fileID: 0}
@@ -2151,6 +2151,8 @@ MonoBehaviour:
   stanceRegenerationTimer: 0
   defaultTimeUntilStanceRegenerationBegins: 15
   playersWithinActivationRange: []
+  minimumTimeToAim: 1
+  maximumTimeToAim: 4
 --- !u!114 &2784435230173168722
 MonoBehaviour:
   m_ObjectHideFlags: 0

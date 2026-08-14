@@ -439,10 +439,7 @@ namespace TraverserProject
                 PlayerUIManager.Singleton.playerUIHudManager.SetMaxFocusPointsValue(newFP);
         }
 
-        public void OnIsHoldingArrowChanged(bool oldStatus, bool newStatus)
-        {
-            player.animator.SetBool("isHoldingArrow", isHoldingArrow.Value);
-        }
+
 
         public void OnIsAimingChanged(bool oldStatus, bool newStatus)
         {

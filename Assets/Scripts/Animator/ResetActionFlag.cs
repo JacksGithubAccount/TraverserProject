@@ -45,6 +45,7 @@ namespace TraverserProject
                 character.characterNetworkManager.isRolling.Value = false;
                 character.characterNetworkManager.isClimbingLadder.Value = false;
                 character.characterNetworkManager.canBeKnockedOffLadder.Value = false;
+                character.characterNetworkManager.isHoldingArrow.Value = false;
             }
 
         }

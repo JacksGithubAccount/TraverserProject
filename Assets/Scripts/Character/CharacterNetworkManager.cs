@@ -310,6 +310,11 @@ namespace TraverserProject
             character.animator.SetBool("isExitingLadder", isExitingLadder.Value);
         }
 
+        public virtual void OnIsHoldingArrowChanged(bool oldStatus, bool newStatus)
+        {
+            character.animator.SetBool("isHoldingArrow", isHoldingArrow.Value);
+        }
+
         [ServerRpc(RequireOwnership = false)]
         public virtual void AddCharacterToListOfCharactersTargetingMeServerRpc(ulong characterTargetingMeID)
         {

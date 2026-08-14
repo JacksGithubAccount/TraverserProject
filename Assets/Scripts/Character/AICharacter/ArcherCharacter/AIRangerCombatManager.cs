@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 namespace TraverserProject
@@ -8,6 +9,11 @@ namespace TraverserProject
     {
         AIRangerManager ranger;
 
+        [Header("Aim Time")]
+        [SerializeField] float minimumTimeToAim = 1;
+        [SerializeField] float maximumTimeToAim = 4;
+        private Coroutine aimCoroutine;
+
         protected override void Awake()
         {
             base.Awake();
@@ -15,7 +21,7 @@ namespace TraverserProject
             ranger = GetComponent<AIRangerManager>();
         }
 
-        public virtual void DrawProjectile()
+        public override void DrawProjectile()
         {
             Animator bowAnimator = ranger.aiRangerEquipmentManager.bowAnimator;
             RangedProjectileItem projectile = ranger.aiRangerEquipmentManager.projectile;
@@ -30,7 +36,16 @@ namespace TraverserProject
             if (drawHand == null)
                 return;
 
-            ranger.characterAnimatorManager.PlayTargetActionAnimation("Bow_Draw_01", true);
+            if (ranger.IsOwner)
+            {
+                if (aimCoroutine != null)
+                    StopCoroutine(aimCoroutine);
+
+                aimCoroutine = StartCoroutine(HoldArrowForATime(Random.Range(minimumTimeToAim, maximumTimeToAim)));
+
+
+
+            }
 
             bowAnimator.SetBool("isDrawn", true);
             bowAnimator.Play("Bow_Draw_01");
@@ -40,6 +55,28 @@ namespace TraverserProject
 
 
             ranger.characterSoundFXManager.PlaySoundFX(WorldSoundFXManager.Singleton.ChooseRandomSFXFromArray(WorldSoundFXManager.Singleton.notchArrowSFX));
+        }
+
+        private IEnumerator HoldArrowForATime(float time)
+        {
+            ranger.aiCharacterNetworkManager.hasArrowNotched.Value = true;
+            ranger.aiCharacterNetworkManager.isHoldingArrow.Value = true;
+            ranger.aiCharacterLocomotionManager.canRotate = true;
+            yield return new WaitForSeconds(time);
+
+            bool canFire = false;
+            //while we arent looking at our target, do not fire
+            while (!canFire)
+            {
+                if (aiCharacter.aiCharacterCombatManager.currentTarget == null)
+                    canFire = true;
+                if (viewableAngle < 5 && viewableAngle > -5 && distanceFromTarget > 1)
+                    canFire = true;
+
+                yield return null;
+            }
+            ranger.aiCharacterLocomotionManager.canRotate = false;
+            ranger.aiCharacterNetworkManager.isHoldingArrow.Value = false;
         }
 
         public override void ReleaseArrow()

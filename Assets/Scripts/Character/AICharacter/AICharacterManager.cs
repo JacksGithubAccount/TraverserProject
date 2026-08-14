@@ -84,7 +84,7 @@ namespace TraverserProject
             aiCharacterNetworkManager.isBloodLoss.OnValueChanged += aiCharacterNetworkManager.OnIsBloodLossChanged;
             aiCharacterNetworkManager.isFrostbite.OnValueChanged += aiCharacterNetworkManager.OnIsFrostbiteChanged;
             aiCharacterNetworkManager.isFrozen.OnValueChanged += aiCharacterNetworkManager.OnIsFrozenChanged;
-
+            aiCharacterNetworkManager.isHoldingArrow.OnValueChanged += aiCharacterNetworkManager.OnIsHoldingArrowChanged;
 
             if (!aiCharacterNetworkManager.isAwake.Value)
                 animator.Play(aiCharacterNetworkManager.sleepingAnimation.Value.ToString());
@@ -109,6 +109,7 @@ namespace TraverserProject
             aiCharacterNetworkManager.isBloodLoss.OnValueChanged -= aiCharacterNetworkManager.OnIsBloodLossChanged;
             aiCharacterNetworkManager.isFrostbite.OnValueChanged -= aiCharacterNetworkManager.OnIsFrostbiteChanged;
             aiCharacterNetworkManager.isFrozen.OnValueChanged -= aiCharacterNetworkManager.OnIsFrozenChanged;
+            aiCharacterNetworkManager.isHoldingArrow.OnValueChanged -= aiCharacterNetworkManager.OnIsHoldingArrowChanged;
 
         }
 
