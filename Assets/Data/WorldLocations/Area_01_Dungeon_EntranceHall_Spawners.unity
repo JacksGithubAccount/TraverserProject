@@ -307,9 +307,92 @@ Transform:
   - {fileID: 2106012713}
   - {fileID: 393929456}
   - {fileID: 2019918332}
+  - {fileID: 1815641102}
   - {fileID: 401488063}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1815641101
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1283049583}
+    m_Modifications:
+    - target: {fileID: 513189949300818301, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
+      propertyPath: spawnerID
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 513189949300818301, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
+      propertyPath: isSleeping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 513189949300818301, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
+      propertyPath: patrolPathID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 513189949300818301, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
+      propertyPath: hasPatrolPath
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 513189949300818301, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
+      propertyPath: characterGameObject
+      value: 
+      objectReference: {fileID: 5230876016868774256, guid: 389894daf4bd5fb48a01d5549a707108, type: 3}
+    - target: {fileID: 1588747371779744386, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.572006
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588747371779744386, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588747371779744386, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.7249763
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588747371779744386, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.8865487
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588747371779744386, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588747371779744386, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.46263537
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588747371779744386, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588747371779744386, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588747371779744386, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -304.885
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588747371779744386, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2109811071273678904, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
+      propertyPath: m_Name
+      value: AISpawner (7)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
+--- !u!4 &1815641102 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1588747371779744386, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
+  m_PrefabInstance: {fileID: 1815641101}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2019918331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -324,7 +407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 513189949300818301, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
       propertyPath: isSleeping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 513189949300818301, guid: 342ae684614c6ac4684cc9dcc748c00c, type: 3}
       propertyPath: patrolPathID

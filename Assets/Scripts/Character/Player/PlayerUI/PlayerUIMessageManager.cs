@@ -8,8 +8,12 @@ namespace TraverserProject
     public class PlayerUIMessageManager : PlayerUIMenu
     {
         [HideInInspector] public string currentMessage = "";
-        [HideInInspector] public string selectedTemplate = "";
-        [HideInInspector] public string selectedWord = "";
+        [HideInInspector] public string currentMessage2 = "";
+        [HideInInspector] public string selectedTemplate1 = "";
+        [HideInInspector] public string selectedWord1 = "";
+        [HideInInspector] public string selectedConjunction = "";
+        [HideInInspector] public string selectedTemplate2 = "";
+        [HideInInspector] public string selectedWord2 = "";
         [HideInInspector] public MessagingItem messagingItem;
 
         public TextMeshProUGUI messageDisplayText;
@@ -62,41 +66,76 @@ namespace TraverserProject
             CloseMenu();
         }
 
-        public void AddTemplateToSelectedTemplate(string template)
+        public void AddTemplateToSelectedTemplate(string template, bool isFirst)
         {
-            
-            selectedTemplate = template;
-            templatesDisplayButtonText.text = selectedTemplate;
+            if (isFirst)
+            {
+                selectedTemplate1 = template;
+            }
+            else
+            {
+                selectedTemplate2 = template;                
+            }
+            templatesDisplayButtonText.text = template;
             GenerateCurrentMessageBasedOnTemplateAndWord();
             
         }
 
-        public void AddWordToSelectedWord(string word)
+        public void AddWordToSelectedWord(string word, bool isFirst)
         {
-            selectedWord = word;
-            wordsDisplayButtonText.text = selectedWord;
+            if (isFirst)
+            {
+                selectedWord1 = word;
+            }
+            else
+            {
+                selectedWord2 = word;
+            }
+            wordsDisplayButtonText.text = word;
+            GenerateCurrentMessageBasedOnTemplateAndWord();
+        }
+
+        public void AddConjunctionToSelectedConjunction(string conjunction)
+        {
+            selectedConjunction = conjunction;
+
+            conjunctionsDisplayButtonText.text = conjunction;
             GenerateCurrentMessageBasedOnTemplateAndWord();
         }
 
         private void GenerateCurrentMessageBasedOnTemplateAndWord()
         {            
-            if (selectedTemplate != "" && selectedWord !="")
+            if (selectedTemplate1 != "" && selectedWord1 !="")
             {
-                currentMessage = selectedTemplate.Replace("****", selectedWord);
+                currentMessage = selectedTemplate1.Replace("****", selectedWord1);
             }
-            else if(selectedTemplate == "")
+            else if(selectedTemplate1 == "")
             {
-                currentMessage = selectedWord;
-            }else if(selectedWord == "")
+                currentMessage = selectedWord1;
+            }else if(selectedWord1 == "")
             {
-                currentMessage = selectedTemplate;
+                currentMessage = selectedTemplate1;
             }
-            
-            messageDisplayText.text = currentMessage;
+
+            if (selectedTemplate2 != "" && selectedWord2 != "")
+            {
+                currentMessage2 = selectedTemplate2.Replace("****", selectedWord2);
+            }
+            else if (selectedTemplate2 == "")
+            {
+                currentMessage2 = selectedWord2;
+            }
+            else if (selectedWord1 == "")
+            {
+                currentMessage2 = selectedTemplate2;
+            }
+
+            messageDisplayText.text = currentMessage + selectedConjunction + currentMessage2;
         }
 
-        public void OpenTemplatesMenu(bool isFirstPart)
+        public void OpenTemplatesMenu()
         {
+            ClearAllPrefabsInList(conjunctionsSlotPrefabs);
             ClearAllPrefabsInList(templatesSlotPrefabs);
             bool hasSelectedFirstInventorySlot = false;
 
@@ -121,7 +160,7 @@ namespace TraverserProject
             
         }
 
-        public void OpenWordsMenu(bool isFirstPart)
+        public void OpenWordsMenu()
         {
             ClearAllPrefabsInList(wordsCategorySlotPrefabs);
             
@@ -150,6 +189,7 @@ namespace TraverserProject
 
         public void OpenConjunctionsMenu()
         {
+            ClearAllPrefabsInList(templatesSlotPrefabs);
             ClearAllPrefabsInList(conjunctionsSlotPrefabs);
             bool hasSelectedFirstInventorySlot = false;
 

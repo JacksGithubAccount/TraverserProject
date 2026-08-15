@@ -40,34 +40,38 @@ namespace TraverserProject
         {
             if (messageType == MessageType.Template1)
             {
-                AddTextToMessageTemplate();
+                AddTextToMessageTemplate(true);
             }
             else if (messageType == MessageType.Word1)
             {
-                AddTextToMessageWord();
+                AddTextToMessageWord(true);
             }
             else if (messageType == MessageType.Conjunction)
             {
-                AddTextToMessageWord();
+                AddConjunctionToMessage();
             }
             else if (messageType == MessageType.Template2)
             {
-                AddTextToMessageWord();
+                AddTextToMessageTemplate(false);
             }
             else if (messageType == MessageType.Word2)
             {
-                AddTextToMessageWord();
+                AddTextToMessageWord(false);
             }
             PlayerUIManager.Singleton.playerUIMessageManager.CloseSubMenu();
         }
 
-        private void AddTextToMessageTemplate()
+        private void AddTextToMessageTemplate(bool isFirst)
         {
-            PlayerUIManager.Singleton.playerUIMessageManager.AddTemplateToSelectedTemplate(messageText.text);
+            PlayerUIManager.Singleton.playerUIMessageManager.AddTemplateToSelectedTemplate(messageText.text, isFirst);
         }
-        private void AddTextToMessageWord()
+        private void AddTextToMessageWord(bool isFirst)
         {
-            PlayerUIManager.Singleton.playerUIMessageManager.AddWordToSelectedWord(messageText.text);
+            PlayerUIManager.Singleton.playerUIMessageManager.AddWordToSelectedWord(messageText.text, isFirst);
+        }
+        private void AddConjunctionToMessage()
+        {
+            PlayerUIManager.Singleton.playerUIMessageManager.AddConjunctionToSelectedConjunction(messageText.text);
         }
     }
 }
