@@ -9,6 +9,7 @@ namespace TraverserProject
         public TextMeshProUGUI wordText;
         public Image highlightIcon;
         public WordCategory wordCategory;
+        public MessageType messageType;
 
 
         private void Awake()
@@ -29,7 +30,7 @@ namespace TraverserProject
 
         public void DisplayWordsBasedOnWordCategory()
         {
-            PlayerUIManager.Singleton.playerUIMessageManager.DisplayWordsList(wordCategory);
+            PlayerUIManager.Singleton.playerUIMessageManager.DisplayWordsList(wordCategory, messageType);
         }
 
         public void SetTextOfMessageCategorySlot(string text)
