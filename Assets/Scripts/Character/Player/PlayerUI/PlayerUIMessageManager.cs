@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -23,11 +24,16 @@ namespace TraverserProject
         public GameObject messageCategorySlotPrefab;
         [SerializeField] GameObject closeSubmenuWindow;
 
+        public MessageFormat messageFormat = MessageFormat.Short;
+        public string defaultStringForButtonTexts = "______________";
+
 
         [Header("Templates")]
         [SerializeField] GameObject templatesMenuWindow;
         [SerializeField] Transform templatesContentWindow;
         [SerializeField] TextMeshProUGUI templatesDisplayButtonText1;
+        [SerializeField] GameObject templatesText2;
+        [SerializeField] GameObject templatesDisplayButton2GameObject;
         [SerializeField] TextMeshProUGUI templatesDisplayButtonText2;
         [HideInInspector] List<GameObject> templatesSlotPrefabs = new List<GameObject>();
 
@@ -36,6 +42,8 @@ namespace TraverserProject
         [SerializeField] Transform wordsCategoryContentWindow;
         [SerializeField] Transform wordsListContentWindow;
         [SerializeField] TextMeshProUGUI wordsDisplayButtonText1;
+        [SerializeField] GameObject wordsText2;
+        [SerializeField] GameObject wordsDisplayButton2GameObject;
         [SerializeField] TextMeshProUGUI wordsDisplayButtonText2;
         [HideInInspector] List<GameObject> wordsCategorySlotPrefabs = new List<GameObject>();
         [HideInInspector] List<GameObject> wordsListSlotPrefabs = new List<GameObject>();
@@ -43,18 +51,27 @@ namespace TraverserProject
         [Header("Conjunctions")]
         [SerializeField] GameObject conjunctionsMenuWindow;
         [SerializeField] Transform conjunctionsContentWindow;
+        [SerializeField] GameObject conjunctionsText;
+        [SerializeField] GameObject conjunctionsDisplayButtonGameObject;
         [SerializeField] TextMeshProUGUI conjunctionsDisplayButtonText;
         [HideInInspector] List<GameObject> conjunctionsSlotPrefabs = new List<GameObject>();
 
+        [Header("Lists")]
         public List<string> templatesTexts;
         public List<string> beingsWordTexts;
         public List<string> directionsWordTexts;
         public List<string> phrasesWordTexts;
         public List<string> conjunctionsTexts;
 
+        [Header("Finish Button")]
+        public Button finishButton;
+
         public override void OpenMenu()
         {
+            ResetAllButtonTexts();
             base.OpenMenu();
+            messageFormat = MessageFormat.Short;
+            SetButtonsBasedOnMessageFormat(messageFormat);
             GenerateCurrentMessageBasedOnTemplateAndWord();
         }
 
@@ -110,6 +127,42 @@ namespace TraverserProject
             GenerateCurrentMessageBasedOnTemplateAndWord();
         }
 
+        public void ChangeMessageFormat()
+        {
+            int formatIndex = (int)messageFormat + 1;
+            if (formatIndex >= Enum.GetNames(typeof(MessageFormat)).Length)
+                formatIndex = 0;
+            messageFormat = (MessageFormat)formatIndex;
+
+            SetButtonsBasedOnMessageFormat(messageFormat);
+            GenerateCurrentMessageBasedOnTemplateAndWord();
+        }
+
+        public void SetButtonsBasedOnMessageFormat(MessageFormat format)
+        {
+            switch (format)
+            {
+                case MessageFormat.Short:
+                    conjunctionsText.SetActive(false);
+                    conjunctionsDisplayButtonGameObject.SetActive(false);
+                    templatesText2.SetActive(false);
+                    templatesDisplayButton2GameObject.SetActive(false);
+                    wordsText2.SetActive(false);
+                    wordsDisplayButton2GameObject.SetActive(false);
+                    break;
+                case MessageFormat.Extended:
+                    conjunctionsText.SetActive(true);
+                    conjunctionsDisplayButtonGameObject.SetActive(true);
+                    templatesText2.SetActive(true);
+                    templatesDisplayButton2GameObject.SetActive(true);
+                    wordsText2.SetActive(true);
+                    wordsDisplayButton2GameObject.SetActive(true);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void GenerateCurrentMessageBasedOnTemplateAndWord()
         {            
             if (selectedTemplate1 != "" && selectedWord1 !="")
@@ -136,8 +189,27 @@ namespace TraverserProject
             {
                 currentMessage2 = selectedTemplate2;
             }
-            completeMessage = currentMessage + " " + selectedConjunction + " " + currentMessage2;
-            messageDisplayText.text = currentMessage + " " + selectedConjunction+ " " + currentMessage2;
+
+            switch (messageFormat)
+            {
+                case MessageFormat.Short:
+                    if (selectedTemplate1 != "" && selectedWord1 != "")
+                    {
+                        finishButton.interactable = true;
+                    }
+                    completeMessage = currentMessage;
+                    break;
+                case MessageFormat.Extended:
+                    if (selectedTemplate1 != "" && selectedWord1 != "" && selectedTemplate2 != "" && selectedWord2 != "" && selectedConjunction != "")
+                    {
+                        finishButton.interactable = true;
+                    }
+                    completeMessage = currentMessage + " " + selectedConjunction + " " + currentMessage2;
+                    break;
+                default:
+                    break;
+            }
+            messageDisplayText.text = completeMessage;
         }
 
         public void OpenTemplatesMenu(bool isFirst)
@@ -167,8 +239,7 @@ namespace TraverserProject
 
                 }
             }
-            OpenSubMenu(templatesMenuWindow);
-            
+            OpenSubMenu(templatesMenuWindow);            
         }
 
         public void OpenWordsMenu(bool isFirst)
@@ -272,6 +343,21 @@ namespace TraverserProject
 
                 }
             }
+        }
+
+        public void ResetAllButtonTexts()
+        {
+            templatesDisplayButtonText1.text = defaultStringForButtonTexts;
+            wordsDisplayButtonText1.text = defaultStringForButtonTexts;
+            conjunctionsDisplayButtonText.text = defaultStringForButtonTexts;
+            templatesDisplayButtonText2.text = defaultStringForButtonTexts;
+            wordsDisplayButtonText2.text = defaultStringForButtonTexts;
+
+            selectedTemplate1 = "";
+            selectedWord1 = "";
+            selectedConjunction = "";
+            selectedTemplate2 = "";
+            selectedWord2 = "";
         }
 
         private void ClearAllPrefabsInList(List<GameObject> listOfPrefabsToDestroy)

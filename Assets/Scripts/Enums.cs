@@ -363,6 +363,12 @@ public enum MessageType
     Template2,
     Word2
 }
+
+public enum MessageFormat
+{
+    Short,
+    Extended
+}
 //AI States
 public enum IdleStateMode
 {
