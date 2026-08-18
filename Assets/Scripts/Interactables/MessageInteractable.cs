@@ -15,7 +15,7 @@ namespace TraverserProject
 
             WorldSaveGameManager.Singleton.SaveGame();
 
-            PlayerUIManager.Singleton.playerUIPopUpManager.SendPlayerMessagePopUp(messagePopUp);
+            PlayerUIManager.Singleton.playerUIPopUpManager.SendMessageInteractablePopUp(messagePopUp);
             //optionally play SFX here
         }
 

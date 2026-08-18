@@ -16,6 +16,10 @@ namespace TraverserProject
         [SerializeField] TextMeshProUGUI messagePopUpText;
         [SerializeField] private GameObject statusEffectPopUpPrefab;
 
+        [Header("Message Interactable Pop Up")]
+        [SerializeField] GameObject messageInteractablePopUpGameObject;
+        [SerializeField] TextMeshProUGUI messageInteractablePopUpText;
+
         [Header("Item Pop Up")]
         [SerializeField] GameObject itemPopUpGameObject;
         [SerializeField] Image itemIcon;
@@ -51,6 +55,7 @@ namespace TraverserProject
         {
             messagePopUpGameObject.SetActive(false);
             itemPopUpGameObject.SetActive(false);
+            messageInteractablePopUpGameObject.SetActive(false);
 
             PlayerUIManager.Singleton.popUpWindowIsOpen = false;
         }
@@ -60,6 +65,13 @@ namespace TraverserProject
             PlayerUIManager.Singleton.popUpWindowIsOpen = true;
             messagePopUpText.text = messageText;
             messagePopUpGameObject.SetActive(true);
+        }
+
+        public void SendMessageInteractablePopUp(string messageText)
+        {
+            PlayerUIManager.Singleton.popUpWindowIsOpen = true;
+            messageInteractablePopUpText.text = messageText;
+            messageInteractablePopUpGameObject.SetActive(true);
         }
 
 
