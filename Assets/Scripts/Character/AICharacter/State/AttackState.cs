@@ -36,9 +36,6 @@ namespace TraverserProject
 
             if (!hasPerformedAttack)
             {
-                if (aiCharacter.aiCharacterCombatManager.actionRecoveryTimer > 0)
-                    return this;
-
                 PerformAttack(aiCharacter);
 
                 return this;

@@ -19,6 +19,10 @@ namespace TraverserProject
         [Header("Action Recovery")]
         public float actionRecoveryTimer = 0f;
 
+        [Header("Engagement Distance")]
+        [HideInInspector] public float maximumEngagementDistance = 1;   //max distance you can get from a target before switching to pursue state
+        [HideInInspector] public float minimumDistanceToEndPursuit = 1;	//min distance you can get to a target until switching to combat stance state
+
         [Header("Pivot")]
         public bool enablePivot = true;
 

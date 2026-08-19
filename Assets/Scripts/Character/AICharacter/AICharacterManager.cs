@@ -76,7 +76,21 @@ namespace TraverserProject
                 investigateSound = Instantiate(investigateSound);
                 currentState = idle;
 
+                float maximumEngagementDistance = 0;
 
+                for (int i = 0; i < combatStance.aiCharacterAttacks.Count; i++)
+                {
+                    if (combatStance.aiCharacterAttacks[i] == null)
+                        continue;
+
+                    if (combatStance.aiCharacterAttacks[i].maximumAttackDistance > maximumEngagementDistance)
+                        maximumEngagementDistance = combatStance.aiCharacterAttacks[i].maximumAttackDistance;
+                }
+
+                //get the max possible range from the longest range attack
+                aiCharacterCombatManager.maximumEngagementDistance = maximumEngagementDistance;
+                //get the minimum distance to end pursuit by getting 75% of that max range
+                aiCharacterCombatManager.minimumDistanceToEndPursuit = (maximumEngagementDistance * 0.75f);
             }
             aiCharacterNetworkManager.currentHealth.OnValueChanged += aiCharacterNetworkManager.CheckHealth;
             aiCharacterNetworkManager.isBlocking.OnValueChanged += aiCharacterNetworkManager.OnIsBlockingChanged;

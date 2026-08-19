@@ -20,13 +20,14 @@ namespace TraverserProject
         [SerializeField] public bool onlyPerformComboIfInitialAttackHits = false;
         protected bool hasRolledForComboChance = false;
 
-        [Header("Engagement Distance")]
-        [SerializeField] public float maximumEngagementDistance = 5;
-
         [Header("Circling")]
         [SerializeField] bool willCircleTarget = false;
         private bool hasChosenCirclePath = false;
         private float strafeMoveAmount;
+
+        [Header("Movement Values")]
+        private float horizontalMovement;
+        private float verticalMovement;
 
         [Header("Blocking")]
         [SerializeField] bool canBlock = false;
@@ -40,6 +41,9 @@ namespace TraverserProject
         private bool hasEvaded = false;
         private bool hasRolledForEvasionChance = false;
         private bool willEvadeDuringThisCombatRotation;
+
+        [Header("Pursuit Mode")]
+        [SerializeField] PursuitMode pursuitMode;
 
         public override AIState Tick(AICharacterManager aiCharacter)
         {
@@ -64,6 +68,28 @@ namespace TraverserProject
 
             //rotate to face target
             aiCharacter.aiCharacterCombatManager.RotateTowardsAgent(aiCharacter);
+
+            switch (pursuitMode)
+            {
+                case PursuitMode.None:
+                    horizontalMovement = 0;
+                    verticalMovement = 0;
+                    break;
+                case PursuitMode.Walk:
+                    horizontalMovement = 0;
+                    verticalMovement = 0.5f;
+                    break;
+                case PursuitMode.Run:
+                    horizontalMovement = 0;
+                    verticalMovement = 1;
+                    break;
+                case PursuitMode.Sprint:
+                    horizontalMovement = 0;
+                    verticalMovement = 2;
+                    break;
+                default:
+                    break;
+            }
 
             if (aiCharacter.aiCharacterCombatManager.currentTarget == null)
                 return SwitchState(aiCharacter, aiCharacter.idle);
@@ -98,6 +124,7 @@ namespace TraverserProject
                 aiCharacter.aiCharacterCombatManager.PerformEvasion();
             }
 
+            //if we do not have an attack, get one
             if (!hasAttack)
             {
                 GetNewAttack(aiCharacter);
@@ -105,13 +132,23 @@ namespace TraverserProject
             else
             {
                 aiCharacter.attack.currentAttack = choosenAttack;
-
+                //roll for combo chance
                 return SwitchState(aiCharacter, aiCharacter.attack);
             }
 
-            if (aiCharacter.aiCharacterCombatManager.distanceFromTarget > maximumEngagementDistance)
+            //if we are outside of the combat engagement distance, switch to pursue target state
+            if (aiCharacter.aiCharacterCombatManager.distanceFromTarget > aiCharacter.aiCharacterCombatManager.maximumEngagementDistance)
                 return SwitchState(aiCharacter, aiCharacter.pursueTarget);
 
+            aiCharacter.characterAnimatorManager.SetAnimatorMovementParameters(horizontalMovement, verticalMovement);
+
+            if (pursuitMode == PursuitMode.None)
+            {
+                aiCharacter.navMeshAgent.SetDestination(aiCharacter.transform.position);
+                return this;
+            }
+
+            //calculates path towards target and moves towards it
             NavMeshPath path = new NavMeshPath();
             aiCharacter.navMeshAgent.CalculatePath(aiCharacter.aiCharacterCombatManager.currentTarget.transform.position, path);
             aiCharacter.navMeshAgent.SetPath(path);
@@ -122,6 +159,9 @@ namespace TraverserProject
 
         protected virtual void GetNewAttack(AICharacterManager aiCharacter)
         {
+            if (aiCharacter.aiCharacterCombatManager.actionRecoveryTimer > 0)
+                return;
+
             potentialAttacks = new List<AICharacterAttackAction>();
 
             foreach (var potentialAttack in aiCharacterAttacks)
@@ -186,13 +226,15 @@ namespace TraverserProject
 
             {
                 //stop strafing as we hit something
-                Debug.Log("Collision, ending Strafe");
-                aiCharacter.characterAnimatorManager.SetAnimatorMovementParameters(0, Mathf.Abs(strafeMoveAmount));
+                //aiCharacter.characterAnimatorManager.SetAnimatorMovementParameters(0, Mathf.Abs(strafeMoveAmount));
+                horizontalMovement = 0;
+                verticalMovement = Mathf.Abs(strafeMoveAmount);
                 return;
             }
             //strafe
-            Debug.Log("strafing");
-            aiCharacter.characterAnimatorManager.SetAnimatorMovementParameters(strafeMoveAmount, 0);
+            //aiCharacter.characterAnimatorManager.SetAnimatorMovementParameters(strafeMoveAmount, 0);
+            horizontalMovement = strafeMoveAmount;
+            verticalMovement = 0;
 
             if (hasChosenCirclePath)
                 return;
@@ -205,12 +247,44 @@ namespace TraverserProject
             if (leftOrRightIndex >= 50)
             {
                 //left
-                strafeMoveAmount = -0.5f;
+                switch (pursuitMode)
+                {
+                    case PursuitMode.None:
+                        strafeMoveAmount = 0;
+                        break;
+                    case PursuitMode.Walk:
+                        strafeMoveAmount = -0.5f;
+                        break;
+                    case PursuitMode.Run:
+                        strafeMoveAmount = -1;
+                        break;
+                    case PursuitMode.Sprint:
+                        strafeMoveAmount = -2;
+                        break;
+                    default:
+                        break;
+                }
             }
             else
             {
                 //right
-                strafeMoveAmount = 0.5f;
+                switch (pursuitMode)
+                {
+                    case PursuitMode.None:
+                        strafeMoveAmount = 0;
+                        break;
+                    case PursuitMode.Walk:
+                        strafeMoveAmount = 0.5f;
+                        break;
+                    case PursuitMode.Run:
+                        strafeMoveAmount = 1;
+                        break;
+                    case PursuitMode.Sprint:
+                        strafeMoveAmount = 2;
+                        break;
+                    default:
+                        break;
+                }
             }
 
         }

@@ -39,6 +39,16 @@ public enum CharacterAttribute
     Faith,
     Luck
 }
+
+//used for AI to determine how they pursuit thier target
+public enum PursuitMode
+{
+    None,
+    Walk,
+    Run,
+    Sprint
+}
+
 //used to give characters proper dialogue sets
 public enum CharacterDialogueID
 {
