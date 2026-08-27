@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TraverserProject;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.TextCore.Text;
 
 namespace TraverserProject
@@ -44,6 +45,11 @@ namespace TraverserProject
 
         [Header("Attack Rotation Speed")]
         public float attackRotationSpeed = 25;
+
+        [Header("Retreat")]
+        [SerializeField] float minimumRetreatDistance = 5;
+        [SerializeField] float maximumRetreatDistance = 15;
+        private float retreatPositionRadius = 5;
 
         [Header("Stance Settings")]
         public float maxStance = 150;
@@ -476,6 +482,58 @@ namespace TraverserProject
             //2 play animation
 
 
+        }
+
+        public Vector3 GetRetreatPosition()
+        {
+            //if no target, do not retreat
+            if (aiCharacter.aiCharacterCombatManager.currentTarget == null)
+                return aiCharacter.transform.position;
+
+            //TODO optionally disable retreat if has high ground
+
+            Vector3 retreatPosition = Vector3.zero;
+            Vector3 retreatDirection = aiCharacter.aiCharacterCombatManager.currentTarget.transform.position - aiCharacter.transform.position;
+            retreatDirection = -retreatDirection;
+            retreatDirection.y = 0;
+            retreatDirection.Normalize();
+            retreatDirection = retreatDirection * Random.Range(minimumRetreatDistance, maximumRetreatDistance);
+
+            Vector3 randomPosition = aiCharacter.transform.position + retreatDirection;
+            NavMeshHit hit;
+
+            NavMeshPath retreatPath = new NavMeshPath();
+
+            //Checks at the position we choose for the nearest walkable point, within the "Retreat radius" of the "random position" given
+            if (NavMesh.SamplePosition(randomPosition, out hit, retreatPositionRadius, NavMesh.AllAreas))
+            {
+                retreatPosition = hit.position;
+
+                if (NavMesh.CalculatePath(aiCharacter.transform.position, hit.position, NavMesh.AllAreas, retreatPath))
+                {
+                    //if we can walk full path, proceed to its end
+                    if (retreatPath.status == NavMeshPathStatus.PathComplete)
+                    {
+                        retreatPosition = hit.position;
+                    }
+                    //if we cannot, proceed to final point
+                    else if (retreatPath.status == NavMeshPathStatus.PathPartial && retreatPath.corners.Length > 0)
+                    {
+                        retreatPosition = retreatPath.corners[retreatPath.corners.Length - 1];
+                    }
+                    // otherwise do not go anywhere
+                    else
+                    {
+                        retreatPosition = aiCharacter.transform.position;
+                    }
+                }
+            }
+            else
+            {
+                retreatPosition = aiCharacter.transform.position;
+            }
+
+            return retreatPosition;
         }
 
         //Ranged Combat

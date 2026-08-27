@@ -178,6 +178,9 @@ namespace TraverserProject
                 if (potentialAttack.maximumAttackAngle < aiCharacter.aiCharacterCombatManager.viewableAngle)
                     continue;
 
+                if (aiCharacter.aiCharacterCombatManager.currentTarget != null && potentialAttack.requireClearLineOfSight && !aiCharacter.aiCharacterCombatManager.HasLineOfSight())
+                    continue;
+
                 potentialAttacks.Add(potentialAttack);
             }
 

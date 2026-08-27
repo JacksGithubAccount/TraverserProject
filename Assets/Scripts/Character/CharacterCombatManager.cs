@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
+using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.GridBrushBase;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 namespace TraverserProject
 {
@@ -49,6 +52,32 @@ namespace TraverserProject
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();
+        }
+
+        public bool HasLineOfSight()
+        {
+            bool hasLineOfSight = true;
+
+            if (character.characterCombatManager.currentTarget == null)
+                return hasLineOfSight;
+					
+					//use linecast starting from lockon position of aiCharacter, direct it to lockon position of its target
+					//if linecast is blocked by environment, line of sight is blocked
+                    if (Physics.Linecast(character.characterCombatManager.lockOnTransform.position,
+                        character.characterCombatManager.currentTarget.characterCombatManager.lockOnTransform.position,
+                        WorldUtilityManager.Singleton.GetEnviroLayers()))
+                hasLineOfSight = false;
+
+            // we have line of sight
+            return hasLineOfSight;
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (character.characterCombatManager.currentTarget == null)
+                return;
+
+            Gizmos.DrawLine(character.characterCombatManager.lockOnTransform.position, character.characterCombatManager.currentTarget.characterCombatManager.lockOnTransform.position);
         }
 
         //death animation

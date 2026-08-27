@@ -70,7 +70,7 @@ namespace TraverserProject
             {
                 if (aiCharacter.aiCharacterCombatManager.currentTarget == null)
                     canFire = true;
-                if (viewableAngle < 5 && viewableAngle > -5 && distanceFromTarget > 1)
+                if (viewableAngle < 5 && viewableAngle > -5 && distanceFromTarget > 1 && HasLineOfSight())
                     canFire = true;
 
                 yield return null;

@@ -23,9 +23,14 @@ namespace TraverserProject
         public float maximumAttackAngle = 35;
         public float minimumAttackDistance = 0;
         public float maximumAttackDistance = 2;
+        public bool requireClearLineOfSight = false;
 
         public void AttemptToPerformAction(AICharacterManager aiCharacter)
         {
+            //if AI act like player(like invader) use this
+            //aiCharacter.characterAnimatorManager.PlayTargetActionAnimation(attackType, attackAnimation, true);
+
+            //if AI use simple attacks that are purely animation based (not equipment/item based) use this
             aiCharacter.characterAnimatorManager.PlayTargetActionAnimation(attackAnimation, true);
             aiCharacter.aiCharacterNetworkManager.isParryable.Value = isParryable;
         }
