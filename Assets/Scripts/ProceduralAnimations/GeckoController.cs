@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GeckoController : MonoBehaviour
@@ -16,6 +17,15 @@ public class GeckoController : MonoBehaviour
     [SerializeField] float rightEyeMaxYRotation;
     [SerializeField] float rightEyeMinYRotation;
 
+    [SerializeField] LegStepper frontLeftLegStepper;
+    [SerializeField] LegStepper frontRightLegStepper;
+    [SerializeField] LegStepper backLeftLegStepper;
+    [SerializeField] LegStepper backRightLegStepper;
+
+    void Awake()
+    {
+        StartCoroutine(LegUpdateCoroutine());
+    }
     void LateUpdate()
     {
         HeadTrackingUpdate();
@@ -114,5 +124,34 @@ public class GeckoController : MonoBehaviour
             rightEyeClampedYRotation,
             rightEyeBone.localEulerAngles.z
         );
+    }
+
+    // Only allow diagonal leg pairs to step together
+    IEnumerator LegUpdateCoroutine()
+    {
+        // Run continuously
+        while (true)
+        {
+            // Try moving one diagonal pair of legs
+            do
+            {
+                frontLeftLegStepper.TryMove();
+                backRightLegStepper.TryMove();
+                // Wait a frame
+                yield return null;
+
+                // Stay in this loop while either leg is moving.
+                // If only one leg in the pair is moving, the calls to TryMove() will let
+                // the other leg move if it wants to.
+            } while (backRightLegStepper.Moving || frontLeftLegStepper.Moving);
+
+            // Do the same thing for the other diagonal pair
+            do
+            {
+                frontRightLegStepper.TryMove();
+                backLeftLegStepper.TryMove();
+                yield return null;
+            } while (backLeftLegStepper.Moving || frontRightLegStepper.Moving);
+        }
     }
 }
