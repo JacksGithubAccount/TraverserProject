@@ -45,6 +45,7 @@ public class GeckoController : MonoBehaviour
     }
     void LateUpdate()
     {
+        RootMotionUpdate();
         HeadTrackingUpdate();
         EyeTrackingUpdate();
     }
@@ -210,5 +211,35 @@ public class GeckoController : MonoBehaviour
         // Rotate the transform around the Y axis in world space,
         // making sure to multiply by delta time to get a consistent angular velocity
         transform.Rotate(0, Time.deltaTime * currentAngularVelocity, 0, Space.World);
+
+        //// To be placed in the RootMotionUpdate method below the rotation code ////
+
+        Vector3 targetVelocity = Vector3.zero;
+
+        // Don't move if we're facing away from the target, just rotate in place
+        if (Mathf.Abs(angToTarget) < 90)
+        {
+            float distToTarget = Vector3.Distance(transform.position, target.position);
+
+            // If we're too far away, approach the target
+            if (distToTarget > maxDistToTarget)
+            {
+                targetVelocity = moveSpeed * towardTargetProjected.normalized;
+            }
+            // If we're too close, reverse the direction and move away
+            else if (distToTarget < minDistToTarget)
+            {
+                targetVelocity = moveSpeed * -towardTargetProjected.normalized;
+            }
+        }
+
+        currentVelocity = Vector3.Lerp(
+          currentVelocity,
+          targetVelocity,
+          1 - Mathf.Exp(-moveAcceleration * Time.deltaTime)
+        );
+
+        // Apply the velocity
+        transform.position += currentVelocity * Time.deltaTime;
     }
 }

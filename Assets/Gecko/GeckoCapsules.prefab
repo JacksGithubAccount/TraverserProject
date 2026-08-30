@@ -6583,7 +6583,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5720832144177519229}
-  - component: {fileID: 8943789324482420005}
   m_Layer: 0
   m_Name: GeckoCapsules
   m_TagString: Untagged
@@ -6609,33 +6608,6 @@ Transform:
   - {fileID: 8380018699506039478}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8943789324482420005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5720832144177219101}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5b9cd138a10b1a4e996eb1ed83c6123, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 7971108797108018398}
-  headBone: {fileID: 5720832144177519227}
-  headMaxTurnAngle: 90
-  headTrackingSpeed: 1
-  leftEyeBone: {fileID: 5720832144177519187}
-  rightEyeBone: {fileID: 5720832144177519189}
-  eyeTrackingSpeed: 1
-  leftEyeMaxYRotation: 0
-  leftEyeMinYRotation: 0
-  rightEyeMaxYRotation: 0
-  rightEyeMinYRotation: 0
-  frontLeftLegStepper: {fileID: 7059342879788894494}
-  frontRightLegStepper: {fileID: 5711143962234080005}
-  backLeftLegStepper: {fileID: 8498822972461569352}
-  backRightLegStepper: {fileID: 7451786406615884959}
 --- !u!1 &5720832144177219105
 GameObject:
   m_ObjectHideFlags: 0
@@ -7289,6 +7261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5720832144177519179}
+  - component: {fileID: 3770754395068172845}
   m_Layer: 0
   m_Name: Hips
   m_TagString: Untagged
@@ -7321,6 +7294,40 @@ Transform:
   - {fileID: 3144173670060644446}
   m_Father: {fileID: 5720832144177519229}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3770754395068172845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5720832144177219179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5b9cd138a10b1a4e996eb1ed83c6123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 7971108797108018398}
+  headBone: {fileID: 5720832144177519227}
+  headMaxTurnAngle: 90
+  headTrackingSpeed: 1
+  leftEyeBone: {fileID: 5720832144177519187}
+  rightEyeBone: {fileID: 5720832144177519189}
+  eyeTrackingSpeed: 1
+  leftEyeMaxYRotation: 0
+  leftEyeMinYRotation: 0
+  rightEyeMaxYRotation: 0
+  rightEyeMinYRotation: 0
+  frontLeftLegStepper: {fileID: 7059342879788894494}
+  frontRightLegStepper: {fileID: 5711143962234080005}
+  backLeftLegStepper: {fileID: 8498822972461569352}
+  backRightLegStepper: {fileID: 7451786406615884959}
+  turnSpeed: 0.5
+  moveSpeed: 0.5
+  turnAcceleration: 0.5
+  moveAcceleration: 0.5
+  minDistToTarget: 0.5
+  maxDistToTarget: 1
+  maxAngToTarget: 90
 --- !u!1 &5720832144177219181
 GameObject:
   m_ObjectHideFlags: 0
