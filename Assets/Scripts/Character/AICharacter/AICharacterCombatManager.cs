@@ -396,10 +396,22 @@ namespace TraverserProject
 
         public void RotateTowardsAgent(AICharacterManager aiCharacter)
         {
-            if (aiCharacter.aiCharacterNetworkManager.isMoving.Value)
-            {
-                aiCharacter.transform.rotation = aiCharacter.navMeshAgent.transform.rotation;
-            }
+            //if (aiCharacter.aiCharacterNetworkManager.isMoving.Value)
+            //aiCharacter.transform.rotation = aiCharacter.navMeshAgent.transform.rotation;
+
+            if (!aiCharacter.aiCharacterNetworkManager.isMoving.Value)
+                return;
+
+            Vector3 desiredDestinationDirection = aiCharacter.navMeshAgent.steeringTarget - aiCharacter.transform.position;
+            desiredDestinationDirection.y = 0;
+            desiredDestinationDirection.Normalize();
+
+            if (desiredDestinationDirection.sqrMagnitude < 0.001f)
+                return;
+
+            Quaternion targetRotation = Quaternion.LookRotation(desiredDestinationDirection);
+            aiCharacter.transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, aiCharacter.aiCharacterLocomotionManager.rotationSpeed * Time.deltaTime);
+
         }
 
         public void RotateTowardsTargetWhilstAttacking(AICharacterManager aiCharacter)

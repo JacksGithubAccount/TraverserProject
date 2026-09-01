@@ -7,7 +7,8 @@ namespace TraverserProject
     {
         AICharacterManager aiCharacter;
 
-
+        [Header("Rotation")]
+        public float rotationSpeed = 360;
 
         protected override void Awake()
         {

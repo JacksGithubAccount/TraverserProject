@@ -36,7 +36,7 @@ namespace TraverserProject
 
             aiCharacter.aiCharacterCombatManager.RotateTowardsTargetWhilstAttacking(aiCharacter);
 
-            aiCharacter.characterAnimatorManager.UpdateAnimatorMovementParameters(0, 0, false);
+            //aiCharacter.characterAnimatorManager.UpdateAnimatorMovementParameters(0, 0, false);
 
             PerformCombo(aiCharacter);
 

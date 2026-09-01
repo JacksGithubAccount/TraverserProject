@@ -40,13 +40,21 @@ public enum CharacterAttribute
     Luck
 }
 
-//used for AI to determine how they pursuit thier target
+//used for AI to determine how they pursuit their target
 public enum PursuitMode
 {
     None,
     Walk,
     Run,
     Sprint
+}
+
+//used for AI to determine how they strafe when in combat
+public enum StrafeMode
+{
+    None,
+    Standard,   //character will walk left and right of target
+    Avoidance	//character will back away from target
 }
 
 //used to give characters proper dialogue sets

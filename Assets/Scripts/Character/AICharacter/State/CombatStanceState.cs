@@ -21,8 +21,9 @@ namespace TraverserProject
         protected bool hasRolledForComboChance = false;
 
         [Header("Circling")]
-        [SerializeField] bool willCircleTarget = false;
-        private bool hasChosenCirclePath = false;
+        [SerializeField] StrafeMode strafeMode = StrafeMode.None;
+        [SerializeField] private float minimumDistanceNeededToAvoidStrafeBackwards = 5;
+        private bool hasChosenStrafeDirection = false;
         private float strafeMoveAmount;
 
         [Header("Movement Values")]
@@ -94,7 +95,7 @@ namespace TraverserProject
             if (aiCharacter.aiCharacterCombatManager.currentTarget == null)
                 return SwitchState(aiCharacter, aiCharacter.idle);
 
-            if (willCircleTarget)
+            if (strafeMode != StrafeMode.None)
                 SetCirclePath(aiCharacter);
 
             if (canBlock && !hasRolledForBlockChance)
@@ -225,71 +226,66 @@ namespace TraverserProject
 
         protected virtual void SetCirclePath(AICharacterManager aiCharacter)
         {
+            /*
             if (Physics.CheckSphere(aiCharacter.aiCharacterCombatManager.lockOnTransform.position, aiCharacter.characterController.radius + 0.25f, WorldUtilityManager.Singleton.GetEnviroLayers()))
-
             {
                 //stop strafing as we hit something
                 //aiCharacter.characterAnimatorManager.SetAnimatorMovementParameters(0, Mathf.Abs(strafeMoveAmount));
                 horizontalMovement = 0;
                 verticalMovement = Mathf.Abs(strafeMoveAmount);
                 return;
-            }
-            //strafe
-            //aiCharacter.characterAnimatorManager.SetAnimatorMovementParameters(strafeMoveAmount, 0);
-            horizontalMovement = strafeMoveAmount;
-            verticalMovement = 0;
+            }*/
 
-            if (hasChosenCirclePath)
+
+            switch (strafeMode)
+            {
+                case StrafeMode.None:
+                    break;
+                case StrafeMode.Standard:
+                    horizontalMovement = strafeMoveAmount;
+                    verticalMovement = 0;
+                    break;
+                case StrafeMode.Avoidance:
+                    horizontalMovement = 0;
+                    verticalMovement = strafeMoveAmount;
+                    break;
+                default:
+                    break;
+            }
+
+            if (hasChosenStrafeDirection)
                 return;
 
-            hasChosenCirclePath = true;
+            hasChosenStrafeDirection = true;
 
             //strafe left or right
             int leftOrRightIndex = Random.Range(0, 100);
 
-            if (leftOrRightIndex >= 50)
+            switch (pursuitMode)
             {
-                //left
-                switch (pursuitMode)
-                {
-                    case PursuitMode.None:
-                        strafeMoveAmount = 0;
-                        break;
-                    case PursuitMode.Walk:
-                        strafeMoveAmount = -0.5f;
-                        break;
-                    case PursuitMode.Run:
-                        strafeMoveAmount = -1;
-                        break;
-                    case PursuitMode.Sprint:
-                        strafeMoveAmount = -2;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else
-            {
-                //right
-                switch (pursuitMode)
-                {
-                    case PursuitMode.None:
-                        strafeMoveAmount = 0;
-                        break;
-                    case PursuitMode.Walk:
-                        strafeMoveAmount = 0.5f;
-                        break;
-                    case PursuitMode.Run:
-                        strafeMoveAmount = 1;
-                        break;
-                    case PursuitMode.Sprint:
-                        strafeMoveAmount = 2;
-                        break;
-                    default:
-                        break;
-                }
+                case PursuitMode.None:
+                    strafeMoveAmount = 0;
+                    break;
+                case PursuitMode.Walk:
+                    strafeMoveAmount = 0.5f;
+                    break;
+                case PursuitMode.Run:
+                    strafeMoveAmount = 1;
+                    break;
+                case PursuitMode.Sprint:
+                    strafeMoveAmount = 2;
+                    break;
+                default:
+                    break;
             }
 
+            //set value to negative if left movement or backwards
+            if (leftOrRightIndex >= 50 || strafeMode == StrafeMode.Avoidance)
+                strafeMoveAmount *= -1;
+
+            //if target is far away enough and we are set to avoid, instead do not move
+            if (strafeMode == StrafeMode.Avoidance && aiCharacter.aiCharacterCombatManager.distanceFromTarget > minimumDistanceNeededToAvoidStrafeBackwards)
+                strafeMoveAmount = 0;
         }
 
         protected override void ResetStateFlags(AICharacterManager aiCharacter)
@@ -300,7 +296,7 @@ namespace TraverserProject
             hasRolledForComboChance = false;
             hasRolledForBlockChance = false;
             willBlockDuringThisCombatRotation = false;
-            hasChosenCirclePath = false;
+            hasChosenStrafeDirection = false;
             strafeMoveAmount = 0;
             hasAttack = false;
             hasEvaded = false;
