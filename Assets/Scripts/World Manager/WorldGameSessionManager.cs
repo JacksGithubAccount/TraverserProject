@@ -144,7 +144,7 @@ namespace TraverserProject
             NetworkManager.Singleton.StartHost();
 
             //to go back to testing with a host and client on one pc, comment out this line
-            //currentLobby = await SteamMatchmaking.CreateLobbyAsync(4);
+            currentLobby = await SteamMatchmaking.CreateLobbyAsync(4);
         }
 
         public void StartGameAsClient(SteamId id)
