@@ -18,6 +18,13 @@ public class ProceduralLadder : MonoBehaviour
 
     private BoxCollider boxCollider;
 
+    private bool isAwoken = false;
+
+    private void Awake()
+    {
+        isAwoken = true;
+    }
+
     private void OnValidate()
     {
         // OnValidate runs whenever a value changes in the inspector
@@ -29,7 +36,8 @@ public class ProceduralLadder : MonoBehaviour
             return;
         }
 #endif
-        GenerateLadder();
+        if (isAwoken)
+            GenerateLadder();
     }
 
     private void ExecuteGeneration()
@@ -39,7 +47,8 @@ public class ProceduralLadder : MonoBehaviour
         UnityEditor.EditorApplication.delayCall -= ExecuteGeneration;
         if (this == null) return;
 #endif
-        GenerateLadder();
+        if (isAwoken)
+            GenerateLadder();
     }
 
     public void GenerateLadder()
