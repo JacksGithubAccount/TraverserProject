@@ -69,28 +69,14 @@ namespace TraverserProject
             //use copy of scriptable objects so the original is not modified
             if (IsOwner)
             {
-                idle = Instantiate(idle);
-                pursueTarget = Instantiate(pursueTarget);
-                combatStance = Instantiate(combatStance);
-                attack = Instantiate(attack);
-                investigateSound = Instantiate(investigateSound);
-                currentState = idle;
+                idle = GetInstantiatedState(idle) as IdleState;
+                pursueTarget = GetInstantiatedState(pursueTarget) as PursueTargetState;
+                combatStance = GetInstantiatedState(combatStance) as CombatStanceState;
+                attack = GetInstantiatedState(attack) as AttackState;
+                investigateSound = GetInstantiatedState(investigateSound) as InvestigateSoundState;
 
-                float maximumEngagementDistance = 0;
-
-                for (int i = 0; i < combatStance.aiCharacterAttacks.Count; i++)
-                {
-                    if (combatStance.aiCharacterAttacks[i] == null)
-                        continue;
-
-                    if (combatStance.aiCharacterAttacks[i].maximumAttackDistance > maximumEngagementDistance)
-                        maximumEngagementDistance = combatStance.aiCharacterAttacks[i].maximumAttackDistance;
-                }
-
-                //get the max possible range from the longest range attack
-                aiCharacterCombatManager.maximumEngagementDistance = maximumEngagementDistance;
-                //get the minimum distance to end pursuit by getting 75% of that max range
-                aiCharacterCombatManager.minimumDistanceToEndPursuit = (maximumEngagementDistance * 0.75f);
+                SetStates(idle, pursueTarget, combatStance, attack, investigateSound);
+                aiCharacterCombatManager.CalculateEngagementDistances(combatStance);
             }
             aiCharacterNetworkManager.currentHealth.OnValueChanged += aiCharacterNetworkManager.CheckHealth;
             aiCharacterNetworkManager.isBlocking.OnValueChanged += aiCharacterNetworkManager.OnIsBlockingChanged;
@@ -170,6 +156,32 @@ namespace TraverserProject
 
             if (positionDifference.magnitude > 0.2f)
                 navMeshAgent.transform.localPosition = Vector3.zero;
+        }
+
+        public AIState GetInstantiatedState(AIState state)
+        {
+            AIState instantiatedState = null;
+
+            if (state != null)
+                instantiatedState = Instantiate(state);
+
+            return instantiatedState;
+        }
+
+        public void SetStates(IdleState idleState, PursueTargetState pursueTargetState, CombatStanceState combatStanceState, AttackState attackState, InvestigateSoundState investigateSoundState)
+        {
+            if (idleState != null)
+                idle = idleState;
+            if (pursueTargetState != null)
+                pursueTarget = pursueTargetState;
+            if (combatStanceState != null)
+                combatStance = combatStanceState;
+            if (attackState != null)
+                attack = attackState;
+            if (investigateSoundState != null)
+                investigateSound = investigateSoundState;
+            if (idleState != null)
+                currentState = idle;
         }
 
         private void ProcessStateMachine()

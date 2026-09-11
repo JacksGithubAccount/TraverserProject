@@ -64,6 +64,16 @@ namespace TraverserProject
         [Header("Activation Range")]
         public List<PlayerManager> playersWithinActivationRange = new List<PlayerManager>();
 
+        [Header("State Switch Close Range")]
+        public AttackState attackStateSwitchCloseRange;
+        public CombatStanceState combatStanceStateSwitchCloseRange;
+        public PursueTargetState pursueTargetStateSwitchCloseRange;
+
+        [Header("State Switch Far Range")]
+        public AttackState attackStateSwitchFarRange;
+        public CombatStanceState combatStanceStateSwitchFarRange;
+        public PursueTargetState pursueTargetStateSwitchFarRange;
+
 
         //is on world utility manager, but can be placed here if want for different values for different ai
         //public float hiddenTargetDetectionRadiusPenalty = 0.5f;
@@ -76,10 +86,63 @@ namespace TraverserProject
             lockOnTransform = GetComponentInChildren<LockOnTransform>().transform;
         }
 
+        protected override void Start()
+        {
+            base.Start();
+
+            attackStateSwitchCloseRange = aiCharacter.GetInstantiatedState(attackStateSwitchCloseRange) as AttackState;
+            attackStateSwitchFarRange = aiCharacter.GetInstantiatedState(attackStateSwitchFarRange) as AttackState;
+
+            combatStanceStateSwitchCloseRange = aiCharacter.GetInstantiatedState(attackStateSwitchCloseRange) as CombatStanceState;
+            combatStanceStateSwitchFarRange = aiCharacter.GetInstantiatedState(attackStateSwitchFarRange) as CombatStanceState;
+
+            pursueTargetStateSwitchCloseRange = aiCharacter.GetInstantiatedState(pursueTargetStateSwitchCloseRange) as PursueTargetState;
+            pursueTargetStateSwitchFarRange = aiCharacter.GetInstantiatedState(pursueTargetStateSwitchFarRange) as PursueTargetState;
+
+        }
+
         private void Update()
         {
             HandleStanceBreak();
 
+        }
+
+        public void SwitchStateSet(CombatStateSwitchMode stateSwitchMode)
+        {
+            aiCharacter.currentState.ManuallySwitchState(aiCharacter, aiCharacter.idle);
+            switch (stateSwitchMode)
+            {
+                case CombatStateSwitchMode.None:
+                    break;
+                case CombatStateSwitchMode.AtMaximumDistance:
+                    aiCharacter.SetStates(null, pursueTargetStateSwitchFarRange, combatStanceStateSwitchFarRange, attackStateSwitchFarRange, null);
+
+                    break;
+                case CombatStateSwitchMode.AtMinimumDistance:
+                    aiCharacter.SetStates(null, pursueTargetStateSwitchCloseRange, combatStanceStateSwitchCloseRange, attackStateSwitchCloseRange, null);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void CalculateEngagementDistances(CombatStanceState combatStance)
+        {
+            float maxEngagementDistance = 0;
+
+            for (int i = 0; i < combatStance.aiCharacterAttacks.Count; i++)
+            {
+                if (combatStance.aiCharacterAttacks[i] == null)
+                    continue;
+
+                if (combatStance.aiCharacterAttacks[i].maximumAttackDistance > maxEngagementDistance)
+                    maxEngagementDistance = combatStance.aiCharacterAttacks[i].maximumAttackDistance;
+            }
+
+            //get the max possible range from the longest range attack
+            maximumEngagementDistance = maxEngagementDistance;
+            //get the minimum distance to end pursuit by getting 75% of that max range
+            minimumDistanceToEndPursuit = (maxEngagementDistance * 0.75f);
         }
 
         public void AddPlayerToPlayersWithinRange(PlayerManager player)

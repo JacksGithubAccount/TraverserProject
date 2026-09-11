@@ -49,6 +49,14 @@ public enum PursuitMode
     Sprint
 }
 
+//used for AI to determine when to switch combat state
+public enum CombatStateSwitchMode
+{
+    None,
+    AtMaximumDistance,  //switch to an alternative state set when the target further than x distance
+    AtMinimumDistance	//switch to an alternative state set when the target closer than x distance
+}
+
 //used for AI to determine how they strafe when in combat
 public enum StrafeMode
 {

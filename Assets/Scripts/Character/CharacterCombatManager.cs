@@ -54,18 +54,23 @@ namespace TraverserProject
             character = GetComponent<CharacterManager>();
         }
 
+        protected virtual void Start()
+        {
+
+        }
+
         public bool HasLineOfSight()
         {
             bool hasLineOfSight = true;
 
             if (character.characterCombatManager.currentTarget == null)
                 return hasLineOfSight;
-					
-					//use linecast starting from lockon position of aiCharacter, direct it to lockon position of its target
-					//if linecast is blocked by environment, line of sight is blocked
-                    if (Physics.Linecast(character.characterCombatManager.lockOnTransform.position,
-                        character.characterCombatManager.currentTarget.characterCombatManager.lockOnTransform.position,
-                        WorldUtilityManager.Singleton.GetEnviroLayers()))
+
+            //use linecast starting from lockon position of aiCharacter, direct it to lockon position of its target
+            //if linecast is blocked by environment, line of sight is blocked
+            if (Physics.Linecast(character.characterCombatManager.lockOnTransform.position,
+                character.characterCombatManager.currentTarget.characterCombatManager.lockOnTransform.position,
+                WorldUtilityManager.Singleton.GetEnviroLayers()))
                 hasLineOfSight = false;
 
             // we have line of sight

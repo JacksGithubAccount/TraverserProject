@@ -43,6 +43,12 @@ namespace TraverserProject
         private bool hasRolledForEvasionChance = false;
         private bool willEvadeDuringThisCombatRotation;
 
+        [Header("Switch State Set")]
+        private bool isSwitchingStateSet = false;
+        [SerializeField] CombatStateSwitchMode combatStateSwitchMode;
+        [SerializeField] float maximumDistanceUntilStatesAreSwitched = 8;
+        [SerializeField] float minimumDistanceUntilStatesAreSwitched = 3;
+
         [Header("Pursuit Mode")]
         [SerializeField] PursuitMode pursuitMode;
 
@@ -50,6 +56,14 @@ namespace TraverserProject
         {
             if (aiCharacter.isPerformingAction)
                 return this;
+
+            CheckForStateSwitch(aiCharacter);
+
+            if (isSwitchingStateSet)
+            {
+                isSwitchingStateSet = false;
+                aiCharacter.aiCharacterCombatManager.SwitchStateSet(combatStateSwitchMode);
+            }
 
             if (!aiCharacter.navMeshAgent.enabled)
                 aiCharacter.navMeshAgent.enabled = true;
@@ -288,6 +302,26 @@ namespace TraverserProject
                 strafeMoveAmount = 0;
         }
 
+        protected virtual void CheckForStateSwitch(AICharacterManager aiCharacter)
+        {
+            switch (combatStateSwitchMode)
+            {
+                case CombatStateSwitchMode.None:
+                    break;
+                case CombatStateSwitchMode.AtMaximumDistance:
+                    if (aiCharacter.aiCharacterCombatManager.distanceFromTarget >= maximumDistanceUntilStatesAreSwitched)
+                        isSwitchingStateSet = true;
+                    break;
+                case CombatStateSwitchMode.AtMinimumDistance:
+                    if (aiCharacter.aiCharacterCombatManager.distanceFromTarget <= minimumDistanceUntilStatesAreSwitched)
+                        isSwitchingStateSet = true;
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
         protected override void ResetStateFlags(AICharacterManager aiCharacter)
         {
             base.ResetStateFlags(aiCharacter);
@@ -296,6 +330,7 @@ namespace TraverserProject
             hasRolledForComboChance = false;
             hasRolledForBlockChance = false;
             willBlockDuringThisCombatRotation = false;
+            isSwitchingStateSet = false;
             hasChosenStrafeDirection = false;
             strafeMoveAmount = 0;
             hasAttack = false;
