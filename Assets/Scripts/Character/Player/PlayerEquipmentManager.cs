@@ -645,6 +645,8 @@ namespace TraverserProject
                 model.SetActive(false);
             }
 
+
+
             //male
             foreach (var model in maleBodies)
             {
@@ -658,6 +660,10 @@ namespace TraverserProject
             {
                 model.SetActive(false);
             }
+            foreach (var model in maleHips)
+            {
+                model.SetActive(false);
+            }            
 
             //female
             foreach (var model in femaleBodies)
@@ -669,6 +675,10 @@ namespace TraverserProject
                 model.SetActive(false);
             }
             foreach (var model in femaleLeftUpperArms)
+            {
+                model.SetActive(false);
+            }
+            foreach (var model in femaleHips)
             {
                 model.SetActive(false);
             }
@@ -772,15 +782,7 @@ namespace TraverserProject
         }
 
         private void UnloadLegEquipmentModels()
-        {
-            foreach (var model in maleHips)
-            {
-                model.SetActive(false);
-            }
-            foreach (var model in femaleHips)
-            {
-                model.SetActive(false);
-            }
+        {          
 
             foreach (var model in leftKnee)
             {
