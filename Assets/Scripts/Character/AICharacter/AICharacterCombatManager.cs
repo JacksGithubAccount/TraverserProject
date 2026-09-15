@@ -93,8 +93,8 @@ namespace TraverserProject
             attackStateSwitchCloseRange = aiCharacter.GetInstantiatedState(attackStateSwitchCloseRange) as AttackState;
             attackStateSwitchFarRange = aiCharacter.GetInstantiatedState(attackStateSwitchFarRange) as AttackState;
 
-            combatStanceStateSwitchCloseRange = aiCharacter.GetInstantiatedState(attackStateSwitchCloseRange) as CombatStanceState;
-            combatStanceStateSwitchFarRange = aiCharacter.GetInstantiatedState(attackStateSwitchFarRange) as CombatStanceState;
+            combatStanceStateSwitchCloseRange = aiCharacter.GetInstantiatedState(combatStanceStateSwitchCloseRange) as CombatStanceState;
+            combatStanceStateSwitchFarRange = aiCharacter.GetInstantiatedState(combatStanceStateSwitchFarRange) as CombatStanceState;
 
             pursueTargetStateSwitchCloseRange = aiCharacter.GetInstantiatedState(pursueTargetStateSwitchCloseRange) as PursueTargetState;
             pursueTargetStateSwitchFarRange = aiCharacter.GetInstantiatedState(pursueTargetStateSwitchFarRange) as PursueTargetState;
@@ -107,9 +107,9 @@ namespace TraverserProject
 
         }
 
-        public void SwitchStateSet(CombatStateSwitchMode stateSwitchMode)
+        public virtual void SwitchStateSet(CombatStateSwitchMode stateSwitchMode)
         {
-            aiCharacter.currentState.ManuallySwitchState(aiCharacter, aiCharacter.idle);
+            aiCharacter.currentState = aiCharacter.currentState.ManuallySwitchState(aiCharacter, aiCharacter.idle);
             switch (stateSwitchMode)
             {
                 case CombatStateSwitchMode.None:

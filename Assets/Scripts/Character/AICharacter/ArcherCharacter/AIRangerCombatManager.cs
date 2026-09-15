@@ -14,11 +14,39 @@ namespace TraverserProject
         [SerializeField] float maximumTimeToAim = 4;
         private Coroutine aimCoroutine;
 
+        [Header("Damage Colliders")]
+        [SerializeField] ManualDamageCollider swordDamageCollider;
+
+        [Header("Damage Modifiers")]
+        [SerializeField] float attack01DamageModifier = 1.0f;
+        [SerializeField] float attack02DamageModifier = 1.2f;
+
         protected override void Awake()
         {
             base.Awake();
 
             ranger = GetComponent<AIRangerManager>();
+        }
+
+        public override void SwitchStateSet(CombatStateSwitchMode stateSwitchMode)
+        {
+            base.SwitchStateSet(stateSwitchMode);
+
+            switch (stateSwitchMode)
+            {
+                case CombatStateSwitchMode.None:
+                    break;
+                case CombatStateSwitchMode.AtMaximumDistance:
+                    //Use range weapon
+                    ranger.aiRangerNetworkManager.isUsingMeleeWeapon.Value = false;
+                    break;
+                case CombatStateSwitchMode.AtMinimumDistance:
+                    //use melee weapon
+                    ranger.aiRangerNetworkManager.isUsingMeleeWeapon.Value = true;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public override void DrawProjectile()
@@ -140,6 +168,28 @@ namespace TraverserProject
             projectileGameObject.transform.parent = null;
 
         }
+
+        public void SetAttack01Damage()
+        {
+            swordDamageCollider.physicalDamage = baseDamage * attack01DamageModifier;
+        }
+
+        public void SetAttack02Damage()
+        {
+            swordDamageCollider.physicalDamage = baseDamage * attack02DamageModifier;
+        }
+
+        public void OpenSwordDamageCollider()
+        {
+            aiCharacter.characterSoundFXManager.PlayAttackGruntFX();
+            swordDamageCollider.EnableDamageCollider();
+        }
+
+        public void CloseSwordDamageCollider()
+        {
+            swordDamageCollider.DisableDamageCollider();
+        }
+
 
     }
 }
