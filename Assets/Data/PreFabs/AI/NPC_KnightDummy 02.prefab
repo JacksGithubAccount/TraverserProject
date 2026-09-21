@@ -239,7 +239,7 @@ MonoBehaviour:
   holyDamage: 0
   trueDamage: 0
   poiseDamage: 0
-  characterCausingDamage: {fileID: 0}
+  characterCausingDamage: {fileID: 8883432730431339116}
   physicalDamageType: 0
 --- !u!4 &8559675972268282694 stripped
 Transform:
@@ -1433,6 +1433,7 @@ MonoBehaviour:
   characterCollisionCheckSphereMultiplier: 1.5
   interactedLadderClimbPositions: []
   currentLadderClimbPosition: 0
+  rotationSpeed: 360
 --- !u!114 &2575105346710630890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1831,6 +1832,8 @@ MonoBehaviour:
   baseDamage: 25
   basePoiseDamage: 25
   actionRecoveryTimer: 0
+  maximumEngagementDistance: 1
+  minimumDistanceToEndPursuit: 1
   enablePivot: 0
   canPerformCombo: 0
   hasHitTargetDuringCombo: 0
@@ -1841,13 +1844,21 @@ MonoBehaviour:
   minimumFOV: -35
   maximumFOV: 35
   attackRotationSpeed: 25
+  minimumRetreatDistance: 5
+  maximumRetreatDistance: 15
   maxStance: 150
   stanceRegeneratedPerSecond: 15
   ignoreStanceBreak: 0
   stanceRegenerationTimer: 0
   defaultTimeUntilStanceRegenerationBegins: 15
   playersWithinActivationRange: []
-  swordDamageCollider: {fileID: 0}
+  attackStateSwitchCloseRange: {fileID: 0}
+  combatStanceStateSwitchCloseRange: {fileID: 0}
+  pursueTargetStateSwitchCloseRange: {fileID: 0}
+  attackStateSwitchFarRange: {fileID: 0}
+  combatStanceStateSwitchFarRange: {fileID: 0}
+  pursueTargetStateSwitchFarRange: {fileID: 0}
+  swordDamageCollider: {fileID: 644557088003180827}
   attack01DamageModifier: 1
   attack02DamageModifier: 1.2
 --- !u!114 &6724004992096148496
