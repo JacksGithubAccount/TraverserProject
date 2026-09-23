@@ -17,6 +17,13 @@ namespace TraverserProject
         public float armorLightningDamageAbsorptionModifier;
         public float armorHolyDamageAbsorptionModifier;
 
+        [Header("Damage")]
+        public float physicalDamageModifier;
+        public float magicDamageModifier;
+        public float fireDamageModifier;
+        public float lightningDamageModifier;
+        public float holyDamageModifier;
+
         [Header("Stamina Regeneration")]
         public float staminaRegenerationPercentageModifier;
 
