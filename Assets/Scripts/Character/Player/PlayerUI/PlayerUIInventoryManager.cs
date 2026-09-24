@@ -395,7 +395,7 @@ namespace TraverserProject
                 AccessoryEquipmentItem accessoryItem = (AccessoryEquipmentItem)item;
                 accessoryItemTypeText.text = accessoryItem.itemType.ToString();
                 accessoryItemWeightText.text = accessoryItem.itemWeight.ToString();
-                accessoryItemEffectText.text = accessoryItem.itemEffect;
+                accessoryItemEffectText.text = accessoryItem.itemEffectDescription;
             }
             else if(item as QuickSlotItem)
             {

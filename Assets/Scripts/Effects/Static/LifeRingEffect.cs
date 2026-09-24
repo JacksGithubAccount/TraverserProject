@@ -5,7 +5,7 @@ namespace TraverserProject
     [CreateAssetMenu(menuName = "Character Effects/Static Effects/Life Ring Effect")]
     public class LifeRingEffect : StaticCharacterEffect
     {
-        [SerializeField] int maxHealthGainedFromEffect;
+        public int maxHealthGainedFromEffect;
 
         public override void ProcessStaticEffect(CharacterManager character)
         {

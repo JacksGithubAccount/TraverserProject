@@ -6,29 +6,33 @@ namespace TraverserProject
     public class AccessoryEquipmentItem : EquipmentItem
     {
         [Header("Bar Modifier")]
-        public float maxHealthModifier;
-        public float maxFocusPointModifier;
-        public float maxStaminaModifier;
+        public int maxHealthModifier;
+        public int maxFocusPointModifier;
+        public int maxStaminaModifier;
 
         [Header("Negation")]
-        public float armorPhysicalDamageAbsorptionModifier;
-        public float armorMagicDamageAbsorptionModifier;
-        public float armorFireDamageAbsorptionModifier;
-        public float armorLightningDamageAbsorptionModifier;
-        public float armorHolyDamageAbsorptionModifier;
+        public int armorPhysicalDamageAbsorptionModifier;
+        public int armorMagicDamageAbsorptionModifier;
+        public int armorFireDamageAbsorptionModifier;
+        public int armorLightningDamageAbsorptionModifier;
+        public int armorHolyDamageAbsorptionModifier;
 
         [Header("Damage")]
-        public float physicalDamageModifier;
-        public float magicDamageModifier;
-        public float fireDamageModifier;
-        public float lightningDamageModifier;
-        public float holyDamageModifier;
+        public int physicalDamageModifier;
+        public int magicDamageModifier;
+        public int fireDamageModifier;
+        public int lightningDamageModifier;
+        public int holyDamageModifier;
 
         [Header("Stamina Regeneration")]
         public float staminaRegenerationPercentageModifier;
 
-        [Header("Item Effect")]
-        public string itemEffect;
+        [Header("Static Character Effect")]
+        public StaticCharacterEffect staticEffect; //not implemented
+
+
+        [Header("Item Effect Description")]
+        public string itemEffectDescription;
 
 
     }

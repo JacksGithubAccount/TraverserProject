@@ -64,6 +64,7 @@ namespace TraverserProject
 
         [Header("Accessory")]
         public LifeRingEffect lifeRingEffect;
+        public DefenseRingEffect defenseRingEffect;
 
         [Header("Instant Effects")]
         [SerializeField] List<InstantCharacterEffect> instantEffects;
@@ -107,12 +108,24 @@ namespace TraverserProject
 
         public StaticCharacterEffect RetrieveAccessoryStaticEffect(AccessoryEquipmentItem item)
         {
+            StaticCharacterEffect ringEffect = null;
             if (item.itemName == "Life Ring")
             {
-                return lifeRingEffect;
+                LifeRingEffect lre = Instantiate(lifeRingEffect);
+                lre.maxHealthGainedFromEffect = item.maxHealthModifier;
+                ringEffect = lre;
+            }else if (item.itemName == "Defense Ring")
+            {
+                DefenseRingEffect dre = Instantiate(defenseRingEffect);
+                dre.physicalDamageAbsorptionGainedFromEffect = item.armorPhysicalDamageAbsorptionModifier;
+                dre.magicDamageAbsorptionGainedFromEffect = item.armorMagicDamageAbsorptionModifier;
+                dre.fireDamageAbsorptionGainedFromEffect = item.armorFireDamageAbsorptionModifier;
+                dre.lightningDamageAbsorptionGainedFromEffect = item.armorLightningDamageAbsorptionModifier;
+                dre.holyDamageAbsorptionGainedFromEffect = item.armorHolyDamageAbsorptionModifier;
+                ringEffect = dre;
             }
 
-            return null;
+                return ringEffect;
         }
 
         public TimedCharacterEffect GetTimedEffectFromSerializedData(SerializableTimedEffect serializedTimeEffect)

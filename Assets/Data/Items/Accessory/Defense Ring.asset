@@ -16,6 +16,7 @@ MonoBehaviour:
   itemIcon: {fileID: 0}
   maxItemAmount: 1
   currentItemAmount: 1
+  maxStorageAmount: 1
   isInfinite: 0
   itemValue: 1
   itemDescription: 
@@ -25,10 +26,16 @@ MonoBehaviour:
   maxHealthModifier: 0
   maxFocusPointModifier: 0
   maxStaminaModifier: 0
-  armorPhysicalDamageAbsorptionModifier: 10
+  armorPhysicalDamageAbsorptionModifier: 0
   armorMagicDamageAbsorptionModifier: 0
   armorFireDamageAbsorptionModifier: 0
   armorLightningDamageAbsorptionModifier: 0
   armorHolyDamageAbsorptionModifier: 0
+  physicalDamageModifier: 0
+  magicDamageModifier: 0
+  fireDamageModifier: 0
+  lightningDamageModifier: 0
+  holyDamageModifier: 0
   staminaRegenerationPercentageModifier: 0
-  itemEffect: 
+  staticEffect: {fileID: 11400000, guid: 45e30797f8278d147821965c19f8c116, type: 2}
+  itemEffectDescription: 
