@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 
 namespace TraverserProject {
@@ -9,6 +10,10 @@ namespace TraverserProject {
         [Header("Icon")]
         public Sprite effectIcon;
 
+        [Header("Flags")]
+        public bool hasConditionals = false;
+        public bool hasEffectApplied = false;
+
         public virtual void ProcessStaticEffect(CharacterManager character)
         {
 
@@ -16,6 +21,13 @@ namespace TraverserProject {
         public virtual void RemoveStaticEffect(CharacterManager character)
         {
 
+        }
+        public virtual bool PassConditionals(CharacterManager character)
+        {
+            if (!hasConditionals)
+                return true;
+
+            return false;
         }
     } 
 }

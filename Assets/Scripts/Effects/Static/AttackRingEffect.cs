@@ -19,14 +19,17 @@ namespace TraverserProject
         {
             base.ProcessStaticEffect(character);
 
-            if (character.IsOwner)
+            if (character.IsOwner && PassConditionals(character))
             {
+                hasEffectApplied = true;
                 character.characterNetworkManager.physicalDamageModifier.Value += physicalDamageGainedFromEffect;
                 character.characterNetworkManager.magicDamageModifier.Value += magicDamageGainedFromEffect;
                 character.characterNetworkManager.fireDamageModifier.Value += fireDamageGainedFromEffect;
                 character.characterNetworkManager.lightningDamageModifier.Value += lightningDamageGainedFromEffect;
                 character.characterNetworkManager.holyDamageModifier.Value += holyDamageGainedFromEffect;
             }
+                
+            
         }
 
         public override void RemoveStaticEffect(CharacterManager character)
@@ -35,12 +38,32 @@ namespace TraverserProject
 
             if (character.IsOwner)
             {
-                character.characterNetworkManager.physicalDamageModifier.Value -= physicalDamageGainedFromEffect;
-                character.characterNetworkManager.magicDamageModifier.Value -= magicDamageGainedFromEffect;
-                character.characterNetworkManager.fireDamageModifier.Value -= fireDamageGainedFromEffect;
-                character.characterNetworkManager.lightningDamageModifier.Value -= lightningDamageGainedFromEffect;
-                character.characterNetworkManager.holyDamageModifier.Value -= holyDamageGainedFromEffect;
+                if (hasEffectApplied)
+                {
+                    character.characterNetworkManager.physicalDamageModifier.Value -= physicalDamageGainedFromEffect;
+                    character.characterNetworkManager.magicDamageModifier.Value -= magicDamageGainedFromEffect;
+                    character.characterNetworkManager.fireDamageModifier.Value -= fireDamageGainedFromEffect;
+                    character.characterNetworkManager.lightningDamageModifier.Value -= lightningDamageGainedFromEffect;
+                    character.characterNetworkManager.holyDamageModifier.Value -= holyDamageGainedFromEffect;
+                }
             }
+        }
+        public override bool PassConditionals(CharacterManager character)
+        {
+            if (hasConditionals)
+            {
+
+                float currentHealthPecentage = (character.characterNetworkManager.currentHealth.Value / character.characterNetworkManager.maxHealth.Value) * 100;
+                if (currentHealthPecentage < healthRemainingToTakeEffect)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            return true;
+            
         }
     }
 }
