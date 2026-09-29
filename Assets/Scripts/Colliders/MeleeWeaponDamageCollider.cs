@@ -117,6 +117,7 @@ namespace TraverserProject
                 charactersDamaged.Add(damageTarget);
 
                 TakeBlockedDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.Singleton.takeBlockedDamageEffect);
+                damageEffect.characterCausingDamage = characterCausingDamage;
                 damageEffect.physicalDamage = physicalDamage;
                 damageEffect.magicDamage = magicDamage;
                 damageEffect.fireDamage = fireDamage;
@@ -257,6 +258,7 @@ namespace TraverserProject
             charactersDamaged.Add(damageTarget);
 
             TakeDamageEffect damageEffect = Instantiate(WorldCharacterEffectsManager.Singleton.takeDamageEffect);
+            damageEffect.characterCausingDamage = characterCausingDamage;
             damageEffect.physicalDamage = physicalDamage;
             damageEffect.magicDamage = magicDamage;
             damageEffect.fireDamage = fireDamage;

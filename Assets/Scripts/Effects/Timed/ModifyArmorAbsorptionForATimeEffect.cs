@@ -26,11 +26,11 @@ namespace TraverserProject
                     return;
 
                 effectHasBeenInitialized = true;
-                character.characterNetworkManager.armorPhysicalDamageAbsorptionModifer.Value += armorPhysicalDamageAbsorptionModifer;
-                character.characterNetworkManager.armorMagicDamageAbsorptionModifer.Value += armorMagicDamageAbsorptionModifer;
-                character.characterNetworkManager.armorFireDamageAbsorptionModifer.Value += armorFireDamageAbsorptionModifer;
-                character.characterNetworkManager.armorLightningDamageAbsorptionModifer.Value += armorLightningDamageAbsorptionModifer;
-                character.characterNetworkManager.armorHolyDamageAbsorptionModifer.Value += armorHolyDamageAbsorptionModifer;
+                character.characterNetworkManager.armorPhysicalDamageAbsorptionModifier.Value += armorPhysicalDamageAbsorptionModifer;
+                character.characterNetworkManager.armorMagicDamageAbsorptionModifier.Value += armorMagicDamageAbsorptionModifer;
+                character.characterNetworkManager.armorFireDamageAbsorptionModifier.Value += armorFireDamageAbsorptionModifer;
+                character.characterNetworkManager.armorLightningDamageAbsorptionModifier.Value += armorLightningDamageAbsorptionModifer;
+                character.characterNetworkManager.armorHolyDamageAbsorptionModifier.Value += armorHolyDamageAbsorptionModifer;
             }
         }
 
@@ -41,11 +41,11 @@ namespace TraverserProject
             if (effectHasBeenInitialized)
             {
                 //remove ui icon if implemented
-                character.characterNetworkManager.armorPhysicalDamageAbsorptionModifer.Value -= armorPhysicalDamageAbsorptionModifer;
-                character.characterNetworkManager.armorMagicDamageAbsorptionModifer.Value -= armorMagicDamageAbsorptionModifer;
-                character.characterNetworkManager.armorFireDamageAbsorptionModifer.Value -= armorFireDamageAbsorptionModifer;
-                character.characterNetworkManager.armorLightningDamageAbsorptionModifer.Value -= armorLightningDamageAbsorptionModifer;
-                character.characterNetworkManager.armorHolyDamageAbsorptionModifer.Value -= armorHolyDamageAbsorptionModifer;
+                character.characterNetworkManager.armorPhysicalDamageAbsorptionModifier.Value -= armorPhysicalDamageAbsorptionModifer;
+                character.characterNetworkManager.armorMagicDamageAbsorptionModifier.Value -= armorMagicDamageAbsorptionModifer;
+                character.characterNetworkManager.armorFireDamageAbsorptionModifier.Value -= armorFireDamageAbsorptionModifer;
+                character.characterNetworkManager.armorLightningDamageAbsorptionModifier.Value -= armorLightningDamageAbsorptionModifer;
+                character.characterNetworkManager.armorHolyDamageAbsorptionModifier.Value -= armorHolyDamageAbsorptionModifer;
             }
         }
     }

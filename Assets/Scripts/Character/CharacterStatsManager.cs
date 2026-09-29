@@ -94,14 +94,11 @@ namespace TravserserProject
 
         public virtual void CalculateTotalArmorAbsorption()
         {
-            character.characterNetworkManager.armorPhysicalDamageAbsorptionModifer.Value += character.characterNetworkManager.armorPhysicalDamageAbsorptionModifer.Value * (character.characterNetworkManager.armorPhysicalDamageAbsorptionModifer.Value / 100);
-            character.characterNetworkManager.armorBluntDamageAbsorptionModifer.Value += character.characterNetworkManager.armorBluntDamageAbsorptionModifer.Value * (character.characterNetworkManager.armorBluntDamageAbsorptionModifer.Value / 100);
-            character.characterNetworkManager.armorPierceDamageAbsorptionModifer.Value += character.characterNetworkManager.armorPierceDamageAbsorptionModifer.Value * (character.characterNetworkManager.armorPierceDamageAbsorptionModifer.Value / 100);
-            character.characterNetworkManager.armorSlashDamageAbsorptionModifer.Value += character.characterNetworkManager.armorSlashDamageAbsorptionModifer.Value * (character.characterNetworkManager.armorSlashDamageAbsorptionModifer.Value / 100);
-            character.characterNetworkManager.armorMagicDamageAbsorptionModifer.Value += character.characterNetworkManager.armorMagicDamageAbsorptionModifer.Value * (character.characterNetworkManager.armorMagicDamageAbsorptionModifer.Value / 100);
-            character.characterNetworkManager.armorFireDamageAbsorptionModifer.Value += character.characterNetworkManager.armorFireDamageAbsorptionModifer.Value * (character.characterNetworkManager.armorFireDamageAbsorptionModifer.Value / 100);
-            character.characterNetworkManager.armorLightningDamageAbsorptionModifer.Value += character.characterNetworkManager.armorLightningDamageAbsorptionModifer.Value * (character.characterNetworkManager.armorLightningDamageAbsorptionModifer.Value / 100);
-            character.characterNetworkManager.armorHolyDamageAbsorptionModifer.Value += character.characterNetworkManager.armorHolyDamageAbsorptionModifer.Value * (character.characterNetworkManager.armorHolyDamageAbsorptionModifer.Value / 100);
+            character.characterNetworkManager.armorPhysicalDamageAbsorptionModifier.Value += character.characterNetworkManager.armorPhysicalDamageAbsorptionModifier.Value * (character.characterNetworkManager.armorPhysicalDamageAbsorptionModifier.Value / 100);
+            character.characterNetworkManager.armorMagicDamageAbsorptionModifier.Value += character.characterNetworkManager.armorMagicDamageAbsorptionModifier.Value * (character.characterNetworkManager.armorMagicDamageAbsorptionModifier.Value / 100);
+            character.characterNetworkManager.armorFireDamageAbsorptionModifier.Value += character.characterNetworkManager.armorFireDamageAbsorptionModifier.Value * (character.characterNetworkManager.armorFireDamageAbsorptionModifier.Value / 100);
+            character.characterNetworkManager.armorLightningDamageAbsorptionModifier.Value += character.characterNetworkManager.armorLightningDamageAbsorptionModifier.Value * (character.characterNetworkManager.armorLightningDamageAbsorptionModifier.Value / 100);
+            character.characterNetworkManager.armorHolyDamageAbsorptionModifier.Value += character.characterNetworkManager.armorHolyDamageAbsorptionModifier.Value * (character.characterNetworkManager.armorHolyDamageAbsorptionModifier.Value / 100);
         }
 
         public int CalculateCharacterLevelBasedOnAttributes(bool calculateProjectedLevel = false)

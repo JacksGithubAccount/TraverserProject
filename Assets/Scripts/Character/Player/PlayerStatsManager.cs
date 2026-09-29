@@ -278,14 +278,14 @@ namespace TravserserProject
             }
 
             //totals
-            player.playerNetworkManager.armorPhysicalDamageAbsorption.Value += player.playerNetworkManager.armorPhysicalDamageAbsorption.Value * (player.playerNetworkManager.armorPhysicalDamageAbsorptionModifer.Value / 100);
-            player.playerNetworkManager.armorBluntDamageAbsorption.Value += player.playerNetworkManager.armorBluntDamageAbsorption.Value * (player.playerNetworkManager.armorBluntDamageAbsorptionModifer.Value / 100);
-            player.playerNetworkManager.armorPierceDamageAbsorption.Value += player.playerNetworkManager.armorPierceDamageAbsorption.Value * (player.playerNetworkManager.armorPierceDamageAbsorptionModifer.Value / 100);
-            player.playerNetworkManager.armorSlashDamageAbsorption.Value += player.playerNetworkManager.armorSlashDamageAbsorption.Value * (player.playerNetworkManager.armorSlashDamageAbsorptionModifer.Value / 100);
-            player.playerNetworkManager.armorMagicDamageAbsorption.Value += player.playerNetworkManager.armorMagicDamageAbsorption.Value * (player.playerNetworkManager.armorMagicDamageAbsorptionModifer.Value / 100);
-            player.playerNetworkManager.armorFireDamageAbsorption.Value += player.playerNetworkManager.armorFireDamageAbsorption.Value * (player.playerNetworkManager.armorFireDamageAbsorptionModifer.Value / 100);
-            player.playerNetworkManager.armorLightningDamageAbsorption.Value += player.playerNetworkManager.armorLightningDamageAbsorption.Value * (player.playerNetworkManager.armorLightningDamageAbsorptionModifer.Value / 100);
-            player.playerNetworkManager.armorHolyDamageAbsorption.Value += player.playerNetworkManager.armorHolyDamageAbsorption.Value * (player.playerNetworkManager.armorHolyDamageAbsorptionModifer.Value / 100);
+            player.playerNetworkManager.armorPhysicalDamageAbsorption.Value += player.playerNetworkManager.armorPhysicalDamageAbsorption.Value * (player.playerNetworkManager.armorPhysicalDamageAbsorptionModifier.Value / 100);
+            player.playerNetworkManager.armorBluntDamageAbsorption.Value += player.playerNetworkManager.armorBluntDamageAbsorption.Value * (player.playerNetworkManager.armorPhysicalDamageAbsorptionModifier.Value / 100);
+            player.playerNetworkManager.armorPierceDamageAbsorption.Value += player.playerNetworkManager.armorPierceDamageAbsorption.Value * (player.playerNetworkManager.armorPhysicalDamageAbsorptionModifier.Value / 100);
+            player.playerNetworkManager.armorSlashDamageAbsorption.Value += player.playerNetworkManager.armorSlashDamageAbsorption.Value * (player.playerNetworkManager.armorPhysicalDamageAbsorptionModifier.Value / 100);
+            player.playerNetworkManager.armorMagicDamageAbsorption.Value += player.playerNetworkManager.armorMagicDamageAbsorption.Value * (player.playerNetworkManager.armorMagicDamageAbsorptionModifier.Value / 100);
+            player.playerNetworkManager.armorFireDamageAbsorption.Value += player.playerNetworkManager.armorFireDamageAbsorption.Value * (player.playerNetworkManager.armorFireDamageAbsorptionModifier.Value / 100);
+            player.playerNetworkManager.armorLightningDamageAbsorption.Value += player.playerNetworkManager.armorLightningDamageAbsorption.Value * (player.playerNetworkManager.armorLightningDamageAbsorptionModifier.Value / 100);
+            player.playerNetworkManager.armorHolyDamageAbsorption.Value += player.playerNetworkManager.armorHolyDamageAbsorption.Value * (player.playerNetworkManager.armorHolyDamageAbsorptionModifier.Value / 100);
 
         }
 

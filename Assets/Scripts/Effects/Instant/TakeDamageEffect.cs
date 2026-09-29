@@ -53,6 +53,12 @@ namespace TraverserProject
             if (characterCausingDamage != null)
             {
                 //Check for damage modifiers and modify base damage(damage buffs)
+                physicalDamage += CalculateAddedDamageFromPercentageModifiers(physicalDamage, characterCausingDamage.characterNetworkManager.physicalDamageModifier.Value);
+                magicDamage += CalculateAddedDamageFromPercentageModifiers(magicDamage, characterCausingDamage.characterNetworkManager.magicDamageModifier.Value);
+                fireDamage += CalculateAddedDamageFromPercentageModifiers(fireDamage, characterCausingDamage.characterNetworkManager.fireDamageModifier.Value);
+                lightningDamage += CalculateAddedDamageFromPercentageModifiers(lightningDamage, characterCausingDamage.characterNetworkManager.lightningDamageModifier.Value);
+                holyDamage += CalculateAddedDamageFromPercentageModifiers(holyDamage, characterCausingDamage.characterNetworkManager.holyDamageModifier.Value);
+
             }
 
             //Check for flat defenses here
@@ -61,48 +67,31 @@ namespace TraverserProject
             switch (physicalDamageType)
             {
                 case PhysicalDamageType.Regular:
-                    float physicalAbsorption = character.characterNetworkManager.armorPhysicalDamageAbsorption.Value / 100;
-                    physicalDamage -= (physicalDamage * physicalAbsorption);
+                    physicalDamage -= CalculateAmountOfDamageAbsorbedFromArmor(character.characterNetworkManager.armorPhysicalDamageAbsorption.Value, character.characterNetworkManager.armorPhysicalDamageAbsorptionModifier.Value, physicalDamage);
                     break;
                 case PhysicalDamageType.Blunt:
-                    float bluntAbsorption = character.characterNetworkManager.armorBluntDamageAbsorption.Value / 100;
-                    physicalDamage -= (physicalDamage * bluntAbsorption);
+                    physicalDamage -= CalculateAmountOfDamageAbsorbedFromArmor(character.characterNetworkManager.armorBluntDamageAbsorption.Value, character.characterNetworkManager.armorPhysicalDamageAbsorptionModifier.Value, physicalDamage);
                     break;
                 case PhysicalDamageType.Pierce:
-                    float pierceAbsorption = character.characterNetworkManager.armorPierceDamageAbsorption.Value / 100;
-                    physicalDamage -= (physicalDamage * pierceAbsorption);
+                    physicalDamage -= CalculateAmountOfDamageAbsorbedFromArmor(character.characterNetworkManager.armorPierceDamageAbsorption.Value, character.characterNetworkManager.armorPhysicalDamageAbsorptionModifier.Value, physicalDamage);
                     break;
                 case PhysicalDamageType.Slash:
-                    float slashAbsorption = character.characterNetworkManager.armorSlashDamageAbsorption.Value / 100;
-                    physicalDamage -= (physicalDamage * slashAbsorption);
+                    physicalDamage -= CalculateAmountOfDamageAbsorbedFromArmor(character.characterNetworkManager.armorSlashDamageAbsorption.Value, character.characterNetworkManager.armorPhysicalDamageAbsorptionModifier.Value, physicalDamage);
                     break;
                 default:
-                    float physicalAbsorption2 = character.characterNetworkManager.armorPhysicalDamageAbsorption.Value / 100;
-                    physicalDamage -= (physicalDamage * physicalAbsorption2);
+                    physicalDamage -= CalculateAmountOfDamageAbsorbedFromArmor(character.characterNetworkManager.armorPhysicalDamageAbsorption.Value, character.characterNetworkManager.armorPhysicalDamageAbsorptionModifier.Value, physicalDamage);
                     break;
             }
             if (physicalDamage < 0)
                 physicalDamage = 0;
 
-            float fireAbsorption = character.characterNetworkManager.armorFireDamageAbsorption.Value / 100;
-            fireDamage -= (fireDamage * fireAbsorption);
-            if (fireDamage < 0)
-                fireDamage = 0;
+            fireDamage -= CalculateAmountOfDamageAbsorbedFromArmor(character.characterNetworkManager.armorFireDamageAbsorption.Value, character.characterNetworkManager.armorFireDamageAbsorptionModifier.Value, fireDamage);
 
-            float magicAbsorption = character.characterNetworkManager.armorMagicDamageAbsorption.Value / 100;
-            magicDamage -= (magicDamage * magicAbsorption);
-            if (magicDamage < 0)
-                magicDamage = 0;
+            magicDamage -= CalculateAmountOfDamageAbsorbedFromArmor(character.characterNetworkManager.armorMagicDamageAbsorption.Value, character.characterNetworkManager.armorMagicDamageAbsorptionModifier.Value, magicDamage);
 
-            float lightningAbsorption = character.characterNetworkManager.armorLightningDamageAbsorption.Value / 100;
-            lightningDamage -= (lightningDamage * lightningAbsorption);
-            if (lightningDamage < 0)
-                lightningDamage = 0;
+            lightningDamage -= CalculateAmountOfDamageAbsorbedFromArmor(character.characterNetworkManager.armorLightningDamageAbsorption.Value, character.characterNetworkManager.armorLightningDamageAbsorptionModifier.Value, lightningDamage);
 
-            float holyAbsorption = character.characterNetworkManager.armorHolyDamageAbsorption.Value / 100;
-            holyDamage -= (holyDamage * holyAbsorption);
-            if (holyDamage < 0)
-                holyDamage = 0;
+            holyDamage -= CalculateAmountOfDamageAbsorbedFromArmor(character.characterNetworkManager.armorHolyDamageAbsorption.Value, character.characterNetworkManager.armorHolyDamageAbsorptionModifier.Value, holyDamage);
 
 
             finalDamageDealt = Mathf.RoundToInt(physicalDamage + magicDamage + fireDamage + lightningDamage + holyDamage);
@@ -302,6 +291,23 @@ namespace TraverserProject
                 return;
 
             character.characterCombatManager.CheckForDeathAnimation();
+        }
+
+        private float CalculateAddedDamageFromPercentageModifiers(float baseDamage, float damageModifier)
+        {
+            float totalDamageAdded = (baseDamage * damageModifier / 100);
+            return totalDamageAdded;
+        }
+
+        private float CalculateAmountOfDamageAbsorbedFromArmor(float baseAbsorption, float modifier, float damage)
+        {
+            float totalAbsorption = (baseAbsorption + modifier) / 100;
+            float finalDamageAfterAbsorption = (damage* totalAbsorption);
+
+            if (finalDamageAfterAbsorption < 0)
+                finalDamageAfterAbsorption = 0;
+
+            return finalDamageAfterAbsorption;
         }
 
     }

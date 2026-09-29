@@ -11,6 +11,23 @@ namespace TraverserProject
         [Header("Timed Effects")]
         [SerializeField] TimedCharacterEffect[] characterEffects;
 
+        public override void AttemptToUseItem(PlayerManager player)
+        {
+            if (!CanIUseThisItem(player))
+                return;
+
+
+            if (player.IsOwner)
+            {
+                player.playerAnimatorManager.PlayTargetActionAnimation(useItemAnimation, true);
+                player.playerNetworkManager.HideWeaponsServerRpc();
+            }
+
+            Destroy(player.playerEffectsManager.activeQuickSlotItemFX);
+            GameObject bag = Instantiate(itemModel, player.playerEquipmentManager.rightHandWeaponSlot.transform);
+            player.playerEffectsManager.activeQuickSlotItemFX = bag;
+        }
+
         public override void SuccessfullyUseItem(PlayerManager player)
         {
             base.SuccessfullyUseItem(player);
