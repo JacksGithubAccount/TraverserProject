@@ -6,6 +6,13 @@ namespace TraverserProject
     [CreateAssetMenu(menuName = "Items/Consumables/Status Buff Item")]
     public class StatusBuffItem : QuickSlotItem
     {
+        [Header("Damage Modified")]
+        public int physicalDamageModifier = 0;
+        public int magicDamageModifer = 0;
+        public int fireDamageModifier = 0;
+        public int lightningDamageModifier = 0;
+        public int holyDamageModifier = 0;
+
         [Header("Negation")]
         public float armorPhysicalDamageAbsorptionModifier;
         public float armorMagicDamageAbsorptionModifier;
@@ -20,6 +27,23 @@ namespace TraverserProject
         public int buffDuration = 180;
 
         protected GameObject statusBuffVFX;
+
+        public override void AttemptToUseItem(PlayerManager player)
+        {
+            if (!CanIUseThisItem(player))
+                return;
+
+
+            if (player.IsOwner)
+            {
+                player.playerAnimatorManager.PlayTargetActionAnimation(useItemAnimation, true);
+                player.playerNetworkManager.HideWeaponsServerRpc();
+            }
+
+            Destroy(player.playerEffectsManager.activeQuickSlotItemFX);
+            GameObject bag = Instantiate(itemModel, player.playerEquipmentManager.rightHandWeaponSlot.transform);
+            player.playerEffectsManager.activeQuickSlotItemFX = bag;
+        }
 
         public override void SuccessfullyUseItem(PlayerManager player)
         {
@@ -48,6 +72,11 @@ namespace TraverserProject
                 staminaBuff.defaultLengthOfEffect = buffDuration;
 
                 player.playerEffectsManager.AddTimedEffect(staminaBuff);
+            }
+            if (physicalDamageModifier != 0 && magicDamageModifer != 0 && fireDamageModifier != 0 &&
+                lightningDamageModifier != 0 && holyDamageModifier != 0)
+            {
+
             }
 
             statusBuffVFX = Instantiate(WorldCharacterEffectsManager.Singleton.poisonCureVFX);
