@@ -76,7 +76,13 @@ namespace TraverserProject
             if (physicalDamageModifier != 0 && magicDamageModifer != 0 && fireDamageModifier != 0 &&
                 lightningDamageModifier != 0 && holyDamageModifier != 0)
             {
-
+                ModifyCharacterDamageForATimeEffect damageBuff = Instantiate(WorldCharacterEffectsManager.Singleton.itemDamageBuffEffect);
+                damageBuff.physicalDamageModified = physicalDamageModifier;
+                damageBuff.magicDamageModifed = magicDamageModifer;
+                damageBuff.fireDamageModified = fireDamageModifier;
+                damageBuff.lightningDamageModified = lightningDamageModifier;
+                damageBuff.holyDamageModified = holyDamageModifier;
+                damageBuff.defaultLengthOfEffect = buffDuration;
             }
 
             statusBuffVFX = Instantiate(WorldCharacterEffectsManager.Singleton.poisonCureVFX);
