@@ -33,11 +33,16 @@ namespace TraverserProject
             if (!CanIUseThisItem(player))
                 return;
 
+            if (currentItemAmount < 1)
+                return;
+
+            player.playerCombatManager.isUsingItem = true;
 
             if (player.IsOwner)
             {
-                player.playerAnimatorManager.PlayTargetActionAnimation(useItemAnimation, true);
+                player.playerAnimatorManager.PlayTargetActionAnimation(useItemAnimation, false, false, true, true, false);
                 player.playerNetworkManager.HideWeaponsServerRpc();
+
             }
 
             Destroy(player.playerEffectsManager.activeQuickSlotItemFX);
@@ -49,8 +54,8 @@ namespace TraverserProject
         {
             base.SuccessfullyUseItem(player);
 
-            if (armorPhysicalDamageAbsorptionModifier != 0 && armorMagicDamageAbsorptionModifier != 0 && armorFireDamageAbsorptionModifier != 0 &&
-                armorLightningDamageAbsorptionModifier != 0 && armorHolyDamageAbsorptionModifier != 0)
+            if (armorPhysicalDamageAbsorptionModifier != 0 || armorMagicDamageAbsorptionModifier != 0 || armorFireDamageAbsorptionModifier != 0 ||
+                armorLightningDamageAbsorptionModifier != 0 || armorHolyDamageAbsorptionModifier != 0)
             {
                 ModifyArmorAbsorptionForATimeEffect absorptionBuff = Instantiate(WorldCharacterEffectsManager.Singleton.itemAbsorptionBuffEffect);
                 absorptionBuff.armorPhysicalDamageAbsorptionModifer = armorPhysicalDamageAbsorptionModifier;
@@ -73,8 +78,8 @@ namespace TraverserProject
 
                 player.playerEffectsManager.AddTimedEffect(staminaBuff);
             }
-            if (physicalDamageModifier != 0 && magicDamageModifer != 0 && fireDamageModifier != 0 &&
-                lightningDamageModifier != 0 && holyDamageModifier != 0)
+            if (physicalDamageModifier != 0 || magicDamageModifer != 0 || fireDamageModifier != 0 ||
+                lightningDamageModifier != 0 || holyDamageModifier != 0)
             {
                 ModifyCharacterDamageForATimeEffect damageBuff = Instantiate(WorldCharacterEffectsManager.Singleton.itemDamageBuffEffect);
                 damageBuff.physicalDamageModified = physicalDamageModifier;
@@ -83,6 +88,8 @@ namespace TraverserProject
                 damageBuff.lightningDamageModified = lightningDamageModifier;
                 damageBuff.holyDamageModified = holyDamageModifier;
                 damageBuff.defaultLengthOfEffect = buffDuration;
+
+                player.playerEffectsManager.AddTimedEffect(damageBuff);
             }
 
             statusBuffVFX = Instantiate(WorldCharacterEffectsManager.Singleton.poisonCureVFX);

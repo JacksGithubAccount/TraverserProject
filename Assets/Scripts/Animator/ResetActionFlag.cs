@@ -23,7 +23,7 @@ namespace TraverserProject
             character.characterLocomotionManager.isRolling = false;
             character.characterLocomotionManager.ignoreGravity = false; //if have flying enemies, make a check for this via thier locomotion manager
             character.characterLocomotionManager.isExitingLadder = false;
-            character.characterEquipmentManager.UnHideWeapons();
+            //character.characterEquipmentManager.UnHideWeapons();
             character.characterCombatManager.DisableCanDoCombo();
             character.characterCombatManager.DisableCanDoRollingAttack();
             character.characterCombatManager.DisableCanDoBackstepAttack();
