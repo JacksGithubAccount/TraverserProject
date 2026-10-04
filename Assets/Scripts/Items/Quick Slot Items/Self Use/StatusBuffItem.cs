@@ -26,6 +26,7 @@ namespace TraverserProject
         [Header("Buff Duration")]
         public int buffDuration = 180;
 
+        [SerializeField] GameObject serializeVFX;
         protected GameObject statusBuffVFX;
 
         public override void AttemptToUseItem(PlayerManager player)
@@ -92,7 +93,7 @@ namespace TraverserProject
                 player.playerEffectsManager.AddTimedEffect(damageBuff);
             }
 
-            statusBuffVFX = Instantiate(WorldCharacterEffectsManager.Singleton.poisonCureVFX);
+            statusBuffVFX = Instantiate(serializeVFX);
             statusBuffVFX.transform.position = player.playerEffectsManager.effectTransform.position;
             statusBuffVFX.transform.root.rotation = Quaternion.identity;
         }
