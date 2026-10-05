@@ -27,8 +27,8 @@ namespace TraverserProject
         [Header("Stamina Regeneration")]
         public float staminaRegenerationPercentageModifier;
 
-        [Header("Static Character Effect")]
-        public StaticCharacterEffect staticEffect; //not implemented
+        // [Header("Static Character Effect")]
+        // public StaticCharacterEffect staticEffect; //not implemented, in WorldCharacterEffectsManager
 
 
         [Header("Item Effect Description")]

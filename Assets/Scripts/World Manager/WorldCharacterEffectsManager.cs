@@ -66,6 +66,7 @@ namespace TraverserProject
         [Header("Accessory")]
         public LifeRingEffect lifeRingEffect;
         public DefenseRingEffect defenseRingEffect;
+        public AttackRingEffect attackRingEffect;
 
         [Header("Instant Effects")]
         [SerializeField] List<InstantCharacterEffect> instantEffects;
@@ -115,7 +116,7 @@ namespace TraverserProject
                 LifeRingEffect lre = Instantiate(lifeRingEffect);
                 lre.maxHealthGainedFromEffect = item.maxHealthModifier;
                 ringEffect = lre;
-            }else if (item.itemName == "Defense Ring")
+            } else if (item.itemName == "Defense Ring")
             {
                 DefenseRingEffect dre = Instantiate(defenseRingEffect);
                 dre.physicalDamageAbsorptionGainedFromEffect = item.armorPhysicalDamageAbsorptionModifier;
@@ -124,9 +125,18 @@ namespace TraverserProject
                 dre.lightningDamageAbsorptionGainedFromEffect = item.armorLightningDamageAbsorptionModifier;
                 dre.holyDamageAbsorptionGainedFromEffect = item.armorHolyDamageAbsorptionModifier;
                 ringEffect = dre;
+            } else if (item.itemName == "Attack Ring")
+            {
+                AttackRingEffect are = Instantiate(attackRingEffect);
+                are.physicalDamageGainedFromEffect = item.physicalDamageModifier;
+                are.magicDamageGainedFromEffect = item.magicDamageModifier;
+                are.fireDamageGainedFromEffect = item.fireDamageModifier;
+                are.lightningDamageGainedFromEffect = item.lightningDamageModifier;
+                are.holyDamageGainedFromEffect = item.holyDamageModifier;
+                ringEffect = are;
             }
 
-                return ringEffect;
+            return ringEffect;
         }
 
         public TimedCharacterEffect GetTimedEffectFromSerializedData(SerializableTimedEffect serializedTimeEffect)
