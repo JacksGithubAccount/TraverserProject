@@ -34,6 +34,10 @@ namespace TraverserProject
         {
 
         }
+        protected virtual void Start()
+        {
+
+        }
         protected virtual void OnTriggerEnter(Collider other)
         {
             CharacterManager damageTarget = other.GetComponentInParent<CharacterManager>();
