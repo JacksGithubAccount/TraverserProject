@@ -36,6 +36,9 @@ namespace TraverserProject
         [SerializeField] protected float defaultEffectTickTime = 1;
         public List<TimedCharacterEffect> timedEffects = new List<TimedCharacterEffect>();
 
+        [Header("Conditional Effects")]
+        public List<ConditionalCharacterEffect> conditionalEffects = new List<ConditionalCharacterEffect>();
+
         [Header("Renderers")]
         private SkinnedMeshRenderer[] skinnedMeshRenderers;
 
@@ -57,6 +60,7 @@ namespace TraverserProject
             {
                 effectTickTimer = defaultEffectTickTime;
                 ProcessTimedEffects();
+                ProcessConditionalEffects();
             }
         }
 
@@ -243,6 +247,80 @@ namespace TraverserProject
                 }
             }
             return timedEffect;
+        }
+
+        //Conditional Effect
+        public void ProcessConditionalEffects()
+        {
+            for (int i = 0; i < conditionalEffects.Count; i++)
+            {
+                if (conditionalEffects[i] == null)
+                    continue;
+
+                conditionalEffects[i].ProcessEffect(character);
+            }
+        }
+
+        public void AddConditionalEffect(ConditionalCharacterEffect effect)
+        {
+            bool effectIsAlreadyOnCharacter = false;
+
+            for (int i = 0; i < conditionalEffects.Count; i++)
+            {
+                if (conditionalEffects[i] == null)
+                    continue;
+                if (conditionalEffects[i].effectID == effect.effectID)
+                {
+                    effectIsAlreadyOnCharacter = true;                    
+                }
+            }
+
+            if (!effectIsAlreadyOnCharacter)
+            {
+                conditionalEffects.Add(effect);                
+
+                effect.ProcessEffect(character);
+
+                if (effect.effectIcon != null)
+                    PlayerUIManager.Singleton.playerUIHudManager.AddEffectIcon(effect.effectIcon);
+            }
+        }
+
+        public void RemoveConditionalEffect(int effectID)
+        {
+
+            for (int i = 0; i < conditionalEffects.Count; i++)
+            {
+                if (conditionalEffects[i] == null)
+                    return;
+
+                if (conditionalEffects[i].effectID == effectID)
+                {
+                    ConditionalCharacterEffect effect = conditionalEffects[i];
+                    effect.RemoveEffect(character);
+                    conditionalEffects.RemoveAt(i);
+
+                    if (effect.effectIcon != null)
+                        PlayerUIManager.Singleton.playerUIHudManager.RemoveEffectIcon(effect.effectIcon);
+                }
+            }
+        }
+
+        public ConditionalCharacterEffect CheckForConditionalEffect(int effectID)
+        {
+            ConditionalCharacterEffect conditionalEffect = null;
+
+
+
+            for (int i = 0; i < conditionalEffects.Count; i++)
+            {
+                if (conditionalEffects[i].effectID == effectID)
+                {
+                    conditionalEffect = conditionalEffects[i];
+                    break;
+                }
+            }
+            return conditionalEffect;
         }
 
         public void ProcessEffectDamage(int effectDamage)

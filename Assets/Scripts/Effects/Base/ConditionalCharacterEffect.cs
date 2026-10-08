@@ -9,13 +9,10 @@ public class ConditionalCharacterEffect : ScriptableObject
     [Header("Icon")]
     public Sprite effectIcon;
 
-    [Header("Conditional")]
-    public float AmountOfHealthLeftToTriggerEffect = 0;
-    public float AboveAmountOfHealthToTriggerEffect = 0;
 
     public virtual void ProcessEffect(CharacterManager character)
     {
-            character.characterEffectsManager.RemoveTimedEffect(effectID);
+            
     }
 
     public virtual void RemoveEffect(CharacterManager character)
@@ -23,8 +20,8 @@ public class ConditionalCharacterEffect : ScriptableObject
 
     }
 
-    public virtual void CheckConditionals()
+    public virtual bool CheckIfMeetsConditionals(CharacterManager character)
     {
-
+        return false;
     }
 }
