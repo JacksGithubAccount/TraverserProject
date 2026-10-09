@@ -27,6 +27,9 @@ namespace TraverserProject
         [Header("Stamina Regeneration")]
         public float staminaRegenerationPercentageModifier;
 
+        [Header("Conditionals")]
+        public float AmountOfHealthLeftToTriggerEffect = 0;
+
         // [Header("Static Character Effect")]
         // public StaticCharacterEffect staticEffect; //not implemented, in WorldCharacterEffectsManager
 

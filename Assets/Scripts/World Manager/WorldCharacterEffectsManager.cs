@@ -67,6 +67,7 @@ namespace TraverserProject
         public LifeRingEffect lifeRingEffect;
         public DefenseRingEffect defenseRingEffect;
         public AttackRingEffect attackRingEffect;
+        public LowHealthAttackBoostRingEffect lowHealthAttackBoostRingLowEffect;
 
         [Header("Instant Effects")]
         [SerializeField] List<InstantCharacterEffect> instantEffects;
@@ -76,6 +77,9 @@ namespace TraverserProject
 
         [Header("Timed Effects")]
         [SerializeField] List<TimedCharacterEffect> timedEffects;
+
+        [Header("Conditional Effects")]
+        public List<ConditionalCharacterEffect> conditionalEffects;
 
         private void Awake()
         {
@@ -105,6 +109,11 @@ namespace TraverserProject
             for (int i = 0; i < timedEffects.Count; i++)
             {
                 timedEffects[i].effectID = i;
+            }
+
+            for (int i = 0; i < conditionalEffects.Count; i++)
+            {
+                conditionalEffects[i].effectID = i;
             }
         }
 
@@ -158,6 +167,10 @@ namespace TraverserProject
         public TimedCharacterEffect GetTimedEffectByID(int ID)
         {
             return timedEffects.Find(effect => effect.effectID == ID);
+        }
+        public ConditionalCharacterEffect GetConditionalEffectByID(int ID)
+        {
+            return conditionalEffects.Find(effect => effect.effectID == ID);
         }
 
     }

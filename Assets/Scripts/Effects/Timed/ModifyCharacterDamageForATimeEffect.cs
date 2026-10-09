@@ -13,7 +13,7 @@ namespace TraverserProject
         public int magicDamageModifed = 0;
         public int fireDamageModified = 0;
         public int lightningDamageModified = 0;
-        public int holyDamageModified = 0;
+        public int holyDamageModified = 0;        
 
         public override void ProcessEffect(CharacterManager character)
         {
