@@ -8,11 +8,11 @@ public class LowHealthAttackBoostRingEffect : ConditionalCharacterEffect
     private bool effectHasBeenInitialized = false;
 
     [Header("Damage Modified")]
-    public int physicalDamageModified = 0;
-    public int magicDamageModifed = 0;
-    public int fireDamageModified = 0;
-    public int lightningDamageModified = 0;
-    public int holyDamageModified = 0;
+    public int physicalDamageGainedFromEffect;
+    public int magicDamageGainedFromEffect;
+    public int fireDamageGainedFromEffect;
+    public int lightningDamageGainedFromEffect;
+    public int holyDamageGainedFromEffect;
 
 
     [Header("Conditional")]
@@ -39,11 +39,11 @@ public class LowHealthAttackBoostRingEffect : ConditionalCharacterEffect
         if (!character.IsOwner)
             return;
 
-        character.characterNetworkManager.physicalDamageModifier.Value += physicalDamageModified;
-        character.characterNetworkManager.magicDamageModifier.Value += magicDamageModifed;
-        character.characterNetworkManager.fireDamageModifier.Value += fireDamageModified;
-        character.characterNetworkManager.lightningDamageModifier.Value += lightningDamageModified;
-        character.characterNetworkManager.holyDamageModifier.Value += holyDamageModified;
+        character.characterNetworkManager.physicalDamageModifier.Value += physicalDamageGainedFromEffect;
+        character.characterNetworkManager.magicDamageModifier.Value += magicDamageGainedFromEffect;
+        character.characterNetworkManager.fireDamageModifier.Value += fireDamageGainedFromEffect;
+        character.characterNetworkManager.lightningDamageModifier.Value += lightningDamageGainedFromEffect;
+        character.characterNetworkManager.holyDamageModifier.Value += holyDamageGainedFromEffect;
 
         VFX.SetActive(true);
         VFX = Instantiate(VFX);
@@ -61,11 +61,11 @@ public class LowHealthAttackBoostRingEffect : ConditionalCharacterEffect
         if (!character.IsOwner)
             return;
 
-        character.characterNetworkManager.physicalDamageModifier.Value -= physicalDamageModified;
-        character.characterNetworkManager.magicDamageModifier.Value -= magicDamageModifed;
-        character.characterNetworkManager.fireDamageModifier.Value -= fireDamageModified;
-        character.characterNetworkManager.lightningDamageModifier.Value -= lightningDamageModified;
-        character.characterNetworkManager.holyDamageModifier.Value -= holyDamageModified;
+        character.characterNetworkManager.physicalDamageModifier.Value -= physicalDamageGainedFromEffect;
+        character.characterNetworkManager.magicDamageModifier.Value -= magicDamageGainedFromEffect;
+        character.characterNetworkManager.fireDamageModifier.Value -= fireDamageGainedFromEffect;
+        character.characterNetworkManager.lightningDamageModifier.Value -= lightningDamageGainedFromEffect;
+        character.characterNetworkManager.holyDamageModifier.Value -= holyDamageGainedFromEffect;
 
         VFX.SetActive(false);
     }

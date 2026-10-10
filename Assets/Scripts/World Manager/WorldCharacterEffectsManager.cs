@@ -143,9 +143,18 @@ namespace TraverserProject
                 are.lightningDamageGainedFromEffect = item.lightningDamageModifier;
                 are.holyDamageGainedFromEffect = item.holyDamageModifier;
                 ringEffect = are;
+            } else if (item.itemName == "Low Health Attack Boost Ring")
+            {
+                LowHealthAttackBoostRingEffect lhabre = Instantiate(lowHealthAttackBoostRingLowEffect);
+                lhabre.physicalDamageGainedFromEffect = item.physicalDamageModifier;
+                lhabre.magicDamageGainedFromEffect = item.magicDamageModifier;
+                lhabre.fireDamageGainedFromEffect = item.fireDamageModifier;
+                lhabre.lightningDamageGainedFromEffect = item.lightningDamageModifier;
+                lhabre.holyDamageGainedFromEffect = item.holyDamageModifier;
             }
 
-            return ringEffect;
+
+                return ringEffect;
         }
 
         public TimedCharacterEffect GetTimedEffectFromSerializedData(SerializableTimedEffect serializedTimeEffect)
