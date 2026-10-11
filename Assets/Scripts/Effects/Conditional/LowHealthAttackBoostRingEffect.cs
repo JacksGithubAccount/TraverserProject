@@ -72,6 +72,6 @@ public class LowHealthAttackBoostRingEffect : ConditionalCharacterEffect
     public override bool CheckIfMeetsConditionals(CharacterManager character)
     {
 
-        return AmountOfHealthLeftToTriggerEffect > (character.characterNetworkManager.currentHealth.Value / character.characterNetworkManager.maxHealth.Value) * 100;
+        return AmountOfHealthLeftToTriggerEffect >= (character.characterNetworkManager.currentHealth.Value / character.characterNetworkManager.maxHealth.Value) * 100;
     }
 }
