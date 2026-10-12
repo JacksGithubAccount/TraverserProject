@@ -1083,7 +1083,11 @@ namespace TraverserProject
                     if (unequippedItem != null)
                         player.playerInventoryManager.AddItemToInventory(unequippedItem);
 
-                    player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[0]).staticEffectID);
+                    if(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[0]) != null)
+                        player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[0]).staticEffectID);
+                    else if(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryConditionalEffect(player.playerInventoryManager.accessoryEquipment[0]) != null)
+                        player.playerEffectsManager.RemoveConditionalEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryConditionalEffect(player.playerInventoryManager.accessoryEquipment[0]).effectID);
+
                     player.playerInventoryManager.accessoryEquipment[0] = null;
 
                     break;
@@ -1092,7 +1096,11 @@ namespace TraverserProject
                     if (unequippedItem != null)
                         player.playerInventoryManager.AddItemToInventory(unequippedItem);
 
-                    player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[1]).staticEffectID);
+                    if (WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[1]) != null)
+                        player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[1]).staticEffectID);
+                    else if (WorldCharacterEffectsManager.Singleton.RetrieveAccessoryConditionalEffect(player.playerInventoryManager.accessoryEquipment[1]) != null)
+                        player.playerEffectsManager.RemoveConditionalEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryConditionalEffect(player.playerInventoryManager.accessoryEquipment[1]).effectID);
+
                     player.playerInventoryManager.accessoryEquipment[1] = null;
                     break;
                 case EquipmentType.Accessory03:
@@ -1100,7 +1108,11 @@ namespace TraverserProject
                     if (unequippedItem != null)
                         player.playerInventoryManager.AddItemToInventory(unequippedItem);
 
-                    player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[2]).staticEffectID);
+                    if (WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[2]) != null)
+                        player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[2]).staticEffectID);
+                    else if (WorldCharacterEffectsManager.Singleton.RetrieveAccessoryConditionalEffect(player.playerInventoryManager.accessoryEquipment[2]) != null)
+                        player.playerEffectsManager.RemoveConditionalEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryConditionalEffect(player.playerInventoryManager.accessoryEquipment[2]).effectID);
+
                     player.playerInventoryManager.accessoryEquipment[2] = null;
                     break;
                 case EquipmentType.Accessory04:
@@ -1108,7 +1120,11 @@ namespace TraverserProject
                     if (unequippedItem != null)
                         player.playerInventoryManager.AddItemToInventory(unequippedItem);
 
-                    player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[3]).staticEffectID);
+                    if (WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[3]) != null)
+                        player.playerEffectsManager.RemoveStaticEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[3]).staticEffectID);
+                    else if (WorldCharacterEffectsManager.Singleton.RetrieveAccessoryConditionalEffect(player.playerInventoryManager.accessoryEquipment[3]) != null)
+                        player.playerEffectsManager.RemoveConditionalEffect(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryConditionalEffect(player.playerInventoryManager.accessoryEquipment[3]).effectID);
+
                     player.playerInventoryManager.accessoryEquipment[3] = null;
                     break;
                 case EquipmentType.MainProjectile:

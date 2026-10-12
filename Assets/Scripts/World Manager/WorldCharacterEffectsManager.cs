@@ -143,7 +143,14 @@ namespace TraverserProject
                 are.lightningDamageGainedFromEffect = item.lightningDamageModifier;
                 are.holyDamageGainedFromEffect = item.holyDamageModifier;
                 ringEffect = are;
-            } else if (item.itemName == "Low Health Attack Boost Ring")
+            }
+                return ringEffect;
+        }
+
+        public ConditionalCharacterEffect RetrieveAccessoryConditionalEffect(AccessoryEquipmentItem item)
+        {
+            ConditionalCharacterEffect ringEffect = null;
+            if (item.itemName == "Low Health Attack Boost Ring")
             {
                 LowHealthAttackBoostRingEffect lhabre = Instantiate(lowHealthAttackBoostRingLowEffect);
                 lhabre.physicalDamageGainedFromEffect = item.physicalDamageModifier;
@@ -151,10 +158,10 @@ namespace TraverserProject
                 lhabre.fireDamageGainedFromEffect = item.fireDamageModifier;
                 lhabre.lightningDamageGainedFromEffect = item.lightningDamageModifier;
                 lhabre.holyDamageGainedFromEffect = item.holyDamageModifier;
+                lhabre.AmountOfHealthLeftToTriggerEffect = item.AmountOfHealthLeftToTriggerEffect;
+                ringEffect = lhabre;
             }
-
-
-                return ringEffect;
+            return ringEffect;
         }
 
         public TimedCharacterEffect GetTimedEffectFromSerializedData(SerializableTimedEffect serializedTimeEffect)

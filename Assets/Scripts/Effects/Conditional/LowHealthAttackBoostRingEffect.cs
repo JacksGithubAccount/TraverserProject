@@ -20,19 +20,20 @@ public class LowHealthAttackBoostRingEffect : ConditionalCharacterEffect
 
     [Header("VFX")]
     public GameObject VFX;
+    private GameObject instantiatedVFX;
 
     public override void ProcessEffect(CharacterManager character)
     {
         base.ProcessEffect(character);
-
-        if (effectHasBeenInitialized)
-            return;
 
         if (!CheckIfMeetsConditionals(character))
         {
             RemoveEffect(character);
             return;
         }
+
+        if (effectHasBeenInitialized)
+            return;
 
         effectHasBeenInitialized = true;
 
@@ -45,10 +46,18 @@ public class LowHealthAttackBoostRingEffect : ConditionalCharacterEffect
         character.characterNetworkManager.lightningDamageModifier.Value += lightningDamageGainedFromEffect;
         character.characterNetworkManager.holyDamageModifier.Value += holyDamageGainedFromEffect;
 
-        VFX.SetActive(true);
-        VFX = Instantiate(VFX);
-        VFX.transform.position = character.characterEffectsManager.effectTransform.position;
-        VFX.transform.root.rotation = Quaternion.identity;
+        instantiatedVFX = Instantiate(VFX);
+        instantiatedVFX.transform.position = character.characterEffectsManager.effectTransform.position;
+        instantiatedVFX.transform.root.rotation = Quaternion.identity;
+
+        if (character.characterEffectsManager.effectTransform != null)
+        {
+            instantiatedVFX.transform.parent = character.characterEffectsManager.effectTransform;
+        }
+        else
+        {
+            instantiatedVFX.transform.parent = character.characterCombatManager.lockOnTransform;
+        }
     }
 
     public override void RemoveEffect(CharacterManager character)
@@ -66,8 +75,8 @@ public class LowHealthAttackBoostRingEffect : ConditionalCharacterEffect
         character.characterNetworkManager.fireDamageModifier.Value -= fireDamageGainedFromEffect;
         character.characterNetworkManager.lightningDamageModifier.Value -= lightningDamageGainedFromEffect;
         character.characterNetworkManager.holyDamageModifier.Value -= holyDamageGainedFromEffect;
-
-        VFX.SetActive(false);
+        effectHasBeenInitialized = false;
+        Destroy(instantiatedVFX);
     }
     public override bool CheckIfMeetsConditionals(CharacterManager character)
     {

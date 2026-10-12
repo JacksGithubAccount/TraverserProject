@@ -283,71 +283,55 @@ namespace TraverserProject
                     break;
                 case EquipmentType.Accessory01:                  
                     equippedItem = player.playerInventoryManager.accessoryEquipment[0];
-                    if (equippedItem != null)
-                    {
-                        player.playerInventoryManager.AddItemToInventory(equippedItem);
-                        StaticCharacterEffect equippedAccessoryEffect = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(equippedItem as AccessoryEquipmentItem));
-                        player.playerEffectsManager.RemoveStaticEffect(equippedAccessoryEffect.staticEffectID);
-                    }
+                    
+                    RemoveAccessory(equippedItem);
+
                     player.playerInventoryManager.accessoryEquipment[0] = currentItem as AccessoryEquipmentItem;
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
 
                     player.playerEquipmentManager.LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[0], 1);
 
-                    StaticCharacterEffect accessoryEffect = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[0]));
-                    player.playerEffectsManager.AddStaticEffect(accessoryEffect);
+                    AddAccessoryEffect(player.playerInventoryManager.accessoryEquipment[0]);
                     break;
                 case EquipmentType.Accessory02:
                     equippedItem = player.playerInventoryManager.accessoryEquipment[1];
-                    if (equippedItem != null)
-                    {
-                        player.playerInventoryManager.AddItemToInventory(equippedItem);
-                        StaticCharacterEffect equippedAccessoryEffect = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(equippedItem as AccessoryEquipmentItem));
-                        player.playerEffectsManager.RemoveStaticEffect(equippedAccessoryEffect.staticEffectID);
-                    }
+
+                    RemoveAccessory(equippedItem);
+
                     player.playerInventoryManager.accessoryEquipment[1] = currentItem as AccessoryEquipmentItem;
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
 
                     player.playerEquipmentManager.LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[1], 2);
 
-                    StaticCharacterEffect accessoryEffect2 = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[1]));
-                    player.playerEffectsManager.AddStaticEffect(accessoryEffect2);
+                    AddAccessoryEffect(player.playerInventoryManager.accessoryEquipment[1]);
                     break;
                 case EquipmentType.Accessory03:
                     equippedItem = player.playerInventoryManager.accessoryEquipment[2];
-                    if (equippedItem != null)
-                    {
-                        player.playerInventoryManager.AddItemToInventory(equippedItem);
-                        StaticCharacterEffect equippedAccessoryEffect = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(equippedItem as AccessoryEquipmentItem));
-                        player.playerEffectsManager.RemoveStaticEffect(equippedAccessoryEffect.staticEffectID);
-                    }
+
+                    RemoveAccessory(equippedItem);
+
                     player.playerInventoryManager.accessoryEquipment[2] = currentItem as AccessoryEquipmentItem;
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
 
                     player.playerEquipmentManager.LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[2], 3);
 
-                    StaticCharacterEffect accessoryEffect3 = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[2]));
-                    player.playerEffectsManager.AddStaticEffect(accessoryEffect3);
+                    AddAccessoryEffect(player.playerInventoryManager.accessoryEquipment[2]);
                     break;
                 case EquipmentType.Accessory04:
                     equippedItem = player.playerInventoryManager.accessoryEquipment[3];
-                    if (equippedItem != null)
-                    {
-                        player.playerInventoryManager.AddItemToInventory(equippedItem);
-                        StaticCharacterEffect equippedAccessoryEffect = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(equippedItem as AccessoryEquipmentItem));
-                        player.playerEffectsManager.RemoveStaticEffect(equippedAccessoryEffect.staticEffectID);
-                    }
+
+                    RemoveAccessory(equippedItem);
+
                     player.playerInventoryManager.accessoryEquipment[3] = currentItem as AccessoryEquipmentItem;
                     player.playerInventoryManager.RemoveItemFromInventory(currentItem);
                     PlayerUIManager.Singleton.playerUIEquipmentManager.RefreshMenu();
 
                     player.playerEquipmentManager.LoadAccessoryEquipment(player.playerInventoryManager.accessoryEquipment[3], 4);
 
-                    StaticCharacterEffect accessoryEffect4 = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(player.playerInventoryManager.accessoryEquipment[3]));
-                    player.playerEffectsManager.AddStaticEffect(accessoryEffect4);
+                    AddAccessoryEffect(player.playerInventoryManager.accessoryEquipment[4]);
                     break;
                 default:
                     break;
@@ -355,6 +339,43 @@ namespace TraverserProject
 
             PlayerUIManager.Singleton.playerUIEquipmentManager.SelectLastSelectedEquipmentSlot();
             PlayerUIManager.Singleton.playerUIHudManager.SetQuickSlotItemQuickSlotIcon(player.playerInventoryManager.currentQuickSlotItem);
+        }
+
+        private void RemoveAccessory(Item equippedItem)
+        {
+            PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+
+            if (equippedItem != null)
+            {
+                player.playerInventoryManager.AddItemToInventory(equippedItem);
+
+                if (WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(equippedItem as AccessoryEquipmentItem) != null)
+                {
+                    StaticCharacterEffect equippedAccessoryEffect = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(equippedItem as AccessoryEquipmentItem));
+                    player.playerEffectsManager.RemoveStaticEffect(equippedAccessoryEffect.staticEffectID);
+                }
+                else if (WorldCharacterEffectsManager.Singleton.RetrieveAccessoryConditionalEffect(equippedItem as AccessoryEquipmentItem) != null)
+                {
+                    ConditionalCharacterEffect equippedAccessoryEffect = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryConditionalEffect(equippedItem as AccessoryEquipmentItem));
+                    player.playerEffectsManager.RemoveConditionalEffect(equippedAccessoryEffect.effectID);
+                }
+            }
+        }
+
+        private void AddAccessoryEffect(AccessoryEquipmentItem accessory)
+        {
+            PlayerManager player = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerManager>();
+            if (WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(accessory) != null)
+            {
+                StaticCharacterEffect accessoryEffect = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryStaticEffect(accessory));
+                player.playerEffectsManager.AddStaticEffect(accessoryEffect);
+            }
+            else if (WorldCharacterEffectsManager.Singleton.RetrieveAccessoryConditionalEffect(accessory) != null)
+            {
+                ConditionalCharacterEffect accessoryEffect = Instantiate(WorldCharacterEffectsManager.Singleton.RetrieveAccessoryConditionalEffect(accessory));
+                player.playerEffectsManager.AddConditionalEffect(accessoryEffect);
+            }
+                
         }
 
     }
