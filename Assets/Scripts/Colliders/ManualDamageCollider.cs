@@ -19,6 +19,30 @@ namespace TraverserProject
             characterCausingDamage = GetComponentInParent<AICharacterManager>();
         }
 
+        protected override void OnTriggerEnter(Collider other)
+        {
+            CharacterManager damageTarget = other.GetComponentInParent<CharacterManager>();
+
+            if (damageTarget == null)
+                return;
+
+            contactPoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+
+            if (damageTarget == characterCausingDamage)
+                return;
+
+            if (!WorldUtilityManager.Singleton.CanIDamageThisTarget(characterCausingDamage.characterGroup, damageTarget.characterGroup))
+                return;
+
+            CheckForBlock(damageTarget);
+            CheckForParry(damageTarget);
+
+            if (!damageTarget.characterNetworkManager.isInvulnerable.Value)
+            {
+                DamageTarget(damageTarget);
+            }
+        }
+
         protected override void GetBlockingDotValues(CharacterManager damageTarget)
         {
             directionFromAttackToDamageTarget = characterCausingDamage.transform.position - damageTarget.transform.position;
