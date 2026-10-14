@@ -42,9 +42,6 @@ namespace TraverserProject
         [Header("Back of door Location")]
         [SerializeField] BackDoorInteractable backDoorInteractable;
 
-        [Header("Navmesh")]
-        [SerializeField] NavMeshObstacle navmeshObstacle;
-
         [Header("SFX")]
         private AudioSource doorAudioSource;
         [SerializeField] private AudioClip doorOpeningSFX;
@@ -55,7 +52,6 @@ namespace TraverserProject
             base.Awake();
 
             doorAudioSource = GetComponent<AudioSource>();
-            navmeshObstacle = GetComponentInParent<NavMeshObstacle>();
 
             //have to manually assign id, this is random based on load
             //WorldInteractablesManager.Singleton.doorInteractables.Add(this);
@@ -221,7 +217,6 @@ namespace TraverserProject
 
             backDoorInteractable.ReturnInteractionToPlayers();
 
-            navmeshObstacle.enabled = false;
             //stops movement SFX
             doorAudioSource.Stop();
             //plays stopped SFX
