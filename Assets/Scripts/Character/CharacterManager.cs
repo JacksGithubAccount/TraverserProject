@@ -176,5 +176,17 @@ namespace TraverserProject
                 }
             }
         }
+
+        public virtual void ToggleIgnoreCollisionWithOtherCollider(bool status, Collider collider)
+        {
+            Physics.IgnoreCollision(characterController, collider, status);
+
+            Collider[] damageableCharacterColliders = GetComponentsInChildren<Collider>();
+            for (int i = 0; i < damageableCharacterColliders.Length; i++)
+            {
+                Physics.IgnoreCollision(damageableCharacterColliders[i], collider, status);
+            }
+        }
+
     }
 }

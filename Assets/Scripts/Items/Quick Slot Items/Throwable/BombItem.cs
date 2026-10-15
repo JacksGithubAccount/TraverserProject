@@ -13,7 +13,7 @@ namespace TraverserProject
 
             if (player.IsOwner)
             {
-                player.playerAnimatorManager.PlayTargetActionAnimation(useItemAnimation, true);
+                player.playerAnimatorManager.PlayTargetActionAnimation(useItemAnimation, false, false, true, true, false);
                 player.playerNetworkManager.HideWeaponsServerRpc(); //optionall, only hide the throw arm
             }
 
@@ -26,8 +26,15 @@ namespace TraverserProject
         {
             base.SuccessfullyUseItem(player);
 
-            if (player.playerEffectsManager.activeQuickSlotItemFX != null)
-                Destroy(player.playerEffectsManager.activeQuickSlotItemFX);
+            if (player.playerEffectsManager.activeQuickSlotItemFX == null)
+                return;
+
+            BombManager bomb = player.playerEffectsManager.activeQuickSlotItemFX.GetComponentInChildren<BombManager>();
+
+            if (bomb == null)
+                return;
+
+            bomb.ThrowBomb(player);
         }
 
     }
