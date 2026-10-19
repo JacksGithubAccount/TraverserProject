@@ -200,8 +200,6 @@ namespace TraverserProject
             doorAudioSource.clip = doorOpeningSFX;
             doorAudioSource.Play();
 
-            backDoorInteractable.RemoveInteractionFromPlayers();
-
             //moves the door
             if (isOpening)
                 animator.Play(openDoorAnimation);
@@ -214,8 +212,6 @@ namespace TraverserProject
                 doorIsOpening.Value = false;
                 doorIsClosing.Value = false;
             }
-
-            backDoorInteractable.ReturnInteractionToPlayers();
 
             //stops movement SFX
             doorAudioSource.Stop();

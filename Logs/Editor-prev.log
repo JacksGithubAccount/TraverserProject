@@ -1,0 +1,1385 @@
+VBCSCompilerPreWarmer: watching VBCSCompiler (PID 38832)
+VBCSCompilerPreWarmer: pre-warm launched (dotnet PID 30704)
+VBCSCompiler prewarm took 63.03 ms
+[Licensing::Module] Trying to connect to existing licensing client channel...
+Built from '6000.6/staging' branch; Version is '6000.6.6f1 (d20c9ac777da) revision 13765786'; Using compiler version '194234433'; Build Type 'Release'
+OS: 'Windows 11  (10.0.26200) Core' Language: 'en' Physical Memory: 32689 MB
+BatchMode: 0, IsHumanControllingUs: 1, StartBugReporterOnCrash: 1, Is64bit: 1
+System  architecture: x64
+Process architecture: x64
+Date: 2026-10-18T02:24:06Z
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jckzh" at "2026-10-18T02:24:06.6962432Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 11124, path: "C:/Program Files/Unity Hub/UnityLicensingClient_V1/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.18.3+d7ffd15
+  Session Id:              555d1dedaaf94df995d9405f2cb05276
+  Correlation Id:          e2ccdefc0e556c59caf6a7f8e76502c6
+  External correlation Id: 1021783359749058430
+  Machine Id:              o04YuWxx8h/oXiL0IyKSUt6Jz5g=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-jckzh" (connect: 0.00s, validation: 0.00s, handshake: 0.14s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-jckzh-notifications" at "2026-10-18T02:24:06.8346539Z"
+[Licensing::Client] Successfully updated the access token
+[Licensing::Module] Successfully updated the access token 1NwLxMTeto...
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] License group:
+  Id: 2473923282740-UnityPersXXXX
+  Product: Unity Personal
+  Type: Assigned
+  Expiration: Unlimited
+[Licensing::Client] Successfully updated license, isAsync: True, time: 0.00
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Licensing Background thread has ended after 0.15s
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\6000.6.6f1\Editor\Unity.exe
+-projectpath
+C:\Users\jckzh\source\repos\TraverserProject
+-acceptSoftwareTermsForThisRunOnly
+-useHub
+-hubIPC
+-cloudEnvironment
+production
+-licensingIpc
+LicenseClient-jckzh
+-hubSessionId
+b8e8a194-bfe2-4b7e-bec0-ecd5209ded58
+-accessToken
+1NwLxMTeto0onJtP5fkkKUL0LLtNytdsEBcZ8Uxve9A002f
+Successfully changed project path to: C:\Users\jckzh\source\repos\TraverserProject
+C:/Users/jckzh/source/repos/TraverserProject
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gfx=262144"
+    "memorysetup-remapper-allocator-initial-capacity=32768"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-main-allocator-mimalloc-enabled=1"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+Player connection [33400]  Target information:
+
+Player connection [33400]  * "[IP] 192.168.124.1 [Port] 55504 [Flags] 2 [Guid] 3513632771 [EditorId] 3513632771 [Version] 1048832 [Id] WindowsEditor(7,PotatoPC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [33400]  * "[IP] 192.168.254.1 [Port] 55504 [Flags] 2 [Guid] 3513632771 [EditorId] 3513632771 [Version] 1048832 [Id] WindowsEditor(7,PotatoPC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [33400]  * "[IP] 192.168.1.5 [Port] 55504 [Flags] 2 [Guid] 3513632771 [EditorId] 3513632771 [Version] 1048832 [Id] WindowsEditor(7,PotatoPC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [33400]  * "[IP] 192.168.1.6 [Port] 55504 [Flags] 2 [Guid] 3513632771 [EditorId] 3513632771 [Version] 1048832 [Id] WindowsEditor(7,PotatoPC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [33400] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [33400] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+[Package Manager] Connected to IPC stream "Upm-39336" after 0.3 seconds.
+[Licensing::Client] Successfully resolved entitlement details
+Library Redirect Path: Library/
+Initialising UDS system complete:
+  - System type: Client
+  - Resource namespace: 8716969de4991dad0497fd531e71235f
+  - Shared memory size: 1073741824
+  - Command buffer id: 1052576
+  - Command buffer size: 8192
+  - Hashmap size: 4194304
+  - Service connected: false
+Launching Unity Data Store - C:/Program Files/Unity/Hub/Editor/6000.6.6f1/Editor/Data/Tools/Unity.DataStore.exe 
+Unity Data Store artifact dir = Library/DataStore, working dir = C:/Users/jckzh/source/repos/TraverserProjectUnity Data Store running and initialised
+[Physics::Module] Selected backend (deferred post-plugins).
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+Initialize engine version: 6000.6.6f1 (d20c9ac777da)
+[EntityIdStore] init: VM path (explicit commit), pageSize=4096, blockCount=1048576, entitiesPerBlock=256, slots reserved=4294967296 bytes
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/6000.6.6f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/jckzh/source/repos/TraverserProject/Assets
+GfxDevice: creating device client; kGfxThreadingModeThreaded
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 2060 (ID=0x1f08)
+    Vendor:   NVIDIA
+    VRAM:     5955 MB
+    Driver:   32.0.16.1088
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/6000.6.6f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/6000.6.6f1/Editor/Data/BCLExtensions/runtime/netstandard2.1'
+Mono path[2] = 'C:/Program Files/Unity/Hub/Editor/6000.6.6f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/6000.6.6f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56336
+CodeReloadManager initialized
+ImportWorker Server TCP listen port: 0
+AcceleratorClientConnectionCallback - disconnected - :0
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/6000.6.6f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.254813 seconds.
+Native extension for WindowsStandalone target not found
+Package Manager log level set to [2]
+ScheduleIndexationOnStartup MainProcess:False IndexOnStartup:True
+Scripting: successfully reloaded assembly
+- Finished resetting the current domain, in  1.812 seconds
+Domain Reload Profiling: 4446ms
+	BeginReloadAssembly (358ms)
+		CreateAndSetChildDomain (19ms)
+	RebuildCommonClasses (6ms)
+	RebuildNativeTypeToScriptingClass (222ms)
+	initialDomainReloadingComplete (475ms)
+	LoadAllAssembliesAndSetupDomain (1572ms)
+		LoadAssemblies (335ms)
+		TypeCache.Refresh (1441ms)
+			TypeCache.ScanAssembly (1179ms)
+		AnalyzeDomain (1ms)
+	FinalizeReload (1812ms)
+		SetupLoadedEditorAssemblies (0ms)
+			InitializePlatformSupportModulesInManaged (3ms)
+			BeforeProcessingInitializeOnLoad (132ms)
+			ProcessInitializeOnLoadAttributes (122ms)
+			ProcessInitializeOnLoadMethodAttributes (704ms)
+[Licensing::Client] Successfully resolved entitlement details
+Application.AssetDatabase Initial Refresh Start
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 70 packages:
+  Packages from [https://packages.unity.com]:
+    com.unity.ai.navigation@2.0.15 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.ai.navigation@a9c5744fc1de)
+    com.unity.collab-proxy@2.13.6 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.collab-proxy@4628d2ba6ea4)
+    com.unity.ide.rider@3.0.38 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.ide.rider@1f60b3138684)
+    com.unity.ide.visualstudio@2.0.27 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.ide.visualstudio@dc1ddd4f09b6)
+    com.unity.inputsystem@1.20.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.inputsystem@7a4e1a2a8194)
+    com.unity.netcode.gameobjects@2.13.3 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.netcode.gameobjects@277a288a1cea)
+    com.unity.postprocessing@3.5.4 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.postprocessing@141166b789e3)
+    com.unity.probuilder@6.1.2 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.probuilder@8be9724b2335)
+    com.unity.visualscripting@1.9.12 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.visualscripting@4edfcc09512f)
+    com.unity.settings-manager@2.1.1 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.settings-manager@0b8638c5ce86)
+    com.unity.nuget.mono-cecil@1.11.6 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.nuget.mono-cecil@ecb9724e46ff)
+    com.unity.profiling.core@1.0.3 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.profiling.core@8a49f7027d06)
+    com.unity.searcher@4.9.5 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.searcher@a463122f2c00)
+  Built-in packages:
+    com.unity.2d.sprite@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.2d.sprite@752945c75a6f)
+    com.unity.multiplayer.center@2.0.1 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.multiplayer.center@01ba5271095b)
+    com.unity.render-pipelines.universal@17.6.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.render-pipelines.universal@9b1eb8be54e0)
+    com.unity.test-framework@1.8.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.test-framework@80f691d4262b)
+    com.unity.timeline@6.6.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.timeline@4891807c6bd8)
+    com.unity.ugui@2.6.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.ugui@0b1771797efc)
+    com.unity.visualeffectgraph@17.6.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.visualeffectgraph@80f7465ede47)
+    com.unity.modules.accessibility@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.accessibility)
+    com.unity.modules.adaptiveperformance@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.adaptiveperformance)
+    com.unity.modules.ai@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.ai)
+    com.unity.modules.androidjni@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.androidjni)
+    com.unity.modules.animation@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.animation)
+    com.unity.modules.assetbundle@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.assetbundle)
+    com.unity.modules.audio@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.audio)
+    com.unity.modules.cloth@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.cloth)
+    com.unity.modules.director@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.director)
+    com.unity.modules.imageconversion@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.imageconversion)
+    com.unity.modules.imgui@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.imgui)
+    com.unity.modules.jsonserialize@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.jsonserialize)
+    com.unity.modules.particlesystem@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.particlesystem)
+    com.unity.modules.physics@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.physics)
+    com.unity.modules.physics2d@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.physics2d)
+    com.unity.modules.physicscore2d@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.physicscore2d)
+    com.unity.modules.screencapture@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.screencapture)
+    com.unity.modules.terrain@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.terrain)
+    com.unity.modules.terrainphysics@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.terrainphysics)
+    com.unity.modules.tetgen@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.tetgen)
+    com.unity.modules.tilemap@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.tilemap)
+    com.unity.modules.timelinefoundation@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.timelinefoundation)
+    com.unity.modules.ui@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.ui)
+    com.unity.modules.uielements@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.uielements)
+    com.unity.modules.umbra@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.umbra)
+    com.unity.modules.unityanalytics@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.unityanalytics)
+    com.unity.modules.unitywebrequest@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.unitywebrequest)
+    com.unity.modules.unitywebrequestassetbundle@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.unitywebrequestassetbundle)
+    com.unity.modules.unitywebrequestaudio@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.unitywebrequestaudio)
+    com.unity.modules.unitywebrequesttexture@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.unitywebrequesttexture)
+    com.unity.modules.unitywebrequestwww@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.unitywebrequestwww)
+    com.unity.modules.vectorgraphics@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.vectorgraphics)
+    com.unity.modules.vehicles@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.vehicles)
+    com.unity.modules.video@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.video)
+    com.unity.modules.wind@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.wind)
+    com.unity.modules.xr@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.xr)
+    com.unity.modules.subsystems@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.subsystems)
+    com.unity.modules.hierarchycore@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.modules.hierarchycore)
+    com.unity.shadergraph@17.6.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.shadergraph@0de771837e0e)
+    com.unity.render-pipelines.core@17.6.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.render-pipelines.core@e18bd88df4e3)
+    com.unity.ext.nunit@2.1.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.ext.nunit@0198eae3b53e)
+    com.unity.render-pipelines.universal-config@17.6.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.render-pipelines.universal-config@561422b74439)
+    com.unity.transport@6.6.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.transport@1b9b1e9062a8)
+    com.unity.burst@2.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.burst@626e66ab421b)
+    com.unity.collections@6.6.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.collections@10fff0607388)
+    com.unity.graph-authoring@1.0.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.graph-authoring@cfd2588851ee)
+    com.unity.mathematics@1.4.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.mathematics@8306a64d0cd6)
+    com.unity.test-framework.performance@6.6.0 (location: C:\Users\jckzh\source\repos\TraverserProject\Library\PackageCache\com.unity.test-framework.performance@54c5bd86aedb)
+  Local packages:
+    com.community.netcode.transport.facepunch@file:C:\UnityPackages\multiplayer-community-contributions-main\Transports\com.community.netcode.transport.facepunch (location: C:\UnityPackages\multiplayer-community-contributions-main\Transports\com.community.netcode.transport.facepunch)
+    com.veriorpies.parrelsync@file:C:\UnityPackages\ParrelSync-master\ParrelSync (location: C:\UnityPackages\ParrelSync-master\ParrelSync)
+[Subsystems] No new subsystems found in resolved package list.
+[Package Manager] Done registering packages in 0.03 seconds
+Starting: C:\Program Files\Unity\Hub\Editor\6000.6.6f1\Editor\Data\Tools\BuildPipeline\bee_backend.exe --ipc --defer-dag-verification --dagfile="Library/Bee/1900b0aE.dag" --continue-on-failure --profile="Library/Bee/backend1.traceevents" ScriptAssemblies
+WorkingDir: C:/Users/jckzh/source/repos/TraverserProject
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.runtime.interopservices.windowsruntime has duplicate hint path. Ignoring "C:\Program Files\Unity\Hub\Editor\6000.6.6f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Runtime.InteropServices.WindowsRuntime.dll" in favor of "C:\Program Files\Unity\Hub\Editor\6000.6.6f1\Editor\Data\NetStandard\Extensions\2.0.0\System.Runtime.InteropServices.WindowsRuntime.dll"
+warn: Unity.ILPP.Runner.PostProcessingAssemblyLoadContext[0]
+      Assembly system.componentmodel.composition has duplicate hint path. Ignoring "C:\Program Files\Unity\Hub\Editor\6000.6.6f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\System.ComponentModel.Composition.dll" in favor of "C:\Program Files\Unity\Hub\Editor\6000.6.6f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.ComponentModel.Composition.dll"
+ExitCode: 0 Duration: 1s171ms
+[1010/1320  0s] ILPP-Configuration Library/ilpp-configuration.nevergeneratedoutput
+*** Tundra build success (1.08 seconds), 1 items updated, 1320 evaluated
+AssetDatabase: script compilation time: 2.255990s
+Begin MonoManager ReloadAssembly
+'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Refreshing native plugins compatible for Editor in 4.88 ms, found 5 plugins.
+Native extension for WindowsStandalone target not found
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+[MODES] Loading mode Default (0) for mode-current-id-TraverserProject
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Scripting: successfully reloaded assembly
+- Finished resetting the current domain, in  1.599 seconds
+Domain Reload Profiling: 4754ms
+	BeginReloadAssembly (407ms)
+		DisableScriptedObjects (33ms)
+		CreateAndSetChildDomain (162ms)
+	RebuildCommonClasses (11ms)
+	RebuildNativeTypeToScriptingClass (18ms)
+	initialDomainReloadingComplete (116ms)
+	LoadAllAssembliesAndSetupDomain (2603ms)
+		LoadAssemblies (2121ms)
+		TypeCache.Refresh (253ms)
+			TypeCache.ScanAssembly (234ms)
+		AnalyzeDomain (132ms)
+			BuildScriptInfoCaches (118ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (1600ms)
+		SetupLoadedEditorAssemblies (0ms)
+			LogAssemblyErrors (4ms)
+			BeforeProcessingInitializeOnLoad (140ms)
+			ProcessInitializeOnLoadAttributes (462ms)
+			ProcessInitializeOnLoadMethodAttributes (310ms)
+			AfterProcessingInitializeOnLoad (11ms)
+		AwakeInstancesAfterBackupRestoration (28ms)
+Starting new worker id: 0 with log in C:/Users/jckzh/source/repos/TraverserProject/Logs/AssetImportWorkerHW0.log
+
+Asset Pipeline Refresh (id=781a708860ed1804c80e8300480a4704): Total: 17.795 seconds - Initiated by InitialRefreshV2(ForceSynchronousImport)
+	(Values over 0.05ms)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=12059 ms
+		Asset DB Callback time: managed=57 ms, native=48 ms
+		Scripting: domain reloads=1, domain reload time=3253 ms, compile time=2258 ms, other=117 ms
+		Project Asset Count: scripts=2425, non-scripts=7645
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokePackagesCallback: 52.888ms
+	ApplyChangesToAssetFolders: 1.399ms
+	Scan: 318.167ms
+	Collect global state as custom dependencies: 30.850ms
+	CategorizeScriptCompilationAssets: 1966.201ms
+	ProcessAssetsWithTransientArtifactChanges: 172.031ms
+	CategorizeAssets: 133.514ms
+	CompileScripts: 2258.279ms
+	ImportOutOfDateAssets: 1631.498ms (1617.103ms without children)
+		ReloadNativeAssets: 0.086ms
+		UnloadImportedAssets: 0.734ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.693ms
+		ImportSchedulerStart: 11.878ms
+	PostProcessAllAssets: 57.366ms
+		MonoPostProcessAllAssets: 57.268ms
+			UniversalRenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 33.981ms
+			SyncVS.PostprocessSyncProject 3.891ms
+			WindowAssetPostprocessingWatcher.OnPostprocessAllAssets 2.475ms
+			SpeedTree9Postprocessor.OnPostprocessAllAssets 1.741ms
+			EditModeScopePostprocessor.OnPostprocessAllAssets 1.593ms
+			ShaderReflectionAssetPostProcessor.OnPostprocessAllAssets 0.806ms
+			RenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 0.753ms
+			InputActionAssetPostprocessor.OnPostprocessAllAssets 0.313ms
+			ReferencedClipsPostProcessor.OnPostprocessAllAssets 0.299ms
+			TerrainToolbarOverlayPostProcessor.OnPostprocessAllAssets 0.256ms
+			ProjectSettingsPostprocessor.OnPostprocessAllAssets 0.196ms
+			AssetDatabaseCallbacks.OnPostprocessAllAssets 0.181ms
+	UnloadStreamsBegin: 3.034ms
+	PersistCurrentRevisions: 0.258ms
+	GenerateScriptTypeHashes: 6.829ms
+	GenerateScriptTypeSerializationHashes: 11.022ms
+	Untracked: 11134.716ms
+
+Application.AssetDatabase Initial Refresh End
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Scanning for USB devices : 12.548ms
+Initializing Unity extensions:
+Worker ready: AssetImportWorkerHW0 0
+Unloading 63 Unused Serialized files (Serialized files now loaded: 0)
+Serialized file "Assets/Data/Imports/JMO Assets/Cartoon FX Remaster/CFXR Assets/Meshes/cfxr ring mesh.asset" contains a Mesh object at version 9, below the supported minimum (10). Open and re-save the file to upgrade.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEditor.EditorApplication:Internal_RestoreLastOpenedScenes ()
+
+[C:\build\output\unity\unity\Runtime\Serialize\TransferFunctions\TextDOMTransferReadBase.h line 180]
+
+Serialized file "Assets/Data/Imports/JMO Assets/Cartoon FX Remaster/CFXR Assets/Meshes/cfxr ring mesh local space smoother.asset" contains a Mesh object at version 9, below the supported minimum (10). Open and re-save the file to upgrade.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Serialization.SerializationBackendManagedCommands:ExecuteReadCommands (UnityEngine.Serialization.NativeReadBufferContext*,byte&,byte*,int,intptr,int&)
+UnityEngine.Serialization.SerializationBackendManagedCommands:SerializationBufferToObject (intptr,intptr,int,intptr,intptr)
+UnityEditor.EditorApplication:Internal_RestoreLastOpenedScenes ()
+
+[C:\build\output\unity\unity\Runtime\Serialize\TransferFunctions\TextDOMTransferReadBase.h line 180]
+
+Serialized file "Assets/Data/Imports/JMO Assets/Cartoon FX Remaster/CFXR Assets/Graphics/cfxr spikes impact mesh.asset" contains a Mesh object at version 9, below the supported minimum (10). Open and re-save the file to upgrade.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Serialization.SerializationBackendManagedCommands:ExecuteReadCommands (UnityEngine.Serialization.NativeReadBufferContext*,byte&,byte*,int,intptr,int&)
+UnityEngine.Serialization.SerializationBackendManagedCommands:SerializationBufferToObject (intptr,intptr,int,intptr,intptr)
+UnityEditor.EditorApplication:Internal_RestoreLastOpenedScenes ()
+
+[C:\build\output\unity\unity\Runtime\Serialize\TransferFunctions\TextDOMTransferReadBase.h line 180]
+
+Loaded scene 'Assets/Scenes/World_01.unity'
+	Deserialize:            201.473 ms
+	Integration:            883.338 ms
+	Integration of assets:  50.911 ms
+	Thread Wait Time:       -43.264 ms
+	Total Operation Time:   1092.458 ms
+Unloading 8772 unused Assets / (14.2 MB). Loaded Objects now: 22135.
+Memory consumption went from 0.75 GB to 0.74 GB.
+Total: 19.928300 ms (FindLiveObjects: 2.110300 ms CreateObjectMapping: 0.767800 ms MarkObjects: 10.682600 ms  DeleteObjects: 6.004600 ms)
+
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_Basement_Effects.unity'
+	Deserialize:            1.727 ms
+	Integration:            78.979 ms
+	Integration of assets:  0.023 ms
+	Thread Wait Time:       0.027 ms
+	Total Operation Time:   80.757 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_Basement_Props.unity'
+	Deserialize:            0.503 ms
+	Integration:            0.518 ms
+	Integration of assets:  0.002 ms
+	Thread Wait Time:       79.000 ms
+	Total Operation Time:   80.023 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_Basement_Spawners.unity'
+	Deserialize:            0.384 ms
+	Integration:            0.297 ms
+	Integration of assets:  0.001 ms
+	Thread Wait Time:       79.166 ms
+	Total Operation Time:   79.848 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_Basement_Structure.unity'
+	Deserialize:            22.177 ms
+	Integration:            45.778 ms
+	Integration of assets:  0.004 ms
+	Thread Wait Time:       57.316 ms
+	Total Operation Time:   125.274 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_Corridor_Effects.unity'
+	Deserialize:            1.290 ms
+	Integration:            3.914 ms
+	Integration of assets:  0.001 ms
+	Thread Wait Time:       101.885 ms
+	Total Operation Time:   107.090 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_Corridor_Props.unity'
+	Deserialize:            0.341 ms
+	Integration:            0.360 ms
+	Integration of assets:  0.001 ms
+	Thread Wait Time:       105.498 ms
+	Total Operation Time:   106.201 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_Corridor_Spawners.unity'
+	Deserialize:            0.322 ms
+	Integration:            0.255 ms
+	Integration of assets:  0.001 ms
+	Thread Wait Time:       105.568 ms
+	Total Operation Time:   106.146 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_Corridor_Structure.unity'
+	Deserialize:            9.238 ms
+	Integration:            20.803 ms
+	Integration of assets:  0.003 ms
+	Thread Wait Time:       96.614 ms
+	Total Operation Time:   126.659 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_EntranceHall_Effects.unity'
+	Deserialize:            0.952 ms
+	Integration:            1.576 ms
+	Integration of assets:  0.004 ms
+	Thread Wait Time:       116.552 ms
+	Total Operation Time:   119.084 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_EntranceHall_Props.unity'
+	Deserialize:            4.480 ms
+	Integration:            46.168 ms
+	Integration of assets:  0.001 ms
+	Thread Wait Time:       113.543 ms
+	Total Operation Time:   164.192 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_EntranceHall_Spawners.unity'
+	Deserialize:            1.010 ms
+	Integration:            68.008 ms
+	Integration of assets:  0.002 ms
+	Thread Wait Time:       158.794 ms
+	Total Operation Time:   227.814 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_EntranceHall_Structure.unity'
+	Deserialize:            9.210 ms
+	Integration:            14.763 ms
+	Integration of assets:  0.005 ms
+	Thread Wait Time:       217.692 ms
+	Total Operation Time:   241.669 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_MainHall_Effects.unity'
+	Deserialize:            1.356 ms
+	Integration:            5.311 ms
+	Integration of assets:  0.004 ms
+	Thread Wait Time:       231.155 ms
+	Total Operation Time:   237.827 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_MainHall_Props.unity'
+	Deserialize:            2.500 ms
+	Integration:            20.518 ms
+	Integration of assets:  0.005 ms
+	Thread Wait Time:       234.059 ms
+	Total Operation Time:   257.082 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_MainHall_Spawners.unity'
+	Deserialize:            0.887 ms
+	Integration:            3.050 ms
+	Integration of assets:  0.004 ms
+	Thread Wait Time:       253.771 ms
+	Total Operation Time:   257.712 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_MainHall_Structure.unity'
+	Deserialize:            6.675 ms
+	Integration:            22.977 ms
+	Integration of assets:  0.004 ms
+	Thread Wait Time:       250.185 ms
+	Total Operation Time:   279.841 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_SideRoom_Effects.unity'
+	Deserialize:            0.775 ms
+	Integration:            2.922 ms
+	Integration of assets:  0.005 ms
+	Thread Wait Time:       272.472 ms
+	Total Operation Time:   276.173 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_SideRoom_Props.unity'
+	Deserialize:            0.674 ms
+	Integration:            2.256 ms
+	Integration of assets:  0.004 ms
+	Thread Wait Time:       274.771 ms
+	Total Operation Time:   277.705 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_SideRoom_Spawners.unity'
+	Deserialize:            0.306 ms
+	Integration:            0.327 ms
+	Integration of assets:  0.004 ms
+	Thread Wait Time:       276.763 ms
+	Total Operation Time:   277.401 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_SideRoom_Structure.unity'
+	Deserialize:            4.479 ms
+	Integration:            8.449 ms
+	Integration of assets:  0.006 ms
+	Thread Wait Time:       272.647 ms
+	Total Operation Time:   285.580 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_ThroneRoom_Effects.unity'
+	Deserialize:            1.099 ms
+	Integration:            7.426 ms
+	Integration of assets:  0.008 ms
+	Thread Wait Time:       280.077 ms
+	Total Operation Time:   288.609 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_ThroneRoom_Props.unity'
+	Deserialize:            0.431 ms
+	Integration:            0.548 ms
+	Integration of assets:  0.006 ms
+	Thread Wait Time:       287.171 ms
+	Total Operation Time:   288.156 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_ThroneRoom_Spawners.unity'
+	Deserialize:            0.432 ms
+	Integration:            0.942 ms
+	Integration of assets:  0.006 ms
+	Thread Wait Time:       287.322 ms
+	Total Operation Time:   288.702 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_ThroneRoom_Structure.unity'
+	Deserialize:            7.642 ms
+	Integration:            24.305 ms
+	Integration of assets:  0.007 ms
+	Thread Wait Time:       280.653 ms
+	Total Operation Time:   312.608 ms
+[LAYOUT] About to load UserSettings\Layouts\default-6000.dwlt, keepMainWindow=False
+Refreshing native plugins compatible for Editor in 3.67 ms, found 5 plugins.
+[LAYOUT] About to save layout C:\Users\jckzh\source\repos\TraverserProject\UserSettings\Layouts\default-6000.dwlt
+[LAYOUT] About to save layout C:/Users/jckzh/AppData/Roaming/Unity/Editor-5.x/Preferences\Layouts\current\default-6000.dwlt
+[MODES] ModeService[default].InitializeCurrentMode
+[MODES] ModeService[default].RaiseModeChanged(default, default)
+This project uses Input Manager, which is marked for deprecation. To manage input in your project, use the <a href="https://docs.unity3d.com/Packages/com.unity.inputsystem@latest">Input System package</a> instead.
+<RI> Initializing input.
+Using Windows.Gaming.Input
+<RI> Input initialized.
+[Project] Loading completed in 38.587 seconds
+	Project init time: 				34.434 seconds
+		Template init time: 		0.000 seconds
+		Package Manager init time: 		0.252 seconds
+		Asset Database init time: 		0.576 seconds
+		Global illumination init time: 	0.002 seconds
+		Assemblies load time: 			8.774 seconds
+		Unity extensions init time: 	0.030 seconds
+		Asset Database refresh time: 	17.795 seconds
+	Scene opening time: 			3.884 seconds
+##utp:{"type":"ProjectInfo","version":2,"phase":"Immediate","time":1792290285207,"processId":39336,"projectLoad":38.586595300000006,"projectInit":34.4341495,"templateInit":0.0,"packageManagerInit":0.2522642,"assetDatabaseInit":0.5763997,"globalIlluminationInit":0.0023633,"assembliesLoad":8.7739426,"unityExtensionsInit":0.0302513,"assetDatabaseRefresh":17.7953922,"sceneOpening":3.884498}
+##utp:{"type":"EditorInfo","version":2,"phase":"Immediate","time":1792290285207,"processId":39336,"editorVersion":"6000.6.6f1 (d20c9ac777da)","branch":"6000.6/staging","buildType":"Release","platform":"Windows"}
+GPU Resident Drawer created with GPU Occlusion Culling.
+Request Asset Garbage Collect because used heap size increased from 0.74 GB to 1.18 GB, exceeding the threshold of 256.0 MB.
+Unloading 939 Unused Serialized files (Serialized files now loaded: 0)
+Created GICache directory at C:/Users/jckzh/AppData/LocalLow/Unity/Caches/GiCache. Took: 0.036s, timestamps: [40.576 - 40.612]
+Unloading 87 unused Assets / (317.9 KB). Loaded Objects now: 34676.
+Memory consumption went from 1.07 GB to 1.07 GB.
+Total: 22.721100 ms (FindLiveObjects: 3.534800 ms CreateObjectMapping: 0.752300 ms MarkObjects: 17.361400 ms  DeleteObjects: 0.661900 ms)
+
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Client] Successfully updated the access token
+[Licensing::Module] Successfully updated access token: "1NwLxMTe"... (expires: 2026-10-18T02:47:39Z)
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Client] Successfully resolved entitlement details
+TrimDiskCacheJob: Current cache size 2225mb
+Asset Pipeline Refresh (id=4fcb419d72d5a534c9df69f586e8fd2e): Total: 0.137 seconds - Initiated by RefreshV2(AllowForceSynchronousImport)
+Couldn't find a readme
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+ReadmeEditor:SelectReadme () (at Assets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs:90)
+ReadmeEditor:SelectReadmeAutomatically () (at Assets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs:58)
+UnityEditor.EditorApplication:Internal_CallDelayFunctions ()
+
+(Filename: Assets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs Line: 90)
+
+Start Indexing on Editor startup
+[Indexing] Starting Initial Indexing for Assets
+Starting new worker id: 1 with log in C:/Users/jckzh/source/repos/TraverserProject/Logs/AssetImportWorkerHW1.log
+[Worker0] Imported GUID: 12ae97471a9a0f649a5e0a9457f978c3 - Path: Assets/Data/WorldLocations/Area_01_Dungeon_EntranceHall_Props.unity - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B -> (ImportResultId: '642a464a5bc8db9cd48b218b67b63a8e') in 0.1381942 seconds
+[Worker0] Imported GUID: 30b537ad166a3884ca337ec9a0218627 - Path: Assets/Data/WorldLocations/Area_01_Dungeon_EntranceHall_Spawners.unity - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B -> (ImportResultId: '435e84c372e298d195353c7488dd5161') in 0.0670901 seconds
+[Worker0] Imported GUID: 54074ccbad7792b4ab323ea7cee4fe2e - Path: Assets/Scenes/Main_Menu_01.unity - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B -> (ImportResultId: '201fec9e1c92c11127c5453ce693d35b') in 0.0450899 seconds
+Worker ready: AssetImportWorkerHW1 1
+Asset Pipeline Refresh (id=a276f788c6e33294eb7395aefe6b7512): Total: 0.010 seconds - Initiated by RefreshV2(AllowForceSynchronousImport)
+Importing 'GUID: 00000000000000009000000000000000 - Path: ProjectSettings/QualitySettings.asset' with importer (LibraryAssetImporter)
+Imported 'GUID: 00000000000000009000000000000000' -> (Import Result ID: '1234d6af70f66210ce7cfda4e66e8b00') in 0.004 seconds [static dependencies only]. Details - ImportResultOutputID=2a108b3da874f726c62fbe5f12be4a8a DependenciesID=1def488656846da6ef2e03206928b0e0 StaticDependenciesID=a0cf3dfdae99c755d92b7948d1cfcae0 
+Serialized file "Assets/Data/Imports/JMO Assets/Cartoon FX Remaster/CFXR Assets/Graphics/cfxr magic star mesh.asset" contains a Mesh object at version 9, below the supported minimum (10). Open and re-save the file to upgrade.
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEditor.AssetDatabase:LoadAssetAtPath (string,System.Type)
+UnityEditor.AssetDatabase:LoadAssetAtPath<Unity.Netcode.NetworkPrefabsList> (string)
+Unity.Netcode.Editor.Configuration.NetworkPrefabProcessor:GetOrCreateNetworkPrefabs (string,bool&,bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@277a288a1cea/Editor/Configuration/NetworkPrefabProcessor.cs:148)
+Unity.Netcode.Editor.Configuration.NetworkPrefabProcessor:OnPostprocessAllAssets (string[],string[],string[],string[]) (at ./Library/PackageCache/com.unity.netcode.gameobjects@277a288a1cea/Editor/Configuration/NetworkPrefabProcessor.cs:117)
+System.Reflection.RuntimeMethodInfo:Invoke (object,System.Reflection.BindingFlags,System.Reflection.Binder,object[],System.Globalization.CultureInfo)
+System.Reflection.MethodBase:Invoke (object,object[])
+UnityEditor.AssetPostprocessingInternal:InvokeMethod (System.Reflection.MethodInfo,object[])
+UnityEditor.AssetPostprocessingInternal:PostprocessAllAssets (string[],string[],string[],string[],string[],bool)
+UnityEditor.AssetDatabase:OpenAsset (UnityEngine.EntityId,int,int)
+UnityEditor.AssetDatabase:OpenAsset (UnityEngine.EntityId)
+UnityEditor.ProjectBrowser:OpenAssetSelection (UnityEngine.EntityId[])
+UnityEditor.ProjectBrowser:OpenListAreaSelection ()
+UnityEditor.ProjectBrowser:ListAreaItemSelectedCallback (bool)
+UnityEditor.ObjectListArea:SetSelection (UnityEngine.EntityId[],bool)
+UnityEditor.ObjectListArea/LocalGroup:HandleMouseWithDragging (UnityEngine.EntityId,int,UnityEngine.Rect)
+UnityEditor.ObjectListArea/LocalGroup:DrawItem (UnityEngine.Rect,UnityEditor.FilteredHierarchy/FilterResult,UnityEditor.BuiltinResource,bool)
+UnityEditor.ObjectListArea/LocalGroup:DrawInternal (int,int,single)
+UnityEditor.ObjectListArea/Group:Draw (single,UnityEngine.Vector2,int&)
+UnityEditor.ObjectListArea:HandleListArea ()
+UnityEditor.ObjectListArea:OnGUI (UnityEngine.Rect,int)
+UnityEditor.ProjectBrowser:OnGUI ()
+UnityEditor.HostView:InvokeOnGUI (UnityEngine.Rect)
+UnityEditor.DockArea:DrawView (UnityEngine.Rect)
+UnityEditor.DockArea:OldOnGUI ()
+UnityEngine.UIElements.IMGUIContainer:DoOnGUI (UnityEngine.Event,UnityEngine.Matrix4x4,UnityEngine.Rect,bool,UnityEngine.Rect,System.Action,bool)
+UnityEngine.UIElements.IMGUIContainer:HandleIMGUIEvent (UnityEngine.Event,UnityEngine.Matrix4x4,UnityEngine.Rect,System.Action,bool)
+UnityEngine.UIElements.IMGUIContainer:HandleIMGUIEvent (UnityEngine.Event,System.Action,bool)
+UnityEngine.UIElements.IMGUIContainer:HandleIMGUIEvent (UnityEngine.Event,bool)
+UnityEngine.UIElements.IMGUIContainer:SendEventToIMGUIRaw (UnityEngine.UIElements.EventBase,bool,bool)
+UnityEngine.UIElements.IMGUIContainer:SendEventToIMGUI (UnityEngine.UIElements.EventBase,bool,bool)
+UnityEngine.UIElements.IMGUIContainer:HandleEventBubbleUp (UnityEngine.UIElements.EventBase)
+UnityEngine.UIElements.EventDispatchUtilities:HandleEventAcrossPropagationPathWithCompatibilityEvent (UnityEngine.UIElements.EventBase,UnityEngine.UIElements.EventBase,UnityEngine.UIElements.BaseVisualElementPanel,UnityEngine.UIElements.VisualElement,bool)
+UnityEngine.UIElements.EventDispatchUtilities:DispatchToElementUnderPointerOrPanelRoot (UnityEngine.UIElements.EventBase,UnityEngine.UIElements.BaseVisualElementPanel,int,UnityEngine.Vector2)
+UnityEngine.UIElements.EventDispatchUtilities:DispatchToCapturingElementOrElementUnderPointer (UnityEngine.UIElements.EventBase,UnityEngine.UIElements.BaseVisualElementPanel,int,UnityEngine.Vector2)
+UnityEngine.UIElements.PointerDownEvent:Dispatch (UnityEngine.UIElements.BaseVisualElementPanel)
+UnityEngine.UIElements.EventDispatcher:ProcessEvent (UnityEngine.UIElements.EventBase,UnityEngine.UIElements.BaseVisualElementPanel)
+UnityEngine.UIElements.EventDispatcher:Dispatch (UnityEngine.UIElements.EventBase,UnityEngine.UIElements.BaseVisualElementPanel,UnityEngine.UIElements.DispatchMode)
+UnityEngine.UIElements.BaseVisualElementPanel:SendEvent (UnityEngine.UIElements.EventBase,UnityEngine.UIElements.DispatchMode)
+UnityEditor.UIElements.EditorEventDispatchUtility:DoDispatch (UnityEngine.UIElements.BaseVisualElementPanel,UnityEngine.Event)
+UnityEditor.UIElements.DefaultWindowBackend:ProcessEvent (UnityEngine.Event)
+UnityEditor.GUIView:ProcessEvent (UnityEngine.EntityId,intptr,bool&)
+
+[./Library/PackageCache/com.unity.netcode.gameobjects@277a288a1cea/Editor/Configuration/NetworkPrefabProcessor.cs line 148]
+
+Refreshing native plugins compatible for Editor in 3.54 ms, found 5 plugins.
+
+Asset Pipeline Refresh (id=dc136ee5185ebd24f9ab6f9c1fc8e392): Total: 0.658 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+	(Values over 0.05ms)
+	Summary:
+		Imports: total=1 (actual=1, local cache=0, cache server=0)
+		Asset DB Process Time: managed=1 ms, native=26 ms
+		Asset DB Callback time: managed=616 ms, native=13 ms
+		Scripting: domain reloads=0, domain reload time=0 ms, compile time=0 ms, other=0 ms
+		Project Asset Count: scripts=2425, non-scripts=7645
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 1
+	ApplyChangesToAssetFolders: 0.184ms
+	Scan: 8.761ms
+	Collect global state as custom dependencies: 0.360ms
+	ProcessAssetsWithTransientArtifactChanges: 0.113ms
+	CategorizeAssets: 6.546ms
+	ImportOutOfDateAssets: 7.210ms (0.310ms without children)
+		ImportManagerImport: 4.997ms (0.881ms without children)
+		ReloadNativeAssets: 0.252ms
+		UnloadImportedAssets: 0.225ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 0.966ms
+		ImportSchedulerStart: 0.459ms
+	PostProcessAllAssets: 624.796ms
+		XRBuildSystem.XRAssetImported 7.011ms
+		MonoPostProcessAllAssets: 616.914ms
+			NetworkPrefabProcessor.OnPostprocessAllAssets 458.782ms
+			AssetPostprocessor.OnPostprocessAllAssets 135.592ms
+			SpriteSlicePostprocessor.OnPostprocessAllAssets 3.193ms
+			VFXGraphPreprocessor.OnPostprocessAllAssets 2.744ms
+			RetainedModeAssetPostprocessor.OnPostprocessAllAssets 1.704ms
+			ShaderGraphAssetPostProcessor.OnPostprocessAllAssets 1.595ms
+			SpriteEditorTexturePostprocessor.OnPostprocessAllAssets 1.302ms
+			ConfigAssetsTracker.OnPostprocessAllAssets 1.207ms
+			BuilderAssetPostprocessor.OnPostprocessAllAssets 1.100ms
+			AssetChangedListener.OnPostprocessAllAssets 0.751ms
+			UVCSAssetPostprocessor.OnPostprocessAllAssets 0.586ms
+			SyncVS.PostprocessSyncProject 0.581ms
+			AudioMixerPostprocessor.OnPostprocessAllAssets 0.549ms
+			MaterialPostprocessor.OnPostprocessAllAssets 0.533ms
+			StyleCatalogPostProcessor.OnPostprocessAllAssets 0.456ms
+			ArtifactBrowserPostProcessor.OnPostprocessAllAssets 0.444ms
+			CubeLutAssetImporter.OnPostprocessAllAssets 0.424ms
+			InputActionJsonNameModifierAssetProcessor.OnPostprocessAllAssets 0.423ms
+			TextAssetPostProcessor.OnPostprocessAllAssets 0.359ms
+			AssetEvents.OnPostprocessAllAssets 0.332ms
+			CFXR_ShaderPostProcessor.OnPostprocessAllAssets 0.325ms
+			PostProcessor.OnPostprocessAllAssets 0.284ms
+			TMPro_TexturePostProcessor.OnPostprocessAllAssets 0.261ms
+			ScenarioDriftAssetsTracker.OnPostprocessAllAssets 0.210ms
+			ThemePostprocessor.OnPostprocessAllAssets 0.183ms
+			SpeedTreePostProcessor.OnPostprocessAllAssets 0.150ms
+			AssetReloadNotifier.OnPostprocessAllAssets 0.147ms
+			SamplePostprocessor.OnPostprocessAllAssets 0.144ms
+			AudioContainerPostProcessor.OnPostprocessAllAssets 0.126ms
+			RenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 0.097ms
+	PostAssetChangesProfiler: 5.772ms
+	GatherAllCurrentPrimaryImportResultRevisions: 0.311ms
+	PersistCurrentRevisions: 0.245ms
+	Untracked: 3.971ms
+
+Importing 'GUID: 94a13c65618ef3b42b2184a3cbe8ae43 - Path: Assets/Scenes/World_01.unity' with importer (DefaultImporter)
+Imported 'GUID: 94a13c65618ef3b42b2184a3cbe8ae43' -> (Import Result ID: '73766e1eb64f366fd48ffb7bc937ad3f') in 0.008 seconds [static dependencies only]. Details - ImportResultOutputID=67df59c5a276b3e50047b6fb701fc9c2 DependenciesID=e93f913162c36dadb0717afc147d42ee StaticDependenciesID=0b4f4f15ac5d161560ffc636b31d4a6d 
+Refreshing native plugins compatible for Editor in 3.51 ms, found 5 plugins.
+Asset Pipeline Refresh (id=c4e43c4a165ad144d9793a0f2a8b0767): Total: 0.081 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+Opening scene 'Assets/Scenes/Main_Menu_01.unity'
+Unloading 33 Unused Serialized files (Serialized files now loaded: 0)
+Loaded scene 'Assets/Scenes/Main_Menu_01.unity'
+	Deserialize:            45.108 ms
+	Integration:            1084.650 ms
+	Integration of assets:  0.886 ms
+	Thread Wait Time:       -0.013 ms
+	Total Operation Time:   1130.631 ms
+Unloading 1595 unused Assets / (144.2 MB). Loaded Objects now: 33772.
+Memory consumption went from 1.19 GB to 1.05 GB.
+Total: 34.529300 ms (FindLiveObjects: 4.135200 ms CreateObjectMapping: 1.737100 ms MarkObjects: 25.321000 ms  DeleteObjects: 2.838700 ms)
+
+[Worker0] Imported GUID: 94a13c65618ef3b42b2184a3cbe8ae43 - Path: Assets/Scenes/World_01.unity - Importer: ScriptedImporter/UnityEditor.QuickSearchModule:UnityEditor.Search:ASIAI0B -> (ImportResultId: '2f4437f34c5ce0849f4b06027abcf70c') in 0.046337 seconds
+GPU Resident Drawer disposed.
+Reloading assemblies for play mode.
+Reloading assemblies after forced synchronous recompile.
+[Licensing::Client] Successfully resolved entitlement details
+Begin MonoManager ReloadAssembly
+'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+Refreshing native plugins compatible for Editor in 4.30 ms, found 5 plugins.
+Native extension for WindowsStandalone target not found
+[MODES] ModeService[none].Initialize
+[MODES] ModeService[none].LoadModes
+ScheduleIndexationOnStartup MainProcess:True IndexOnStartup:True
+Scripting: successfully reloaded assembly
+- Finished resetting the current domain, in  3.612 seconds
+Domain Reload Profiling: 4956ms
+	BeginReloadAssembly (838ms)
+		DisableScriptedObjects (182ms)
+		CreateAndSetChildDomain (345ms)
+	RebuildCommonClasses (16ms)
+	RebuildNativeTypeToScriptingClass (22ms)
+	initialDomainReloadingComplete (100ms)
+	LoadAllAssembliesAndSetupDomain (365ms)
+		LoadAssemblies (211ms)
+		TypeCache.Refresh (8ms)
+		AnalyzeDomain (38ms)
+			ResolveRequiredComponents (33ms)
+	FinalizeReload (3613ms)
+		SetupLoadedEditorAssemblies (0ms)
+			BeforeProcessingInitializeOnLoad (253ms)
+			ProcessInitializeOnLoadAttributes (580ms)
+			ProcessInitializeOnLoadMethodAttributes (317ms)
+			AfterProcessingInitializeOnLoad (10ms)
+			EditorAssembliesLoaded (3ms)
+		AwakeInstancesAfterBackupRestoration (1595ms)
+No restricted APIs configured; Validation skipped.
+Checking 19 assemblies for restricted APIs found 0 usage(s) in 6 ms
+Refreshing native plugins compatible for Editor in 3.60 ms, found 5 plugins.
+
+Asset Pipeline Refresh (id=e8203d4731ef0324e89f860de8adc41d): Total: 9.452 seconds - Initiated by StopAssetImportingV2(ForceSynchronousImport | ForceDomainReload)
+	(Values over 0.05ms)
+	Summary:
+		Imports: total=0 (actual=0, local cache=0, cache server=0)
+		Asset DB Process Time: managed=0 ms, native=4179 ms
+		Asset DB Callback time: managed=2697 ms, native=1139 ms
+		Scripting: domain reloads=1, domain reload time=1434 ms, compile time=1 ms, other=0 ms
+		Project Asset Count: scripts=2425, non-scripts=7645
+		Asset File Changes: new=0, changed=0, moved=0, deleted=0
+		Scan Filter Count: 0
+	InvokePackagesCallback: 3.972ms
+	ApplyChangesToAssetFolders: 0.385ms
+	Collect global state as custom dependencies: 3.538ms
+	ProcessAssetsWithTransientArtifactChanges: 311.070ms
+	CategorizeAssets: 138.923ms
+	CompileScripts: 1.198ms
+	ImportOutOfDateAssets: 3635.126ms (3628.117ms without children)
+		CollectScriptTypesHashes: 2.756ms
+		ReloadNativeAssets: 2.654ms
+		UnloadImportedAssets: 2.099ms
+		EnsureUptoDateAssetsAreRegisteredWithGuidPM: 1.743ms
+		ImportSchedulerStart: 0.458ms
+	PostProcessAllAssets: 3819.375ms
+		AssemblyValidation.PostprocessAllAssets 94.844ms
+		PostprocessAssetsUpdateCachedIcon 36.156ms
+		PostProcessCallbackCreateDeferredMaterials 30.893ms
+		RaytracingShaderImportPostprocess 18.636ms
+		ShaderAssetModifiedCallback 18.029ms
+		ComputeShaderImportPostprocess 17.657ms
+		SpeedTreeImporter.PostprocessAllAssets 13.764ms
+		BlockShaderImporter.PostprocessAllAssets 7.569ms
+		LocalizationDatabase.AssetDatabasePostprocessCallback 6.185ms
+		XRBuildSystem.XRAssetImported 1.102ms
+		MonoPostProcessAllAssets: 2694.196ms
+			SyncVS.PostprocessSyncProject 1545.481ms
+			ShaderGraphAssetPostProcessor.OnPostprocessAllAssets 288.840ms
+			AssetPostprocessor.OnPostprocessAllAssets 122.417ms
+			AudioMixerPostprocessor.OnPostprocessAllAssets 74.711ms
+			PostProcessor.OnPostprocessAllAssets 70.563ms
+			CFXR_ShaderPostProcessor.OnPostprocessAllAssets 65.813ms
+			VFXGraphPreprocessor.OnPostprocessAllAssets 54.849ms
+			InputActionJsonNameModifierAssetProcessor.OnPostprocessAllAssets 53.387ms
+			NetworkPrefabProcessor.OnPostprocessAllAssets 48.617ms
+			InputActionAssetPostprocessor.OnPostprocessAllAssets 44.499ms
+			MaterialPostprocessor.OnPostprocessAllAssets 44.432ms
+			TextAssetPostProcessor.OnPostprocessAllAssets 42.915ms
+			SpriteSlicePostprocessor.OnPostprocessAllAssets 36.193ms
+			CubeLutAssetImporter.OnPostprocessAllAssets 28.607ms
+			AssetChangedListener.OnPostprocessAllAssets 24.825ms
+			UniversalRenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 22.675ms
+			BuilderAssetPostprocessor.OnPostprocessAllAssets 11.833ms
+			RenderPipelineGlobalSettingsPostprocessor.OnPostprocessAllAssets 10.329ms
+			SpeedTree9Postprocessor.OnPostprocessAllAssets 7.155ms
+			WindowAssetPostprocessingWatcher.OnPostprocessAllAssets 3.475ms
+			RetainedModeAssetPostprocessor.OnPostprocessAllAssets 3.060ms
+			SpriteEditorTexturePostprocessor.OnPostprocessAllAssets 2.234ms
+			StyleCatalogPostProcessor.OnPostprocessAllAssets 1.572ms
+			ProjectSettingsPostprocessor.OnPostprocessAllAssets 1.375ms
+			ShaderReflectionAssetPostProcessor.OnPostprocessAllAssets 0.937ms
+			ThemePostprocessor.OnPostprocessAllAssets 0.864ms
+			UVCSAssetPostprocessor.OnPostprocessAllAssets 0.683ms
+			ArtifactBrowserPostProcessor.OnPostprocessAllAssets 0.682ms
+			SpeedTreePostProcessor.OnPostprocessAllAssets 0.648ms
+			AssetEvents.OnPostprocessAllAssets 0.478ms
+			ReferencedClipsPostProcessor.OnPostprocessAllAssets 0.464ms
+			TMPro_TexturePostProcessor.OnPostprocessAllAssets 0.372ms
+			SamplePostprocessor.OnPostprocessAllAssets 0.359ms
+			EditModeScopePostprocessor.OnPostprocessAllAssets 0.356ms
+			TerrainToolbarOverlayPostProcessor.OnPostprocessAllAssets 0.245ms
+			AssetDatabaseCallbacks.OnPostprocessAllAssets 0.193ms
+			AssetReloadNotifier.OnPostprocessAllAssets 0.179ms
+			AudioContainerPostProcessor.OnPostprocessAllAssets 0.173ms
+			ConfigAssetsTracker.OnPostprocessAllAssets 0.163ms
+			ScenarioDriftAssetsTracker.OnPostprocessAllAssets 0.148ms
+	PostAssetChangesProfiler: 16.638ms
+	GatherAllCurrentPrimaryImportResultRevisions: 0.297ms
+	UnloadStreamsBegin: 4.073ms
+	PersistCurrentRevisions: 0.237ms
+	GenerateScriptTypeHashes: 9.300ms
+	GenerateScriptTypeSerializationHashes: 14.880ms
+	Untracked: 1479.659ms
+
+Setting breakpad minidump AppID = 480
+SteamInternal_SetMinidumpSteamID:  Caching Steam ID:  76561198052973914 [API loaded no]
+Loaded scene 'Temp/__Backupscenes/0.backup'
+	Deserialize:            139.374 ms
+	Integration:            578.499 ms
+	Integration of assets:  0.177 ms
+	Thread Wait Time:       -0.058 ms
+	Total Operation Time:   717.992 ms
+GPU Resident Drawer created with GPU Occlusion Culling.
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Client] Successfully resolved entitlement details
+Asset Pipeline Refresh (id=3ba032411d2e3014f84de05c941b742e): Total: 0.029 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+Asset Pipeline Refresh (id=aab08bbdffeb5e5459521af7fbbd17ab): Total: 0.004 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+[Package Manager Window] Error while getting access token: Server response is "The requested URL returned error: 400" [Code 400]
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:LogError (object)
+UnityEditor.PackageManager.UI.Internal.AssetStoreOAuth:OnOperationError (string)
+UnityEditor.PackageManager.UI.Internal.AssetStoreOAuth:<GetAccessToken>b__24_0 (UnityEditor.IAsyncHTTPClient)
+UnityEditor.AsyncHTTPClient:Done (UnityEditor.AsyncHTTPClient/State,int)
+
+[Package Manager Window] Error while getting product update details: Error while getting access token: Server response is "The requested URL returned error: 400" [Code 400]
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+UnityEditor.PackageManager.UI.Internal.AssetStoreClientV2/<>c__DisplayClass27_0:<FetchUpdateInfos>b__1 (UnityEditor.PackageManager.UI.Internal.UIError)
+UnityEditor.PackageManager.UI.Internal.AssetStoreOAuth:OnOperationError (string)
+UnityEditor.PackageManager.UI.Internal.AssetStoreOAuth:<GetAccessToken>b__24_0 (UnityEditor.IAsyncHTTPClient)
+UnityEditor.AsyncHTTPClient:Done (UnityEditor.AsyncHTTPClient/State,int)
+
+CREATE SAVE FILE, AT SAVE PATH: C:/Users/jckzh/AppData/LocalLow/DefaultCompany/TraverserProject\CharacterSlot_051
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraverserProject.SaveFileDataWriter:CreateNewCharacterSaveFile (TraverserProject.CharacterSaveData) (at Assets/Scripts/SaveAndLoad/SaveFileDataWriter.cs:37)
+TraverserProject.WorldSaveGameManager:SaveGame () (at Assets/Scripts/World Manager/WorldSaveGameManager.cs:329)
+TraverserProject.WorldSaveGameManager:NewGame () (at Assets/Scripts/World Manager/WorldSaveGameManager.cs:305)
+TraverserProject.WorldSaveGameManager:AttemptToCreateNewGame () (at Assets/Scripts/World Manager/WorldSaveGameManager.cs:256)
+TraverserProject.TitleScreenManager:StartNewGame () (at Assets/Scripts/Menu Scene/TitleScreenManager.cs:103)
+UnityEngine.Events.InvokableCall:Invoke ()
+UnityEngine.Events.UnityEvent:Invoke ()
+UnityEngine.UI.Button:Press () (at ./Library/PackageCache/com.unity.ugui@0b1771797efc/Runtime/UGUI/UI/Core/Button.cs:71)
+UnityEngine.UI.Button:OnPointerClick (UnityEngine.EventSystems.PointerEventData) (at ./Library/PackageCache/com.unity.ugui@0b1771797efc/Runtime/UGUI/UI/Core/Button.cs:115)
+UnityEngine.EventSystems.ExecuteEvents:Execute (UnityEngine.EventSystems.IPointerClickHandler,UnityEngine.EventSystems.BaseEventData) (at ./Library/PackageCache/com.unity.ugui@0b1771797efc/Runtime/UGUI/EventSystem/ExecuteEvents.cs:57)
+UnityEngine.EventSystems.ExecuteEvents:Execute<UnityEngine.EventSystems.IPointerClickHandler> (UnityEngine.GameObject,UnityEngine.EventSystems.BaseEventData,UnityEngine.EventSystems.ExecuteEvents/EventFunction`1<UnityEngine.EventSystems.IPointerClickHandler>) (at ./Library/PackageCache/com.unity.ugui@0b1771797efc/Runtime/UGUI/EventSystem/ExecuteEvents.cs:272)
+UnityEngine.InputSystem.UI.InputSystemUIInputModule:ProcessPointerButton (UnityEngine.InputSystem.UI.PointerModel/ButtonState&,UnityEngine.EventSystems.PointerEventData) (at ./Library/PackageCache/com.unity.inputsystem@7a4e1a2a8194/InputSystem/Runtime/Plugins/UI/InputSystemUIInputModule.cs:727)
+UnityEngine.InputSystem.UI.InputSystemUIInputModule:ProcessPointer (UnityEngine.InputSystem.UI.PointerModel&) (at ./Library/PackageCache/com.unity.inputsystem@7a4e1a2a8194/InputSystem/Runtime/Plugins/UI/InputSystemUIInputModule.cs:486)
+UnityEngine.InputSystem.UI.InputSystemUIInputModule:Process () (at ./Library/PackageCache/com.unity.inputsystem@7a4e1a2a8194/InputSystem/Runtime/Plugins/UI/InputSystemUIInputModule.cs:2405)
+UnityEngine.EventSystems.EventSystem:Update () (at ./Library/PackageCache/com.unity.ugui@0b1771797efc/Runtime/UGUI/EventSystem/EventSystem.cs:527)
+
+(Filename: Assets/Scripts/SaveAndLoad/SaveFileDataWriter.cs Line: 37)
+
+spell has No Icon
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TravserserProject.PlayerUIHudManager:SetSpellQuickSlotIcon (int) (at Assets/Scripts/Character/Player/PlayerUI/PlayerUIHudManager.cs:279)
+TraverserProject.PlayerNetworkManager:OnCurrentSpellIDChange (int,int) (at Assets/Scripts/Character/Player/PlayerNetworkManager.cs:377)
+Unity.Netcode.NetworkVariable`1<int>:set_Value (int) (at ./Library/PackageCache/com.unity.netcode.gameobjects@277a288a1cea/Runtime/NetworkVariable/NetworkVariable.cs:165)
+TraverserProject.PlayerEquipmentManager:LoadSpellItemEquipment (TraverserProject.SpellItem) (at Assets/Scripts/Character/Player/PlayerEquipmentManager.cs:926)
+TraverserProject.PlayerManager:LoadGameDataFromCurrentCharacterData (TraverserProject.CharacterSaveData&) (at Assets/Scripts/Character/Player/PlayerManager.cs:726)
+TraverserProject.WorldSceneManager:LoadWorldScene (int) (at Assets/Scripts/World Manager/WorldSceneManager.cs:146)
+TraverserProject.WorldSaveGameManager:NewGame () (at Assets/Scripts/World Manager/WorldSaveGameManager.cs:306)
+TraverserProject.WorldSaveGameManager:AttemptToCreateNewGame () (at Assets/Scripts/World Manager/WorldSaveGameManager.cs:256)
+TraverserProject.TitleScreenManager:StartNewGame () (at Assets/Scripts/Menu Scene/TitleScreenManager.cs:103)
+UnityEngine.Events.InvokableCall:Invoke ()
+UnityEngine.Events.UnityEvent:Invoke ()
+UnityEngine.UI.Button:Press () (at ./Library/PackageCache/com.unity.ugui@0b1771797efc/Runtime/UGUI/UI/Core/Button.cs:71)
+UnityEngine.UI.Button:OnPointerClick (UnityEngine.EventSystems.PointerEventData) (at ./Library/PackageCache/com.unity.ugui@0b1771797efc/Runtime/UGUI/UI/Core/Button.cs:115)
+UnityEngine.EventSystems.ExecuteEvents:Execute (UnityEngine.EventSystems.IPointerClickHandler,UnityEngine.EventSystems.BaseEventData) (at ./Library/PackageCache/com.unity.ugui@0b1771797efc/Runtime/UGUI/EventSystem/ExecuteEvents.cs:57)
+UnityEngine.EventSystems.ExecuteEvents:Execute<UnityEngine.EventSystems.IPointerClickHandler> (UnityEngine.GameObject,UnityEngine.EventSystems.BaseEventData,UnityEngine.EventSystems.ExecuteEvents/EventFunction`1<UnityEngine.EventSystems.IPointerClickHandler>) (at ./Library/PackageCache/com.unity.ugui@0b1771797efc/Runtime/UGUI/EventSystem/ExecuteEvents.cs:272)
+UnityEngine.InputSystem.UI.InputSystemUIInputModule:ProcessPointerButton (UnityEngine.InputSystem.UI.PointerModel/ButtonState&,UnityEngine.EventSystems.PointerEventData) (at ./Library/PackageCache/com.unity.inputsystem@7a4e1a2a8194/InputSystem/Runtime/Plugins/UI/InputSystemUIInputModule.cs:727)
+UnityEngine.InputSystem.UI.InputSystemUIInputModule:ProcessPointer (UnityEngine.InputSystem.UI.PointerModel&) (at ./Library/PackageCache/com.unity.inputsystem@7a4e1a2a8194/InputSystem/Runtime/Plugins/UI/InputSystemUIInputModule.cs:486)
+UnityEngine.InputSystem.UI.InputSystemUIInputModule:Process () (at ./Library/PackageCache/com.unity.inputsystem@7a4e1a2a8194/InputSystem/Runtime/Plugins/UI/InputSystemUIInputModule.cs:2405)
+UnityEngine.EventSystems.EventSystem:Update () (at ./Library/PackageCache/com.unity.ugui@0b1771797efc/Runtime/UGUI/EventSystem/EventSystem.cs:527)
+
+(Filename: Assets/Scripts/Character/Player/PlayerUI/PlayerUIHudManager.cs Line: 279)
+
+Unloading 178 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 10.986100 ms
+NullReferenceException: Object reference not set to an instance of an object
+  at TraverserProject.AIPatrolPath.Awake () [0x00032] in C:\Users\jckzh\source\repos\TraverserProject\Assets\Scripts\Character\AICharacter\AIPatrolPath.cs:19 
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&)
+
+(Filename: Assets/Scripts/Character/AICharacter/AIPatrolPath.cs Line: 19)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at TraverserProject.AIPatrolPath.Awake () [0x00032] in C:\Users\jckzh\source\repos\TraverserProject\Assets\Scripts\Character\AICharacter\AIPatrolPath.cs:19 
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&)
+
+(Filename: Assets/Scripts/Character/AICharacter/AIPatrolPath.cs Line: 19)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at TraverserProject.AIPatrolPath.Awake () [0x00032] in C:\Users\jckzh\source\repos\TraverserProject\Assets\Scripts\Character\AICharacter\AIPatrolPath.cs:19 
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&)
+
+(Filename: Assets/Scripts/Character/AICharacter/AIPatrolPath.cs Line: 19)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at TraverserProject.AIPatrolPath.Awake () [0x00032] in C:\Users\jckzh\source\repos\TraverserProject\Assets\Scripts\Character\AICharacter\AIPatrolPath.cs:19 
+UnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&)
+
+(Filename: Assets/Scripts/Character/AICharacter/AIPatrolPath.cs Line: 19)
+
+Loaded scene 'Assets/Scenes/World_01.unity'
+	Deserialize:            193.157 ms
+	Integration:            142.655 ms
+	Integration of assets:  0.130 ms
+	Thread Wait Time:       124.116 ms
+	Total Operation Time:   460.057 ms
+Asset 'Knight': Transition 'Spell_Off_Fire_Ball_Start_01 -> Spell_Off_Fire_Ball_Charge_01' in state 'Spell_Off_Fire_Ball_Start_01' doesn't have an Exit Time or any condition, transition will be ignored
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Internal_CloneSingle (UnityEngine.Object)
+UnityEngine.Object:Instantiate<UnityEngine.GameObject> (UnityEngine.GameObject)
+TraverserProject.AICharacterSpawner:AttemptToSpawnCharacter () (at Assets/Scripts/Character/AICharacter/AICharacterSpawner.cs:47)
+TraverserProject.WorldAIManager:SpawnCharacter (TraverserProject.AICharacterSpawner) (at Assets/Scripts/World Manager/WorldAIManager.cs:58)
+TraverserProject.AICharacterSpawner:Start () (at Assets/Scripts/Character/AICharacter/AICharacterSpawner.cs:35)
+
+[Assets/Scripts/Character/AICharacter/AICharacterSpawner.cs line 47]
+
+Asset 'Knight': Transition 'Spell_Off_Fire_Ball_Charge_01 -> Spell_Off_Fire_Ball_Release_01' in state 'Spell_Off_Fire_Ball_Charge_01' doesn't have an Exit Time or any condition, transition will be ignored
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Internal_CloneSingle (UnityEngine.Object)
+UnityEngine.Object:Instantiate<UnityEngine.GameObject> (UnityEngine.GameObject)
+TraverserProject.AICharacterSpawner:AttemptToSpawnCharacter () (at Assets/Scripts/Character/AICharacter/AICharacterSpawner.cs:47)
+TraverserProject.WorldAIManager:SpawnCharacter (TraverserProject.AICharacterSpawner) (at Assets/Scripts/World Manager/WorldAIManager.cs:58)
+TraverserProject.AICharacterSpawner:Start () (at Assets/Scripts/Character/AICharacter/AICharacterSpawner.cs:35)
+
+[Assets/Scripts/Character/AICharacter/AICharacterSpawner.cs line 47]
+
+[Netcode] Spawning NetworkObjects with nested NetworkObjects is only supported for scene objects. Child NetworkObjects will not be spawned over the network!
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object,UnityEngine.Object)
+Unity.Netcode.Logging.ContextualLogger:Log (UnityEngine.LogType,Unity.Netcode.Logging.Context)
+Unity.Netcode.Logging.ContextualLogger:Warning (Unity.Netcode.Logging.Context)
+Unity.Netcode.NetworkLog:LogWarning (string)
+Unity.Netcode.NetworkSpawnManager:AuthorityLocalSpawn (Unity.Netcode.NetworkObject,ulong,bool,bool,ulong,bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@277a288a1cea/Runtime/Spawning/NetworkSpawnManager.cs:1130)
+Unity.Netcode.NetworkObject:SpawnInternal (bool,ulong,bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@277a288a1cea/Runtime/Core/NetworkObject.cs:1938)
+Unity.Netcode.NetworkObject:Spawn (bool) (at ./Library/PackageCache/com.unity.netcode.gameobjects@277a288a1cea/Runtime/Core/NetworkObject.cs:2079)
+TraverserProject.NetworkObjectSpawner:AttemptToSpawnObject () (at Assets/Scripts/Interactables/NetworkObjectSpawner.cs:32)
+TraverserProject.WorldObjectManager:SpawnObject (TraverserProject.NetworkObjectSpawner) (at Assets/Scripts/World Manager/WorldObjectManager.cs:38)
+TraverserProject.NetworkObjectSpawner:Start () (at Assets/Scripts/Interactables/NetworkObjectSpawner.cs:21)
+
+(Filename: ./Library/PackageCache/com.unity.netcode.gameobjects@277a288a1cea/Runtime/Spawning/NetworkSpawnManager.cs Line: 1130)
+
+Unloading 14581 unused Assets / (15.1 MB). Loaded Objects now: 36908.
+Memory consumption went from 1.15 GB to 1.14 GB.
+Total: 51.145000 ms (FindLiveObjects: 6.109500 ms CreateObjectMapping: 2.918700 ms MarkObjects: 33.445000 ms  DeleteObjects: 8.123600 ms)
+
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_EntranceHall_Effects.unity'
+	Deserialize:            1.738 ms
+	Integration:            4.529 ms
+	Integration of assets:  0.146 ms
+	Thread Wait Time:       40.129 ms
+	Total Operation Time:   46.542 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_EntranceHall_Props.unity'
+	Deserialize:            10.253 ms
+	Integration:            10.233 ms
+	Integration of assets:  0.445 ms
+	Thread Wait Time:       12.688 ms
+	Total Operation Time:   33.619 ms
+BoxCollider does not support negative scale or size.
+The effective box size has been forced positive and is likely to give unexpected collision geometry.
+If you absolutely need to use negative scaling you can use the convex MeshCollider. Scene hierarchy path "Interactable/Double Door Interactable/Pivot/DoubleDoors/LeftPivot/Cube"
+BoxCollider does not support negative scale or size.
+The effective box size has been forced positive and is likely to give unexpected collision geometry.
+If you absolutely need to use negative scaling you can use the convex MeshCollider. Scene hierarchy path "Interactable/Double Door Interactable/Pivot/DoubleDoors/RightPivot/Cube.001"
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_EntranceHall_Spawners.unity'
+	Deserialize:            2.367 ms
+	Integration:            6.802 ms
+	Integration of assets:  0.410 ms
+	Thread Wait Time:       15.041 ms
+	Total Operation Time:   24.621 ms
+Asset 'Archer': Transition 'Spell_Off_Fire_Ball_Start_01 -> Spell_Off_Fire_Ball_Charge_01' in state 'Spell_Off_Fire_Ball_Start_01' doesn't have an Exit Time or any condition, transition will be ignored
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Internal_CloneSingle (UnityEngine.Object)
+UnityEngine.Object:Instantiate<UnityEngine.GameObject> (UnityEngine.GameObject)
+TraverserProject.AICharacterSpawner:AttemptToSpawnCharacter () (at Assets/Scripts/Character/AICharacter/AICharacterSpawner.cs:47)
+TraverserProject.WorldAIManager:SpawnCharacter (TraverserProject.AICharacterSpawner) (at Assets/Scripts/World Manager/WorldAIManager.cs:58)
+TraverserProject.AICharacterSpawner:Start () (at Assets/Scripts/Character/AICharacter/AICharacterSpawner.cs:35)
+
+[Assets/Scripts/Character/AICharacter/AICharacterSpawner.cs line 47]
+
+Asset 'Archer': Transition 'Spell_Off_Fire_Ball_Charge_01 -> Spell_Off_Fire_Ball_Release_01' in state 'Spell_Off_Fire_Ball_Charge_01' doesn't have an Exit Time or any condition, transition will be ignored
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.Object:Internal_CloneSingle (UnityEngine.Object)
+UnityEngine.Object:Instantiate<UnityEngine.GameObject> (UnityEngine.GameObject)
+TraverserProject.AICharacterSpawner:AttemptToSpawnCharacter () (at Assets/Scripts/Character/AICharacter/AICharacterSpawner.cs:47)
+TraverserProject.WorldAIManager:SpawnCharacter (TraverserProject.AICharacterSpawner) (at Assets/Scripts/World Manager/WorldAIManager.cs:58)
+TraverserProject.AICharacterSpawner:Start () (at Assets/Scripts/Character/AICharacter/AICharacterSpawner.cs:35)
+
+[Assets/Scripts/Character/AICharacter/AICharacterSpawner.cs line 47]
+
+Playing Animation: Sleep_01
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraverserProject.CharacterAnimatorManager:PlayTargetActionAnimation (string,bool,bool,bool,bool,bool,bool) (at Assets/Scripts/Character/CharacterAnimatorManager.cs:170)
+TraverserProject.IdleState:SleepUntilDisturbed (TraverserProject.AICharacterManager) (at Assets/Scripts/Character/AICharacter/State/IdleState.cs:180)
+TraverserProject.IdleState:Tick (TraverserProject.AICharacterManager) (at Assets/Scripts/Character/AICharacter/State/IdleState.cs:44)
+TraverserProject.AICharacterManager:ProcessStateMachine () (at Assets/Scripts/Character/AICharacter/AICharacterManager.cs:189)
+TraverserProject.AICharacterManager:Update () (at Assets/Scripts/Character/AICharacter/AICharacterManager.cs:150)
+
+(Filename: Assets/Scripts/Character/CharacterAnimatorManager.cs Line: 170)
+
+Playing Animation: Sleep_01
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraverserProject.CharacterAnimatorManager:PlayTargetActionAnimation (string,bool,bool,bool,bool,bool,bool) (at Assets/Scripts/Character/CharacterAnimatorManager.cs:170)
+TraverserProject.IdleState:SleepUntilDisturbed (TraverserProject.AICharacterManager) (at Assets/Scripts/Character/AICharacter/State/IdleState.cs:180)
+TraverserProject.IdleState:Tick (TraverserProject.AICharacterManager) (at Assets/Scripts/Character/AICharacter/State/IdleState.cs:44)
+TraverserProject.AICharacterManager:ProcessStateMachine () (at Assets/Scripts/Character/AICharacter/AICharacterManager.cs:189)
+TraverserProject.AICharacterManager:Update () (at Assets/Scripts/Character/AICharacter/AICharacterManager.cs:150)
+
+(Filename: Assets/Scripts/Character/CharacterAnimatorManager.cs Line: 170)
+
+Playing Animation: Sleep_01
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraverserProject.CharacterAnimatorManager:PlayTargetActionAnimation (string,bool,bool,bool,bool,bool,bool) (at Assets/Scripts/Character/CharacterAnimatorManager.cs:170)
+TraverserProject.IdleState:SleepUntilDisturbed (TraverserProject.AICharacterManager) (at Assets/Scripts/Character/AICharacter/State/IdleState.cs:180)
+TraverserProject.IdleState:Tick (TraverserProject.AICharacterManager) (at Assets/Scripts/Character/AICharacter/State/IdleState.cs:44)
+TraverserProject.AICharacterManager:ProcessStateMachine () (at Assets/Scripts/Character/AICharacter/AICharacterManager.cs:189)
+TraverserProject.AICharacterManager:Update () (at Assets/Scripts/Character/AICharacter/AICharacterManager.cs:150)
+
+(Filename: Assets/Scripts/Character/CharacterAnimatorManager.cs Line: 170)
+
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_EntranceHall_Structure.unity'
+	Deserialize:            15.023 ms
+	Integration:            7.655 ms
+	Integration of assets:  0.008 ms
+	Thread Wait Time:       19.365 ms
+	Total Operation Time:   42.051 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_Basement_Effects.unity'
+	Deserialize:            3.541 ms
+	Integration:            12.036 ms
+	Integration of assets:  0.126 ms
+	Thread Wait Time:       16.735 ms
+	Total Operation Time:   32.439 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_Basement_Structure.unity'
+	Deserialize:            35.256 ms
+	Integration:            13.992 ms
+	Integration of assets:  0.324 ms
+	Thread Wait Time:       23.037 ms
+	Total Operation Time:   72.608 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_Basement_Props.unity'
+	Deserialize:            0.700 ms
+	Integration:            3.284 ms
+	Integration of assets:  0.057 ms
+	Thread Wait Time:       16.972 ms
+	Total Operation Time:   21.014 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_SideRoom_Effects.unity'
+	Deserialize:            1.046 ms
+	Integration:            5.220 ms
+	Integration of assets:  0.072 ms
+	Thread Wait Time:       16.385 ms
+	Total Operation Time:   22.723 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_SideRoom_Props.unity'
+	Deserialize:            9.769 ms
+	Integration:            4.246 ms
+	Integration of assets:  0.156 ms
+	Thread Wait Time:       17.290 ms
+	Total Operation Time:   31.462 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_SideRoom_Structure.unity'
+	Deserialize:            7.958 ms
+	Integration:            5.319 ms
+	Integration of assets:  0.169 ms
+	Thread Wait Time:       12.052 ms
+	Total Operation Time:   25.498 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_SideRoom_Spawners.unity'
+	Deserialize:            0.501 ms
+	Integration:            3.083 ms
+	Integration of assets:  0.075 ms
+	Thread Wait Time:       16.256 ms
+	Total Operation Time:   19.914 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_MainHall_Effects.unity'
+	Deserialize:            1.445 ms
+	Integration:            8.329 ms
+	Integration of assets:  0.070 ms
+	Thread Wait Time:       11.684 ms
+	Total Operation Time:   21.529 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_MainHall_Props.unity'
+	Deserialize:            18.865 ms
+	Integration:            8.563 ms
+	Integration of assets:  0.701 ms
+	Thread Wait Time:       33.509 ms
+	Total Operation Time:   61.638 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_MainHall_Structure.unity'
+	Deserialize:            20.642 ms
+	Integration:            8.727 ms
+	Integration of assets:  0.287 ms
+	Thread Wait Time:       16.797 ms
+	Total Operation Time:   46.453 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_MainHall_Spawners.unity'
+	Deserialize:            0.990 ms
+	Integration:            4.450 ms
+	Integration of assets:  0.058 ms
+	Thread Wait Time:       16.708 ms
+	Total Operation Time:   22.207 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_Corridor_Effects.unity'
+	Deserialize:            1.344 ms
+	Integration:            6.728 ms
+	Integration of assets:  0.108 ms
+	Thread Wait Time:       27.005 ms
+	Total Operation Time:   35.185 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_Corridor_Props.unity'
+	Deserialize:            0.695 ms
+	Integration:            3.851 ms
+	Integration of assets:  0.060 ms
+	Thread Wait Time:       18.056 ms
+	Total Operation Time:   22.663 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_Corridor_Spawners.unity'
+	Deserialize:            0.585 ms
+	Integration:            3.632 ms
+	Integration of assets:  0.053 ms
+	Thread Wait Time:       18.509 ms
+	Total Operation Time:   22.780 ms
+Loaded scene 'Assets/Data/WorldLocations/Area_01_Dungeon_Corridor_Structure.unity'
+	Deserialize:            19.910 ms
+	Integration:            8.394 ms
+	Integration of assets:  0.273 ms
+	Thread Wait Time:       14.595 ms
+	Total Operation Time:   43.173 ms
+Stamina Regeneration Amount: 50
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TravserserProject.CharacterStatsManager:RegenerateStamina () (at Assets/Scripts/Character/CharacterStatsManager.cs:199)
+TraverserProject.PlayerManager:Update () (at Assets/Scripts/Character/Player/PlayerManager.cs:62)
+
+(Filename: Assets/Scripts/Character/CharacterStatsManager.cs Line: 199)
+
+Stamina Regeneration Amount: 50
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TravserserProject.CharacterStatsManager:RegenerateStamina () (at Assets/Scripts/Character/CharacterStatsManager.cs:199)
+TraverserProject.PlayerManager:Update () (at Assets/Scripts/Character/Player/PlayerManager.cs:62)
+
+(Filename: Assets/Scripts/Character/CharacterStatsManager.cs Line: 199)
+
+Stamina Regeneration Amount: 50
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TravserserProject.CharacterStatsManager:RegenerateStamina () (at Assets/Scripts/Character/CharacterStatsManager.cs:199)
+TraverserProject.PlayerManager:Update () (at Assets/Scripts/Character/Player/PlayerManager.cs:62)
+
+(Filename: Assets/Scripts/Character/CharacterStatsManager.cs Line: 199)
+
+Stamina Regeneration Amount: 50
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TravserserProject.CharacterStatsManager:RegenerateStamina () (at Assets/Scripts/Character/CharacterStatsManager.cs:199)
+TraverserProject.PlayerManager:Update () (at Assets/Scripts/Character/Player/PlayerManager.cs:62)
+
+(Filename: Assets/Scripts/Character/CharacterStatsManager.cs Line: 199)
+
+Stamina Regeneration Amount: 50
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TravserserProject.CharacterStatsManager:RegenerateStamina () (at Assets/Scripts/Character/CharacterStatsManager.cs:199)
+TraverserProject.PlayerManager:Update () (at Assets/Scripts/Character/Player/PlayerManager.cs:62)
+
+(Filename: Assets/Scripts/Character/CharacterStatsManager.cs Line: 199)
+
+Stamina Regeneration Amount: 50
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TravserserProject.CharacterStatsManager:RegenerateStamina () (at Assets/Scripts/Character/CharacterStatsManager.cs:199)
+TraverserProject.PlayerManager:Update () (at Assets/Scripts/Character/Player/PlayerManager.cs:62)
+
+(Filename: Assets/Scripts/Character/CharacterStatsManager.cs Line: 199)
+
+Stamina Regeneration Amount: 50
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TravserserProject.CharacterStatsManager:RegenerateStamina () (at Assets/Scripts/Character/CharacterStatsManager.cs:199)
+TraverserProject.PlayerManager:Update () (at Assets/Scripts/Character/Player/PlayerManager.cs:62)
+
+(Filename: Assets/Scripts/Character/CharacterStatsManager.cs Line: 199)
+
+Stamina Regeneration Amount: 50
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TravserserProject.CharacterStatsManager:RegenerateStamina () (at Assets/Scripts/Character/CharacterStatsManager.cs:199)
+TraverserProject.PlayerManager:Update () (at Assets/Scripts/Character/Player/PlayerManager.cs:62)
+
+(Filename: Assets/Scripts/Character/CharacterStatsManager.cs Line: 199)
+
+Stamina Regeneration Amount: 50
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TravserserProject.CharacterStatsManager:RegenerateStamina () (at Assets/Scripts/Character/CharacterStatsManager.cs:199)
+TraverserProject.PlayerManager:Update () (at Assets/Scripts/Character/Player/PlayerManager.cs:62)
+
+(Filename: Assets/Scripts/Character/CharacterStatsManager.cs Line: 199)
+
+Stamina Regeneration Amount: 50
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TravserserProject.CharacterStatsManager:RegenerateStamina () (at Assets/Scripts/Character/CharacterStatsManager.cs:199)
+TraverserProject.PlayerManager:Update () (at Assets/Scripts/Character/Player/PlayerManager.cs:62)
+
+(Filename: Assets/Scripts/Character/CharacterStatsManager.cs Line: 199)
+
+CREATE SAVE FILE, AT SAVE PATH: C:/Users/jckzh/AppData/LocalLow/DefaultCompany/TraverserProject\CharacterSlot_051
+UnityEngine.Debug:ExtractStackTraceNoAlloc (byte*,int,string)
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:Internal_Log (UnityEngine.LogType,UnityEngine.LogOption,string,UnityEngine.Object)
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object)
+UnityEngine.Debug:Log (object)
+TraverserProject.SaveFileDataWriter:CreateNewCharacterSaveFile (TraverserProject.CharacterSaveData) (at Assets/Scripts/SaveAndLoad/SaveFileDataWriter.cs:37)
+TraverserProject.WorldSaveGameManager:SaveGame () (at Assets/Scripts/World Manager/WorldSaveGameManager.cs:329)
+TraverserProject.Interactable:Interact (TraverserProject.PlayerManager) (at Assets/Interactable.cs:37)
+TraverserProject.ElevatorInteractable:Interact (TraverserProject.PlayerManager) (at Assets/Scripts/Interactables/ElevatorInteractable.cs:53)
+TraverserProject.PlayerInteractionManager:Interact () (at Assets/Scripts/Character/Player/PlayerInteractionManager.cs:92)
+TraverserProject.PlayerInputManager:HandleInteractionInput () (at Assets/Scripts/Character/Player/PlayerInputManager.cs:707)
+TraverserProject.PlayerInputManager:HandleAllInputs () (at Assets/Scripts/Character/Player/PlayerInputManager.cs:228)
+TraverserProject.PlayerInputManager:Update () (at Assets/Scripts/Character/Player/PlayerInputManager.cs:202)
+
+(Filename: Assets/Scripts/SaveAndLoad/SaveFileDataWriter.cs Line: 37)
+
+Asset Pipeline Refresh (id=a00f53092c2c37944abec2893948f559): Total: 0.031 seconds - Initiated by RefreshV2(NoUpdateAssetOptions)
+GPU Resident Drawer disposed.
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+Loaded scene 'Temp/__Backupscenes/0.backup'
+	Deserialize:            82.865 ms
+	Integration:            228.569 ms
+	Integration of assets:  0.465 ms
+	Thread Wait Time:       0.132 ms
+	Total Operation Time:   312.032 ms
+Unloading 888 unused Assets / (82.0 MB). Loaded Objects now: 33755.
+Memory consumption went from 1.16 GB to 1.08 GB.
+Total: 53.639000 ms (FindLiveObjects: 5.326200 ms CreateObjectMapping: 2.834800 ms MarkObjects: 42.705400 ms  DeleteObjects: 2.226200 ms)
+
+[Licensing::Client] Successfully resolved entitlement details
+GPU Resident Drawer created with GPU Occlusion Culling.
+Asset Pipeline Refresh (id=dff7fc6498ecafb44a052ab7da7af1d0): Total: 0.018 seconds - Initiated by RefreshV2(AllowForceSynchronousImport)
+Importing 'GUID: 00000000000000009000000000000000 - Path: ProjectSettings/QualitySettings.asset' with importer (LibraryAssetImporter)
+Imported 'GUID: 00000000000000009000000000000000' -> (Import Result ID: '1234d6af70f66210ce7cfda4e66e8b00') in 0.005 seconds [static dependencies only]. Details - ImportResultOutputID=2a108b3da874f726c62fbe5f12be4a8a DependenciesID=1def488656846da6ef2e03206928b0e0 StaticDependenciesID=a0cf3dfdae99c755d92b7948d1cfcae0 
+Importing 'GUID: 28c594378528e524caff8a848c745ab4 - Path: Assets/IconMakerRenderTexture.renderTexture' with importer (NativeFormatImporter)
+Imported 'GUID: 28c594378528e524caff8a848c745ab4' -> (Import Result ID: '233934d5edde93962ff0f6926fe6a915') in 0.002 seconds [static dependencies only]. Details - ImportResultOutputID=0adf8dca1f8dd3b71dfddf1c9230dae4 DependenciesID=7547e59cfc7ad8bf4db4b4d7e4622d5a StaticDependenciesID=a2df14f7d483fca12fb336e38546732d 
+Importing 'GUID: cab9102fefe99d24d85c5e6481fd83ea - Path: Assets/PlayerPreviewRenderTexture.renderTexture' with importer (NativeFormatImporter)
+Imported 'GUID: cab9102fefe99d24d85c5e6481fd83ea' -> (Import Result ID: 'dcfdf2e61efe9fd098812504b1d3b00e') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=ca4dc39e9edb7ce7ffcd2d13cb99b4f0 DependenciesID=33bac70761532a7be03a6e8c32fcf04d StaticDependenciesID=16dc1418fdf6aae644f8ca9c62c159ca 
+Importing 'GUID: 573040314eafec34b848653067c61792 - Path: Assets/Scenes/Scene_World_01/Scene_World_01 Baking Set.asset' with importer (NativeFormatImporter)
+Imported 'GUID: 573040314eafec34b848653067c61792' -> (Import Result ID: '36573baf8bb7d42e83e73fc0cf5e73ee') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=e8fa3ed590a9e3a1a74e6f5b0e41d93f DependenciesID=6ae601bf203b3f9a78f2b656b515ee0f StaticDependenciesID=a2332f84d80d35c61986961571fe337a 
+Refreshing native plugins compatible for Editor in 4.82 ms, found 5 plugins.
+Asset Pipeline Refresh (id=11009f5e9202c4c43a3ecd8dfa743a07): Total: 0.061 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+MonoPathRemapper: Attempts to remap: 38877; Successful remaps: 12
+Serialized file version minimum: 22, current 23
+[LAYOUT] About to save layout C:\Users\jckzh\source\repos\TraverserProject\UserSettings\Layouts\default-6000.dwlt
+[LAYOUT] About to save layout C:/Users/jckzh/AppData/Roaming/Unity/Editor-5.x/Preferences\Layouts\current\default-6000.dwlt
+Importing 'GUID: 28c594378528e524caff8a848c745ab4 - Path: Assets/IconMakerRenderTexture.renderTexture' with importer (NativeFormatImporter)
+Imported 'GUID: 28c594378528e524caff8a848c745ab4' -> (Import Result ID: '233934d5edde93962ff0f6926fe6a915') in 0.003 seconds [static dependencies only]. Details - ImportResultOutputID=0adf8dca1f8dd3b71dfddf1c9230dae4 DependenciesID=7547e59cfc7ad8bf4db4b4d7e4622d5a StaticDependenciesID=a2df14f7d483fca12fb336e38546732d 
+Importing 'GUID: cab9102fefe99d24d85c5e6481fd83ea - Path: Assets/PlayerPreviewRenderTexture.renderTexture' with importer (NativeFormatImporter)
+Imported 'GUID: cab9102fefe99d24d85c5e6481fd83ea' -> (Import Result ID: 'dcfdf2e61efe9fd098812504b1d3b00e') in 0.001 seconds [static dependencies only]. Details - ImportResultOutputID=ca4dc39e9edb7ce7ffcd2d13cb99b4f0 DependenciesID=33bac70761532a7be03a6e8c32fcf04d StaticDependenciesID=16dc1418fdf6aae644f8ca9c62c159ca 
+Curl error 42: Callback aborted
+Refreshing native plugins compatible for Editor in 6.31 ms, found 5 plugins.
+Asset Pipeline Refresh (id=7279af2c52a8e5d4ebf42c45a536d2d6): Total: 0.040 seconds - Initiated by StopAssetImportingV2(NoUpdateAssetOptions)
+GPU Resident Drawer disposed.
+Input System module state changed to: ShutdownInProgress.
+Input Polling Thread exited.
+Input System module state changed to: Shutdown.
+'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+'Packages/com.unity.render-pipelines.core/Editor/Deprecated.cs' contains partial class of Unity.Object, exactly 1 of the partial classes needs to be in a file with the same filename. This is to know the one that can be referenced from ie. GameObjects
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+[Licensing::IpcConnector] LicenseClient-jckzh-notifications channel disconnected successfully.
+[Licensing::IpcConnector] LicenseClient-jckzh channel disconnected successfully.
+Lingering sessions upon destruction of worker manager
+Unity Data Store service was successfully shut down
+UDS shutting down local client system
+Shut down UDS service system complete
+AcceleratorClientConnectionCallback - disconnected - :0
+Cleanup mono
+CodeReloadManager destroyed
+abort_threads: Failed aborting id: 0000000000003B58, mono_thread_manage will ignore it
+
+abort_threads: Failed aborting id: 00000000000056DC, mono_thread_manage will ignore it
+
+abort_threads: Failed aborting id: 0000000000003B58, mono_thread_manage will ignore it
+
+abort_threads: Failed aborting id: 00000000000056DC, mono_thread_manage will ignore it
+
+debugger-agent: Unable to listen on 4356
+VBCSCompilerPreWarmer: requested VBCSCompiler shutdown
+Checking for leaked weakptr:
+  Found no leaked weakptrs.
+[Package Manager] Server process was shutdown
+##utp:{"type":"MemoryLeaks","version":2,"phase":"Immediate","time":1792290826446,"processId":39336,"allocatedMemory":24191833,"memoryLabels":[{"Default":247766},{"Permanent":15516},{"NewDelete":87393},{"Thread":4193344},{"Manager":2347549},{"VertexData":8},{"Geometry":816},{"Texture":24},{"Shader":860937},{"Material":132},{"GfxDevice":55968},{"GfxThread":48},{"Animation":2408},{"FreeType":8},{"FontEngine":736},{"Physics":1970},{"Physics2D":16},{"Serialization":71536},{"Input":45280},{"JobScheduler":256},{"TextLib":23254},{"Mono":310},{"MonoCode":39936},{"ScriptingNativeRuntime":1602248},{"BaseObject":124304},{"Resource":1444},{"Renderer":2512},{"Transform":4685},{"File":200158},{"WebCam":616},{"Culling":32},{"Terrain":11442},{"Wind":24},{"STL":40},{"String":415069},{"StaticString":3808},{"Utility":2674970},{"PoolAlloc":3080},{"AI":80},{"TypeTree":14869},{"ScriptManager":18984},{"CodeReload":448},{"RuntimeInitializeOnLoadManager":64},{"Sprites":102},{"SpriteAtlas":120},{"GI":7816},{"Director":360},{"CloudService":7584},{"WebRequest":592},{"VR":49650},{"SceneManager":608},{"Video":208},{"LazyScriptCache":32},{"NativeArray":10560},{"Camera":729},{"Secure":265},{"SerializationCache":9256},{"APIUpdating":10320},{"Subsystems":336},{"VirtualTexturing":57888},{"StaticSafetyDebugInfo":278528},{"Analytics":768},{"Hierarchy":1188},{"UIElements":40},{"CoreStats":14456},{"Identifiers":7152},{"Gui":558936},{"EditorUtility":697227},{"VersionControl":8},{"Undo":931},{"AssetDatabase":9491749},{"AssetImporter":40},{"EditorGi":328},{"UnityConnect":36881},{"Upm":1988},{"UpmDiagnostics":8},{"AssetCompliance":96},{"DrivenProperties":72},{"LocalIPC":260},{"ProfilerEditor":9746},{"CoreBusinessMetrics":3600},{"Windowing":456},{"Licensing":12805},{"AssetReference":32},{"IPCStream":32}]}

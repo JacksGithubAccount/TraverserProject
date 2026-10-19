@@ -119,12 +119,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2555007742
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 861444311
+  InScenePlacedSourceGlobalObjectIdHash: 2555007742
+  m_InScenePlacedDisabledByDefault: 0
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
+  m_InScenePlaced: 1
   ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
@@ -183,18 +185,30 @@ MonoBehaviour:
   interactableCollider: {fileID: 2479388955607223544}
   hostOnlyInteractable: 1
   networkPosition:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
     m_InternalValue: {x: 0, y: 0, z: 0}
   doorIsOpening:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
     m_InternalValue: 0
   doorIsClosing:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
     m_InternalValue: 0
   isOpened:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
     m_InternalValue: 0
   animator: {fileID: 5434221761996767296}
   openDoorAnimation: Door_Open_01
   closeDoorAnimation: Door_Close_01
   doorPivotTransform: {fileID: 7599388555694350753}
-  doorID: 0
+  doorID: 1
   doorState: 0
   keyToUnlockDoor: {fileID: 0}
   unlockMessage: Used KeyItemNameHere

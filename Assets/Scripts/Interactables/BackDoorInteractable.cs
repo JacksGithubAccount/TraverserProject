@@ -15,6 +15,7 @@ namespace TraverserProject
 
         public override void Interact(PlayerManager player)
         {
+            base.Interact(player);
             door.ActivateDoorServerRpc(true);
 
         }
@@ -68,7 +69,7 @@ namespace TraverserProject
             //null checker and removes
             for (int i = 0; i < playersWithinInteractionTrigger.Count; i++)
             {
-                if (playersWithinInteractionTrigger[i] == null)
+                if (playersWithinInteractionTrigger[i] != null)
                     playersWithinInteractionTrigger.RemoveAt(i);
             }
         }

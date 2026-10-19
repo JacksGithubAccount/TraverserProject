@@ -8,7 +8,7 @@ namespace TraverserProject
     {
         [Header("Object")]
         [SerializeField] GameObject networkGameObject;
-        [SerializeField] GameObject instantiatedGameObject;
+        private GameObject instantiatedGameObject;
 
 
         private void Awake()

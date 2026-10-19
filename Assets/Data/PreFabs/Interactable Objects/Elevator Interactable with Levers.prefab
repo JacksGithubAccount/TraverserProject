@@ -75,10 +75,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2598103019199739109}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -195,12 +195,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2489846170
-  InScenePlacedSourceGlobalObjectIdHash: 2419902077
+  GlobalObjectIdHash: 1602016499
+  InScenePlacedSourceGlobalObjectIdHash: 3891186000
+  m_InScenePlacedDisabledByDefault: 0
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
+  m_InScenePlaced: 1
   ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 0
   SpawnWithObservers: 1
@@ -226,15 +228,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1919314149277322759, guid: 5f8863ada7474424384d1b0559fe9a77, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.1011639
+      value: 3.71
       objectReference: {fileID: 0}
     - target: {fileID: 1919314149277322759, guid: 5f8863ada7474424384d1b0559fe9a77, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.61140746
+      value: -31
       objectReference: {fileID: 0}
     - target: {fileID: 1919314149277322759, guid: 5f8863ada7474424384d1b0559fe9a77, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.154407
+      value: 5.72
       objectReference: {fileID: 0}
     - target: {fileID: 1919314149277322759, guid: 5f8863ada7474424384d1b0559fe9a77, type: 3}
       propertyPath: m_LocalRotation.w
@@ -242,15 +244,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1919314149277322759, guid: 5f8863ada7474424384d1b0559fe9a77, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1919314149277322759, guid: 5f8863ada7474424384d1b0559fe9a77, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1919314149277322759, guid: 5f8863ada7474424384d1b0559fe9a77, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1919314149277322759, guid: 5f8863ada7474424384d1b0559fe9a77, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -324,7 +326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1919314149277322759, guid: 5f8863ada7474424384d1b0559fe9a77, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.732
+      value: -1.82
       objectReference: {fileID: 0}
     - target: {fileID: 1919314149277322759, guid: 5f8863ada7474424384d1b0559fe9a77, type: 3}
       propertyPath: m_LocalPosition.y
@@ -332,7 +334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1919314149277322759, guid: 5f8863ada7474424384d1b0559fe9a77, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.275
+      value: -7.05
       objectReference: {fileID: 0}
     - target: {fileID: 1919314149277322759, guid: 5f8863ada7474424384d1b0559fe9a77, type: 3}
       propertyPath: m_LocalRotation.w
@@ -526,16 +528,25 @@ MonoBehaviour:
   interactableCollider: {fileID: 7145698715966883037}
   hostOnlyInteractable: 1
   networkPosition:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
     m_InternalValue: {x: 0, y: 0, z: 0}
   elevatorIsRising:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
     m_InternalValue: 0
   elevatorIsDescending:
+    UpdateTraits:
+      MinSecondsBetweenUpdates: 0
+      MaxSecondsBetweenUpdates: 0
     m_InternalValue: 0
   networkPositionSmoothTime: 0.1
   yMovementOffset: 0.3
   moveSpeed: 2
-  destinationHigh: {x: 0, y: 5, z: 0}
-  destinationLow: {x: 0, y: 0, z: 0}
+  destinationHigh: {x: 0, y: 0, z: 0}
+  destinationLow: {x: 0, y: -30, z: 0}
   charactersOnElevator: []
   lowDestinationRecall: {fileID: 2309152471673727192}
   highDestinationRecall: {fileID: 6095239275100970949}
