@@ -73,13 +73,13 @@ namespace TraverserProject
 
             if (player.playerNetworkManager.isLockedOn.Value)
             {
-                
 
 
-                
+
+
             }
         }
-        
+
         public void HandleAllCameraActions()
         {
             if (player != null)
@@ -87,6 +87,11 @@ namespace TraverserProject
                 HandleFollowTarget();
                 HandleRotations();
                 HandleCollisions();
+
+                player.playerNetworkManager.cameraLookAngle.Value = cameraPivotTransform.localEulerAngles.x;
+
+                if (player.playerNetworkManager.isAiming.Value)
+                    player.playerNetworkManager.cameraLookAngle.Value = cameraObject.transform.parent.localEulerAngles.x;
             }
         }
         private void HandleFollowTarget()
@@ -108,7 +113,7 @@ namespace TraverserProject
             if (player.playerNetworkManager.isAiming.Value && !player.playerNetworkManager.isHoldingArrow.Value)
             {
                 HandleAimRotations();
-            } 
+            }
             else if (player.playerNetworkManager.isAiming.Value && player.playerNetworkManager.isHoldingArrow.Value)
             {
                 HandleAimAndHoldingArrowRotations();
@@ -154,7 +159,7 @@ namespace TraverserProject
             Vector3 forwardXVector = cameraObject.transform.forward;
             forwardXVector.y = 0;
             PlayerUIManager.Singleton.localPlayer.transform.forward = forwardXVector;
-                      
+
             //rotates upperbody, but twists in strange ways
             //UpperBodyTransform upperbodyTransform = player.GetComponentInChildren<UpperBodyTransform>();
             //upperbodyTransform.transform.right = cameraObject.transform.forward;
@@ -172,7 +177,7 @@ namespace TraverserProject
             cameraRotationX.x = upAndDownLookAngle;
 
             cameraObject.transform.localEulerAngles = new Vector3(upAndDownLookAngle, leftAndRightLookAngle, 0);
-            
+
         }
 
         private void HandleStandardRotations()
@@ -329,7 +334,7 @@ namespace TraverserProject
                             shortestDistanceOfRightTarget = distanceFromRightTarget;
                             rightLockOnTarget = availableTargets[k];
                         }
-                        
+
                     }
                 }
                 else

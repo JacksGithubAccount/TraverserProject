@@ -25,12 +25,16 @@ namespace TraverserProject
         {
             base.Start();
 
+            explosionCollider = damageCollider as SphereCollider;
             startingRadius = explosionCollider.radius;
 
         }
 
-        public void Explode(float maximumRadius)
+        public void Explode(CharacterManager characterCausingDamage, float maximumRadius)
         {
+            if (characterCausingDamage != null)
+                characterCausingExplosion = characterCausingDamage;
+
             maximumExplosionRadius = maximumRadius;
             damageCollider.enabled = true;
 
@@ -40,8 +44,7 @@ namespace TraverserProject
                 return;
 
             //make the explosion the same size as the passed explosion radius
-            var shape = explosionParticles.shape;
-            shape.radius = maximumRadius;
+            explosionParticles.transform.localScale = new Vector3(maximumRadius, maximumRadius, maximumRadius);
             explosionParticles.Play();
         }
 

@@ -12,6 +12,10 @@ namespace TraverserProject
         PlayerManager player;
         public NetworkVariable<FixedString64Bytes> characterName = new NetworkVariable<FixedString64Bytes>("Character", NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+        [Header("Camera")]
+        public NetworkVariable<float> cameraLookAngle = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+
         [Header("Site Of Grace")]
         public NetworkVariable<int> lastSiteOfGraceUsed = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
