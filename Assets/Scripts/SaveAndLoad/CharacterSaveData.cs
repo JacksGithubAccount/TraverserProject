@@ -68,6 +68,9 @@ namespace TraverserProject
         //alternative way to save door state
         public List<string> doorsOpenedAlt;
 
+        [Header("Illusions")]
+        public List<string> illusionaryWallsDispelled;
+
         [Header("Shopes Generated")]
         public List<int> shopsGenerated;
         public SerializableDictionary<int, SerializableShopInventory> shopsGeneratedData;
@@ -164,6 +167,7 @@ namespace TraverserProject
             worldItemsLooted = new SerializableDictionary<int, bool>();
             doorsOpened = new SerializableDictionary<int, bool>();
             doorsOpenedAlt = new List<string>();
+            illusionaryWallsDispelled = new List<string>();
             shopsGenerated = new List<int>();
             shopsGeneratedData = new SerializableDictionary<int, SerializableShopInventory>();
             shortcutsActivated = new SerializableDictionary<int, bool>();
