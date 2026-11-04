@@ -6,6 +6,9 @@ namespace TraverserProject
 
     public class AICharacterSpawner : MonoBehaviour
     {
+        [Header("Spawn Settings")]
+        [SerializeField] bool manuallySpawnCharacter = false;
+
         [Header("Character")]
         [SerializeField] GameObject characterGameObject;
         [SerializeField] GameObject instantiatedGameObject;
@@ -32,7 +35,8 @@ namespace TraverserProject
 
         private void Start()
         {
-            WorldAIManager.Singleton.SpawnCharacter(this);
+            if (!manuallySpawnCharacter)
+                WorldAIManager.Singleton.SpawnCharacter(this);
 
             gameObject.SetActive(false);
         }
@@ -77,6 +81,9 @@ namespace TraverserProject
 
         public void ResetCharacter()
         {
+            if (manuallySpawnCharacter)
+                return;
+
             if (instantiatedGameObject == null)
                 return;
 
