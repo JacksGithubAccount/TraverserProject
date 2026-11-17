@@ -38,6 +38,9 @@ namespace TraverserProject
         public float viewableAngle;
         public Vector3 targetsDirection;
 
+        [Header("Follow Target")]
+        public CharacterManager followTarget;
+
         [Header("Detection")]
         [SerializeField] float detectionRadius = 15;
         public float minimumFOV = -35;

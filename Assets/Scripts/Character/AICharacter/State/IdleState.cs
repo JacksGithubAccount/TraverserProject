@@ -43,6 +43,9 @@ namespace TraverserProject
                 case IdleStateMode.Sleep:
                     return SleepUntilDisturbed(aiCharacter);
 
+                case IdleStateMode.Follow:
+                    return Follow(aiCharacter);
+
                 default:
                     break;
             }
@@ -192,6 +195,21 @@ namespace TraverserProject
             }
 
             return this;
+        }
+
+        protected virtual AIState Follow(AICharacterManager aiCharacter)
+        {
+            willInvestigateSound = false;
+
+            if (aiCharacter.isPerformingAction)
+                return this;
+
+
+            if (aiCharacter.characterCombatManager.currentTarget != null)
+                return SwitchState(aiCharacter, aiCharacter.pursueTarget);
+
+            return this;
+
         }
 
         protected override void ResetStateFlags(AICharacterManager aiCharacter)

@@ -10,9 +10,9 @@ namespace TraverserProject
         [SerializeField] bool manuallySpawnCharacter = false;
 
         [Header("Character")]
-        [SerializeField] GameObject characterGameObject;
+        public GameObject characterGameObject;
         [SerializeField] GameObject instantiatedGameObject;
-        private AICharacterManager aiCharacter;
+        public AICharacterManager aiCharacter;
 
         [Header("Patrol")]
         [SerializeField] bool hasPatrolPath = false;
@@ -111,6 +111,20 @@ namespace TraverserProject
                 boss.sleepState.hasBeenAwakened = boss.hasBeenAwakened.Value;
                 boss.currentState = boss.currentState.SwitchState(boss, boss.sleepState);
             }
+        }
+
+        public bool CharacterIsSpawned()
+        {
+            if (instantiatedGameObject == null)
+                return false;
+
+            if (aiCharacter == null)
+                return false;
+
+            if (!aiCharacter.IsSpawned)
+                return false;
+
+            return true;
         }
     }
 }

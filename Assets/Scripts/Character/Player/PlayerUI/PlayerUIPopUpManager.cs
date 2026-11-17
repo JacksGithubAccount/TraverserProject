@@ -11,6 +11,8 @@ namespace TraverserProject
         [Header("Pop Up Parent")]
         [SerializeField] Transform popUpTransformParent;
 
+
+
         [Header("Message Pop Up")]
         [SerializeField] GameObject messagePopUpGameObject;
         [SerializeField] TextMeshProUGUI messagePopUpText;
@@ -19,6 +21,13 @@ namespace TraverserProject
         [Header("Message Interactable Pop Up")]
         [SerializeField] GameObject messageInteractablePopUpGameObject;
         [SerializeField] TextMeshProUGUI messageInteractablePopUpText;
+
+        [Header("Temporary Message Pop Up")]
+        [SerializeField] GameObject temporaryPopUpGameObject;
+        [SerializeField] TextMeshProUGUI temporaryPopUpText;
+        private Coroutine temporaryPopUpCoroutine;
+        private Coroutine temporaryPopUpFadeCoroutine;
+        [SerializeField] CanvasGroup temporaryPopUpCanvasGroup;
 
         [Header("Item Pop Up")]
         [SerializeField] GameObject itemPopUpGameObject;
@@ -58,6 +67,41 @@ namespace TraverserProject
             messageInteractablePopUpGameObject.SetActive(false);
 
             PlayerUIManager.Singleton.popUpWindowIsOpen = false;
+        }
+
+        public void SendTemporaryPopUp(string messageText)
+        {            
+            temporaryPopUpText.text = messageText;
+            temporaryPopUpCanvasGroup.alpha = 0;
+            temporaryPopUpGameObject.SetActive(true);
+
+            if (temporaryPopUpCoroutine != null)
+                StopCoroutine(temporaryPopUpCoroutine);
+
+            temporaryPopUpCoroutine = StartCoroutine(SendTemporaryPopUpCoroutine());
+
+            if (temporaryPopUpFadeCoroutine != null)
+                StopCoroutine(temporaryPopUpFadeCoroutine);
+
+            temporaryPopUpFadeCoroutine = StartCoroutine(FadeInPopUpOverTime(temporaryPopUpCanvasGroup, 1));
+        }
+
+        private IEnumerator SendTemporaryPopUpCoroutine()
+        {
+            yield return new WaitForSeconds(3);
+
+            if (temporaryPopUpFadeCoroutine != null)
+                StopCoroutine(temporaryPopUpFadeCoroutine);
+
+            temporaryPopUpFadeCoroutine = StartCoroutine(WaitThenFadeOutPopUpOverTime(temporaryPopUpCanvasGroup, 1, 0));
+
+            while(temporaryPopUpCanvasGroup.alpha != 0)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            temporaryPopUpGameObject.SetActive(false);
+
         }
 
         public void SendPlayerMessagePopUp(string messageText)

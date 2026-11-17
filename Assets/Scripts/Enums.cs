@@ -400,7 +400,8 @@ public enum IdleStateMode
 {
     Idle,
     Patrol,
-    Sleep
+    Sleep,
+    Follow
 }
 
 //scenes
