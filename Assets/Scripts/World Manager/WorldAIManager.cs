@@ -16,7 +16,7 @@ namespace TraverserProject
 
         [Header("Characters")]
         [SerializeField] List<AICharacterSpawner> aiCharacterSpawners;
-        [SerializeField] List<AICharacterManager> spawnedInCharacters;
+        public List<AICharacterManager> spawnedInCharacters;
         private Coroutine spawnAllCharactersCoroutine;
         private Coroutine despawnAllCharactersCoroutine;
         private Coroutine resetAllCharactersCoroutine;
@@ -56,7 +56,7 @@ namespace TraverserProject
                 {
                     aiCharacterSpawners.Add(aiCharacterSpawner);
                     aiCharacterSpawner.AttemptToSpawnCharacter();
-                }               
+                }
             }
         }
 

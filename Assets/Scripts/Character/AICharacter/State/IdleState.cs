@@ -27,6 +27,11 @@ namespace TraverserProject
         [SerializeField] string sleepingAnimation = "Sleep_01";
         [SerializeField] string wakingAnimation = "Wake_01";
 
+        [Header("Follow Options")]
+        [SerializeField] float maxDistanceFromFollower = 5;
+        private bool hasIdleDestination = false;
+        private Vector3 randomIdleDestination;
+
         public override AIState Tick(AICharacterManager aiCharacter)
         {
             if (aiCharacter.aiCharacterNetworkManager.isAwake.Value)
@@ -208,6 +213,63 @@ namespace TraverserProject
             if (aiCharacter.characterCombatManager.currentTarget != null)
                 return SwitchState(aiCharacter, aiCharacter.pursueTarget);
 
+            if (aiCharacter.aiCharacterCombatManager.followTarget == null)
+                return this;
+
+            float followerDistance = Vector3.Distance(aiCharacter.transform.position, aiCharacter.aiCharacterCombatManager.followTarget.transform.position);
+
+            //optionally set the same target as the summoner if they aquire a target and follower doesnt have one
+            if (aiCharacter.aiCharacterCombatManager.followTarget.characterCombatManager.currentTarget != null)
+                aiCharacter.aiCharacterCombatManager.SetTarget(aiCharacter.aiCharacterCombatManager.followTarget.characterCombatManager.currentTarget);
+
+            aiCharacter.aiCharacterLocomotionManager.RotateTowardsAgent(aiCharacter);
+
+            if (!aiCharacter.navMeshAgent.enabled)
+                aiCharacter.navMeshAgent.enabled = true;
+
+            if (!IsDestinationReachable(aiCharacter, aiCharacter.aiCharacterCombatManager.followTarget.transform.position))
+            {
+                //optionally, teleport ai close if you are in unreachable position, or search for ladder/object etc
+            }
+
+            if (followerDistance > maxDistanceFromFollower)
+            {
+                NavMeshPath path = new NavMeshPath();
+                aiCharacter.navMeshAgent.CalculatePath(aiCharacter.aiCharacterCombatManager.followTarget.transform.position, path);
+                aiCharacter.navMeshAgent.SetPath(path);
+                aiCharacter.characterAnimatorManager.SetAnimatorMovementParameters(0, 1);
+                hasIdleDestination = false;
+                return this;
+            }
+
+            //If summoner has stopped, pick a random location next to them, walk to it, and idle
+            if (!aiCharacter.aiCharacterCombatManager.followTarget.characterNetworkManager.isMoving.Value && !hasIdleDestination)
+            {
+                //Get random destination near summoner
+                randomIdleDestination = aiCharacter.aiCharacterCombatManager.followTarget.transform.position;
+                randomIdleDestination += new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2));
+
+                //if destination is not occupied by an agent, assign it
+                if (!IsDestinationOccupied(randomIdleDestination, aiCharacter.navMeshAgent.radius))
+                    hasIdleDestination = true;
+            }
+
+            //reset position if summoner begins moving
+            //if(aiCharacter.aiCharacterCombatManager.followTarget.characterNetworkManager.isMoving.Value)
+            //hasIdleDestination = false;
+
+            if (hasIdleDestination)
+            {
+                if (IsACharacterInFrontOfMyPath(aiCharacter))
+                    randomIdleDestination = aiCharacter.transform.position;
+
+                NavMeshPath idleDestinationPath = new NavMeshPath();
+                aiCharacter.navMeshAgent.CalculatePath(randomIdleDestination, idleDestinationPath);
+                aiCharacter.navMeshAgent.SetPath(idleDestinationPath);
+                aiCharacter.characterAnimatorManager.SetAnimatorMovementParameters(0, 1);
+            }
+
+
             return this;
 
         }
@@ -217,6 +279,7 @@ namespace TraverserProject
             base.ResetStateFlags(aiCharacter);
 
             sleepAnimationSet = false;
+            hasIdleDestination = false;
         }
 
 
