@@ -1,6 +1,7 @@
-using UnityEngine;
-using Unity.Netcode;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.Netcode;
+using UnityEngine;
 
 namespace TraverserProject
 {
@@ -23,7 +24,7 @@ namespace TraverserProject
         [Header("Active")]
         public NetworkVariable<bool> isActive = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-
+        [HideInInspector] public List<CharacterManager> charactersThatHavePassedThroughThisFogwall = new List<CharacterManager>();
 
         protected override void Awake()
         {
@@ -35,15 +36,26 @@ namespace TraverserProject
         {
             base.Interact(player);
 
+            PassThroughFogWall(player);
+        }
+
+        public void PassThroughFogWall(CharacterManager character)
+        {
             //face fog wall
-            Quaternion targetRotation = Quaternion.LookRotation(Vector3.right);
-            player.transform.rotation = targetRotation;
+            Quaternion targetRotation = Quaternion.LookRotation(transform.forward);
+            character.transform.rotation = targetRotation;
+
+            character.characterCombatManager.lastFogWallEntered = this;
 
             //ignore fogwall collision
-            AllowPlayerThroughFogWallCollidersServerRpc(player.NetworkObjectId);
+            AllowPlayerThroughFogWallCollidersServerRpc(character.NetworkObjectId);
+
+            character.characterNetworkManager.isInvulnerable.Value = true;
 
             //walk through fog wall
-            player.playerAnimatorManager.PlayTargetActionAnimation("Pass_Through_Fog_01", true);
+            character.characterAnimatorManager.PlayTargetActionAnimation("Pass_Through_Fog_01", true);
+
+            charactersThatHavePassedThroughThisFogwall.Add(character);
         }
 
         public override void OnNetworkSpawn()
@@ -84,32 +96,32 @@ namespace TraverserProject
 
 
         [ServerRpc(RequireOwnership = false)]
-        private void AllowPlayerThroughFogWallCollidersServerRpc(ulong playerObjectID)
+        private void AllowPlayerThroughFogWallCollidersServerRpc(ulong characterObjectID)
         {
             if (IsServer)
             {
-                AllowPlayerThroughFogWallCollidersClientRpc(playerObjectID);
+                AllowPlayerThroughFogWallCollidersClientRpc(characterObjectID);
             }
         }
 
 
         [ClientRpc]
-        private void AllowPlayerThroughFogWallCollidersClientRpc(ulong playerObjectID)
+        private void AllowPlayerThroughFogWallCollidersClientRpc(ulong characterObjectID)
         {
-            PlayerManager player = NetworkManager.Singleton.SpawnManager.SpawnedObjects[playerObjectID].GetComponent<PlayerManager>();
+            CharacterManager character = NetworkManager.Singleton.SpawnManager.SpawnedObjects[characterObjectID].GetComponent<CharacterManager>();
 
             fogWallAudioSource.PlayOneShot(fogWallSFX);
 
-            if (player != null)
-                StartCoroutine(DisableCollisionForTime(player));
+            if (character != null)
+                StartCoroutine(DisableCollisionForTime(character));
         }
 
-        private IEnumerator DisableCollisionForTime(PlayerManager player)
+        private IEnumerator DisableCollisionForTime(CharacterManager character)
         {
-            Physics.IgnoreCollision(player.characterController, fogWallCollider, true);
+            Physics.IgnoreCollision(character.characterController, fogWallCollider, true);
 
             yield return new WaitForSeconds(3);
-            Physics.IgnoreCollision(player.characterController, fogWallCollider, false);
+            Physics.IgnoreCollision(character.characterController, fogWallCollider, false);
 
         }
 

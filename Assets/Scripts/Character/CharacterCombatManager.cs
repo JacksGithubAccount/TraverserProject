@@ -30,6 +30,9 @@ namespace TraverserProject
         [Header("Lock On Transform")]
         public Transform lockOnTransform;
 
+        [Header("Fog Wall")]
+        [HideInInspector] public FogWallInteractable lastFogWallEntered;
+
         [Header("Combat Flags")]
         public bool canPerformRollingAttack = false;
         public bool canPerformBackstepAttack = false;

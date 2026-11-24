@@ -94,5 +94,55 @@ namespace TraverserProject
             return false;
         }
 
+        public bool IsMySummonerInABossBattleThatIHaveNotJoined(AICharacterManager aiCharacter)
+        {
+            if (aiCharacter.aiCharacterCombatManager.followTarget.characterCombatManager.lastFogWallEntered != null
+                   && aiCharacter.aiCharacterCombatManager.followTarget.characterCombatManager.lastFogWallEntered.isActive.Value
+                   && !aiCharacter.aiCharacterCombatManager.followTarget.characterCombatManager.lastFogWallEntered.charactersThatHavePassedThroughThisFogwall.Contains(aiCharacter))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        public void MoveToBossFight(AICharacterManager aiCharacter, FogWallInteractable fogwall)
+        {
+            aiCharacter.navMeshAgent.enabled = true;
+
+            Vector3 targetPosition = aiCharacter.aiCharacterCombatManager.followTarget.transform.position;
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(fogwall.transform.position, out hit, 5, NavMesh.AllAreas))
+                targetPosition = hit.position;
+
+            NavMeshPath path = new NavMeshPath();
+            aiCharacter.navMeshAgent.CalculatePath(targetPosition, path);
+            aiCharacter.navMeshAgent.SetPath(path);
+            aiCharacter.characterAnimatorManager.SetAnimatorMovementParameters(0, 1);
+            aiCharacter.aiCharacterLocomotionManager.RotateTowardsAgent(aiCharacter);
+
+            Collider[] fogWallColliders = Physics.OverlapSphere(aiCharacter.transform.position,
+            aiCharacter.navMeshAgent.stoppingDistance * 1.1f, WorldUtilityManager.Singleton.GetInteractableLayers());
+
+            FogWallInteractable potentialFogWall;
+
+            for (int i = 0; i < fogWallColliders.Length; i++)
+            {
+                potentialFogWall = fogWallColliders[i].GetComponentInParent<FogWallInteractable>();
+
+                if (potentialFogWall == null)
+                    continue;
+
+                if (potentialFogWall != fogwall)
+                    continue;
+
+                potentialFogWall.PassThroughFogWall(aiCharacter);
+                break;
+            }
+        }
+
     }
 }

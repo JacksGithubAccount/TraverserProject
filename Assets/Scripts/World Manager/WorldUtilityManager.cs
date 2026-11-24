@@ -14,6 +14,7 @@ namespace TraverserProject
         [SerializeField] LayerMask characterLayers;
         [SerializeField] LayerMask enviroLayers;
         [SerializeField] LayerMask slipperyEnviroLayers;
+        [SerializeField] LayerMask interactableLayers;
 
         [Header("UI Colors")]
         [SerializeField] Color regularColor;
@@ -62,6 +63,11 @@ namespace TraverserProject
         public LayerMask GetSlipperyEnviroLayers()
         {
             return slipperyEnviroLayers;
+        }
+
+        public LayerMask GetInteractableLayers()
+        {
+            return interactableLayers;
         }
 
         public Color GetRegularColor()

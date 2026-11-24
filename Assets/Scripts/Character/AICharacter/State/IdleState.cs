@@ -216,6 +216,12 @@ namespace TraverserProject
             if (aiCharacter.aiCharacterCombatManager.followTarget == null)
                 return this;
 
+            if (IsMySummonerInABossBattleThatIHaveNotJoined(aiCharacter))
+            {
+                MoveToBossFight(aiCharacter, aiCharacter.aiCharacterCombatManager.followTarget.characterCombatManager.lastFogWallEntered);
+                return this;
+            }
+
             float followerDistance = Vector3.Distance(aiCharacter.transform.position, aiCharacter.aiCharacterCombatManager.followTarget.transform.position);
 
             //optionally set the same target as the summoner if they aquire a target and follower doesnt have one
