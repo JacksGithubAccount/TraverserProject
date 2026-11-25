@@ -41,6 +41,13 @@ namespace TraverserProject
 
         }
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            //locate fog walls
+            StartCoroutine(GetFogWallsFromWorldObjectManager());
+        }
+
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
@@ -68,8 +75,7 @@ namespace TraverserProject
                     sleepState.hasBeenAwakened = hasBeenAwakened.Value;
 
                 }
-                //locate fog walls
-                StartCoroutine(GetFogWallsFromWorldObjectManager());
+                
 
 
                 if (hasBeenAwakened.Value)

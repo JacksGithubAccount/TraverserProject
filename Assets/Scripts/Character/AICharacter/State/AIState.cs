@@ -136,7 +136,7 @@ namespace TraverserProject
                 if (potentialFogWall == null)
                     continue;
 
-                if (potentialFogWall != fogwall)
+                if (potentialFogWall.fogWallID != fogwall.fogWallID)
                     continue;
 
                 potentialFogWall.PassThroughFogWall(aiCharacter);

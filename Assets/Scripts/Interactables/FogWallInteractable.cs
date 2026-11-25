@@ -43,7 +43,7 @@ namespace TraverserProject
         {
             //face fog wall
             Quaternion targetRotation = Quaternion.LookRotation(transform.forward);
-            character.transform.rotation = targetRotation;
+            character.transform.rotation = targetRotation * Quaternion.Euler(0, 90f, 0);
 
             character.characterCombatManager.lastFogWallEntered = this;
 
