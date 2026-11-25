@@ -6,9 +6,11 @@ namespace TraverserProject
 
     public class NetworkObjectSpawner : MonoBehaviour
     {
+        public int spawnerID;
         [Header("Object")]
         [SerializeField] GameObject networkGameObject;
         private GameObject instantiatedGameObject;
+
 
 
         private void Awake()

@@ -34,15 +34,17 @@ namespace TraverserProject
         {
             if (NetworkManager.Singleton.IsServer)
             {
-                networkObjectSpawners.Add(networkObjectSpawner);
-                networkObjectSpawner.AttemptToSpawnObject();
+                if (!networkObjectSpawners.Exists(x =>  x.spawnerID == networkObjectSpawner.spawnerID))
+                {
+                    networkObjectSpawners.Add(networkObjectSpawner);
+                    networkObjectSpawner.AttemptToSpawnObject();
+                }
             }
         }
 
         public void AddFogWallToList(FogWallInteractable fogWall)
         {
             if (!fogWalls.Contains(fogWall))
-
             {
                 fogWalls.Add(fogWall);
             }
@@ -52,7 +54,6 @@ namespace TraverserProject
         public void RemoveFogWallFromList(FogWallInteractable fogWall)
         {
             if (fogWalls.Contains(fogWall))
-
             {
                 fogWalls.Remove(fogWall);
             }
